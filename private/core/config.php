@@ -1,7 +1,7 @@
 <?php
 
-define('ROOT', 'http://localhost/school/public/');
-define('ASSETS', 'http://localhost/school/public/assets/');
+define('ROOT', 'http://localhost/trackNbook/public/');
+define('ASSETS', 'http://localhost/trackNbook/public/assets/');
 // echo ROOT;
 
 define('DBNAME' ,'school_db');
