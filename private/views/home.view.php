@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-12">
                         <h1>Badulla -> Colombo Fort</h1>
-                        <p>Select a train to proceed</p>
+                        <p>Select a train to proc</p>
                     </div>
                 </div>
                 <div class="table" >
