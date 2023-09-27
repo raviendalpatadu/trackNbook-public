@@ -531,7 +531,7 @@ tbody td {
   position: relative;
 }
 
-.availabity > .row:hover .badge-base {
+.availabity-class:hover .badge-base {
   background: var(--light-green) !important;
 }
 
@@ -633,14 +633,8 @@ tbody td {
   overflow: hidden;
 }
 
-.button-base:hover, .button-base:hover path{
-  background: var(--background-fade, rgba(71, 178, 255, 0.15));
-  stroke: var(--Primary-Blue);
-  /* border-color: 1px solid var(--background-fade, rgba(71, 178, 255, 0.15)); */
-}
-
-.button-base:hover .text{
-  color: var(--Primary-Blue);
+.button-base:hover{
+    border-color: 1px solid var(--gray-300, #010d21);
 }
 .pagination .arrow-left {
   flex-shrink: 0;
@@ -698,9 +692,6 @@ tbody td {
   height: 40px;
   position: relative;
   overflow: hidden;
-}
-.pagination .pagination-number-base:hover {
-  background: var(--background-fade, rgba(71, 178, 255, 0.15));
 }
 .pagination .number2 {
   color: var(--gray-500, #667085);
