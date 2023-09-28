@@ -7,9 +7,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>Badulla -> Colombo Fort</h1>
+                        <h1>Edit</h1>
                         <p>Select a train to proceed</p>
-                        <h2><a href="<?=ROOT?>trains/editTrain"> got edit trains</a></h2>
                     </div>
                 </div>
                 <div class="table" >

@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href=" <?= ASSETS ?>css/styles.css">
-</head>
+<?php $this->view("./includes/header"); ?>
 
 <body>
     <div class="column-left">
@@ -21,6 +13,7 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <div class="row">
                     <div class="col-12">
                         <h1>Badulla -> Colombo Fort</h1>
@@ -179,6 +172,8 @@
                         </div>
                     </div>
                 </div>
+=======
+>>>>>>> d995f1ed38252ba749a5249415b2e0278581fe40
             </div>
         </main>
     </div>

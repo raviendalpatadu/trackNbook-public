@@ -1,4 +1,5 @@
 <?php $this->view("./includes/header"); ?>
+
 <body>
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
@@ -6,13 +7,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>Services</h1>
-                        <p>Our services</p>
+                        <div class="card card-body">
+                            <h1>Profile for passneger</h1>
+                            <p>Welcome to the track and book</p>
+                        </div>
                     </div>
                 </div>
-            
+            </div>
         </main>
     </div>
+
+
 </body>
 
 </html>
