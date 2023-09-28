@@ -462,7 +462,7 @@ svg.sidebar-dote {
 }
 
 .primary-blue {
-  color: var(--Primary-Blue) !important;
+  color: var(--Primary-Blue) !importnt;
 }
 
 .primary-gray {
