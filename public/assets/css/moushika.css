@@ -1,0 +1,19 @@
+.trains-available h3 {
+  color: var(--lightgray-font);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19.444px;
+}
+
+.trains-available h2 {
+  color: #000;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 19.444px;
+}/*# sourceMappingURL=moushika.css.map */

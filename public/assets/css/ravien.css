@@ -958,6 +958,10 @@
   background-color: transparent;
 }
 
+.transparent {
+  color: transparent;
+}
+
 .border-bottom-Primary-Blue {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -966,6 +970,10 @@
 
 .bg-Primary-Blue {
   background-color: #2d68fe;
+}
+
+.Primary-Blue {
+  color: #2d68fe;
 }
 
 .border-bottom-Primary-Gray {
@@ -978,6 +986,10 @@
   background-color: #324054;
 }
 
+.Primary-Gray {
+  color: #324054;
+}
+
 .border-bottom-Secondary-Gray {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -986,6 +998,10 @@
 
 .bg-Secondary-Gray {
   background-color: #71839b;
+}
+
+.Secondary-Gray {
+  color: #71839b;
 }
 
 .border-bottom-Selected-Blue {
@@ -998,6 +1014,10 @@
   background-color: #cae1ff;
 }
 
+.Selected-Blue {
+  color: #cae1ff;
+}
+
 .border-bottom-Banner-red {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1006,6 +1026,10 @@
 
 .bg-Banner-red {
   background-color: #ff472e;
+}
+
+.Banner-red {
+  color: #ff472e;
 }
 
 .border-bottom-Selected-red {
@@ -1018,6 +1042,10 @@
   background-color: #ffd1cf;
 }
 
+.Selected-red {
+  color: #ffd1cf;
+}
+
 .border-bottom-White {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1026,6 +1054,10 @@
 
 .bg-White {
   background-color: #fff;
+}
+
+.White {
+  color: #fff;
 }
 
 .border-bottom-Lightgray {
@@ -1038,6 +1070,10 @@
   background-color: #d3d3d3;
 }
 
+.Lightgray {
+  color: #d3d3d3;
+}
+
 .border-bottom-Border-blue {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1046,6 +1082,10 @@
 
 .bg-Border-blue {
   background-color: #0085e4;
+}
+
+.Border-blue {
+  color: #0085e4;
 }
 
 .border-bottom-Background-colour-nav {
@@ -1058,6 +1098,10 @@
   background-color: rgba(250, 250, 250, 0.9019607843);
 }
 
+.Background-colour-nav {
+  color: rgba(250, 250, 250, 0.9019607843);
+}
+
 .border-bottom-green {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1066,6 +1110,10 @@
 
 .bg-green {
   background-color: #12b76a;
+}
+
+.green {
+  color: #12b76a;
 }
 
 .border-bottom-light-green {
@@ -1078,6 +1126,10 @@
   background-color: #bffad7;
 }
 
+.light-green {
+  color: #bffad7;
+}
+
 .border-bottom-dark-green {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1088,6 +1140,10 @@
   background-color: #027a48;
 }
 
+.dark-green {
+  color: #027a48;
+}
+
 .border-bottom-blue {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -1096,6 +1152,24 @@
 
 .bg-blue {
   background-color: #2185d5;
+}
+
+.blue {
+  color: #2185d5;
+}
+
+.border-bottom-lightgray-font {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #646464;
+}
+
+.bg-lightgray-font {
+  background-color: #646464;
+}
+
+.lightgray-font {
+  color: #646464;
 }
 
 .loader-circle {

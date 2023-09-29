@@ -37,7 +37,8 @@ $colors: (
   "green": #12b76a,
   "light-green": #bffad7,
   "dark-green": #027a48,
-  "blue": #2185d5
+  "blue": #2185d5,
+  "lightgray-font": #646464 
 );
 
 @each $key, $val in $sizes{
@@ -103,7 +104,12 @@ $colors: (
   .bg-#{$key}{
     background-color: $val;
   }
+
+  .#{$key}{
+    color: $val;
+  }
 }
+
 
 .loader-circle{
   padding: 15px 21px;
@@ -138,3 +144,4 @@ $colors: (
     display: block;
   }
 }
+
