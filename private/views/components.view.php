@@ -326,6 +326,47 @@
                         </div>
                     </div>
                 </div>
+
+
+                <h2>loader</h2>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="loader d-flex align-items-center justify-content-center px-20">
+                            <div class="loader-circle complete">
+                                <div class="loader-circle-text white">1</div>
+                            </div>
+                            <div class="divider complete"></div>
+
+                            <div class="loader-circle active">
+                                <div class="loader-circle-text white">2</div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="loader-circle ">
+                                <div class="loader-circle-text white">3</div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="loader-circle ">
+                                <div class="loader-circle-text white">4</div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="loader-circle ">
+                                <div class="loader-circle-text white">5</div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <div class="loader-circle ">
+                                <div class="loader-circle-text white">6</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

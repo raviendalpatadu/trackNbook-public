@@ -12,8 +12,8 @@ class Trains extends Controller
         $this->view('trains');
     }
 
-    function editTrain($id = '')
+    function available($id = '')
     {   
-        $this->view('edit.trains');
+        $this->view('trains.available');
     }
 }
