@@ -6,6 +6,10 @@
   font-family: Inter;
 }
 
+main{
+  height: -webkit-fill-available;
+}
+
 :root {
   --Primary-Blue: #2d68fe;
   --Primary-Gray: #324054;
@@ -532,7 +536,6 @@ table {
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 20px;
 }
 
 @media screen and (max-width: 768px) {
