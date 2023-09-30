@@ -7,4 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href=" <?= ASSETS ?>css/styles.css">
     <link rel="stylesheet" href=" <?= ASSETS ?>css/ravien.css">
+    <link rel="stylesheet" href=" <?= ASSETS ?>css/iflal.css">
+    <link rel="stylesheet" href=" <?= ASSETS ?>css/moushika.css">
 </head>
