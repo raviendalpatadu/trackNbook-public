@@ -1,5 +1,6 @@
 
 <?php $this->view("./includes/header") ?>
+
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
@@ -16,6 +17,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    
 
                     <div class="col-6">
                         <p>Welcome to the dashboard</p>
