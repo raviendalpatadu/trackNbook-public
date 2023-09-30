@@ -6,6 +6,10 @@
   font-family: Inter;
 }
 
+main{
+  height: -webkit-fill-available;
+}
+
 :root {
   --Primary-Blue: #2d68fe;
   --Primary-Gray: #324054;
