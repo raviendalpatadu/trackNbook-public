@@ -11,8 +11,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-body">
-                            <h1>Dashboard</h1>
-                            <p>Welcome to the dashboard</p>
+                            
                         </div>
                     </div>
                 </div>
