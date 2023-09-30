@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="if-txt-wrapper">Hello,&nbsp;&nbsp;Admin</div>
+                        <div class="if-txt-wrapper">Hello, Admin</div>
 
                     </div>
                 </div>
