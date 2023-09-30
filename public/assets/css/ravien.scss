@@ -21,9 +21,7 @@ $sizes: (
 );
 
 $colors: (
-
   "transparent": transparent,
-
   "Primary-Blue": #2d68fe,
   "Primary-Gray": #324054,
   "Secondary-Gray": #71839b,
@@ -60,6 +58,10 @@ $colors: (
   .mr-#{$key}{
     margin-right: $val;
   }
+  .mx-#{$key}{
+    margin-right: $val;
+    margin-left: $val;
+  }
 
   .p-#{$key}{
     padding: $val;
@@ -89,6 +91,10 @@ $colors: (
   .py-#{$key}{
     padding-top: $val;
     padding-bottom: $val;
+  }
+
+  .g-#{$key}{
+    gap: $val;
   }
 
 }
@@ -138,3 +144,31 @@ $colors: (
     display: block;
   }
 }
+
+.profile .profile-img img{
+  width: 200px;
+  border-radius: 1000px;
+}
+
+.profile-name{
+  font-size: 32px;
+  font-weight: 700px;
+}
+
+@media screen and (max-width: 768px) {
+  @each $key, $val in $sizes{
+    .profile .row .col-#{$key}{
+      grid-column: span 12;
+    }
+  }
+
+  .profile .profile-img img{
+    width: 150px;
+  }
+  .profile-name{
+    font-size: 22px;
+    text-align: center;
+  }
+
+}
+  
