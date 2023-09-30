@@ -21,6 +21,7 @@
   --light-green: #bffad7;
   --dark-green: #027a48;
   --blue: #0f8eea;
+  --lightgray-font: #646464;
 }
 
 body {
@@ -870,7 +871,7 @@ input:focus {
 .input-text-label {
   color: #666666;
   text-align: left;
-  font: 600 12px/18px "Noto Sans", sans-serif;
+  font: 600 18px "Noto Sans", sans-serif;
   position: relative;
   align-self: stretch;
 }
@@ -1216,3 +1217,8 @@ input.type-here.green::placeholder {
 .flex-grow-0 {
   flex-grow: 0;
 }
+
+main{
+  height: -webkit-fill-available;
+}
+
