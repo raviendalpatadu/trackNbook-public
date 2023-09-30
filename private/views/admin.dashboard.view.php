@@ -82,7 +82,7 @@
                                                                     <div class="container-wrapper">
                                                                         <div class="container">
                                                                             <div class="line-container"><img
-                                                                                    class="line" src="img/image.svg" />
+                                                                                    class="line" C />
                                                                             </div>
                                                                             <div class="y-axis-container">
                                                                                 <img class="left-divider"
