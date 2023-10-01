@@ -26,7 +26,7 @@ $colors: (
   "Primary-Gray": #324054,
   "Secondary-Gray": #71839b,
   "Selected-Blue": #cae1ff,
-  "Banner-red": #ff472e,
+  "Banner-red": #f00,
   "Selected-red": #ffd1cf,
   "White": #fff,
   "Lightgray": #d3d3d3,
@@ -36,94 +36,97 @@ $colors: (
   "light-green": #bffad7,
   "dark-green": #027a48,
   "blue": #2185d5,
-  "lightgray-font": #646464 
+  "lightgray-font": #646464,
 );
 
-@each $key, $val in $sizes{
-  .m-#{$key}{
+@each $key, $val in $sizes {
+  .m-#{$key} {
     margin: $val;
   }
 
-  .mb-#{$key}{
+  .mb-#{$key} {
     margin-bottom: $val;
   }
 
-  .mt-#{$key}{
+  .mt-#{$key} {
     margin-top: $val;
   }
 
-  .ml-#{$key}{
+  .ml-#{$key} {
     margin-left: $val;
   }
 
-  .mr-#{$key}{
+  .mr-#{$key} {
     margin-right: $val;
   }
-  .mx-#{$key}{
+  .mx-#{$key} {
     margin-right: $val;
     margin-left: $val;
+
+    .mx-auto {
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
 
-  .p-#{$key}{
+  .p-#{$key} {
     padding: $val;
   }
 
-  .pb-#{$key}{
+  .pb-#{$key} {
     padding-bottom: $val;
   }
 
-  .pt-#{$key}{
+  .pt-#{$key} {
     padding-top: $val;
   }
 
-  .pl-#{$key}{
+  .pl-#{$key} {
     padding-left: $val;
   }
 
-  .pr-#{$key}{
+  .pr-#{$key} {
     padding-right: $val;
   }
 
-  .px-#{$key}{
+  .px-#{$key} {
     padding-left: $val;
     padding-right: $val;
   }
 
-  .py-#{$key}{
+  .py-#{$key} {
     padding-top: $val;
     padding-bottom: $val;
   }
 
-  .g-#{$key}{
+  .g-#{$key} {
     gap: $val;
   }
-
 }
 
-@each $key, $val in $colors{
-  .border-bottom-#{$key}{
+@each $key, $val in $colors {
+  .border-bottom-#{$key} {
     border-bottom: 10px;
     border-bottom-style: solid;
     border-bottom-color: $val;
   }
 
-  .bg-#{$key}{
+  .bg-#{$key} {
     background-color: $val;
   }
 
-  .#{$key}{
+  .#{$key} {
     color: $val;
   }
 }
 
-
-.loader-circle{
+.loader-circle {
   padding: 15px 21px;
   border-radius: 2000px;
-  background-color: map-get($colors, "blue");;
+  background-color: map-get($colors, "blue");
 }
 
-.divider{
+.divider {
   border-style: solid;
   border-color: #2185d5;
   border-width: 1.8px 0 0 0;
@@ -132,49 +135,126 @@ $colors: (
   position: relative;
 }
 
-
-.complete{
-
+.complete {
   background-color: map-get($colors, "green");
-  border-color: map-get($colors, "green" );
-
+  border-color: map-get($colors, "green");
 }
 
 @media screen and (max-width: 768px) {
-  .loader-circle, .divider{
+  .loader-circle,
+  .divider {
     display: none;
   }
 
-  .loader-circle.active{
+  .loader-circle.active {
     justify-content: center;
     display: block;
   }
 }
 
-.profile .profile-img img{
+.profile .profile-img img {
   width: 200px;
   border-radius: 1000px;
 }
 
-.profile-name{
+.profile-name {
   font-size: 32px;
   font-weight: 700px;
 }
 
 @media screen and (max-width: 768px) {
-  @each $key, $val in $sizes{
-    .profile .row .col-#{$key}{
+  @each $key, $val in $sizes {
+    .profile .row .col-#{$key} {
       grid-column: span 12;
     }
   }
 
-  .profile .profile-img img{
+  .profile .profile-img img {
     width: 150px;
   }
-  .profile-name{
+  .profile-name {
     font-size: 22px;
     text-align: center;
   }
-
 }
-  
+
+.passenger-container {
+  width: 80%;
+}
+
+.comparment {
+  border-radius: 25px;
+  border: 2px solid #ccc;
+}
+
+.seat-row {
+  gap: 25px;
+}
+
+.seats-top {
+  gap: 10px;
+}
+
+.seats-bottom {
+  gap: 10px;
+}
+
+.seat {
+  width: 25px;
+  height: 25px;
+  padding: 5px 4px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background: #fff;
+  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
+}
+
+.seat:hover:not(.reserved) {
+  background: var(--Selected-Blue);
+  border: 2px solid var(--Border-blue);
+  cursor: pointer;
+  // add hover animation
+  transition: all 0.2s ease-out;
+}
+
+.seat.selected:not(.reserved) {
+  background: var(--Selected-Blue) !important;
+  border: 2px solid var(--Border-blue) !important;
+  cursor: pointer;
+}
+
+.reserved {
+  background: var(--Banner-red) !important;
+  border: 2px solid var(--Banner-red) !important;
+  color: var(--White) !important;
+  border: none;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .passenger-container {
+    width: 100%;
+  }
+
+  .comparment.flex-row {
+    flex-direction: column;
+  }
+
+  .comparment .seat-row,
+  .comparment .seats-top,
+  .comparment .seats-bottom {
+    flex-direction: row;
+  }
+
+  .seat {
+    width: 20px;
+    height: 20px;
+    padding: 5px 4px;
+    font-size: 12px;
+  }
+}
+
+.width-fill{
+  width: 100%;
+}

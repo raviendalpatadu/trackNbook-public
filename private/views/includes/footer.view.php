@@ -5,3 +5,5 @@
         </div>
     </div>
 </footer>
+
+<script src="<?=ASSETS?>/js/ravien.js"></script>

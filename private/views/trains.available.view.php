@@ -90,7 +90,7 @@
                                         <td class="col-4">
 
                                             <div class="availabity">
-                                                <div class="row">
+                                                <div class=""><a href="<?=ROOT?>trains/seatsAvailable" class="row">
                                                     <div class="col-7">
                                                         <div class="badge-base">
                                                             <div class="text">1st Class Reservation</div>
@@ -105,10 +105,10 @@
                                                         <div class="badge-base">
                                                             <div class="text">LKR.2500.00</div>
                                                         </div>
-                                                    </div>
+                                                    </div></a>
                                                 </div>
 
-                                                <div class="row">
+                                                <div class=""><a href="<?=ROOT?>trains/seatsAvailable" class="row">
                                                     <div class="col-7">
                                                         <div class="badge-base bg-selected-blue">
                                                             <div class="text primary-blue">2nd Class Reservation</div>
@@ -123,11 +123,11 @@
                                                         <div class="badge-base bg-selected-blue">
                                                             <div class="text primary-blue">LKR.2000.00</div>
                                                         </div>
-                                                    </div>
+                                                    </div></a>
                                                 </div>
 
 
-                                                <div class="row">
+                                                <div class=""><a href="<?=ROOT?>trains/seatsAvailable" class="row">
                                                     <div class="col-7">
                                                         <div class="badge-base bg-selected-blue">
                                                             <div class="text blue">3rd Class Reservation</div>
@@ -142,84 +142,14 @@
                                                         <div class="badge-base bg-selected-blue">
                                                             <div class="text blue">LKR.1500.00</div>
                                                         </div>
-                                                    </div>
+                                                    </div></a>
                                                 </div>
                                             </div>
 
                                         </td>
                                     </tr>
 
-                                    <tr class="row">
-                                        <td class="col-6 d-flex align-items-center">Udarata menike Express Train<br>Badulla - Colombo Fort</td>
-                                        <td class="col-2 d-flex align-items-center justify-content-center">
-                                            <div class="badge-base bg-light-green">
-                                                <div class="dot">
-                                                    <div class="dot2"></div>
-                                                </div>
-                                                <div class="text dark-green">07.00-17.00</div>
-                                            </div>
-                                        </td>
-                                        <td class="col-4">
-
-                                            <div class="availabity">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base">
-                                                            <div class="text">1st Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base">
-                                                            <div class="text">20</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base">
-                                                            <div class="text">LKR.2500.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">2nd Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">230</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">LKR.2000.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">3rd Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">60</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">LKR.1500.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
+                                    
 
                                     
                                 </tbody>

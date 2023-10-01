@@ -22,6 +22,10 @@
   margin-right: 1px;
   margin-left: 1px;
 }
+.mx-1 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-1 {
   padding: 1px;
@@ -80,6 +84,10 @@
 .mx-2 {
   margin-right: 2px;
   margin-left: 2px;
+}
+.mx-2 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-2 {
@@ -140,6 +148,10 @@
   margin-right: 3px;
   margin-left: 3px;
 }
+.mx-3 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-3 {
   padding: 3px;
@@ -198,6 +210,10 @@
 .mx-4 {
   margin-right: 4px;
   margin-left: 4px;
+}
+.mx-4 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-4 {
@@ -258,6 +274,10 @@
   margin-right: 5px;
   margin-left: 5px;
 }
+.mx-5 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-5 {
   padding: 5px;
@@ -316,6 +336,10 @@
 .mx-6 {
   margin-right: 6px;
   margin-left: 6px;
+}
+.mx-6 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-6 {
@@ -376,6 +400,10 @@
   margin-right: 7px;
   margin-left: 7px;
 }
+.mx-7 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-7 {
   padding: 7px;
@@ -434,6 +462,10 @@
 .mx-8 {
   margin-right: 8px;
   margin-left: 8px;
+}
+.mx-8 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-8 {
@@ -494,6 +526,10 @@
   margin-right: 9px;
   margin-left: 9px;
 }
+.mx-9 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-9 {
   padding: 9px;
@@ -552,6 +588,10 @@
 .mx-10 {
   margin-right: 10px;
   margin-left: 10px;
+}
+.mx-10 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-10 {
@@ -612,6 +652,10 @@
   margin-right: 20px;
   margin-left: 20px;
 }
+.mx-20 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-20 {
   padding: 20px;
@@ -670,6 +714,10 @@
 .mx-30 {
   margin-right: 30px;
   margin-left: 30px;
+}
+.mx-30 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-30 {
@@ -730,6 +778,10 @@
   margin-right: 40px;
   margin-left: 40px;
 }
+.mx-40 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-40 {
   padding: 40px;
@@ -788,6 +840,10 @@
 .mx-50 {
   margin-right: 50px;
   margin-left: 50px;
+}
+.mx-50 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-50 {
@@ -848,6 +904,10 @@
   margin-right: 60px;
   margin-left: 60px;
 }
+.mx-60 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-60 {
   padding: 60px;
@@ -906,6 +966,10 @@
 .mx-70 {
   margin-right: 70px;
   margin-left: 70px;
+}
+.mx-70 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-70 {
@@ -966,6 +1030,10 @@
   margin-right: 80px;
   margin-left: 80px;
 }
+.mx-80 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-80 {
   padding: 80px;
@@ -1025,6 +1093,10 @@
   margin-right: 90px;
   margin-left: 90px;
 }
+.mx-90 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
 
 .p-90 {
   padding: 90px;
@@ -1083,6 +1155,10 @@
 .mx-100 {
   margin-right: 100px;
   margin-left: 100px;
+}
+.mx-100 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .p-100 {
@@ -1192,15 +1268,15 @@
 .border-bottom-Banner-red {
   border-bottom: 10px;
   border-bottom-style: solid;
-  border-bottom-color: #ff472e;
+  border-bottom-color: #f00;
 }
 
 .bg-Banner-red {
-  background-color: #ff472e;
+  background-color: #f00;
 }
 
 .Banner-red {
-  color: #ff472e;
+  color: #f00;
 }
 
 .border-bottom-Selected-red {
@@ -1364,7 +1440,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .loader-circle, .divider {
+  .loader-circle,
+  .divider {
     display: none;
   }
   .loader-circle.active {
@@ -1447,4 +1524,79 @@
     font-size: 22px;
     text-align: center;
   }
+}
+.passenger-container {
+  width: 80%;
+}
+
+.comparment {
+  border-radius: 25px;
+  border: 2px solid #ccc;
+}
+
+.seat-row {
+  gap: 25px;
+}
+
+.seats-top {
+  gap: 10px;
+}
+
+.seats-bottom {
+  gap: 10px;
+}
+
+.seat {
+  width: 25px;
+  height: 25px;
+  padding: 5px 4px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background: #fff;
+  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
+}
+
+.seat:hover:not(.reserved) {
+  background: var(--Selected-Blue);
+  border: 2px solid var(--Border-blue);
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.seat.selected:not(.reserved) {
+  background: var(--Selected-Blue) !important;
+  border: 2px solid var(--Border-blue) !important;
+  cursor: pointer;
+}
+
+.reserved {
+  background: var(--Banner-red) !important;
+  border: 2px solid var(--Banner-red) !important;
+  color: var(--White) !important;
+  border: none;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .passenger-container {
+    width: 100%;
+  }
+  .comparment.flex-row {
+    flex-direction: column;
+  }
+  .comparment .seat-row,
+  .comparment .seats-top,
+  .comparment .seats-bottom {
+    flex-direction: row;
+  }
+  .seat {
+    width: 20px;
+    height: 20px;
+    padding: 5px 4px;
+    font-size: 12px;
+  }
+}
+.width-fill {
+  width: 100%;
 }/*# sourceMappingURL=ravien.css.map */

@@ -15,7 +15,7 @@ main{
   --Primary-Gray: #324054;
   --Secondary-Gray: #71839b;
   --Selected-Blue: #cae1ff;
-  --Banner-red: #ff472e;
+  --Banner-red: #F00;
   --Selected-red: #ffd1cf;
   --White: #fff;
   --Lightgray: #d3d3d3;
@@ -94,6 +94,9 @@ div.container {
 }
 
 @media screen and (max-width: 768px) {
+  body{
+    height: auto;
+  }
   .col-6,
   .col-7,
   .col-8,
@@ -601,7 +604,7 @@ tbody td {
   position: relative;
 }
 
-.availabity > .row:hover .badge-base {
+.availabity .row:hover .badge-base {
   background: var(--light-green) !important;
 }
 
@@ -1168,6 +1171,22 @@ input.type-here.green::placeholder {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
 }
 
 .align-items-center {
