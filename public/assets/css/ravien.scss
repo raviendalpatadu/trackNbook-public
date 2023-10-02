@@ -255,6 +255,139 @@ $colors: (
   }
 }
 
-.width-fill{
+.width-fill {
   width: 100%;
+}
+
+.bg-home-desktop {
+  position: absolute;
+  top: -25vh;
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background: url("../images/home1.jpg"),
+    lightgray -3.491px -930.014px / 100.77% 290.365% no-repeat;
+}
+
+.bg-home-mobile {
+  display: none;
+}
+
+.search-box-text {
+  max-width: 250px;
+  background: #2285d5;
+  color: rgba(255, 255, 255);
+  font-feature-settings: "clig" off, "liga" off;
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  font-size: 20px;
+  padding: 40px 15px;
+}
+
+.search-box .button {
+  height: fit-content;
+}
+
+.display-none {
+  display: none;
+}
+
+.home-text h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  font-size: 42px;
+  color: var(--White);
+}
+
+@media screen and (max-width: 768px) {
+  .bg-home-desktop {
+    display: none;
+  }
+
+  .bg-home-mobile {
+    display: initial;
+    position: absolute;
+    top: -10vh;
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    background: url("../images/home-mobile.jpg"),
+      lightgray -3.491px -930.014px / 100.77% 290.365% no-repeat;
+  }
+
+  .search-box-home.flex-row {
+    // padding: 30px;
+    flex-direction: column;
+  }
+
+  .search-box-home .flex-row {
+    flex-direction: column;
+  }
+
+  .search-box-text {
+    max-width: 100%;
+    font-size: 16px;
+    padding: 5vh 15px;
+  }
+
+  .search-box-home .text-inputs {
+    min-width: 0px;
+  }
+
+  .search-box-group {
+    padding: 20px;
+  }
+
+  .home-container {
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .home-text h1 {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 500;
+    padding-top: 25vh;
+    padding-bottom: 25vh;
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+#toDate {
+  display: none;
+}
+
+.bg-login-desktop{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  height: 100%;
+  width: 60%;
+  background: linear-gradient(270deg, #FFF 5.1%, rgba(0, 0, 0, 0.00) 101.92%), url('../images/home1.jpg'),  no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-login-desktop {
+    width: 100%;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.8) 5.1%,  rgba(255, 255, 255, 0.9) 101.92%), url("../images/home1.jpg"), no-repeat;
+    background-size: cover;
+  }  
 }

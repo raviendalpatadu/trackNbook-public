@@ -878,7 +878,7 @@ input:focus {
 .input-text-label {
   color: #666666;
   text-align: left;
-  font: 600 18px "Noto Sans", sans-serif;
+  font: 600 14px "Noto Sans", sans-serif;
   position: relative;
   align-self: stretch;
 }
