@@ -1,0 +1,521 @@
+:root {
+    --collection-1-primary-blue: rgba(33, 133, 213, 1);
+    --collection-1-background-fade: rgba(71, 178, 255, 0.15);
+    --collection-1-seat: rgba(33, 133, 213, 0);
+  }
+
+  .ach-box {
+  }
+  
+  .ach-box .group {
+    position: relative;
+    width: 1268px;
+    height: 785px;
+    top: 0;
+    left: 0;
+  }
+  
+  .ach-box .overlap {
+    position: relative;
+    height: 785px;
+  }
+  
+  .ach-box .frame {
+    display: flex;
+    flex-direction: column;
+    width: 1268px;
+    height: 785px;
+    align-items: flex-start;
+    padding: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fafafa;
+    box-shadow: 0px 4px 4px #00000040;
+  }
+  
+  .ach-box .div {
+    position: relative;
+    width: 1234px;
+    height: 658px;
+    margin-right: -66px;
+  }
+  
+  .ach-box .group-2 {
+    position: absolute;
+    width: 468px;
+    height: 203px;
+    top: 179px;
+    left: 752px;
+  }
+  
+  .ach-box .tracknbook-logo {
+    width: 133px;
+    position: absolute;
+    height: 203px;
+    top: 0;
+    left: 0;
+  }
+  
+  .ach-box .overlap-group {
+    position: absolute;
+    width: 333px;
+    height: 203px;
+    top: 0;
+    left: 133px;
+  }
+  
+  .ach-box .img {
+    width: 309px;
+    position: absolute;
+    height: 203px;
+    top: 0;
+    left: 0;
+  }
+  
+  .ach-box .text-wrapper {
+    position: absolute;
+    width: 246px;
+    top: 39px;
+    left: 87px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #18181b;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: 36.8px;
+  }
+  
+  .ach-box .overlap-2 {
+    position: absolute;
+    width: 546px;
+    height: 616px;
+    top: 0;
+    left: 152px;
+  }
+  
+  .ach-box .text-wrapper-2 {
+    position: absolute;
+    width: 86px;
+    height: 39px;
+    top: 0;
+    left: 20px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .text-wrapper-3 {
+    position: absolute;
+    width: 111px;
+    height: 39px;
+    top: 268px;
+    left: 17px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .text-wrapper-4 {
+    position: absolute;
+    width: 133px;
+    height: 39px;
+    top: 351px;
+    left: 12px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .text-wrapper-5 {
+    position: absolute;
+    width: 86px;
+    height: 39px;
+    top: 439px;
+    left: 11px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .text-wrapper-6 {
+    position: absolute;
+    width: 145px;
+    height: 39px;
+    top: 522px;
+    left: 16px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .text-wrapper-7 {
+    position: absolute;
+    width: 86px;
+    height: 39px;
+    top: 92px;
+    left: 19px;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #666666;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.4px;
+  }
+  
+  .ach-box .input-field {
+    display: flex;
+    flex-direction: column;
+    width: 526.85px;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    top: 472px;
+    left: 16px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .text {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+  
+  .ach-box .text-wrapper-8 {
+    position: relative;
+    width: 304px;
+    margin-top: -1px;
+    font-family: "Noto Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #666666;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  
+  .ach-box .icon {
+    margin-top: -16115.5px;
+    margin-left: -880.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .text-wrapper-9 {
+    position: absolute;
+    width: 96px;
+    height: 39px;
+    top: 179px;
+    left: 0;
+    font-family: "Noto Sans-SemiBold", Helvetica;
+    font-weight: 600;
+    text-align: center;
+    line-height: 19.4px;
+    color: #666666;
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+  
+  .ach-box .div-wrapper {
+    width: 526.85px;
+    top: 302px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .achchuthan-gmail-com {
+    position: relative;
+    width: 304px;
+    margin-top: -1px;
+    font-family: "Noto Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #666666;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  .ach-box .icon-2 {
+    margin-top: -15945.5px;
+    margin-left: -884.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-2 {
+    width: 526.85px;
+    top: 389px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .icon-3 {
+    margin-top: -16032.5px;
+    margin-left: -880.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-3 {
+    width: 526.85px;
+    top: 558px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .icon-4 {
+    margin-top: -16201.5px;
+    margin-left: -880.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-4 {
+    width: 526.85px;
+    top: 35px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .icon-5 {
+    margin-top: -15678.5px;
+    margin-left: -884.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-5 {
+    width: 526.85px;
+    top: 128px;
+    left: 19px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .icon-6 {
+    margin-top: -15771.5px;
+    margin-left: -886.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-6 {
+    width: 526.85px;
+    top: 217px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .icon-7 {
+    margin-top: -15860.5px;
+    margin-left: -884.15px;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .p {
+    position: absolute;
+    width: 246px;
+    top: 640px;
+    left: 171px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 700;
+    color: #666666;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 18.4px;
+    text-decoration: underline;
+  }
+  
+  .ach-box .input-field-7 {
+    width: 137.49px;
+    top: 35px;
+    left: -1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .text-2 {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+  
+  .ach-box .text-wrapper-10 {
+    position: relative;
+    flex: 1;
+    margin-top: -1px;
+    font-family: "Noto Sans-Regular", Helvetica;
+    font-weight: 400;
+    color: #666666;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  
+  .ach-box .icon-8 {
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .ach-box .input-field-8 {
+    width: 137.49px;
+    top: 217px;
+    left: -1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #cccccc;
+  }
+  
+  .ach-box .buttons {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px;
+    position: absolute;
+    top: 687px;
+    left: 572px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: #000000;
+    all: unset;
+    box-sizing: border-box;
+  }
+  
+  .ach-box .go-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    gap: 8px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+  }
+  
+  .ach-box .go {
+    position: relative;
+    width: 140px;
+    margin-top: -1px;
+    font-family: "Inter-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  
