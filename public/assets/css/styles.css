@@ -30,7 +30,7 @@ main{
 
 body {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 div.container {
@@ -95,7 +95,7 @@ div.container {
 
 @media screen and (max-width: 768px) {
   body{
-    height: auto;
+    /* height: auto; */
   }
   .col-6,
   .col-7,
@@ -871,8 +871,8 @@ input:focus {
   gap: 2px;
   align-items: flex-start;
   justify-content: flex-start;
-  min-width: 300px;
-  max-width: -webkit-fill-available;
+  width: -webkit-fill-available; 
+  max-width: 300px;
   position: relative;
 }
 .input-text-label {
@@ -944,7 +944,7 @@ input.type-here.green::placeholder {
   align-self: stretch;
 }
 
-.select select {
+/* .select select {
   width: -webkit-fill-available;
   padding: 5px;
   border-radius: 8px;
@@ -954,7 +954,7 @@ input.type-here.green::placeholder {
 
 .select select:focus {
   outline: none;
-}
+} */
 
 /* checkbox  */
 

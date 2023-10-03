@@ -6,33 +6,42 @@
         <main class=" d-flex align-items-end justify-content-center">
             <img src="<?= ASSETS ?>images/home1.jpg" class="bg-home-desktop" alt="" srcset="">
             <img src="<?= ASSETS ?>images/home-mobile.jpg" class="bg-home-mobile" alt="" srcset="">
-            <div class="home-container">
+            <div class="home-container width-fill">
                 <div class="row">
-                    <div class="col-12 d-flex flex-column g-20">
+                    <div class="col-12 d-flex flex-column g-20 align-items-center">
                         <div class="home-text">
                             <h1>Welcome to TrackNBook</h1>
                         </div>
-                        <div class="search-box-home d-flex flex-row">
+                        <div class="search-box-home d-flex flex-row width-fill justify-content-center">
                             <div class="search-box-text">
                                 <h2>Search Your Train</h2>
                             </div>
-                            <div class="search-box-group d-flex g-20 flex-column p-40 bg-White">
+                            <div class="search-box-group d-flex g-20 flex-column bg-White width-fill">
+
                                 <div class="d-flex flex-row g-20">
                                     <div class="text-inputs">
                                         <div class="input-text-label">From</div>
-                                        <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
-                                            </div>
+
+                                        <div class="width-fill">
+                                            <select class="dropdown" placeholder="Please choose">
+                                                <option>List entry #1</option>
+                                                <option>List entry #2</option>
+                                                <option>List entry #3</option>
+                                                <option>List entry #4</option>
+                                            </select>
                                         </div>
+
                                         <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
                                     <div class="text-inputs">
                                         <div class="input-text-label">To</div>
-                                        <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
-                                            </div>
+                                        <div class="width-fill">
+                                            <select class="dropdown" placeholder="Please choose">
+                                                <option>List entry #1</option>
+                                                <option>List entry #2</option>
+                                                <option>List entry #3</option>
+                                                <option>List entry #4</option>
+                                            </select>
                                         </div>
                                         <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
@@ -50,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-row g-20">
-                                    
+
                                     <div class="text-inputs">
                                         <div class="input-text-label">No of Passengers</div>
                                         <div class="input-field">
@@ -61,16 +70,17 @@
                                         <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
 
-
-                                    <div class="d-flex align-items-end justify-content-start flex-fill">
-                                        <div class="d-flex align-items-center g-20">
-                                            <div class="d-flex .flex-row g-5">
-                                                <label class="switch">
-                                                    <input type="checkbox" id="return">
-                                                    <span class="slider"></span>
-                                                </label>
+                                    <div class="text-inputs">
+                                        <div class="d-flex align-items-end justify-content-start flex-fill">
+                                            <div class="d-flex align-items-center g-20">
+                                                <div class="d-flex .flex-row g-5">
+                                                    <label class="switch">
+                                                        <input type="checkbox" id="return">
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                </div>
+                                                <div>Return</div>
                                             </div>
-                                            <div>Return</div>         
                                         </div>
                                     </div>
 
@@ -86,19 +96,19 @@
                                         </div>
                                         <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="d-flex align-items-end justify-content-end flex-fill">
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <div class="text">Next</div>
-                                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </button>
-                                    </div>
+                                    <button class="button"><a href="<?=ROOT?>trains/available">
+                                        <div class="button-base">
+                                            <div class="text">Next</div>
+                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div></a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

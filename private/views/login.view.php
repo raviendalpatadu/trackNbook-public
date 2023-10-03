@@ -13,7 +13,7 @@
                             <h1 class="d-flex justify-content-center width-fill">Login</h1>
                             <form action="" method="post" class="d-flex flex-column g-20">
                                 <!-- username -->
-                                <div class="text-inputs">
+                                <div class="login-text-inputs">
                                     <div class="input-text-label">Username</div>
                                     <div class="input-field">
                                         <div class="text">
@@ -24,7 +24,7 @@
                                 </div>
                                 
                                 <!-- password -->
-                                <div class="text-inputs">
+                                <div class="login-text-inputs">
                                     <div class="input-text-label">Password</div>
                                     <div class="input-field">
                                         <div class="text">
