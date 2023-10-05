@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-2">
                         <div class="field">
-                            
+
                             <div>
                                 <select name="" id="" value="Mr." class="select-field">
                                     <option value="">Mr.</option>
@@ -21,7 +21,7 @@
 
                         </div>
                         <div class="field">
-                        
+
                             <div>
                                 <select name="" id="" value="Mr." class="select-field">
                                     <option value="">NIC</option>
@@ -76,79 +76,5 @@
 
 
 </body>
-
-<style>
-    .image-field {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .field-select {
-        height:112px;
-    }
-
-    .button {
-        display: inline-flex;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        cursor: pointer;
-
-        border-radius: 8px;
-        border: 1px solid #000;
-        background: #FFF;
-    }
-
-    .button:hover {
-        background-color: lightgray;
-        color: blue;
-    }
-
-    .activation-field {
-        display: flex;
-        justify-content: space-between;
-
-    }
-
-    .activation-field a {
-        text-decoration-line: underline;
-    }
-
-    .field {
-        margin-bottom: 6px;
-    }
-
-    .text-field {
-        display: flex;
-        width: 100%;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-    .select-field {
-        display: flex;
-        width: 135.492px;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-
-    .image {
-        margin-left: 182px;
-        width: 542px;
-    }
-</style>
 
 </html>

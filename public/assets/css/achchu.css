@@ -3,508 +3,85 @@
   --collection-1-background-fade: rgba(71, 178, 255, 0.15);
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
-
-.ach-box {
-  width: 1218px;
-  height: 694px;
-}
-
-.ach-box .group {
-  position: fixed;
-  width: 1218px;
-  height: 694px;
-  top: 0;
-  left: 0;
-}
-
-.ach-box .overlap {
-  position: relative;
-  width: 1234px;
-  height: 695px;
-}
-
-.ach-box .div {
-  position: absolute;
-  width: 1234px;
-  height: 658px;
-  top: 0;
-  left: 0;
-}
-
-.ach-box .group-2 {
-  position: absolute;
-  width: 468px;
-  height: 203px;
-  top: 179px;
-  left: 752px;
-}
-
-.ach-box .tracknbook-logo {
-  width: 133px;
-  position: absolute;
-  height: 203px;
-  top: 0;
-  left: 0;
-}
-
-.ach-box .overlap-group {
-  position: absolute;
-  width: 333px;
-  height: 203px;
-  top: 0;
-  left: 133px;
-}
-
-.ach-box .img {
-  width: 309px;
-  position: absolute;
-  height: 203px;
-  top: 0;
-  left: 0;
-}
-
-.ach-box .text-wrapper {
-  position: absolute;
-  width: 246px;
-  top: 39px;
-  left: 87px;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #18181b;
-  font-size: 32px;
-  letter-spacing: 0;
-  line-height: 36.8px;
-}
-
-.ach-box .overlap-2 {
-  position: absolute;
-  width: 546px;
-  height: 616px;
-  top: 0;
-  left: 152px;
-}
-
-.ach-box .text-wrapper-2 {
-  position: absolute;
-  width: 86px;
-  height: 39px;
-  top: 0;
-  left: 20px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .text-wrapper-3 {
-  position: absolute;
-  width: 111px;
-  height: 39px;
-  top: 268px;
-  left: 17px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .text-wrapper-4 {
-  position: absolute;
-  width: 133px;
-  height: 39px;
-  top: 351px;
-  left: 12px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .text-wrapper-5 {
-  position: absolute;
-  width: 86px;
-  height: 39px;
-  top: 439px;
-  left: 11px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .text-wrapper-6 {
-  position: absolute;
-  width: 145px;
-  height: 39px;
-  top: 522px;
-  left: 16px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .text-wrapper-7 {
-  position: absolute;
-  width: 86px;
-  height: 39px;
-  top: 92px;
-  left: 19px;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  color: #666666;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 19.4px;
-}
-
-.ach-box .input-field {
+.image-field {
   display: flex;
-  flex-direction: column;
-  width: 526.85px;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  top: 472px;
-  left: 16px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .text {
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .field-select {
+  height:78px;
+  }
+  
+  .button {
+    display: inline-flex;
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #FFF;
+    /* Add margin to move the button to the right */
+    margin-left: 10px; /* Adjust this value to control the amount of spacing */
+    margin-right: 0px; /* Set margin-right to 0 to ensure no extra spacing on the right */
+  }
+  
+  .button:hover {
+    background-color: lightgray;
+    color: blue;
+  }
+  
+  
+  
+  .activation-field {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  position: relative;
-  align-self: stretch;
   width: 100%;
-  flex: 0 0 auto;
-}
-
-.ach-box .text-wrapper-8 {
-  position: relative;
-  width: 304px;
-  margin-top: -1px;
-  font-family: "Noto Sans-Regular", Helvetica;
-  font-weight: 400;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-}
-
-.ach-box .icon {
-  margin-top: -16111px;
-  margin-left: -830.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .text-wrapper-9 {
-  position: absolute;
-  width: 96px;
-  height: 39px;
-  top: 179px;
-  left: 0;
-  font-family: "Noto Sans-SemiBold", Helvetica;
-  font-weight: 600;
-  text-align: center;
-  line-height: 19.4px;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-}
-
-.ach-box .div-wrapper {
-  width: 526.85px;
-  top: 302px;
-  left: 18px;
+  
+  }
+  
+  .activation-field a {
+  text-decoration-line: underline;
+  }
+  
+  .field {
+  margin-bottom: 6px;
+  }
+  
+  .text-field {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .achchuthan-gmail-com {
-  position: relative;
-  width: 304px;
-  margin-top: -1px;
-  font-family: "Noto Sans-Regular", Helvetica;
-  font-weight: 400;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-.ach-box .icon-2 {
-  margin-top: -15941px;
-  margin-left: -834.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-2 {
-  width: 526.85px;
-  top: 389px;
-  left: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .icon-3 {
-  margin-top: -16028px;
-  margin-left: -830.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-3 {
-  width: 526.85px;
-  top: 558px;
-  left: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .icon-4 {
-  margin-top: -16197px;
-  margin-left: -830.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-4 {
-  width: 526.85px;
-  top: 35px;
-  left: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .icon-5 {
-  margin-top: -15674px;
-  margin-left: -834.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-5 {
-  width: 526.85px;
-  top: 128px;
-  left: 19px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .icon-6 {
-  margin-top: -15767px;
-  margin-left: -836.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-6 {
-  width: 526.85px;
-  top: 217px;
-  left: 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .icon-7 {
-  margin-top: -15856px;
-  margin-left: -834.15px;
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .p {
-  position: absolute;
-  width: 246px;
-  top: 640px;
-  left: 171px;
-  font-family: "Inter-Bold", Helvetica;
-  font-weight: 700;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 18.4px;
-  text-decoration: underline;
-}
-
-.ach-box .input-field-7 {
-  width: 137.49px;
-  top: 35px;
-  left: -1px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .text-2 {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  position: relative;
-  align-self: stretch;
   width: 100%;
-  flex: 0 0 auto;
-}
-
-.ach-box .text-wrapper-10 {
-  position: relative;
-  width: 304px;
-  margin-top: -1px;
-  font-family: "Noto Sans-Regular", Helvetica;
-  font-weight: 400;
-  color: #666666;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 24px;
-}
-
-.ach-box .icon-8 {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.ach-box .input-field-8 {
-  width: 137.49px;
-  top: 217px;
-  left: -1px;
-  display: flex;
+  padding: 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  padding: 16px;
-  position: absolute;
-  background-color: #ffffff;
   border-radius: 8px;
-  border: 1px solid;
-  border-color: #cccccc;
-}
-
-.ach-box .buttons {
-  display: inline-flex;
+  border: 1px solid #CCC;
+  background: var(--W-Background, #FFF);
+  }
+  
+  .select-field {
+  display: flex;
+  width: 135.492px;
+  padding: 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  padding: 16px;
-  position: absolute;
-  top: 637px;
-  left: 522px;
-  background-color: #ffffff;
   border-radius: 8px;
-  border: 1px solid;
-  border-color: #000000;
-  all: unset;
-  box-sizing: border-box;
-}
+  border: 1px solid #CCC;
+  background: var(--W-Background, #FFF);
+  margin-top: 18px;
+  margin-left: 40px;
 
-.ach-box .go-wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  gap: 8px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  flex: 0 0 auto;
-}
-
-.ach-box .go {
-  position: relative;
-  width: 140px;
-  margin-top: -1px;
-  font-family: "Inter-Regular", Helvetica;
-  font-weight: 400;
-  color: #000000;
-  font-size: 16px;
-  text-align: center;
-  letter-spacing: 0;
-  line-height: 24px;
-}
+  }
+  
+  
+  .image {
+  margin-left: 182px;
+  width: 542px;
+  }
+  main{
+  height: -webkit-fill-available;
+  }
