@@ -14,16 +14,19 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="select">
-                                            <div class="input-text-label">Train Name</div>
-                                            <select name="Train Name" id="">
-                                                <option value="">1005 Colombo &#8594 Kandy</option>
-                                                <option value="">All</option>
-                                                <option value="">1006 Badulla &#8594 Colombo </option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                            </select>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">To</div>
+                                            <div class="width-fill">
+                                                <select class="dropdown" placeholder="Please choose">
+                                                    <option value="">All</option>
+                                                    <option value="" selected>1005 Colombo &#8594 Kandy</option>
+                                                    <option value="">1006 Badulla &#8594 Colombo </option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                </select>
+                                            </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
 
                                     </div>
@@ -32,16 +35,20 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="select">
-                                            <div class="input-text-label">NIC</div>
-                                            <select name="NIC" id="">
-                                                <option value="">200456231785</option>
-                                                <option value="">All</option>
-                                                <option value="">200456231785</option>
-                                                <option value="">200456231785</option>
-                                                <option value="">200456231785</option>
-                                            </select>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">To</div>
+                                            <div class="width-fill">
+                                                <select class="dropdown" placeholder="Please choose">
+                                                    <option value="">All</option>
+                                                    <option value="" selected>200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                </select>
+                                            </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -245,10 +252,9 @@
                             </div>
                         </div>
                     </div>
-
         </main>
     </div>
-
+    <?php $this->view("./includes/load-js") ?>
 
 </body>
 

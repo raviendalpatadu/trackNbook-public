@@ -676,8 +676,9 @@ tbody td {
   position: relative;
 }
 .button {
+  background: transparent;
   border-radius: 8px;
-  border: 1px solid var(--gray-300, #d0d5dd);
+  border: none;
   display: flex;
   flex-direction: row;
   gap: 0px;
@@ -688,6 +689,7 @@ tbody td {
 }
 .button-base {
   background: var(--white, #ffffff);
+  border: 1px solid var(--gray-300, #d0d5dd);
   border-radius: 8px;
   padding: 8px 14px 8px 14px;
   display: flex;

@@ -110,6 +110,11 @@ $colors: (
     border-bottom-style: solid;
     border-bottom-color: $val;
   }
+  .border-top-#{$key} {
+    border-top: 1px;
+    border-top-style: solid;
+    border-top-color: $val;
+  }
 
   .bg-#{$key} {
     background-color: $val;
@@ -622,4 +627,73 @@ select {
   .login-text-inputs{
     max-width: 300px;
   }  
+}
+
+form.profile .text-inputs{
+  max-width: -webkit-fill-available;
+}
+
+input[type="file"]::file-selector-button {
+  background: var(--blue);
+  color: var(--White);
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background: var(--Selected-Blue);
+    color: var(--Primary-Blue);
+  }
+}
+
+.shadow {
+  box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.track-text{
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--Primary-Gray);
+  flex-basis: min-content;
+}
+
+.topic{
+  width: 200px;
+}
+
+.flex-grow{
+  flex-grow: 1;
+}
+
+.map iframe{
+  width: 100%;
+  min-height: 75vh;
+  border: none;
+}
+
+h2.topic ~ p{
+  font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .map iframe{
+    min-height: 50vh;
+  }
+
+  .track-content{
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  .track-text{
+    font-size: 12px;
+  }
+
+  .topic{
+    width: 140px;
+  }
+  
 }

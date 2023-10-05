@@ -21,4 +21,9 @@ class Trains extends Controller
     {
         $this->view('seats.available');
     }
+
+    function track($id = '')
+    {
+        $this->view('track');
+    }
 }

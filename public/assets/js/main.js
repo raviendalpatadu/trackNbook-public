@@ -22,6 +22,19 @@ $(document).ready(function() {
           box.css('display', 'none');
       }
   });
+
+  //warrent booking toggle
+  var warrent = $('#warrentBooking');
+  var chooseImg = $('#chooseImg');
+
+  // Add click event to warrent
+  warrent.click(function() {
+      if (warrent.is(':checked')) {
+          chooseImg.css('display', 'block');
+      } else {
+          chooseImg.css('display', 'none');
+      }
+  });
 });
 
 

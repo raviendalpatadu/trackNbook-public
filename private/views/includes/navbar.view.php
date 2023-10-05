@@ -10,6 +10,7 @@
         <li class="navbar-item"><a href="<?= ROOT ?>services">Services</a></li>
         <li class="navbar-item"><a href="<?= ROOT ?>contact">Contact</a></li>
         <li class="navbar-item"><a href="<?= ROOT ?>termsAndConditions">Terms & Conditions</a></li>
+        <li class="navbar-item"><a href="<?= ROOT ?>trains/track">Track Train</a></li>
         <li class="navbar-item"><a href="<?= ROOT ?>profile">
             <div class="profile">
               <div class="profile-img">

@@ -117,13 +117,13 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                                         <div class="text">Cancel</div>
                                     </div>
                                 </button>
-                                <button class="button">
+                                <button class="button"><a href="<?=ROOT?>passenger/details">
                                     <div class="button-base">
                                         <div class="text">Next</div>
                                         <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                    </div>
+                                    </div></a>
                                 </button>
                             </div>
                         </div>

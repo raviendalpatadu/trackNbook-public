@@ -16,7 +16,7 @@
                             <div class="search-box-text">
                                 <h2>Search Your Train</h2>
                             </div>
-                            <div class="search-box-group d-flex g-20 flex-column bg-White width-fill">
+                            <div class="search-box-group d-flex g-20 flex-column bg-White width-fill shadow">
 
                                 <div class="d-flex flex-row g-20">
                                     <div class="text-inputs">
@@ -100,13 +100,14 @@
                                 </div>
 
                                 <div class="d-flex align-items-end justify-content-end flex-fill">
-                                    <button class="button"><a href="<?=ROOT?>trains/available">
-                                        <div class="button-base">
-                                            <div class="text">Next</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div></a>
+                                    <button class="button"><a href="<?= ROOT ?>trains/available">
+                                            <div class="button-base">
+                                                <div class="text">Next</div>
+                                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
+                                        </a>
                                     </button>
                                 </div>
                             </div>
