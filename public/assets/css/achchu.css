@@ -3,6 +3,7 @@
   --collection-1-background-fade: rgba(71, 178, 255, 0.15);
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
+
 .image-field {
   display: flex;
   align-items: center;
