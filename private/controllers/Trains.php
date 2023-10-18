@@ -11,7 +11,7 @@ class Trains extends Controller
     {   
         $this->view('trains');
     }
-
+    
     function available($id = '')
     {   
         $this->view('trains.available');
