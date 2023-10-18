@@ -1,5 +1,9 @@
 <?php
 $no_of_passengers = 2;
+
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 

@@ -14,7 +14,10 @@ class Passenger extends Controller
 
     function details($id = '')
     {
-        $this->view('passenger.details');
+        $passenger = new Passengers();
+        $data = array();
+        $data = $passenger->getPassengers();
+        $this->view('passenger.details', $data);
     }
 
 }

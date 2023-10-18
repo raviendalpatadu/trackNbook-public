@@ -1,11 +1,12 @@
 <?php
 // database connection
 
-class Database {
+class Database
+{
 
     private function connect()
-    {    
-        $string = DBDRIVER . ":host=". DBHOST .";dbname=". DBNAME ;
+    {
+        $string = DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME;
         if (!$con = new PDO($string, DBUSER, DBPASS)) {
             die("database connection faild");
         }
@@ -24,7 +25,7 @@ class Database {
                 } else {
                     $data = $stm->fetchAll(PDO::FETCH_ASSOC);
                 }
-                
+
                 if (is_array($data) && count($data) > 0) {
                     // echo "<pre>";
                     // print_r($data);
@@ -36,5 +37,4 @@ class Database {
 
         return false;
     }
-    
 }
