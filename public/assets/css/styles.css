@@ -639,6 +639,7 @@ tbody td {
   position: relative;
 }
 .text {
+  width: -webkit-fill-available;
   color: var(--Primary-Gray);
   text-align: center;
   font: var(--textxs-medium, 600 12px/18px "Inter", sans-serif);
@@ -857,6 +858,7 @@ input {
 
 input:focus {
   outline: none;
+  background-color: transparent;
 }
 
 .input-field:focus-within {

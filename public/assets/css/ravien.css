@@ -2107,4 +2107,7 @@ h2.topic ~ p {
   .topic {
     width: 140px;
   }
+}
+input[type=submit] {
+  background: transparent;
 }/*# sourceMappingURL=ravien.css.map */
