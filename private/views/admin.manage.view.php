@@ -6,7 +6,15 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
 
         <main>
-            
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 center-col">
+                        <div class="">
+                            <div>ADD</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>

@@ -905,6 +905,7 @@ input:focus {
   align-self: stretch;
 }
 
+
 .input-field {
   background: var(--w-background, #ffffff);
   border-radius: 8px;
@@ -977,6 +978,7 @@ input.type-here.green::placeholder {
   border-color: #cccccc;
   color: var(--Primary-Gray);
 }
+
 
 .select select:focus {
   outline: none;
