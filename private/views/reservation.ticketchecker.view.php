@@ -15,7 +15,7 @@
                                 <div class="row g-5">
                                     <div class="col-8">
                                         <div class="select">
-                                            <div class="input-text-label">Train Name</div>
+                                            <div class="input-text-label">Train Nameee</div>
                                             <select name="Train Name" id="">
                                                 <option value="">1005 Colombo &#8594 Kandy</option>
                                                 <option value="">All</option>
@@ -126,11 +126,11 @@
                                                         First Class
                                                     </td>
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
-                                                        <div class="badge-base bg-Selected-Blue">
+                                                        <div class="badge-base bg-light-green">
                                                             <div class="dot">
-                                                                <div class="dot4"></div>
+                                                                <div class="dot2"></div>
                                                             </div>
-                                                            <div class="text blue ">View</div>
+                                                            <div class="text dark-green">checked</div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -150,12 +150,12 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
-                                                        <div class="badge-base bg-Selected-Blue">
+                                                    <td class="col-1 d-flex align-items-center">
+                                                        <div class="badge-base bg-Selected-red">
                                                             <div class="dot">
-                                                                <div class="dot4"></div>
+                                                                <div class="dot3"></div>
                                                             </div>
-                                                            <div class="text blue ">View</div>
+                                                            <div class="text Banner-red">Rejected</div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -176,11 +176,11 @@
                                                         First Class
                                                     </td>
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
-                                                        <div class="badge-base bg-Selected-Blue">
+                                                        <div class="badge-base bg-light-green">
                                                             <div class="dot">
-                                                                <div class="dot4"></div>
+                                                                <div class="dot2"></div>
                                                             </div>
-                                                            <div class="text blue ">View</div>
+                                                            <div class="text dark-green">checked</div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -200,12 +200,12 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
-                                                        <div class="badge-base bg-Selected-Blue">
+                                                    <td class="col-1 d-flex align-items-center">
+                                                        <div class="badge-base bg-Selected-red">
                                                             <div class="dot">
-                                                                <div class="dot4"></div>
+                                                                <div class="dot3"></div>
                                                             </div>
-                                                            <div class="text blue ">View</div>
+                                                            <div class="text Banner-red">Rejected</div>
                                                         </div>
                                                     </td>
                                                 </tr>

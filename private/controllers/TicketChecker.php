@@ -4,18 +4,18 @@
  * TicketChecker controller
  */
 
-class StaffTicketing extends Controller
+class TicketChecker extends Controller
 {
     function index($id = '')
     {
          
-        $this->view('dashboard.ticketchecker');
+        $this->view('ticket_checker.dashboard');
     }
 
     function reservationList($id = '')
     {
          
-        $this->view('reservation.staffticketing');
+        $this->view('reservation.ticketchecker');
     }
 
 }

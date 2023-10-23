@@ -659,6 +659,26 @@ tbody td {
   left: 1px;
   top: 1px;
 }
+.dot3 {
+  background: var(--Banner-red);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+
+.dot4 {
+  background: var(--blue);
+  border-radius: 50%;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+
 
 .pagination,
 .pagination * {
@@ -873,7 +893,7 @@ input:focus {
   position: relative;
 }
 .input-text-label {
-  color: #666666;
+  color: #000000;
   text-align: left;
   font: 600 18px "Noto Sans", sans-serif;
   position: relative;
