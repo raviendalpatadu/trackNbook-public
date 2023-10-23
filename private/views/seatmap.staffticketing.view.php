@@ -20,47 +20,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
         <?php $this->view("./includes/navbar") ?>
         <main>
             <div class="container d-flex justify-content-center">
-                <div class="passenger-container">
-                    <!-- complete loader -->
-
-                    <div class="row mb-50">
-                        <div class="col-12">
-                            <div class="loader d-flex align-items-center justify-content-center px-20">
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">1</div>
-                                </div>
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle active">
-                                    <div class="loader-circle-text white">2</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">3</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">4</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">5</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">6</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="passenger-container">     
                     <div class="row mb-20">
                         <div class="col-12">
                             <h1>Badulla -> Colombo Fort</h1>
@@ -119,7 +79,8 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                                 </button>
                                 <button class="button"><a href="<?=ROOT?>passenger/details">
                                     <div class="button-base">
-                                        <div class="text">Next</div>
+
+                                        <div class="text">Proceed</div>
                                         <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
@@ -131,8 +92,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
         </main>
         <?php $this->view('includes/footer'); ?>
     </div>
-
-
 </body>
+
 
 </html>

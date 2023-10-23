@@ -36,7 +36,8 @@ $colors: (
   "light-green": #bffad7,
   "dark-green": #027a48,
   "blue": #2185d5,
-  "lightgray-font": #646464 
+  "lightgray-font": #646464,
+  "box-gray": #CCCCCC
 );
 
 @each $key, $val in $sizes{

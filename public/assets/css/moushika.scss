@@ -1,3 +1,7 @@
+$colors : (
+    "box-gray": #CCCCCC
+);
+
 .trains-available h3{
     color: var(--lightgray-font);
     font-feature-settings: 'clig' off, 'liga' off;
@@ -17,3 +21,84 @@ font-style: normal;
 font-weight: 500;
 line-height: 19.444px; 
 }
+
+.comparment {
+    border-radius: 25px;
+    border: 2px solid #ccc;
+  }
+  
+.passenger-container {
+    width: 80%;
+    padding: inherit;
+    background-color: var(--box-gray) !important;
+}
+  
+
+.seat-row {
+  gap: 25px;
+}
+
+.seats-top {
+  gap: 10px;
+}
+
+.seats-bottom {
+  gap: 10px;
+}
+
+.seat {
+  width: 25px;
+  height: 25px;
+  padding: 5px 4px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background: #fff;
+  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
+}
+
+.seat:hover:not(.reserved) {
+  background: var(--Selected-Blue);
+  border: 2px solid var(--Border-blue);
+  cursor: pointer;
+  // add hover animation
+  transition: all 0.2s ease-out;
+}
+
+.seat.selected:not(.reserved) {
+  background: var(--Selected-Blue) !important;
+  border: 2px solid var(--Border-blue) !important;
+  cursor: pointer;
+}
+
+.reserved {
+  background: var(--Banner-red) !important;
+  border: 2px solid var(--Banner-red) !important;
+  color: var(--White) !important;
+  border: none;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .passenger-container {
+    width: 100%;
+  }
+
+  .comparment.flex-row {
+    flex-direction: column;
+  }
+
+  .comparment .seat-row,
+  .comparment .seats-top,
+  .comparment .seats-bottom {
+    flex-direction: row;
+  }
+
+  .seat {
+    width: 20px;
+    height: 20px;
+    padding: 5px 4px;
+    font-size: 12px;
+  }
+}
+
