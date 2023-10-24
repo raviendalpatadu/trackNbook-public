@@ -24,7 +24,7 @@ class Users extends Model{
             $query = "select * from tbl_login where login_username = :username and login_password = :password";
             $data_pass = $this->query($query,array(
                 'username'=>$_POST['username'],
-                'password'=>$_POST['password']
+                'password'=>md5($_POST['password'])
             ));
     
             if($data_pass > 0){

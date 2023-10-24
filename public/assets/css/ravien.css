@@ -2108,6 +2108,10 @@ h2.topic ~ p {
     width: 140px;
   }
 }
-input[type=submit] {
+input[type=submit]{
   background: transparent;
 }/*# sourceMappingURL=ravien.css.map */
+
+input[type="reset"]{
+  background: transparent !important;
+}

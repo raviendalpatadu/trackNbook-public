@@ -42,9 +42,14 @@
                                 </div>
 
                                 <!-- submit -->
-                                <div class="d-flex justify-content-start flex-fill">
+                                <div class="d-flex justify-content-between flex-fill">
                                     <div class="button-base">
                                         <input class="text" type="submit" value="submit" name="submit">
+                                    </div>
+
+                                    <!-- create account -->
+                                    <div class="button-base p-1 size-10 ">
+                                        <a href="<?=ROOT?>passenger/register" >Create Account</a>
                                     </div>
                                 </div>
                             </form>
@@ -62,7 +67,7 @@
 
 <script>
     $(document).ready(function() {
-        var tag = $('.login-text-inputs').children('.assistive-text');
+        var tag = $('.login-text-inputs:not(.display-none)').children('.assistive-text');
         var counter = 0;
 
         // access errors array

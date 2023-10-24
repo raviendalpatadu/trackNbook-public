@@ -4,7 +4,7 @@
 class Database
 {
 
-    private function connect()
+    protected function connect()
     {
         $string = DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME;
         if (!$con = new PDO($string, DBUSER, DBPASS)) {
