@@ -264,15 +264,12 @@
                 <h2>select</h2>
                 <div class="row g-5">
                     <div class="col-4">
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                                <option value="">Option 3</option>
-                                <option value="">Option 4</option>
-                            </select>
-                        </div>
-
+                        <select class="dropdown" placeholder="Please choose">
+                            <option>List entry #1</option>
+                            <option>List entry #2</option>
+                            <option>List entry #3</option>
+                            <option>List entry #4</option>
+                        </select>    
                     </div>
 
                     <!-- checkbox -->
@@ -371,5 +368,6 @@
         </main>
     </div>
 </body>
+<?php $this->view('includes/footer')?>
 
 </html>
