@@ -1515,6 +1515,20 @@
   color: #646464;
 }
 
+.border-bottom-box-gray {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #CCCCCC;
+}
+
+.bg-box-gray {
+  background-color: #CCCCCC;
+}
+
+.box-gray {
+  color: #CCCCCC;
+}
+
 .loader-circle {
   padding: 15px 21px;
   border-radius: 2000px;

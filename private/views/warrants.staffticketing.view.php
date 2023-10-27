@@ -9,51 +9,30 @@
             <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12 center-col">
-
-                        <div class="row mb-30">
-                            <div class="col-4">
-                                <div class="row g-5">
-                                    <div class="col-8">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label">To</div>
-                                            <div class="width-fill">
-                                                <select class="dropdown" placeholder="Please choose">
-                                                    <option value="">All</option>
-                                                    <option value="" selected>1005 Colombo &#8594 Kandy</option>
-                                                    <option value="">1006 Badulla &#8594 Colombo </option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                </select>
-                                            </div>
-                                            <div class="assistive-text display-none">Assistive Text</div>
+                    <div class="row mb-10 d-flex">
+                         <div class="col-12">
+                            <div class="trains-available mb-10">
+                                <h2>Verify Warrants</h2>
+                            </div>
+                        <div class="row mt-30 mb-20 " >
+                            <div class="col-6 ">
+                                <div class="row g-5 ">
+                                    <div class="col-8 ">
+                                        <div class="select ">
+                                            <div class="input-text-label">Train Name</div>
+                                            <select name="Train Name" id="">
+                                                <option value="">1005 Colombo &#8594 Kandy</option>
+                                                <option value="">All</option>
+                                                <option value="">1006 Badulla &#8594 Colombo </option>
+                                                <option value="">1005 Colombo &#8594 Badulla</option>
+                                                <option value="">1005 Colombo &#8594 Badulla</option>
+                                                <option value="">1005 Colombo &#8594 Badulla</option>
+                                            </select>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="row g-5">
-                                    <div class="col-8">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label">To</div>
-                                            <div class="width-fill">
-                                                <select class="dropdown" placeholder="Please choose">
-                                                    <option value="">All</option>
-                                                    <option value="" selected>200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                </select>
-                                            </div>
-                                            <div class="assistive-text display-none">Assistive Text</div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="row g-5">
                                     <div class="col-4">
                                         <div class="text-inputs">
@@ -72,17 +51,16 @@
                             </div>
                         </div>
 
+                       
                         <div class="row">
                             <div class="col-12">
-                                <div class="trains-available mb-10">
-                                    <h2>Udarata Manike</h2>
-
+                                <div class="trains-available mt-10 mb-2">
+                                    <h3>Udarata Manike</h3>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="trains-available">
-
-                                            <h3>Colombo &#8594 Kandy</h3>
+                                            <h4>Colombo &#8594 Kandy</h4>
                                         </div>
                                         <table class="">
                                             <thead>
@@ -93,14 +71,10 @@
                                                                 <input type="checkbox" class="checkbox" id="">
                                                             </div>
                                                         </div>
-                                                        NIC
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                                            <path d="M8.49967 3.83301V13.1663M8.49967 13.1663L13.1663 8.49967M8.49967 13.1663L3.83301 8.49967" stroke="#667085" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
+                                                        Name   
                                                     </th>
-                                                    <th class="col-1">Ticket ID</th>
+                                                    <th class="col-2">Warrant ID</th>
                                                     <th class="col-2">Date</th>
-                                                    <th class="col-3">Passenger</th>
                                                     <th class="col-2 d-flex align-items-center">
                                                         <div class="col-4">
                                                             <div class="d-flex .flex-row g-5 mr-5">
@@ -112,6 +86,7 @@
                                                             <path d="M8.49967 3.83301V13.1663M8.49967 13.1663L13.1663 8.49967M8.49967 13.1663L3.83301 8.49967" stroke="#667085" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                                                         </svg>
                                                     </th>
+                                                    <th class="col-2">Status</th> 
                                                     <th class="col-1"></th>
                                                 </tr>
                                             </thead>
@@ -121,17 +96,24 @@
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
-                                                        200156234102
+                                                        Moushika Kriyanjalee
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
                                                     <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
-                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
                                                         First Class
                                                     </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green">Pending</div>
+                                                        </div>
+                                                    </td>                                                  
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
@@ -146,17 +128,24 @@
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
-                                                        200156234102
+                                                        Moushika Kriyanjalee
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
                                                     <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
-                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
                                                         First Class
                                                     </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green">Pending</div>
+                                                        </div>
+                                                    </td>                                                  
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
@@ -171,17 +160,24 @@
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
-                                                        200156234190
+                                                        Moushika Kriyanjalee
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
                                                     <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
-                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
                                                         First Class
                                                     </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-Selected-red">
+                                                            <div class="dot">
+                                                                <div class="dot3"></div>
+                                                            </div>
+                                                            <div class="text Banner-red">Rejected</div>
+                                                        </div>
+                                                    </td>                                                  
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
@@ -196,17 +192,120 @@
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
-                                                        200156234102
+                                                        Moushika Kriyanjalee
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
                                                     <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
-                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <input type="checkbox" class="checkbox" id="">
                                                         </div>
                                                         First Class
                                                     </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green">Pending</div>
+                                                        </div>
+                                                    </td>                                                  
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        Moushika Kriyanjalee
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        First Class
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green">Pending</div>
+                                                        </div>
+                                                    </td>                                                  
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        Moushika Kriyanjalee
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        First Class
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-Selected-red">
+                                                            <div class="dot">
+                                                                <div class="dot3"></div>
+                                                            </div>
+                                                            <div class="text Banner-red">Rejected</div>
+                                                        </div>
+                                                    </td>                                                  
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        Moushika Kriyanjalee
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        First Class
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green">Pending</div>
+                                                        </div>
+                                                    </td>                                                  
                                                     <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
@@ -276,13 +375,15 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
         </main>
     </div>
-    <?php $this->view("./includes/load-js") ?>
+
 
 </body>
 
