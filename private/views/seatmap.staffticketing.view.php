@@ -94,6 +94,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
             </main>
             <?php $this->view('includes/footer'); ?>
         </div>
+        
     </body>
 
 

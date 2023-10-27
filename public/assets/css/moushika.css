@@ -113,11 +113,20 @@
     padding: 5px 4px;
     font-size: 12px;
   }
-  .line {
-    border-bottom: 1px solid #000;
-  }
-  .total-row {
-    background-color: rgba(0, 0, 0, 0.69);
-    height: 100px;
-  }
+}
+.line {
+  border-bottom: 2px solid #000;
+}
+
+.total-row {
+  background-color: rgba(0, 0, 0, 0.69);
+  height: 30px;
+}
+
+.date {
+  width: 270px;
+}
+
+.total {
+  justify-content: right;
 }/*# sourceMappingURL=moushika.css.map */

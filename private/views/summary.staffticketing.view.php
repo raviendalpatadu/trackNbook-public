@@ -25,7 +25,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                     <div class="ticket-container">     
                         <div class="row mb-20 "> 
                             <div class="col-12 d-flex align-items-center flex-column line">
-                                <h1>Ticket Details</h1>
+                                <h1>Booking Summary</h1>
                             </div>
                         </div>
                         <div class="row mb-10 mt-50 ml-20 "> 
@@ -108,20 +108,13 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                                 <p1>1500</p1>
                             </div>
                         </div>
-                        <div class="row mb-10 bg-Primary-Gray text White total-row"> 
-                            <div class="col-12 d-flex align-items-center total">
-                                <p1>Total Price - LKR 3000</p1>
-                            </div>    
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-12 d-flex align-items-center flex-column">
                             <button class="button"><a href="<?=ROOT?>passenger/details">
                                 <div class="button-base">
-                                    <div class="text">Pay</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
+                                    <div class="text">Print Ticket</div>
                                 </div></a>
                             </button>
                         </div>

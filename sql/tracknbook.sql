@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 24, 2023 at 10:58 AM
+-- Generation Time: Oct 27, 2023 at 10:09 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -69,7 +69,9 @@ INSERT INTO `tbl_login` (`login_id`, `login_username`, `login_password`, `user_i
 (6, 'weq', '2', 6),
 (7, 'some', 'some', 7),
 (8, 'shika', '77ec8952be7c961a1b975a00de15a630', 8),
-(9, 'gon', 'c6fac1b43c0b97c1a80e11267cca23e9', 9);
+(9, 'gon', 'c6fac1b43c0b97c1a80e11267cca23e9', 9),
+(10, 'raviee', 'db26ee047a4c86fbd2fba73503feccb6', 10),
+(11, 'silu', 'ac5585d98646d255299c359140537783', 11);
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,9 @@ INSERT INTO `tbl_passengers` (`passenger_id`, `passenger_email`, `passenger_nic`
 (6, 'sda@gm.com', '32'),
 (7, 'some@gm.com', '23412'),
 (8, 'sanath_dalpatadu@yahoo.com', '21312312'),
-(9, 'gon@gm.com', '221');
+(9, 'gon@gm.com', '221'),
+(10, 'dalpataduravien@gmail.com', '200123602078'),
+(11, 'siluni@gm.com', '2342342');
 
 -- --------------------------------------------------------
 
@@ -136,7 +140,8 @@ CREATE TABLE `tbl_route` (
 
 INSERT INTO `tbl_route` (`route_no`, `route_name`) VALUES
 (1, 'colombo-badulla'),
-(2, 'colombo-jaffna');
+(2, 'colombo-jaffna'),
+(4, 'colombo-kandy');
 
 -- --------------------------------------------------------
 
@@ -157,7 +162,9 @@ INSERT INTO `tbl_route_station` (`route_no`, `station_id`) VALUES
 (1, 1),
 (1, 2),
 (2, 1),
-(2, 6);
+(2, 6),
+(4, 1),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -268,7 +275,9 @@ INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_n
 (6, 'Mrs.', 'gew', 'jkj', 23231, 'passenger', 'male'),
 (7, 'Mr.', 'some', 'pala', 332, 'passenger', 'male'),
 (8, 'Mrs.', 'shika', 'dalpatadu', 718118969, 'passenger', 'male'),
-(9, 'Miss.', 'gonn', 'gaha', 212, 'passenger', 'female');
+(9, 'Miss.', 'gonn', 'gaha', 212, 'passenger', 'female'),
+(10, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', 'male'),
+(11, 'Mr.', 'silnui', 'ala', 342334232, 'passenger', 'female');
 
 --
 -- Indexes for dumped tables
@@ -359,7 +368,7 @@ ALTER TABLE `tbl_compartment`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
@@ -371,7 +380,7 @@ ALTER TABLE `tbl_reservation`
 -- AUTO_INCREMENT for table `tbl_route`
 --
 ALTER TABLE `tbl_route`
-  MODIFY `route_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `route_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_station`
@@ -389,7 +398,7 @@ ALTER TABLE `tbl_train`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
