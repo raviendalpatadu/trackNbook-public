@@ -1521,6 +1521,12 @@
   border-bottom-color: #CCCCCC;
 }
 
+.border-top-box-gray {
+  border-top: 1px;
+  border-top-style: solid;
+  border-top-color: #CCCCCC;
+}
+
 .bg-box-gray {
   background-color: #CCCCCC;
 }
