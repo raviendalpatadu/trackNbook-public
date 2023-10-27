@@ -1,0 +1,88 @@
+:root {
+  --collection-1-primary-blue: rgba(33, 133, 213, 1);
+  --collection-1-background-fade: rgba(71, 178, 255, 0.15);
+  --collection-1-seat: rgba(33, 133, 213, 0);
+}
+
+.image-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .field-select {
+  height:78px;
+  }
+  
+  /* .button {
+    display: inline-flex;
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #FFF;*/
+    /* Add margin to move the button to the right */
+    /* margin-left: 10px; Adjust this value to control the amount of spacing */
+    /* margin-right: 0px; Set margin-right to 0 to ensure no extra spacing on the right */
+  /*} */
+  
+  /* .button:hover {
+    background-color: lightgray;
+    color: blue;
+  }
+   */
+  
+  
+  .activation-field {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  
+  }
+  
+  .activation-field a {
+  text-decoration-line: underline;
+  }
+  
+  .field {
+  margin-bottom: 6px;
+  }
+  
+  .text-field {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #CCC;
+  background: var(--W-Background, #FFF);
+  }
+  
+  .select-field {
+  display: flex;
+  width: 135.492px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #CCC;
+  background: var(--W-Background, #FFF);
+  margin-top: 18px;
+  margin-left: 40px;
+
+  }
+  
+  
+  .image {
+  margin-left: 182px;
+  width: 542px;
+  }
+  main{
+  height: -webkit-fill-available;
+  }
