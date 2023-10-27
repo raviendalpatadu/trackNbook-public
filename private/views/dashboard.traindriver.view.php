@@ -2,7 +2,7 @@
 <?php $this->view("./includes/header") ?>
 
 <body>
-    <?php $this->view("./includes/sidebar", array("admin")) ?>
+    <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
