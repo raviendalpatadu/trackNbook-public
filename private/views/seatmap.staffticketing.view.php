@@ -22,7 +22,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
      <?php $this->view("./includes/dashboard-navbar") ?>
             <main>
                 <div class="container d-flex justify-content-center">
-                    <div class="passenger-container">     
+                    <div class="staff-container">     
                         <div class="row mb-20">
                             <div class="col-12">
                                 <h1>Badulla -> Colombo Fort</h1>

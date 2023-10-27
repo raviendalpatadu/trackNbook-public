@@ -12,6 +12,12 @@ class StaffTicketing extends Controller
         $this->view('staff_ticketing.dashboard');
     }
 
+    function pay($id = '')
+    {
+         
+        $this->view('ticket.staffticketing');
+    }
+
     function reservationList($id = '')
     {
          
