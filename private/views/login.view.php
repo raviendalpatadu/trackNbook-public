@@ -1,6 +1,12 @@
-<?php $this->view("./includes/header"); ?>
+<?php $this->view("./includes/header"); 
+
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+?>
 
 <body>
+    
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
         <main class=" d-flex align-items-start justify-content-end">
@@ -43,14 +49,16 @@
 
                                 <!-- submit -->
                                 <div class="d-flex justify-content-between flex-fill">
-                                    <div class="button-base">
-                                        <input class="text" type="submit" value="submit" name="submit">
-                                    </div>
-
                                     <!-- create account -->
                                     <div class="button-base p-1 size-10 ">
                                         <a href="<?=ROOT?>passenger/register" >Create Account</a>
                                     </div>
+
+
+                                    <div class="button-base">
+                                        <input class="text" type="submit" value="Submit" name="submit">
+                                    </div>
+
                                 </div>
                             </form>
                         </div>

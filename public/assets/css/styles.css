@@ -146,6 +146,7 @@ nav .brand {
   display: flex;
   align-items: center;
   gap: 5px;
+  padding: 12px;
 }
 
 nav .brand img {
@@ -710,7 +711,10 @@ tbody td {
 .button-base:hover path {
   background: var(--background-fade, rgba(71, 178, 255, 0.15));
   stroke: var(--Primary-Blue);
+  cursor: pointer;
 }
+
+
 
 .border-red .button-base path {
   stroke: var(--Banner-red);
@@ -738,6 +742,19 @@ tbody td {
 
 .button-base:hover .text .red {
   color: var(--Banner-red);
+}
+
+.button-base a {
+  cursor: pointer;
+  font:var(--textxs-medium, 600 12px/18px "Inter", sans-serif);
+}
+
+.button-base a:hover {
+  color: var(--Primary-Blue);
+} 
+
+.button-base input[type="submit"] {
+  cursor: pointer;
 }
 .pagination .arrow-left {
   flex-shrink: 0;

@@ -410,7 +410,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .dropdown {
-  --max-scroll: 8;
+  --max-scroll: 3;
   --text: #3f4656;
   --border: #2f3545;
   --borderActive: #23c4f8;
@@ -481,7 +481,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     list-style: none;
     opacity: 0;
     visibility: hidden;
-    position: absolute;
+    position: absolute; //absolute
     max-height: calc(var(--max-scroll) * 42px);
     top: 30px;
     left: 0;
@@ -490,7 +490,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: var(--White);
     border-radius: 6px;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: auto;//auto
     transform-origin: 0 0;
     transition: opacity 0.2s ease, visibility 0.2s ease,
       transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
@@ -524,7 +524,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
             display: block;
             width: 10px;
             height: 2px;
-            position: absolute;
+            position: absolute; //absolute
             right: 17px;
             top: 50%;
             opacity: 0;
@@ -582,6 +582,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     ul {
       opacity: 1;
       visibility: visible;
+      
       transform: scale(1) translate(0, 12px);
       transition: opacity 0.3s ease, visibility 0.3s ease,
         transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);

@@ -5,10 +5,6 @@ class Users extends Model{
         parent::__construct();
     }
 
-    public function getUsers(){
-        $result = $this->findAll();
-        return $result;
-    }
 
     public function login(){
         $errors = array();
@@ -21,7 +17,7 @@ class Users extends Model{
 
         if($data > 0){
             //check if username and password is correct
-            $query = "select * from tbl_login where login_username = :username and login_password = :password";
+            $query = "SELECT u.user_id, u.user_title, u.user_first_name , u.user_last_name, u.user_phone_number,u.user_type, u.user_gender FROM tbl_user as u JOIN tbl_login ON u.user_id = tbl_login.user_id WHERE login_username = :username and login_password = :password";
             $data_pass = $this->query($query,array(
                 'username'=>$_POST['username'],
                 'password'=>md5($_POST['password'])

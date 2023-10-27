@@ -48,6 +48,8 @@ $("select.dropdown").each(function() {
       .insertAfter($(this));
   var list = $("<ul />");
 
+  label.attr("class","input-field");
+
   $(this)
       .find("option")
       .each(function() {
@@ -78,6 +80,7 @@ $(document).on("click touch", ".selectDropdown ul li a", function(e) {
 
   dropdown.toggleClass("filled", !active);
   dropdown.children("span").text(label);
+  ;
 
   if (!active) {
       dropdown

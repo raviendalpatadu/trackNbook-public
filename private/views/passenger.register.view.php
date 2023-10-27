@@ -1,4 +1,7 @@
 <?php $this->view("./includes/header"); ?>
+<?php 
+$data['errors'] = array();
+?>
 
 <body>
     <div class="column-left">
@@ -181,7 +184,7 @@
 
                             <div class="row">
 
-                                <div class="col-12 d-flex justify-content-center">
+                                <div class="col-12 d-flex justify-content-center g-10">
 
                                     <div class="button-base">
                                         <input class="text" type="reset" value="Reset" name="submit">

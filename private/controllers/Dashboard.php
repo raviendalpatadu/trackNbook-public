@@ -7,22 +7,39 @@ class Dashboard extends Controller
 {
     function index($id = '')
     {   
-        $this->view('dashboard');
+        if(Auth::is_logged_in()){
+            $this->view('dashboard');
+        }else{
+            $this->redirect('login');
+        }
+       
     }
     function admin($id = '')
     {   
-        $this->view('admin.dashboard');
+        if(Auth::is_logged_in()){
+            $this->view('admin.dashboard');
+        }else{
+            $this->view('login');
+        }
     }
 
     //to be made
     function staff_general($id = '')
     {   
-        $this->view('staff_general.dashboard');
+        if(Auth::is_logged_in()){
+            $this->view(' staff_general.dashboard');
+        }else{
+            $this->view('login');
+        }
     }
     //to be made
     function staff_ticketing($id = '')
-    {   
-        $this->view('staff_ticketing.dashboard');
+    {  
+        if(Auth::is_logged_in()){
+            $this->view('staff_ticketing.dashboard');
+        }else{
+            $this->view('login');
+        } 
     }
     //to be made
     function train_driver($id = '')

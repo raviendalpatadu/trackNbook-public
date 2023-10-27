@@ -16,10 +16,12 @@ class Login extends Controller
             $data = $user->login();
 
             if(!array_key_exists('error',$data)){
+
+                Auth::authenticate($data[0]);
                 
                 $user_id = $data[0]->user_id;
                 
-                $user_type = $user->gUserType($user_id);
+                $user_type = Auth::getUser_Type($user_id);
                 // redirect to dashboard admin
                 if(strtolower($user_type) == "admin"){
                     $this->redirect('dashboard/admin');

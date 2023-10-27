@@ -1824,7 +1824,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   }
 }
 .dropdown {
-  --max-scroll: 8;
+  --max-scroll: 3;
   --text: #3f4656;
   --border: #2f3545;
   --borderActive: #23c4f8;
@@ -2108,10 +2108,6 @@ h2.topic ~ p {
     width: 140px;
   }
 }
-input[type=submit]{
+input[type=submit] {
   background: transparent;
 }/*# sourceMappingURL=ravien.css.map */
-
-input[type="reset"]{
-  background: transparent !important;
-}

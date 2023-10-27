@@ -1,5 +1,12 @@
 <?php $this->view("./includes/header"); ?>
 
+<?php
+
+echo "<pre>";   
+// print_r($data);
+echo "</pre>";
+?>
+
 <body>
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
@@ -77,14 +84,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- print trains -->
+                                    <?php foreach($data as $key => $value):?>
                                     <tr class="row">
-                                        <td class="col-6 d-flex align-items-center">Udarata menike Express Train - 1105</td>
+                                        <td class="col-6 d-flex align-items-center"><?=ucfirst($value->train_name)?> - <?=$value->train_id?></td>
                                         <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center">
                                             <div class="badge-base bg-light-green">
                                                 <div class="dot">
                                                     <div class="dot2"></div>
                                                 </div>
-                                                <div class="text dark-green">07.00-17.00</div>
+                                                <div class="text dark-green"><?=date("H:i", strtotime($value->train_start_time))?>-<?=date("H:i", strtotime($value->train_end_time))?></div>
                                             </div>
                                         </td>
                                         <td class="col-4">
@@ -153,6 +162,7 @@
 
                                         </td>
                                     </tr>
+                                    <?php endforeach; ?>
 
 
 
