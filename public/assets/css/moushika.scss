@@ -1,6 +1,22 @@
-$colors : (
-    "box-gray": #CCCCCC
+$mou-colors : (
+    "box-gray": #FAFAFA
 );
+
+@each $key, $val in $mou-colors{
+  .border-bottom-#{$key}{
+    border-bottom: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: $val;
+  }
+
+  .bg-#{$key}{
+    background-color: $val;
+  }
+
+  .#{$key}{
+    color: $val;
+  }
+}
 
 .trains-available h3{
     color: var(--lightgray-font);
@@ -30,7 +46,7 @@ line-height: 19.444px;
 .passenger-container {
     width: 80%;
     padding: inherit;
-    background-color: var(--box-gray) !important;
+    background-color:map-get($mou-colors, "box-gray" );
 }
   
 

@@ -1,3 +1,17 @@
+.border-bottom-box-gray {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #FAFAFA;
+}
+
+.bg-box-gray {
+  background-color: #FAFAFA;
+}
+
+.box-gray {
+  color: #FAFAFA;
+}
+
 .trains-available h3 {
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
@@ -26,7 +40,7 @@
 .passenger-container {
   width: 80%;
   padding: inherit;
-  background-color: var(--box-gray) !important;
+  background-color: #FAFAFA;
 }
 
 .seat-row {
