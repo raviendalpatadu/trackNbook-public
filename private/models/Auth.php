@@ -12,7 +12,7 @@ class Auth
             unset($_SESSION['USER']);
         }
     }
-    public static function is_logged_in()
+    public static function is_logged_in()   
     {
         if (isset($_SESSION['USER'])) {
             return true;
@@ -22,7 +22,7 @@ class Auth
     public static function user()
     {
         if (isset($_SESSION['USER'])) {
-            return $_SESSION['USER']->first_name;
+            return $_SESSION['USER']->user_first_name;
         }
         return false;
     }

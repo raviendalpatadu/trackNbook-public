@@ -14,16 +14,19 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="select">
-                                            <div class="input-text-label">Train Name</div>
-                                            <select name="Train Name" id="">
-                                                <option value="">1005 Colombo &#8594 Kandy</option>
-                                                <option value="">All</option>
-                                                <option value="">1006 Badulla &#8594 Colombo </option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                                <option value="">1005 Colombo &#8594 Badulla</option>
-                                            </select>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">To</div>
+                                            <div class="width-fill">
+                                                <select class="dropdown" placeholder="Please choose">
+                                                    <option value="">All</option>
+                                                    <option value="" selected>1005 Colombo &#8594 Kandy</option>
+                                                    <option value="">1006 Badulla &#8594 Colombo </option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                    <option value="">1005 Colombo &#8594 Badulla</option>
+                                                </select>
+                                            </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
 
                                     </div>
@@ -32,16 +35,20 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="select">
-                                            <div class="input-text-label">NIC</div>
-                                            <select name="NIC" id="">
-                                                <option value="">200456231785</option>
-                                                <option value="">All</option>
-                                                <option value="">200456231785</option>
-                                                <option value="">200456231785</option>
-                                                <option value="">200456231785</option>
-                                            </select>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">To</div>
+                                            <div class="width-fill">
+                                                <select class="dropdown" placeholder="Please choose">
+                                                    <option value="">All</option>
+                                                    <option value="" selected>200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                    <option value="">200456231785</option>
+                                                </select>
+                                            </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -125,7 +132,14 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href="">View</a></td>
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
@@ -143,7 +157,39 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href="">View</a></td>
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        200156234190
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
+                                                    <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
+                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+                                                            <input type="checkbox" class="checkbox" id="">
+                                                        </div>
+                                                        First Class
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
@@ -161,25 +207,14 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href="">View</a></td>
-                                                </tr>
-                                                <tr class="row p-20">
-                                                    <td class="col-3 d-flex align-items-center">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue ">View</div>
                                                         </div>
-                                                        200156234102
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font ">WD1001</td>
-                                                    <td class="col-2 d-flex align-items-center">Sep 23,2023</td>
-                                                    <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                    <td class="col-2 d-flex align-items-center">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
-                                                        </div>
-                                                        First Class
-                                                    </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href="">View</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -245,10 +280,9 @@
                             </div>
                         </div>
                     </div>
-
         </main>
     </div>
-
+    <?php $this->view("./includes/load-js") ?>
 
 </body>
 
