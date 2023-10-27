@@ -42,4 +42,10 @@ class StaffTicketing extends Controller
         $this->view('seatmap.staffticketing');
     }
 
+    function cancel($id = '')
+    {
+         
+        $this->view('cancelation.staffticketing');
+    }
+
 }
