@@ -1,4 +1,3 @@
-
 <?php $this->view("./includes/header") ?>
 
 <body>
@@ -17,13 +16,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    
+
 
                     <div class="col-6">
                         <p>Welcome to the dashboard</p>
                     </div>
                     <div class="col-6">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias voluptas natus, laboriosam veritatis itaque repudiandae, voluptate minima aliquid quod ea cumque, necessitatibus voluptatum quidem assumenda tempore blanditiis et quia earum.</p>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias voluptas natus,
+                            laboriosam veritatis itaque repudiandae, voluptate minima aliquid quod ea cumque,
+                            necessitatibus voluptatum quidem assumenda tempore blanditiis et quia earum.</p>
                     </div>
 
                 </div>

@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row g-20 mb-20">
                             <div class="col-2">
                                 <div class="text-inputs">
@@ -110,13 +110,13 @@
                                         <div class="text">Reset</div>
                                     </div>
                                 </button>
-                           
+
                                 <button class="button mx-10">
                                     <div class="button-base">
                                         <div class="text">Delete</div>
                                     </div>
                                 </button>
-                            
+
                                 <button class="button mx-10">
                                     <div class="button-base">
                                         <div class="text">Update</div>

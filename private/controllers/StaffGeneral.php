@@ -18,4 +18,16 @@ class StaffGeneral extends Controller
         $this->view('manage.schedule');
     }
 
+    function updateSchedule($id = '')
+    {
+         
+        $this->view('update.schedule');
+    }
+
+    function addSchedule($id = '')
+    {
+         
+        $this->view('add.schedule');
+    }
+
 }

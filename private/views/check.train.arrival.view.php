@@ -1,4 +1,5 @@
 <?php $this->view("./includes/header"); ?>
+
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
@@ -8,11 +9,9 @@
                 <div class="row">
                     <div class="col-12">
                         <h1>Check Train Arrival</h1>
-                       
-                      
                     </div>
                 </div>
-                <div class="table" >
+                <div class="table">
                     <div class="row">
                         <div class="col-12">
                             <div class="trains-available">
@@ -34,7 +33,7 @@
                                 <th class="col-1">Status</th>
                                 <th class="col-1"></th>
                                 <th class="col-1"></th>
-                                
+
 
                             </tr>
                         </thead>
@@ -43,15 +42,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">Kankesanthurai </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
-                                    <td class="col-1"></td>
+                                    </div>
+                                </td>
+                                <td class="col-1"></td>
                                 <td class="col-1"><a href="/" class="blue">Check</a>
-</td>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -59,15 +60,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -75,15 +78,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -91,15 +96,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -107,15 +114,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -123,15 +132,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -139,15 +150,17 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                         <tbody>
@@ -155,23 +168,29 @@
                                 <td class="col-3">Yal Devi</td>
                                 <td class="col-3">KKS </td>
                                 <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1"> <div class="badge-base bg-light-green">
+                                <td class="col-1">
+                                    <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
                                         </div>
                                         <div class="text dark-green">Arrived</div>
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td class="col-1"></td>
-                                <td class="col-1"><a href="/"  class="blue">Check</a>
-</td>
+                                <td class="col-1"><a href="/" class="blue">Check</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="pagination">
                         <div class="button">
                             <div class="button-base">
-                                <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
+                                        stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
 
                                 <div class="text">Previous</div>
@@ -217,8 +236,12 @@
                         <div class="button">
                             <div class="button-base">
                                 <div class="text">Next</div>
-                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
+                                        stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
                             </div>
                         </div>
