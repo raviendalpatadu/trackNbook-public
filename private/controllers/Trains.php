@@ -21,3 +21,4 @@ class Trains extends Controller
         $this->view('add.trains');
     }
 }
+

@@ -1,5 +1,12 @@
 <?php $this->view("./includes/header"); ?>
 
+<?php
+
+echo "<pre>";   
+// print_r($data);
+echo "</pre>";
+?>
+
 <body>
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
@@ -10,7 +17,7 @@
 
 
                     <div class="col-8 center-col">
-                        <div class="table">
+                        <div>
                             <!-- complete loader -->
                             <div class="row mb-50">
                                 <div class="col-12">
@@ -31,13 +38,13 @@
                                         </div>
 
                                         <div class="divider"></div>
-                                        
+
                                         <div class="loader-circle ">
                                             <div class="loader-circle-text white">4</div>
                                         </div>
-                                        
+
                                         <div class="divider"></div>
-                                        
+
                                         <div class="loader-circle ">
                                             <div class="loader-circle-text white">5</div>
                                         </div>
@@ -77,151 +84,89 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- print trains -->
+                                    <?php foreach($data as $key => $value):?>
                                     <tr class="row">
-                                        <td class="col-6 d-flex align-items-center">Udarata menike Express Train<br>Badulla - Colombo Fort</td>
-                                        <td class="col-2 d-flex align-items-center justify-content-center">
+                                        <td class="col-6 d-flex align-items-center"><?=ucfirst($value->train_name)?> - <?=$value->train_id?></td>
+                                        <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center">
                                             <div class="badge-base bg-light-green">
                                                 <div class="dot">
                                                     <div class="dot2"></div>
                                                 </div>
-                                                <div class="text dark-green">07.00-17.00</div>
+                                                <div class="text dark-green"><?=date("H:i", strtotime($value->train_start_time))?>-<?=date("H:i", strtotime($value->train_end_time))?></div>
                                             </div>
                                         </td>
                                         <td class="col-4">
 
                                             <div class="availabity">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base">
+                                                <a href="<?= ROOT ?>trains/seatsAvailable">
+                                                    <div class="d-flex justify-content-between">
+
+                                                        <div class="badge-base flex-grow">
                                                             <div class="text">1st Class Reservation</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base">
+
+
+                                                        <div class="badge-base flex-grow">
                                                             <div class="text">20</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base">
+
+
+                                                        <div class="badge-base flex-grow">
                                                             <div class="text">LKR.2500.00</div>
                                                         </div>
-                                                    </div>
-                                                </div>
 
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
+                                                    </div>
+                                                </a>
+
+                                                <a href="<?= ROOT ?>trains/seatsAvailable">
+                                                    <div class="d-flex justify-content-between">
+
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text primary-blue">2nd Class Reservation</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
+
+
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text primary-blue">230</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
+
+
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text primary-blue">LKR.2000.00</div>
                                                         </div>
+
                                                     </div>
-                                                </div>
+                                                </a>
 
+                                                <a href="<?= ROOT ?>trains/seatsAvailable">
+                                                    <div class="d-flex justify-content-between">
 
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text blue">3rd Class Reservation</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
+
+
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text blue">60</div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
+
+
+                                                        <div class="badge-base flex-grow bg-selected-blue">
                                                             <div class="text blue">LKR.1500.00</div>
                                                         </div>
+
                                                     </div>
-                                                </div>
+                                                </a>
                                             </div>
 
                                         </td>
                                     </tr>
-
-                                    <tr class="row">
-                                        <td class="col-6 d-flex align-items-center">Udarata menike Express Train<br>Badulla - Colombo Fort</td>
-                                        <td class="col-2 d-flex align-items-center justify-content-center">
-                                            <div class="badge-base bg-light-green">
-                                                <div class="dot">
-                                                    <div class="dot2"></div>
-                                                </div>
-                                                <div class="text dark-green">07.00-17.00</div>
-                                            </div>
-                                        </td>
-                                        <td class="col-4">
-
-                                            <div class="availabity">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base">
-                                                            <div class="text">1st Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base">
-                                                            <div class="text">20</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base">
-                                                            <div class="text">LKR.2500.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">2nd Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">230</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text primary-blue">LKR.2000.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <?php endforeach; ?>
 
 
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">3rd Class Reservation</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">60</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="badge-base bg-selected-blue">
-                                                            <div class="text blue">LKR.1500.00</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                        </td>
-                                    </tr>
 
-                                    
                                 </tbody>
                             </table>
                             <div class="pagination">
@@ -271,13 +216,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="button">
-                                    <div class="button-base">
-                                        <div class="text">Next</div>
-                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
+                                <button class="button"><a href="<?= ROOT ?>trains/seatsAvailable">
+                                        <div class="button-base">
+                                            <div class="text">Next</div>
+                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </a>
                                 </button>
                             </div>
                         </div>
@@ -285,7 +231,7 @@
                 </div>
             </div>
         </main>
-        <?php $this->view('includes/footer');?>
+        <?php $this->view('includes/footer'); ?>
     </div>
 
 
