@@ -42,4 +42,8 @@ class Train extends Controller
     {
         $this->view('track');
     }
+
+    function add($id = ''){
+        $this->view('add.trains');
+    }
 }
