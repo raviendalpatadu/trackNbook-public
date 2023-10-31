@@ -1,9 +1,9 @@
 <?php
 $no_of_passengers = 2;
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 
@@ -51,7 +51,7 @@ echo "</pre>";
                             </div>
                         </div>
                     </div>
-                    <form action="" method="post" class="profile p-50 shadow">
+                    <form action="<?=ROOT?>passenger/billing" method="post" class="profile p-50 shadow">
                         <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
                             <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger <?= $i + 1 ?></h3>
                             <div class="row g-20 mb-20">
@@ -156,20 +156,22 @@ echo "</pre>";
                                     Please upload a clear photo of the warrent.
                                 </div>
                                 <div class="d-flex flex-row align-items-center mt-10">
-                                    
+
                                     <div class="file-upload">
-                                        <input type="file" class="" name="file-upload-input" id="file-upload-input" >
+                                        <input type="file" class="" name="file-upload-input" id="file-upload-input">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end">
-                                <button class="button mx-10">
-                                    <div class="button-base">
-                                        <div class="text">Proceed</div>
-                                    </div>
-                                </button>
+                                <a href="<?=ROOT?>passenger/billing">
+                                    <button class="button mx-10">
+                                        <div class="button-base">
+                                            <div class="text">Proceed</div>
+                                        </div>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </form>

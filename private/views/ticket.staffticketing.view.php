@@ -23,8 +23,8 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
             <main>
                 <div class="container d-flex justify-content-center">
                     <div class="ticket-container">     
-                        <div class="row mb-20 line"> 
-                            <div class="col-12 d-flex align-items-center flex-column">
+                        <div class="row mb-20 "> 
+                            <div class="col-12 d-flex align-items-center flex-column line">
                                 <h1>Ticket Details</h1>
                             </div>
                         <div class="row mb-10 mt-50 ml-20 "> 
@@ -108,7 +108,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                             </div>
                         </div>
                         <div class="row mb-10 bg-Primary-Gray text White total-row"> 
-                            <div class="col-12 d-flex align-items-end  ">
+                            <div class="col-12 d-flex align-items-center justify-content-end pr-10  ">
                                 <p1>Total Price - LKR 3000</p1>
                             </div>    
                      </div>

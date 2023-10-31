@@ -59,7 +59,7 @@ echo "</pre>";
                             </div>
                             <div class="row mb-20">
                                 <div class="col-12">
-                                    <h1>Badulla -> Colombo Fort</h1>
+                                    <h1><?php echo (isset($data[0])) ? $data[0]->start_station : ""?> -> <?=(isset($data[0])) ? $data[0]->end_station : ""?></h1>
                                     <p>Select a train to proceed</p>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ echo "</pre>";
                                         <td class="col-4">
 
                                             <div class="availabity">
-                                                <a href="<?= ROOT ?>trains/seatsAvailable">
+                                                <a href="<?= ROOT ?>train/seatsAvailable">
                                                     <div class="d-flex justify-content-between">
 
                                                         <div class="badge-base flex-grow">

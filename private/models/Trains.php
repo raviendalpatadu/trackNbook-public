@@ -52,7 +52,31 @@ class Trains extends Model{
                 $con->beginTransaction();
 
                 //insert query to search train must come form route
-                $query = "SELECT * FROM tbl_train WHERE train_start_station = :from_station AND train_end_station = :to_station";
+                $query = "SELECT\n"
+
+                . "tbl_train.*,\n"
+            
+                . "start.station_name AS start_station,\n"
+            
+                . "end.station_name AS end_station\n"
+            
+                . "\n"
+            
+                . "FROM\n"
+            
+                . "	tbl_train\n"
+            
+                . "JOIN\n"
+            
+                . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
+            
+                . " JOIN\n"
+            
+                . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id\n"
+            
+                . "WHERE\n"
+            
+                . "	tbl_train.train_start_station = :from_station AND tbl_train.train_end_station = :to_station;";
                 $stm = $con->prepare($query);
 
                 $stm->execute(array(

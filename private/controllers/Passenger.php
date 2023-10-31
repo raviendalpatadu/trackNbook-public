@@ -20,6 +20,14 @@ class Passenger extends Controller
         $this->view('passenger.details', $data);
     }
 
+    function billing($id = '')
+    {
+        // $passenger = new Passengers();
+        // $data = array();
+        // $data = $passenger->getPassengers();
+        $this->view('passenger.billing.summary');
+    }
+
     //add passenger
     function register($id = '') {
         $data = array();
@@ -27,7 +35,7 @@ class Passenger extends Controller
 
         if(isset($_POST['user_title'])){
             $data = $passenger->addPassenger();
-            // echo json_encode($data);
+            
             if(!array_key_exists('errors',$data)){
                 $this->redirect('login');
             }

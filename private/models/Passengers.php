@@ -62,10 +62,15 @@ class Passengers extends Model
             $errors['errors']['user_phone_number'] = 'Phone Number is required';
         }
 
+        // 10 number validation
+        
+
         //check nic is exists in post
         if (empty($_POST['user_nic'])) {
             $errors['errors']['user_nic'] = 'NIC is required';
         }
+
+        // 10 number validation o rGroup13 - SRS-TrackNBookm in it
 
         //check if email is exists in post
         if (empty($_POST['user_email'])) {
@@ -81,6 +86,8 @@ class Passengers extends Model
         if(empty($_POST['user_gender'])){
             $errors['errors']['user_gender'] = 'Gender is required';
         }
+
+        // auto pgender validatiaon
 
 
 
@@ -142,4 +149,7 @@ class Passengers extends Model
         }
         return $errors;
     }
+
+    // con currency transaction cj=heck in seat map
 }
+ 

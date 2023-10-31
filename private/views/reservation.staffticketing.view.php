@@ -28,7 +28,6 @@
                                             </div>
                                             <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
