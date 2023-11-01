@@ -168,4 +168,8 @@ class Passenger extends Controller
         }
     }
 
+    // recancel reservation
+
+    // show reservation
+
 }
