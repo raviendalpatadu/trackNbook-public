@@ -81,50 +81,16 @@
   gap: 50px;
 }
 
-.seat-row {
-  gap: 25px;
+@media screen and (max-width: 768px) {
+  .staff-container {
+    width: 100%;
+    padding: 10px 0px;
+  }
+  .ticket-container {
+    width: 100%;
+    padding: 10px 0px;
+  }
 }
-
-.seats-top {
-  gap: 10px;
-}
-
-.seats-bottom {
-  gap: 10px;
-}
-
-.seat {
-  width: 25px;
-  height: 25px;
-  padding: 5px 4px;
-  gap: 10px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background: #fff;
-  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
-}
-
-.seat:hover:not(.reserved) {
-  background: var(--Selected-Blue);
-  border: 2px solid var(--Border-blue);
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-}
-
-.seat.selected:not(.reserved) {
-  background: var(--Selected-Blue) !important;
-  border: 2px solid var(--Border-blue) !important;
-  cursor: pointer;
-}
-
-.reserved {
-  background: var(--Banner-red) !important;
-  border: 2px solid var(--Banner-red) !important;
-  color: var(--White) !important;
-  border: none;
-  cursor: not-allowed;
-}
-
 @media screen and (max-width: 768px) {
   .staff-container {
     width: 100%;

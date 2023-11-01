@@ -20,9 +20,8 @@
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here" name="">
                                             </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
-                                    </div>
-
                                     </div>
                                 </div>
                             </div>
