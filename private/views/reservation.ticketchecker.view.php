@@ -14,20 +14,14 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label">To</div>
-                                            <div class="width-fill">
-                                                <select class="dropdown" placeholder="Please choose">
-                                                    <option value="">All</option>
-                                                    <option value="" selected>1005 Colombo &#8594 Kandy</option>
-                                                    <option value="">1006 Badulla &#8594 Colombo </option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                    <option value="">1005 Colombo &#8594 Badulla</option>
-                                                </select>
+                                    <div class="text-inputs">
+                                        <div class="input-text-label text lightgray-font">NIC</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" name="">
                                             </div>
-                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
+                                    </div>
 
                                     </div>
                                 </div>
@@ -35,19 +29,14 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label">To</div>
-                                            <div class="width-fill">
-                                                <select class="dropdown" placeholder="Please choose">
-                                                    <option value="">All</option>
-                                                    <option value="" selected>200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                    <option value="">200456231785</option>
-                                                </select>
+                                    <div class="text-inputs">
+                                        <div class="input-text-label text lightgray-font">Class</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" name="">
                                             </div>
-                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
+                                    </div>
 
 
                                     </div>
@@ -57,7 +46,7 @@
                                 <div class="row g-5">
                                     <div class="col-4">
                                     <div class="text-inputs date">
-                                            <div class="input-text-label">Date</div>
+                                            <div class="input-text-label text lightgray-font ">Date</div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="date" name="from_date" class="type-here" placeholder="Type here">
@@ -92,13 +81,11 @@
                                                     <th class="col-3 d-flex align-items-center">
                                                         <div class="col-4">
                                                             <div class="d-flex .flex-row g-5 mr-5">
-                                                                <input type="checkbox" class="checkbox" id="">
+    
                                                             </div>
                                                         </div>
                                                         NIC
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                                            <path d="M8.49967 3.83301V13.1663M8.49967 13.1663L13.1663 8.49967M8.49967 13.1663L3.83301 8.49967" stroke="#667085" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
+                                                        
                                                     </th>
                                                     <th class="col-1">Ticket ID</th>
                                                     <th class="col-2">Date</th>
@@ -106,13 +93,11 @@
                                                     <th class="col-2 d-flex align-items-center">
                                                         <div class="col-4">
                                                             <div class="d-flex .flex-row g-5 mr-5">
-                                                                <input type="checkbox" class="checkbox" id="">
+                                                                
                                                             </div>
                                                         </div>
                                                         Class
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                                                            <path d="M8.49967 3.83301V13.1663M8.49967 13.1663L13.1663 8.49967M8.49967 13.1663L3.83301 8.49967" stroke="#667085" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-                                                        </svg>
+                                                        
                                                     </th>
                                                     <th class="col-1"></th>
                                                 </tr>
@@ -121,7 +106,7 @@
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+                                                            
                                                         </div>
                                                         200156234102
                                                     </td>
@@ -130,7 +115,7 @@
                                                     <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         First Class
                                                     </td>
@@ -146,7 +131,7 @@
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         200156234102
                                                     </td>
@@ -155,7 +140,7 @@
                                                     <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         First Class
                                                     </td>
@@ -171,7 +156,7 @@
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         200156234190
                                                     </td>
@@ -180,7 +165,7 @@
                                                     <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         First Class
                                                     </td>
@@ -196,7 +181,7 @@
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         200156234102
                                                     </td>
@@ -205,7 +190,7 @@
                                                     <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <input type="checkbox" class="checkbox" id="">
+
                                                         </div>
                                                         First Class
                                                     </td>

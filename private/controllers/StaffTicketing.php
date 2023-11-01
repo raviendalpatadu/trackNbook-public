@@ -30,7 +30,7 @@ class StaffTicketing extends Controller
         $this->view('reservation.staffticketing');
     }
 
-    function verifyWarrants($id = '')
+    function Warrants($id = '')
     {
          
         $this->view('warrants.staffticketing');
@@ -46,6 +46,12 @@ class StaffTicketing extends Controller
     {
          
         $this->view('cancelation.staffticketing');
+    }
+
+    function refund($id = '')
+    {
+         
+        $this->view('refund.staffticketing');
     }
 
 }
