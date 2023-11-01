@@ -79,7 +79,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                         <div class="line">
                             <hr>
                         </div>
-                        <div id="refund" class="">
+                        <div id="refund" class="display-none">
                             <div class="row mt-30">
                                 <div class="col-12">
                                     <div class="text ">

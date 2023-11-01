@@ -36,6 +36,12 @@ class StaffTicketing extends Controller
         $this->view('warrants.staffticketing');
     }
 
+    function display($id = '')
+    {
+         
+        $this->view('display.warrant.staffticketing');
+    }
+
     function seatMap($id = '')
     {
          
