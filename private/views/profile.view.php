@@ -1,4 +1,10 @@
+<?php
+// echo "<pre>";
+// print_r($_SESSION);
+// echo "</pre>";
+?>
 <?php $this->view("./includes/header"); ?>
+
 
 <body>
     <div class="column-left">
@@ -16,7 +22,7 @@
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <div class="profile-name">
-                                    <h2>Moushika Kiriyanjalee</h2>
+                                    <h2><?=ucfirst(Auth::getuser_first_name()) . " " . ucfirst(Auth::getuser_last_name())?></h2>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +47,7 @@
                                         <div class="input-text-label">First Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_first_name()?>">
                                             </div>
                                         </div>
                                         <!-- <div class="assistive-text">Assistive Text</div> -->
@@ -52,7 +58,7 @@
                                         <div class="input-text-label">Last Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_last_name()?>">
                                             </div>
                                         </div>
                                         <!-- <div class="assistive-text">Assistive Text</div> -->
@@ -65,7 +71,7 @@
                                         <div class="input-text-label">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_nic()?>">
     
                                             </div>
                                         </div>
@@ -77,7 +83,7 @@
                                         <div class="input-text-label">Mobile</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_phone_number()?>">
     
                                             </div>
                                         </div>
@@ -91,7 +97,7 @@
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here">
+                                                <input type="text" class="type-here" placeholder="Type here" value="Disabled">
     
                                             </div>
                                         </div>
