@@ -60,4 +60,17 @@ class StaffTicketing extends Controller
         $this->view('refund.staffticketing');
     }
 
+    function trainstaff($id = '')
+    {
+         
+        $this->view('trains.staffticketing');
+    }
+
+    function passenger($id = '')
+    {
+         
+        $this->view('passenger.staff.staffticketing');
+    }
+
+    
 }

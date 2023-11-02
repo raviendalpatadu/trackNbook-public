@@ -79,7 +79,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                                             <div class="text">Cancel</div>
                                         </div>
                                     </button>
-                                    <button class="button"><a href="<?=ROOT?>passenger/details">
+                                    <button class="button"><a href="<?=ROOT?>staffticketing/passenger">
                                         <div class="button-base">
 
                                             <div class="text">Proceed</div>

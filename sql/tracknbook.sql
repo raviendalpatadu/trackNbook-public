@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 27, 2023 at 10:09 AM
+-- Generation Time: Nov 01, 2023 at 12:34 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -71,7 +71,8 @@ INSERT INTO `tbl_login` (`login_id`, `login_username`, `login_password`, `user_i
 (8, 'shika', '77ec8952be7c961a1b975a00de15a630', 8),
 (9, 'gon', 'c6fac1b43c0b97c1a80e11267cca23e9', 9),
 (10, 'raviee', 'db26ee047a4c86fbd2fba73503feccb6', 10),
-(11, 'silu', 'ac5585d98646d255299c359140537783', 11);
+(11, 'silu', 'ac5585d98646d255299c359140537783', 11),
+(12, 'asd', '7815696ecbf1c96e6894b779456d330e', 12);
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,8 @@ INSERT INTO `tbl_passengers` (`passenger_id`, `passenger_email`, `passenger_nic`
 (8, 'sanath_dalpatadu@yahoo.com', '21312312'),
 (9, 'gon@gm.com', '221'),
 (10, 'dalpataduravien@gmail.com', '200123602078'),
-(11, 'siluni@gm.com', '2342342');
+(11, 'siluni@gm.com', '2342342'),
+(12, 'sanath_dalpatadu@yahoo.com', '213123');
 
 -- --------------------------------------------------------
 
@@ -112,16 +114,28 @@ CREATE TABLE `tbl_reservation` (
   `reservation_start_station` int(11) NOT NULL,
   `reservation_end_station` int(11) NOT NULL,
   `reservation_train_id` int(11) NOT NULL,
-  `reservation_date` date NOT NULL
+  `reservation_date` date NOT NULL,
+  `reservation_class` int(20) NOT NULL,
+  `reservation_seat` int(20) NOT NULL,
+  `reservation_passenger_titile` varchar(5) NOT NULL,
+  `reservation_passenger_first_name` varchar(50) NOT NULL,
+  `reservation_passenger_last_name` varchar(50) NOT NULL,
+  `reservation_passenger_nic` int(11) NOT NULL,
+  `reservation_passenger_phone_number` int(15) NOT NULL,
+  `reservation_passenger_email` varchar(50) NOT NULL,
+  `reservation_passenger_gender` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_date`) VALUES
-(1, 4, 12, 1, 1, '2023-10-31'),
-(2, 6, 1, 7, 2, '2023-10-30');
+INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_date`, `reservation_class`, `reservation_seat`, `reservation_passenger_titile`, `reservation_passenger_first_name`, `reservation_passenger_last_name`, `reservation_passenger_nic`, `reservation_passenger_phone_number`, `reservation_passenger_email`, `reservation_passenger_gender`) VALUES
+(1, 1, 12, 1, 1, '2023-10-31', 1, 25, 'Mr.', 'rave', 'dalpe', 200123608, 713125549, 'dalpe@gm.com', 'male'),
+(2, 6, 1, 7, 2, '2023-10-30', 2, 25, 'Mr.', 'sdadaa', 'dsadadad', 1231231232, 2131, 'adad@gm.com', 'female'),
+(3, 10, 14, 1, 3, '2023-11-04', 1, 1, 'Miss.', 'sdadad', 'sdada', 132123, 3112123, 'sdada@gmail.com', 'male'),
+(4, 5, 14, 1, 3, '2023-11-04', 1, 2, 'Mrs.', 'shika', 'mou', 213321, 231321, 'moushika@gmail.com', 'female'),
+(6, 8, 14, 1, 3, '2023-11-04', 1, 13, 'Miss', 'Ravien', 'Dalpatadu', 789568, 701949400, 'dalpataduravien@gmail.com', 'male');
 
 -- --------------------------------------------------------
 
@@ -277,7 +291,8 @@ INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_n
 (8, 'Mrs.', 'shika', 'dalpatadu', 718118969, 'passenger', 'male'),
 (9, 'Miss.', 'gonn', 'gaha', 212, 'passenger', 'female'),
 (10, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', 'male'),
-(11, 'Mr.', 'silnui', 'ala', 342334232, 'passenger', 'female');
+(11, 'Mr.', 'silnui', 'ala', 342334232, 'passenger', 'female'),
+(12, 'Mr.', 'dadsa', 'dfs', 718118969, 'passenger', 'male');
 
 --
 -- Indexes for dumped tables
@@ -308,6 +323,7 @@ ALTER TABLE `tbl_passengers`
 --
 ALTER TABLE `tbl_reservation`
   ADD PRIMARY KEY (`reservation_id`),
+  ADD UNIQUE KEY `reservation_date` (`reservation_date`,`reservation_class`,`reservation_seat`),
   ADD KEY `passenger_fk` (`reservation_passenger_id`),
   ADD KEY `start_station_fk` (`reservation_start_station`),
   ADD KEY `end_station_fk` (`reservation_end_station`),
@@ -368,13 +384,13 @@ ALTER TABLE `tbl_compartment`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_route`
@@ -398,7 +414,7 @@ ALTER TABLE `tbl_train`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
