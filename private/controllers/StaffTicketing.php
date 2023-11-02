@@ -139,10 +139,20 @@ class StaffTicketing extends Controller
         $this->view('trains.staffticketing');
     }
 
-    function passengerdetails($id = '')
-    {
+    function rejectWarrent($id = ''){
+        $warrant_resevation = new WarrantsReservations();
+        // echo $id;
+        try{
+            $warrant_resevation->update($id,array(
+                'warrant_status'=>'rejected'
+            ),"warrant_id");
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
 
-        $this->view('details.staffticketing');
+        
+        $this->redirect('staffticketing/Warrant');
     }
+
 
 }
