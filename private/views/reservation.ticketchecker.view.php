@@ -29,21 +29,21 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Class</div>
-                                        <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="">
-                                            </div>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label text lightgray-font">Class</div>
+                                            <div class="input-field">
+                                                <div class="text">
+                                                    <input type="text" class="type-here" placeholder="Type here" name="">
+                                                </div>
+                                             </div>
+                                            <div class="assistive-text display-none">Assistive Text</div>
                                         </div>
-                                        <div class="assistive-text display-none">Assistive Text</div>
-
                                     </div>
-                                </div>
+                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="row g-5">
-                                    <div class="col-4">
+                            <div class="col-4">
                                         <div class="text-inputs date">
                                             <div class="input-text-label text lightgray-font ">Date</div>
                                             <div class="input-field">
@@ -55,12 +55,13 @@
                                                 </div>
                                             </div>
                                             <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['from_date'] : ''; ?></div>
+                                            </div>
+                                    </div>
+
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
+                           
 
                         <div class="row">
                             <div class="col-12">
@@ -68,13 +69,17 @@
                                     <h2>Udarata Manike</h2>
 
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="trains-available">
+                            </div>
+                        </div>
 
-                                            <h3>Colombo &#8594 Kandy</h3>
-                                        </div>
-                                        <table class="">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="trains-available">
+
+                                    <h3>Colombo &#8594 Kandy</h3>
+                                </div>
+                                
+                                <table class="">
                                             <thead>
                                                 <tr class="row p-20">
                                                     <th class="col-3 d-flex align-items-center">

@@ -26,20 +26,6 @@
   color: #F2F9FE;
 }
 
-.border-bottom-light-blue {
-  border-bottom: 10px;
-  border-bottom-style: solid;
-  border-bottom-color: #F2F9FE;
-}
-
-.bg-light-blue {
-  background-color: #F2F9FE;
-}
-
-.light-blue {
-  color: #F2F9FE;
-}
-
 .trains-available h3 {
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
@@ -256,8 +242,22 @@ h3.warrant {
   text-shadow: 2px 2px rgba(0, 0, 0, 0.25);
 }
 
-.btn {
-  width: -webkit-fill-available;
-  max-width: 300px;
-  display: block;
+.home-staff-container {
+  width: 90%;
+  padding: 0px 10px;
+  background-color: #FAFAFA;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.home-staff-text h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 60px;
+  color: var(--Border-blue) !important;
+}
+
+.home-staff-text h3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 30px;
 }/*# sourceMappingURL=moushika.css.map */

@@ -19,44 +19,7 @@ echo "</pre>";
                     <div class="col-8 center-col">
                         <div>
                             <!-- complete loader -->
-                            <div class="row mb-50">
-                                <div class="col-12">
-                                    <div class="loader d-flex align-items-center justify-content-center px-20">
-                                        <div class="loader-circle complete">
-                                            <div class="loader-circle-text white">1</div>
-                                        </div>
-                                        <div class="divider complete"></div>
-
-                                        <div class="loader-circle active">
-                                            <div class="loader-circle-text white">2</div>
-                                        </div>
-
-                                        <div class="divider"></div>
-
-                                        <div class="loader-circle ">
-                                            <div class="loader-circle-text white">3</div>
-                                        </div>
-
-                                        <div class="divider"></div>
-
-                                        <div class="loader-circle ">
-                                            <div class="loader-circle-text white">4</div>
-                                        </div>
-
-                                        <div class="divider"></div>
-
-                                        <div class="loader-circle ">
-                                            <div class="loader-circle-text white">5</div>
-                                        </div>
-
-                                        <div class="divider"></div>
-
-                                        <div class="loader-circle ">
-                                            <div class="loader-circle-text white">6</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="row mb-20">
                                 <div class="col-12">
                                     <h1>Badulla -> Colombo Fort</h1>
@@ -170,7 +133,7 @@ echo "</pre>";
                                 </tbody>
                             </table>
                             <div class="pagination">
-                                <button class="button">
+                                <button class="button"><a href="<?= ROOT ?>staffticketing/home">
                                     <div class="button-base">
                                         <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
@@ -178,7 +141,7 @@ echo "</pre>";
 
                                         <div class="text">Previous</div>
                                     </div>
-                                </button>
+                                </button></a> 
                                 <div class="pagination-numbers">
                                     <div class="pagination-number-base-active">
                                         <div class="content">

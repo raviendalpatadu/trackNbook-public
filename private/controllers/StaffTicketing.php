@@ -127,4 +127,22 @@ class StaffTicketing extends Controller
         $this->view('refund.staffticketing');
     }
 
+    function home($id = '')
+    {
+
+        $this->view('home.staffticketing');
+    }
+
+    function trains($id = '')
+    {
+
+        $this->view('trains.staffticketing');
+    }
+
+    function passengerdetails($id = '')
+    {
+
+        $this->view('details.staffticketing');
+    }
+
 }
