@@ -25,7 +25,7 @@ class Trains extends Model
         if (empty($_POST['from_station']) || $_POST['from_station'] == 0) {
             $errors['errors']['from_station'] = 'Staion is required';
         }
-
+        
         //check if from staion = to_station
         if (!(array_key_exists('errors', $errors)) && $_POST['from_station'] == $_POST['to_station']) {
             $errors['errors']['from_station'] = 'From and To stations are same';
@@ -84,10 +84,12 @@ class Trains extends Model
                     . "	tbl_train.train_start_station = :from_station AND tbl_train.train_end_station = :to_station";
                 $stm = $con->prepare($query);
 
-                $stm->execute(array(
-                    'from_station' => $_POST['from_station'],
-                    'to_station' => $_POST['to_station']
-                ));
+                $stm->execute(
+                    array(
+                        'from_station' => $_POST['from_station'],
+                        'to_station' => $_POST['to_station']
+                    )
+                );
 
                 $data = $stm->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
@@ -99,6 +101,58 @@ class Trains extends Model
             }
         }
         return $errors;
+
+    }
+
+    public function addTrain($data)
+    {
+        $errors = array();
+
+        // Check if required fields are empty
+        if (empty($data['train_name'])) {
+            $errors['train_name'] = 'Train Name is required';
+        }
+
+        if (empty($data['train_route'])) {
+            $errors['train_route'] = 'Train route is required';
+        }
+
+        if (empty($data['start_station'])) {
+            $errors['start_station'] = 'Start Station is required';
+        }
+
+        if (empty($data['end_station'])) {
+            $errors['end_station'] = 'End Station is required';
+        }
+
+        if (empty($data['start_time'])) {
+            $errors['start_time'] = 'Start Time is required';
+        }
+
+        if (empty($data['end_time'])) {
+            $errors['end_time'] = 'End Time is required';
+        }
+
+        if (empty($data['train_type'])) {
+            $errors['train_type'] = 'Train Type is required';
+        }
+
+        if (empty($errors)) {
+            try {
+                $query = "INSERT INTO tbl_train (train_name, train_type, train_start_time, train_end_time, train_start_station, train_end_station, train_route)
+                          VALUES (:train_name, :train_type, :train_start_time, :train_end_time, :train_start_station, :train_end_station, :train_route)";
+
+                $stm = $this->con->prepare($query);
+                $stm->execute($data);
+
+                return true; // Successful insertion
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+    }
+
+
     }
 
     //get reservation for a specific train
