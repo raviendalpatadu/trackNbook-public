@@ -1,4 +1,12 @@
 <?php $this->view("./includes/header") ?>
+<?php
+
+if (isset($data['reservations']) && $data['reservations'] != 0) {
+    $count = count($data['reservations']);
+} else {
+    $count = 0;
+}
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -6,7 +14,7 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
 
         <main>
-            <div class="container">
+        <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12 center-col">
 

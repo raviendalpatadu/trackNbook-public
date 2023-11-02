@@ -37,7 +37,7 @@ class Login extends Controller
                 //rederect to dashboard staff ticketing
                 elseif (strtolower($user_type) == "staff_ticketing") {
                     $this->redirect('dashboard/staff_ticketing');
-                }
+                } 
                 //rederect to dashboard train driver
                 elseif (strtolower($user_type) == "train_driver") {
                     $this->redirect('dashboard/train_driver');
@@ -46,10 +46,14 @@ class Login extends Controller
                 elseif (strtolower($user_type) == "station_master") {
                     $this->redirect('dashboard/station_master');
                 }
-
-            } else {
-                $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
-                $errors['password'] = (array_key_exists('invalid_password', $data['error'])) ? $data['error']['invalid_password'] : '';
+                elseif(strtolower($user_type) == "ticket_checker"){
+                    $this->redirect('dashboard/ticket_checker');
+                }
+                
+            }
+            else{
+                $errors['username'] = (array_key_exists('invalid_uname',$data['error'])) ? $data['error']['invalid_uname'] : '';
+                $errors['password'] = (array_key_exists('invalid_password',$data['error'])) ? $data['error']['invalid_password'] : '';
             }
         }
 
