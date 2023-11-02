@@ -3,7 +3,7 @@
 class Trains extends Model
 {
     protected $table = 'tbl_train';
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -138,6 +138,54 @@ class Trains extends Model
 
         if ($data > 0) {
             return $data;
+        }
+    }
+
+    public function getTrain($id)
+    {
+        try {
+            $con = $this->connect();
+            $con->beginTransaction();
+
+            //insert query to search train must come form route
+            $query = "SELECT\n"
+
+                . "tbl_train.*,\n"
+
+                . "start.station_name AS start_station,\n"
+
+                . "end.station_name AS end_station\n"
+
+                . "\n"
+
+                . "FROM\n"
+
+                . "	tbl_train\n"
+
+                . "JOIN\n"
+
+                . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
+
+                . " JOIN\n"
+
+                . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id\n"
+
+                . "WHERE\n"
+
+                . "	tbl_train.train_id = :train_id LIMIT 1";
+            $stm = $con->prepare($query);
+
+            $stm->execute(array(
+                'train_id' => $id
+            ));
+
+            $data = $stm->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        if ($data > 0) {
+            return $data[0];
         }
     }
 }

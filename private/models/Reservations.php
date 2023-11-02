@@ -19,6 +19,22 @@ class Reservations extends Model
         }
         return $result;
     }
+    public function getReservations($column, $value)
+    {
+
+        try {
+            $result = $this->where($column, $value);
+            //sort an array in assending order
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 
     public function getOneReservation($column, $value)
     {
@@ -82,5 +98,25 @@ class Reservations extends Model
         // unset($_SESSION['reservation']);
         return true;
 
+    }
+
+    public function cancelReservation($reservation_id, $passenger_nic)
+    {
+        try {
+            $con = $this->connect();
+            $query = "DELETE FROM tbl_reservation WHERE reservation_id = :reservation_id AND reservation_passenger_nic = :passenger_nic";
+            $stm = $con->prepare($query);
+            $stm->execute(array(
+                'reservation_id' => $reservation_id,
+                'passenger_nic' => $passenger_nic
+            ));
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+        $con = null;
+    
+        // echo true;//for ajax call
+        return true;   
     }
 }
