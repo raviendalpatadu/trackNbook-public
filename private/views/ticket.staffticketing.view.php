@@ -112,7 +112,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                             
                         </div>
                         <div class="row bg-Primary-Gray text White total-row"> 
-                                <div class="col-12 d-flex mr-10 align-items-center total">
+                                <div class="col-12 d-flex mr-10 align-items-center justify-content-end">
                                     <p1>Total Price - LKR 3000</p1>
                                 </div>    
                             </div>       

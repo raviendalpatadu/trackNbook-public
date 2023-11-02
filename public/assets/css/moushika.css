@@ -26,6 +26,20 @@
   color: #F2F9FE;
 }
 
+.border-bottom-light-blue {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #F2F9FE;
+}
+
+.bg-light-blue {
+  background-color: #F2F9FE;
+}
+
+.light-blue {
+  color: #F2F9FE;
+}
+
 .trains-available h3 {
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
@@ -81,6 +95,12 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.checker-container {
+  width: 100%;
+  background-color: #FAFAFA;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
 .ticket-details {
   padding: 23px 50px;
 }
@@ -99,50 +119,6 @@
   background-color: #FAFAFA;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   gap: 50px;
-}
-
-.seat-row {
-  gap: 25px;
-}
-
-.seats-top {
-  gap: 10px;
-}
-
-.seats-bottom {
-  gap: 10px;
-}
-
-.seat {
-  width: 25px;
-  height: 25px;
-  padding: 5px 4px;
-  gap: 10px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background: #fff;
-  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
-}
-
-.seat:hover:not(.reserved) {
-  background: var(--Selected-Blue);
-  border: 2px solid var(--Border-blue);
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-}
-
-.seat.selected:not(.reserved) {
-  background: var(--Selected-Blue) !important;
-  border: 2px solid var(--Border-blue) !important;
-  cursor: pointer;
-}
-
-.reserved {
-  background: var(--Banner-red) !important;
-  border: 2px solid var(--Banner-red) !important;
-  color: var(--White) !important;
-  border: none;
-  cursor: not-allowed;
 }
 
 @media screen and (max-width: 768px) {
@@ -166,7 +142,6 @@
 }
 .line {
   border-bottom: 2px solid #000;
-  margin-top: 1px;
 }
 
 .total-row {
@@ -178,10 +153,6 @@
 
 .date {
   width: 270px;
-}
-
-.total {
-  justify-content: right;
 }
 
 p.text {
@@ -199,15 +170,13 @@ h2.text {
   background: #5c8a92;
   border-radius: 5px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 40%;
   translate: -50%, -50% scale(0.1);
   text-align: center;
   padding: 0 30px 30px;
   color: #333;
-  visibility: hidden;
   transition: transform 0.5s ease-in-out;
-  display: none;
 }
 
 .popup .button {

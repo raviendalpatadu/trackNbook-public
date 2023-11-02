@@ -14,15 +14,15 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-8">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">NIC</div>
-                                        <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="">
+                                        <div class="text-inputs">
+                                            <div class="input-text-label text lightgray-font">NIC</div>
+                                            <div class="input-field">
+                                                <div class="text">
+                                                    <input type="text" class="type-here" placeholder="Type here" name="">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                        <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
                                 </div>
                             </div>
@@ -36,8 +36,7 @@
                                                 <input type="text" class="type-here" placeholder="Type here" name="">
                                             </div>
                                         </div>
-                                    </div>
-
+                                        <div class="assistive-text display-none">Assistive Text</div>
 
                                     </div>
                                 </div>
@@ -45,7 +44,7 @@
                             <div class="col-4">
                                 <div class="row g-5">
                                     <div class="col-4">
-                                    <div class="text-inputs date">
+                                        <div class="text-inputs date">
                                             <div class="input-text-label text lightgray-font ">Date</div>
                                             <div class="input-field">
                                                 <div class="text">
@@ -61,7 +60,7 @@
                                 </div>
                             </div>
                         </div>
-           
+
 
                         <div class="row">
                             <div class="col-12">
@@ -81,11 +80,11 @@
                                                     <th class="col-3 d-flex align-items-center">
                                                         <div class="col-4">
                                                             <div class="d-flex .flex-row g-5 mr-5">
-    
+
                                                             </div>
                                                         </div>
                                                         NIC
-                                                        
+
                                                     </th>
                                                     <th class="col-1">Ticket ID</th>
                                                     <th class="col-2">Date</th>
@@ -93,11 +92,11 @@
                                                     <th class="col-2 d-flex align-items-center">
                                                         <div class="col-4">
                                                             <div class="d-flex .flex-row g-5 mr-5">
-                                                                
+
                                                             </div>
                                                         </div>
                                                         Class
-                                                        
+
                                                     </th>
                                                     <th class="col-1"></th>
                                                 </tr>
@@ -106,7 +105,7 @@
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            
+
                                                         </div>
                                                         200156234102
                                                     </td>
@@ -119,7 +118,7 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>
                                                         <div class="badge-base bg-light-green">
                                                             <div class="dot">
                                                                 <div class="dot2"></div>
@@ -169,7 +168,7 @@
                                                         </div>
                                                         First Class
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>      
+                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>
                                                         <div class="badge-base bg-light-green">
                                                             <div class="dot">
                                                                 <div class="dot2"></div>
@@ -267,7 +266,6 @@
                             </div>
                         </div>
                     </div>
-
         </main>
     </div>
 <?php $this->view("./includes/load-js") ?>
