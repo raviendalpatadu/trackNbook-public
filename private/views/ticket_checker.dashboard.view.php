@@ -30,7 +30,7 @@
             </div>
         </main>
     </div>
-
+    <?php $this->view("./includes/load-js") ?>
 
 </body>
 

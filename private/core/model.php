@@ -116,22 +116,21 @@ class Model extends Database
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        echo "{$id}<pre>";
-            print_r($data);
-            echo "</pre>";
+        // echo "{$id}<pre>";
+        //     print_r($data);
+        //     echo "</pre>";
         try{
-            if ($id_feild == '') {
+            if($id_feild == ''){
                 $query = "update $this->table set $str where ".strtolower($this::class)."_id = :id";
-            } else{
+            }else
+            {
                 $query = "update $this->table set $str where $id_feild = :id";
             }
-        } catch(PDOException $e){
+            return $this->query($query,$data);
+        }
+        catch(PDOException $e){
             echo $e->getMessage();
         }
-
-        // echo $query;
-        
-        return $this->query($query,$data);
     }
 
 
