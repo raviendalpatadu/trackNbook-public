@@ -1,4 +1,3 @@
-
 <?php $this->view("./includes/header") ?>
 
 <body>
@@ -6,29 +5,65 @@
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
-        <main>
+        <main style="background-color:#EFF8FF;">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card card-body">
-                            <h1>Dashboard</h1>
-                            <p>Welcome to the dashboard</p>
+
+                        <div class="if-txt-wrapper">Hello,
+                            <?= ucfirst(Auth::user()) ?>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="if-widgets">
+                            <div class="if-frame">
+                                <div class="div">
+                                    <div class="if-frame-2">
+                                        <div class="impressions">Number of Trains Onboard</div>
+                                    </div>
+                                    <div class="number">24</div>
+                                </div>
+                            </div>
+                            <div class="if-frame">
+                                <div class="if-frame-3">
+                                    <div class="if-frame-4">
+                                        <div class="impressions">Waiting List</div>
+                                    </div>
+                                    <div class="number">27</div>
+                                </div>
+                            </div>
+                            <div class="if-frame">
+                                <div class="div">
+                                    <div class="if-frame-4">
+                                        <div class="impressions">Staffs On Duty</div>
+                                    </div>
+                                    <div class="number">1675</div>
+                                </div>
+                            </div>
+                            <div class="if-frame">
+                                <div class="div">
+                                    <div class="if-frame-4">
+                                        <div class="impressions">Cancelled Trains</div>
+                                    </div>
+                                    <div class="number">4</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    
-
-                    <div class="col-6">
-                        <p>Welcome to the dashboard</p>
-                    </div>
-                    <div class="col-6">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias voluptas natus, laboriosam veritatis itaque repudiandae, voluptate minima aliquid quod ea cumque, necessitatibus voluptatum quidem assumenda tempore blanditiis et quia earum.</p>
-                    </div>
-
-                </div>
             </div>
-        </main>
+
+
+
+    </div>
+
+    </main>
     </div>
 
 

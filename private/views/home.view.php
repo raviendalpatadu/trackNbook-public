@@ -128,12 +128,12 @@ echo "</pre>";
                     </div>
 
                 </div>
+                <?php $this->view("./includes/footer") ?>
             </div>
         </main>
-        <?php $this->view("./includes/footer") ?>
     </div>
-
-
+    
+    
 </body>
 <script>
     $(document).ready(function() {
