@@ -89,7 +89,8 @@
                             <path d="M0 2L645 1" stroke="black" />
                         </svg></div>
                     <div class="activation-field">
-                        <button class="button-white"> Clear</button>
+                        <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button
+                                class="button-white"> Back</button></a>
                         <button class="button-blue"> Update</button>
                     </div>
                 </div>
@@ -103,7 +104,7 @@
     .activation-field {
         display: flex;
         justify-content: flex-end;
-        width: calc(156% - 10px);
+        width: calc(137% - 10px);
         gap: 20px;
     }
 
@@ -132,7 +133,7 @@
         border-radius: 8px;
         border: 2px solid #2185D5;
         background: var(--W-Background, #FFF);
-        margin-right: 10px;
+        margin-right: 433px;
         width: 12%;
         cursor: pointer;
 

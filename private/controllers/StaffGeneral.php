@@ -9,7 +9,7 @@ class StaffGeneral extends Controller
     function index($id = '')
     {
 
-        $this->view('dashboard.staffgeneral');
+        $this->view('staff_general.dashboard');
     }
 
     function manageSchedule($id = '')

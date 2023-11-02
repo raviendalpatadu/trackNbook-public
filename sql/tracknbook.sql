@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 02, 2023 at 01:10 AM
+-- Generation Time: Nov 02, 2023 at 08:02 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -153,7 +153,9 @@ INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_passenger_id`, `re
 (28, 11, 14, 1, 3, '2023-11-27', 1, 14, 'Miss.', 'ghjk', 'fghjk', 2147483647, 718115656, 'huhu@yahoo.com', 'female'),
 (29, 11, 1, 7, 2, '2023-11-28', 3, 18, 'Mr.', 'ravien', 'dalpe', 2147483647, 718118969, 'sanath_dalpatadu@yahoo.com', 'male'),
 (30, 11, 1, 7, 2, '2023-11-26', 3, 19, 'Mr.', 'ravien', 'dalpe', 2147483647, 718118969, 'sanath_dalpatadu@yahoo.com', 'male'),
-(31, 11, 14, 1, 3, '2023-11-04', 1, 31, 'Mr.', 'yashmika', 'kriyanjalee', 2147483647, 718118932, 'yah@yahoo.com', 'female');
+(31, 11, 14, 1, 3, '2023-11-04', 1, 31, 'Mr.', 'yashmika', 'kriyanjalee', 2147483647, 718118932, 'yah@yahoo.com', 'female'),
+(32, 11, 14, 1, 1, '2023-11-14', 2, 5, 'Mr.', 'vinupa ', 'thenuka', 200123602032, 718118939, 'vinupa@yahoo.com', 'male'),
+(33, 11, 14, 1, 1, '2023-11-14', 2, 6, 'Mr.', 'ravien', 'kavisha', 200123602078, 718118969, 'sanath_dalpatadu@yahoo.com', 'male');
 
 -- --------------------------------------------------------
 
@@ -291,28 +293,30 @@ CREATE TABLE `tbl_user` (
   `user_last_name` varchar(50) NOT NULL,
   `user_phone_number` int(13) NOT NULL,
   `user_type` varchar(20) NOT NULL,
-  `user_gender` varchar(10) NOT NULL
+  `user_gender` varchar(10) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `user_nic` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_name`, `user_phone_number`, `user_type`, `user_gender`) VALUES
-(1, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', ''),
-(2, 'Mr.', 'admin', 'as', 231, 'admin', ''),
-(3, 'Mr.', 'menuwa', 'weje', 9091, 'passenger', ''),
-(4, 'Mr.', 'staff', 'general', 312, 'staff_general', ''),
-(5, 'Miss.', 'moushika', 'kriyanjale', 211, 'passenger', ''),
-(6, 'Mrs.', 'gew', 'jkj', 23231, 'passenger', 'male'),
-(7, 'Mr.', 'some', 'pala', 332, 'passenger', 'male'),
-(8, 'Mrs.', 'shika', 'dalpatadu', 718118969, 'passenger', 'male'),
-(9, 'Miss.', 'gonn', 'gaha', 212, 'passenger', 'female'),
-(10, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', 'male'),
-(11, 'Mr.', 'silnui', 'ala', 342334232, 'passenger', 'female'),
-(12, 'Mr.', 'dadsa', 'dfs', 718118969, 'passenger', 'male'),
-(13, 'Mr.', 'staff', 'ticketing', 718118969, 'staff_ticketing', 'male'),
-(14, 'Mr.', 'dadsa', 'dfs', 718118969, 'staff_ticketing', 'male');
+INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_name`, `user_phone_number`, `user_type`, `user_gender`, `user_email`, `user_nic`) VALUES
+(1, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', '', '', 0),
+(2, 'Mr.', 'admin', 'as', 231, 'admin', '', '', 0),
+(3, 'Mr.', 'menuwa', 'weje', 9091, 'passenger', '', '', 0),
+(4, 'Mr.', 'staff', 'general', 312, 'staff_general', '', '', 0),
+(5, 'Miss.', 'moushika', 'kriyanjale', 211, 'passenger', '', '', 0),
+(6, 'Mrs.', 'gew', 'jkj', 23231, 'passenger', 'male', '', 0),
+(7, 'Mr.', 'some', 'pala', 332, 'passenger', 'male', '', 0),
+(8, 'Mrs.', 'shika', 'dalpatadu', 718118969, 'passenger', 'male', '', 0),
+(9, 'Miss.', 'gonn', 'gaha', 212, 'passenger', 'female', '', 0),
+(10, 'Mr.', 'ravien', 'dalpatadu', 701949400, 'passenger', 'male', '', 0),
+(11, 'Mr.', 'silnui', 'ala', 342334232, 'passenger', 'female', 'silu@gm.com', 200123602079),
+(12, 'Mr.', 'dadsa', 'dfs', 718118969, 'passenger', 'male', '', 0),
+(13, 'Mr.', 'staff', 'ticketing', 718118969, 'staff_ticketing', 'male', '', 0),
+(14, 'Mr.', 'dadsa', 'dfs', 718118969, 'staff_ticketing', 'male', '', 0);
 
 -- --------------------------------------------------------
 
@@ -437,7 +441,7 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_route`
