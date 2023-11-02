@@ -1,64 +1,25 @@
 <?php
-$no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 
-
-echo "<pre>";
-// print_r($_POST);
-// // print_r($_SESSION);
+// echo "<pre>";
 // print_r($data);
+// echo "</pre>";
 
-echo "</pre>";
 ?>
+
+
 <?php $this->view("./includes/header"); ?>
 
 <body>
+
+    <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
+        <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
-            <div class="container d-flex justify-content-center">
-                <div class="passenger-container">
-                    <div class="row mb-50">
-                        <div class="col-12">
-                            <div class="loader d-flex align-items-center justify-content-center px-20">
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">1</div>
-                                </div>
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">2</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">3</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle active">
-                                    <div class="loader-circle-text white">4</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">5</div>
-                                </div>
-
-                                <div class="divider"></div>
-
-                                <div class="loader-circle ">
-                                    <div class="loader-circle-text white">6</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+        <div class="container d-flex justify-content-center">
+                <div class="passenger-container justify-content-center">
                     <form action="" method="post" class="profile p-50 shadow">
-                        <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
-                            <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger <?= $i + 1 ?></h3>
+                       
+                            <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger 1</h3>
                             <div class="row g-20 mb-20">
                                 <div class="col-2">
                                     <div class="text-inputs">
@@ -70,9 +31,7 @@ echo "</pre>";
                                                 <option>Miss.</option>
                                             </select>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_title'])) ? 'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_title'][$i])) ? $data['errors']['user_title'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-5">
@@ -80,12 +39,10 @@ echo "</pre>";
                                         <div class="input-text-label">First Name </div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_first_name[]" value="<?php echo (isset($_POST['user_first_name'][$i])) ? $_POST['user_first_name'][$i] : "" ; ?>">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_first_name[]" value="">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_first_name'][$i])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_first_name'][$i])) ? $data['errors']['user_first_name'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-5">
@@ -93,12 +50,10 @@ echo "</pre>";
                                         <div class="input-text-label">Last Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_last_name[]" value="<?php echo (isset($_POST['user_last_name'][$i])) ? $_POST['user_last_name'][$i] : "" ; ?>">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_last_name[]" value="">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_last_name'][$i])) ?  'display-none' : '') : '';  ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_last_name'][$i])) ? $data['errors']['user_last_name'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -109,12 +64,10 @@ echo "</pre>";
                                         <div class="input-text-label">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_nic[]" value="<?php echo (isset($_POST['user_nic'][$i])) ? $_POST['user_nic'][$i] : "" ; ?>">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_nic[]" value="">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_nic'][$i])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_nic'][$i])) ? $data['errors']['user_nic'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                        
 
                                     </div>
                                 </div>
@@ -123,12 +76,10 @@ echo "</pre>";
                                         <div class="input-text-label">Mobile</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_phone_number[]" value="<?php echo (isset($_POST['user_phone_number'][$i])) ? $_POST['user_phone_number'][$i] : "" ; ?>">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_phone_number[]" value="">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_phone_number'][$i])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_phone_number'][$i])) ? $data['errors']['user_phone_number'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                        
 
                                     </div>
                                 </div>
@@ -137,12 +88,10 @@ echo "</pre>";
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_email[]" value="<?php echo (isset($_POST['user_email'][$i])) ? $_POST['user_email'][$i] : "" ; ?>">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_email[]" value=" ">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['user_email'][$i])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_email'][$i])) ? $data['errors']['user_email'][$i] : "") : ''; ?></div>
-                                        <?php endif ?>
+                                        
 
                                     </div>
                                 </div>
@@ -172,7 +121,7 @@ echo "</pre>";
                                 </div>
                             </div>
 
-                        <?php } ?>
+                
 
 
                         <div class="row">
@@ -206,22 +155,23 @@ echo "</pre>";
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-end">
-                                <a href="<?= ROOT ?>passenger/billing">
+                    </form>
+                        <div class="row mt-20">
+                            <div class="col-12 d-flex justify-content-end"><a href="<?=ROOT?>staffTicketing/pay">
                                     <button class="button mx-10">
+                                        
                                         <div class="button-base">
                                             <div class="text">Proceed</div>
                                         </div>
-                                    </button>
-                                </a>
+                                        
+                                    </button></a>
+                                
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </main>
-        <?php $this->view("./includes/footer") ?>
+        <?php $this->view('includes/footer'); ?>
         <script>
             $(document).ready(function() {
                 var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
@@ -246,10 +196,7 @@ echo "</pre>";
 
             });
         </script>
-
     </div>
-
-
 </body>
 
 </html>

@@ -22,14 +22,13 @@
           </div>
         </a>
       </li>
-      <!-- check user login -->
-      <?php if (!Auth::is_logged_in()): ?>
-        <li class="navbar-item"><a href="<?= ROOT ?>login">Log in</a></li>
-      <?php else: ?>
-        <li class="navbar-item"><a href="<?= ROOT ?>profile">
-            <div class="profile">
-              <div class="profile-img">
-                <img src="<?= ASSETS ?>images/avatar1.png" alt="TrackNBook">
+      <?php if (!Auth::is_logged_in()) : ?>
+          <li class="navbar-item"><a href="<?= ROOT ?>login">Log in</a></li>
+        <?php else : ?>
+          <li class="navbar-item"><a href="<?= ROOT ?>profile">
+              <div class="profile">
+                <div class="profile-img">
+                  <img src="<?= ASSETS ?>images/avatar1.png" alt="TrackNBook">
 
               </div>
               <div class="profile-right">

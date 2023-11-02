@@ -18,4 +18,11 @@ class TicketChecker extends Controller
         $this->view('reservation.ticketchecker');
     }
 
+    function option($id = '')
+    {
+         
+        $this->view('option.ticketchecker');
+    }
+
+
 }

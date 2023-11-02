@@ -209,7 +209,7 @@ if(!isset($data['errors'])){
                                 <div class="col-12 d-flex justify-content-start">
                                     <div class="radio-buttons-container">
                                         <div class="radio-button">
-                                            <input name="user_type" value="staffTicketing" id="radio1"
+                                            <input name="user_type" value="staff_ticketing" id="radio1"
                                                 class="radio-button__input" type="radio">
                                             <label for="radio1" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
@@ -217,7 +217,7 @@ if(!isset($data['errors'])){
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="staffGeneral" id="radio2"
+                                            <input name="user_type" value="staff_general" id="radio2"
                                                 class="radio-button__input" type="radio">
                                             <label for="radio2" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
@@ -225,7 +225,7 @@ if(!isset($data['errors'])){
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="trainDriver" id="radio3"
+                                            <input name="user_type" value="train_driver" id="radio3"
                                                 class="radio-button__input" type="radio">
                                             <label for="radio3" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
@@ -233,7 +233,7 @@ if(!isset($data['errors'])){
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="ticketChecker" id="radio4"
+                                            <input name="user_type" value="ticket_checker" id="radio4"
                                                 class="radio-button__input" type="radio">
                                             <label for="radio4" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>

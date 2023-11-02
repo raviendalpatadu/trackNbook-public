@@ -1,7 +1,13 @@
 <?php $this->view("./includes/header") ?>
 <?php
 
+if (!isset($data['errors'])) {
+    $data['errors'] = array();
+}
+
 echo "<pre>";
+
+// print_r($_POST);
 print_r($data);
 echo "</pre>";
 ?>
@@ -30,113 +36,116 @@ echo "</pre>";
                         </div>
 
 
-                        <form action="post" class="center-col col-12 mt-50">
+                        <form action="" method="post" class="center-col col-12 mt-50">
                             <div class="text-inputs">
 
-                                <!-- <div class="input-text-label">Train No</div>
-                                <div class="input-field">
-                                    <div class="text">
-                                        <input type="text" class="type-here" placeholder="1105">
+                                <div class="text-inputs">
+                                    <div class="input-text-label">Train Name</div>
+                                    <div class="input-field">
+                                        <div class="text">
+                                            <input type="text" name="train_name" class="type-here" placeholder="Type here">
+                                        </div>
                                     </div>
-                                </div> -->
-                                <div class="input-text-label mt-20">Train Name</div>
-                                <div class="input-field">
-                                    <div class="text">
-                                        <input type="text" class="type-here" placeholder="Udaya devi" name="train_name">
-                                    </div>
+                                    <div class="assistive-text <?php echo (!array_key_exists('train_name', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_name', $data['errors'])) ? $data['errors']['train_name'] : ''; ?></div>
                                 </div>
 
-                                <div class="input-text-label mt-20">Train Route</div>
+
                                 <div class="text-inputs">
-                                    <div class="input-text-label">To</div>
+                                    <div class="input-text-label mt-20">Train Route</div>
                                     <div class="width-fill">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class="input-field dropdown" name="train_route"
-                                            placeholder="Please choose">
+                                        <select class="input-field dropdown" name="train_route" placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['routes'] as $key => $value): ?>
+                                            <?php foreach ($data['routes'] as $key => $value) : ?>
                                                 <option value="<?= $value->route_no ?>">
                                                     <?= $value->route_name ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div
-                                        class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                        <?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['to_station'] : ''; ?>
+                                    <div class="assistive-text <?php echo (!array_key_exists('train_route', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('train_route', $data['errors'])) ? $data['errors']['train_route'] : ''; ?>
                                     </div>
                                 </div>
 
 
-                                <div class="input-text-label mt-20">Start </div>
-                                <div class="text-inputs">
-                                    <div class="input-text-label">To</div>
+
+                                <div class="text-inputs mt-20">
+                                    <div class="input-text-label">Start Station</div>
                                     <div class="width-fill">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class="input-field dropdown" name="start_station"
-                                            placeholder="Please choose">
+                                        <select class="input-field dropdown" name="start_station" placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                            <?php foreach ($data['stations'] as $key => $value) : ?>
                                                 <option value="<?= $value->station_id ?>">
                                                     <?= $value->station_name ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div
-                                        class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                        <?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['to_station'] : ''; ?>
+                                    <div class="assistive-text <?php echo (!array_key_exists('start_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('start_station', $data['errors'])) ? $data['errors']['start_station'] : ''; ?>
                                     </div>
                                 </div>
 
-                                <div class="input-text-label mt-20">Start Time</div>
-                                <div class="input-field">
-                                    <div class="text">
-                                        <input type="time" class="type-here" placeholder="Udaya devi" name="start_time">
+                                <div class="text-inputs mt-20">
+                                    <div class="input-text-label">Start Time</div>
+                                    <div class="input-field">
+                                        <div class="text">
+                                            <input type="time" name="start_time" class="type-here" placeholder="Type here">
+                                        </div>
+                                    </div>
+                                    <div class="assistive-text <?php echo (!array_key_exists('start_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('start_time', $data['errors'])) ? $data['errors']['start_time'] : ''; ?>
                                     </div>
                                 </div>
 
-                                <div class="input-text-label mt-20">End </div>
+                                <div class="input-text-label mt-20">End Staion</div>
                                 <div class="text-inputs">
-                                    <div class="input-text-label">To</div>
                                     <div class="width-fill">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class="input-field dropdown" name="end_station"
-                                            placeholder="Please choose">
+                                        <select class="input-field dropdown" name="end_station" placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                            <?php foreach ($data['stations'] as $key => $value) : ?>
                                                 <option value="<?= $value->station_id ?>">
                                                     <?= $value->station_name ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div
-                                        class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                        <?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['to_station'] : ''; ?>
+                                    <div class="assistive-text <?php echo (!array_key_exists('end_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('end_station', $data['errors'])) ? $data['errors']['end_station'] : ''; ?>
                                     </div>
                                 </div>
 
-                                <div class="input-text-label mt-20">End Time</div>
-                                <div class="input-field">
-                                    <div class="text">
-                                        <input type="time" class="type-here" placeholder="Udaya devi" name="end_time">
+                                <div class="text-inputs mt-20">
+                                    <div class="input-text-label">End Time</div>
+                                    <div class="input-field">
+                                        <div class="text">
+                                            <input type="time" name="end_time" class="type-here" placeholder="Type here">
+                                        </div>
+                                    </div>
+                                    <div class="assistive-text <?php echo (!array_key_exists('end_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('end_time', $data['errors'])) ? $data['errors']['end_time'] : ''; ?>
                                     </div>
                                 </div>
 
                                 <div class="input-text-label mt-20">Train Type</div>
                                 <div class="text-inputs">
                                     <div class=width-fill>
-                                        <select class="input-field dropdown" name="type" placeholder="Please choose">
+                                        <select class="input-field dropdown" name="train_type" placeholder="Please choose">
 
                                             <option value="Intercity">Intercity</option>
                                             <option value="Slow">Slow</option>
                                             <option value="Special">Special</option>
 
                                         </select>
+                                    </div>
+                                    <div class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?>
                                     </div>
                                 </div>
 
@@ -146,13 +155,13 @@ echo "</pre>";
                                 <div class="col-12 d-flex justify-content-center">
                                     <button class="button mx-15 px-10">
                                         <div class="button-base">
-                                            <div class="text">Add</div>
+                                            <input type="submit" value="Add" name="submit">
                                         </div>
                                     </button>
 
                                     <button class="button mx-15 px-10">
                                         <div class="button-base">
-                                            <div class="text">Reset</div>
+                                            <input type="reset" value="reset">
                                         </div>
                                     </button>
 

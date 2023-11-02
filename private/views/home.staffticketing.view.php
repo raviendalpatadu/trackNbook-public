@@ -1,26 +1,29 @@
-<?php $this->view("./includes/header"); ?>
-
 <?php
-// print session
-echo "<pre>";
+
+// echo "<pre>";
 // print_r($data);
-// print_r($_POST);
-echo "</pre>";
+// echo "</pre>";
+
 ?>
 
+
+<?php $this->view("./includes/header"); ?>
+
 <body>
+
+    <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
-        <main class=" d-flex align-items-end justify-content-center">
-            <img src="<?= ASSETS ?>images/home1.jpg" class="bg-home-desktop" alt="" srcset="">
-            <img src="<?= ASSETS ?>images/home-mobile.jpg" class="bg-home-mobile" alt="" srcset="">
-            <div class="home-container width-fill">
+        <?php $this->view("./includes/dashboard-navbar") ?>
+    <main> 
+        <div class="container">
+            <div class="home-staff-container width-fill justify-content-center ml-70 mt-80">
                 <div class="row">
                     <div class="col-12 d-flex flex-column g-20 align-items-center">
-                        <div class="home-text">
-                            <h1>Welcome to TrackNBook</h1>
+                        <div class="home-staff-text ">
+                            <h1 class="">Welcome to TrackNBook</h1>
+                      
                         </div>
-                        <div class="search-box-home d-flex flex-row width-fill justify-content-center">
+                        <div class="search-box-home d-flex flex-row width-fill justify-content-center mb-20">
                             <div class="search-box-text">
                                 <h2>Search Your Train</h2>
                             </div>
@@ -111,53 +114,30 @@ echo "</pre>";
 
                                     </div>
 
-                                    <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
-                                        <!-- <button class="button"><a href="trains/available"> -->
-                                        <div class="button-base">
-                                            <input type="submit" name="submit" value="Next" />
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                        </a>
-                                        <!-- </button> -->
-                                    </div>
                                 </form>
+                                <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
+                                    <!-- <button class="button"><a href="trains/available"> -->
+                                    <div class="button-base"><a href="<?= ROOT ?>staffticketing/trains">
+                                    <div>
+                                        <input class="text"type="submit" name="submit" value="Search" />
+                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        </div>
+                                    </div>
+                                    </a>
+                                    <!-- </button> -->
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-        </main>
-        <?php $this->view("./includes/footer") ?>
+        </div>
+    </main>
+        <?php $this->view('includes/footer'); ?>
     </div>
-
-
 </body>
-<script>
-    $(document).ready(function() {
-        var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
-        var counter = 0;
-
-        // access errors array
-        var arr = <?php echo json_encode($data); ?>;
-        console.log(arr.hasOwnProperty('errors'));
-
-        // check errors key exists
-        if (arr.hasOwnProperty('errors')) {
-            tag.each(() => {
-                console.log(tag[counter]);
-                if (tag[counter++].innerHTML != " ") {
-                    tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
-                    tag.parent().children('.input-text-label').addClass('red');
-                    tag.addClass('red');
-                }
-            });
-        }
-
-    });
-</script>
 
 </html>

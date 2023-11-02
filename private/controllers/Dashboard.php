@@ -16,18 +16,18 @@ class Dashboard extends Controller
     }
     function admin($id = '')
     {   
-        if(Auth::is_logged_in()){
+        // if(Auth::is_logged_in()){
             $this->view('admin.dashboard');
-        }else{
-            $this->view('login');
-        }
+        // }else{
+        //     $this->view('login');
+        // }
     }
 
     //to be made
     function staff_general($id = '')
     {   
         if(Auth::is_logged_in()){
-            $this->view(' staff_general.dashboard');
+            $this->view('staff_general.dashboard');
         }else{
             $this->view('login');
         }

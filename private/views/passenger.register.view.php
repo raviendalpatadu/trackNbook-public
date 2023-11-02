@@ -1,6 +1,9 @@
 <?php $this->view("./includes/header"); ?>
-<?php
-$data['errors'] = array();
+<?php 
+if (!isset($data['errors'])) {
+    $data['errors'] = array();
+}
+
 ?>
 
 <body>
@@ -258,6 +261,7 @@ $data['errors'] = array();
 
         // access errors array
         var arr = <?php echo json_encode($data); ?>;
+        console.log(arr);
 
         // check errors key exists
         if (arr.hasOwnProperty('errors')) {

@@ -27,7 +27,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             <div class="row mb-30 g-10">
                                 <div class="col-3">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Train</div>
+                                        <div class="input-text-label">Display users</div>
 
                                         <div class="width-fill">
                                             <select class="dropdown" name="reservation_train_id" placeholder="Please choose">

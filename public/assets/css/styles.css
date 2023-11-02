@@ -8,6 +8,7 @@
 
 main  {
   height: -webkit-fill-available;
+  
 }
 
 :root {
@@ -31,6 +32,12 @@ main  {
 body {
   display: flex;
   min-height: 100vh;
+}
+@media screen and (max-width: 768px) {
+  body {
+    display: block;
+  }
+  
 }
 
 div.container {
