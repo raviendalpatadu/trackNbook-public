@@ -15,7 +15,7 @@
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center mt-80">
                 <div class="passenger-container justify-content-center">
                     <form action="" method="post" class="profile p-50 shadow">
                        

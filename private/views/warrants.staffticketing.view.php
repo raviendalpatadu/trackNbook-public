@@ -20,9 +20,19 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
         <main>
             <div class="container">
+                
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12">
-                        <form action="" method="post">
+                        
+                        <div class="row mt-20 mb-20 " >
+                            <div class="col-4 line">
+                                <div class="trains-available mt-10 mb-30">
+                                    <h3>Warrant Requests</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form class="mt-30" action="" method="post">
                             <div class="row mb-30 g-10">
                                 <div class="col-3">
                                     <div class="text-inputs">
@@ -79,14 +89,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                     <div class="row">
                         <div class="col-12">
-                            <div class="trains-available mt-10 mb-2">
-                                <h3>Warrant Requests</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="trains-available">
-                                        <h4>Pending warrant requests</h4>
-                                    </div>
+                            
                                     <table class="">
                                         <thead>
                                             <tr class="row p-20">

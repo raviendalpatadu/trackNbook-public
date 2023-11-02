@@ -126,7 +126,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                             </button> 
                         </div> 
                         <div class="col-6">
-                            <button class="button mt-20"><a href="<?=ROOT?>passenger/details">
+                            <button class="button mt-20"><a href="<?=ROOT?>staffTicketing/payment">
                                 <div class="button-base">
                                      <div class="text">Proceed</div>
                                          <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

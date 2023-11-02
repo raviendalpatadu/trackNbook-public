@@ -129,8 +129,20 @@ class StaffTicketing extends Controller
 
     function home($id = '')
     {
+        $station = new Stations();
+        $data = array();
+        $data['stations'] = $station->getStations();
 
-        $this->view('home.staffticketing');
+        if(isset($_SESSION['reservation'])){
+            unset($_SESSION['reservation']);
+        }
+        
+        if(isset($_SESSION['errors'])){
+            $data['errors'] = $_SESSION['errors'];
+            unset($_SESSION['errors']);
+        }
+
+        $this->view('home.staffticketing',$data);
     }
 
     function trains($id = '')
@@ -158,6 +170,12 @@ class StaffTicketing extends Controller
     {
 
         $this->view('details.staffticketing');
+    }
+
+    function payment($id = '')
+    {
+
+        $this->view('staffticketing.payment');
     }
 
 
