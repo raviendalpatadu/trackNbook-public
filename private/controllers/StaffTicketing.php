@@ -166,6 +166,7 @@ class StaffTicketing extends Controller
             echo $e->getMessage();
         }
 
+        
         $this->redirect('staffticketing/Warrant');
     }
 }
