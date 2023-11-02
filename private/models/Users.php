@@ -141,8 +141,8 @@ class Users extends Model{
                 $con->beginTransaction() ;
 
                 //insert query to add passenger account
-                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender) 
-                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender)";
+                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
+                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
 
                 $stm = $con->prepare($query);
                 $stm->execute(array(
@@ -151,7 +151,9 @@ class Users extends Model{
                     'user_last_name' => $_POST['user_last_name'],
                     'user_phone_number' => $_POST['user_phone_number'],
                     'user_type' => $_POST["user_type"],
-                    'user_gender' => $_POST['user_gender']
+                    'user_gender' => $_POST['user_gender'],
+                    'user_email' => $_POST['user_email'],
+                    'user_nic' => $_POST['user_nic']
                 ));
                 $user_id = $con->lastInsertId();
                 $query2 = "Insert INTO tbl_login (login_username,login_password, user_id) VALUES (:login_username, :login_password, :user_id)";
@@ -181,129 +183,3 @@ class Users extends Model{
         return $errors;
     }
 }
-
-// class UserController {
-//     public function addUser() {
-//         $errors = [];
-
-//         // Form validation
-//         if (empty($_POST['login_username'])) {
-//             $errors['login_username'] = 'Username is required';
-//         }
-
-//         // Check for username existence in the database
-//         $query = "SELECT COUNT(*) FROM tbl_login WHERE login_username = :username";
-//         $data = $this->query($query, ['username' => $_POST['login_username']]);
-
-//         if ($data > 0) {
-//             $errors['login_username'] = 'Username already exists';
-//         }
-
-//         if (empty($_POST['login_password'])) {
-//             $errors['login_password'] = 'Password is required';
-//         }
-
-//         if (empty($_POST['login_confirm_password'])) {
-//             $errors['login_confirm_password'] = 'Confirm Password is required';
-//         }
-
-//         if ($_POST['login_password'] !== $_POST['login_confirm_password']) {
-//             $errors['login_confirm_password'] = 'Password and Confirm Password do not match';
-//         }
-
-//         if (empty($_POST['user_first_name'])) {
-//             $errors['user_first_name'] = 'First Name is required';
-//         }
-
-//         if (empty($_POST['user_last_name'])) {
-//             $errors['user_last_name'] = 'Last Name is required';
-//         }
-
-//         if (empty($_POST['user_phone_number'])) {
-//             $errors['user_phone_number'] = 'Phone Number is required';
-//         }
-
-//         if (!preg_match("/^[0-9]{10}$/", $_POST['user_phone_number'])) {
-//             $errors['user_phone_number'] = 'Please enter a valid 10-digit Phone Number';
-//         }
-
-//         if (empty($_POST['user_nic'])) {
-//             $errors['user_nic'] = 'NIC is required';
-//         }
-
-//         if (empty($_POST['user_email'])) {
-//             $errors['user_email'] = 'Email is required';
-//         }
-
-//         if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
-//             $errors['user_email'] = 'Invalid Email';
-//         }
-
-//         if (empty($_POST['user_gender'])) {
-//             $errors['user_gender'] = 'Gender is required';
-//         }
-
-//         if (empty($_POST['user_type'])) {
-//             $errors['user_type'] = 'User Type is required';
-//         }
-
-//         if (!empty($errors)) {
-//             return ['errors' => $errors];
-//         }
-
-//         try {
-//             $con = $this->connect(); // Establish a database connection
-//             $con->beginTransaction();
-
-//             // Insert user data into the database (use prepared statements)
-//             $query = "INSERT INTO tbl_user (user_title, user_first_name, user_last_name, user_phone_number, user_type, user_gender) 
-//                       VALUES (:user_title, :user_first_name, :user_last_name, :user_phone_number, :user_type, :user_gender)";
-
-//             $stm = $con->prepare($query);
-//             $stm->execute([
-//                 'user_title' => $_POST['user_title'],
-//                 'user_first_name' => $_POST['user_first_name'],
-//                 'user_last_name' => $_POST['user_last_name'],
-//                 'user_phone_number' => $_POST['user_phone_number'],
-//                 'user_type' => $_POST['user_type'],
-//                 'user_gender' => $_POST['user_gender']
-//             ]);
-
-//             $user_id = $con->lastInsertId();
-
-//             // Insert login data into the database (hash the password)
-//             $query2 = "INSERT INTO tbl_login (login_username, login_password, user_id) 
-//                        VALUES (:login_username, :login_password, :user_id)";
-
-//             $stm2 = $con->prepare($query2);
-//             $stm2->execute([
-//                 'login_username' => $_POST['login_username'],
-//                 'login_password' => password_hash($_POST['login_password'], PASSWORD_DEFAULT), // Use bcrypt for password hashing
-//                 'user_id' => $user_id
-//             ]);
-
-//             $con->commit();
-//             $con = null;
-
-//             return 'User added successfully';
-//         } catch (PDOException $e) {
-//             // Handle exceptions (e.g., log the error)
-//             $con->rollBack();
-//             return 'An error occurred during user creation';
-//         }
-//     }
-
-//     // Implement the query and connect methods as needed
-
-//     // Example query method (replace with your database interaction code)
-//     private function query($sql, $params) {
-//         // Execute the SQL query with parameters
-//         // ...
-//     }
-
-//     // Example connect method (replace with your database connection code)
-//     private function connect() {
-//         // Establish a database connection
-//         // ...
-//     }
-// }
