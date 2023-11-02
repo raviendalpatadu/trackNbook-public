@@ -6,21 +6,21 @@
 class Dashboard extends Controller
 {
     function index($id = '')
-    {   
-        if(Auth::is_logged_in()){
+    {
+        if (Auth::is_logged_in()) {
             $this->view('dashboard');
-        }else{
+        } else {
             $this->redirect('login');
         }
-       
+
     }
     function admin($id = '')
-    {   
-        // if(Auth::is_logged_in()){
+    {
+        if (Auth::is_logged_in()) {
             $this->view('admin.dashboard');
-        // }else{
-        //     $this->view('login');
-        // }
+        } else {
+            $this->view('login');
+        }
     }
 
     //to be made
@@ -34,21 +34,21 @@ class Dashboard extends Controller
     }
     //to be made
     function staff_ticketing($id = '')
-    {  
-        if(Auth::is_logged_in()){
+    {
+        if (Auth::is_logged_in()) {
             $this->view('staff_ticketing.dashboard');
-        }else{
+        } else {
             $this->view('login');
-        } 
+        }
     }
     //to be made
     function train_driver($id = '')
-    {   
+    {
         $this->view('train_driver.dashboard');
     }
     //to be made
     function station_master($id = '')
-    {   
+    {
         $this->view('station_master.dashboard');
     }
 
