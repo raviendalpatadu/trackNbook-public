@@ -360,4 +360,48 @@
 }
 
 /*Add Train - admin */
- 
+/* CSS */
+.if-manage-button {
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: 0 10px 20px -10px #5E5DF0;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter;
+    font-size: 1.5em;
+    /* Adjust the font size using ems */
+    font-weight: 700;
+    line-height: 2em;
+    /* Adjust line height using ems */
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 1em 2em;
+    /* Adjust padding using ems */
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    /* Set width to 100% for responsiveness */
+    border: 0;
+}
+
+
+.if-c-center {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+}
+
+@media screen and (max-width: 768px) {
+    .if-manage-button {
+        font-size: 1.2em;
+        /* Adjust font size for smaller screens */
+        line-height: 1.8em;
+        /* Adjust line height for smaller screens */
+        padding: 0.8em 1.5em;
+        /* Adjust padding for smaller screens */
+    }
+}

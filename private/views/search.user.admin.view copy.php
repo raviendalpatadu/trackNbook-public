@@ -1,12 +1,14 @@
-<?php $this->view("./includes/header"); ?>
+<?php $this->view("./includes/header") ?>
 <?php
 $data['errors'] = array();
 ?>
 
 <body>
+    <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
-        <main>
+        <?php $this->view("./includes/dashboard-navbar") ?>
+
+        <main style="background-color:#EFF8FF;">
             <div class="container">
                 <div class="row">
                     <div class="col-8 center-col table profile">
@@ -35,12 +37,7 @@ $data['errors'] = array();
                                                 <option>Miss.</option>
                                             </select>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_title', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_title', $data['errors'])) ? $data['errors']['user_title'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
                                     </div>
                                 </div>
                                 <div class="col-5">
@@ -52,12 +49,7 @@ $data['errors'] = array();
                                                     name="user_first_name">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_first_name', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
                                     </div>
                                 </div>
                                 <div class="col-5">
@@ -69,12 +61,7 @@ $data['errors'] = array();
                                                     name="user_last_name">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_last_name', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -88,12 +75,7 @@ $data['errors'] = array();
                                                     name="user_nic">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_nic', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_nic', $data['errors'])) ? $data['errors']['user_nic'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
 
                                     </div>
                                 </div>
@@ -106,12 +88,7 @@ $data['errors'] = array();
                                                     name="user_phone_number">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_phone_number', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_phone_number', $data['errors'])) ? $data['errors']['user_phone_number'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
 
                                     </div>
                                 </div>
@@ -124,12 +101,7 @@ $data['errors'] = array();
                                                     name="user_email">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_email', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_email', $data['errors'])) ? $data['errors']['user_email'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
 
                                     </div>
                                 </div>
@@ -146,12 +118,7 @@ $data['errors'] = array();
                                                     name="login_username">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_username', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_username', $data['errors'])) ? $data['errors']['login_username'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
 
                                     </div>
                                 </div>
@@ -164,12 +131,6 @@ $data['errors'] = array();
                                                     name="login_password">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_password', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_password', $data['errors'])) ? $data['errors']['login_password'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
 
                                     </div>
                                 </div>
@@ -182,25 +143,74 @@ $data['errors'] = array();
                                                     name="login_confirm_password">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_confirm_password', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_confirm_password', $data['errors'])) ? $data['errors']['login_confirm_password'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
+
 
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
+                                <div class="col-4">
+                                    <div class="text-inputs">
+                                        <div class="input-text-label">User Type: </div>
+                                    </div><br>
+                                </div>
 
                                 <div class="col-12 d-flex justify-content-start">
                                     <div class="radio-buttons-container">
                                         <div class="radio-button">
-                                            <input name="user_gender" value="male" id="radio2"
+                                            <input name="user_type" value="staffTicketing" id="radio1"
                                                 class="radio-button__input" type="radio">
-                                            <label for="radio2"
+                                            <label for="radio1" class="radio-button__label ">
+                                                <span class="radio-button__custom"></span>
+
+                                                Staff Ticketing
+                                            </label>
+                                        </div>
+                                        <div class="radio-button">
+                                            <input name="user_type" value="staffGeneral" id="radio2"
+                                                class="radio-button__input" type="radio">
+                                            <label for="radio2" class="radio-button__label 
+                                                ">
+                                                <span class="radio-button__custom"></span>
+
+                                                Staff General
+                                            </label>
+                                        </div>
+                                        <div class="radio-button">
+                                            <input name="user_type" value="trainDriver" id="radio3"
+                                                class="radio-button__input" type="radio">
+                                            <label for="radio3" class="radio-button__label ">
+                                                <span class="radio-button__custom"></span>
+
+                                                Train Driver
+                                            </label>
+                                        </div>
+                                        <div class="radio-button">
+                                            <input name="user_type" value="ticketChecker" id="radio4"
+                                                class="radio-button__input" type="radio">
+                                            <label for="radio4" class="radio-button__label ">
+                                                <span class="radio-button__custom"></span>
+
+                                                Ticket Checker
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="text-inputs">
+                                        <div class="input-text-label">Gender: </div>
+                                    </div><br>
+                                </div>
+                                <div class="col-12 d-flex justify-content-start">
+                                    <div class="radio-buttons-container">
+                                        <div class="radio-button">
+                                            <input name="user_gender" value="male" id="radio5"
+                                                class="radio-button__input" type="radio">
+                                            <label for="radio5"
                                                 class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
 
@@ -208,9 +218,9 @@ $data['errors'] = array();
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_gender" value="female" id="radio1"
+                                            <input name="user_gender" value="female" id="radio6"
                                                 class="radio-button__input" type="radio">
-                                            <label for="radio1"
+                                            <label for="radio6"
                                                 class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
 
@@ -219,7 +229,7 @@ $data['errors'] = array();
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div><br><br>
 
                             <div class="row">
 
@@ -243,36 +253,12 @@ $data['errors'] = array();
                     </div>
                 </div>
             </div>
+
         </main>
         <?php $this->view("./includes/footer") ?>
-
     </div>
 
 
 </body>
-
-<script>
-    $(document).ready(function () {
-        var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
-        var counter = 0;
-
-        // access errors array
-        var arr = <?php echo json_encode($data); ?>;
-
-        // check errors key exists
-        if (arr.hasOwnProperty('errors')) {
-            tag.each(() => {
-                console.log(tag[counter]);
-                if (tag[counter++].innerHTML != " ") {
-                    tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
-                    tag.parent().children('.input-text-label').addClass('red');
-                    tag.addClass('red');
-                }
-            });
-        }
-
-    });
-</script>
 
 </html>

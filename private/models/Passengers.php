@@ -90,9 +90,9 @@ class Passengers extends Model
 
         if (!array_key_exists('errors', $errors)) {
             
-            try {
+            try { 
                 $con = $this->connect();
-                $con->beginTransaction();
+                $con->beginTransaction() ;
 
                 //insert query to add passenger account
                 $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender) 
