@@ -138,6 +138,33 @@ class StaffTicketing extends Controller
 
         $this->view('trains.staffticketing');
     }
+    function verifiedWarrent($id = ''){
+        $warrant_resevation = new WarrantsReservations();
+        // echo $id;
+        try{
+            $warrant_resevation->update($id,array(
+                'warrant_status'=>'verified'
+            ),"warrant_id");
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+
+        $this->redirect('staffticketing/Warrant');
+    }
+
+    function pendingWarrent($id = ''){
+        $warrant_resevation = new WarrantsReservations();
+        // echo $id;
+        try{
+            $warrant_resevation->update($id,array(
+                'warrant_status'=>'pending'
+            ),"warrant_id");
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
+
+        $this->redirect('staffticketing/Warrant');
+    }
 
     function rejectWarrent($id = ''){
         $warrant_resevation = new WarrantsReservations();
