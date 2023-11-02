@@ -104,36 +104,37 @@ class Trains extends Model
 
     }
 
-    public function addTrain($data)
+    public function addTrain()
     {
+        $con = $this->connect();
         $errors = array();
 
         // Check if required fields are empty
-        if (empty($data['train_name'])) {
+        if (empty($_POST['train_name'])) {
             $errors['train_name'] = 'Train Name is required';
         }
 
-        if (empty($data['train_route'])) {
+        if (empty($_POST['train_route'])) {
             $errors['train_route'] = 'Train route is required';
         }
 
-        if (empty($data['start_station'])) {
+        if (empty($_POST['start_station'])) {
             $errors['start_station'] = 'Start Station is required';
         }
 
-        if (empty($data['end_station'])) {
+        if (empty($_POST['end_station'])) {
             $errors['end_station'] = 'End Station is required';
         }
 
-        if (empty($data['start_time'])) {
+        if (empty($_POST['start_time'])) {
             $errors['start_time'] = 'Start Time is required';
         }
 
-        if (empty($data['end_time'])) {
+        if (empty($_POST['end_time'])) {
             $errors['end_time'] = 'End Time is required';
         }
 
-        if (empty($data['train_type'])) {
+        if (empty($_POST['train_type'])) {
             $errors['train_type'] = 'Train Type is required';
         }
 
@@ -142,18 +143,27 @@ class Trains extends Model
                 $query = "INSERT INTO tbl_train (train_name, train_type, train_start_time, train_end_time, train_start_station, train_end_station, train_route)
                           VALUES (:train_name, :train_type, :train_start_time, :train_end_time, :train_start_station, :train_end_station, :train_route)";
 
-                $stm = $this->con->prepare($query);
-                $stm->execute($data);
+                $stm = $con->prepare($query);
+                $stm->execute(array(
+                    'train_name' => $_POST['train_name'],
+                    'train_type' => $_POST['train_type'],
+                    'train_start_time' => $_POST['start_time'],
+                    'train_end_time' => $_POST['end_time'],
+                    'train_start_station' => $_POST['start_station'],
+                    'train_end_station' => $_POST['end_station'],
+                    'train_route' => $_POST['train_route']
+                ));
 
                 return true; // Successful insertion
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
         }
+        return $errors;
     }
 
 
-    }
+    
 
     //get reservation for a specific train
     public function getTrainReservation($class_id = "", $train_id = "")

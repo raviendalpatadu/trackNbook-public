@@ -82,22 +82,14 @@ class Train extends Controller
 
         $route = new Routes();
         $data['routes'] = $route->findAll();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['train_name'])) {
-            $trainData = [
-                'train_name' => $_POST['train_name'],
-                'train_route' => $_POST['train_route'],
-                'start_station' => $_POST['start_station'],
-                'end_station' => $_POST['end_station'],
-                'start_time' => $_POST['start_time'],
-                'end_time' => $_POST['end_time'],
-                'train_type' => $_POST['type'],
-            ];
-
-            $train = new Trains($this->connect()); // You may need to adjust this part to properly initialize the Train model.
-            $result = $train->addTrain($trainData);
-
-            if ($result === true) {
+        if (isset($_POST['submit'])) {
+            
+            
+            $train = new Trains(); // You may need to adjust this part to properly initialize the Train model.
+            $result = $train->addTrain();
+            // print_r($result);
+            
+            if ($result == 1) {
                 $this->redirect('services/manage');
                 echo 'Data received and added successfully';
             } else {
