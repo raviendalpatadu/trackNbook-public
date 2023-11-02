@@ -88,7 +88,7 @@
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_email[]" value="">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_email[]" value=" ">
                                             </div>
                                         </div>
                                         
@@ -155,18 +155,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-end">
-                                <a href="<?= ROOT ?>passenger/billing">
+                    </form>
+                        <div class="row mt-20">
+                            <div class="col-12 d-flex justify-content-end"><a href="<?=ROOT?>staffTicketing/pay">
                                     <button class="button mx-10">
+                                        
                                         <div class="button-base">
                                             <div class="text">Proceed</div>
                                         </div>
-                                    </button>
-                                </a>
+                                        
+                                    </button></a>
+                                
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </main>

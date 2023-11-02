@@ -154,5 +154,12 @@ class StaffTicketing extends Controller
         $this->redirect('staffticketing/Warrant');
     }
 
+    function passengerdetails($id = '')
+    {
+
+        $this->view('details.staffticketing');
+    }
+
+
 
 }

@@ -165,7 +165,7 @@ echo "</pre>";
                         </div>
                         <div class="row">
                             <div class="col-12 d-flex justify-content-end">
-                                <button class="button mx-10"><a href="<?=ROOT?>staffticketing/">
+                                <button class="button mx-10"><a href="<?=ROOT?>staffticketing/ticket">
                                     <div class="button-base">
                                         <div class="text">Proceed</div>
                                     </div>
