@@ -12,4 +12,5 @@ class StationMaster extends Controller
         $this->view('check.train.arrival');
     }
 
+    
 }

@@ -35,8 +35,14 @@
 
                                     <div class="impressions">Remaining Stations</div>
                                 </div>
-                                <div class="number"></div>
+                                <div class="number">04</div>
 
+                            </div>
+                            <div>
+                                <div class="profile-img d-flex flex-column align-items-center justify-content-center">
+                                    <img src="<?= ASSETS ?>images/map.png" alt="profile img" width="500" height="750">
+
+                                </div>
                             </div>
 
                         </div>
@@ -46,10 +52,7 @@
 
 
             </div>
-            <div class="profile-img d-flex flex-column align-items-center justify-content-center">
-                <img src="<?= ASSETS ?>images/trainschedule.jpeg" alt="profile img" width="1000" height="400">
 
-            </div>
 
 
         </main>

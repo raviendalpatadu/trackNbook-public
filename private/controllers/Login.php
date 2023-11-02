@@ -37,7 +37,7 @@ class Login extends Controller
                 //rederect to dashboard staff ticketing
                 elseif(strtolower($user_type) == "staff_ticketing"){
                     $this->redirect('dashboard/staff_ticketing');
-                }
+                } 
                 //rederect to dashboard train driver
                 elseif(strtolower($user_type) == "train_driver"){
                     $this->redirect('dashboard/train_driver');
@@ -45,6 +45,9 @@ class Login extends Controller
                 //rederect to dashboard station master
                 elseif(strtolower($user_type) == "station_master"){
                     $this->redirect('dashboard/station_master');
+                }
+                elseif(strtolower($user_type) == "ticket_checker"){
+                    $this->redirect('dashboard/ticket_checker');
                 }
                 
             }
