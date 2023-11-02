@@ -1,6 +1,9 @@
 <?php
 
 class Users extends Model{
+
+    protected $table = 'tbl_user';
+    
     public function __construct(){
         parent::__construct();
     }
@@ -17,11 +20,13 @@ class Users extends Model{
 
         if($data > 0){
             //check if username and password is correct
-            $query = "SELECT u.user_id, u.user_title, u.user_first_name , u.user_last_name, u.user_phone_number,u.user_type, u.user_gender FROM tbl_user as u JOIN tbl_login ON u.user_id = tbl_login.user_id WHERE login_username = :username and login_password = :password";
+            $query = "SELECT u.user_id, u.user_title, u.user_first_name , u.user_last_name, u.user_phone_number,u.user_type, u.user_gender, u.user_email, u.user_nic FROM tbl_user as u JOIN tbl_login ON u.user_id = tbl_login.user_id WHERE login_username = :username and login_password = :password";
             $data_pass = $this->query($query,array(
                 'username'=>$_POST['username'],
                 'password'=>md5($_POST['password'])
             ));
+
+            
     
             if($data_pass > 0){
                 return $data_pass;

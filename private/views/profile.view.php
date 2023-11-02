@@ -33,7 +33,7 @@
                                     <div class="text-inputs">
                                         <div class="input-text-label">Title</div>
                                         <div class="width-fill">
-                                            <select class="dropdown" placeholder="Please choose">
+                                            <select class="dropdown" placeholder="Please choose"  value="<?=Auth::getuser_title()?>" name="user_title">
                                                 <option>Mr.</option>
                                                 <option>Mrs.</option>
                                                 <option>Miss.</option>
@@ -47,7 +47,7 @@
                                         <div class="input-text-label">First Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_first_name()?>">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_first_name()?>" name="user_first_name">
                                             </div>
                                         </div>
                                         <!-- <div class="assistive-text">Assistive Text</div> -->
@@ -58,7 +58,7 @@
                                         <div class="input-text-label">Last Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_last_name()?>">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_last_name()?> " name="user_last_name">
                                             </div>
                                         </div>
                                         <!-- <div class="assistive-text">Assistive Text</div> -->
@@ -71,7 +71,7 @@
                                         <div class="input-text-label">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_nic()?>">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_nic()?>" name="user_nic" disabled>
     
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                         <div class="input-text-label">Mobile</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_phone_number()?>">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_phone_number()?>" name="user_phone_number">
     
                                             </div>
                                         </div>
@@ -97,7 +97,7 @@
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="Disabled">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_email()?>" name="user_email" disabled>
     
                                             </div>
                                         </div>
@@ -122,7 +122,7 @@
     
                                     <button class="button mx-10">
                                         <div class="button-base">
-                                            <div class="text">Update</div>
+                                            <input type="submit" value="Update" name="update">
                                         </div>
                                     </button>
                                 </div>

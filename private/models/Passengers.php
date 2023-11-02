@@ -1,6 +1,8 @@
 <?php
 class Passengers extends Model
 {
+    protected $table = 'tbl_passengers';
+
     public function __construct()
     {
         parent::__construct();

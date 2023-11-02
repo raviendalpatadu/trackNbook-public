@@ -108,7 +108,7 @@ class Model extends Database
     }
 
 
-    public function update($id,$data)
+    public function update($id,$data, $id_feild = '')
     {
         $str = '';
         foreach ($data as $key => $value) {
@@ -116,10 +116,21 @@ class Model extends Database
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        // echo "{$id}<pre>";
-        //     print_r($data);
-        //     echo "</pre>";
-        $query = "update $this->table set $str where ".strtolower($this::class)."_id = :id";
+        echo "{$id}<pre>";
+            print_r($data);
+            echo "</pre>";
+        try{
+            if ($id_feild == '') {
+                $query = "update $this->table set $str where ".strtolower($this::class)."_id = :id";
+            } else{
+                $query = "update $this->table set $str where $id_feild = :id";
+            }
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
+
+        // echo $query;
+        
         return $this->query($query,$data);
     }
 
