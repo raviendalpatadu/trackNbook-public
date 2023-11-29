@@ -4,7 +4,7 @@
  * home controller
  */
 
-class user extends Controller
+class User extends Controller
 {
     function index($id = '')
     {
@@ -12,10 +12,10 @@ class user extends Controller
         $this->view('home');
     }
 
-    function add($id = '')
-    {
-        $this->view('add.user.admin');
-    }
+    // function add($id = '')
+    // {
+    //     $this->view('add.user.admin');
+    // }
 
     // function details($id = '')
     // {
@@ -32,9 +32,11 @@ class user extends Controller
 
         if (isset($_POST['user_title'])) {
             $data = $user->addUser();
-            // echo json_encode($data);
+        
             if (!array_key_exists('errors', $data)) {
-                $this->redirect('login');
+                $this->redirect('services/manage');
+
+
             } else {
                 $errors['user_first_name'] = (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : '';
                 $errors['user_last_name'] = (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : '';

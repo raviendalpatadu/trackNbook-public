@@ -1,6 +1,9 @@
 <?php $this->view("./includes/header"); ?>
-<?php
-$data['errors'] = array();
+<?php 
+if (!isset($data['errors'])) {
+    $data['errors'] = array();
+}
+
 ?>
 
 <body>
@@ -160,7 +163,7 @@ $data['errors'] = array();
                                         <div class="input-text-label">Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
+                                                <input type="password" class="type-here" placeholder="Type here"
                                                     name="login_password">
                                             </div>
                                         </div>
@@ -178,7 +181,7 @@ $data['errors'] = array();
                                         <div class="input-text-label">Confirm Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
+                                                <input type="password" class="type-here" placeholder="Type here"
                                                     name="login_confirm_password">
                                             </div>
                                         </div>
@@ -258,6 +261,7 @@ $data['errors'] = array();
 
         // access errors array
         var arr = <?php echo json_encode($data); ?>;
+        console.log(arr);
 
         // check errors key exists
         if (arr.hasOwnProperty('errors')) {

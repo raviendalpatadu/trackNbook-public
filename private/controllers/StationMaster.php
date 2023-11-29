@@ -22,5 +22,4 @@ class StationMaster extends Controller
 
         $this->view('update.train.location');
     }
-
 }

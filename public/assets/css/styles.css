@@ -8,6 +8,7 @@
 
 main {
   height: -webkit-fill-available;
+  
 }
 
 :root {
@@ -31,6 +32,12 @@ main {
 body {
   display: flex;
   min-height: 100vh;
+}
+@media screen and (max-width: 768px) {
+  body {
+    display: block;
+  }
+  
 }
 
 div.container {
@@ -1290,6 +1297,14 @@ input.type-here.green::placeholder {
 
 .align-self-end {
   align-self: flex-end;
+}
+
+.align-self-between{
+  align-self: space-between;
+}
+
+.align-items-between {
+  align-items: space-between;
 }
 
 .flex-column {

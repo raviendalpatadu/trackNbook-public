@@ -1,6 +1,8 @@
 <?php
 class Passengers extends Model
 {
+    protected $table = 'tbl_passengers';
+
     public function __construct()
     {
         parent::__construct();
@@ -62,9 +64,35 @@ class Passengers extends Model
             $errors['errors']['user_phone_number'] = 'Phone Number is required';
         }
 
+        // 10 number validation
+
+
         //check nic is exists in post
         if (empty($_POST['user_nic'])) {
             $errors['errors']['user_nic'] = 'NIC is required';
+        }
+
+        // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+        // 10 number validation
+        if (strlen($_POST['user_phone_number']) != 10) {
+            $errors['errors']['user_phone_number'] = 'Phone Number is invalid';
+        }
+
+        //check nic is exists in post
+        if (empty($_POST['user_nic'])) {
+            $errors['errors']['user_nic'] = 'NIC is required';
+        } else {
+            // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+            if (strlen($_POST['user_nic']) != 12) {
+                if (strlen($_POST['user_nic']) == 10) {
+                    $last_char = strtolower(substr($_POST['user_nic'], -1));
+                    if ($last_char != 'v') {
+                        $errors['errors']['user_nic'] = 'NIC is invalid last char is not V or v';
+                    }
+                } else {
+                    $errors['errors']['user_nic'] = 'NIC is invalid';
+                }
+            }
         }
 
         //check if email is exists in post
@@ -76,11 +104,13 @@ class Passengers extends Model
         if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {
             $errors['errors']['user_email'] = 'Invalid Email';
         }
-        
+
         // check gender is exists in post it is a radio box
-        if(empty($_POST['user_gender'])){
+        if (empty($_POST['user_gender'])) {
             $errors['errors']['user_gender'] = 'Gender is required';
         }
+
+        // auto pgender validatiaon
 
 
 
@@ -95,8 +125,8 @@ class Passengers extends Model
                 $con->beginTransaction() ;
 
                 //insert query to add passenger account
-                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender) 
-                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender)";
+                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
+                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
 
                 $stm = $con->prepare($query);
                 $stm->execute(array(
@@ -105,7 +135,9 @@ class Passengers extends Model
                     'user_last_name' => $_POST['user_last_name'],
                     'user_phone_number' => $_POST['user_phone_number'],
                     'user_type' => "passenger",
-                    'user_gender' => $_POST['user_gender']
+                    'user_gender' => $_POST['user_gender'],
+                    'user_email' => $_POST['user_email'],
+                    'user_nic' => $_POST['user_nic']
                 ));
                 $user_id = $con->lastInsertId();
                 $query2 = "Insert INTO tbl_login (login_username,login_password, user_id) VALUES (:login_username, :login_password, :user_id)";
@@ -125,7 +157,6 @@ class Passengers extends Model
                     'user_email' => $_POST['user_email'],
                     'user_nic' => $_POST['user_nic']
                 ));
-
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
@@ -139,6 +170,125 @@ class Passengers extends Model
             if ($data > 0) {
                 return $data;
             }
+            
+        }
+        return $errors;
+    }
+
+    // con currency transaction check in seat map
+
+
+    public function makePayment()
+    {
+        $errors = array();
+
+
+        //check if username is exists in post
+        if (empty($_POST['card_holder_name'])) {
+            $errors['errors']['card_holder_name'] = 'Card holder name is required';
+        }
+
+
+        //check if card is exists in post
+        if (empty($_POST['card_no'])) {
+            $errors['errors']['card_no'] = 'Card No is required';
+        }
+
+        //check if card exp is exists 
+        if (empty($_POST['card_exp'])) {
+            $errors['errors']['card_exp'] = 'Card Exp Date is required';
+        }
+
+
+
+        //check if first name is exists in post
+        if (empty($_POST['card_cvv'])) {
+            $errors['errors']['card_cvv'] = 'CVV is required';
+        }
+
+
+        // auto pgender validatiaon
+
+
+
+
+
+
+
+        if (!array_key_exists('errors', $errors)) {
+            //add payment gateway data here
+            $data = array();
+        }
+        return $errors;
+    }
+
+    public function validatePassenger($data)
+    {
+        $errors = array();
+
+        for ($entry = 0; $entry < count($data['user_title']); $entry++) {
+
+            //check if title exists in post
+            if (empty($data['user_title'][$entry])) {
+                $errors['errors']['user_title'][$entry] = 'Title is required';
+            }
+
+            //check if first name is exists in post
+            if (empty($data['user_first_name'][$entry])) {
+                $errors['errors']['user_first_name'][$entry] = 'First Name is required';
+            }
+
+            //check if last name is exists in post
+            if (empty($data['user_last_name'][$entry])) {
+                $errors['errors']['user_last_name'][$entry] = 'Last Name is required';
+            }
+
+            //check if phone number is exists in post
+            if (empty($data['user_phone_number'][$entry])) {
+                $errors['errors']['user_phone_number'][$entry] = 'Phone Number is required';
+            }
+
+            // 10 number validation
+            if (strlen($data['user_phone_number'][$entry]) != 10) {
+                $errors['errors']['user_phone_number'][$entry] = 'Phone Number is invalid';
+            }
+
+            //check nic is exists in post
+            if (empty($data['user_nic'][$entry])) {
+                $errors['errors']['user_nic'][$entry] = 'NIC is required';
+            }else{
+                // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+                if (strlen($data['user_nic'][$entry]) != 12) {
+                    if (strlen($data['user_nic'][$entry]) == 10) {
+                        $last_char = strtolower(substr($data['user_nic'][$entry], -1));
+                        if ($last_char != 'v') {
+                            $errors['errors']['user_nic'][$entry] = 'NIC is invalid last char is not V or v';
+                        }
+                    }
+                    else{
+                        $errors['errors']['user_nic'][$entry] = 'NIC is invalid';
+                    }
+                }
+                
+            }
+
+
+
+            //check if email is exists in post
+            if (empty($data['user_email'][$entry])) {
+                $errors['errors']['user_email'][$entry] = 'Email is required';
+            }
+
+            //check if email is valid
+            if (!filter_var($_POST['user_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+                $errors['errors']['user_email'][$entry] = 'Invalid Email';
+            }
+
+            // check gender
+            if(empty($data['user_gender'.$entry])){
+                $errors['errors']['user_gender'.$entry] = 'Gender Required';
+            }
+
         }
         return $errors;
     }

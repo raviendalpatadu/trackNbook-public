@@ -18,8 +18,13 @@ class Services extends Controller
     {
         $this->view('contact');
     }
-    function terms($id = '')
+    function termsAndConditions($id = '')
     {
         $this->view('terms');
+    }
+
+    function inquires($id = '')
+    {
+        $this->view('passenger.inquiry');
     }
 }

@@ -41,7 +41,7 @@ echo "</pre>";
                                                 </select>
                                             </div>
 
-                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['from_station'] : ''; ?></div>
+                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?></div>
                                         </div>
                                         <div class="text-inputs">
                                             <div class="input-text-label">To</div>
@@ -55,7 +55,7 @@ echo "</pre>";
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['to_station'] : ''; ?></div>
+                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('to_station', $data['errors']['errors'])) ? $data['errors']['errors']['to_station'] : ''; ?></div>
                                         </div>
                                         <div class="text-inputs">
                                             <div class="input-text-label">From Date</div>
@@ -67,10 +67,10 @@ echo "</pre>";
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['from_date'] : ''; ?></div>
+                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('from_date', $data['errors']['errors'])) ? $data['errors']['errors']['from_date'] : ''; ?></div>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-row g-20">
+                                    <div class="d-flex flex-row g-20 mt-10">
 
                                         <div class="text-inputs">
                                             <div class="input-text-label">No of Passengers</div>
@@ -79,7 +79,7 @@ echo "</pre>";
                                                     <input type="number" name="no_of_passengers" class="type-here" placeholder="Type here">
                                                 </div>
                                             </div>
-                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['no_of_passengers'] : ''; ?></div>
+                                            <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_passengers', $data['errors']['errors'])) ? $data['errors']['errors']['no_of_passengers'] : ''; ?></div>
                                         </div>
 
                                         <div class="text-inputs">
@@ -106,12 +106,12 @@ echo "</pre>";
                                                     </svg>
                                                 </div>
                                             </div>
-                                            <div class="assistive-text display-none <?php echo (array_key_exists('errors', $data)) ? 'red' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['errors']['to_date'] : ''; ?></div>
+                                            <div class="assistive-text display-none <?php echo (array_key_exists('errors', $data)) ? 'red' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('to_date', $data['errors']['errors'])) ? $data['errors']['errors']['to_date'] : ''; ?></div>
                                         </div>
 
                                     </div>
 
-                                    <div class="d-flex align-items-end justify-content-end flex-fill">
+                                    <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
                                         <!-- <button class="button"><a href="trains/available"> -->
                                         <div class="button-base">
                                             <input type="submit" name="submit" value="Next" />

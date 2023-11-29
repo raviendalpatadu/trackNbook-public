@@ -11,6 +11,10 @@ class Home extends Controller
         $station = new Stations();
         $data = array();
         $data['stations'] = $station->getStations();
+
+        if(isset($_SESSION['reservation'])){
+            unset($_SESSION['reservation']);
+        }
         
         if(isset($_SESSION['errors'])){
             $data['errors'] = $_SESSION['errors'];
