@@ -1,6 +1,8 @@
 <?php
 class Passengers extends Model
 {
+    protected $table = 'tbl_passengers';
+
     public function __construct()
     {
         parent::__construct();
@@ -71,6 +73,27 @@ class Passengers extends Model
         }
 
         // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+        // 10 number validation
+        if (strlen($_POST['user_phone_number']) != 10) {
+            $errors['errors']['user_phone_number'] = 'Phone Number is invalid';
+        }
+
+        //check nic is exists in post
+        if (empty($_POST['user_nic'])) {
+            $errors['errors']['user_nic'] = 'NIC is required';
+        } else {
+            // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+            if (strlen($_POST['user_nic']) != 12) {
+                if (strlen($_POST['user_nic']) == 10) {
+                    $last_char = strtolower(substr($_POST['user_nic'], -1));
+                    if ($last_char != 'v') {
+                        $errors['errors']['user_nic'] = 'NIC is invalid last char is not V or v';
+                    }
+                } else {
+                    $errors['errors']['user_nic'] = 'NIC is invalid';
+                }
+            }
+        }
 
         //check if email is exists in post
         if (empty($_POST['user_email'])) {
@@ -96,14 +119,14 @@ class Passengers extends Model
 
 
         if (!array_key_exists('errors', $errors)) {
-
-            try {
+            
+            try { 
                 $con = $this->connect();
-                $con->beginTransaction();
+                $con->beginTransaction() ;
 
                 //insert query to add passenger account
-                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender) 
-                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender)";
+                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
+                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
 
                 $stm = $con->prepare($query);
                 $stm->execute(array(
@@ -112,7 +135,9 @@ class Passengers extends Model
                     'user_last_name' => $_POST['user_last_name'],
                     'user_phone_number' => $_POST['user_phone_number'],
                     'user_type' => "passenger",
-                    'user_gender' => $_POST['user_gender']
+                    'user_gender' => $_POST['user_gender'],
+                    'user_email' => $_POST['user_email'],
+                    'user_nic' => $_POST['user_nic']
                 ));
                 $user_id = $con->lastInsertId();
                 $query2 = "Insert INTO tbl_login (login_username,login_password, user_id) VALUES (:login_username, :login_password, :user_id)";
@@ -145,6 +170,7 @@ class Passengers extends Model
             if ($data > 0) {
                 return $data;
             }
+            
         }
         return $errors;
     }

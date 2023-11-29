@@ -8,8 +8,13 @@ class TrainDriver extends Controller
 {
     function index($id = '')
     {
-         
-        $this->view('dashboard.traindriver');
+
+        $this->view('train_driver.dashboard');
+    }
+    function trainDelay($id = '')
+    {
+
+        $this->view('update.train.delay');
     }
 
 }

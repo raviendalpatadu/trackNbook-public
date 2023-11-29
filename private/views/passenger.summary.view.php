@@ -53,11 +53,11 @@
                     </div>
                     <div class="container d-flex justify-content-center">
                         <div class="ticket-container">
-                            <div class="row mb-20 ">
+                            <div class="row mb-20 mt-20">
                                 <div class="col-12 d-flex align-items-center flex-column line">
                                     <h1>Ticket Summary</h1>
                                 </div>
-                                <div class="row mb-10 mt-50 ml-20 ">
+                                <div class="row mb-10 mt-30 ml-20 ">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Number</p>
                                         <p class="width-50"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?></p>
@@ -100,6 +100,22 @@
                                         <p class="width-50"><?php echo (array_key_exists('train', $data)) ? date("H:i",strtotime($data['train']->train_start_time)) ."->" . date("H:i",strtotime($data['train']->train_end_time)): ''; ?></p>
                                     </div>
                                 </div>
+
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Seats Selected</p>
+                                        <p class="width-50">
+                                            <?php
+                                            if (array_key_exists('selected_seats', $_SESSION['reservation'])) {
+                                                foreach ($_SESSION['reservation']['selected_seats'] as $key => $value) {
+                                                    echo $value . " ";
+                                                }
+                                            }
+                                            ?>
+                                        </p>
+                                    </div>
+                                </div>
+
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Date</p>

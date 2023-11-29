@@ -14,4 +14,17 @@ class Services extends Controller
     {
         $this->view('admin.manage');
     }
+    function contact($id = '')
+    {
+        $this->view('contact');
+    }
+    function termsAndConditions($id = '')
+    {
+        $this->view('terms');
+    }
+
+    function inquires($id = '')
+    {
+        $this->view('passenger.inquiry');
+    }
 }
