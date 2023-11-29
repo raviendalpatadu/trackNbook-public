@@ -1,5 +1,6 @@
 $mou-colors : (
-    "box-gray": #FAFAFA
+    "box-gray": #FAFAFA,
+    "light-blue" : #F2F9FE
 );
 
 @each $key, $val in $mou-colors{
@@ -22,7 +23,7 @@ $mou-colors : (
     color: var(--lightgray-font);
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: Inter;
-    font-size: 18px;
+    font-size: 30px;
     font-style: normal;
     font-weight: 700;
     line-height: 19.444px; 
@@ -53,56 +54,98 @@ line-height: 19.444px;
 
 .ticket-container {
   width: 39%;
-  padding: inherit;
+  background-color:map-get($mou-colors, "box-gray" );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-end-end-radius: 10px;
+  border-end-start-radius: 10px;
+}
+
+.warrant-container{
+  width: 100%;
+}
+
+
+
+.warrant-container-box{
   background-color:map-get($mou-colors, "box-gray" );
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
   
-
-.seat-row {
-  gap: 25px;
+.checker-container{
+  width: 100%;
+  background-color:map-get($mou-colors, "box-gray" );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.checker-container{
+  width: 100%;
+  background-color:map-get($mou-colors, "box-gray" );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.ticket-details{
+  padding: 23px 50px;
 }
 
-.seats-top {
-  gap: 10px;
+ .cancel-container .ticket-details{
+  padding: 60px 50px ;
+ }
+
+.ticket-details .button{
+  width: -webkit-fill-available;
 }
 
-.seats-bottom {
-  gap: 10px;
+.cancel-container{
+  width: 630px;
+  height: 450px;
+  background-color:map-get($mou-colors, "box-gray" );
+  // background-color: #F2F9FD;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  gap: 50px;
 }
 
-.seat {
-  width: 25px;
-  height: 25px;
-  padding: 5px 4px;
-  gap: 10px;
-  border-radius: 10px;
-  border: 2px solid #ccc;
-  background: #fff;
-  box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
-}
+// .seat-row {
+//   gap: 25px;
+// }
 
-.seat:hover:not(.reserved) {
-  background: var(--Selected-Blue);
-  border: 2px solid var(--Border-blue);
-  cursor: pointer;
-  // add hover animation
-  transition: all 0.2s ease-out;
-}
+// .seats-top {
+//   gap: 10px;
+// }
 
-.seat.selected:not(.reserved) {
-  background: var(--Selected-Blue) !important;
-  border: 2px solid var(--Border-blue) !important;
-  cursor: pointer;
-}
+// .seats-bottom {
+//   gap: 10px;
+// }
 
-.reserved {
-  background: var(--Banner-red) !important;
-  border: 2px solid var(--Banner-red) !important;
-  color: var(--White) !important;
-  border: none;
-  cursor: not-allowed;
-}
+// .seat {
+//   width: 25px;
+//   height: 25px;
+//   padding: 5px 4px;
+//   gap: 10px;
+//   border-radius: 10px;
+//   border: 2px solid #ccc;
+//   background: #fff;
+//   box-shadow: 4px 4px 11px 0px rgba(0, 0, 0, 0.25);
+// }
+
+// .seat:hover:not(.reserved) {
+//   background: var(--Selected-Blue);
+//   border: 2px solid var(--Border-blue);
+//   cursor: pointer;
+//   // add hover animation
+//   transition: all 0.2s ease-out;
+// }
+
+// .seat.selected:not(.reserved) {
+//   background: var(--Selected-Blue) !important;
+//   border: 2px solid var(--Border-blue) !important;
+//   cursor: pointer;
+// }
+
+// .reserved {
+//   background: var(--Banner-red) !important;
+//   border: 2px solid var(--Banner-red) !important;
+//   color: var(--White) !important;
+//   border: none;
+//   cursor: not-allowed;
+// }
 
 @media screen and (max-width: 768px) {
   .staff-container {
@@ -125,14 +168,161 @@ line-height: 19.444px;
     padding: 5px 4px;
     font-size: 12px;
   }
+}
 
 .line {
-  border-bottom: 1px solid #000;
-  }
+  border-bottom: 2px solid #000;  
+ }
 
 .total-row{
   background-color: rgba(0, 0, 0, 0.69);
-  height: 100px;
+  height: 35px;
+  border-end-end-radius: 10px;
+  border-end-start-radius: 10px;
   }
+
+  .date{
+    width: 270px;
+  }
+
+p.text {
+  font-size: medium;
+}
+
+h2.text {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+
+.popup{
+  width: 400px;
+  background: #5c8a92;
+  border-radius: 5px;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  translate: (-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  transition: transform 0.5s ease-in-out;
+}
+
+.popup .button{
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  cursor: pointer;
+  // box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.popup .open-btn{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background: #fff;
+  color: #333;
+  font-size: 20px;
+  border: 2px solid #333;
+}
+
+.popup .close-btn{
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  background: #222;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.popup .close-btn:hover{
+  background: #444;
+}
+
+.popup .content{
+  max-height: 30%;
+  overflow: auto;
+}
+
+.popup .content img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup.active{
+  visibility: visible;
+  opacity: 1;
+}
+
+h3.warrant{
+font-size: 30px;
+}
+
+.card-dashboard{
+  margin: 5px 5px;
+  padding: 10px 20px;
+  background-color:map-get($mou-colors, "box-gray" );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Poppins-Medium", Helvetica;
+  border-radius: 10px;
+}
+
+// .card-text{
+//   font-weight:600px ;
+//   line-height: 1.5px;
+// }
+.text-checker{
+font-family: Open Sans;
+font-size: 41px;
+font-style: normal;
+font-weight: 700;
+line-height: 48px; 
+letter-spacing: -0.902px;
+text-shadow:  2px 2px  rgba(0, 0, 0, 0.25);
+}
+
+.home-staff-container{
+    width: 90%;
+    padding: 0px 10px;
+    background-color:map-get($mou-colors, "box-gray" );
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.home-staff-text h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 60px;
+  color: var(--Primary-Gray) !important;
+}
+
+.home-staff-text h3 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 30px;
+  
+}
+
+.inquiry-container {
+    width: 80%;
+    padding: inherit;
+    background-color:map-get($mou-colors, "box-gray" );
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px 50px;
+
+}
+
+.inquiry{
+  min-height: 100px;
 }
 
