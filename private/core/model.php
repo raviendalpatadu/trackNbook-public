@@ -116,31 +116,42 @@ class Model extends Database
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        echo "{$id}<pre>";
-            print_r($data);
-            echo "</pre>";
+        // echo "{$id}<pre>";
+        //     print_r($data);
+        //     echo "</pre>";
         try{
-            if ($id_feild == '') {
+            if($id_feild == ''){
                 $query = "update $this->table set $str where ".strtolower($this::class)."_id = :id";
-            } else{
+            }else
+            {
                 $query = "update $this->table set $str where $id_feild = :id";
             }
-        } catch(PDOException $e){
+            return $this->query($query,$data);
+        }
+        catch(PDOException $e){
             echo $e->getMessage();
         }
-
-        // echo $query;
-        
-        return $this->query($query,$data);
     }
 
 
-    public function delete($id)
+    public function delete($id, $id_feild = '')
     {
         $data['id'] = $id;
-        
-        $query = "delete from $this->table where ".strtolower($this::class)."_id = :id";
-        return $this->query($query,$data);
+
+        try{
+            if($id_feild == ''){
+                $query = "delete from $this->table where ".strtolower($this::class)."_id = :id";
+            }else
+            {
+                $query = "delete from $this->table where $id_feild = :id";
+            }
+            return $this->query($query,$data);
+        } 
+        catch(PDOException $e){
+            die($e->getMessage());
+            
+        }
+
     }
 
 
