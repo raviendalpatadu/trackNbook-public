@@ -163,7 +163,7 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
+                                                <input type="password" class="type-here" placeholder="Type here"
                                                     name="login_password">
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Confirm Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
+                                                <input type="password" class="type-here" placeholder="Type here"
                                                     name="login_confirm_password">
                                             </div>
                                         </div>

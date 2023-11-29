@@ -41,9 +41,41 @@ class Admin extends Controller
 
         $data['user'] = $user->whereOne('user_id',$id);
         
+        if(isset($_POST['update'])){
+            try{
+                $result = $user->updateUser($id, $_POST);
+
+                if($result !=1 && array_key_exists('errors', $result)){
+                    $data['errors'] = $result['errors'];
+                }
+            }catch(Exception $e){
+                die($e->getMessage());
+            }
+        }
 
 
         $this->view('update.user.admin', $data);
+    }
+
+    function deleteUser($id = ''){
+        $user = new Users();
+        $data = array();
+        
+        // if(isset($_POST['delete'])){
+            try{
+                $result = $user->delete($id,"user_id");
+                $this->redirect('admin/getUsers');
+
+                // if($result !=1 && array_key_exists('errors', $result)){
+                //     $data['errors'] = $result['errors'];
+                //     echo "<pre>";
+                //     echo "</pre>";
+                // }
+
+            }catch(Exception $e){
+                die($e->getMessage());
+            }
+        // }
     }
 
     function search($id = '')

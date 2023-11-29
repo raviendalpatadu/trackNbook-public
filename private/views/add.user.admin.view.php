@@ -240,6 +240,14 @@ if(!isset($data['errors'])){
                                                 Ticket Checker
                                             </label>
                                         </div>
+                                        <div class="radio-button">
+                                            <input name="user_type" value="station_master" id="radio7"
+                                                class="radio-button__input" type="radio">
+                                            <label for="radio7" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                                <span class="radio-button__custom"></span>
+                                                Station Master
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

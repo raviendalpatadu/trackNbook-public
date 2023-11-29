@@ -7,11 +7,17 @@
     <div class="menu">
       <ul>
         <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
-        <li class="navbar-item"><a href="<?= ROOT ?>services">Services</a></li>
-        <li class="navbar-item"><a href="<?= ROOT ?>contact">Contact</a></li>
-        <li class="navbar-item"><a href="<?= ROOT ?>termsAndConditions">Terms & Conditions</a></li>
+        <!-- <li class="navbar-item"><a href="<?php //ROOT
+                                              ?>services">Services</a></li> -->
+        <li class="navbar-item"><a href="<?= ROOT ?>services/contact">Contact</a></li>
+        <li class="navbar-item"><a href="<?= ROOT ?>services/termsAndConditions">Terms & Conditions</a></li>
         <li class="navbar-item"><a href="<?= ROOT ?>train/track">Track Train</a></li>
-
+        <?php if (Auth::is_logged_in()) : ?>
+          <li class="navbar-item"><a href="<?= ROOT ?>passenger/reservation/<?= Auth::getuser_id() ?>">Reservations</a></li>
+        <?php endif; ?>
+        <?php if (Auth::is_logged_in()) : ?>
+          <li class="navbar-item"><a href="<?= ROOT ?>services/inquires">Inquries</a></li>
+        <?php endif; ?>
         <!-- check user login -->
         <?php if (!Auth::is_logged_in()) : ?>
           <li class="navbar-item"><a href="<?= ROOT ?>login">Log in</a></li>

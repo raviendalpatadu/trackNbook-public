@@ -11,11 +11,20 @@ class Profile extends Controller
         $user = new Users();
         $errors = array();
         
-        // if (isset($_POST['update'])) {
-        //     // var_dump($_POST);
-        //     $update = array("user_first_name"=> $_POST['user_first_name']);
-        //     $user->update($id, $update, 'user_id');
-        // }
+        if (isset($_POST['update'])) {
+            try {
+                $result = $user->updateUserProfile($_POST['user_id'], $_POST);
+                
+                if ($result != 1 && array_key_exists('errors', $result)) {
+                    $data['errors'] = $result['errors'];
+                }
+                echo "<pre>";
+                print_r($result);
+                echo "</pre>";
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        }
          
         $this->view('profile');
     }

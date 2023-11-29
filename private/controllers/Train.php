@@ -90,7 +90,7 @@ class Train extends Controller
             // print_r($result);
             
             if ($result == 1) {
-                $this->redirect('services/manage');
+                $this->redirect('train/add');
                 echo 'Data received and added successfully';
             } else {
                 $data['errors'] = $result;

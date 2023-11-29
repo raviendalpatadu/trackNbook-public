@@ -10,7 +10,7 @@
                 <div class="col-4"></div>
                 <div class="col-4 center_form1">
                     <form class="add-schedule">
-                        <div class="top-head-addtrain">Add Train</div>
+                        <div class="top-head-addtrain">Add schedule</div>
                         <div class="head-box">
                             Train Details
                         </div>

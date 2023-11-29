@@ -127,10 +127,10 @@ if (isset($data['users']) && $data['users'] != 0) {
                                                     <td class="col-3 d-flex align-items-center"><?= $data['users'][$user]->user_email ?></td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                        <?= $data['users'][$user]->user_nic ?>
+                                                            <?= $data['users'][$user]->user_nic ?>
                                                         </div>
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center g-5"> 
+                                                    <td class="col-1 d-flex align-items-center g-5">
                                                         <a class="blue" href="<?= ROOT ?>admin/updateUser/<?= $data['users'][$user]->user_id ?>">
                                                             <div class="badge-base bg-Selected-Blue">
                                                                 <div class="dot">
@@ -139,14 +139,14 @@ if (isset($data['users']) && $data['users'] != 0) {
                                                                 <div class="text blue">View</div>
                                                             </div>
                                                         </a>
-                                                        <a class="blue" href="<?= ROOT ?>admin/deleteUser/<?= $data['users'][$user]->user_id ?>">
-                                                            <div class="badge-base bg-Selected-red">
+                                                        <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
+                                                            <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/<?= $data['users'][$user]->user_id ?>">
                                                                 <div class="dot">
                                                                     <div class="dot4  bg-Banner-red"></div>
                                                                 </div>
-                                                                <div class="text red">Cancel</div>
-                                                            </div>
-                                                        </a>
+                                                                <div class="text red">Delete</div>
+                                                            </a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             <?php endfor; ?>

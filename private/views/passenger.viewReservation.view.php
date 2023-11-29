@@ -13,44 +13,7 @@
         <main>
             <div class="container d-flex justify-content-center">
                 <div class="passenger-container">
-                    <div class="row mb-50">
-                        <div class="col-12">
-                            <div class="loader d-flex align-items-center justify-content-center px-20">
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">1</div>
-                                </div>
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">2</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">3</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">4</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle complete">
-                                    <div class="loader-circle-text white">5</div>
-                                </div>
-
-                                <div class="divider complete"></div>
-
-                                <div class="loader-circle  complete active">
-                                    <div class="loader-circle-text white">6</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <
                     <div class="container d-flex justify-content-center">
                         <div class="ticket-container">
                             <div class="row mb-20 mt-20">
@@ -60,66 +23,58 @@
                                 <div class="row mb-10 mt-30 ml-20 ">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Number</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?></p>
+                                        <p class="width-50">1106</p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Type</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_type) : ''; ?></p>
+                                        <p class="width-50">Express</p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Name</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_name) : ''; ?></p>
+                                        <p class="width-50">Udarata Menike</p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Start Location</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) : ''; ?></p>
+                                        <p class="width-50">Bandarawela</p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">End Location</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->end_station) : ''; ?></p>
+                                        <p class="width-50">Colombo Fort</p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Class</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->reservation_class) : ''; ?></p>
+                                        <p class="width-50">First Class</p>
                                     </div>
                                 </div>
                                 
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Time Start &#8594 End</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? date("H:i",strtotime($data['train']->train_start_time)) ."->" . date("H:i",strtotime($data['train']->train_end_time)): ''; ?></p>
+                                        <p class="width-50">17.00 - 23.00</p>
                                     </div>
                                 </div>
 
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Seats Selected</p>
-                                        <p class="width-50">
-                                            <?php
-                                            if (array_key_exists('selected_seats', $_SESSION['reservation'])) {
-                                                foreach ($_SESSION['reservation']['selected_seats'] as $key => $value) {
-                                                    echo $value . " ";
-                                                }
-                                            }
-                                            ?>
-                                        </p>
+                                        <p class="width-50">06, 05</p>
                                     </div>
                                 </div>
 
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Date</p>
-                                        <p class="width-50"><?php echo (array_key_exists('reservation', $_SESSION)) ? $_SESSION['reservation']['from_date'] : ''; ?></p>
+                                        <p class="width-50">23-11-2023</p>
                                     </div>
                                 </div>
                                 
@@ -129,9 +84,6 @@
                                         <button class="button"><a href="<?= ROOT ?>home">
                                                 <div class="button-base">
                                                     <div class="text">Home</div>
-                                                    <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
                                                 </div>
                                             </a>
                                         </button>

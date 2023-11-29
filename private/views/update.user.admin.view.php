@@ -209,7 +209,8 @@ if(!isset($data['errors'])){
                                         <a href="<?= ROOT ?>admin/getusers">Back</a>
                                     </div>
                                     <div class="button-base">
-                                        <input class="text" type="submit" value="Update" name="submit">
+                                        <input type="hidden" name="user_id" value="<?=$data['user']->user_id?>">
+                                        <input class="text" type="submit" value="Update" name="update">
                                     </div>
                                 </div>
                             </div>

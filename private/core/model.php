@@ -134,12 +134,24 @@ class Model extends Database
     }
 
 
-    public function delete($id)
+    public function delete($id, $id_feild = '')
     {
         $data['id'] = $id;
-        
-        $query = "delete from $this->table where ".strtolower($this::class)."_id = :id";
-        return $this->query($query,$data);
+
+        try{
+            if($id_feild == ''){
+                $query = "delete from $this->table where ".strtolower($this::class)."_id = :id";
+            }else
+            {
+                $query = "delete from $this->table where $id_feild = :id";
+            }
+            return $this->query($query,$data);
+        } 
+        catch(PDOException $e){
+            die($e->getMessage());
+            
+        }
+
     }
 
 

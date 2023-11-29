@@ -30,7 +30,7 @@ if (!isset($data['errors'])) {
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <div class="profile-name">
-                                    <h2>Add New Train</h2>
+                                    <h2>Update Train</h2>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Train Name</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="text" name="train_name" class="type-here" placeholder="Type here">
+                                            <input type="text" name="train_name" class="type-here" placeholder="Type here" value="<?= $data['train']->train_name ?>">
                                         </div>
                                     </div>
                                     <div class="assistive-text <?php echo (!array_key_exists('train_name', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_name', $data['errors'])) ? $data['errors']['train_name'] : ''; ?></div>
@@ -58,7 +58,7 @@ if (!isset($data['errors'])) {
                                             <option value="0">Please choose</option>
 
                                             <?php foreach ($data['routes'] as $key => $value) : ?>
-                                                <option value="<?= $value->route_no ?>">
+                                                <option value="<?= $value->route_no ?>" <?php echo ($data['train']->train_route == $value->route_no) ? "selected" : ""; ?>>
                                                     <?= $value->route_name ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -79,7 +79,7 @@ if (!isset($data['errors'])) {
                                             <option value="0">Please choose</option>
 
                                             <?php foreach ($data['stations'] as $key => $value) : ?>
-                                                <option value="<?= $value->station_id ?>">
+                                                <option value="<?= $value->station_id ?>" <?php echo ($data['train']->train_start_station == $value->station_id) ? "selected" : ""; ?>>
                                                     <?= $value->station_name ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -94,7 +94,7 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Start Time</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="time" name="start_time" class="type-here" placeholder="Type here">
+                                            <input type="time" name="start_time" class="type-here" placeholder="Type here" value="<?= $data['train']->train_start_time ?>">
                                         </div>
                                     </div>
                                     <div class="assistive-text <?php echo (!array_key_exists('start_time', $data['errors'])) ? 'display-none' : ''; ?>">
@@ -110,7 +110,7 @@ if (!isset($data['errors'])) {
                                             <option value="0">Please choose</option>
 
                                             <?php foreach ($data['stations'] as $key => $value) : ?>
-                                                <option value="<?= $value->station_id ?>">
+                                                <option value="<?= $value->station_id ?>" <?php echo ($data['train']->train_end_station == $value->station_id) ? "selected" : ""; ?>>
                                                     <?= $value->station_name ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -125,7 +125,7 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">End Time</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="time" name="end_time" class="type-here" placeholder="Type here">
+                                            <input type="time" name="end_time" class="type-here" placeholder="Type here" value="<?= $data['train']->train_end_time ?>">
                                         </div>
                                     </div>
                                     <div class="assistive-text <?php echo (!array_key_exists('end_time', $data['errors'])) ? 'display-none' : ''; ?>">
@@ -137,7 +137,7 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Train Type</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="text" name="train_type" class="type-here" placeholder="Type here">
+                                            <input type="text" name="train_type" class="type-here" placeholder="Type here" value="<?= $data['train']->train_type ?>">
                                         </div>
                                     </div>
                                     <div class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?></div>
@@ -149,7 +149,8 @@ if (!isset($data['errors'])) {
                                 <div class="col-12 d-flex justify-content-center">
                                     <button class="button mx-15 px-10">
                                         <div class="button-base">
-                                            <input type="submit" value="Add" name="submit">
+                                            <input type="hidden" name="train_id" value="<?= $data['train']->train_id ?>">
+                                            <input type="submit" value="Update" name="update">
                                         </div>
                                     </button>
 

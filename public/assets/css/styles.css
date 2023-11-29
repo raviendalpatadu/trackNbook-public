@@ -1299,6 +1299,14 @@ input.type-here.green::placeholder {
   align-self: flex-end;
 }
 
+.align-self-between{
+  align-self: space-between;
+}
+
+.align-items-between {
+  align-items: space-between;
+}
+
 .flex-column {
   flex-direction: column;
 }
