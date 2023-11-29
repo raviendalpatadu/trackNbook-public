@@ -2,12 +2,12 @@
 <?php
 // echo "<pre>";
 // print_r($data);
-// // // print_r($_SESSION);
-// // // print_r($_POST);
+// // print_r($_SESSION);
+// // print_r($_POST);
 // echo "</pre>";
 
-if (isset($data['reservations']) && $data['reservations'] != 0) {
-    $count =  count($data['reservations']);
+if (isset($data['users']) && $data['users'] != 0) {
+    $count =  count($data['users']);
 } else {
     $count = 0;
 }
@@ -81,15 +81,13 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                     <div class="row">
                         <div class="col-12">
                             <div class="trains-available mb-10">
-                                <h2>Reservations</h2>
+                                <h2>Users</h2>
 
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="trains-available">
-
-                                        <!-- <h3>Colombo &#8594 Kandy</h3> -->
-                                        <h3>Reservations available</h3>
+                                        <h3>All users available</h3>
                                     </div>
                                     <table class="">
                                         <thead>
@@ -97,53 +95,43 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                 <th class="col-3 d-flex align-items-center">
                                                     <div class="col-4">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-
                                                         </div>
                                                     </div>
-                                                    NIC
+                                                    Name
                                                 </th>
-                                                <th class="col-1">Ticket ID</th>
-                                                <th class="col-2">Date</th>
-                                                <th class="col-3">Passenger</th>
+                                                <th class="col-1">Type</th>
+                                                <th class="col-2">Phone</th>
+                                                <th class="col-3">Email</th>
                                                 <th class="col-2 d-flex align-items-center">
                                                     <div class="col-4">
                                                         <div class="d-flex .flex-row g-5 mr-5">
 
                                                         </div>
                                                     </div>
-                                                    Class
+                                                    NIC
 
                                                 </th>
                                                 <th class="col-1"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for ($reservation = 0; $reservation < $count; $reservation++) : ?>
+                                            <?php for ($user = 0; $user < $count; $user++) : ?>
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-
                                                         </div>
-                                                        <?= $data['reservations'][$reservation]->reservation_passenger_nic ?>
+                                                        <?= $data['users'][$user]->user_first_name . " " . $data['users'][$user]->user_last_name ?>
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font "><?= $data['reservations'][$reservation]->reservation_id ?></td>
-                                                    <td class="col-2 d-flex align-items-center"><?= date("d-m-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
-                                                    <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
+                                                    <td class="col-1 d-flex align-items-center lightgray-font "><?= $data['users'][$user]->user_type ?></td>
+                                                    <td class="col-2 d-flex align-items-center"><?= $data['users'][$user]->user_phone_number ?></td>
+                                                    <td class="col-3 d-flex align-items-center"><?= $data['users'][$user]->user_email ?></td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
-                                                            <?php
-                                                            if ($data['reservations'][$reservation]->reservation_class == 1) {
-                                                                echo "First Class";
-                                                            } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
-                                                                echo "Second Class";
-                                                            } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
-                                                                echo "Third Class";
-                                                            }
-                                                            ?>
+                                                            <?= $data['users'][$user]->user_nic ?>
                                                         </div>
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center g-5"> 
-                                                        <a class="blue" href="<?= ROOT ?>staffticketing/summary/<?= $data['reservations'][$reservation]->reservation_id ?>">
+                                                    <td class="col-1 d-flex align-items-center g-5">
+                                                        <a class="blue" href="<?= ROOT ?>admin/updateUser/<?= $data['users'][$user]->user_id ?>">
                                                             <div class="badge-base bg-Selected-Blue">
                                                                 <div class="dot">
                                                                     <div class="dot4"></div>
@@ -151,14 +139,14 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                                 <div class="text blue">View</div>
                                                             </div>
                                                         </a>
-                                                        <a class="blue" href="<?= ROOT ?>staffticketing/cancel/<?= $data['reservations'][$reservation]->reservation_id ?>">
-                                                            <div class="badge-base bg-Selected-red">
+                                                        <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
+                                                            <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/<?= $data['users'][$user]->user_id ?>">
                                                                 <div class="dot">
                                                                     <div class="dot4  bg-Banner-red"></div>
                                                                 </div>
-                                                                <div class="text red">Cancel</div>
-                                                            </div>
-                                                        </a>
+                                                                <div class="text red">Delete</div>
+                                                            </a>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             <?php endfor; ?>

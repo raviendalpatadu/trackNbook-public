@@ -30,7 +30,7 @@
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Inter;
-  font-size: 18px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
   line-height: 19.444px;
@@ -229,6 +229,7 @@ h3.warrant {
   padding: 10px 20px;
   background-color: #FAFAFA;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Poppins-Medium", Helvetica;
   border-radius: 10px;
 }
 
@@ -253,11 +254,23 @@ h3.warrant {
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 60px;
-  color: var(--Border-blue) !important;
+  color: var(--Primary-Gray) !important;
 }
 
 .home-staff-text h3 {
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 30px;
+}
+
+.inquiry-container {
+  width: 80%;
+  padding: inherit;
+  background-color: #FAFAFA;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 20px 50px;
+}
+
+.inquiry {
+  min-height: 100px;
 }/*# sourceMappingURL=moushika.css.map */

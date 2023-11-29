@@ -13,25 +13,6 @@ class Passenger extends Controller
         $data = array();
         $passenger = new Passengers();
 
-        if(isset($_POST['user_title'])){
-            $data = $passenger->addPassenger();
-            
-            if(!array_key_exists('errors',$data)){
-                $this->redirect('login');
-            }
-            else{
-                $errors['user_first_name'] = (array_key_exists('user_first_name',$data['errors'])) ? $data['errors']['user_first_name'] : '';
-                $errors['user_last_name'] = (array_key_exists('user_last_name',$data['errors'])) ? $data['errors']['user_last_name'] : '';
-                $errors['user_phone_number'] = (array_key_exists('user_phone_number',$data['errors'])) ? $data['errors']['user_phone_number'] : '';
-                $errors['login_username'] = (array_key_exists('login_username',$data['errors'])) ? $data['errors']['login_username'] : '';
-                $errors['login_password'] = (array_key_exists('login_password',$data['errors'])) ? $data['errors']['login_password'] : '';
-            }
-        }
-
-
-        $this->view('passenger.register', $data);
-
-
 
         if (isset($_POST['user_nic']) && !empty($_POST['user_nic'])) {
             $passenger = new Passengers();
@@ -85,8 +66,9 @@ class Passenger extends Controller
         if(isset($_POST['card_no'])){
             $data = $passenger->makePayment();
             
-            
             if(!array_key_exists('errors',$data)){
+                print_r($data);
+                echo "payment success";
                 $this->redirect('passenger/addReservation');
             }
             // else{
@@ -113,7 +95,10 @@ class Passenger extends Controller
         if ($data) {
             $this->redirect('passenger/summary');
         } else {
-            $this->redirect('passenger/billing');
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+            // $this->redirect('passenger/billing');
         }  
     }
 
@@ -126,8 +111,8 @@ class Passenger extends Controller
             $data = $passenger->addPassenger();
             
             if(!array_key_exists('errors',$data)){
-                print_r($data);
-                // $this->redirect('login');
+                // print_r($data);
+                $this->redirect('login');
             }
             else{
                 $errors['user_first_name'] = (array_key_exists('user_first_name',$data['errors'])) ? $data['errors']['user_first_name'] : '';
@@ -147,20 +132,7 @@ class Passenger extends Controller
         $train = new Trains();
         $resultTrain = $train->getTrainReservation($_SESSION['reservation']['class_id'] , $_SESSION['reservation']['train_id']);
         $data['train'] = $resultTrain[0];
-        // if(isset($_POST['user_title'])){
-        //     $data = $passenger->addPassenger();
-            
-        //     if(!array_key_exists('errors',$data)){
-        //         $this->redirect('login');
-        //     }
-        //     else{
-        //         $errors['user_first_name'] = (array_key_exists('user_first_name',$data['errors'])) ? $data['errors']['user_first_name'] : '';
-        //         $errors['user_last_name'] = (array_key_exists('user_last_name',$data['errors'])) ? $data['errors']['user_last_name'] : '';
-        //         $errors['user_phone_number'] = (array_key_exists('user_phone_number',$data['errors'])) ? $data['errors']['user_phone_number'] : '';
-        //         $errors['login_username'] = (array_key_exists('login_username',$data['errors'])) ? $data['errors']['login_username'] : '';
-        //         $errors['login_password'] = (array_key_exists('login_password',$data['errors'])) ? $data['errors']['login_password'] : '';
-        //     }
-        // }
+
 
         if (isset($_SESSION['reservation'])) {
             $this->view('passenger.summary', $data);
@@ -169,7 +141,24 @@ class Passenger extends Controller
         }
     }
 
+    // reservations
+    function reservation($id='') {
+        $data = array();
+        // $reservation = new Reservations();
+        // $data = $reservation->getReservationPassenger("reservation_passenger_id", $id);
+        $this->view('passenger.reservations', $data);
+    }
+
+    // view reservation
+    function viewReservation($id='') {
+        $data = array();
+        $reservation = new Reservations();
+        // $data = $reservation->getReservationPassenger("reservation_passenger_id", $id);
+        $this->view('passenger.viewReservation', $data);
+    }
+
     // recancel reservation
+
 
     // show reservation
 

@@ -72,6 +72,7 @@
                                         <div class="input-field">
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_nic()?>" name="user_nic" disabled>
+                                                <input type="hidden" class="type-here" placeholder="Type here" value="<?=Auth::getuser_nic()?>" name="user_nic">
     
                                             </div>
                                         </div>
@@ -98,6 +99,7 @@
                                         <div class="input-field">
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here" value="<?=Auth::getuser_email()?>" name="user_email" disabled>
+                                                <input type="hidden" class="type-here" placeholder="Type here" value="<?=Auth::getuser_email()?>" name="user_email">
     
                                             </div>
                                         </div>
@@ -122,6 +124,7 @@
     
                                     <button class="button mx-10">
                                         <div class="button-base">
+                                            <input type="hidden" name="user_id" value="<?=Auth::getuser_id()?>">
                                             <input type="submit" value="Update" name="update">
                                         </div>
                                     </button>
