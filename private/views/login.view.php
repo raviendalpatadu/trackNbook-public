@@ -1,4 +1,4 @@
-<?php $this->view("./includes/header"); 
+<?php $this->view("./includes/header");
 
 // echo "<pre>";
 // print_r($_SESSION);
@@ -6,7 +6,7 @@
 ?>
 
 <body>
-    
+
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
         <main class=" d-flex align-items-start justify-content-end">
@@ -23,7 +23,7 @@
 
                                 <!-- username -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Username</div>
+                                    <div class="input-text-label mb-5">Username</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="text" class="type-here" placeholder="Type here" name="username">
@@ -36,7 +36,7 @@
 
                                 <!-- password -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Password</div>
+                                    <div class="input-text-label mb-5">Password</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="password" class="type-here " placeholder="Type here" name="password">
@@ -47,18 +47,35 @@
                                     <?php endif ?>
                                 </div>
 
+                                <!-- create account -->
+                                <div class="row mb-4 d-flex justify-content-between flex-fill">
+                                    <div class="col-6 d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                                            <label class="form-check-label" for="form2Example31"> Remember me </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <!-- Simple link -->
+                                        <a href="#!">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <!-- remembre me -->
+
+
+                                <div class="button-base">
+                                    <input class="text" type="submit" value="Submit" name="submit">
+                                </div>
+
+
+
                                 <!-- submit -->
-                                <div class="d-flex justify-content-between flex-fill">
-                                    <!-- create account -->
-                                    <div class="button-base p-1 size-10 ">
-                                        <a href="<?=ROOT?>passenger/register" >Create Account</a>
-                                    </div>
-
-
-                                    <div class="button-base">
-                                        <input class="text" type="submit" value="Submit" name="submit">
-                                    </div>
-
+                                <div class="d-flex justify-content-center flex-fill">
+                                    <p class="mb-0">Don't have an account? <a href="passenger/register" class="text-white-50 fw-bold">Sign Up</a>
+                                    </p>
                                 </div>
                             </form>
                         </div>
