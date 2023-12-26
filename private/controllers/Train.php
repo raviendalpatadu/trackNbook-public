@@ -8,12 +8,12 @@
 class Train extends Controller
 {
     function index($id = '')
-    {   
+    {
         $this->view('trains');
     }
 
     function available($id = '')
-    {   
+    {
         $station = new Stations();
         $data = array();
         $data['trains_avilable'] = array();
@@ -22,18 +22,15 @@ class Train extends Controller
             $train = new Trains();
             $data['trains_available'] = $train->search();
 
-            if(array_key_exists('errors',$data['trains_available'])){
-                $_SESSION['errors'] = $data['trains_available']; 
+            if (array_key_exists('errors', $data['trains_available'])) {
+                $_SESSION['errors'] = $data['trains_available'];
                 // print_r($_SESSION['errors']);
-                $this->redirect('home');    
-            }else{
+                $this->redirect('home');
+            } else {
                 $this->view('trains.available', $data['trains_available']);
             }
         }
-        else{
-            $this->view('trains.available');
-        }
-        
+
     }
 
     function seatsAvailable($class_id = '', $train_id = '')
@@ -77,7 +74,29 @@ class Train extends Controller
         $this->view('track');
     }
 
-    function add($id = ''){
-        $this->view('add.trains');
+    public function add()
+    {
+        $station = new Stations();
+        $data = array();
+        $data['stations'] = $station->getStations();
+
+        $route = new Routes();
+        $data['routes'] = $route->findAll();
+        if (isset($_POST['submit'])) {
+            
+            
+            $train = new Trains(); // You may need to adjust this part to properly initialize the Train model.
+            $result = $train->addTrain();
+            // print_r($result);
+            
+            if ($result == 1) {
+                $this->redirect('train/add');
+                echo 'Data received and added successfully';
+            } else {
+                $data['errors'] = $result;
+            }
+        }
+
+        $this->view('add.trains', $data);
     }
 }
