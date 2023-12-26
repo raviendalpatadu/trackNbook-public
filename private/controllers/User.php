@@ -32,7 +32,7 @@ class User extends Controller
 
         if (isset($_POST['user_title'])) {
             $data = $user->addUser();
-        
+
             if (!array_key_exists('errors', $data)) {
                 $this->redirect('services/manage');
 
@@ -52,6 +52,6 @@ class User extends Controller
 
     function search($id = '')
     {
-        $this->view('view.user.admin');
+        $this->view('search.test.user.admin');
     }
 }

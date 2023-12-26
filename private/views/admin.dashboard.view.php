@@ -1,4 +1,5 @@
-<?php $this->view("./includes/header") ?>
+<?php $this->view("./includes/header"); ?>
+<?php print_r($data); ?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -10,7 +11,9 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="if-txt-wrapper">Hello, <?= ucfirst(Auth::user()) ?></div>
+                        <div class="if-txt-wrapper">Hello,
+                            <?= ucfirst(Auth::user()) ?>
+                        </div>
 
                     </div>
                 </div>
@@ -25,7 +28,9 @@
                                     <div class="if-frame-2">
                                         <div class="impressions">Number of Train Onboard</div>
                                     </div>
-                                    <div class="number">26</div>
+                                    <div class="number">
+                                        <?= $data['usersCount'] ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="if-frame">

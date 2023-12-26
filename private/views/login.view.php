@@ -56,7 +56,7 @@
 
 
                                     <div class="button-base">
-                                        <input class="text" type="submit" value="Submit" name="submit">
+                                        <input class="text" type="submit" value="Login" name="submit">
                                     </div>
 
                                 </div>
