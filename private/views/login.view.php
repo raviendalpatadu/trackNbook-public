@@ -23,7 +23,7 @@
 
                                 <!-- username -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Username</div>
+                                    <div class="input-text-label mb-5">Username</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="text" class="type-here" placeholder="Type here" name="username">
@@ -36,7 +36,7 @@
 
                                 <!-- password -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Password</div>
+                                    <div class="input-text-label mb-5">Password</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="password" class="type-here " placeholder="Type here" name="password">
@@ -48,19 +48,27 @@
                                 </div>
 
                                 <!-- submit -->
-                                <div class="d-flex justify-content-between flex-fill">
-                                    <!-- create account -->
-                                    <div class="button-base p-1 size-10 ">
-                                        <a href="<?=ROOT?>passenger/register" >Create Account</a>
-                                    </div>
-
-
-                                    <div class="button-base">
+                                
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-6">
+                                        <div class="button-base">
                                         <input class="text" type="submit" value="Submit" name="submit">
-                                    </div>
+                                        </div>
 
+                                        <div class="d-flex justify-content-between flex-fill">
+                                            <!-- create account -->
+                                            <div class="button-base p-1 size-10 ">
+                                                <a href="<?=ROOT?>passenger/register" >Create Account</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
+
+                                
+
                             </form>
+                            
                         </div>
                     </div>
                 </div>

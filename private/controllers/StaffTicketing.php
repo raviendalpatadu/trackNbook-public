@@ -178,6 +178,12 @@ class StaffTicketing extends Controller
         $this->view('staffticketing.payment');
     }
 
+    function login($id = '')
+    {
+
+        $this->view('staffticketing.login');
+    }
+
 
 
 }

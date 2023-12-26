@@ -965,7 +965,7 @@ input:focus {
 
 .input-field {
   background: var(--w-background, #ffffff);
-  border-radius: 8px;
+  border-radius: 5px;
   border-style: solid;
   border-color: #cccccc;
   border-width: 1px;
