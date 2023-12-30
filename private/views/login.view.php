@@ -11,12 +11,13 @@
         <?php $this->view("./includes/navbar") ?>
         <main class=" d-flex align-items-start justify-content-end">
             <div class="bg-login-desktop"></div>
-            <div class="container">
+            <div class="container ">
 
                 <div class="row">
                     <div class="col-12">
-                        <div class="login-form d-flex justify-content-center align-items-center p-100 flex-column g-20">
-                            <h1 class="d-flex justify-content-center width-fill">Login</h1>
+                        <div class="login-form d-flex justify-content-center align-items-center p-100 flex-column ">
+                            <h1 class="d-flex justify-content-center width-fill mb-10">Login</h1>
+                            <p class="text1 d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>
 
                             <form action="" method="post" class="d-flex flex-column g-20">
 

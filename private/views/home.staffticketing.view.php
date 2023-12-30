@@ -14,18 +14,18 @@
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
-    <main> 
-        <div class="container">
-            <div class="home-staff-container width-fill justify-content-center ml-70 mt-80">
+        <main class=" d-flex align-items-start justify-content-end">
+            <div class="bg-staff-search-desktop"></div>
+            <div class="container">
                 <div class="row">
                     <div class="col-12 d-flex flex-column g-20 align-items-center">
                         <div class="home-staff-text line">
                             <h1 class="">Search Train</h1>
                         </div>
                         <div class="search-box-home d-flex flex-row width-fill justify-content-center mb-30">
-                
+
                             <div class="search-box-group d-flex g-20 flex-column bg-White width-fill shadow">
-                                <form action="<?=ROOT?>staffTicketing/trains" method="post">
+                                <form action="<?= ROOT ?>staffTicketing/trains" method="post">
 
                                     <div class="d-flex flex-row g-20">
                                         <div class="text-inputs">
@@ -110,26 +110,26 @@
                                         </div>
 
                                     </div>
-                                    </form>
-                                    <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
-                                        <button class="button"><a href="<?=ROOT?>staffTicketing/trains">
-                                        <div class="button-base">
-                                            <input type="submit" name="submit" value="Next" />
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
+                                </form>
+                                <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
+                                    <button class="button"><a href="<?= ROOT ?>staffTicketing/trains">
+                                            <div class="button-base">
+                                                <input type="submit" name="submit" value="Next" />
+                                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                            </div>
                                         </a>
-                                        </button>
-                                    </div>
-                                
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
         <?php $this->view('includes/footer'); ?>
     </div>
 </body>
