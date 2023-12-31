@@ -1,5 +1,5 @@
 <?php $this->view("./includes/header"); ?>
-<?php print_r($data); ?>
+
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -29,7 +29,7 @@
                                         <div class="impressions">Number of Train Onboard</div>
                                     </div>
                                     <div class="number">
-                                        <?= $data['usersCount'] ?>
+                                        <?= $data['trainsCount'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,9 @@
                                     <div class="if-frame-4">
                                         <div class="impressions">Staffs On Duty</div>
                                     </div>
-                                    <div class="number">1675</div>
+                                    <div class="number">
+                                        <?= $data['usersCount'] ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="if-frame">
