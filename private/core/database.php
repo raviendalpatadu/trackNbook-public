@@ -7,6 +7,7 @@ class Database
     protected function connect()
     {
         $string = DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME;
+        // echo $string;
         if (!$con = new PDO($string, DBUSER, DBPASS)) {
             die("database connection faild");
         }

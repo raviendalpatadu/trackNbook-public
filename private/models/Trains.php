@@ -103,41 +103,49 @@ class Trains extends Model
                 $con->beginTransaction();
 
                 //insert query to search train must come form route
-                $query = "SELECT\n"
-
-                    . "tbl_train.*,\n"
-
-                    . "start.station_name AS start_station,\n"
-
-                    . "end.station_name AS end_station\n"
-
-                    . "\n"
-
-                    . "FROM\n"
-
-                    . "	tbl_train\n"
-
-                    . "JOIN\n"
-
-                    . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
-
-                    . " JOIN\n"
-
-                    . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id\n"
-
-                    . "WHERE\n"
-
-                    . "	tbl_train.train_start_station = :from_station AND tbl_train.train_end_station = :to_station";
+                $query = "WITH StartingTrains AS (
+                            SELECT *
+                            FROM tbl_train_stop_station
+                            WHERE station_id = (SELECT station_id FROM tbl_station WHERE station_id = :from_station) 
+                        ),
+                        CountReservations AS (
+                            SELECT c.*, COUNT(r.reservation_id) AS no_of_reservations
+                                FROM
+                                    tbl_compartment c
+                                LEFT JOIN
+                                    tbl_reservation r ON c.compartment_id = r.reservation_compartment_id AND r.reservation_date = :from_date
+                                GROUP BY
+                                    c.compartment_id, c.compartment_class_type
+                                )
+                        SELECT DISTINCT 
+                            train.train_id, train.train_name, train_type.train_type, train.train_start_time, train.train_end_time, 
+                            start.station_name AS train_start_station,
+                        end.station_name AS train_end_station,
+                            reservation.* 
+                        FROM StartingTrains ST
+                        JOIN tbl_train_stop_station TS1 ON ST.train_id = TS1.train_id
+                        JOIN tbl_train_stop_station TS2 ON TS1.train_id = TS2.train_id
+                        JOIN tbl_train train ON ST.train_id = train.train_id
+                        JOIN tbl_train_type train_type ON train_type.train_type_id = train.train_type
+                        JOIN tbl_station AS start ON train.train_start_station = start.station_id
+                        JOIN tbl_station AS end ON train.train_end_station = end.station_id
+                        JOIN tbl_compartment AS compartment ON compartment.compartment_train_id = train.train_id
+                        JOIN CountReservations AS reservation ON reservation.compartment_id = compartment.compartment_id
+                        WHERE TS1.station_id = (SELECT station_id FROM tbl_station WHERE station_id = :from_station) 
+                            AND TS2.station_id = (SELECT station_id FROM tbl_station WHERE station_id = :to_station) 
+                            AND TS1.stop_no < TS2.stop_no
+                            AND reservation.compartment_total_seats > reservation.no_of_reservations;";
                 $stm = $con->prepare($query);
 
                 $stm->execute(
                     array(
                         'from_station' => $_POST['from_station'],
-                        'to_station' => $_POST['to_station']
+                        'to_station' => $_POST['to_station'],
+                        'from_date' => $_POST['from_date']
                     )
                 );
 
-                $data = $stm->fetchAll(PDO::FETCH_OBJ);
+                $data['trains'] = $stm->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
@@ -183,13 +191,17 @@ class Trains extends Model
             $errors['train_type'] = 'Train Type is required';
         }
 
+        echo "jijij";
         if (empty($errors)) {
             try {
+                // $con = $this->connect();
+                $con->beginTransaction();
+
                 $query = "INSERT INTO tbl_train (train_name, train_type, train_start_time, train_end_time, train_start_station, train_end_station, train_route)
                           VALUES (:train_name, :train_type, :train_start_time, :train_end_time, :train_start_station, :train_end_station, :train_route)";
 
                 $stm = $con->prepare($query);
-                $stm->execute(array(
+                $out = $stm->execute(array(
                     'train_name' => $_POST['train_name'],
                     'train_type' => $_POST['train_type'],
                     'train_start_time' => $_POST['start_time'],
@@ -199,10 +211,44 @@ class Trains extends Model
                     'train_route' => $_POST['train_route']
                 ));
 
-                return true; // Successful insertion
+                $train_id = $con->lastInsertId();
+                
+                foreach ($_POST['stopping_station']['id'] as $key => $value) {
+                    $query_stop_staion = "INSERT INTO tbl_train_stop_station (train_id, station_id, stop_no)
+                          VALUES (:train_id, :station_id, :stop_no)";
+                    $stm3 = $con->prepare($query_stop_staion);
+                    $out3 = $stm3->execute(array(
+                        'train_id' => $train_id,
+                        'station_id' => $value,
+                        'stop_no' => $key + 1
+                        ));
+                }
+
+
+                // compartment tbl
+                foreach ($_POST['compartment']['class'] as $key => $value) {
+
+                    $query_compartment = "INSERT INTO tbl_compartment (compartment_train_id, compartment_class_type, compartment_class, compartment_seat_layout, compartment_total_seats, compartment_total_number)
+                              VALUES (:compartment_train_id, :compartment_class_type, :compartment_class, :compartment_seat_layout, :compartment_total_seats, :compartment_total_no)";
+                    $stm2 = $con->prepare($query_compartment);
+                    $out2 = $stm2->execute(array(
+                        'compartment_train_id' => $train_id,
+                        'compartment_class_type' => $_POST['compartment']['type'][$key],
+                        'compartment_class' => $value,
+                        'compartment_seat_layout' => $_POST['compartment']['seat_layout'][$key],
+                        'compartment_total_seats' => $_POST['compartment']['total_seats'][$key],
+                        'compartment_total_no' => $_POST['compartment']['total_no'][$key]
+                    ));
+                }
             } catch (PDOException $e) {
+                $data['errors'][] = $e->getMessage();
                 echo $e->getMessage();
+                return $data;
             }
+
+            $con->commit();
+            $con = null;
+            return true; // Successful insertion
         }
         return $errors;
     }
@@ -218,7 +264,7 @@ class Trains extends Model
         $date = $_SESSION['reservation']['from_date'];
 
         try {
-            $query = "SELECT t.*, r.*,\n"
+            $query = "SELECT t.*, r.*, c.*,\n"
                 . "start.station_name AS start_station,\n"
 
                 . "end.station_name AS end_station\n"
@@ -230,6 +276,8 @@ class Trains extends Model
                 . " JOIN tbl_station start ON t.train_start_station = start.station_id\n"
 
                 . " JOIN tbl_station end ON t.train_end_station = end.station_id\n"
+
+                . " JOIN tbl_compartment c ON r.reservation_compartment_id = c.compartment_id\n"
 
                 . " WHERE r.reservation_train_id = :train_id AND r.reservation_date = :date AND r.reservation_class = :class";
 
@@ -356,3 +404,28 @@ class Trains extends Model
         return $errors;
     }
 }
+
+
+// SELECT DISTINCT
+//     tbl_train_stop_station.stop_no,
+//     train.train_name,
+//     start.station_name AS train_start_station,
+//     end.station_name AS train_end_station,
+//     p_s_station.station_name AS p_start,
+//     p_e_station.station_name AS p_end
+// FROM
+// 	tbl_train_stop_station
+// JOIN
+// 	tbl_station AS station ON tbl_train_stop_station.station_id = station.station_id
+// JOIN
+// 	tbl_station AS p_s_station ON tbl_train_stop_station.station_id = p_s_station.station_id
+// JOIN
+// 	tbl_station AS p_e_station ON tbl_train_stop_station.station_id = p_e_station.station_id
+// JOIN
+// 	tbl_train AS train ON tbl_train_stop_station.train_id = train.train_id
+// JOIN
+//     tbl_station AS start ON train.train_start_station = start.station_id
+// JOIN
+//     tbl_station AS end ON train.train_end_station = end.station_id;
+    
+//  # get positive and negative for another direction

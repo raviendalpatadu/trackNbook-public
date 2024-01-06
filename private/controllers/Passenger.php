@@ -41,7 +41,10 @@ class Passenger extends Controller
 
             $train = new Trains();
             $data['train'] = $train->whereOne('train_id', $_SESSION['reservation']['train_id']);
-            $data['class'] = $_SESSION['reservation']['class_id'];
+
+            $compartment = new Compartments();
+            $data['class'] = $compartment->whereOne('compartment_id', $_SESSION['reservation']['class_id']);
+            // $data['class'] = $_SESSION['reservation']['class_id'];
 
             $data['no_of_passengers'] = $_SESSION['reservation']['no_of_passengers'];
             $data['price_for_one'] = $price_for_one;

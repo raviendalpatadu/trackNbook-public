@@ -61,6 +61,10 @@
   gap: 1px;
 }
 
+.fs-1 {
+  font-size: 1px;
+}
+
 .m-2 {
   margin: 2px;
 }
@@ -122,6 +126,10 @@
 
 .g-2 {
   gap: 2px;
+}
+
+.fs-2 {
+  font-size: 2px;
 }
 
 .m-3 {
@@ -187,6 +195,10 @@
   gap: 3px;
 }
 
+.fs-3 {
+  font-size: 3px;
+}
+
 .m-4 {
   margin: 4px;
 }
@@ -248,6 +260,10 @@
 
 .g-4 {
   gap: 4px;
+}
+
+.fs-4 {
+  font-size: 4px;
 }
 
 .m-5 {
@@ -313,6 +329,10 @@
   gap: 5px;
 }
 
+.fs-5 {
+  font-size: 5px;
+}
+
 .m-6 {
   margin: 6px;
 }
@@ -374,6 +394,10 @@
 
 .g-6 {
   gap: 6px;
+}
+
+.fs-6 {
+  font-size: 6px;
 }
 
 .m-7 {
@@ -439,6 +463,10 @@
   gap: 7px;
 }
 
+.fs-7 {
+  font-size: 7px;
+}
+
 .m-8 {
   margin: 8px;
 }
@@ -500,6 +528,10 @@
 
 .g-8 {
   gap: 8px;
+}
+
+.fs-8 {
+  font-size: 8px;
 }
 
 .m-9 {
@@ -565,6 +597,10 @@
   gap: 9px;
 }
 
+.fs-9 {
+  font-size: 9px;
+}
+
 .m-10 {
   margin: 10px;
 }
@@ -626,6 +662,144 @@
 
 .g-10 {
   gap: 10px;
+}
+
+.fs-10 {
+  font-size: 10px;
+}
+
+.m-11 {
+  margin: 11px;
+}
+
+.mb-11 {
+  margin-bottom: 11px;
+}
+
+.mt-11 {
+  margin-top: 11px;
+}
+
+.ml-11 {
+  margin-left: 11px;
+}
+
+.mr-11 {
+  margin-right: 11px;
+}
+
+.mx-11 {
+  margin-right: 11px;
+  margin-left: 11px;
+}
+.mx-11 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.p-11 {
+  padding: 11px;
+}
+
+.pb-11 {
+  padding-bottom: 11px;
+}
+
+.pt-11 {
+  padding-top: 11px;
+}
+
+.pl-11 {
+  padding-left: 11px;
+}
+
+.pr-11 {
+  padding-right: 11px;
+}
+
+.px-11 {
+  padding-left: 11px;
+  padding-right: 11px;
+}
+
+.py-11 {
+  padding-top: 11px;
+  padding-bottom: 11px;
+}
+
+.g-11 {
+  gap: 11px;
+}
+
+.fs-11 {
+  font-size: 11px;
+}
+
+.m-12 {
+  margin: 12px;
+}
+
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
+.ml-12 {
+  margin-left: 12px;
+}
+
+.mr-12 {
+  margin-right: 12px;
+}
+
+.mx-12 {
+  margin-right: 12px;
+  margin-left: 12px;
+}
+.mx-12 .mx-auto {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.p-12 {
+  padding: 12px;
+}
+
+.pb-12 {
+  padding-bottom: 12px;
+}
+
+.pt-12 {
+  padding-top: 12px;
+}
+
+.pl-12 {
+  padding-left: 12px;
+}
+
+.pr-12 {
+  padding-right: 12px;
+}
+
+.px-12 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.py-12 {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.g-12 {
+  gap: 12px;
+}
+
+.fs-12 {
+  font-size: 12px;
 }
 
 .m-20 {
@@ -691,6 +865,10 @@
   gap: 20px;
 }
 
+.fs-20 {
+  font-size: 20px;
+}
+
 .m-30 {
   margin: 30px;
 }
@@ -752,6 +930,10 @@
 
 .g-30 {
   gap: 30px;
+}
+
+.fs-30 {
+  font-size: 30px;
 }
 
 .m-40 {
@@ -817,6 +999,10 @@
   gap: 40px;
 }
 
+.fs-40 {
+  font-size: 40px;
+}
+
 .m-50 {
   margin: 50px;
 }
@@ -878,6 +1064,10 @@
 
 .g-50 {
   gap: 50px;
+}
+
+.fs-50 {
+  font-size: 50px;
 }
 
 .m-60 {
@@ -943,6 +1133,10 @@
   gap: 60px;
 }
 
+.fs-60 {
+  font-size: 60px;
+}
+
 .m-70 {
   margin: 70px;
 }
@@ -1004,6 +1198,10 @@
 
 .g-70 {
   gap: 70px;
+}
+
+.fs-70 {
+  font-size: 70px;
 }
 
 .m-80 {
@@ -1069,6 +1267,10 @@
   gap: 80px;
 }
 
+.fs-80 {
+  font-size: 80px;
+}
+
 .m-90 {
   margin: 90px;
 }
@@ -1132,6 +1334,10 @@
   gap: 90px;
 }
 
+.fs-90 {
+  font-size: 90px;
+}
+
 .m-100 {
   margin: 100px;
 }
@@ -1193,6 +1399,10 @@
 
 .g-100 {
   gap: 100px;
+}
+
+.fs-100 {
+  font-size: 100px;
 }
 
 .border-bottom-transparent {
@@ -1518,21 +1728,21 @@
 .border-bottom-box-gray {
   border-bottom: 10px;
   border-bottom-style: solid;
-  border-bottom-color: #CCCCCC;
+  border-bottom-color: #cccccc;
 }
 
 .border-top-box-gray {
   border-top: 1px;
   border-top-style: solid;
-  border-top-color: #CCCCCC;
+  border-top-color: #cccccc;
 }
 
 .bg-box-gray {
-  background-color: #CCCCCC;
+  background-color: #cccccc;
 }
 
 .box-gray {
-  color: #CCCCCC;
+  color: #cccccc;
 }
 
 .loader-circle {
@@ -1604,6 +1814,12 @@
     grid-column: span 12;
   }
   .profile .row .col-10 {
+    grid-column: span 12;
+  }
+  .profile .row .col-11 {
+    grid-column: span 12;
+  }
+  .profile .row .col-12 {
     grid-column: span 12;
   }
   .profile .row .col-20 {
@@ -2134,4 +2350,37 @@ h2.topic ~ p {
 }
 input[type=submit] {
   background: transparent;
+}
+
+.train-stoppin-staions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.route-line {
+  width: 100%;
+  height: 2px;
+  background: var(--Primary-Blue);
+}
+
+.route-station {
+  font-size: 14px;
+  text-align: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+table.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.price-table td, table.price-table th {
+  width: 100px;
+  font-size: 14px;
+  padding: 20px;
+  border: 1px solid var(--Secondary-Gray);
 }/*# sourceMappingURL=ravien.css.map */

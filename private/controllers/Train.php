@@ -16,18 +16,25 @@ class Train extends Controller
     {
         $station = new Stations();
         $data = array();
-        $data['trains_avilable'] = array();
+        // $data['trains_avilable'] = array();
 
         if (isset($_POST['to_station']) && isset($_POST['from_station']) && isset($_POST['from_date'])) {
             $train = new Trains();
             $data['trains_available'] = $train->search();
+            echo '<pre>';
+            print_r($data['trains_available']);
+            echo '</pre>';
+            
+            $data['from_date'] = $_POST['from_date'];
+            $data['from_station'] = $station->getOneStation('station_id', $_POST['from_station'])->station_name;
+            $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station'])->station_name;
 
             if (array_key_exists('errors', $data['trains_available'])) {
                 $_SESSION['errors'] = $data['trains_available'];
                 // print_r($_SESSION['errors']);
                 $this->redirect('home');
             } else {
-                $this->view('trains.available', $data['trains_available']);
+                $this->view('trains.available', $data);
             }
         }
 
@@ -76,22 +83,25 @@ class Train extends Controller
 
     public function add()
     {
-        $station = new Stations();
+        
         $data = array();
-        $data['stations'] = $station->getStations();
-
+        
         $route = new Routes();
         $data['routes'] = $route->findAll();
-        if (isset($_POST['submit'])) {
-            
-            
+        //get route stations
+
+        $compartment_types = new CompartmentTypes();
+        $data['compartment_types'] = $compartment_types->findAll();
+
+        if (isset($_POST['submit'])) {  
+
             $train = new Trains(); // You may need to adjust this part to properly initialize the Train model.
             $result = $train->addTrain();
-            // print_r($result);
+
             
-            if ($result == 1) {
+            if ($result) {
                 $this->redirect('train/add');
-                echo 'Data received and added successfully';
+                // echo 'Data received and added successfully';
             } else {
                 $data['errors'] = $result;
             }
@@ -99,4 +109,6 @@ class Train extends Controller
 
         $this->view('add.trains', $data);
     }
+
+    
 }

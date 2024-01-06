@@ -1,9 +1,9 @@
 <?php
 
-echo "<pre>";
+// echo "<pre>";
 // print_r($data);
-// print_r($_SESSION);
-echo "</pre>";
+// // print_r($_SESSION);
+// echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 
@@ -90,7 +90,7 @@ echo "</pre>";
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Class</p>
-                                        <p class="width-50"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class']) : ''; ?></p>
+                                        <p class="width-50"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class']->compartment_class_type) : ''; ?></p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">

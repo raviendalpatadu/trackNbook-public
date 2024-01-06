@@ -5,13 +5,14 @@
 
 class Model extends Database
 {
+    
     public $errors = array();
     // public $table;
 
     public function __construct()
     { 
         if(!property_exists($this, 'table')){
-            $this->table = "tbl_" . strtolower($this::class);
+            $this->table = "tbl_" . strtolower(get_class($this));
         }
     }
 
@@ -121,7 +122,7 @@ class Model extends Database
         //     echo "</pre>";
         try{
             if($id_feild == ''){
-                $query = "update $this->table set $str where ".strtolower($this::class)."_id = :id";
+                $query = "update $this->table set $str where ".strtolower(get_class($this))."_id = :id";
             }else
             {
                 $query = "update $this->table set $str where $id_feild = :id";
@@ -140,7 +141,7 @@ class Model extends Database
 
         try{
             if($id_feild == ''){
-                $query = "delete from $this->table where ".strtolower($this::class)."_id = :id";
+                $query = "delete from $this->table where ".strtolower(get_class($this))."_id = :id";
             }else
             {
                 $query = "delete from $this->table where $id_feild = :id";
@@ -153,6 +154,5 @@ class Model extends Database
         }
 
     }
-
 
 }

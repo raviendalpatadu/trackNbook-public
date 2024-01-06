@@ -90,6 +90,7 @@ $("select.dropdown").each(function () {
   }
 });
 
+
 $(document).on("click touch", ".selectDropdown ul li a", function (e) {
   e.preventDefault();
   var dropdown = $(this).parent().parent().parent();
@@ -107,10 +108,14 @@ $(document).on("click touch", ".selectDropdown ul li a", function (e) {
     dropdown
       .find("option:contains(" + $(this).text() + ")")
       .prop("selected", true);
+    
     $(this).parent().addClass("active");
   }
 
   dropdown.removeClass("open");
+
+  //trigger change event
+  dropdown.find("select").trigger("change");
 });
 
 $(".dropdown > span").on("click touch", function (e) {
