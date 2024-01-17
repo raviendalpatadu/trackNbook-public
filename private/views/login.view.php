@@ -50,12 +50,12 @@
 
                                 <!-- create account -->
                                 <div class="row mb-4 d-flex justify-content-between flex-fill">
-                                    <div class="col-6 d-flex justify-content-center">
+                                    <div class="col-6 d-flex justify-content-center form-check g-5">
                                         <!-- Checkbox -->
-                                        <div class="form-check">
+                                        
                                             <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
                                             <label class="form-check-label" for="form2Example31"> Remember me </label>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="col-6">

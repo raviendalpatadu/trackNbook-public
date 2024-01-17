@@ -47,7 +47,7 @@ class Login extends Controller
                     $this->redirect('dashboard/station_master');
                 }
                 elseif(strtolower($user_type) == "ticket_checker"){
-                    $this->redirect('dashboard/ticket_checker');
+                    $this->redirect('ticketchecker/option');
                 }
                 
             }
