@@ -73,7 +73,7 @@ class StaffGeneral extends Controller
             } catch (Exception $e) {
                 die($e->getMessage());
             }
-        }else{
+        } else {
             $this->view('update.train.staffgeneral', $data);
         }
     }
