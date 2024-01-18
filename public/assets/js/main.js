@@ -169,3 +169,4 @@ domReady(function () {
     htmlscanner.render(onScanSuccess);
 });
 
+//popup
