@@ -19,6 +19,70 @@ $mou-colors : (
   }
 }
 
+
+.mou-form-container{
+  width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 50px 40px 20px 40px;
+    background: linear-gradient(0deg, rgb(160, 167, 175) 0%, rgb(255, 255, 255) 100%);
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+      0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+      0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
+    font-family: "Inter", sans-serif;
+}
+
+.mou-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212121;
+}
+
+.mou-subtitle {
+  font-size: 0.725rem;
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.1rem;
+  color: #8B8E98
+}
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mou-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.mou-flex-row>div>label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.mou-span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .trains-available h3{
     color: var(--lightgray-font);
     font-feature-settings: 'clig' off, 'liga' off;
@@ -397,9 +461,9 @@ font-weight: 500;
   left: 0px;
   z-index: -100;
   height: 100%;
-  width: 60%;
-  background: url("../images/login.png"), no-repeat;
-  background-size: cover;
+  width: 100%;
+  //background: url("../images/login.png"), no-repeat;
+ // background-size: cover;
 }
 
 @media screen and (max-width: 768px) {

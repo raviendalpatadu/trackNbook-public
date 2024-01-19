@@ -12,73 +12,68 @@
         <main class=" d-flex align-items-start justify-content-end">
             <div class="bg-staff-login-desktop"></div>
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="login-form d-flex justify-content-center align-items-center p-100 flex-column ">
-                            <h1 class="d-flex justify-content-center width-fill mb-10">Login</h1>
-                            <p class="text1 d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>
 
-                            <form action="" method="post" class="d-flex flex-column g-20">
+                <form action="" method="post" class="mou-form-container d-flex flex-column justify-content-center g-20">
+                    <div class="d-flex flex-column justify-contet-center align-items-center">
+                        <h1 class="mou-title d-flex justify-content-center width-fill mb-10">Login</h1>
+                        <p class="mou-subtitle d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>
+                    </div>
 
-                                <!-- username -->
-                                <div class="login-text-inputs">
-                                    <div class="input-text-label mb-5">Username</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" class="type-here" placeholder="Type here" name="username">
-                                        </div>
-                                    </div>
-                                    <?php if (isset($data['errors'])) : ?>
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?></div>
-                                    <?php endif ?>
+                    <div class="input_container">
+                        <!-- username -->
+                        <div class="login-text-inputs">
+                            <div class="input-text-label mb-5">Username</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" class="type-here ml-10" placeholder="Enter Your Email" name="username">
                                 </div>
+                            </div>
+                            <?php if (isset($data['errors'])) : ?>
+                                <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?></div>
+                            <?php endif ?>
+                        </div>
 
-                                <!-- password -->
-                                <div class="login-text-inputs">
-                                    <div class="input-text-label mb-5">Password</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="password" class="type-here " placeholder="Type here" name="password">
-                                        </div>
-                                    </div>
-                                    <?php if (isset($data['errors'])) : ?>
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('password', $data['errors'])) ? $data['errors']['password'] : ''; ?></div>
-                                    <?php endif ?>
+                        <!-- password -->
+                        <div class="login-text-inputs">
+                            <div class="input-text-label mt-10 mb-5">Password</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="password" class="type-here ml-10 " placeholder="Enter Your Password" name="password">
                                 </div>
+                            </div>
 
-                                <!-- remembre me -->
-                                <div class="row mb-4 d-flex justify-content-between flex-fill">
-                                    <div class="col-6 d-flex justify-content-center">
-                                        <!-- Checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                            <label class="form-check-label" for="form2Example31"> Remember me </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <!-- Simple link -->
-                                        <a href="#!">Forgot password?</a>
-                                    </div>
-                                </div>
+                            <?php if (isset($data['errors'])) : ?>
+                                <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('password', $data['errors'])) ? $data['errors']['password'] : ''; ?></div>
+                            <?php endif ?>
+                        </div>
 
 
+                        <div class="mou-flex-row  flex-fill">
+                            <div>
+                                <input type="checkbox">
+                                <label>Remember me </label>
+                            </div>
+                            <a class="mou-span" href="#!">Forgot password?</a>
+                        </div>
 
-                                <!-- submit -->
-                                <div class="button-base">
-                                    <input class="text" type="submit" value="Submit" name="submit">
-                                </div>
-
-
-
-
-                            </form>
+                        <!-- submit -->
+                        <div class="button-base mt-10">
+                            <input class="text" type="submit" value="Submit" name="submit">
                         </div>
 
                     </div>
-                </div>
+
+
+
+
+                </form>
+
+
+
 
             </div>
+
+
         </main>
         <?php $this->view("./includes/footer") ?>
     </div>
