@@ -34,6 +34,11 @@ class StaffGeneral extends Controller
 
         $this->view('view.waitinglist');
     }
+    function manageSchedule2($id = '')
+    {
+
+        $this->view('manage.schedule2');
+    }
 
     function getTrainList($id = '')
     {

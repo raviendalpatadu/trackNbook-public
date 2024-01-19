@@ -28,7 +28,10 @@
                                             <select class="dropdown" name="reservation_train_id"
                                                 placeholder="Please choose">
                                                 <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
+                                                <option value="0">1006 Badulla → Colombo</option>
+                                                <option value="0">1006 Badulla → Colombo</option>
+                                                <option value="0">1006 Badulla → Colombo</option>
+                                                <option value="0">1006 Badulla → Colombo</option>
                                                 <?php foreach ($data['trains'] as $key => $value): ?>
                                                 <option value="<?= $value->train_id ?>">
                                                     <?= $value->train_name ?>
@@ -345,7 +348,8 @@
     background: #2185D5;
     cursor: pointer;
     color: white;
-    width: 8%;
+    width: 6%;
+    margin-right: 50px;
     /* Set the text color to white */
     /* You can add additional styling here, such as padding, border, etc. */
 }
