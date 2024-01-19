@@ -959,14 +959,14 @@ input:focus {
 .input-text-label {
   color: #000000;
   text-align: left;
-  font: 600 14px "Noto Sans", sans-serif;
+  font: 600 14px Inter;
   position: relative;
   align-self: stretch;
 }
 
 .input-field {
   background: var(--w-background, #ffffff);
-  border-radius: 8px;
+  border-radius: 5px;
   border-style: solid;
   border-color: #cccccc;
   border-width: 1px;

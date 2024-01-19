@@ -162,4 +162,13 @@ class Passenger extends Controller
 
     // show reservation
 
+    //make inquiries
+
+    function cancel($id = '')
+    {
+         
+        $this->view('passenger.cancel.reservation');
+    }
+
+
 }

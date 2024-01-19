@@ -7,7 +7,7 @@
 
         <main style="background-color:#EFF8FF; padding:20px;">
             <div class="row">
-                <div class="col-4"></div>
+                <div class="col-3"></div>
                 <div class="col-4 center_form1">
                     <form class="update-schedule">
                         <div class="top-head-updatetrain">Update Schedule</div>
@@ -83,16 +83,14 @@
 
                             </div>
                         </div>
+                        <div class="activation-field">
+                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button
+                                    class="button-white"> Back</button></a>
+                            <button class="button-blue"> Update</button>
+                        </div>
                     </form>
-                    <div class="endline"><svg xmlns="http://www.w3.org/2000/svg" width="600" height="3"
-                            viewBox="0 0 645 3" fill="none">
-                            <path d="M0 2L645 1" stroke="black" />
-                        </svg></div>
-                    <div class="activation-field">
-                        <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button
-                                class="button-white"> Back</button></a>
-                        <button class="button-blue"> Update</button>
-                    </div>
+
+
                 </div>
                 <div class="col-4"></div>
 
@@ -104,22 +102,26 @@
     .activation-field {
         display: flex;
         justify-content: flex-end;
-        width: calc(137% - 10px);
-        gap: 20px;
+        width: calc(103% - 10px);
+        gap: 0px;
     }
+
 
     .button-blue {
         display: inline-flex;
         padding: 16px;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
         border-radius: 8px;
-        border: 1px solid #FFF;
+        border: 2px solid #FFF;
         background: #2185D5;
         cursor: pointer;
         color: white;
-        width: 13%;
+        width: 15%;
+        margin-left: 50px;
+
+        margin-top: 20px;
         /* Set the text color to white */
         /* You can add additional styling here, such as padding, border, etc. */
     }
@@ -128,14 +130,15 @@
         display: inline-flex;
         padding: 16px;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
         border-radius: 8px;
         border: 2px solid #2185D5;
         background: var(--W-Background, #FFF);
-        margin-right: 433px;
-        width: 12%;
+        margin-right: 311px;
+        width: 18%;
         cursor: pointer;
+        margin-top: 20px;
 
     }
 
@@ -190,6 +193,7 @@
         width: 500px;
         height: auto;
         padding: 50px;
+        padding-bottom: 30px;
         flex-direction: column;
         align-items: flex-start;
         background: #FAFAFA;
@@ -199,7 +203,7 @@
     .form-group {
         display: flex;
         flex-direction: column;
-        margin-bottom: 10px;
+        margin-bottom: 18px;
         width: 100%;
     }
 
@@ -210,6 +214,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
+        margin-bottom: 18px;
         /* 112.5% */
     }
 
@@ -240,6 +245,7 @@
     .box-3 {
         display: flex;
         gap: 50px;
+        margin-bottom: 18px;
     }
 
     .box {

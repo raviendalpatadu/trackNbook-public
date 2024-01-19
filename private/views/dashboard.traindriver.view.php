@@ -62,7 +62,10 @@
                             <div>
 
                             </div>
+                            <div class="profile-img d-flex flex-column1 align-items-center justify-content-center">
+                                <img src="<?= ASSETS ?>images/map.png" alt="profile img" width="500" height="750">
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,10 +73,7 @@
 
 
             </div>
-            <div class="profile-img d-flex flex-column align-items-center justify-content-center">
-                <img src="<?= ASSETS ?>images/map.png" alt="profile img" width="500" height="750">
 
-            </div>
 
 
 
@@ -99,5 +99,10 @@
     border-radius: 23.33px;
     box-shadow: 0px 1.94px 13.61px #0063e70f;
     width: 100px;
+}
+
+.flex-column1 {
+    margin-left: 200px;
+    flex-direction: column;
 }
 </style>

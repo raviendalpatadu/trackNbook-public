@@ -10,7 +10,7 @@
                 <div class="col-3"></div>
                 <div class="col-4 center_form1">
                     <form class="add-schedule">
-                        <div class="top-head-addtrain">Add schedule</div>
+                        <div class="top-head-addtrain">Add Train</div>
                         <div class="head-box">
                             Train Details
                         </div>
@@ -27,22 +27,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="departure">Departure</label>
-                                <select class="text-field" id="departure">
-                                    <option value="option1">Colombo</option>
-                                    <option value="option2">Anuradhapura</option>
-                                    <option value="option3">Jaffna</option>
-                                    <option value="option3">Vavuniya</option>
-                                    <option value="option3">Kodikamam</option>
-                                    <option value="option3">Kankesanthurai</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="departureTime">Departure Time</label>
-                                <input class="text-field-box" placeholder="Ex : 13.30" />
-                            </div>
-                            <div class="form-group">
-                                <label for="departure">Arrival</label>
+                                <label for="departure">Train Route</label>
                                 <select class="text-field" id="departure">
                                     <option value="option1"> Colombo</option>
                                     <option value="option2">Anuradhapura</option>
@@ -53,44 +38,75 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="departureTime">Arrival Time</label>
+                                <label for="departure">Start Station</label>
+                                <select class="text-field" id="departure">
+                                    <option value="option1">Colombo</option>
+                                    <option value="option2">Anuradhapura</option>
+                                    <option value="option3">Jaffna</option>
+                                    <option value="option3">Vavuniya</option>
+                                    <option value="option3">Kodikamam</option>
+                                    <option value="option3">Kankesanthurai</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="departureTime">Start Time</label>
                                 <input class="text-field-box" placeholder="Ex : 13.30" />
                             </div>
-                            <label for="departureTime">Seat count</label>
+                            <div class="form-group">
+                                <label for="departure">End Station</label>
+                                <select class="text-field" id="departure">
+                                    <option value="option1"> Colombo</option>
+                                    <option value="option2">Anuradhapura</option>
+                                    <option value="option3">Jaffna</option>
+                                    <option value="option3">Vavuniya</option>
+                                    <option value="option3">Kodikamam</option>
+                                    <option value="option3">Kankesanthurai</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="departureTime">End Time</label>
+                                <input class="text-field-box" placeholder="Ex : 13.30" />
+                            </div>
+                            <div class="form-group">
+                                <label for="departure">Train Type</label>
+                                <select class="text-field" id="departure">
+                                    <option value="option1"> Express</option>
+                                    <option value="option2">Mail</option>
+                                    <option value="option3">Intercity</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="departureTime">No of Compartments</label>
+                                <input class="text-field-box" placeholder="Ex : 2" />
+                            </div>
+
                             <div class="box-3">
                                 <div class="box">
-                                    <label class="lab-small">First Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 100" />
+                                    <label class="lab-small">Compartment Class</label>
+                                    <input class="inputs1" placeholder="Ex : 1st class" />
                                 </div>
                                 <div class="box">
-                                    <label class="lab-small">2nd Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 80" />
+                                    <label class="lab-small">Compartment type</label>
+                                    <input class="inputs1" placeholder="Ex : Reserved" />
                                 </div>
-                                <div class="box">
-                                    <label class="lab-small">3rd Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 60" />
+                                <div class="box-4">
+                                    <div class="box">
+                                        <label class="lab-small">Seat layout</label>
+                                        <input class="inputs2" placeholder="Ex : 2*3" />
+                                    </div>
+                                    <div class="box">
+                                        <label class="lab-small">Tital Seats</label>
+                                        <input class="inputs2" placeholder="Ex : 48" />
+                                    </div>
                                 </div>
+
                             </div>
-                            <label for="departureTime">Ticket price</label>
-                            <div class="box-3">
-                                <div class="box">
-                                    <label class="lab-small">1st Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 3000.00" />
-                                </div>
-                                <div class="box">
-                                    <label class="lab-small">2nd Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 2000.00" />
-                                </div>
-                                <div class="box">
-                                    <label class="lab-small">3rd Class Reserved</label>
-                                    <input class="inputs" placeholder="Ex : 1000.00" />
-                                    <div class="endline"></div>
-                                </div>
-                            </div>
+
                             <div class="box">
                                 <div class="activation-field">
                                     <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button
-                                            class="button-white"> Back</button></a>
+                                            class="button-white"> Reset</button></a>
 
 
                                     <button class="button-blue"> Add</button>
@@ -222,8 +238,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 18px;
-        margin-bottom: 18px;
-        width: 100%;
+        margin-bottom: 10px;
 
         /* 112.5% */
     }
@@ -256,14 +271,30 @@
         display: flex;
         gap: 50px;
         margin-bottom: 18px;
+
+
+    }
+
+    .box-4 {
+        display: flex;
+        gap: 59px;
     }
 
     .box {
         width: calc(25% - 0px);
     }
 
-    .inputs {
-        width: 90%;
+    .inputs1 {
+        width: 114%;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #CCC;
+        background: var(--W-Background, #FFF);
+
+    }
+
+    .inputs2 {
+        width: 137%;
         padding: 16px;
         border-radius: 8px;
         border: 1px solid #CCC;
@@ -295,6 +326,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 18px;
+        margin-top: 10px;
         /* 138.462% */
     }
     </style>

@@ -7,63 +7,45 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
             <div class="container d-flex flex-column justify-content-center align-items-center">
-                <div class="row">
-                    <div class="col-8 d-flex flex-column justify-content-between">
-                        <div class="text-checker justify-content-start">
-                            <p>What's Your <br>Today Work <br>Station</p>
-                        </div>
-                        <div class="checker-container mt-30">
-                            <div class="ticket-details">
-                                <div class="row mb-20 g-10">
-                                    <div class="col-6">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label text lightgray-font">Staff ID</div>
-                                            <div class="input-field">
-                                                <div class="text">
-                                                    <input type="text" class="type-here" placeholder="Staff ID" name="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label text lightgray-font">Train ID</div>
-                                            <div class="input-field">
-                                                <div class="text">
-                                                    <input type="text" class="type-here" placeholder="Staff ID" name="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-inputs">
-                                            <div class="input-text-label text lightgray-font">Start Location</div>
-                                            <div class="input-field">
-                                                <div class="text">
-                                                    <input type="text" class="type-here" placeholder="Staff ID" name="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="button btn mt-20 "><a href="<?= ROOT ?>">
-                                                <div class="button-base btn bg-Border-blue  ">
-                                                    <div class="text White">Start</div>
-                                                </div>
-                                            </a>
-                                        </button>
-                                    </div>
+                <div id="popup-box">
+                    <div class="notificationCard modal mt-50 d-flex flex-column justify-content-center align-items-center">
+                        <div class="content"></div>
+                        <p class="notificationHeading">What's Your Today Work Station</p>
+                        <p class="notificationPara text-align-center">Enter Your Working Train ID and the <br>Start Location</p>
+
+                        <div class="text-inputs">
+                            <div class="input-text-label text lightgray-font">Train ID</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" class="type-here" placeholder="Staff ID" name="" id="trainId">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <img src="<?= ASSETS ?>images/checker.png" alt="">
+
+                        <!-- <div class="text-inputs">
+                            <div class="input-text-label text lightgray-font">Start Location</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" class="type-here" placeholder="Staff ID" name="" >
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <button class="button btn mt-20 " id="loginBtn">
+                                <div class="button-base btn bg-Border-blue ">
+                                    <div class="text White">Start</div>
+                                </div>
+                        </button>
                     </div>
                 </div>
 
+            </div>
 
-
+            <div class="col-6 d-flex justify-content-center g-30">
+                <button>reservation list</button>
+            </div>
+            <div class="col-6">
+               <button>QR</button>
             </div>
         </main>
         <?php $this->view('includes/footer'); ?>
@@ -71,3 +53,24 @@
 </body>
 
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#popup-box").hide();
+        $("#popup-box").fadeIn(1000);
+        // // popup box should come from bottom to top 
+        $("#popup-box").addClass('mou-popup-box d-flex flex-column justify-content-center align-items-center');
+
+
+        $("#loginBtn").click(function() {
+            
+            var trainId = $('#trainId').val();
+
+            if (trainId == '') {
+                alert('Please Enter Train ID');
+            } else {
+                $("#popup-box").fadeOut(500);
+            }
+        });
+    });
+</script>

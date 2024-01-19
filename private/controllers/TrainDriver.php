@@ -16,5 +16,10 @@ class TrainDriver extends Controller
 
         $this->view('update.train.delay');
     }
+    function scanLocation($id = '')
+    {
+
+        $this->view('scan.train.location');
+    }
 
 }

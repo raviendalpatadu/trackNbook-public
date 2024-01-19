@@ -36,6 +36,7 @@ if (!isset($data['errors'])) {
                         </div>
 
 
+
                         <form action="" method="post" class="d-flex align-items-center flex-column col-12">
                             <div class="text-inputs">
 
@@ -62,10 +63,10 @@ if (!isset($data['errors'])) {
                                             placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['routes'] as $key => $value) : ?>
-                                            <option value="<?= $value->route_no ?>">
-                                                <?= $value->route_name ?>
-                                            </option>
+                                            <?php foreach ($data['routes'] as $key => $value): ?>
+                                                <option value="<?= $value->route_no ?>">
+                                                    <?= $value->route_name ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -85,10 +86,10 @@ if (!isset($data['errors'])) {
                                             placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['stations'] as $key => $value) : ?>
-                                            <option value="<?= $value->station_id ?>">
-                                                <?= $value->station_name ?>
-                                            </option>
+                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                                <option value="<?= $value->station_id ?>">
+                                                    <?= $value->station_name ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -120,10 +121,10 @@ if (!isset($data['errors'])) {
                                             placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['stations'] as $key => $value) : ?>
-                                            <option value="<?= $value->station_id ?>">
-                                                <?= $value->station_name ?>
-                                            </option>
+                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                                <option value="<?= $value->station_id ?>">
+                                                    <?= $value->station_name ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -195,27 +196,41 @@ if (!isset($data['errors'])) {
 </html>
 
 <script>
-$(document).ready(function() {
-    var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
-    var counter = 0;
+    $(document).ready(function () {
+        var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
+        var counter = 0;
 
-    // access errors array
-    var arr = <?php echo json_encode($data); ?>;
-    console.log(arr);
+        // access errors array
+        var arr = <?php echo json_encode($data); ?>;
+        console.log(arr);
 
-    // check errors key exists
-    if (arr.hasOwnProperty('errors')) {
-        tag.each(() => {
-            console.log(tag[counter]);
-            if (tag[counter++].innerHTML != " ") {
-                tag.parent().children('.input-field').addClass('border-red');
-                tag.parent().children('.input-field').children('.text').children('.type-here').addClass(
-                    'red');
-                tag.parent().children('.input-text-label').addClass('red');
-                tag.addClass('red');
-            }
-        });
-    }
+        // check errors key exists
+        if (arr.hasOwnProperty('errors')) {
+            tag.each(() => {
+                console.log(tag[counter]);
+                if (tag[counter++].innerHTML != " ") {
+                    tag.parent().children('.input-field').addClass('border-red');
+                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass(
+                        'red');
+                    tag.parent().children('.input-text-label').addClass('red');
+                    tag.addClass('red');
+                }
+            });
+        }
 
-});
+    });
 </script>
+
+<style>
+    .add-schedule {
+        margin-top: 20%;
+        display: flex;
+        width: 500px;
+        height: 655px;
+        padding: 50px;
+        flex-direction: column;
+        align-items: flex-start;
+        background: #FAFAFA;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+</style>
