@@ -132,10 +132,17 @@ if (!isset($data['errors'])) {
 
                                 <div class="text-inputs mt-20">
                                     <div class="input-text-label">Train Type</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" name="train_type" class="type-here" placeholder="Type here">
-                                        </div>
+                                    <div class="width-fill" id="">
+                                        <!-- show max of 5 items in select tag -->
+                                        <select class=" input-field dropdown" name="train_type" placeholder="Please choose">
+                                            <option value="0">Please choose</option>
+
+                                            <?php foreach ($data['train_types'] as $key => $value) : ?>
+                                                <option value="<?= $value->train_type_id ?>" id="traintype">
+                                                    <?= $value->train_type ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <div class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?></div>
                                 </div>
@@ -202,7 +209,7 @@ if (!isset($data['errors'])) {
 
         // access errors array
         var arr = <?php echo json_encode($data); ?>;
-        console.log(arr);
+        // console.log(arr);
 
         // check errors key exists
         if (arr.hasOwnProperty('errors')) {
@@ -223,19 +230,17 @@ if (!isset($data['errors'])) {
         selectRoute.on('change', function() {
             // This code will be executed when the value of the select element changes
             var routeId = $('select[name="train_route"]').val();
-            console.log(routeId);
+            // console.log(routeId);
             // get route details
             if (routeId != 0) {
                 $.ajax({
-                    url: '<?= ROOT ?>/route/getRouteStations/',
+                    url: '<?= ROOT ?>/route/getRouteStations/' + routeId,
                     type: 'POST',
-                    data: {
-                        route_id: routeId
-                    },
+
                     success: function(data) {
                         // console.log(data);
                         var route = JSON.parse(data);
-                        console.log(route);
+                        // console.log(route);
                         // add stations names for the select tags in the form
                         var startStation = $('#startStation');
                         var endStation = $('#endStation');
@@ -327,14 +332,17 @@ if (!isset($data['errors'])) {
             noOfCompartments = $('#noOfCompartments').val();
 
             // add input fields for no of compartments entered
-            console.log(noOfCompartments)
+            // console.log(noOfCompartments)
+            const outputContainer = $('.compartmentDetails');
+
             $('#noOfCompartments').on('input', function() {
-                generateTags();
+                generateTags(outputContainer);
             });
 
-            function generateTags() {
+
+
+            function generateTags(outputContainer) {
                 const inputValue = $('#noOfCompartments').val();
-                const outputContainer = $('.compartmentDetails');
 
                 // Clear previous content
                 outputContainer.empty();
@@ -356,10 +364,7 @@ if (!isset($data['errors'])) {
                                             <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?></div>
                                         </div>
                                         <div class="text-inputs mt">
-                                            <div class="input-text-label mt-20">Train Route</div>
-
-                                            
-                                                <!-- show max of 5 items in select tag -->
+                                            <div class="input-text-label mt-20">Compartment Type</div>
                                                 <select class="input-field dropdown" name="compartment[type][]" placeholder="Please choose">
                                                     <option value="0">Please choose</option>
 
@@ -384,24 +389,7 @@ if (!isset($data['errors'])) {
                                             </div>
                                             <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?></div>
                                         </div>
-                                        <div class="text-inputs mt">
-                                            <div class="input-text-label">Compartment Seat layout</div>
-                                            <div class="input-field">
-                                                <div class="text">
-                                                    <select class="input-field dropdown" name="compartment[type][]" placeholder="Please choose">
-                                                        <option value="0">Please choose</option>
-
-                                                        <?php foreach ($data['compartment_types'] as $key => $value) : ?>
-                                                            <option value="<?= $value->compartment_class_type_id ?>" id="trainRoute">
-                                                                <?= $value->compartment_class_type ?>
-                                                            </option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?></div>
-                                        </div>
+                                       
                                         <div class="text-inputs mt">
                                             <div class="input-text-label">Compartment Tital seats</div>
                                             <div class="input-field">
@@ -424,79 +412,84 @@ if (!isset($data['errors'])) {
                                     `;
                     outputContainer.append(newRow);
 
-
-                    $("select.dropdown").each(function() {
-                        var dropdown = $("<div />").addClass("dropdown selectDropdown");
-
-                        $(this).wrap(dropdown);
-
-                        var label = $("<span />")
-                            .text($(this).attr("placeholder"))
-                            .insertAfter($(this));
-                        var list = $("<ul />");
-
-                        label.attr("class", "input-field");
-
-                        $(this)
-                            .find("option")
-                            .each(function() {
-                                list.append($("<li />").append($("<a />").text($(this).text())));
-                            });
-
-                        list.insertAfter($(this));
-
-                        if ($(this).find("option:selected").length) {
-                            label.text($(this).find("option:selected").text());
-                            list
-                                .find("li:contains(" + $(this).find("option:selected").text() + ")")
-                                .addClass("active");
-                            $(this).parent().addClass("filled");
-                        }
-                    });
-
-
-                    $(document).on("click touch", ".selectDropdown ul li a", function(e) {
-                        e.preventDefault();
-                        var dropdown = $(this).parent().parent().parent();
-                        var active = $(this).parent().hasClass("active");
-                        var label = active ?
-                            dropdown.find("select").attr("placeholder") :
-                            $(this).text();
-
-                        dropdown.find("option").prop("selected", false);
-                        dropdown.find("ul li").removeClass("active");
-
-                        dropdown.toggleClass("filled", !active);
-                        dropdown.children("span").text(label);
-                        if (!active) {
-                            dropdown
-                                .find("option:contains(" + $(this).text() + ")")
-                                .prop("selected", true);
-
-                            $(this).parent().addClass("active");
-                        }
-
-                        dropdown.removeClass("open");
-
-                        //trigger change event
-                        dropdown.find("select").trigger("change");
-                    });
-
-                    $(".dropdown > span").on("click touch", function(e) {
-                        var self = $(this).parent();
-                        self.toggleClass("open");
-                    });
-
-                    $(document).on("click touch", function(e) {
-                        var dropdown = $(".dropdown");
-                        if (dropdown !== e.target && !dropdown.has(e.target).length) {
-                            dropdown.removeClass("open");
-                        }
-                    });
                 }
             }
 
+            // bug when compartment ro is genarates the top select tags are not working
+            $(outputContainer).find("select.dropdown").each(function() {
+                var dropdown = $("<div />").addClass("dropdown selectDropdown");
 
+                $(this).wrap(dropdown);
+
+                var label = $("<span />")
+                    .text($(this).attr("placeholder"))
+                    .insertAfter($(this));
+                var list = $("<ul />");
+
+                label.attr("class", "input-field");
+
+                $(this)
+                    .find("option")
+                    .each(function() {
+                        list.append($("<li />").append($("<a />").text($(this).text())));
+                    });
+
+                list.insertAfter($(this));
+
+                if ($(this).find("option:selected").length) {
+                    label.text($(this).find("option:selected").text());
+                    list
+                        .find("li:contains(" + $(this).find("option:selected").text() + ")")
+                        .addClass("active");
+                    $(this).parent().addClass("filled");
+                }
+            });
+
+
+            $(outputContainer).on("click touch", ".selectDropdown ul li a", function(e) {
+                e.stopImmediatePropagation();
+                console.log($(this).text());
+                var dropdown = $(this).parent().parent().parent();
+                // console.log(dropdown);
+                var active = $(this).parent().hasClass("active");
+                var label = active ?
+                    dropdown.find("select").attr("placeholder") :
+                    $(this).text();
+
+
+                console.log($(this));
+
+
+                dropdown.find("option").prop("selected", false);
+                dropdown.find("ul li").removeClass("active");
+
+                dropdown.toggleClass("filled", !active);
+                dropdown.children("span").text(label);
+                if (!active) {
+                    dropdown
+                        .find("option:contains(" + $(this).text() + ")")
+                        .prop("selected", true);
+
+                    $(this).parent().addClass("active");
+                }
+
+                dropdown.removeClass("open");
+
+                //trigger change event
+                dropdown.find("select").trigger("change");
+            });
+
+            $(".dropdown > span").on("click touch", function(e) {
+                var self = $(this).parent();
+                self.toggleClass("open");
+            });
+
+            $(outputContainer).on("click touch", function(e) {
+                var dropdown = $(".dropdown");
+                if (dropdown !== e.target && !dropdown.has(e.target).length) {
+                    dropdown.removeClass("open");
+                }
+            });
 
 
 

@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_root_password
+      - MYSQL_DATABASE=your_database_name
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./db-backup:/var/db-backup
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=your_root_password
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  webserver:
+    build: ./nginx
+    depends_on:
+      - php
+      - phpmyadmin
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/var/www/html/public
+      - ./private:/var/www/html/private
+      - ./nginx-conf:/etc/nginx/conf.d
+    networks:
+      - app-network
+
+  php:
+    build: ./php
+    container_name: php
+    restart: unless-stopped
+    depends_on:
+      - db
+    volumes:
+      - ./public:/var/www/html/public
+      - ./private:/var/www/html/private
+    networks:
+      - app-network
+
+volumes:
+  dbdata:
+  www:
+
+networks:
+  app-network:
+    driver: bridge

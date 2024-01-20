@@ -2,13 +2,13 @@
 
 class Route extends Controller
 {
-    public function getRouteStations(){
+    public function getRouteStations($route_id){
         $route = new Routes();
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $route_stations = $route->getRouteStations($_POST['route_id']);
+        
+        $route_stations = $route->getRouteStations($route_id);
             
-            echo json_encode($route_stations);
-        }
+        echo json_encode($route_stations);
+        
     }
     public function getRouteStationsWithStartAndEndStaions(){
         $route = new Routes();

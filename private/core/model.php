@@ -103,8 +103,7 @@ class Model extends Database
         $value = implode(',:' , $keys);
 
         $query = "insert into $this->table ($column) values(:$value)";
-
-        echo $query;
+        // echo $query;
         return $this->query($query,$data);
     }
 

@@ -26,6 +26,15 @@ class Auth
         }
         return false;
     }
+
+    public static function reservation()
+    {
+        if (isset($_SESSION['reservation'])) {
+            return $_SESSION['reservation'];
+        }
+        return false;
+    }
+    
     public static function __callStatic($method, $params)
     /**meken wenne unknown method ekak call karoth ee method eke name eka aran eke name session eke user ge
      * propery ekak thiyenawada balala eka return karana eka.

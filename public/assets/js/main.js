@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
   // Select seats using jQuery
   var seats = $('[id^="seatNo-"]:not(.reserved)');
 //   var seatsOption = $('[id^="seatNoOption-"]');
@@ -57,7 +57,7 @@ $(document).ready(function () {
       chooseImg.css("display", "none");
     }
   });
-});
+// });
 
 //drop down
 
@@ -133,7 +133,7 @@ $(document).on("click touch", function (e) {
 
 
 
-$(document).ready(function () {
+// $(document).ready(function () {
   $("#popup").hide();
 
   $("#yes").on("click", function () {
@@ -143,4 +143,4 @@ $(document).ready(function () {
   $("#no").on("click", function () {
     $("#popup").hide();
   });
-});
+// });
