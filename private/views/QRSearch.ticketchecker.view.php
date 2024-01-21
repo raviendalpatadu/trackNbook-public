@@ -2,11 +2,11 @@
 
 <body>
 
-    <?php $this->view("./includes/sidebar") ?>
+
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
-            <div class="container d-flex  flex-column justify-content-center ">
+            <div class="home-container width-fill justify-content-center     ">
 
                 <!-- QR -->
                 <div class="justify-content-center section mou-qr-box">
