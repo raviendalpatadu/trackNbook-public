@@ -22,9 +22,6 @@
 
 
 </html>
-<script type="text/javascript">
-    
-</script>
 
 <script src="https://unpkg.com/html5-qrcode">
 </script>

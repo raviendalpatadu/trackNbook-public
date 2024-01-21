@@ -2,9 +2,9 @@
 
 <?php
 
-echo "<pre>";
-// print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// // print_r($data);
+// echo "</pre>";
 ?>
 
 <body>
@@ -57,6 +57,7 @@ echo "</pre>";
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="row mb-20">
                                 <div class="col-12">
                                     <h1><?php echo (isset($data[0])) ? $data[0]->start_station . "->" : "" ?> <?= (isset($data[0])) ? $data[0]->end_station : "No Trains" ?></h1>

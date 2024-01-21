@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h1>Edit</h1>
+                        
                         <p>Select a train to proceed</p>
                     </div>
                 </div>

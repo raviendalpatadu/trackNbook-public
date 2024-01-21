@@ -60,7 +60,6 @@ class Trains extends Model
     {
         $errors = array();
 
-
         $data = array();
         //   //check if to_station is exists in post
         if (empty($_POST['to_station']) || $_POST['to_station'] == 0) {
@@ -96,12 +95,11 @@ class Trains extends Model
         }
 
 
+
         if (!array_key_exists('errors', $errors)) {
 
             try {
-                $con = $this->connect();
-                $con->beginTransaction();
-
+                
                 //insert query to search train must come form route
                 $query = "SELECT\n"
 
@@ -128,16 +126,12 @@ class Trains extends Model
                     . "WHERE\n"
 
                     . "	tbl_train.train_start_station = :from_station AND tbl_train.train_end_station = :to_station";
-                $stm = $con->prepare($query);
+                
+                $data = $this->query($query, array(
+                    'from_station' => $_POST['from_station'],
+                    'to_station' => $_POST['to_station']
+                ));
 
-                $stm->execute(
-                    array(
-                        'from_station' => $_POST['from_station'],
-                        'to_station' => $_POST['to_station']
-                    )
-                );
-
-                $data = $stm->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
