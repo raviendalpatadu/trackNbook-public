@@ -2,9 +2,9 @@
 
 <?php
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
 ?>
 
@@ -89,10 +89,7 @@
 
                                     <!-- print trains -->
                                     <?php if ($data) : ?>
-                                        <?php
-                                        $_SESSION['reservation'] = $_POST;
-
-                                        ?>
+                                     
                                         <?php
                                         // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
                                         $unique_trains = true;

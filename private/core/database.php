@@ -24,7 +24,7 @@ class Database
                 if ($check) {
                     if ($data_type == "object") {
                         $data = $stm->fetchAll(PDO::FETCH_OBJ);
-                    } else {
+                    } elseif ($data_type == "array") {
                         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
                     }
     
@@ -32,6 +32,7 @@ class Database
                         // echo "<pre>";
                         // print_r($data);
                         // echo "</pre>";
+                        $con = null;
                         return $data;
                     }
                 }

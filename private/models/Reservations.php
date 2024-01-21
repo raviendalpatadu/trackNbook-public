@@ -3,6 +3,7 @@
 class Reservations extends Model
 {
     protected $table = 'tbl_reservation';
+    protected $allowedColumns = array();
 
     public function __construct()
     {
@@ -36,10 +37,22 @@ class Reservations extends Model
 
     }
 
-    public function getOneReservation($column, $value)
+    public function getOneReservation($value)
     {
         try {
-            $result = $this->whereOne($column, $value);
+            // echo "<pre>";
+            // print_r($value);
+            // echo "</pre>";
+
+            $query = "SELECT * FROM tbl_reservation WHERE reservation_train_id = :train_id AND reservation_class = :class_id AND reservation_start_station = :from_station AND reservation_end_station = :to_station AND reservation_date = :from_date";
+            $result = $this->query($query, array(
+                'train_id' => $value['train_id'],
+                'class_id' => $value['class_id'],
+                'from_station' => $value['from_station'],
+                'to_station' => $value['to_station'],
+                'from_date' => "2024-01-29"
+                // 'selected_seats' => $value['selected_seats']
+            ));
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
