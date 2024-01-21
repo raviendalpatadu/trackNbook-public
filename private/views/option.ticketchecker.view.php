@@ -1,15 +1,20 @@
 <?php $this->view("./includes/header"); ?>
 
 <body>
-
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
             <div class="container d-flex flex-column justify-content-center align-items-center">
 
-                <div class="notificationCard modal mt-50 d-flex flex-column justify-content-center align-items-center">
-                    <div class="content"></div>
-                    <p class="notificationHeading">What's Your Today Work Station</p>
+                <div class="notificationCard  mt-50 d-flex flex-column justify-content-center align-items-center">
+                    <div class="d-flex flex-row">
+                        <div class="d-flex align-items-center">
+                            <p class="notificationHeading">What's Your <br>Today Work <br>Station</p>
+                        </div>
+
+                        <img src="<?= ASSETS ?>images/checker.png" alt="" srcset="" class="checker-img">
+                    </div>
+
 
                     <div class="text-inputs d-flex mt-20">
                         <div class="input-text-label text lightgray-font">Train ID</div>
@@ -36,15 +41,12 @@
                             </div>
                         </a>
                     </button>
+                    
                 </div>
             </div>
-
-
-
-
         </main>
         <?php $this->view('includes/footer'); ?>
-    </div>
+</div>
 </body>
 
 </html>

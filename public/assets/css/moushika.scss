@@ -20,7 +20,7 @@ $mou-colors : (
 }
 
 
-.mou-form-container{
+.mou-staff-login-container{
   width: fit-content;
     height: fit-content;
     display: flex;
@@ -38,18 +38,24 @@ $mou-colors : (
 }
 
 .mou-title {
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #212121;
+color: #2E3E5C;
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  /* 133.333% */
+  letter-spacing: 0.48px;
 }
 
 .mou-subtitle {
   font-size: 0.85rem;
+  font-weight: 400;
   max-width: 80%;
   text-align: center;
   line-height: 1.1rem;
-  color: #8B8E98
+  color: #8B8E98;
+ 
 }
 
 .input_container {
@@ -587,7 +593,7 @@ font-weight: 500;
 }
 
 .notificationCard {
-  width: 220px;
+  // width: 220px;
   height: fit-content;
   background: rgb(245, 245, 245);
   padding: 20px 35px;
@@ -596,10 +602,17 @@ font-weight: 500;
   border-radius: 5px;
 }
 
+.notificationCard img.checker-img {
+  object-fit: cover;
+  width: 141px;
+  
+ 
+}
+
 .notificationHeading {
   color: black;
   font-family: "Open Sans";
-    font-size: 41px;
+    font-size: 38px;
     font-style: normal;
     font-weight: 700;
 }

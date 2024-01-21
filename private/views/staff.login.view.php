@@ -9,11 +9,11 @@
 
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
-        <main class=" d-flex align-items-start justify-content-end">
+        <main class=" d-flex align-items-center justify-content-center">
             <div class="bg-staff-login-desktop"></div>
             <div class="container">
 
-                <form action="" method="post" class="mou-form-container d-flex flex-column justify-content-center g-20">
+                <form action="" method="post" class="mou-staff-login-container d-flex flex-column justify-content-center g-20">
                     <div class="d-flex flex-column justify-contet-center align-items-center">
                         <h1 class="mou-title d-flex justify-content-center width-fill mb-10">Login</h1>
                         <p class="mou-subtitle d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>

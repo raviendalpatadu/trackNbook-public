@@ -27,7 +27,7 @@
   color: #F2F9FE;
 }
 
-.mou-form-container {
+.mou-staff-login-container {
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -45,14 +45,19 @@
 }
 
 .mou-title {
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #212121;
+  color: #2E3E5C;
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  /* 133.333% */
+  letter-spacing: 0.48px;
 }
 
 .mou-subtitle {
   font-size: 0.85rem;
+  font-weight: 400;
   max-width: 80%;
   text-align: center;
   line-height: 1.1rem;
@@ -526,7 +531,6 @@ h3.warrant {
 }
 
 .notificationCard {
-  width: 220px;
   height: -moz-fit-content;
   height: fit-content;
   background: rgb(245, 245, 245);
@@ -536,10 +540,16 @@ h3.warrant {
   border-radius: 5px;
 }
 
+.notificationCard img.checker-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 141px;
+}
+
 .notificationHeading {
   color: black;
   font-family: "Open Sans";
-  font-size: 41px;
+  font-size: 38px;
   font-style: normal;
   font-weight: 700;
 }
