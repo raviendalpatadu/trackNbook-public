@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
   // Select seats using jQuery
   var seats = $('[id^="seatNo-"]:not(.reserved)');
 //   var seatsOption = $('[id^="seatNoOption-"]');
@@ -57,7 +57,7 @@ $(document).ready(function () {
       chooseImg.css("display", "none");
     }
   });
-});
+// });
 
 //drop down
 
@@ -90,6 +90,7 @@ $("select.dropdown").each(function () {
   }
 });
 
+
 $(document).on("click touch", ".selectDropdown ul li a", function (e) {
   e.preventDefault();
   var dropdown = $(this).parent().parent().parent();
@@ -107,10 +108,14 @@ $(document).on("click touch", ".selectDropdown ul li a", function (e) {
     dropdown
       .find("option:contains(" + $(this).text() + ")")
       .prop("selected", true);
+    
     $(this).parent().addClass("active");
   }
 
   dropdown.removeClass("open");
+
+  //trigger change event
+  dropdown.find("select").trigger("change");
 });
 
 $(".dropdown > span").on("click touch", function (e) {
@@ -128,7 +133,7 @@ $(document).on("click touch", function (e) {
 
 
 
-$(document).ready(function () {
+// $(document).ready(function () {
   $("#popup").hide();
 
   $("#yes").on("click", function () {
@@ -138,7 +143,7 @@ $(document).ready(function () {
   $("#no").on("click", function () {
     $("#popup").hide();
   });
-});
+// });
 
 //QR Code Scanner
 function domReady(fn) {

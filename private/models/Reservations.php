@@ -3,6 +3,7 @@
 class Reservations extends Model
 {
     protected $table = 'tbl_reservation';
+    protected $allowedColumns = array();
 
     public function __construct()
     {
@@ -36,10 +37,22 @@ class Reservations extends Model
 
     }
 
-    public function getOneReservation($column, $value)
+    public function getOneReservation($value)
     {
         try {
-            $result = $this->whereOne($column, $value);
+            // echo "<pre>";
+            // print_r($value);
+            // echo "</pre>";
+
+            $query = "SELECT * FROM tbl_reservation WHERE reservation_train_id = :train_id AND reservation_class = :class_id AND reservation_start_station = :from_station AND reservation_end_station = :to_station AND reservation_date = :from_date";
+            $result = $this->query($query, array(
+                'train_id' => $value['train_id'],
+                'class_id' => $value['class_id'],
+                'from_station' => $value['from_station'],
+                'to_station' => $value['to_station'],
+                'from_date' => "2024-01-29"
+                // 'selected_seats' => $value['selected_seats']
+            ));
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -68,8 +81,8 @@ class Reservations extends Model
             $con = $this->connect();
             for ($insert_count = 0; $insert_count < $no_of_passengers; $insert_count++) {
                 $query = "INSERT INTO tbl_reservation "
-                    . "(reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
-                    . "VALUES(:passenger_id, :from_station, :end_station, :train_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
+                    . "(reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_compartment_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
+                    . "VALUES(:passenger_id, :from_station, :end_station, :train_id, :compartment_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
                 // echo $query . "<br>";
                 $stm = $con->prepare($query);
                 $stm->execute(array(
@@ -77,6 +90,7 @@ class Reservations extends Model
                     'from_station' => $from_station,
                     'end_station' => $to_station,
                     'train_id' => $train_id,
+                    'compartment_id' => $class_id,
                     'date' => $from_date,
                     'class_id' => $class_id,
                     'seat' => $selected_seats[$insert_count],

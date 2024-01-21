@@ -9,6 +9,8 @@ $sizes: (
   "8": 8px,
   "9": 9px,
   "10": 10px,
+  "11": 11px,
+  "12": 12px,
   "20": 20px,
   "30": 30px,
   "40": 40px,
@@ -37,7 +39,7 @@ $colors: (
   "dark-green": #027a48,
   "blue": #2185d5,
   "lightgray-font": #646464,
-  "box-gray": #CCCCCC
+  "box-gray": #cccccc,
 );
 
 @each $key, $val in $sizes {
@@ -102,6 +104,10 @@ $colors: (
 
   .g-#{$key} {
     gap: $val;
+  }
+
+  .fs-#{$key} {
+    font-size: $val;
   }
 }
 
@@ -268,6 +274,9 @@ $colors: (
 .width-50 {
   width: 50%;
 }
+.width-40 {
+  width: 40%;
+}
 
 .bg-home-desktop {
   position: absolute;
@@ -299,7 +308,7 @@ $colors: (
   height: fit-content;
 }
 
-.search-box-group{
+.search-box-group {
   max-width: 700px;
   width: -webkit-fill-available;
   padding: 40px;
@@ -444,7 +453,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     --listBorder: #e4ecfa;
     --textFilled: #6c7486;
   }
-  
+
   position: relative;
   select {
     display: none;
@@ -495,7 +504,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: var(--White);
     border-radius: 6px;
     overflow-x: hidden;
-    overflow-y: auto;//auto
+    overflow-y: auto; //auto
     transform-origin: 0 0;
     transition: opacity 0.2s ease, visibility 0.2s ease,
       transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
@@ -587,7 +596,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     ul {
       opacity: 1;
       visibility: visible;
-      
+
       transform: scale(1) translate(0, 12px);
       transition: opacity 0.3s ease, visibility 0.3s ease,
         transform 0.3s cubic-bezier(0.4, 0.6, 0.5, 1.32);
@@ -624,18 +633,18 @@ select {
   }
 }
 
-.login-text-inputs{
+.login-text-inputs {
   max-width: 500px;
   width: 400px;
 }
 
-@media  screen and (max-width: 768px) {
-  .login-text-inputs{
+@media screen and (max-width: 768px) {
+  .login-text-inputs {
     max-width: 300px;
-  }  
+  }
 }
 
-form.profile .text-inputs{
+form.profile .text-inputs {
   max-width: -webkit-fill-available;
 }
 
@@ -659,51 +668,87 @@ input[type="file"]::file-selector-button {
   box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.25);
 }
 
-.track-text{
+.track-text {
   font-size: 18px;
   font-weight: 400;
   color: var(--Primary-Gray);
   flex-basis: min-content;
 }
 
-.topic{
+.topic {
   width: 200px;
 }
 
-.flex-grow{
+.flex-grow {
   flex-grow: 1;
 }
 
-.map iframe{
+.map iframe {
   width: 100%;
   min-height: 75vh;
   border: none;
 }
 
-h2.topic ~ p{
+h2.topic ~ p {
   font-size: 16px;
 }
 
 @media screen and (max-width: 768px) {
-  .map iframe{
+  .map iframe {
     min-height: 50vh;
   }
 
-  .track-content{
+  .track-content {
     font-size: 12px;
     gap: 10px;
   }
 
-  .track-text{
+  .track-text {
     font-size: 12px;
   }
 
-  .topic{
+  .topic {
     width: 140px;
   }
-  
 }
 
-input[type="submit"]{
+input[type="submit"] {
   background: transparent;
 }
+
+.train-stoppin-staions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.route-line{
+  width: 100%;
+  height: 2px;
+  background: var(--Primary-Blue);
+}
+
+.route-station{
+  // transform: rotate(45deg);
+  font-size: 14px;
+  text-align: center;
+}
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+table.price-table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.price-table td, table.price-table th{
+  width: 100px;
+  font-size: 14px;
+  padding: 20px;
+  border: 1px solid var(--Secondary-Gray);
+}
+
+

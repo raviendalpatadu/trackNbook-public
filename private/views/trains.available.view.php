@@ -60,7 +60,8 @@
                             
                             <div class="row mb-20">
                                 <div class="col-12">
-                                    <h1><?php echo (isset($data[0])) ? $data[0]->start_station . "->" : "" ?> <?= (isset($data[0])) ? $data[0]->end_station : "No Trains" ?></h1>
+                                    <h1><?php echo (isset($data['trains_available']['trains'][0])) ? ucfirst($data['from_station'] . "->") : "" ?> <?= (isset($data['trains_available']['trains'][0])) ? ucfirst($data['to_station']) : "No Trains" ?></h1>
+                                    <p class="fs-12 pt-5 pb-5 Secondary-Gray">Date - <?= $data['from_date'] ?></p>
                                     <p>Select a train to proceed</p>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                         <h2>Trains available</h2>
                                         <div class="badge">
                                             <div class="badge-base bg-light-green">
-                                                <div class="text dark-green"><?= count($data) ?></div>
+                                                <div class="text dark-green"><?= count($data['trains_available']['trains']) ?></div>
                                             </div>
                                         </div>
                                     </div>
@@ -88,86 +89,58 @@
 
                                     <!-- print trains -->
                                     <?php if ($data) : ?>
-                                        <?php 
-                                            $_SESSION['reservation'] = $_POST;    
+                                     
+                                        <?php
+                                        // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
+                                        $unique_trains = true;
+                                        foreach ($data['trains_available']['trains'] as $key => $value) :
+                                            if ($key > 0) {
+                                                if ($value->train_id == $data['trains_available']['trains'][$key - 1]->train_id) {
+                                                    $unique_trains = false;
+                                                } else {
+                                                    $unique_trains = true;
+                                                }
+                                            }
+                                            if ($unique_trains) :
                                         ?>
-                                        <?php foreach ($data as $key => $value) : ?>
-                                            <tr class="row">
-                                                <td class="col-6 d-flex align-items-center"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                                <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center">
-                                                    <div class="badge-base bg-light-green">
-                                                        <div class="dot">
-                                                            <div class="dot2"></div>
+                                                <tr class="row">
+                                                    <td class="col-6 d-flex align-items-center"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
+                                                    <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center">
+                                                        <div class="badge-base bg-light-green">
+                                                            <div class="dot">
+                                                                <div class="dot2"></div>
+                                                            </div>
+                                                            <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
                                                         </div>
-                                                        <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
-                                                    </div>
-                                                </td>
-                                                <td class="col-4">
+                                                    </td>
+                                                    <td class="col-4">
 
-                                                    <div class="availabity">
-                                                        <a href="<?= ROOT ?>train/seatsAvailable/1/<?=$value->train_id?>">
-                                                            <div class="d-flex justify-content-between">
+                                                        <div class="availabity">
+                                                            <?php foreach ($data['trains_available']['trains'] as $key_res => $value_res) : ?>
+                                                                <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
+                                                                    <a href="<?= ROOT ?>train/seatsAvailable/<?= $data['trains_available']['trains'][$key_res]->compartment_id ?>/<?= $value->train_id ?>">
+                                                                        <div class="d-flex justify-content-between">
 
-                                                                <div class="badge-base flex-grow">
-                                                                    <div class="text">1st Class Reservation</div>
-                                                                </div>
+                                                                            <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
+                                                                            </div>
 
+                                                                            <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
+                                                                            </div>
 
-                                                                <div class="badge-base flex-grow">
-                                                                    <div class="text">20</div>
-                                                                </div>
+                                                                            <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price?>.00</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
+                                                        </div>
 
-
-                                                                <div class="badge-base flex-grow">
-                                                                    <div class="text">LKR.2500.00</div>
-                                                                </div>
-
-                                                            </div>
-                                                        </a>
-
-                                                        <a href="<?= ROOT ?>train/seatsAvailable/2/<?=$value->train_id?>">
-                                                            <div class="d-flex justify-content-between">
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text primary-blue">2nd Class Reservation</div>
-                                                                </div>
-
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text primary-blue">230</div>
-                                                                </div>
-
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text primary-blue">LKR.2000.00</div>
-                                                                </div>
-
-                                                            </div>
-                                                        </a>
-
-                                                        <a href="<?= ROOT ?>train/seatsAvailable/3/<?=$value->train_id?>">
-                                                            <div class="d-flex justify-content-between">
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text blue">3rd Class Reservation</div>
-                                                                </div>
-
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text blue">60</div>
-                                                                </div>
-
-
-                                                                <div class="badge-base flex-grow bg-selected-blue">
-                                                                    <div class="text blue">LKR.1500.00</div>
-                                                                </div>
-
-                                                            </div>
-                                                        </a>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
 
@@ -234,15 +207,15 @@
 
                             <div class="col-12 d-flex justify-content-end g-10">
 
-                                
+
                                 <div class="button-base">
                                     <a href="<?= ROOT ?>home">Back</a>
                                 </div>
 
-                                <?php if(count($data) > 0): ?>   
-                                <div class="button-base">
-                                    <input class="text" type="submit" value="Proceed" name="submit">
-                                </div>
+                                <?php if (count($data) > 0) : ?>
+                                    <div class="button-base">
+                                        <input class="text" type="submit" value="Proceed" name="submit">
+                                    </div>
                                 <?php endif; ?>
                             </div>
                         </div>
