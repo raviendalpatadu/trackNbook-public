@@ -25,7 +25,7 @@
                                     <div class="if-frame-2">
                                         <div class="impressions">Number of Train Onboard</div>
                                     </div>
-                                    <div class="number">26</div>
+                                    <div class="number">28</div>
                                 </div>
                             </div>
                             <div class="if-frame">

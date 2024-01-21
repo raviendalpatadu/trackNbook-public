@@ -90,7 +90,7 @@
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Class</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->reservation_class) : ''; ?></p>
+                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->compartment_class_type) : ''; ?></p>
                                     </div>
                                 </div>
                                 
