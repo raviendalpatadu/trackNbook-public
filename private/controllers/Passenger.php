@@ -43,9 +43,7 @@ class Passenger extends Controller
 
         $fare =  new Fares();
 
- 
-        // $price  = $fare->getPrice();
-        $price_for_one = $fare->getFareData($_SESSION['reservation']['train_type'], $_SESSION['reservation']['class_id'], $_SESSION['reservation']['from_station'], $_SESSION['reservation']['to_station']); //get from db must be changed
+        $price_for_one = $fare->getFareData($_SESSION['reservation']['train_type'], $_SESSION['reservation']['class_type'], $_SESSION['reservation']['from_station'], $_SESSION['reservation']['to_station']); //get from db must be changed
         $price_for_one = $price_for_one[0]->fare_price;
         if (isset($_SESSION['reservation']['passenger_data']) && !empty($_SESSION['reservation']['passenger_data'])) {
             $station = new Stations();
@@ -64,6 +62,7 @@ class Passenger extends Controller
             $data['price'] = $price_for_one * $_SESSION['reservation']['no_of_passengers'];
             $data['date'] = $_SESSION['reservation']['from_date'];
 
+
             $this->view('passenger.billing.summary', $data);
         } else {
             unset($_SESSION['reservation']);
@@ -79,28 +78,9 @@ class Passenger extends Controller
             $this->redirect('/home');
         }
 
-        $data = array();
-        $passenger = new Passengers();
-
-
-        if (isset($_POST['card_no'])) {
-            $data = $passenger->makePayment();
-
-            if (!array_key_exists('errors', $data)) {
-                print_r($data);
-                echo "payment success";
-                $this->redirect('passenger/addReservation');
-            }
-            // else{
-            //     // $errors['user_first_name'] = (array_key_exists('user_first_name',$data['errors'])) ? $data['errors']['user_first_name'] : '';
-            //     // $errors['user_last_name'] = (array_key_exists('user_last_name',$data['errors'])) ? $data['errors']['user_last_name'] : '';
-            //     // $errors['user_phone_number'] = (array_key_exists('user_phone_number',$data['errors'])) ? $data['errors']['user_phone_number'] : '';
-            //     // $errors['login_username'] = (array_key_exists('login_username',$data['errors'])) ? $data['errors']['login_username'] : '';
-            //     // $errors['login_password'] = (array_key_exists('login_password',$data['errors'])) ? $data['errors']['login_password'] : '';
-
-            // }
-        }
-        $this->view('passenger.payment', $data);
+        $data = Auth::payment($_POST['payment_data']);
+        echo json_encode($data);
+        
     }
 
     function addReservation()
@@ -116,10 +96,10 @@ class Passenger extends Controller
         if ($data) {
             $this->redirect('passenger/summary');
         } else {
-            echo "<pre>";
+            // echo "<pre>";
             print_r($data);
             echo "</pre>";
-            // $this->redirect('passenger/billing');
+            $this->redirect('passenger/billing');
         }
     }
 
@@ -151,9 +131,16 @@ class Passenger extends Controller
     function summary($id = '')
     {
         $data = array();
-        $train = new Trains();
-        $resultTrain = $train->getTrainReservation($_SESSION['reservation']['class_id'], $_SESSION['reservation']['train_id']);
-        $data['train'] = $resultTrain[0];
+        $reservation = new Reservations();
+        $data = $reservation->getOneReservation($_SESSION['reservation']);
+
+        // summary not comming and selected reservation not comming in seats available layout
+
+
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
 
 
         if (isset($_SESSION['reservation'])) {

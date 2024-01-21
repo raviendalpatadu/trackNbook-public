@@ -15,6 +15,8 @@ class Fares extends Model
     {
         $query = "SELECT fare_price FROM $this->table WHERE fare_train_type_id = :train_type AND fare_compartment_id = :compartment_type AND fare_start_station = :start_station AND fare_end_station = :end_station";
         $data = $this->query($query, array('train_type' => $train_type, 'compartment_type' => $compartment_type, 'start_station' => $start_station, 'end_station' => $end_station));
+        
+
         return $data;
     }
 

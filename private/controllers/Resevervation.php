@@ -10,4 +10,14 @@ class Reservation extends Controller
     {   
         $this->view('');
     }
+
+    function getReservation($id = '')
+    {
+        $reservation = new Reservations();
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+
+
+    }
 }

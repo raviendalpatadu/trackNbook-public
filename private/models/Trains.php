@@ -137,6 +137,7 @@ class Trains extends Model
                         START.station_name AS train_start_station,
                         END.station_name AS train_end_station,
                         reservation.*,
+                        compartment_type.compartment_class_type_id,
                         compartment_type.compartment_class_type,
                         fare.fare_price
                     FROM
@@ -300,7 +301,7 @@ class Trains extends Model
         $date = $_SESSION['reservation']['from_date'];
 
         try {
-            $query = "SELECT t.*, r.*, c.*,\n"
+            $query = "SELECT t.*, r.*, c.*, ct.*,\n"
                 . "start.station_name AS start_station,\n"
 
                 . "end.station_name AS end_station\n"
@@ -314,6 +315,8 @@ class Trains extends Model
                 . " JOIN tbl_station end ON t.train_end_station = end.station_id\n"
 
                 . " JOIN tbl_compartment c ON r.reservation_compartment_id = c.compartment_id\n"
+
+                . " JOIN tbl_compartment_class_type ct ON ct.compartment_class_type_id = c.compartment_id\n"
 
                 . " WHERE r.reservation_train_id = :train_id AND r.reservation_date = :date AND r.reservation_class = :class";
 
