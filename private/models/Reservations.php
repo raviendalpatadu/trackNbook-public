@@ -78,14 +78,13 @@ class Reservations extends Model
 
 
         try {
-            $con = $this->connect();
+
             for ($insert_count = 0; $insert_count < $no_of_passengers; $insert_count++) {
                 $query = "INSERT INTO tbl_reservation "
                     . "(reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_compartment_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
                     . "VALUES(:passenger_id, :from_station, :end_station, :train_id, :compartment_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
                 // echo $query . "<br>";
-                $stm = $con->prepare($query);
-                $stm->execute(array(
+                $this->query($query, array(
                     'passenger_id' => $user_id,
                     'from_station' => $from_station,
                     'end_station' => $to_station,
@@ -107,9 +106,7 @@ class Reservations extends Model
             echo $e->getMessage();
             return false;
         }
-        $con = null;
 
-        // unset($_SESSION['reservation']);
         return true;
 
     }

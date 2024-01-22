@@ -131,23 +131,23 @@ class Passenger extends Controller
     function summary($id = '')
     {
         $data = array();
-        $reservation = new Reservations();
-        $data = $reservation->getOneReservation($_SESSION['reservation']);
+        // $reservation = new Reservations();
+        // $data = $reservation->getOneReservation($_SESSION['reservation']);
 
         // summary not comming and selected reservation not comming in seats available layout
 
 
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
 
 
-        if (isset($_SESSION['reservation'])) {
-            $this->view('passenger.summary', $data);
-        } else {
-            $this->redirect('home');
-        }
+        $this->view('passenger.summary', $data);
+        // if (isset($_SESSION['reservation'])) {
+        // } else {
+        //     $this->redirect('home');
+        // }
     }
 
     // reservations
