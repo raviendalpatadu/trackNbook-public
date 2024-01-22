@@ -20,7 +20,7 @@
                     <div class="ticket-details">
                         <div class="row mb-20 ">
                             <div class="col-12 d-flex align-items-center flex-column line">
-                                <h1>Booking Summary</h1>
+                                <h1>Refund Request</h1>
                             </div>
                         </div>
                         <div class="row mb-10 mt-50 ml-20 ">
@@ -38,7 +38,7 @@
                         <div class="row mb-10 ml-20">
                             <div class="col-12 d-flex align-items-center justify-content-start">
                                 <p class="width-50">Start & End Station</p>
-                                <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) . "&#8594" . ucfirst($data['train']->end_station) : ''; ?></p>
+                                <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) . "&#8594" . ucfirst($data['train']->end_station): ''; ?></p>
                             </div>
                         </div>
 
@@ -52,11 +52,11 @@
                         <div class="row mb-10 ml-20">
                             <div class="col-12 d-flex align-items-center justify-content-start">
                                 <p class="width-50">Name</p>
-                                <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_passenger_title) . " " . ucfirst($data['reservations']->reservation_passenger_first_name) . " " . ucfirst($data['reservations']->reservation_passenger_last_name) : ''; ?></p>
+                                <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_passenger_title) ." ". ucfirst($data['reservations']->reservation_passenger_first_name) ." ". ucfirst($data['reservations']->reservation_passenger_last_name) : ''; ?></p>
                             </div>
                         </div>
 
-
+                        
                         <div class="row mb-10 ml-20">
                             <div class="col-12 d-flex align-items-center justify-content-start">
                                 <p class="width-50">Date</p>
@@ -73,17 +73,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <button class="button mt-20 ">
                             <div class="button-base">
-                                <a href="<?= ROOT ?>ticketchecker/QR">Scan</a>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="col-6">
-                        <button class="button mt-20 ">
-                            <div class="button-base">
-                                <a href="<?= ROOT ?>ticketchecker/reservationList">Verify</a>
+                                <div class="text"></div>
                             </div>
                         </button>
                     </div>

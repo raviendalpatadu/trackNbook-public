@@ -26,6 +26,7 @@ class StaffTicketing extends Controller
 
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+        
         $this->view('summary.staffticketing', $data);
     }
 
@@ -118,13 +119,25 @@ class StaffTicketing extends Controller
             $this->view('cancellation.staffticketing', $data);
         }
 
-
     }
+
 
     function refund($id = '')
     {
 
-        $this->view('refund.staffticketing');
+        $this->view('make_refund.staffticketing');
+    }
+
+    function refundList($id = '')
+    {
+
+        $this->view('refund_list.staffticketing');
+    }
+
+    function refundDetails($id = '')
+    {
+
+        $this->view('refund_details.staffticketing');
     }
 
     function home($id = '')
@@ -161,7 +174,7 @@ class StaffTicketing extends Controller
                 $_SESSION['errors'] = $data['trains_available'];
                 // $this->redirect('home');
             } else {
-                $this->view('trains.staffticketing', $data['trains_available']);
+                $this->view('trains.staffticketing', $data);
             }
         }
         // $this->view('trains.staffticketing');
