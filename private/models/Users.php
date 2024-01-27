@@ -370,4 +370,21 @@ class Users extends Model
         }
         return $errors;
     }
+
+    public function getUsers($column, $value)
+    {
+
+        try {
+            $result = $this->where($column, $value);
+            //sort an array in assending order
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+    }
 }

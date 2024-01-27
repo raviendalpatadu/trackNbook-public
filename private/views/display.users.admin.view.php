@@ -25,36 +25,33 @@ if (isset($data['users']) && $data['users'] != 0) {
                     <div class="col-12">
                         <form action="" method="post">
                             <div class="row mb-30 g-10">
+
+
                                 <div class="col-3">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Display users</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id"
-                                                placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
-                                                <?php foreach ($data['trains'] as $key => $value): ?>
-                                                    <option value="<?= $value->train_id ?>">
-                                                        <?= $value->train_name ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                        <div
-                                            class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                            <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label text lightgray-font">Name</div>
+                                            <div class="input-field">
+                                                <div class="text">
+                                                    <input type="text" class="type-here" placeholder="Type here"
+                                                        name="user_first_name">
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
+                                                <?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-3">
                                     <div class="text-inputs">
                                         <div class="input-text-label text lightgray-font">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here"
-                                                    name="reservation_passenger_nic">
+                                                    name="user_nic">
                                             </div>
                                         </div>
                                         <div
@@ -63,6 +60,8 @@ if (isset($data['users']) && $data['users'] != 0) {
                                         </div>
                                     </div>
                                 </div>
+
+                                
                                 <!-- <div class="col-3">
                                     <div class="text-inputs date">
                                         <div class="input-text-label text lightgray-font">Date</div>
@@ -177,6 +176,8 @@ if (isset($data['users']) && $data['users'] != 0) {
                                                 </tr>
                                             <?php endfor; ?>
                                         </tbody>
+
+
                                     </table><br><br>
                                     <div class="pagination"
                                         style="position: fixed; left: 50%; transform: translateX(-50%);">

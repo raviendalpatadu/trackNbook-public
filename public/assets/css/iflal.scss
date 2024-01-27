@@ -1,0 +1,118 @@
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+// Colors
+$color-one: #1F2124;
+$color-two: #383A3F;
+$color-three: #F68657;
+$color-four: #F6B352;
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.card {
+    background: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border-radius: 30px;
+    margin: 50px 20px 20px 20px;
+    width: auto;
+    /* 1/3 minus the margins (20+20) */
+    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    
+    text-align: center;
+    color: #1F2124;
+    float: left;
+
+    @media (max-width: 768px) {
+        margin: 10px 20px;
+        width: calc(100% - 40px);
+
+        &:first-child {
+            margin-top: 20px;
+        }
+    }
+
+
+    .title {
+        font-size: 25px;
+        font-weight: bolder;
+    }
+
+    .if-icon {
+        margin: 50px 0;
+
+        svg {
+            width: 100px;
+            height: 100px;
+
+            path {
+                fill: #0085e4;
+            }
+        }
+    }
+        .if-icon1 {
+            margin: 50px 0;
+    
+            svg {
+                width: 100px;
+                height: 100px;
+    
+                path {
+                    fill: #f5013e;
+                }
+            }
+        }
+
+    .features {
+        ul {
+            padding: 0;
+            margin: 20px 0 50px 0;
+            list-style-type: none;
+
+            li {
+                margin: 10px 0;
+                font-size: 14px;
+
+                span {
+                    border-bottom: 2px dotted #0085e4;
+                }
+            }
+        }
+    }
+
+    .btn {
+        display: block;
+        background: #0085e4;
+        color: white;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.9);
+        transition: all 200ms ease-in-out;
+        text-decoration: none;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+        .btn1 {
+            display: block;
+            background: #f5013e;
+            color: white;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.9);
+            transition: all 200ms ease-in-out;
+            text-decoration: none;
+    
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+}
