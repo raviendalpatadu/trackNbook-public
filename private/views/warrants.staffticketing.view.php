@@ -86,6 +86,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             </div>
                         </form>
                     </div>
+                </div>
 
                     <div class="row">
                         <div class="col-12">
@@ -196,16 +197,15 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-    </div>
-    </div>
+            
+          
+  
     </div>
 
     </main>
     <?php $this->view('includes/footer'); ?>
     </div>
-    <?php $this->view("./includes/load-js") ?>
+    
 
 
 </body>

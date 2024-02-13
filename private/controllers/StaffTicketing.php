@@ -219,7 +219,13 @@ class StaffTicketing extends Controller
         }
 
         
-        $this->redirect('staffticketing/Warrant');
+        $this->redirect('staffticketing/warrant');
+    }
+
+    function refectReason($id = '')
+    {
+
+        $this->view('refect_reason.staffticketing');
     }
 
     function passengerdetails($id = '')

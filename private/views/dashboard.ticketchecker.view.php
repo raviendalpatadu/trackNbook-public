@@ -2,7 +2,7 @@
 
 
 <body>
-    <div class="column-left">
+    <div class="flex-grow">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class=" flex-grow d-flex align-items-end justify-content-center bg-ticket-checker">
             <div class="notificationCard max-width  mt-50 d-flex flex-column flex-grow justify-content-center align-items-center">
@@ -11,11 +11,13 @@
                         <img src="<?= ASSETS ?>images/home.jpg" class="bg-staff-home-mobile" alt="" srcset="">
                     </div> -->
                     <div class="d-flex flex-column justify-content-center align-items-center g-20">
-                        <button class="mou-staff-card">
-                            <a href="<?= ROOT ?>ticketchecker/QR">
+
+                        <button class="mou-staff-card" id="qr">
+                            <a href="<?= ROOT ?>ticketchecker/QR" >
                                 <div class="mou-staff-card-text">QR Scan</div>
                             </a>
                         </button>
+
                         <button class="mou-staff-card">
                             <a href="<?= ROOT ?>ticketchecker/reservationList">
                                 <div class="mou-staff-card-text">Reservation <br>List</div>
@@ -48,3 +50,13 @@
         <?php $this->view("./includes/footer") ?>
     </div>
 </body>
+
+<!-- <script>
+    $(document).ready(function() {
+        $("#qr").click(function() {
+
+            console.log("clicked");
+            // window.location.href = "<?= ROOT ?>staffticketing/refundDetails";
+        });
+    });
+</script> -->

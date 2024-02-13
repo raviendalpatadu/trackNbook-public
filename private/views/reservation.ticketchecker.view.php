@@ -79,7 +79,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text dark-green">Pending</div>
                                                 </div>
 
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/summary">
+                                                <a class="blue" href="<?= ROOT ?>ticketchecker/summary">
                                                     <div class="badge-base bg-Selected-Blue">
                                                         <div class="dot">
                                                             <div class="dot4"></div>
