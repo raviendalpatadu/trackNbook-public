@@ -56,14 +56,29 @@
 
 
 
+<<<<<<< HEAD
 
 
+=======
+                            </div>
+                            <div class="profile-img d-flex flex-column1 align-items-center justify-content-center">
+                                <img src="<?= ASSETS ?>images/map.png" alt="profile img" width="500" height="750">
+>>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 
+                            </div>
                         </div>
 
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
+=======
+
+
+
+            </div>
+
+>>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 
 
 
@@ -80,6 +95,7 @@
 
 </html>
 <style>
+<<<<<<< HEAD
     .if-widgets .if-frame {
         display: flex;
         flex-direction: column;
@@ -114,4 +130,26 @@
 
 
     }
+=======
+.if-widgets .if-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 7.78px;
+    padding: 23.33px;
+    position: relative;
+    flex: 1;
+    flex-grow: 0.15;
+    background-color: var(--bgwhite-100);
+    border-radius: 23.33px;
+    box-shadow: 0px 1.94px 13.61px #0063e70f;
+    width: 100px;
+}
+
+.flex-column1 {
+    margin-left: 200px;
+    flex-direction: column;
+}
+>>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 </style>
