@@ -365,7 +365,7 @@
 
 </html>
 <style>
-    .trains-available {
-        padding: 12px 24px;
-    }
+.trains-available {
+    padding: 12px 24px;
+}
 </style>

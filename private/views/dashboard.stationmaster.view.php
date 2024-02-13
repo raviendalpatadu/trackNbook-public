@@ -13,252 +13,70 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main style="background-color:#EFF8FF; padding:20px;">
-            <h1 style="margin-bottom:20px;">Check Train Arrival</h1>
-            <div>
-                <div class="table" style="background-color:white;max-width:100%;">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="trains-available">
-                                <h3>Trains available</h3>
-                                <div class="badge">
-                                    <div class="badge-base bg-light-green">
-                                        <div class="text dark-green">03</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="">
-                        <thead>
-                            <tr class="row">
-                                <th class="col-3">Train Name</th>
-                                <th class="col-3">From</th>
-                                <th class="col-3">To</th>
-                                <th class="col-1">Status</th>
-                                <th class="col-1"></th>
-                                <th class="col-1"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="row">
-                                <td class="col-3">Yal Devi</td>
-                                <td class="col-3">Kankesanthurai </td>
-                                <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1">
-                                    <div class="badge-base bg-light-green">
-                                        <div class="dot">
-                                            <div class="dot2"></div>
-                                        </div>
-                                        <div class="text dark-green">Arrived</div>
-                                    </div>
-                                </td>
-                                <td class="col-1"></td>
-                                <td class="col-1">
-                                    <a href="http://localhost/trackNbook/public/StationMaster/updateArrival"
-                                        class="blue">Check</a>
 
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="row">
-                                <td class="col-3">Yal Devi</td>
-                                <td class="col-3">KKS </td>
-                                <td class="col-3">Mount-Lavinia </td>
-                                <td class="col-1">
+            <div class="row">
+                <div class="col-12">
+                    <div class="if-widgets">
+
+                        <div class="card-dashboard1">
+                            <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
+                                    viewBox="0 0 31 37" fill="none">
+                                    <path
+                                        d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z"
+                                        fill="black" />
+                                </svg>
+
+                                <div class="impressions">Previuos trains</div>
+                            </div>
+                            <div class="number">02</div>
+                        </div>
+                        <div class="card-dashboard1">
+                            <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
+                                    viewBox="0 0 31 37" fill="none">
+                                    <path
+                                        d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z"
+                                        fill="black" />
+                                </svg>
+
+                                <div class="impressions">Upcoming trains</div>
+                            </div>
+                            <div class="number">03</div>
+                        </div>
 
 
-                                    <div class="badge-base bg-Selected-red">
-                                        <div class="dot">
-                                            <div class="dot3"></div>
-                                        </div>
-                                        <div class="text Banner-red">Not Arrived</div>
-                                    </div>
-                </div>
-                </td>
-                <td class="col-1"></td>
-                <td class="col-1">
-                    <a href="http://localhost/trackNbook/public/StationMaster/updateArrival" class="blue">Check</a>
-
-                </td>
-                </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-light-green">
-                                <div class="dot">
-                                    <div class="dot2"></div>
-                                </div>
-                                <div class="text dark-green">Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-light-green">
-                                <div class="dot">
-                                    <div class="dot2"></div>
-                                </div>
-                                <div class="text dark-green">Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-Selected-red">
-                                <div class="dot">
-                                    <div class="dot3"></div>
-                                </div>
-                                <div class="text Banner-red">Not Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-light-green">
-                                <div class="dot">
-                                    <div class="dot2"></div>
-                                </div>
-                                <div class="text dark-green">Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-light-green">
-                                <div class="dot">
-                                    <div class="dot2"></div>
-                                </div>
-                                <div class="text dark-green">Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                <tbody>
-                    <tr class="row">
-                        <td class="col-3">Yal Devi</td>
-                        <td class="col-3">KKS </td>
-                        <td class="col-3">Mount-Lavinia </td>
-                        <td class="col-1">
-                            <div class="badge-base bg-Selected-red">
-                                <div class="dot">
-                                    <div class="dot3"></div>
-                                </div>
-                                <div class="text Banner-red">Not Arrived</div>
-                            </div>
-                        </td>
-                        <td class="col-1"></td>
-                        <td class="col-1"><a href="/" class="blue">Check</a>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>
-                <div class="pagination">
-                    <div class="button">
-                        <div class="button-base">
-                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
-                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <div class="text">Previous</div>
-                        </div>
-                    </div>
-                    <div class="pagination-numbers">
-                        <div class="pagination-number-base-active">
-                            <div class="content">
-                                <div class="number">1</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">2</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">3</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">...</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">8</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">9</div>
-                            </div>
-                        </div>
-                        <div class="pagination-number-base">
-                            <div class="content">
-                                <div class="number2">10</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="button">
-                        <div class="button-base">
-                            <div class="text">Next</div>
-                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
-                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
                     </div>
                 </div>
+
+
+
             </div>
-        </main>
+            <br><br>
+            <div class="profile-img d-flex flex-column1 align-items-center justify-content-start">
+                <img src="<?= ASSETS ?>images/notification.png" alt="profile img" width="880" height="500">
+            </div>
+
+    </div>
+
+
+    </div>
+
+    </main>
     </div>
     <?php $this->view("./includes/load-js") ?>
 </body>
+<style>
+    .card-dashboard1 {
+        margin: 5px 5px;
+        padding: 10px 20px;
+        background-color: #FAFAFA;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        font-family: "Poppins-Medium", Helvetica;
+        border-radius: 10px;
+        height: 106px;
+        width: 381px;
+
+
+    }
+</style>
 
 </html>

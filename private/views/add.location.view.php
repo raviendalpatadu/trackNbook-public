@@ -24,32 +24,53 @@
 
                     <div class="col-5">
                         <div class="warrant-container-box mt-30">
-                            <div class="delay-details">
+                            <div class="ticket-details">
                                 <div class="row mb-20 ">
                                     <div class="col-12 d-flex align-items-center flex-column line">
-                                        <h1>Update Train Delay</h1>
+                                        <h1>Update Location</h1>
+                                    </div>
+                                </div>
+                                <div class="row mb-10 mt-50 ml-20 ">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Train ID : 1059</p>
+                                        <p class="width-50">
+                                            <?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Train Name : Yal Devi</p>
+                                        <p class="width-50">
+                                            <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_name) : ''; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Start Station : KKS</p>
+                                        <p class="width-50">
+                                            <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) . "&#8594" . ucfirst($data['train']->end_station) : ''; ?>
+                                        </p>
                                     </div>
                                 </div>
 
                                 <div class="row mb-10 ml-20">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Train ID</div>
-                                        <div class="input-field4">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="reservation_passenger_nic">
-                                            </div>
-
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?>
-                                            </div>
-                                        </div>
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">End Station : Mount Lavinia</p>
+                                        <p class="width-50">
+                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
+                                        </p>
                                     </div>
                                 </div>
-
-
-
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Date : 25-Jan-2024</p>
+                                        <p class="width-50">
+                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
+                                        </p>
+                                    </div>
+                                </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-3">
                                         <div class="text-inputs">
@@ -78,22 +99,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Reason</div>
-                                        <div class="input-field3">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="reservation_passenger_nic">
-                                            </div>
-
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
 
 
@@ -101,10 +106,18 @@
                         </div>
                         <div class="row d-flex g-8 justify-content-center">
                             <div class="col-4">
+                                <button class="button mt-20 "><a
+                                        href="http://localhost/trackNbook/public/traindriver/updatelocation">
+                                        <div class="button-base bg-Selected-Blue">
+                                            <div class="text Blue">Back</div>
+                                        </div>
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="col-4">
                                 <button class="button mt-20 " id="reject">
-
                                     <div class="button-base bg-Selected-red">
-                                        <div class="text Banner-red">Clear</div>
+                                        <div class="text Banner-red">Pending</div>
                                     </div>
                                     </a>
                                 </button>
@@ -117,9 +130,7 @@
                                     </a>
                                 </button>
                             </div>
-                            <div class="col-4">
 
-                            </div>
                         </div>
                     </div>
 
@@ -143,50 +154,6 @@
         transition: all 0.3s ease;
         width: 421px;
     }
-
-    .input-field3 {
-        background: var(--w-background, #ffffff);
-        border-radius: 5px;
-        border-style: solid;
-        border-color: #cccccc;
-        border-width: 1px;
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-        justify-content: flex-start;
-        align-self: stretch;
-        flex-shrink: 0;
-        position: relative;
-        width: 421px;
-        height: 100px;
-    }
-
-    .input-field4 {
-        background: var(--w-background, #ffffff);
-        border-radius: 5px;
-        border-style: solid;
-        border-color: #cccccc;
-        border-width: 1px;
-        padding: 5px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-        justify-content: flex-start;
-        align-self: stretch;
-        flex-shrink: 0;
-        position: relative;
-        width: 421px;
-    }
-
-
-    .delay-details {
-        padding: 23px 50px;
-        height: 347px;
-
-    }
 </style>
 
-</html>m
+</html>

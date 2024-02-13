@@ -16,10 +16,11 @@ class StationMaster extends Controller
 
         $this->view('update.train.arrival');
     }
-
-    function updateLocation($id = '')
+    function updateTrainLocation($id = '')
     {
 
         $this->view('update.train.location');
     }
+
+
 }

@@ -49,9 +49,6 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                         </div>
 
-
-
-
                         <div class="row">
                             <div class="col-12">
 
@@ -232,8 +229,12 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                 <div class="pagination">
                                     <button class="button">
                                         <div class="button-base">
-                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
 
                                             <div class="text">Previous</div>
@@ -279,8 +280,12 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     <button class="button">
                                         <div class="button-base">
                                             <div class="text">Next</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </button>
@@ -513,8 +518,12 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                 <div class="pagination">
                                     <button class="button">
                                         <div class="button-base">
-                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
 
                                             <div class="text">Previous</div>
@@ -560,8 +569,12 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     <button class="button">
                                         <div class="button-base">
                                             <div class="text">Next</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </button>

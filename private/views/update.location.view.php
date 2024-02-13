@@ -91,8 +91,8 @@
                                             </td>
                                             <td class="col-1"></td>
                                             <td class="col-1">
-                                                <a href="http://localhost/trackNbook/public/StationMaster/updateArrival"
-                                                    class="blue">Check</a>
+                                                <a href="http://localhost/trackNbook/public/traindriver/addlocation"
+                                                    class="blue">Update</a>
 
                                             </td>
                                         </tr>
@@ -109,14 +109,14 @@
                                                     <div class="dot">
                                                         <div class="dot3"></div>
                                                     </div>
-                                                    <div class="text Banner-red">Not Arrived</div>
+                                                    <div class="text Banner-red">Pending</div>
                                                 </div>
                             </div>
                             </td>
                             <td class="col-1"></td>
                             <td class="col-1">
-                                <a href="http://localhost/trackNbook/public/StationMaster/updateArrival"
-                                    class="blue">Check</a>
+                                <a href="http://localhost/trackNbook/public/traindriver/addlocation"
+                                    class="blue">Update</a>
 
                             </td>
                             </tr>
@@ -135,7 +135,7 @@
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -153,7 +153,7 @@
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -167,11 +167,11 @@
                                             <div class="dot">
                                                 <div class="dot3"></div>
                                             </div>
-                                            <div class="text Banner-red">Not Arrived</div>
+                                            <div class="text Banner-red">Pending</div>
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -189,7 +189,7 @@
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -207,7 +207,7 @@
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -221,11 +221,11 @@
                                             <div class="dot">
                                                 <div class="dot3"></div>
                                             </div>
-                                            <div class="text Banner-red">Not Arrived</div>
+                                            <div class="text Banner-red">Pending</div>
                                         </div>
                                     </td>
                                     <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
+                                    <td class="col-1"><a href="/" class="blue">Update</a>
                                     </td>
                                 </tr>
                             </tbody>
