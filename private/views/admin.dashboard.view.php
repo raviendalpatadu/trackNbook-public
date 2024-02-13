@@ -106,6 +106,7 @@
                             <a href="<?= ROOT ?>admin/inquiry" class="btn">Check</a>
 
                         </div><!--/card-->
+                        <!-- need to edit the card -->
 
                         <div class="card">
 
