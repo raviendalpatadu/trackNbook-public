@@ -283,8 +283,6 @@ $train_driver = array(
     false,
     "traindriver/scanLocation"
   ),
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
-
 
 );
 
