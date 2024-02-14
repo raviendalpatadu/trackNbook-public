@@ -1,7 +1,7 @@
 <?php
 echo "<pre>";
-print_r($data);
-print_r($_SESSION);
+// print_r($data);
+// print_r($_SESSION);
 // print_r($_POST);
 echo "</pre>";
 
@@ -26,8 +26,10 @@ if ($_SESSION['reservation']['class_id'] == 1) {
 
 
 $reserved_seats = array();
-foreach ($data as $key => $value) {
-    $reserved_seats[] = $value->reservation_seat;
+if ($data != null) {
+    foreach ($data as $key => $value) {
+        $reserved_seats[] = $value->reservation_seat;
+    }
 }
 
 
@@ -94,7 +96,7 @@ foreach ($data as $key => $value) {
 
                     <div class="row">
                         <div class="col-12 d-flex align-items-center flex-column g-20">
-                            <h2><?=ucfirst($class_name)?> class reservation</h2>
+                            <h2><?= ucfirst($class_name) ?> class reservation</h2>
                             <form action="" method="post" class="d-flex align-items-center flex-column g-20">
                                 <div class="comparment d-flex flex-row g-10 p-30">
 
@@ -147,10 +149,10 @@ foreach ($data as $key => $value) {
 
                                 <div class="d-flex justify-content-end align-items-end g-20 width-fill">
                                     <a class="button" href="<?= ROOT ?>home">
-                                            <div class="button-base">
-                                                <div class="text">Cancel</div>
-                                            </div>
-                                        </a>
+                                        <div class="button-base">
+                                            <div class="text">Cancel</div>
+                                        </div>
+                                    </a>
                                     <!-- </button> -->
 
                                     <div class="button-base">

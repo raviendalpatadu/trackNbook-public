@@ -26,7 +26,7 @@ class TicketChecker extends Controller
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
             $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
         }
-         
+        
         $this->view('reservation.ticketchecker', $data);
     }
 

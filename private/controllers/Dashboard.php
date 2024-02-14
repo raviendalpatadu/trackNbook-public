@@ -17,7 +17,11 @@ class Dashboard extends Controller
     function admin($id = '')
     {
         if (Auth::is_logged_in()) {
-            $this->view('admin.dashboard');
+            $user = new Users();
+            $data['usersCount'] = $user->getCount();
+            $train = new Trains();
+            $data['trainsCount'] = $train->getCount();
+            $this->view('admin.dashboard', $data);
         } else {
             $this->view('login');
         }
@@ -25,10 +29,10 @@ class Dashboard extends Controller
 
     //to be made
     function staff_general($id = '')
-    {   
-        if(Auth::is_logged_in()){
+    {
+        if (Auth::is_logged_in()) {
             $this->view('staff_general.dashboard');
-        }else{
+        } else {
             $this->view('login');
         }
     }
@@ -43,17 +47,17 @@ class Dashboard extends Controller
     }
     //to be made
     function train_driver($id = '')
-    {   
+    {
         $this->view('dashboard.traindriver');
     }
     //to be made
     function station_master($id = '')
-    {   
+    {
         $this->view('dashboard.stationmaster');
     }
-    
+
     function ticket_checker($id = '')
-    {   
+    {
         $this->view('dashboard.ticketchecker');
     }
 

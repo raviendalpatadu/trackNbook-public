@@ -1,7 +1,7 @@
 <?php
 
 // echo "<pre>";
-// print_r($data);
+// // print_r($data);
 // print_r($_SESSION);
 // echo "</pre>";
 ?>
@@ -13,7 +13,7 @@
         <main>
             <div class="container d-flex justify-content-center">
                 <div class="passenger-container">
-                    <div class="row mb-50">
+                    <div class="row mb-50 mobile-mb-20">
                         <div class="col-12">
                             <div class="loader d-flex align-items-center justify-content-center px-20">
                                 <div class="loader-circle complete">
@@ -51,103 +51,146 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container d-flex justify-content-center">
-                        <div class="ticket-container">
-                            <div class="row mb-20 mt-20">
-                                <div class="col-12 d-flex align-items-center flex-column line">
-                                    <h1>Ticket Summary</h1>
-                                </div>
-                                <div class="row mb-10 mt-30 ml-20 ">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train Number</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train Type</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_type) : ''; ?></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train Name</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_name) : ''; ?></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Start Location</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) : ''; ?></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">End Location</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->end_station) : ''; ?></p>
-                                    </div>
-                                </div>
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train Class</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->compartment_class_type) : ''; ?></p>
-                                    </div>
-                                </div>
-                                
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Time Start &#8594 End</p>
-                                        <p class="width-50"><?php echo (array_key_exists('train', $data)) ? date("H:i",strtotime($data['train']->train_start_time)) ."->" . date("H:i",strtotime($data['train']->train_end_time)): ''; ?></p>
-                                    </div>
-                                </div>
 
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Seats Selected</p>
-                                        <p class="width-50">
-                                            <?php
-                                            if (array_key_exists('selected_seats', $_SESSION['reservation'])) {
-                                                foreach ($_SESSION['reservation']['selected_seats'] as $key => $value) {
-                                                    echo $value . " ";
-                                                }
-                                            }
-                                            ?>
-                                        </p>
-                                    </div>
-                                </div>
+                    <div class="container d-flex flex-column g-20 justify-content-center align-items-center">
+                        <div class="ticket-summary d-flex flex-column align-items-center" id="ticketSummary">
+                            <h3 class="width-fill text-align-center">Booking Summary</h3>
+                            <div class="d-flex flex-column align-items-center g-20">
 
-                                <div class="row mb-10 ml-20">
-                                    <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Date</p>
-                                        <p class="width-50"><?php echo (array_key_exists('reservation', $_SESSION)) ? $_SESSION['reservation']['from_date'] : ''; ?></p>
+                                <div class="d-flex align-items-center mobile-align-items-center mobile-flex-column-reverse pb-20 width-fill border-bottom g-100 mobile-g-20">
+                                    <!-- train details and qr code -->
+                                    <div class="d-flex g-20 flex-column ticket-summary-train-data flex-grow">
+                                        <p class="ref-no">Ref No: <?= Auth::getreservation_ticket_id() ?></p>
+                                        <div class="d-flex g-5 ticket-summary-train-data-details flex-grow flex-column">
+                                            <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Price</p>
+                                                <p class="width-fill"><?= number_format(floatval(Auth::getPrice()), 2) ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Train No</p>
+                                                <p class="width-fill"><?= str_pad(Auth::getTrain()->train_id, 4, '0', STR_PAD_LEFT) ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Train Name</p>
+                                                <p class="width-fill"><?= Auth::getTrain()->train_name ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Start Station</p>
+                                                <p class="width-fill"><?= Auth::getStart_station()->station_name ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">End Station</p>
+                                                <p class="width-fill"><?= Auth::getEnd_station()->station_name ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Arrival Time</p>
+                                                <p class="width-fill"><?= date_format(date_create(Auth::getTrain()->train_start_time), "H:i") ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">No of Passengers</p>
+                                                <p class="width-fill"><?= str_pad(Auth::no_of_passengers(), 2, "0", STR_PAD_LEFT) ?></p>
+                                            </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="ticket-summary-qr-code">
+                                        <div id="qr_code"></div>
                                     </div>
                                 </div>
-                                
-                                
-                                <div class="row">
-                                    <div class="col-12 d-flex align-items-center flex-column">
-                                        <button class="button"><a href="<?= ROOT ?>home">
-                                                <div class="button-base">
-                                                    <div class="text">Home</div>
-                                                    <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </div>
-                                            </a>
-                                        </button>
-                                    </div>
+                                <div class="d-flex flex-column align-items-start g-10 passenger-compartment-details">
+                                    <p class="">Passenger and Compartment Details</p>
+                                    <table class="ticket-summary-passenger-compartment-details text-align-center">
+                                        <!-- <tr>
+                                            <th>Seat No(s)</th>
+                                                <td>23</td>
+                                                <td>23</td>
+                                                <td>23</td>
+                                                <td>23</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                                <td>female</td>
+                                                <td>female</td>
+                                                <td>female</td>
+                                                <td>female</td>
+                                           
+                                        </tr>
+                                        <tr>
+                                            <th>NIC</th>
+                                                <td>20000000000000</td>
+                                                <td>20000000000000</td>
+                                                <td>20000000000000</td>
+                                                <td>20000000000000</td>
+                                        </tr> -->
+                                        <tr>
+                                            <th>Seat No(s)</th>
+                                            <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
+                                                <td><?= (isset(Auth::getSelected_seats()[$i])) ? str_pad(Auth::getSelected_seats()[$i], 2, "0", STR_PAD_LEFT) : "-" ?></td>
+                                            <?php endfor; ?>
+                                        </tr>
+                                        <tr>
+                                            <th>Gender</th>
+                                            <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
+                                                <td><?= (isset(Auth::getpassenger_data()["user_gender"]["$i"])) ? Auth::getpassenger_data()["user_gender"]["$i"] : "-" ?></td>
+                                            <?php endfor; ?>
+                                        </tr>
+                                        <tr>
+                                            <th>NIC</th>
+                                            <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
+                                                <td><?= (isset(Auth::getpassenger_data()['user_nic'][$i])) ? Auth::getpassenger_data()['user_nic'][$i] : "-" ?></td>
+                                            <?php endfor; ?>
+                                        </tr>
+                                    </table>
                                 </div>
-                                
-                                
                             </div>
                         </div>
+
+                        <div class="d-flex g-20">
+                            <!-- home btn and print btn -->
+                            <button class="button mx-10">
+                                <div class="button-base"><a href="<?= ROOT ?>">
+                                        <div class="text">Home</div>
+                                </div></a>
+                            </button>
+                            <button class="button mx-10" id="downloadTicket">
+                                <div class="button-base">
+                                    <div class="text">Download Ticket</div>
+                                </div>
+                            </button>
+                        </div>
                     </div>
+                </div>
         </main>
         <?php $this->view("./includes/footer") ?>
-
     </div>
 
 
 </body>
 
 </html>
+
+
+
+<script>
+    var qrcode = new QRCode("qr_code", {
+        text: "<?= Auth::getreservation_ticket_id() ?>",
+        width: 128,
+        height: 128,
+        colorDark: "#324054",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    $("#downloadTicket").click(function() {
+        var element = $('#ticketSummary');
+        var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
+        var pdf = new jsPDF();
+
+        
+        pdf.addHTML(element, function() {
+            pdf.save(name + '.pdf');
+        })
+    });
+</script>

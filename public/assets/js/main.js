@@ -1,62 +1,64 @@
-
-  // Select seats using jQuery
-  var seats = $('[id^="seatNo-"]:not(.reserved)');
+// Select seats using jQuery
+var seats = $('[id^="seatNo-"]:not(.reserved)');
 //   var seatsOption = $('[id^="seatNoOption-"]');
 
+// Function to handle the click event
+function handleEvent() {
+  //add seletced attribute to the selected seat option
+  var seatOption = $(
+    "#seatNoOption-" + parseInt($(this).attr("id").split("-")[1])
+  );
 
-  // Function to handle the click event
-  function handleEvent() {
-    //add seletced attribute to the selected seat option
-    var seatOption = $("#seatNoOption-" + parseInt($(this).attr("id").split("-")[1]));
-    
-    //get the count of elements with class selected
-    var selectedSeatCount = $(".comparment  .selected").length;
-    
-    // get no of passengers from PHP session variable
-    var noOfPassengers = $("#noOfPassengers").val();
-    // string to int conversion
-    noOfPassengers = parseInt(noOfPassengers);
-    
-    if (selectedSeatCount < noOfPassengers) {
-        $(this).toggleClass("selected");
-        //add selected attribute to the selected seat option
-        seatOption.attr("selected", "selected");
-    }
-    if (selectedSeatCount >= noOfPassengers) {
-        $(".comparment  .selected").removeClass("selected");
-        // remove selected attribute to the selected seat option
-        $('#hiddenSeats > option[selected="selected"]').removeAttr("selected");
-    }
+  //get the count of elements with class selected
+  var selectedSeatCount = $(".comparment  .selected").length;
+
+  // get no of passengers from PHP session variable
+  var noOfPassengers = $("#noOfPassengers").val();
+  // string to int conversion
+  noOfPassengers = parseInt(noOfPassengers);
+
+  if (selectedSeatCount < noOfPassengers) {
+    $(this).toggleClass("selected");
+    //add selected attribute to the selected seat option
+    seatOption.attr("selected", "selected");
   }
+  if (selectedSeatCount >= noOfPassengers) {
+    $(".comparment  .selected").removeClass("selected");
+    // remove selected attribute to the selected seat option
+    $('#hiddenSeats > option[selected="selected"]').removeAttr("selected");
+  }
+}
 
-  // Add click event to seats
-  seats.click(handleEvent);
+// Add click event to seats
+seats.click(handleEvent);
 
-  // Select checkbox and box using jQuery
-  var checkbox = $("#return");
-  var box = $("#toDate");
+// Select checkbox and box using jQuery
+var checkbox = $("#return");
+var box = $("#toDate");
 
-  // Add click event to checkbox
-  checkbox.click(function () {
-    if (checkbox.is(":checked")) {
-      box.css("display", "block");
-    } else {
-      box.css("display", "none");
-    }
-  });
+// Add click event to checkbox
+checkbox.click(function () {
+  if (checkbox.is(":checked")) {
+    // show the box with an animation
+    //box.css("display", "block");
+    box.fadeIn(300);
+  } else {
+    box.css("display", "none");
+  }
+});
 
-  //warrent booking toggle
-  var warrent = $("#warrentBooking");
-  var chooseImg = $("#chooseImg");
+//warrent booking toggle
+var warrent = $("#warrentBooking");
+var chooseImg = $("#chooseImg");
 
-  // Add click event to warrent
-  warrent.click(function () {
-    if (warrent.is(":checked")) {
-      chooseImg.css("display", "block");
-    } else {
-      chooseImg.css("display", "none");
-    }
-  });
+// Add click event to warrent
+warrent.click(function () {
+  if (warrent.is(":checked")) {
+    chooseImg.css("display", "block");
+  } else {
+    chooseImg.css("display", "none");
+  }
+});
 // });
 
 //drop down
@@ -90,7 +92,6 @@ $("select.dropdown").each(function () {
   }
 });
 
-
 $(document).on("click touch", ".selectDropdown ul li a", function (e) {
   e.preventDefault();
   var dropdown = $(this).parent().parent().parent();
@@ -108,7 +109,7 @@ $(document).on("click touch", ".selectDropdown ul li a", function (e) {
     dropdown
       .find("option:contains(" + $(this).text() + ")")
       .prop("selected", true);
-    
+
     $(this).parent().addClass("active");
   }
 
@@ -130,19 +131,16 @@ $(document).on("click touch", function (e) {
   }
 });
 
-
-
-
 // $(document).ready(function () {
+$("#popup").hide();
+
+$("#yes").on("click", function () {
+  $("#popup").show();
+});
+
+$("#no").on("click", function () {
   $("#popup").hide();
-
-  $("#yes").on("click", function () {
-    $("#popup").show();
-  });
-
-  $("#no").on("click", function () {
-    $("#popup").hide();
-  });
+});
 //});
 
 //QR Code Scanner
@@ -175,3 +173,45 @@ domReady(function () {
 });
 
 //popup
+
+
+function hello() {
+  alert("hello");
+}
+
+// get errors from the server
+
+function getErrors(url, data, callback) {
+  $.ajax({
+    url: url,
+    type: "post",
+    data: data,
+    success: function (response) {
+      var res = JSON.parse(response);
+      callback(res);
+    },
+  });
+}
+
+
+function printErrors(errors) {
+  if ($("div.assistive-text").length) {
+    $("div.assistive-text").remove();
+  }
+
+  var errs = errors.errors;
+  // loop through the errors
+  for (var key in errs) {
+    if (errs.hasOwnProperty(key)) {
+      var value = errs[key];
+      console.log("key is " + key + " value " + value);
+
+      var tag = $("[name=" + key + "]")
+        .parent()
+        .parent();
+
+      var errorDiv = $("<div class='assistive-text'></div>").text(value);
+      tag.append(errorDiv);
+    }
+  }
+}

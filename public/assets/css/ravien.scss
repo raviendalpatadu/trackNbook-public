@@ -22,6 +22,19 @@ $sizes: (
   "100": 100px,
 );
 
+$vw : (
+  "10": 10vw,
+  "20": 20vw,
+  "30": 30vw,
+  "40": 40vw,
+  "50": 50vw,
+  "60": 60vw,
+  "70": 70vw,
+  "80": 80vw,
+  "90": 90vw,
+  "100": 100vw
+);
+
 $colors: (
   "transparent": transparent,
   "Primary-Blue": #2d68fe,
@@ -67,10 +80,10 @@ $colors: (
     margin-right: $val;
     margin-left: $val;
 
-    .mx-auto {
-      margin-right: auto;
-      margin-left: auto;
-    }
+  }
+  .mx-auto {
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .p-#{$key} {
@@ -109,6 +122,71 @@ $colors: (
 
   .fs-#{$key} {
     font-size: $val;
+  }
+
+  @media screen and (max-width: 768px) {
+    .mobile-m-#{$key} {
+      margin: $val !important;
+    }
+
+    .mobile-mb-#{$key} {
+      margin-bottom: $val !important;
+    }
+
+    .mobile-mt-#{$key} {
+      margin-top: $val !important;
+    }
+
+    .mobile-ml-#{$key} {
+      margin-left: $val !important;
+    }
+
+    .mobile-mr-#{$key} {
+      margin-right: $val !important;
+    }
+
+    .mobile-mx-#{$key} {
+      margin-right: $val !important;
+      margin-left: $val !important;
+    }
+
+    .mobile-p-#{$key} {
+      padding: $val !important;
+    }
+
+    .mobile-pb-#{$key} {
+      padding-bottom: $val !important;
+    }
+
+    .mobile-pt-#{$key} {
+      padding-top: $val !important;
+    }
+
+    .mobile-pl-#{$key} {
+      padding-left: $val !important;
+    }
+
+    .mobile-pr-#{$key} {
+      padding-right: $val !important;
+    }
+
+    .mobile-px-#{$key} {
+      padding-left: $val !important;
+      padding-right: $val !important;
+    }
+
+    .mobile-py-#{$key} {
+      padding-top: $val !important;
+      padding-bottom: $val !important;
+    }
+
+    .mobile-g-#{$key} {
+      gap: $val !important;
+    }
+
+    .mobile-fs-#{$key} {
+      font-size: $val !important;
+    }
   }
 }
 
@@ -154,6 +232,13 @@ $colors: (
   border-color: map-get($colors, "green");
 }
 
+.max-width-none {
+  max-width: none !important;
+}
+
+.min-width-none{
+  min-width: none !important;
+}
 @media screen and (max-width: 768px) {
 
   .loader-circle,
@@ -275,12 +360,16 @@ $colors: (
   width: 100%;
 }
 
-.width-50 {
-  width: 50%;
-}
+@each $key, $val in $vw {
+  .width-#{$key} {
+    width: $val;
+  }
 
-.width-40 {
-  width: 40%;
+  @media screen and (max-width: 768px) {
+    .mobile-width-#{key} {
+      width: $val !important;
+    }
+  }
 }
 
 .bg-home-desktop {
@@ -409,7 +498,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   left: 0px;
   z-index: -100;
   height: 100%;
-  width: 60%;
+  width: 65%;
   background: linear-gradient(270deg, #fff 5.1%, rgba(0, 0, 0, 0) 101.92%),
     url("../images/home1.jpg"), no-repeat;
   background-size: cover;
@@ -753,6 +842,7 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   align-items: center;
+
 }
 
 .route-line {
@@ -802,7 +892,6 @@ table.price-table th {
 .ticket-summary-passenger-compartment-details {
   border: 1px solid #000;
   border-collapse: collapse;
-
 }
 
 .ticket-summary-passenger-compartment-details td,

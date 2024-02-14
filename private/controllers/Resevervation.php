@@ -17,7 +17,10 @@ class Reservation extends Controller
         echo "<pre>";
         print_r($_SESSION);
         echo "</pre>";
+    }
 
-
+    public function scan($id = '')
+    {
+        
     }
 }

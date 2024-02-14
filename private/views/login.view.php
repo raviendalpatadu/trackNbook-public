@@ -67,9 +67,9 @@
                                 <!-- Submit -->
 
 
-                                <div class="button-base">
-                                    <input class="text" type="submit" value="Submit" name="submit">
-                                </div>
+                                    <div class="button-base">
+                                        <input class="text" type="submit" value="Login" name="submit">
+                                    </div>
 
 
 

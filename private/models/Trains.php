@@ -56,46 +56,55 @@ class Trains extends Model
             return $data;
         }
     }
-    public function search()
-    {
-        $errors = array();
 
-        $data = array();
-        //   //check if to_station is exists in post
-        if (empty($_POST['to_station']) || $_POST['to_station'] == 0) {
-            $errors['errors']['to_station'] = 'Station is required';
+    public function validate($values = array()){
+
+       
+        if (empty($values['to_station']) || $values['to_station'] == 0) {
+            $this->errors['errors']['to_station'] = 'Station is required';
         }
 
         //check if from_station is exists in post
-        if (empty($_POST['from_station']) || $_POST['from_station'] == 0) {
-            $errors['errors']['from_station'] = 'Staion is required';
+        if (empty($values['from_station']) || $values['from_station'] == 0) {
+            $this->errors['errors']['from_station'] = 'Staion is required';
         }
 
         //check if from staion = to_station
-        if (!(array_key_exists('errors', $errors)) && $_POST['from_station'] == $_POST['to_station']) {
-            $errors['errors']['from_station'] = 'From and To stations are same';
-            $errors['errors']['to_station'] = 'From and To stations are same';
+        if (!(array_key_exists('errors', $this->errors)) && $values['from_station'] == $values['to_station']) {
+            $this->errors['errors']['from_station'] = 'From and To stations are same';
+            $this->errors['errors']['to_station'] = 'From and To stations are same';
         }
 
         //check if from date is exists in post
-        if (empty($_POST['from_date'])) {
-            $errors['errors']['from_date'] = 'date is required';
+        if (empty($values['from_date'])) {
+            $this->errors['errors']['from_date'] = 'date is required';
         }
 
-        if (isset($_POST['return'])) {
+        if (isset($values['return'])) {
             //check if to date is exists in post
-            if (empty($_POST['to_date'])) {
-                $errors['errors']['to_date'] = 'Date is required';
+            if (empty($values['to_date'])) {
+                $this->errors['errors']['to_date'] = 'Date is required';
             }
         }
 
         //check if from no of passengers is exists in post
-        if (empty($_POST['no_of_passengers'])) {
-            $errors['errors']['no_of_passengers'] = 'Passenger count is required';
+        if (empty($values['no_of_passengers'])) {
+            $this->errors['errors']['no_of_passengers'] = 'Passenger count is required';
         }
 
+        if (count($this->errors) > 0) {
+            return false;
+        }
+        return true;
+    }
+    public function search($values = array())
+    {
+        $errors = array();
 
 
+        $data = array();
+        //   //check if to_station is exists in post
+        
         if (!array_key_exists('errors', $errors)) {
 
             try {
@@ -182,9 +191,9 @@ class Trains extends Model
 
 
                 $data['trains'] = $this->query($query, array(
-                    'from_station' => $_POST['from_station'],
-                    'to_station' => $_POST['to_station'],
-                    'from_date' => $_POST['from_date']
+                    'from_station' => $values['from_station']->station_id,
+                    'to_station' => $values['to_station']->station_id,
+                    'from_date' => $values['from_date']
                 ));
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -296,8 +305,7 @@ class Trains extends Model
     //get reservation for a specific train
     public function getTrainReservation($class_id = "", $train_id = "")
     {
-        $con = $this->connect();
-
+           
         $date = $_SESSION['reservation']['from_date'];
 
         try {
@@ -316,18 +324,16 @@ class Trains extends Model
 
                 . " JOIN tbl_compartment c ON r.reservation_compartment_id = c.compartment_id\n"
 
-                . " JOIN tbl_compartment_class_type ct ON ct.compartment_class_type_id = c.compartment_id\n"
+                . " JOIN tbl_compartment_class_type ct ON ct.compartment_class_type_id = c.compartment_class_type\n"
 
-                . " WHERE r.reservation_train_id = :train_id AND r.reservation_date = :date AND r.reservation_class = :class";
+                . " WHERE r.reservation_train_id = :train_id AND r.reservation_compartment_id = :class AND r.reservation_date = :date";
 
-            $stm = $con->prepare($query);
-
-            $stm->execute(array(
+            $data = $this->query($query, array(
                 'train_id' => $train_id,
                 'class' => $class_id,
                 'date' => $date
             ));
-            $data = $stm->fetchAll(PDO::FETCH_OBJ);
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

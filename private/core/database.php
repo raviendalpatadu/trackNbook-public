@@ -19,9 +19,15 @@ class Database
         try{
             $con = $this->connect();
             $stm = $con->prepare($query);
+
             if ($stm) {
                 $check = $stm->execute($data);
                 if ($check) {
+                    // if a insert query is been executed return the id of the inserted row
+                    if (preg_match("/^INSERT/i", $query)) {
+                        return $con->lastInsertId();
+                    }
+
                     if ($data_type == "object") {
                         $data = $stm->fetchAll(PDO::FETCH_OBJ);
                     } elseif ($data_type == "array") {
@@ -35,13 +41,16 @@ class Database
                         $con = null;
                         return $data;
                     }
+
                 }
             }
         } catch(PDOException $e){
-            echo $query;
+            // echo $query;
             die($e->getMessage());
         }
         $con = null;
         return false;
     }
+
+
 }

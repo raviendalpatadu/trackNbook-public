@@ -7,7 +7,7 @@
 // echo "</pre>";
 
 if (isset($data['users']) && $data['users'] != 0) {
-    $count =  count($data['users']);
+    $count = count($data['users']);
 } else {
     $count = 0;
 }
@@ -25,35 +25,44 @@ if (isset($data['users']) && $data['users'] != 0) {
                     <div class="col-12">
                         <form action="" method="post">
                             <div class="row mb-30 g-10">
+
+
                                 <div class="col-3">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Display users</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id" placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
-                                                <?php foreach ($data['trains'] as $key => $value) : ?>
-                                                    <option value="<?= $value->train_id ?>"><?= $value->train_name ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label text lightgray-font">Name</div>
+                                            <div class="input-field">
+                                                <div class="text">
+                                                    <input type="text" class="type-here" placeholder="Type here"
+                                                        name="user_first_name">
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
+                                                <?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?>
+                                            </div>
                                         </div>
-
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?></div>
                                     </div>
                                 </div>
+
                                 <div class="col-3">
                                     <div class="text-inputs">
                                         <div class="input-text-label text lightgray-font">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="reservation_passenger_nic">
+                                                <input type="text" class="type-here" placeholder="Type here"
+                                                    name="user_nic">
                                             </div>
                                         </div>
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
+                                        <div
+                                            class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
+                                            <?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-3">
+
+                                
+                                <!-- <div class="col-3">
                                     <div class="text-inputs date">
                                         <div class="input-text-label text lightgray-font">Date</div>
                                         <div class="input-field">
@@ -66,7 +75,7 @@ if (isset($data['users']) && $data['users'] != 0) {
                                         </div>
                                         <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-3 d-flex align-self-end">
                                     <button class="button">
                                         <div class="button-base">
@@ -80,15 +89,12 @@ if (isset($data['users']) && $data['users'] != 0) {
 
                     <div class="row">
                         <div class="col-12">
-                            <div class="trains-available mb-10">
-                                <h2>Users</h2>
-
-                            </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="trains-available">
-                                        <h3>All users available</h3>
+                                        <h3>Available Users</h3>
                                     </div>
+                                    <br>
                                     <table class="">
                                         <thead>
                                             <tr class="row p-20">
@@ -115,23 +121,40 @@ if (isset($data['users']) && $data['users'] != 0) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php for ($user = 0; $user < $count; $user++) : ?>
+
+                                            <!-- pagination initiate -->
+                                            <?php
+                                            $totalRows = count($data['users']);
+                                            $totalPages = ceil($totalRows / 7);
+                                            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                                            $start = ($page - 1) * 7;
+                                            $end = $start + 7;
+                                            for ($user = $start; $user < $end && $user < $totalRows; $user++):
+                                                ?>
+
                                                 <tr class="row p-20">
                                                     <td class="col-3 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                         </div>
                                                         <?= $data['users'][$user]->user_first_name . " " . $data['users'][$user]->user_last_name ?>
                                                     </td>
-                                                    <td class="col-1 d-flex align-items-center lightgray-font "><?= $data['users'][$user]->user_type ?></td>
-                                                    <td class="col-2 d-flex align-items-center"><?= $data['users'][$user]->user_phone_number ?></td>
-                                                    <td class="col-3 d-flex align-items-center"><?= $data['users'][$user]->user_email ?></td>
+                                                    <td class="col-1 d-flex align-items-center lightgray-font ">
+                                                        <?= $data['users'][$user]->user_type ?>
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <?= $data['users'][$user]->user_phone_number ?>
+                                                    </td>
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <?= $data['users'][$user]->user_email ?>
+                                                    </td>
                                                     <td class="col-2 d-flex align-items-center">
                                                         <div class="d-flex .flex-row g-5 mr-5">
                                                             <?= $data['users'][$user]->user_nic ?>
                                                         </div>
                                                     </td>
                                                     <td class="col-1 d-flex align-items-center g-5">
-                                                        <a class="blue" href="<?= ROOT ?>admin/updateUser/<?= $data['users'][$user]->user_id ?>">
+                                                        <a class="blue"
+                                                            href="<?= ROOT ?>admin/updateUser/<?= $data['users'][$user]->user_id ?>">
                                                             <div class="badge-base bg-Selected-Blue">
                                                                 <div class="dot">
                                                                     <div class="dot4"></div>
@@ -139,8 +162,10 @@ if (isset($data['users']) && $data['users'] != 0) {
                                                                 <div class="text blue">View</div>
                                                             </div>
                                                         </a>
-                                                        <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
-                                                            <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/<?= $data['users'][$user]->user_id ?>">
+                                                        <div class="badge-base bg-Selected-red"
+                                                            onclick="alert('Are you sure you want to delete record')">
+                                                            <a class="blue d-flex flex-row g-2 align-items-center"
+                                                                href="<?= ROOT ?>admin/deleteUser/<?= $data['users'][$user]->user_id ?>">
                                                                 <div class="dot">
                                                                     <div class="dot4  bg-Banner-red"></div>
                                                                 </div>
@@ -151,62 +176,61 @@ if (isset($data['users']) && $data['users'] != 0) {
                                                 </tr>
                                             <?php endfor; ?>
                                         </tbody>
-                                    </table>
-                                    <div class="pagination">
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
 
-                                                <div class="text">Previous</div>
-                                            </div>
-                                        </button>
+
+                                    </table><br><br>
+                                    <div class="pagination"
+                                        style="position: fixed; left: 50%; transform: translateX(-50%);">
+                                        <?php if ($page > 1): ?>
+                                            <a class="button" href="?page=<?= $page - 1 ?>">
+                                                <div class="button-base">
+                                                    <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
+                                                            stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+
+                                                    <div class="text">Previous</div>
+                                                </div>
+                                            </a>
+                                        <?php endif; ?>
                                         <div class="pagination-numbers">
-                                            <div class="pagination-number-base-active">
-                                                <div class="content">
-                                                    <div class="number">1</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">2</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">3</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">...</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">8</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">9</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">10</div>
-                                                </div>
-                                            </div>
+                                            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                                <?php if ($i == $page): ?>
+                                                    <div class="pagination-number-base-active">
+                                                        <div class="content">
+                                                            <div class="number">
+                                                                <?= $i ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <a class="pagination-number-base" href="?page=<?= $i ?>">
+                                                        <div class="content">
+                                                            <div class="number2">
+                                                                <?= $i ?>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                <?php endif; ?>
+                                            <?php endfor; ?>
                                         </div>
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <div class="text">Next</div>
-                                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </button>
+                                        <?php if ($page < $totalPages): ?>
+                                            <a class="button" href="?page=<?= $page + 1 ?>">
+                                                <div class="button-base">
+                                                    <div class="text">Next</div>
+                                                    <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20"
+                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
+                                                            stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
+                                                    </svg>
+                                                </div>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -214,6 +238,7 @@ if (isset($data['users']) && $data['users'] != 0) {
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
     </div>
     <?php $this->view("./includes/load-js") ?>

@@ -156,6 +156,7 @@
 
 .checker-container {
   width: 70%;
+  width: 70%;
   background-color: #FAFAFA;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -332,6 +333,7 @@ h3.warrant {
 .home-staff-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
+  font-size: 40px;
   font-size: 40px;
   color: var(--Primary-Gray) !important;
 }
