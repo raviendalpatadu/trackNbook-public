@@ -26,6 +26,7 @@ class StaffTicketing extends Controller
 
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+        
         $this->view('summary.staffticketing', $data);
     }
 
@@ -118,13 +119,25 @@ class StaffTicketing extends Controller
             $this->view('cancellation.staffticketing', $data);
         }
 
-
     }
+
 
     function refund($id = '')
     {
 
-        $this->view('refund.staffticketing');
+        $this->view('make_refund.staffticketing');
+    }
+
+    function refundList($id = '')
+    {
+
+        $this->view('refund_list.staffticketing');
+    }
+
+    function refundDetails($id = '')
+    {
+
+        $this->view('refund_details.staffticketing');
     }
 
     function home($id = '')
@@ -147,8 +160,24 @@ class StaffTicketing extends Controller
 
     function trains($id = '')
     {
+        $station = new Stations();
+        $data = array();
+        $data['trains_avilable'] = array();
 
-        $this->view('trains.staffticketing');
+        if (isset($_POST['to_station']) && isset($_POST['from_station']) && isset($_POST['from_date'])) {
+            
+            $train = new Trains();
+            $data['trains_available'] = $train->search();
+
+
+            if (array_key_exists('errors', $data['trains_available'])) {
+                $_SESSION['errors'] = $data['trains_available'];
+                // $this->redirect('home');
+            } else {
+                $this->view('trains.staffticketing', $data);
+            }
+        }
+        // $this->view('trains.staffticketing');
     }
     function verifiedWarrent($id = ''){
         $warrant_resevation = new WarrantsReservations();
@@ -190,7 +219,13 @@ class StaffTicketing extends Controller
         }
 
         
-        $this->redirect('staffticketing/Warrant');
+        $this->redirect('staffticketing/warrant');
+    }
+
+    function refectReason($id = '')
+    {
+
+        $this->view('refect_reason.staffticketing');
     }
 
     function passengerdetails($id = '')
@@ -208,3 +243,6 @@ class StaffTicketing extends Controller
 
 
 }
+
+
+

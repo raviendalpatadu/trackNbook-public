@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .border-bottom-box-gray {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -26,6 +27,75 @@
   color: #F2F9FE;
 }
 
+.mou-staff-login-container {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 50px 40px 20px 40px;
+  background: lightblue;
+  box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01), 0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09), 0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 11px;
+  font-family: "Inter", sans-serif;
+}
+
+.mou-title {
+  color: #2E3E5C;
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 32px;
+  /* 133.333% */
+  letter-spacing: 0.48px;
+}
+
+.mou-subtitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.1rem;
+  color: #415971;
+}
+
+.input_container {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mou-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.mou-flex-row > div > label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.mou-span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .trains-available h3 {
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
@@ -33,7 +103,6 @@
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19.444px;
 }
 
 .trains-available h2 {
@@ -64,6 +133,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-end-end-radius: 10px;
   border-end-start-radius: 10px;
+  padding: inherit;
 }
 
 .row-bottom-round {
@@ -85,7 +155,7 @@
 }
 
 .checker-container {
-  width: 100%;
+  width: 70%;
   background-color: #FAFAFA;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -262,7 +332,7 @@ h3.warrant {
 .home-staff-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-  font-size: 60px;
+  font-size: 40px;
   color: var(--Primary-Gray) !important;
 }
 
@@ -277,9 +347,313 @@ h3.warrant {
   padding: inherit;
   background-color: #FAFAFA;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px 50px;
+  padding: 20px 20px;
 }
 
 .inquiry {
+  min-height:  100px;
+}
+
+.bg-staff-home-desktop1 {
+  position: absolute;
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background: url("../images/home1.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
+}
+
+.search-box-text {
+  max-width: 100%;
+  font-size: 16px;
+  padding: 5vh 15px;
+}
+
+/* width: 80%;
+ padding: inherit;
+ background-color:map-get($mou-colors, "box-gray" );
+ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+ padding: 20px 50px;*/
+.inquiry {
   min-height: 100px;
+}
+
+.text1 {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bg-staff-login-desktop {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-staff-login-desktop {
+    width: 100%;
+    background: url("../images/login.png"), no-repeat;
+    background-size: cover;
+  }
+}
+.bg-staff-search-desktop {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  height: 100%;
+  width: 40%;
+  background-size: cover;
+}
+
+.form-check-input {
+  width: 20px !important;
+}
+
+.diplay-grid {
+  display: grid;
+}
+
+.QR-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 5px;
+}
+
+.QR-container h1 {
+  color: #ffffff;
+}
+
+.QR-section {
+  background-color: #ffffff;
+  padding: 50px 30px;
+  border: 1.5px solid #b2b2b2;
+  border-radius: 0.25em;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+}
+
+#my-qr-reader {
+  padding: 20px !important;
+  border: 1.5px solid #b2b2b2 !important;
+  border-radius: 8px;
+}
+
+#my-qr-reader img[alt="Info icon"] {
+  display: none;
+}
+
+#my-qr-reader img[alt="Camera based scan"] {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+QR-button {
+  padding: 10px 20px;
+  border: 1px solid #b2b2b2;
+  outline: none;
+  border-radius: 0.25em;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background-color: Border-blue;
+  transition: 0.3s background-color;
+}
+
+Qr-button:hover {
+  background-color: #008000;
+}
+
+#html5-qrcode-anchor-scan-type-change {
+  text-decoration: none !important;
+  color: #1d9bf0;
+}
+
+video {
+  width: 100% !important;
+  border: 1px solid #b2b2b2 !important;
+  border-radius: 0.25em;
+}
+
+.notificationCard {
+  height: -moz-fit-content;
+  height: fit-content;
+  background: rgb(245, 245, 245);
+  padding: 20px 35px;
+  gap: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
+  border-radius: 5px;
+}
+
+.notificationCard img.checker-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 141px;
+}
+
+.notificationHeading {
+  color: black;
+  font-family: "Open Sans";
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.notificationCard.max-width {
+  max-width: 500px;
+}
+
+@media (max-width: 768px) {
+  .notificationCard.max-width {
+    max-width: 100%;
+  }
+}
+.notificationPara {
+  color: rgb(133, 133, 133);
+  font-size: 0.6em;
+  font-weight: 600;
+}
+
+.check-box {
+  justify-content: space-around;
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-popup-container {
+    margin: 8em auto;
+  }
+}
+.mou-popup-box {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.69);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.ticketchecker-container {
+  max-width: 350px;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: #f8f9fd;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  padding: 25px 35px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  margin: 20px;
+}
+
+.mou-heading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  color: rgb(16, 137, 211);
+}
+
+.mou-form {
+  margin-top: 20px;
+}
+
+.mou-form .input {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  box-shadow: #cff0ff 0px 10px 10px -5px;
+  border-inline: 2px solid transparent;
+}
+
+.mou-form .input::-moz-placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.mou-form .input::placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.mou-form .input:focus {
+  outline: none;
+  border-inline: 2px solid #12b1d1;
+}
+
+.mou-form .forgot-password {
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.mou-form .forgot-password a {
+  font-size: 11px;
+  color: #0099ff;
+  text-decoration: none;
+}
+
+.mou-form .login-button {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+  color: white;
+  padding-block: 15px;
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.mou-form .login-button:hover {
+  transform: scale(1.03);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+}
+
+.mou-form .login-button:active {
+  transform: scale(0.95);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+}
+
+.mou-staff-card {
+  height: 60px;
+  min-width: 130px;
+  place-items: center;
+  background: #2285D5;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.mou-staff-card-text {
+  color: #FFFFFF;
+}
+
+.bg-ticket-checker {
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background: url("../images/checker-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
+  background-position-y: 100% !important;
+  background-position-x: center !important;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-ticket-checker {
+    background: url("../images/checker-mobile.jpg"), no-repeat;
+    background-size: cover;
+  }
+}
+.home-container {
+  padding: 0 5%;
 }/*# sourceMappingURL=moushika.css.map */

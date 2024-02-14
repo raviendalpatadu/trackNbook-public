@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2024 at 06:01 AM
+-- Generation Time: Jan 21, 2024 at 01:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,24 +42,18 @@ CREATE TABLE `tbl_compartment` (
 --
 
 INSERT INTO `tbl_compartment` (`compartment_id`, `compartment_train_id`, `compartment_class`, `compartment_class_type`, `compartment_seat_layout`, `compartment_total_seats`, `compartment_total_number`) VALUES
-(3, 18, '1', 1, '2x2', 48, 2),
-(4, 18, '2', 4, '2x2', 48, 2),
-(5, 18, '3', 3, '2x2', 48, 2),
-(6, 5, '1', 1, '2x2', 48, 1),
-(7, 5, '2', 4, '2x2', 48, 1),
-(8, 5, '3', 3, '2x2', 48, 1),
-(9, 3, '1', 3, '2x2', 20, 1),
-(10, 3, '2', 1, '2x2', 30, 1),
-(11, 38, '1', 1, '2x2', 48, 1),
-(12, 38, '2', 1, '2x2', 48, 1),
-(13, 39, '1', 1, '2x2', 48, 1),
-(14, 39, '2', 1, '2x2', 48, 1),
-(15, 43, '1', 1, '2x2', 48, 1),
-(16, 43, '2', 1, '2x2', 48, 1),
-(17, 47, '1', 1, 'fd', 48, 2),
-(18, 48, '1', 1, '123', 32, 2),
-(19, 51, '1', 1, '2x2', 212, 2),
-(20, 52, '1', 1, '2x2', 212, 2);
+(1, 1, '1', 1, '2x2', 48, 1),
+(2, 1, '2', 4, '2x2', 48, 1),
+(3, 1, '3', 3, '2x3', 48, 1),
+(4, 2, '1', 1, '2x2', 48, 1),
+(5, 2, '2', 4, '2x2', 48, 1),
+(6, 2, '3', 3, '2x3', 48, 1),
+(7, 3, '1', 1, '2x2', 48, 1),
+(8, 3, '2', 4, '2x2', 48, 1),
+(9, 3, '3', 3, '2x2', 48, 1),
+(10, 4, '1', 1, '2x2', 48, 1),
+(11, 4, '2', 4, '2x2', 48, 1),
+(12, 4, '3', 3, '2x2', 48, 1);
 
 -- --------------------------------------------------------
 
@@ -79,8 +73,8 @@ CREATE TABLE `tbl_compartment_class_type` (
 INSERT INTO `tbl_compartment_class_type` (`compartment_class_type_id`, `compartment_class_type`) VALUES
 (1, 'AFC'),
 (2, '1st class Reservation'),
-(3, '3rd class Reservation'),
-(4, '2nd class Reservation'),
+(3, '2nd class Reservation'),
+(4, '3rd class Reservation'),
 (5, '1st class with OFV & AFC'),
 (6, 'Sleeplets');
 
@@ -105,22 +99,42 @@ CREATE TABLE `tbl_fare` (
 --
 
 INSERT INTO `tbl_fare` (`fare_id`, `fare_train_type_id`, `fare_compartment_id`, `fare_route_id`, `fare_start_station`, `fare_end_station`, `fare_price`) VALUES
-(1, 1, 1, 2, 1, 6, 200),
-(2, 1, 1, 2, 6, 1, 200),
-(3, 1, 2, 4, 1, 2, 1500),
-(4, 1, 2, 4, 2, 1, 1500),
-(5, 1, 2, 1, 1, 2, 2000),
-(6, 1, 2, 1, 1, 12, 2800),
-(7, 1, 2, 1, 1, 14, 3000),
-(8, 1, 2, 1, 2, 1, 2000),
-(9, 1, 2, 1, 2, 12, 2500),
-(10, 1, 2, 1, 2, 14, 3000),
-(11, 1, 2, 1, 12, 1, 2800),
-(12, 1, 2, 1, 12, 2, 2500),
-(13, 1, 2, 1, 12, 14, 2000),
-(14, 1, 2, 1, 14, 1, 3000),
-(15, 1, 2, 1, 14, 2, 3000),
-(16, 1, 2, 1, 14, 12, 2000);
+(1, 1, 1, 1, 1, 2, 2000),
+(2, 1, 1, 1, 1, 12, 2800),
+(3, 1, 1, 1, 1, 14, 3000),
+(4, 1, 1, 1, 2, 1, 2000),
+(5, 1, 1, 1, 2, 12, 2500),
+(6, 1, 1, 1, 2, 14, 3000),
+(7, 1, 1, 1, 12, 1, 2800),
+(8, 1, 1, 1, 12, 2, 2500),
+(9, 1, 1, 1, 12, 14, 2000),
+(10, 1, 1, 1, 14, 1, 3000),
+(11, 1, 1, 1, 14, 2, 3000),
+(12, 1, 1, 1, 14, 12, 2000),
+(13, 1, 3, 1, 1, 2, 900),
+(14, 1, 3, 1, 1, 12, 1800),
+(15, 1, 3, 1, 1, 14, 1500),
+(16, 1, 3, 1, 2, 1, 900),
+(17, 1, 3, 1, 2, 12, 1700),
+(18, 1, 3, 1, 2, 14, 1800),
+(19, 1, 3, 1, 12, 1, 1800),
+(20, 1, 3, 1, 12, 2, 1700),
+(21, 1, 3, 1, 12, 14, 1200),
+(22, 1, 3, 1, 14, 1, 1500),
+(23, 1, 3, 1, 14, 2, 1800),
+(24, 1, 3, 1, 14, 12, 1200),
+(25, 1, 4, 1, 1, 2, 1200),
+(26, 1, 4, 1, 1, 12, 1800),
+(27, 1, 4, 1, 1, 14, 2000),
+(28, 1, 4, 1, 2, 1, 1200),
+(29, 1, 4, 1, 2, 12, 1700),
+(30, 1, 4, 1, 2, 14, 1800),
+(31, 1, 4, 1, 12, 1, 1800),
+(32, 1, 4, 1, 12, 2, 1700),
+(33, 1, 4, 1, 12, 14, 1200),
+(34, 1, 4, 1, 14, 1, 2000),
+(35, 1, 4, 1, 14, 2, 1800),
+(36, 1, 4, 1, 14, 12, 1200);
 
 -- --------------------------------------------------------
 
@@ -253,30 +267,9 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_compartment_id`, `reservation_date`, `reservation_class`, `reservation_seat`, `reservation_passenger_title`, `reservation_passenger_first_name`, `reservation_passenger_last_name`, `reservation_passenger_nic`, `reservation_passenger_phone_number`, `reservation_passenger_email`, `reservation_passenger_gender`) VALUES
-(14, 11, 14, 1, 3, 3, '2023-11-04', 3, 1, 'Mr.', 'dad', 'ds', 132453534543, '0798784656', 'abc@gm.com', 'female'),
-(15, 11, 14, 1, 3, 3, '2023-11-04', 3, 2, 'Miss.', 'ewqeq', 'ewq', 213344346345, '0715898444', 'sdad@yahoo.com', 'male'),
-(19, 11, 14, 1, 3, 3, '2023-11-04', 1, 27, 'Mr.', 'menura', 'wije', 214748364743, '0718118923', 'menu@yahoo.com', 'male'),
-(22, 11, 14, 1, 3, 3, '2023-11-14', 1, 22, 'Mr.', 'namalie', 'liyanage', 200123688878, '0718045940', 'namali_69@yahoo.com', 'female'),
-(28, 11, 14, 1, 5, 8, '2023-12-31', 1, 14, 'Miss.', 'ghjk', 'fghjk', 200123628078, '0718115656', 'huhu@yahoo.com', 'female'),
-(31, 11, 14, 1, 3, 3, '2023-11-04', 1, 31, 'Mr.', 'yashmika', 'kriyanjalee', 214748364734, '0718118932', 'yah@yahoo.com', 'female'),
-(35, 19, 14, 1, 5, 8, '2023-12-31', 1, 30, 'Mr.', 'ravien', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male'),
-(41, 19, 14, 1, 3, 3, '2023-11-04', 1, 47, 'Mr.', 'ravien', 'dsff', 200123602078, '0718118969', 'da@gm.com', 'male'),
-(42, 19, 14, 1, 5, 6, '2023-12-31', 1, 1, 'Mr.', 'menura', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male'),
-(43, 29, 14, 1, 5, 7, '2023-12-31', 1, 7, 'Mr.', 'ravien', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male'),
-(44, 30, 14, 1, 3, 3, '2023-12-29', 1, 21, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0718118969', 'dalpatadu@yahoo.com', 'male'),
-(45, 36, 14, 1, 18, 5, '2023-12-31', 1, 19, 'Mr.', 'pas', 'pas', 200123602078, '0718118969', 'pas@gm.com', 'male'),
-(46, 37, 14, 1, 18, 4, '2023-12-31', 1, 39, 'Mr.', 'pass', 'pass', 200123602088, '0718118964', 'sanath@yahoo.com', 'male'),
-(47, 39, 14, 1, 18, 5, '2023-12-30', 1, 4, 'Mr.', 'ra', 'thenuka', 200123602079, '0718118969', 'sanatu@yahoo.com', 'male'),
-(48, 40, 1, 2, 18, 4, '2023-12-31', 1, 17, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'female'),
-(49, 40, 1, 18, 18, 3, '2023-12-31', 1, 25, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(52, 40, 1, 2, 5, 7, '2023-12-20', 7, 1, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'female'),
-(53, 40, 1, 2, 5, 7, '2023-12-20', 7, 41, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'female'),
-(54, 40, 1, 12, 5, 6, '2024-01-24', 6, 1, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(55, 40, 1, 12, 5, 7, '2024-01-24', 7, 1, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(56, 40, 1, 12, 5, 7, '2024-01-24', 7, 2, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(57, 40, 1, 12, 5, 7, '2024-01-24', 7, 5, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(58, 40, 1, 12, 5, 7, '2024-01-24', 7, 6, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male'),
-(59, 40, 1, 12, 5, 7, '2024-01-24', 7, 13, 'Mr.', 'ravien', 'dalpatadu', 200123602078, '0701949400', 'dalpataduravien@gmail.com', 'male');
+(1, 40, 1, 2, 4, 12, '2024-01-30', 12, 2, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female'),
+(2, 40, 1, 2, 4, 12, '2024-01-30', 12, 40, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female'),
+(3, 40, 1, 14, 1, 1, '2024-01-29', 1, 1, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female');
 
 -- --------------------------------------------------------
 
@@ -395,26 +388,11 @@ CREATE TABLE `tbl_train` (
 --
 
 INSERT INTO `tbl_train` (`train_id`, `train_name`, `train_type`, `train_start_time`, `train_end_time`, `train_start_station`, `train_end_station`, `train_route`) VALUES
-(3, 'udaratamenike', 1, '05:00:00', '18:00:02', 14, 1, 2),
-(5, 'podimenike 1', 1, '10:30:00', '22:30:00', 1, 12, 1),
-(6, 'podi 2menike', 1, '10:30:00', '22:30:00', 12, 1, 1),
-(11, 'yaldewi', 1, '02:00:00', '02:01:00', 1, 16, 4),
-(18, 'cmb-kan', 1, '13:00:00', '16:00:02', 1, 2, 4),
-(30, 'ella odesy', 1, '09:01:00', '21:01:00', 1, 14, 1),
-(31, 'ella odesy', 1, '09:07:00', '21:07:00', 1, 14, 1),
-(32, 'ella odesy', 1, '09:07:00', '21:07:00', 1, 14, 1),
-(33, 'ella odesy', 1, '09:07:00', '21:07:00', 1, 14, 1),
-(34, 'ella odesy', 1, '09:25:00', '21:21:00', 1, 2, 4),
-(35, 'ella cmb', 1, '21:28:00', '09:28:00', 13, 1, 1),
-(36, 'yal dee', 1, '18:29:00', '18:31:00', 1, 9, 2),
-(37, 'yal dee', 1, '18:29:00', '18:31:00', 1, 9, 2),
-(38, 'yal dee', 1, '18:29:00', '18:31:00', 1, 9, 2),
-(39, 'yal dee', 1, '18:29:00', '18:31:00', 1, 9, 2),
-(43, 'yal dee', 1, '18:29:00', '18:31:00', 1, 9, 2),
-(47, 'nmnm', 1, '02:17:00', '02:18:00', 1, 2, 1),
-(48, 'yal dee', 1, '02:33:00', '14:17:00', 1, 6, 2),
-(51, 'rwrewrwer', 1, '23:29:00', '11:29:00', 1, 2, 1),
-(52, 'rwrewrwer', 1, '23:29:00', '11:29:00', 1, 2, 1);
+(1, 'Udarata Menike', 1, '05:00:00', '19:00:00', 1, 14, 1),
+(2, 'Udarata Menike', 1, '05:00:00', '19:00:00', 14, 1, 1),
+(3, 'podi menike', 1, '07:00:00', '21:00:00', 14, 1, 1),
+(4, 'podi menike', 1, '07:00:00', '21:00:00', 1, 14, 1),
+(5, 'bulugahagoda nawaththanne nathi eka', 1, '12:24:00', '17:28:00', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -433,23 +411,25 @@ CREATE TABLE `tbl_train_stop_station` (
 --
 
 INSERT INTO `tbl_train_stop_station` (`train_id`, `station_id`, `stop_no`) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 12, 3),
+(1, 14, 4),
+(2, 1, 4),
+(2, 2, 3),
+(2, 12, 2),
+(2, 14, 1),
+(3, 1, 4),
+(3, 2, 3),
+(3, 12, 2),
+(3, 14, 1),
+(4, 1, 1),
+(4, 2, 2),
+(4, 12, 3),
+(4, 14, 4),
 (5, 1, 1),
-(5, 2, 4),
-(5, 12, 5),
-(5, 14, 6),
-(5, 17, 2),
-(5, 18, 3),
-(6, 1, 3),
-(6, 2, 2),
-(6, 12, 1),
-(18, 1, 1),
-(18, 2, 4),
-(18, 17, 2),
-(18, 18, 3),
-(51, 1, 1),
-(51, 2, 2),
-(52, 1, 1),
-(52, 2, 2);
+(5, 2, 2),
+(5, 14, 3);
 
 -- --------------------------------------------------------
 
@@ -659,7 +639,7 @@ ALTER TABLE `tbl_warrant_reservation`
 -- AUTO_INCREMENT for table `tbl_compartment`
 --
 ALTER TABLE `tbl_compartment`
-  MODIFY `compartment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `compartment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_compartment_class_type`
@@ -671,7 +651,7 @@ ALTER TABLE `tbl_compartment_class_type`
 -- AUTO_INCREMENT for table `tbl_fare`
 --
 ALTER TABLE `tbl_fare`
-  MODIFY `fare_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `fare_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_login`
@@ -683,7 +663,7 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_route`
@@ -701,7 +681,7 @@ ALTER TABLE `tbl_station`
 -- AUTO_INCREMENT for table `tbl_train`
 --
 ALTER TABLE `tbl_train`
-  MODIFY `train_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `train_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_train_type`
