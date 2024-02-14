@@ -5,13 +5,14 @@
 
 class Model extends Database
 {
+    
     public $errors = array();
     // public $table;
 
     public function __construct()
-    {
-        if (!property_exists($this, 'table')) {
-            $this->table = "tbl_" . strtolower($this::class);
+    { 
+        if(!property_exists($this, 'table')){
+            $this->table = "tbl_" . strtolower(get_class($this));
         }
     }
 
@@ -95,9 +96,8 @@ class Model extends Database
         $value = implode(',:', $keys);
 
         $query = "insert into $this->table ($column) values(:$value)";
-
-        echo $query;
-        return $this->query($query, $data);
+        // echo $query;
+        return $this->query($query,$data);
     }
 
 
@@ -112,10 +112,11 @@ class Model extends Database
         // echo "{$id}<pre>";
         //     print_r($data);
         //     echo "</pre>";
-        try {
-            if ($id_feild == '') {
-                $query = "update $this->table set $str where " . strtolower($this::class) . "_id = :id";
-            } else {
+        try{
+            if($id_feild == ''){
+                $query = "update $this->table set $str where ".strtolower(get_class($this))."_id = :id";
+            }else
+            {
                 $query = "update $this->table set $str where $id_feild = :id";
             }
             return $this->query($query, $data);
@@ -129,10 +130,11 @@ class Model extends Database
     {
         $data['id'] = $id;
 
-        try {
-            if ($id_feild == '') {
-                $query = "delete from $this->table where " . strtolower($this::class) . "_id = :id";
-            } else {
+        try{
+            if($id_feild == ''){
+                $query = "delete from $this->table where ".strtolower(get_class($this))."_id = :id";
+            }else
+            {
                 $query = "delete from $this->table where $id_feild = :id";
             }
             return $this->query($query, $data);
@@ -143,6 +145,7 @@ class Model extends Database
 
     }
 
+   
 
     public function getCount()
     {

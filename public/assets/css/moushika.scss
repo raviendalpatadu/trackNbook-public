@@ -19,6 +19,77 @@ $mou-colors : (
   }
 }
 
+
+.mou-staff-login-container{
+  width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 50px 40px 20px 40px;
+    background: lightblue;
+    //background: linear-gradient(0deg, rgb(160, 167, 175) 0%, rgb(255, 255, 255) 100%);
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+      0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+      0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
+    font-family: "Inter", sans-serif;
+}
+
+.mou-title {
+color: #2E3E5C;
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 32px;
+  /* 133.333% */
+  letter-spacing: 0.48px;
+}
+
+.mou-subtitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.1rem;
+  color: #415971;
+ 
+}
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mou-flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.mou-flex-row>div>label {
+  font-size: 14px;
+  color: black;
+  font-weight: 400;
+}
+
+.mou-span {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #2d79f3;
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .trains-available h3{
     color: var(--lightgray-font);
     font-feature-settings: 'clig' off, 'liga' off;
@@ -26,8 +97,8 @@ $mou-colors : (
     font-size: 30px;
     font-style: normal;
     font-weight: 700;
-    line-height: 19.444px; 
 }
+   
 
 .trains-available h2{
  color: #000;
@@ -53,16 +124,27 @@ line-height: 19.444px;
 }
 
 .ticket-container {
-  width: 39%;
+  max-width: 500px;
   background-color:map-get($mou-colors, "box-gray" );
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-end-end-radius: 10px;
   border-end-start-radius: 10px;
+  padding: inherit;
+}
+
+.row-bottom-round{
+  border-end-end-radius: 10px;
+  border-end-start-radius: 10px;
+}
+
+.ticket-container-heading-bottom-border{
+  border-bottom: 2px solid var(--Secondary-Gray);
 }
 
 .warrant-container{
   width: 100%;
 }
+
 
 
 
@@ -72,7 +154,8 @@ line-height: 19.444px;
 }
   
 .checker-container{
-  width: 100%;
+  width: 70%;
+  width: 70%;
   background-color:map-get($mou-colors, "box-gray" );
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -169,6 +252,40 @@ line-height: 19.444px;
     font-size: 12px;
   }
 }
+
+// .bg-staff-home-desktop {
+//   position: absolute;
+//   //top: -25vh;
+//   left: 0;
+//   z-index: -100;
+//   width: 100%;
+//   height: 100%;
+//   flex-shrink: 0;
+//   background: url("../images/home1.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
+// }
+
+// .bg-staff-home-mobile {
+//   display: none;
+// }
+
+// @media screen and (max-width: 768px) {
+//   .bg-staff-home-desktop {
+//     display: none;
+//   }
+
+
+  // .bg-staff-home-mobile {
+  //   display: initial;
+  //   position: absolute;
+  //  // top: -10vh;
+  //   left: 0;
+  //   z-index: -100;
+  //   width: 100%;
+  //   height: 100%;
+  //   flex-shrink: 0;
+  //   //background: url("../images/home-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
+  // }
+
 
 .line {
   border-bottom: 2px solid #000;  
@@ -302,7 +419,8 @@ text-shadow:  2px 2px  rgba(0, 0, 0, 0.25);
 .home-staff-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-  font-size: 60px;
+  font-size: 40px;
+  font-size: 40px;
   color: var(--Primary-Gray) !important;
 }
 
@@ -314,15 +432,595 @@ text-shadow:  2px 2px  rgba(0, 0, 0, 0.25);
 }
 
 .inquiry-container {
-    width: 80%;
-    padding: inherit;
-    background-color:map-get($mou-colors, "box-gray" );
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    padding: 20px 50px;
+  width: 80%;
+  padding: inherit;
+  background-color:map-get($mou-colors, "box-gray" );
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 20px 20px;
 
 }
 
 .inquiry{
+min-height: 100px;
+}
+
+.bg-staff-home-desktop1 {
+  position: absolute;
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background: url("../images/home1.jpg"),
+    lightgray -3.491px -930.014px / 100.77% 290.365% no-repeat;
+}
+
+.search-box-text{
+  max-width: 100%;
+  font-size: 16px;
+  padding: 5vh 15px;
+}
+   /* width: 80%;
+    padding: inherit;
+    background-color:map-get($mou-colors, "box-gray" );
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px 50px;*/
+
+.inquiry{
   min-height: 100px;
 }
+
+.text1{
+font-size: 13px;
+font-weight: 500;
+}
+
+.bg-staff-login-desktop {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -100;
+  height: 100%;
+  width: 100%;
+  //background: url("../images/login.png"), no-repeat;
+ // background-size: cover;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-staff-login-desktop {
+    width: 100%;
+    background:
+      url("../images/login.png"), no-repeat;
+    background-size: cover;
+  }
+}
+
+.bg-staff-search-desktop{
+  position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -100;
+    height: 100%;
+    width: 40%;
+    // background: url("../images/login.png"), no-repeat;
+    background-size: cover;
+}
+
+.form-check-input{
+  width: 20px !important;
+}
+
+.diplay-grid{
+  display: grid;
+}
+
+// .range input {
+//   -webkit-appearance: none;
+//   width: 400px;
+//   height: 4px;
+//   border-radius: 5px;
+//   background-color: #508cec;
+//   outline: none;
+// }
+
+// .range input::-webkit-slider-thumb {
+//   -webkit-appearance: none;
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   background-color: #4d80cd;
+// }
+
+// .range span {
+//   position: absolute;
+//   margin-left: 14px;
+//   width: 50px;
+//   height: 30px;
+//   background-color: #8ab3da;
+//   color: #fff;
+//   border-radius: 3px;
+//   text-align: center;
+//   line-height: 30px;
+// }
+
+// .range span:before {
+//   content: '';
+//   position: absolute;
+//   border-right: 9px solid transparent;
+//   border-left: 9px solid transparent;
+//   border-bottom: 12px solid #8ab3da;
+//   left: -10px;
+//   top: 50%;
+//   transform: translateY(-50%) rotate(-90deg);
+// }
+
+// .section {
+//   background-color: #ffffff;
+//   padding: 50px 30px;
+//   border: 1.5px solid #b2b2b2;
+//   border-radius: 0.25em;
+//   box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+// }
+
+// #my-qr-reader {
+//   padding: 20px !important;
+//   border: 1.5px solid #b2b2b2 !important;
+//   border-radius: 8px;
+// }
+
+// #my-qr-reader img[alt="Info icon"] {
+//   display: none;
+// }
+
+// #my-qr-reader img[alt="Camera based scan"] {
+//   width: 100px !important;
+//   height: 100px !important;
+// }
+
+// .QR-button {
+//   padding: 10px 20px;
+//   border: 1px solid #b2b2b2;
+//   outline: none;
+//   border-radius: 0.25em;
+//   color: white;
+//   font-size: 15px;
+//   cursor: pointer;
+//   margin-top: 15px;
+//   margin-bottom: 10px;
+//   background-color: #008000ad;
+//   transition: 0.3s background-color;
+// }
+
+// .QR-button:hover {
+//   background-color: #008000;
+// }
+
+// #html5-qrcode-anchor-scan-type-change {
+//   text-decoration: none !important;
+//   color: #1d9bf0;
+// }
+
+// .video {
+//   width: 100% !important;
+//   border: 1px solid #b2b2b2 !important;
+//   border-radius: 0.25em;
+// }
+
+//QR code scanner
+
+.QR-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 5px;
+}
+
+.QR-container h1 {
+  color: #ffffff;
+}
+
+.QR-section {
+  background-color: #ffffff;
+  padding: 50px 30px;
+  border: 1.5px solid #b2b2b2;
+  border-radius: 0.25em;
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
+}
+
+#my-qr-reader {
+  padding: 20px !important;
+  border: 1.5px solid #b2b2b2 !important;
+  border-radius: 8px;
+}
+
+#my-qr-reader img[alt="Info icon"] {
+  display: none;
+}
+
+#my-qr-reader img[alt="Camera based scan"] {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+QR-button {
+  padding: 10px 20px;
+  border: 1px solid #b2b2b2;
+  outline: none;
+  border-radius: 0.25em;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  background-color:Border-blue ;
+  transition: 0.3s background-color;
+}
+
+Qr-button:hover {
+  background-color: #008000;
+}
+
+#html5-qrcode-anchor-scan-type-change {
+  text-decoration: none !important;
+  color: #1d9bf0;
+}
+
+video {
+  width: 100% !important;
+  border: 1px solid #b2b2b2 !important;
+  border-radius: 0.25em;
+}
+
+.notificationCard {
+  // width: 220px;
+  height: fit-content;
+  background: rgb(245, 245, 245);
+  padding: 20px 35px;
+  gap: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
+  border-radius: 5px;
+}
+
+.notificationCard img.checker-img {
+  object-fit: cover;
+  width: 141px;
+  
+ 
+}
+
+.notificationHeading {
+  color: black;
+  font-family: "Open Sans";
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.notificationCard.max-width {
+  max-width: 500px;
+  
+}
+
+@media(max-width: 768px) {
+  .notificationCard.max-width {
+    max-width: 100%;
+  }
+  
+}
+
+.notificationPara {
+  color: rgb(133, 133, 133);
+  font-size: 0.6em;
+  font-weight: 600;
+}
+
+.check-box{
+  justify-content:space-around;
+}
+
+//popup
+
+// .cd-popup {
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   height: 100%;
+//   width: 100%;
+//   background-color: rgba(94, 110, 141, 0.9);
+//   opacity: 0;
+//   visibility: hidden;
+//   -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+//   -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+//   transition: opacity 0.3s 0s, visibility 0s 0.3s;
+// }
+
+// .cd-popup.is-visible {
+//   opacity: 1;
+//   visibility: visible;
+//   -webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+//   -moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+//   transition: opacity 0.3s 0s, visibility 0s 0s;
+// }
+
+// .cd-popup-container {
+//   position: relative;
+//   width: 90%;
+//   max-width: 400px;
+//   margin: 4em auto;
+//   background: #FFF;
+//   border-radius: .25em .25em .4em .4em;
+//   text-align: center;
+//   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+//   -webkit-transform: translateY(-40px);
+//   -moz-transform: translateY(-40px);
+//   -ms-transform: translateY(-40px);
+//   -o-transform: translateY(-40px);
+//   transform: translateY(-40px);
+//   /* Force Hardware Acceleration in WebKit */
+//   -webkit-backface-visibility: hidden;
+//   -webkit-transition-property: -webkit-transform;
+//   -moz-transition-property: -moz-transform;
+//   transition-property: transform;
+//   -webkit-transition-duration: 0.3s;
+//   -moz-transition-duration: 0.3s;
+//   transition-duration: 0.3s;
+// }
+
+// .cd-popup-container p {
+//   padding: 3em 1em;
+// }
+
+// .cd-popup-container .cd-buttons:after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }
+
+// .cd-popup-container .cd-buttons li {
+//   float: left;
+//   width: 50%;
+//   list-style: none;
+// }
+
+// .cd-popup-container .cd-buttons a {
+//   display: block;
+//   height: 60px;
+//   line-height: 60px;
+//   text-transform: uppercase;
+//   color: #FFF;
+//   -webkit-transition: background-color 0.2s;
+//   -moz-transition: background-color 0.2s;
+//   transition: background-color 0.2s;
+// }
+
+// .cd-popup-container .cd-buttons li:first-child a {
+//   background: #fc7169;
+//   border-radius: 0 0 0 .25em;
+// }
+
+// .no-touch .cd-popup-container .cd-buttons li:first-child a:hover {
+//   background-color: #fc8982;
+// }
+
+// .cd-popup-container .cd-buttons li:last-child a {
+//   background: #b6bece;
+//   border-radius: 0 0 .25em 0;
+// }
+
+// .no-touch .cd-popup-container .cd-buttons li:last-child a:hover {
+//   background-color: #c5ccd8;
+// }
+
+// .cd-popup-container .cd-popup-close {
+//   position: absolute;
+//   top: 8px;
+//   right: 8px;
+//   width: 30px;
+//   height: 30px;
+// }
+
+// .cd-popup-container .cd-popup-close::before,
+// .cd-popup-container .cd-popup-close::after {
+//   content: '';
+//   position: absolute;
+//   top: 12px;
+//   width: 14px;
+//   height: 3px;
+//   background-color: #8f9cb5;
+// }
+
+// .cd-popup-container .cd-popup-close::before {
+//   -webkit-transform: rotate(45deg);
+//   -moz-transform: rotate(45deg);
+//   -ms-transform: rotate(45deg);
+//   -o-transform: rotate(45deg);
+//   transform: rotate(45deg);
+//   left: 8px;
+// }
+
+// .cd-popup-container .cd-popup-close::after {
+//   -webkit-transform: rotate(-45deg);
+//   -moz-transform: rotate(-45deg);
+//   -ms-transform: rotate(-45deg);
+//   -o-transform: rotate(-45deg);
+//   transform: rotate(-45deg);
+//   right: 8px;
+// }
+
+// .is-visible .cd-popup-container {
+//   -webkit-transform: translateY(0);
+//   -moz-transform: translateY(0);
+//   -ms-transform: translateY(0);
+//   -o-transform: translateY(0);
+//   transform: translateY(0);
+// }
+
+@media only screen and (min-width: 1170px) {
+  .cd-popup-container {
+    margin: 8em auto;
+  }
+}
+
+.mou-popup-box{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.69);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+// .mou-qr-box {
+//   display: none;
+// }
+
+// @media screen and (max-width: 768px) {
+//   .mou-qr-box {
+//     display: inline;
+//   } 
+// }
+
+.ticketchecker-container{
+  //display: inline-grid;
+  max-width: 350px;
+  height: fit-content;
+  background: #f8f9fd;
+  
+  background:linear-gradient(0deg,
+      rgb(255, 255, 255) 0%,
+      rgb(244, 247, 251) 100%);
+  //border-radius: 40px;
+  padding: 25px 35px;
+ // border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
+  margin: 20px;
+}
+
+.mou-heading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  color: rgb(16, 137, 211);
+}
+
+.mou-form {
+  margin-top: 20px;
+}
+
+.mou-form .input {
+  width: 100%;
+  background: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  box-shadow: #cff0ff 0px 10px 10px -5px;
+  border-inline: 2px solid transparent;
+}
+
+.mou-form .input::-moz-placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.mou-form .input::placeholder {
+  color: rgb(170, 170, 170);
+}
+
+.mou-form .input:focus {
+  outline: none;
+  border-inline: 2px solid #12b1d1;
+}
+
+.mou-form .forgot-password {
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.mou-form .forgot-password a {
+  font-size: 11px;
+  color: #0099ff;
+  text-decoration: none;
+}
+
+.mou-form .login-button {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(45deg,
+      rgb(16, 137, 211) 0%,
+      rgb(18, 177, 209) 100%);
+  color: white;
+  padding-block: 15px;
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.mou-form .login-button:hover {
+  transform: scale(1.03);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+}
+
+.mou-form .login-button:active {
+  transform: scale(0.95);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
+}
+
+.mou-staff-card {
+  height: 60px;
+  min-width: 130px;
+  place-items: center;
+  background: #2285D5;
+  align-items: center;
+  
+  //padding: 1.4em;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.mou-staff-card-text{
+  color: #FFFFFF;
+//   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//   font-family: "Open Sans";
+//   font-size: 20px;
+//   font-style: normal;
+//   font-weight: 700;
+//   //line-height: 48px;    
+//   letter-spacing: 0.5px;
+}
+
+.bg-ticket-checker{
+    left: 0;
+    z-index: -100;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    background: url("../images/checker-mobile.jpg"),
+      lightgray -3.491px -930.014px / 100.77% 290.365% no-repeat;
+    background-position-y: 100% !important;
+    background-position-x: center !important; 
+  }
+
+  @media screen and (max-width: 768px) {
+    .bg-ticket-checker {
+
+      background:
+        url("../images/checker-mobile.jpg"), no-repeat;
+      background-size: cover;
+    }
+    
+  }
+
+  .home-container{
+    padding: 0 5%;
+  
+  }
+ // background: linear-gradient(0deg, rgba(0, 0, 0, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%), url("../images/home.jpg"), lightgray -32px -138.526px / 114.651% 146.255% no-repeat;
 

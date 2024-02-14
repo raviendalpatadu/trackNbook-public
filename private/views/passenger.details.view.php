@@ -4,11 +4,13 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 
 echo "<pre>";
 // print_r($_POST);
-// // print_r($_SESSION);
+// print_r($_SESSION);
 // print_r($data);
 
 echo "</pre>";
 ?>
+
+
 <?php $this->view("./includes/header"); ?>
 
 <body>
@@ -106,7 +108,7 @@ echo "</pre>";
                             <div class="row g-30 mb-20">
                                 <div class="col-4">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">NIC</div>
+                                        <div class="input-text-label">NIC/passpot</div>
                                         <div class="input-field">
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here" name="user_nic[]" value="<?php echo (isset($_POST['user_nic'][$i])) ? $_POST['user_nic'][$i] : "" ; ?>">
@@ -153,16 +155,16 @@ echo "</pre>";
                                     <div class="radio-buttons-container">
                                         <?php for ($j=0; $j < 2; $j++):?>
                                         <div class="radio-button">
-                                            <input name="user_gender<?=$i?>" value="male" id="radio<?=$i?>_<?=$j?>" class="radio-button__input" type="radio">
-                                            <label for="radio<?=$i?>_<?=$j++?>" class="radio-button__label <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_gender'.$i])) ? 'red' : '') : ''; ?>">
+                                            <input name="user_gender[<?=$i?>]" value="male" id="radio<?=$i?>_<?=$j?>" class="radio-button__input" type="radio">
+                                            <label for="radio<?=$i?>_<?=$j++?>" class="radio-button__label <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_gender'][$i])) ? 'red' : '') : ''; ?>">
                                                 <span class="radio-button__custom"></span>
 
                                                 Male
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_gender<?=$i?>" value="female" id="radio<?=$i?>_<?=$j?>" class="radio-button__input" type="radio">
-                                            <label for="radio<?=$i?>_<?=$j?>" class="radio-button__label <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_gender'.$i])) ? 'red' : '') : ''; ?>">
+                                            <input name="user_gender[<?=$i?>]" value="female" id="radio<?=$i?>_<?=$j?>" class="radio-button__input" type="radio">
+                                            <label for="radio<?=$i?>_<?=$j?>" class="radio-button__label <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['user_gender'][$i])) ? 'red' : '') : ''; ?>">
                                                 <span class="radio-button__custom"></span>
                                                 Female
                                             </label>
