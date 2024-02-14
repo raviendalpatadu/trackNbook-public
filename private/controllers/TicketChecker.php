@@ -26,7 +26,7 @@ class TicketChecker extends Controller
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
             $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
         }
-         
+        
         $this->view('reservation.ticketchecker', $data);
     }
 
@@ -60,10 +60,17 @@ class TicketChecker extends Controller
         $this->view('dashboard.ticketchecker', $data);
     }
 
-    function summary($id = '')
-    {
+    function summary($id = ''){
+        
+        $resevation = new Reservations();
+        $data = array();
+        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
 
-        $this->view('summary.ticketchecker');
+        $train = new Trains();
+        $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+        $this->view('summary.ticketchecker', $data);
+   
     }
 
     function QR($id = '')

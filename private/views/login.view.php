@@ -51,31 +51,31 @@
                                 <!-- create account -->
                                 <div class="row mb-4 d-flex justify-content-between flex-fill">
                                     <div class="col-6 d-flex justify-content-center form-check g-5">
-                                        <!-- Checkbox -->
-                                        
-                                            <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                                            <label class="form-check-label" for="form2Example31"> Remember me </label>
-                                        
+                                        <!-- remembre me -->
+
+                                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                                        <label class="form-check-label" for="form2Example31"> Remember me </label>
+
                                     </div>
 
                                     <div class="col-6">
-                                        <!-- Simple link -->
-                                        <a href="#!">Forgot password?</a>
+                                        <!-- Forgot password?-->
+                                        <a class="mou-span" href="#!">Forgot password?</a>
                                     </div>
                                 </div>
 
-                                <!-- remembre me -->
+                                <!-- Submit -->
 
 
-                                <div class="button-base">
-                                    <input class="text" type="submit" value="Submit" name="submit">
-                                </div>
+                                    <div class="button-base">
+                                        <input class="text" type="submit" value="Login" name="submit">
+                                    </div>
 
 
 
                                 <!-- submit -->
                                 <div class="d-flex justify-content-center flex-fill">
-                                    <p class="mb-0">Don't have an account? <a href="passenger/register" class="text-white-50 fw-bold">Sign Up</a>
+                                    <p class="mb-0 ">Don't have an account? <a href="passenger/register" class="mou-span fw-bold">Sign Up</a>
                                     </p>
                                 </div>
                             </form>

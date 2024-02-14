@@ -20,11 +20,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
         <main>
             <div class="container">
-                
+
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12">
-                        
-                        <div class="row mt-20 mb-20 " >
+
+                        <div class="row mt-20 mb-20 ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
                                     <h3>Warrant Requests</h3>
@@ -86,126 +86,126 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             </div>
                         </form>
                     </div>
+                </div>
 
                     <div class="row">
                         <div class="col-12">
-                            
-                                    <table class="">
-                                        <thead>
-                                            <tr class="row p-20">
-                                                <th class="col-3 d-flex align-items-center">Name</th>
-                                                <th class="col-2">NIC</th>
-                                                <th class="col-2">Date</th>
-                                                <th class="col-2 d-flex align-items-center"> Class</th>
-                                                <th class="col-2">Status</th>
-                                                <th class="col-1"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                            
-                                            <?php for ($reservation = 0; $reservation < $count; $reservation++) : ?>
-                                                <tr class="row p-20">
-                                                    <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
-                                                    <td class="col-2 d-flex align-items-center lightgray-font "><?= $data['reservations'][$reservation]->reservation_passenger_nic ?></td>
-                                                    <td class="col-2 d-flex align-items-center"><?= date("d-M-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
-                                                    <td class="col-2 d-flex align-items-center"><?php
-                                                                                                if ($data['reservations'][$reservation]->reservation_class == 1) {
-                                                                                                    echo "First Class";
-                                                                                                } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
-                                                                                                    echo "Second Class";
-                                                                                                } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
-                                                                                                    echo "Third Class";
-                                                                                                }
-                                                                                                ?></td>
-                                                    <td class="col-2 d-flex align-items-center">
-                                                        <div class="badge-base bg-light-green">
-                                                            <div class="dot">
-                                                                <div class="dot2"></div>
-                                                            </div>
-                                                            <div class="text dark-green"><?=ucfirst($data['reservations'][$reservation]->warrant_status)?></div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>
-                                                        <div class="badge-base bg-Selected-Blue">
-                                                            <div class="dot">
-                                                                <div class="dot4"></div>
-                                                            </div>
-                                                            <div class="text blue "><a href="<?= ROOT ?>staffticketing/displayWarrent/<?=$data['reservations'][$reservation]->warrant_id?>">View </div> </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php endfor; ?>
 
-                                        </tbody>
-                                    </table>
-                                    <div class="pagination">
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
+                            <table class="">
+                                <thead>
+                                    <tr class="row p-20">
+                                        <th class="col-3 d-flex align-items-center">Name</th>
+                                        <th class="col-2">NIC</th>
+                                        <th class="col-2">Date</th>
+                                        <th class="col-2 d-flex align-items-center"> Class</th>
+                                        <th class="col-2">Status</th>
+                                        <th class="col-1"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php for ($reservation = 0; $reservation < $count; $reservation++) : ?>
+                                        <tr class="row p-20">
+                                            <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
+                                            <td class="col-2 d-flex align-items-center lightgray-font "><?= $data['reservations'][$reservation]->reservation_passenger_nic ?></td>
+                                            <td class="col-2 d-flex align-items-center"><?= date("d-M-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
+                                            <td class="col-2 d-flex align-items-center"><?php
 
-                                                <div class="text">Previous</div>
-                                            </div>
-                                        </button>
-                                        <div class="pagination-numbers">
-                                            <div class="pagination-number-base-active">
-                                                <div class="content">
-                                                    <div class="number">1</div>
+                                                                                        if ($data['reservations'][$reservation]->reservation_class == 1) {
+                                                                                            echo "First Class";
+                                                                                        } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
+                                                                                            echo "Second Class";
+                                                                                        } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
+                                                                                            echo "Third Class";
+                                                                                        }
+                                                                                        ?></td>
+                                            <td class="col-2 d-flex align-items-center">
+                                                <div class="badge-base bg-light-green">
+                                                    <div class="dot">
+                                                        <div class="dot2"></div>
+                                                    </div>
+                                                    <div class="text dark-green"><?= ucfirst($data['reservations'][$reservation]->warrant_status) ?></div>
                                                 </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">2</div>
+                                            </td>
+                                            <td class="col-1 d-flex align-items-center"><a class="blue" href=""></a>
+                                                <div class="badge-base bg-Selected-Blue">
+                                                    <div class="dot">
+                                                        <div class="dot4"></div>
+                                                    </div>
+                                                    <div class="text blue "><a href="<?= ROOT ?>staffticketing/displayWarrent/<?= $data['reservations'][$reservation]->warrant_id ?>">View </div> </a>
                                                 </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">3</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">...</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">8</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">9</div>
-                                                </div>
-                                            </div>
-                                            <div class="pagination-number-base">
-                                                <div class="content">
-                                                    <div class="number2">10</div>
-                                                </div>
-                                            </div>
+                                            </td>
+                                        </tr>
+                                    <?php endfor; ?>
+
+                                </tbody>
+                            </table>
+                            <div class="pagination">
+                                <button class="button">
+                                    <div class="button-base">
+                                        <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                        <div class="text">Previous</div>
+                                    </div>
+                                </button>
+                                <div class="pagination-numbers">
+                                    <div class="pagination-number-base-active">
+                                        <div class="content">
+                                            <div class="number">1</div>
                                         </div>
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <div class="text">Next</div>
-                                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                        </button>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">2</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">3</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">...</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">8</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">9</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-number-base">
+                                        <div class="content">
+                                            <div class="number2">10</div>
+                                        </div>
                                     </div>
                                 </div>
+                                <button class="button">
+                                    <div class="button-base">
+                                        <div class="text">Next</div>
+                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+            
+          
+  
     </div>
 
     </main>
+    <?php $this->view('includes/footer'); ?>
     </div>
-    <?php $this->view("./includes/load-js") ?>
+    
 
 
 </body>

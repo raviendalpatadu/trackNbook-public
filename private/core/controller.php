@@ -10,9 +10,8 @@ class Controller
     {
         if (is_array($data) && count($data) > 0)
             extract($data);
-            
-        if (file_exists("../private/views/" . $view . ".view.php")) 
-        {
+
+        if (file_exists("../private/views/" . $view . ".view.php")) {
             require("../private/views/" . $view . ".view.php");
         } else {
             require("../private/views/error404.view.php");
@@ -28,7 +27,7 @@ class Controller
     }
     public function redirect($link)
     {
-        header("Location:". ROOT . trim($link, "/"));
+        header("Location:" . ROOT . trim($link, "/"));
         die;
     }
 }

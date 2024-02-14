@@ -285,8 +285,8 @@ class Passengers extends Model
             }
 
             // check gender
-            if(empty($data['user_gender'.$entry])){
-                $errors['errors']['user_gender'.$entry] = 'Gender Required';
+            if(empty($data['user_gender'][$entry])){
+                $errors['errors']['user_gender'][$entry] = 'Gender Required';
             }
 
         }

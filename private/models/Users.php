@@ -147,7 +147,7 @@ class Users extends Model
                 $con->beginTransaction();
 
                 //insert query to add passenger account
-                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
+                $query = "Inse INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
                 VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
 
                 $stm = $con->prepare($query);
@@ -369,5 +369,22 @@ class Users extends Model
             }
         }
         return $errors;
+    }
+
+    public function getUsers($column, $value)
+    {
+
+        try {
+            $result = $this->where($column, $value);
+            //sort an array in assending order
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
     }
 }
