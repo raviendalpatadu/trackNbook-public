@@ -378,6 +378,23 @@ div.sidebar .sidebar-menu ul li.sidebar-item .sidebar-content:hover {
   transition: all 0.4s ease-in-out;
 }
 
+div.sidebar-menu ul li.sidebar-item .sidebar-content:hover .sidebar-icon svg{
+  width: 20px !important;
+  height: 20px !important;
+}
+div.sidebar
+  .sidebar-menu
+  ul
+  li.sidebar-item
+  .sidebar-content
+  .sidebar-icon
+  svg
+  path {
+  fill: var(--Primary-Gray);
+  transition: all 0.4s ease-in-out;
+  
+}
+
 div.sidebar
   .sidebar-menu
   ul
@@ -388,7 +405,9 @@ div.sidebar
   path {
   fill: var(--Primary-Blue);
   transition: all 0.4s ease-in-out;
+  
 }
+
 
 svg.sidebar-dote {
   display: none;

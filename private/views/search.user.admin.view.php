@@ -19,17 +19,17 @@ $this->view("includes/header");
             <div class="container">
                 <div class="row">
 
-                    <div class="col-8 center-col table profile">
+                    <div class="col-12 center-col">
                         <form action="post" class="center-col col-12 mt-50 mx-15">
                             <div class="text-inputs">
 
 
-                                <div class="input-text-label mt-20">Staff Id</div>
+                                <!-- <div class="input-text-label mt-20">Staff Id</div>
                                 <div class="input-field">
                                     <div class="text">
                                         <input type="text" class="type-here" placeholder="1101">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="input-text-label mt-20">Staff Name</div>
                                 <div class="input-field">
