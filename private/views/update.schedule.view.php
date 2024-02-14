@@ -1,4 +1,3 @@
-
 <?php $this->view("./includes/header") ?>
 
 <body>
@@ -8,9 +7,6 @@
 
         <main style="background-color:#EFF8FF; padding:20px;">
             <div class="row">
-<<<<<<< HEAD
-                <div class="col-5"></div>
-=======
                 <div class="col-3"></div>
                 <div class="col-4 center_form1">
                     <form class="update-schedule">
@@ -84,176 +80,144 @@
                             <div class="box">
                                 <label class="lab-small">3rd Class Reserved</label>
                                 <input class="inputs" placeholder="Ex : 1000.00" />
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 
-                <form class="add-schedule p-50 shadow" style="background-color: white;">
-                    <div class="top-head-addtrain">Update Train</div>
-
+                                <form class="add-schedule p-50 shadow" style="background-color: white;">
+                                    <div class="top-head-addtrain">Update Train</div>
 
 
-                    <div class="form-group">
-                        <div class="box-3">
-                            <div class="form-group">
-                                <label for="departureTime">Train Name</label>
-                                <input class="text-field-box" placeholder="Ex : 2" />
-                            </div>
 
-                            <div class="form-group">
-                                <label for="departure">Train Route</label>
-                                <select class="text-field" id="departure">
-                                    <option value="option1"> Main</option>
-                                    <option value="option2">North</option>
-                                    <option value="option3">Main</option>
+                                    <div class="form-group">
+                                        <div class="box-3">
+                                            <div class="form-group">
+                                                <label for="departureTime">Train Name</label>
+                                                <input class="text-field-box" placeholder="Ex : 2" />
+                                            </div>
 
-                                </select>
-                            </div>
+                                            <div class="form-group">
+                                                <label for="departure">Train Route</label>
+                                                <select class="text-field" id="departure">
+                                                    <option value="option1"> Main</option>
+                                                    <option value="option2">North</option>
+                                                    <option value="option3">Main</option>
 
-                        </div>
-                        <div class="box-3">
-                            <div class="form-group">
-                                <label for="departure">Start Station</label>
-                                <select class="text-field" id="departure">
-                                    <option value="option1">Colombo</option>
-                                    <option value="option2">Anuradhapura</option>
-                                    <option value="option3">Jaffna</option>
-                                    <option value="option3">Vavuniya</option>
-                                    <option value="option3">Kodikamam</option>
-                                    <option value="option3">Kankesanthurai</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="departureTime">Start Time</label>
-                                <input class="text-field-box" placeholder="Ex : 13.30" />
-                            </div>
-                        </div>
-                        <div class="box-3">
-                            <div class="form-group">
-                                <label for="departure">End Station</label>
-                                <select class="text-field" id="departure">
-                                    <option value="option1"> Colombo</option>
-                                    <option value="option2">Anuradhapura</option>
-                                    <option value="option3">Jaffna</option>
-                                    <option value="option3">Vavuniya</option>
-                                    <option value="option3">Kodikamam</option>
-                                    <option value="option3">Kankesanthurai</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="departureTime">End Time</label>
-                                <input class="text-field-box" placeholder="Ex : 13.30" />
-                            </div>
-                        </div>
-                        <div class="box-3">
-                            <div class="form-group">
-                                <label for="departure">Train Type</label>
-                                <select class="text-field" id="departure">
-                                    <option value="option1"> Express</option>
-                                    <option value="option2">Mail</option>
-                                    <option value="option3">Intercity</option>
+                                                </select>
+                                            </div>
 
-                                </select>
+                                        </div>
+                                        <div class="box-3">
+                                            <div class="form-group">
+                                                <label for="departure">Start Station</label>
+                                                <select class="text-field" id="departure">
+                                                    <option value="option1">Colombo</option>
+                                                    <option value="option2">Anuradhapura</option>
+                                                    <option value="option3">Jaffna</option>
+                                                    <option value="option3">Vavuniya</option>
+                                                    <option value="option3">Kodikamam</option>
+                                                    <option value="option3">Kankesanthurai</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="departureTime">Start Time</label>
+                                                <input class="text-field-box" placeholder="Ex : 13.30" />
+                                            </div>
+                                        </div>
+                                        <div class="box-3">
+                                            <div class="form-group">
+                                                <label for="departure">End Station</label>
+                                                <select class="text-field" id="departure">
+                                                    <option value="option1"> Colombo</option>
+                                                    <option value="option2">Anuradhapura</option>
+                                                    <option value="option3">Jaffna</option>
+                                                    <option value="option3">Vavuniya</option>
+                                                    <option value="option3">Kodikamam</option>
+                                                    <option value="option3">Kankesanthurai</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="departureTime">End Time</label>
+                                                <input class="text-field-box" placeholder="Ex : 13.30" />
+                                            </div>
+                                        </div>
+                                        <div class="box-3">
+                                            <div class="form-group">
+                                                <label for="departure">Train Type</label>
+                                                <select class="text-field" id="departure">
+                                                    <option value="option1"> Express</option>
+                                                    <option value="option2">Mail</option>
+                                                    <option value="option3">Intercity</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="departureTime">No of Compartments</label>
+                                                <input class="text-field-box" placeholder="Ex : 2" />
+                                            </div>
+                                        </div>
+                                        <div class="activation-field">
+                                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button class="button-white"> Back</button></a>
+                                            <button class="button-blue"> Update</button>
+                                        </div>
+                                </form>
+
+
                             </div>
-                            <div class="form-group">
-                                <label for="departureTime">No of Compartments</label>
-                                <input class="text-field-box" placeholder="Ex : 2" />
-                            </div>
-                        </div>
-<<<<<<< HEAD
-                    </div>
-                    <button class="button mx1-10">
-                        <div class="button-base">
-                            <div class="text">Update</div>
-                        </div>
-                    </button>
-=======
-                        <div class="activation-field">
-                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button
-                                    class="button-white"> Back</button></a>
-                            <button class="button-blue"> Update</button>
-                        </div>
+                            <div class="col-4"></div>
+
+
+
+
+
                     </form>
-
-
                 </div>
+
+
                 <div class="col-4"></div>
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 
-
-
-
-
-                </form>
             </div>
-
-
-            <div class="col-4"></div>
-
-    </div>
-    </main>
+        </main>
     </div>
 
     <style>
-<<<<<<< HEAD
-        .mx1-10 {
-
-            margin-left: 847px;
-            margin-top: -px;
-            6
+        .activation-field {
+            display: flex;
+            justify-content: flex-end;
+            width: calc(103% - 10px);
+            gap: 0px;
         }
 
-        .text-field01 {
-            display: flex;
-            width: 200px;
+
+        .button-blue {
+            display: inline-flex;
             padding: 16px;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 10px;
             border-radius: 8px;
-            border: 1px solid #CCC;
+            border: 2px solid #FFF;
+            background: #2185D5;
+            cursor: pointer;
+            color: white;
+            width: 15%;
+            margin-left: 50px;
+
+            margin-top: 20px;
+            /* Set the text color to white */
+            /* You can add additional styling here, such as padding, border, etc. */
+        }
+
+        .button-white {
+            display: inline-flex;
+            padding: 16px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            border: 2px solid #2185D5;
             background: var(--W-Background, #FFF);
-            margin-left: 10px;
-=======
-    .activation-field {
-        display: flex;
-        justify-content: flex-end;
-        width: calc(103% - 10px);
-        gap: 0px;
-    }
-
-
-    .button-blue {
-        display: inline-flex;
-        padding: 16px;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        border-radius: 8px;
-        border: 2px solid #FFF;
-        background: #2185D5;
-        cursor: pointer;
-        color: white;
-        width: 15%;
-        margin-left: 50px;
-
-        margin-top: 20px;
-        /* Set the text color to white */
-        /* You can add additional styling here, such as padding, border, etc. */
-    }
-
-    .button-white {
-        display: inline-flex;
-        padding: 16px;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        border-radius: 8px;
-        border: 2px solid #2185D5;
-        background: var(--W-Background, #FFF);
-        margin-right: 311px;
-        width: 18%;
-        cursor: pointer;
-        margin-top: 20px;
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
+            margin-right: 311px;
+            width: 18%;
+            cursor: pointer;
+            margin-top: 20px;
 
         }
 
@@ -263,7 +227,7 @@
             border-radius: 8px;
             border: 1px solid #CCC;
             background: var(--W-Background, #FFF);
-            margin right: 20px;
+            margin-right: 20px;
         }
 
         .activation-field {
@@ -293,77 +257,36 @@
             /* You can add additional styling here, such as padding, border, etc. */
         }
 
-<<<<<<< HEAD
-        .button-white {
-            display: inline-flex;
-            padding: 16px;
+        .update-schedule {
+            margin-top: 20%;
+            display: flex;
+            width: 500px;
+            height: auto;
+            padding: 50px;
+            padding-bottom: 30px;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            border-radius: 8px;
-            border: 2px solid #2185D5;
-            background: var(--W-Background, #FFF);
-            margin-right: 311px;
-            width: 18%;
-            cursor: pointer;
-            margin-top: 20px;
-
+            align-items: flex-start;
+            background: #FAFAFA;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
 
-        .top-head-addtrain {
-            display: inline-flex;
-            padding: 32px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border-radius: 5px;
-            background: rgba(33, 133, 213, 0.77);
-            position: absolute;
-            top: 0;
-            margin-top: 128px;
-            margin-left: -11px;
-            color: #FFF;
-            text-align: center;
-            font-feature-settings: 'clig' off, 'liga' off;
-            font-family: Inter;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+
+        label {
+            color: #666;
+            font-family: Noto Sans;
             font-size: 16px;
             font-style: normal;
-            font-weight: 700;
-            line-height: 5.444px;
-            /* 121.528% */
+            font-weight: 600;
+            line-height: 18px;
+            margin-bottom: 18px;
+            /* 112.5% */
         }
-=======
-    .update-schedule {
-        margin-top: 20%;
-        display: flex;
-        width: 500px;
-        height: auto;
-        padding: 50px;
-        padding-bottom: 30px;
-        flex-direction: column;
-        align-items: flex-start;
-        background: #FAFAFA;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 18px;
-        width: 100%;
-    }
-
-    label {
-        color: #666;
-        font-family: Noto Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 18px;
-        margin-bottom: 18px;
-        /* 112.5% */
-    }
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
 
         .head-box {
             position: relative;
@@ -395,17 +318,15 @@
             padding-bottom: 30px;
             flex-direction: column;
             align-items: flex-start;
-            background: #FFFFFF FF box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-<<<<<<< HEAD
+            background: #FFFFFF;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
-=======
-    .box-3 {
-        display: flex;
-        gap: 50px;
-        margin-bottom: 18px;
-    }
->>>>>>> 6c81745cf8ea3b5c2d4f8d9dfeb033bace3d5e1e
+
+        .box-3 {
+            display: flex;
+            gap: 50px;
+            margin-bottom: 18px;
+        }
 
         .form-group {
             display: flex;
