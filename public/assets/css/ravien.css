@@ -2716,6 +2716,10 @@
   color: #12b76a;
 }
 
+.bg-Banner-green {
+  background-color: #12b76a;
+}
+
 .border-bottom-light-green {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -3216,7 +3220,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   left: 0px;
   z-index: -100;
   height: 100%;
-  width: 60%;
+  width: 65%;
   background: linear-gradient(270deg, #fff 5.1%, rgba(0, 0, 0, 0) 101.92%), url("../images/home1.jpg"), no-repeat;
   background-size: cover;
 }

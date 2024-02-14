@@ -53,14 +53,14 @@
                                 <div class="col-6 d-flex align-items-center">
                                     <div class="text-inputs">
                                         <div class="input-text-label text lightgray-font">Reason</div>
-                                        <div class="width-fill">
+                                        <!-- <div class="width-fill"> -->
                                             <select class="dropdown" placeholder="Please choose" name="reason">
                                                 <option value="" selected>--Select The Reason--</option>
                                                 <option value="">Booking Name Is Incorrect</option>
                                                 <option value="">I Have Changed My Plan </option>
                                                 <option value="">Other </option>
                                             </select>
-                                        </div>
+                                        <!-- </div> -->
                                         <div class="assistive-text display-none">Assistive Text</div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-6">
                                         <!-- <button class="button" id="yes"> -->
-                                            <div class="button-base bg-blue">
+                                            <div class="button-base bg-blue"><a href="<?= ROOT ?>staffticketing/refund">
                                                 <input class="text White" type="submit" value="Yes" name="submit">
                                                 <!-- <div class="text White">Yes</div> -->
                                             </div>

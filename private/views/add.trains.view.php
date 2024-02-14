@@ -36,6 +36,7 @@ if (!isset($data['errors'])) {
                         </div>
 
 
+
                         <form action="" method="post" class="d-flex align-items-center flex-column col-12">
                             <div class="text-inputs">
 
@@ -43,10 +44,14 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Train Name</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="text" name="train_name" class="type-here" placeholder="Type here">
+                                            <input type="text" name="train_name" class="type-here"
+                                                placeholder="Type here">
                                         </div>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('train_name', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_name', $data['errors'])) ? $data['errors']['train_name'] : ''; ?></div>
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('train_name', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (isset($data['errors']) && array_key_exists('train_name', $data['errors'])) ? $data['errors']['train_name'] : ''; ?>
+                                    </div>
                                 </div>
 
 
@@ -64,7 +69,8 @@ if (!isset($data['errors'])) {
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('train_route', $data['errors'])) ? 'display-none' : ''; ?>">
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('train_route', $data['errors'])) ? 'display-none' : ''; ?>">
                                         <?php echo (array_key_exists('train_route', $data['errors'])) ? $data['errors']['train_route'] : ''; ?>
                                     </div>
                                 </div>
@@ -76,10 +82,15 @@ if (!isset($data['errors'])) {
                                         <select class="input-field dropdown" name="start_station" placeholder="Please choose" id="startStation">
                                             <option value="0">Please choose</option>
 
-
+                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                                <option value="<?= $value->station_id ?>">
+                                                    <?= $value->station_name ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('start_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('start_station', $data['errors'])) ? 'display-none' : ''; ?>">
                                         <?php echo (array_key_exists('start_station', $data['errors'])) ? $data['errors']['start_station'] : ''; ?>
                                     </div>
                                 </div>
@@ -88,10 +99,12 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Start Time</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="time" name="start_time" class="type-here" placeholder="Type here">
+                                            <input type="time" name="start_time" class="type-here"
+                                                placeholder="Type here">
                                         </div>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('start_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('start_time', $data['errors'])) ? 'display-none' : ''; ?>">
                                         <?php echo (array_key_exists('start_time', $data['errors'])) ? $data['errors']['start_time'] : ''; ?>
                                     </div>
                                 </div>
@@ -103,10 +116,15 @@ if (!isset($data['errors'])) {
                                         <select class="input-field dropdown" name="end_station" placeholder="Please choose" id="endStation">
                                             <option value="0">Please choose</option>
 
-
+                                            <?php foreach ($data['stations'] as $key => $value): ?>
+                                                <option value="<?= $value->station_id ?>">
+                                                    <?= $value->station_name ?>
+                                                </option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('end_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('end_station', $data['errors'])) ? 'display-none' : ''; ?>">
                                         <?php echo (array_key_exists('end_station', $data['errors'])) ? $data['errors']['end_station'] : ''; ?>
                                     </div>
                                 </div>
@@ -115,10 +133,12 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">End Time</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="time" name="end_time" class="type-here" placeholder="Type here">
+                                            <input type="time" name="end_time" class="type-here"
+                                                placeholder="Type here">
                                         </div>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('end_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('end_time', $data['errors'])) ? 'display-none' : ''; ?>">
                                         <?php echo (array_key_exists('end_time', $data['errors'])) ? $data['errors']['end_time'] : ''; ?>
                                     </div>
                                 </div>
@@ -203,7 +223,7 @@ if (!isset($data['errors'])) {
 </html>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
         var counter = 0;
 
@@ -217,7 +237,8 @@ if (!isset($data['errors'])) {
                 console.log(tag[counter]);
                 if (tag[counter++].innerHTML != " ") {
                     tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
+                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass(
+                        'red');
                     tag.parent().children('.input-text-label').addClass('red');
                     tag.addClass('red');
                 }
@@ -499,3 +520,17 @@ if (!isset($data['errors'])) {
 
     });
 </script>
+
+<style>
+    .add-schedule {
+        margin-top: 20%;
+        display: flex;
+        width: 500px;
+        height: 655px;
+        padding: 50px;
+        flex-direction: column;
+        align-items: flex-start;
+        background: #FAFAFA;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+</style>

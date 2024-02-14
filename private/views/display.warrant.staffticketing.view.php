@@ -83,7 +83,7 @@
                         </div>
                         <div class="row d-flex g-8 justify-content-center">
                             <div class="col-4">
-                                <button class="button mt-20 " id="reject"><a href="<?= ROOT ?>staffticketing/rejectWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['reservations']->warrant_id : ''; ?>">
+                                <button class="button mt-20 " id="reject"><a href="<?= ROOT ?>staffticketing/rejectReason/<?php echo (array_key_exists('reservations', $data)) ? $data['reservations']->warrant_id : ''; ?>">
                                         <div class="button-base bg-Selected-red">
                                             <div class="text Banner-red">Rejected</div>
                                         </div>

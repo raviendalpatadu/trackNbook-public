@@ -11,7 +11,7 @@ if (!isset($data['errors'])) {
         <?php $this->view("./includes/navbar") ?>
         <main>
             <div class="container">
-                <div class="row d-flex align-items-center">
+                <div class="row d-flex   ">
                     <div class="col-5 justify-content-center">
                         <img src="<?= ASSETS ?>images/inquiry.png" alt="" srcset="">
                     </div>
@@ -30,7 +30,7 @@ if (!isset($data['errors'])) {
                                 <form action="" method="post" class="profile">
 
                                     <div class="row mt-20 g-20 mb-20">
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="text-inputs">
                                                 <div class="input-text-label">First Name</div>
                                                 <div class="input-field">
@@ -43,7 +43,7 @@ if (!isset($data['errors'])) {
                                                 <?php endif ?>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="text-inputs">
                                                 <div class="input-text-label">Last Name</div>
                                                 <div class="input-field">
@@ -58,7 +58,7 @@ if (!isset($data['errors'])) {
                                         </div>
                                     </div>
                                     <div class="row g-30 mb-20">
-                                        <div class="col-6">
+                                        <div class="col-5">
                                             <div class="text-inputs">
                                                 <div class="input-text-label">Email</div>
                                                 <div class="input-field">
@@ -72,7 +72,7 @@ if (!isset($data['errors'])) {
 
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="text-inputs">
                                                 <div class="input-text-label">Mobile</div>
                                                 <div class="input-field">
@@ -189,7 +189,8 @@ if (!isset($data['errors'])) {
                 console.log(tag[counter]);
                 if (tag[counter++].innerHTML != " ") {
                     tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
+                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass(
+                        'red');
                     tag.parent().children('.input-text-label').addClass('red');
                     tag.addClass('red');
                 }
