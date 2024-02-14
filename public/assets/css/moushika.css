@@ -27,7 +27,7 @@
   color: #F2F9FE;
 }
 
-.mou-form-container {
+.mou-staff-login-container {
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
@@ -38,25 +38,30 @@
   justify-content: center;
   gap: 15px;
   padding: 50px 40px 20px 40px;
-  background: linear-gradient(0deg, rgb(160, 167, 175) 0%, rgb(255, 255, 255) 100%);
+  background: lightblue;
   box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01), 0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09), 0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 11px;
   font-family: "Inter", sans-serif;
 }
 
 .mou-title {
-  margin: 0;
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: #212121;
+  color: #2E3E5C;
+  font-family: Inter;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 32px;
+  /* 133.333% */
+  letter-spacing: 0.48px;
 }
 
 .mou-subtitle {
   font-size: 0.85rem;
+  font-weight: 700;
   max-width: 80%;
   text-align: center;
   line-height: 1.1rem;
-  color: #8B8E98;
+  color: #415971;
 }
 
 .input_container {
@@ -98,7 +103,6 @@
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
-  line-height: 19.444px;
 }
 
 .trains-available h2 {
@@ -129,6 +133,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-end-end-radius: 10px;
   border-end-start-radius: 10px;
+  padding: inherit;
 }
 
 .row-bottom-round {
@@ -198,35 +203,6 @@
     height: 20px;
     padding: 5px 4px;
     font-size: 12px;
-  }
-}
-.bg-staff-home-desktop {
-  position: absolute;
-  left: 0;
-  z-index: -100;
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-  background: url("../images/home1.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
-}
-
-.bg-staff-home-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
-  .bg-staff-home-desktop {
-    display: none;
-  }
-  .bg-staff-home-mobile {
-    display: initial;
-    position: absolute;
-    left: 0;
-    z-index: -100;
-    width: 100%;
-    height: 100%;
-    flex-shrink: 0;
-    background: url("../images/home-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
   }
 }
 .line {
@@ -442,47 +418,17 @@ h3.warrant {
   display: grid;
 }
 
-.range input {
-  -webkit-appearance: none;
-  width: 400px;
-  height: 4px;
-  border-radius: 5px;
-  background-color: #508cec;
-  outline: none;
+.QR-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 5px;
 }
 
-.range input::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #4d80cd;
+.QR-container h1 {
+  color: #ffffff;
 }
 
-.range span {
-  position: absolute;
-  margin-left: 14px;
-  width: 50px;
-  height: 30px;
-  background-color: #8ab3da;
-  color: #fff;
-  border-radius: 3px;
-  text-align: center;
-  line-height: 30px;
-}
-
-.range span:before {
-  content: "";
-  position: absolute;
-  border-right: 9px solid transparent;
-  border-left: 9px solid transparent;
-  border-bottom: 12px solid #8ab3da;
-  left: -10px;
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
-}
-
-.section {
+.QR-section {
   background-color: #ffffff;
   padding: 50px 30px;
   border: 1.5px solid #b2b2b2;
@@ -505,7 +451,7 @@ h3.warrant {
   height: 100px !important;
 }
 
-.QR-button {
+QR-button {
   padding: 10px 20px;
   border: 1px solid #b2b2b2;
   outline: none;
@@ -515,11 +461,11 @@ h3.warrant {
   cursor: pointer;
   margin-top: 15px;
   margin-bottom: 10px;
-  background-color: rgba(0, 128, 0, 0.6784313725);
+  background-color: Border-blue;
   transition: 0.3s background-color;
 }
 
-.QR-button:hover {
+Qr-button:hover {
   background-color: #008000;
 }
 
@@ -528,14 +474,13 @@ h3.warrant {
   color: #1d9bf0;
 }
 
-.video {
+video {
   width: 100% !important;
   border: 1px solid #b2b2b2 !important;
   border-radius: 0.25em;
 }
 
 .notificationCard {
-  width: 220px;
   height: -moz-fit-content;
   height: fit-content;
   background: rgb(245, 245, 245);
@@ -545,18 +490,37 @@ h3.warrant {
   border-radius: 5px;
 }
 
+.notificationCard img.checker-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 141px;
+}
+
 .notificationHeading {
   color: black;
   font-family: "Open Sans";
-  font-size: 41px;
+  font-size: 38px;
   font-style: normal;
   font-weight: 700;
 }
 
+.notificationCard.max-width {
+  max-width: 500px;
+}
+
+@media (max-width: 768px) {
+  .notificationCard.max-width {
+    max-width: 100%;
+  }
+}
 .notificationPara {
   color: rgb(133, 133, 133);
   font-size: 0.6em;
   font-weight: 600;
+}
+
+.check-box {
+  justify-content: space-around;
 }
 
 @media only screen and (min-width: 1170px) {
@@ -574,15 +538,6 @@ h3.warrant {
   z-index: 100;
 }
 
-.mou-qr-box {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
-  .mou-qr-box {
-    display: inline;
-  }
-}
 .ticketchecker-container {
   max-width: 350px;
   height: -moz-fit-content;
@@ -594,7 +549,7 @@ h3.warrant {
   margin: 20px;
 }
 
-.heading {
+.mou-heading {
   text-align: center;
   font-weight: 900;
   font-size: 30px;
@@ -666,9 +621,11 @@ h3.warrant {
 }
 
 .mou-staff-card {
+  height: 60px;
+  min-width: 130px;
   place-items: center;
-  background: #e3edf7;
-  padding: 1.4em;
+  background: #2285D5;
+  align-items: center;
   border-radius: 10px;
   box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0);
@@ -676,8 +633,27 @@ h3.warrant {
   transition: transform 0.5s;
 }
 
-.mou-staff-card:hover {
-  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2), inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7), -0.5px -0.5px 0px rgb(255, 255, 255), 0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  transform: translateY(0.5em);
+.mou-staff-card-text {
+  color: #FFFFFF;
+}
+
+.bg-ticket-checker {
+  left: 0;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  background: url("../images/checker-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
+  background-position-y: 100% !important;
+  background-position-x: center !important;
+}
+
+@media screen and (max-width: 768px) {
+  .bg-ticket-checker {
+    background: url("../images/checker-mobile.jpg"), no-repeat;
+    background-size: cover;
+  }
+}
+.home-container {
+  padding: 0 5%;
 }/*# sourceMappingURL=moushika.css.map */

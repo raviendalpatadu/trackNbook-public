@@ -143,7 +143,7 @@ $(document).on("click touch", function (e) {
   $("#no").on("click", function () {
     $("#popup").hide();
   });
-// });
+//});
 
 //QR Code Scanner
 function domReady(fn) {

@@ -9,13 +9,15 @@
 
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
-        <main class=" d-flex align-items-start justify-content-end">
+        <main class=" d-flex align-items-center justify-content-center">
             <div class="bg-staff-login-desktop"></div>
             <div class="container">
 
-                <form action="" method="post" class="mou-form-container d-flex flex-column justify-content-center g-20">
+                <form action="" method="post" class="mou-staff-login-container d-flex flex-column justify-content-center g-20">
                     <div class="d-flex flex-column justify-contet-center align-items-center">
                         <h1 class="mou-title d-flex justify-content-center width-fill mb-10">Login</h1>
+                    </div>
+                    <div class="d-flex flex-column justify-contet-center align-items-center">
                         <p class="mou-subtitle d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>
                     </div>
 
@@ -23,8 +25,8 @@
                         <!-- username -->
                         <div class="login-text-inputs">
                             <div class="input-text-label mb-5">Username</div>
-                            <div class="input-field">
-                                <div class="text">
+                            <div class="input-field ">
+                                <div class="text ">
                                     <input type="text" class="type-here ml-10" placeholder="Enter Your Email" name="username">
                                 </div>
                             </div>
@@ -47,18 +49,23 @@
                             <?php endif ?>
                         </div>
 
-
-                        <div class="mou-flex-row  flex-fill">
-                            <div>
-                                <input type="checkbox">
+                    
+                        <!-- remeber me  -->
+                        <div class="mou-flex-row justify-content-between flex-fill py-10">
+                            <div class="d-flex justify-content-center form-check g-5">
+                                <input class="form-check-input" type="checkbox">
                                 <label>Remember me </label>
                             </div>
-                            <a class="mou-span" href="#!">Forgot password?</a>
+
+                            <div class="">
+                                <a class="mou-span" href="#!">Forgot password?</a>
+                            </div>
+
                         </div>
 
                         <!-- submit -->
                         <div class="button-base mt-10">
-                            <input class="text" type="submit" value="Submit" name="submit">
+                            <input class="text" type="submit" value="Login" name="submit">
                         </div>
 
                     </div>

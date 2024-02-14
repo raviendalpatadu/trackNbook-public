@@ -60,10 +60,17 @@ class TicketChecker extends Controller
         $this->view('dashboard.ticketchecker', $data);
     }
 
-    function summary($id = '')
-    {
+    function summary($id = ''){
+        
+        $resevation = new Reservations();
+        $data = array();
+        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
 
-        $this->view('summary.ticketchecker');
+        $train = new Trains();
+        $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+        $this->view('summary.ticketchecker', $data);
+   
     }
 
     function QR($id = '')

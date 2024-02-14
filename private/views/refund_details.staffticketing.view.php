@@ -20,7 +20,7 @@
                     <div class="ticket-details">
                         <div class="row mb-20 ">
                             <div class="col-12 d-flex align-items-center flex-column line">
-                                <h1>Booking Summary</h1>
+                                <h1>Refund Request</h1>
                             </div>
                         </div>
                         <div class="row mb-10 mt-50 ml-20 ">
@@ -76,7 +76,7 @@
                     <div class="col-12">
                         <button class="button mt-20 ">
                             <div class="button-base">
-                                <div class="text">Print Ticket</div>
+                                <div class="text"></div>
                             </div>
                         </button>
                     </div>
