@@ -27,7 +27,7 @@
                             <div class="ticket-details">
                                 <div class="row mb-20 ">
                                     <div class="col-12 d-flex align-items-center flex-column line">
-                                        <h1>Update Train Arrival</h1>
+                                        <h1>Update Location</h1>
                                     </div>
                                 </div>
                                 <div class="row mb-10 mt-50 ml-20 ">
@@ -71,6 +71,34 @@
                                         </p>
                                     </div>
                                 </div>
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-3">
+                                        <div class="text-inputs">
+                                            <div class="input-text-label text lightgray-font">Current Station</div>
+
+                                            <div class="width-fill">
+                                                <select class="dropdown2" name="reservation_train_id"
+                                                    placeholder="Please choose">
+                                                    <!-- print data of $data -->
+                                                    <option value="0">Jaffna</option>
+                                                    <option value="0">Colombo</option>
+                                                    <option value="0">Vavuniya</option>
+                                                    <option value="0">Anuradhapura</option>
+                                                    <?php foreach ($data['trains'] as $key => $value): ?>
+                                                        <option value="<?= $value->train_id ?>">
+                                                            <?= $value->train_name ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
+                                                <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
 
 
@@ -78,10 +106,18 @@
                         </div>
                         <div class="row d-flex g-8 justify-content-center">
                             <div class="col-4">
+                                <button class="button mt-20 "><a
+                                        href="http://localhost/trackNbook/public/traindriver/updatelocation">
+                                        <div class="button-base bg-Selected-Blue">
+                                            <div class="text Blue">Back</div>
+                                        </div>
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="col-4">
                                 <button class="button mt-20 " id="reject">
-
                                     <div class="button-base bg-Selected-red">
-                                        <div class="text Banner-red">Not Arrived</div>
+                                        <div class="text Banner-red">Pending</div>
                                     </div>
                                     </a>
                                 </button>
@@ -89,14 +125,12 @@
                             <div class="col-4">
                                 <button class="button mt-20 ">
                                     <div class="button-base bg-light-green">
-                                        <div class="text dark-green">Arrived</div>
+                                        <div class="text dark-green">Update</div>
                                     </div>
                                     </a>
                                 </button>
                             </div>
-                            <div class="col-4">
 
-                            </div>
                         </div>
                     </div>
 
@@ -107,5 +141,19 @@
         <?php $this->view('includes/footer'); ?>
     </div>
 </body>
+<style>
+    .dropdown2 {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 6px;
+        display: block;
+        position: relative;
+        color: var(--Secondary-Gray);
+        border: 1px solid #ccc;
+        background: var(--White);
+        transition: all 0.3s ease;
+        width: 421px;
+    }
+</style>
 
 </html>

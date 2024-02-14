@@ -7,6 +7,14 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
     $count = 0;
 }
 ?>
+<?php
+
+if (isset($data['reservations']) && $data['reservations'] != 0) {
+    $count = count($data['reservations']);
+} else {
+    $count = 0;
+}
+?>
 
 <body>
     <div class="column-left">
@@ -47,6 +55,13 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mou-bg-mobile">
+                <div class="row  mr-20 mt-20">
+                    <div class="col-12 ">
 
 
 
