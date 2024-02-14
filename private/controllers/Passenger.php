@@ -43,19 +43,25 @@ class Passenger extends Controller
 
         $fare =  new Fares();
 
-        $price_for_one = $fare->getFareData($_SESSION['reservation']['train_type'], $_SESSION['reservation']['class_type'], $_SESSION['reservation']['from_station'], $_SESSION['reservation']['to_station']); //get from db must be changed
+        $price_for_one = $fare->getFareData($_SESSION['reservation']['train_type'], $_SESSION['reservation']['class_type'], $_SESSION['reservation']['from_station']->station_id, $_SESSION['reservation']['to_station']->station_id); //get from db must be changed
         $price_for_one = $price_for_one[0]->fare_price;
         if (isset($_SESSION['reservation']['passenger_data']) && !empty($_SESSION['reservation']['passenger_data'])) {
             $station = new Stations();
-            $data['start_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['from_station']);
-            $data['end_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['to_station']);
+            $data['start_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['from_station']->station_id);
+            $data['end_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['to_station']->station_id);
 
             $train = new Trains();
             $data['train'] = $train->whereOne('train_id', $_SESSION['reservation']['train_id']);
 
+            $train_type = new TrainTypes();
+            $data['train_type'] = $train_type->whereOne('train_type_id', $_SESSION['reservation']['train_type']);
+
             $compartment = new Compartments();
             $data['class'] = $compartment->whereOne('compartment_id', $_SESSION['reservation']['class_id']);
-            // $data['class'] = $_SESSION['reservation']['class_id'];
+
+
+            $compartment_type = new CompartmentTypes();
+            $data['class_type'] = $compartment_type->whereOne('compartment_class_type_id', $_SESSION['reservation']['class_id']);
 
             $data['no_of_passengers'] = $_SESSION['reservation']['no_of_passengers'];
             $data['price_for_one'] = $price_for_one;
@@ -93,12 +99,12 @@ class Passenger extends Controller
             echo $e->getMessage();
         }
 
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
         if ($data) {
-            $this->redirect('passenger/summary');
+            $this->redirect('passenger/summary', $data);
         } else {
-            // echo "<pre>";
-            print_r($data);
-            echo "</pre>";
             $this->redirect('passenger/billing');
         }
     }
@@ -131,12 +137,16 @@ class Passenger extends Controller
     function summary($id = '')
     {
         $data = array();
-        // $reservation = new Reservations();
+
         // $data = $reservation->getOneReservation($_SESSION['reservation']);
 
         // summary not comming and selected reservation not comming in seats available layout
 
+        $train_id = Auth::getTrain_id();
+        $train = new Trains();
+        $dataTrain = $train->whereOne('train_id', $train_id);
 
+        $_SESSION['reservation']['train'] = $dataTrain; 
 
         // echo "<pre>";
         // print_r($data);

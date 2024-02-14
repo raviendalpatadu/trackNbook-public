@@ -49,6 +49,9 @@ class Auth
         if (isset($_SESSION['USER']->$property)) {
             return $_SESSION['USER']->$property;
         }
+        if(isset($_SESSION['reservation'][$property])){
+            return $_SESSION['reservation'][$property];
+        }
         return 'unknown';
     }
 
@@ -91,6 +94,19 @@ class Auth
         // echo "heeejj";
         
 
+    }
+
+    public static function setError($data){
+        $_SESSION['errors'] = $data;
+    }
+
+    public static function getError(){
+        if(isset($_SESSION['errors'])){
+            $errors = $_SESSION['errors'];
+            unset($_SESSION['errors']);
+            return $errors;
+        }
+        return false;
     }
 
 }

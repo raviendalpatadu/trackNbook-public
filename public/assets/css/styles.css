@@ -8,7 +8,6 @@
 
 main {
   height: -webkit-fill-available;
-  
 }
 
 :root {
@@ -37,7 +36,6 @@ body {
   body {
     display: block;
   }
-  
 }
 
 div.container {
@@ -555,8 +553,6 @@ table {
   margin-right: auto;
 }
 
-
-
 @media screen and (max-width: 768px) {
   .table {
     max-width: 100%;
@@ -955,14 +951,14 @@ input:focus {
   align-items: flex-start;
   justify-content: flex-start;
   width: -webkit-fill-available;
-  max-width: 300px;
+  /* max-width: 300px; */
   position: relative;
 }
 
 .input-text-label {
   color: #000000;
   text-align: left;
-  font: 600 14px "Noto Sans", sans-serif;
+  font: 300 14px "Noto Sans", sans-serif;
   position: relative;
   align-self: stretch;
 }
@@ -975,16 +971,16 @@ input:focus {
   border-width: 1px;
   padding: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
 }
 
-.text-inputs .text {
+/* .text-inputs .text {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -992,7 +988,7 @@ input:focus {
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
-}
+} */
 
 .type-here {
   color: #666666;
@@ -1025,7 +1021,7 @@ input.type-here.green::placeholder {
 }
 
 .assistive-text {
-  color: #666666;
+  color: var(--Banner-red);
   text-align: left;
   font: 400 12px/18px "Noto Sans", sans-serif;
   position: relative;
@@ -1302,7 +1298,7 @@ input.type-here.green::placeholder {
   align-self: flex-end;
 }
 
-.align-self-between{
+.align-self-between {
   align-self: space-between;
 }
 
@@ -1314,7 +1310,7 @@ input.type-here.green::placeholder {
   flex-direction: column;
 }
 
-.flex-column-reverse{
+.flex-column-reverse {
   flex-direction: column-reverse;
 }
 
@@ -1322,7 +1318,7 @@ input.type-here.green::placeholder {
   flex-direction: row;
 }
 
-.flex-row-reverse{
+.flex-row-reverse {
   flex-direction: row-reverse;
 }
 
@@ -1344,6 +1340,18 @@ input.type-here.green::placeholder {
 
 .flex-grow-0 {
   flex-grow: 0;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-start {
+  text-align: start;
+}
+
+.text-align-end {
+  text-align: end;
 }
 
 @media screen and (max-width: 768px) {

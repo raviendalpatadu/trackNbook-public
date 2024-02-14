@@ -1,9 +1,9 @@
 <?php
 
-// echo "<pre>";
-// // print_r($data);
-// // print_r($_SESSION);
-// echo "</pre>";
+echo "<pre>";
+// print_r($data);
+// print_r($_SESSION);
+echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Type</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_type) : ''; ?></div>
+                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train_type']->train_type) : ''; ?></div>
                                         </div>
                                         <!-- start station -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
@@ -88,7 +88,7 @@
                                         <!-- class -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Class</div>
-                                            <div class="width-40"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class']->compartment_class_type) : ''; ?></div>
+                                            <div class="width-40"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class_type']->compartment_class_type) : ''; ?></div>
                                         </div>
 
                                         <!-- no of passengers -->
@@ -163,58 +163,73 @@
         payhere.onDismissed = function onDismissed() {
             // Note: Prompt user to pay again or show an error page
             console.log("Payment dismissed");
-            window.location.replace("<?= ROOT ?>passanger/billing");
+            window.location.replace("<?= ROOT ?>passenger/billing");
         };
 
         // Error occurred
         payhere.onError = function onError(error) {
             // Note: show an error page
             console.log("Error:" + error);
-            window.location.replace("<?= ROOT ?>passanger/billing");
+
+            $.ajax({
+                type: "POST",
+                url: "<?= ROOT ?>/paymentError",
+                data: {
+                    'error': error
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+            // window.location.replace("<?= ROOT ?>passenger/billing");
         };
 
 
 
         $('#payhere-payment').click(function(e) {
             e.preventDefault();
-            $.ajax({
-                type: "POST",
-                url: "<?= ROOT ?>passenger/payment",
-                data: {
-                    'payment_data': <?= json_encode($data) ?>
-                },
-                success: function(data) {
-                    var paymentData = JSON.parse(data);
-                    console.log(paymentData);
+            try {
+                $.ajax({
+                    type: "POST",
+                    url: "<?= ROOT ?>passenger/payment",
+                    data: {
+                        'payment_data': <?= json_encode($data) ?>
+                    },
+                    success: function(data) {
+                        var paymentData = JSON.parse(data);
+                        console.log(paymentData);
 
-                    var payment = {
-                        "sandbox": true,
-                        "merchant_id": paymentData.merchant_id, // Replace your Merchant ID
-                        "return_url": "<?= ROOT ?>/passanger/summary", // Important
-                        "cancel_url": "<?= ROOT ?>/passanger/billing", // Important
-                        "notify_url": "passenger/summary", // Important
-                        "order_id": paymentData.order_id,
-                        "items": "Door bell wireles",
-                        "amount": paymentData.amount,
-                        "currency": "LKR",
-                        "hash": paymentData.hash, // *Replace with generated hash retrieved from backend
-                        "first_name": "Saman",
-                        "last_name": "Perera",
-                        "email": "samanp@gmail.com",
-                        "phone": "0771234567",
-                        "address": "No.1, Galle Road",
-                        "city": "Colombo",
-                        "country": "Sri Lanka",
-                        "delivery_address": "No. 46, Galle road, Kalutara South",
-                        "delivery_city": "Kalutara",
-                        "delivery_country": "Sri Lanka",
-                        "custom_1": "",
-                        "custom_2": ""
-                    };
+                        var payment = {
+                            "sandbox": true,
+                            "merchant_id": paymentData.merchant_id, // Replace your Merchant ID
+                            "return_url": "<?= ROOT ?>/passanger/summary", // Important
+                            "cancel_url": "<?= ROOT ?>/passanger/billing", // Important
+                            "notify_url": "passenger/summary", // Important
+                            "order_id": paymentData.order_id,
+                            "items": "Door bell wireles",
+                            "amount": paymentData.amount,
+                            "currency": "LKR",
+                            "hash": paymentData.hash, // *Replace with generated hash retrieved from backend
+                            "first_name": "Saman",
+                            "last_name": "Perera",
+                            "email": "samanp@gmail.com",
+                            "phone": "0771234567",
+                            "address": "No.1, Galle Road",
+                            "city": "Colombo",
+                            "country": "Sri Lanka",
+                            "delivery_address": "No. 46, Galle road, Kalutara South",
+                            "delivery_city": "Kalutara",
+                            "delivery_country": "Sri Lanka",
+                            "custom_1": "",
+                            "custom_2": ""
+                        };
 
-                    payhere.startPayment(payment);
-                }
-            });
+                        payhere.startPayment(payment);
+                    }
+                });
+            } catch (error) {
+                // console.log(error);
+            }
         });
     });
 </script>
