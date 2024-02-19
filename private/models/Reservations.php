@@ -1,15 +1,94 @@
 <?php
 
 class Reservations extends Model
-{
+{   
     protected $table = 'tbl_reservation';
-    protected $allowedColumns = array();
+    protected $allowedColumns = array('reservation_id', 'reservation_ticket_id', 'reservation_passenger_id', 'reservation_start_station', 'reservation_end_station', 'reservation_train_id', 'reservation_compartment_id', 'reservation_date', 'reservation_seat', 'reservation_passenger_title', 'reservation_passenger_first_name', 'reservation_passenger_last_name', 'reservation_passenger_nic', 'reservation_passenger_phone_number', 'reservation_passenger_email', 'reservation_passenger_gender', 'reservation_created_time', 'reservation_status');
+
+
 
     public function __construct()
     {
         parent::__construct();
     }
 
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
+    public function validatePassenger($data)
+    {
+        $errors = array();
+
+        for ($entry = 0; $entry < count($data['reservation_passenger_title']); $entry++) {
+
+            //check if title exists in post
+            if (empty($data['reservation_passenger_title'][$entry])) {
+                $this->errors['reservation_passenger_title'][$entry] = 'Title is required';
+            }
+
+            //check if first name is exists in post
+            if (empty($data['reservation_passenger_first_name'][$entry])) {
+                $this->errors['reservation_passenger_first_name'][$entry] = 'First Name is required';
+            }
+
+            //check if last name is exists in post
+            if (empty($data['reservation_passenger_last_name'][$entry])) {
+                $this->errors['reservation_passenger_last_name'][$entry] = 'Last Name is required';
+            }
+
+            //check if phone number is exists in post
+            if (empty($data['reservation_passenger_phone_number'][$entry])) {
+                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
+            }
+
+            // 10 number validation
+            if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
+                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
+            }
+
+            //check nic is exists in post
+            if (empty($data['reservation_passenger_nic'][$entry])) {
+                $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
+            } else {
+                // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+                if (strlen($data['reservation_passenger_nic'][$entry]) != 12) {
+                    if (strlen($data['reservation_passenger_nic'][$entry]) == 10) {
+                        $last_char = strtolower(substr($data['reservation_passenger_nic'][$entry], -1));
+                        if ($last_char != 'v') {
+                            $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid last char is not V or v';
+                        }
+                    } else {
+                        $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid';
+                    }
+                }
+            }
+
+
+
+            //check if email is exists in post
+            if (empty($data['reservation_passenger_email'][$entry])) {
+                $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
+            }
+
+            //check if email is valid
+            if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+                $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
+            }
+
+            // check gender
+            if (empty($data['reservation_passenger_gender'][$entry])) {
+                $this->errors['reservation_passenger_gender'][$entry] = 'Gender Required';
+            }
+        }
+
+        if (count($this->errors) > 0) {
+            return false;
+        }
+        return true;
+    }
+    
     public function getReservation()
     {
         try {
@@ -34,7 +113,6 @@ class Reservations extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
 
     public function getOneReservation($value)
@@ -44,7 +122,7 @@ class Reservations extends Model
             // print_r($value);
             // echo "</pre>";
 
-            $query = "SELECT * FROM tbl_reservation WHERE reservation_train_id = :train_id AND reservation_class = :class_id AND reservation_start_station = :from_station AND reservation_end_station = :to_station AND reservation_date = :from_date";
+            $query = "SELECT * FROM tbl_reservation WHERE reservation_train_id = :train_id AND reservation_compartment_id = :class_id AND reservation_start_station = :from_station AND reservation_end_station = :to_station AND reservation_date = :from_date";
             $result = $this->query($query, array(
                 'train_id' => $value['train_id'],
                 'class_id' => $value['class_id'],
@@ -59,67 +137,58 @@ class Reservations extends Model
         return $result;
     }
 
-    public function addReservation($data)
-    {
-        $user_id = $_SESSION['USER']->user_id;
-        $train_id = $data['train_id'];
-        $class_id = $data['class_id'];
-        $from_station = $data['from_station']->station_id;
-        $to_station = $data['to_station']->station_id;
-        $from_date = $data['from_date'];
-        $selected_seats = $data['selected_seats'];
-        $no_of_passengers = $data['no_of_passengers'];
-        $passenger_titles = $data['passenger_data']['user_title'];
-        $passenger_first_names = $data['passenger_data']['user_first_name'];
-        $passenger_last_names = $data['passenger_data']['user_last_name'];
-        $passenger_nics = $data['passenger_data']['user_nic'];
-        $passenger_phone_numbers = $data['passenger_data']['user_phone_number'];
-        $passenger_emails = $data['passenger_data']['user_email'];
-        $passenger_gender = $data['passenger_data']['user_gender'];
+    // public function addReservation($data)
+    // {
+    //     $user_id = $_SESSION['USER']->user_id;
+    //     $train_id = $data['train_id'];
+    //     $class_id = $data['class_id'];
+    //     $from_station = $data['from_station']->station_id;
+    //     $to_station = $data['to_station']->station_id;
+    //     $from_date = $data['from_date'];
+    //     $selected_seats = $data['selected_seats'];
+    //     $no_of_passengers = $data['no_of_passengers'];
+    //     $passenger_titles = $data['passenger_data']['user_title'];
+    //     $passenger_first_names = $data['passenger_data']['user_first_name'];
+    //     $passenger_last_names = $data['passenger_data']['user_last_name'];
+    //     $passenger_nics = $data['passenger_data']['user_nic'];
+    //     $passenger_phone_numbers = $data['passenger_data']['user_phone_number'];
+    //     $passenger_emails = $data['passenger_data']['user_email'];
+    //     $passenger_gender = $data['passenger_data']['user_gender'];
 
-        $timestamp = date('YmdHis');
-        $randomValue = rand(1000, 9999); // Generate a random 4-digit number
-        $ticketId = $timestamp . "-" . $randomValue;
+    //     try {
 
+    //         for ($insert_count = 0; $insert_count < $no_of_passengers; ++$insert_count) {
+    //             $query = "INSERT INTO tbl_reservation "
+    //                 . "(reservation_ticket_id, reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_compartment_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
+    //                 . "VALUES(:ticket_id, :passenger_id, :from_station, :end_station, :train_id, :compartment_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
 
+    //             $data = $this->query($query, array(
+    //                 'ticket_id' => $ticketId,
+    //                 'passenger_id' => $user_id,
+    //                 'from_station' => $from_station,
+    //                 'end_station' => $to_station,
+    //                 'train_id' => $train_id,
+    //                 'compartment_id' => $class_id,
+    //                 'date' => $from_date,
+    //                 'class_id' => $class_id,
+    //                 'seat' => $selected_seats[$insert_count],
+    //                 'title' => $passenger_titles[$insert_count],
+    //                 'first_name' => $passenger_first_names[$insert_count],
+    //                 'last_name' => $passenger_last_names[$insert_count],
+    //                 'nic' => $passenger_nics[$insert_count],
+    //                 'phone_number' => $passenger_phone_numbers[$insert_count],
+    //                 'email' => $passenger_emails[$insert_count],
+    //                 'gender' => $passenger_gender[$insert_count]
+    //             ));
+    //         }
+    //         $_SESSION['reservation']['reservation_ticket_id'] = $ticketId;
+    //     } catch (PDOException $e) {
+    //         echo $e->getMessage();
+    //         return false;
+    //     }
 
-
-        try {
-
-            for ($insert_count = 0; $insert_count < $no_of_passengers; ++$insert_count) {
-                $query = "INSERT INTO tbl_reservation "
-                    . "(reservation_ticket_id, reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_compartment_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
-                    . "VALUES(:ticket_id, :passenger_id, :from_station, :end_station, :train_id, :compartment_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
-                
-                 $data = $this->query($query, array(
-                    'ticket_id' => $ticketId,
-                    'passenger_id' => $user_id,
-                    'from_station' => $from_station,
-                    'end_station' => $to_station,
-                    'train_id' => $train_id,
-                    'compartment_id' => $class_id,
-                    'date' => $from_date,
-                    'class_id' => $class_id,
-                    'seat' => $selected_seats[$insert_count],
-                    'title' => $passenger_titles[$insert_count],
-                    'first_name' => $passenger_first_names[$insert_count],
-                    'last_name' => $passenger_last_names[$insert_count],
-                    'nic' => $passenger_nics[$insert_count],
-                    'phone_number' => $passenger_phone_numbers[$insert_count],
-                    'email' => $passenger_emails[$insert_count],
-                    'gender' => $passenger_gender[$insert_count]
-                ));
-
-            }
-            $_SESSION['reservation']['reservation_ticket_id'] = $ticketId;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-
-        return $data;
-
-    }
+    //     return $data;
+    // }
 
     public function cancelReservation($reservation_id, $passenger_nic)
     {
@@ -136,8 +205,8 @@ class Reservations extends Model
             return false;
         }
         $con = null;
-    
+
         // echo true;//for ajax call
-        return true;   
+        return true;
     }
 }

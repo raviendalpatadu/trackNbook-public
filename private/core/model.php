@@ -8,6 +8,9 @@ class Model extends Database
     
     public $errors = array();
     // public $table;
+    // public $allowedColumns;
+    // public $beforeInsert;
+    // public $afterSelect;
 
     public function __construct()
     { 

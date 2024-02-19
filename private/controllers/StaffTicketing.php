@@ -26,7 +26,7 @@ class StaffTicketing extends Controller
 
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
-        
+
         $this->view('summary.staffticketing', $data);
     }
 
@@ -80,7 +80,7 @@ class StaffTicketing extends Controller
         }
 
 
-        $this->view('warrants.staffticketing',$data);
+        $this->view('warrants.staffticketing', $data);
     }
 
     function displayWarrent($id = '')
@@ -114,11 +114,10 @@ class StaffTicketing extends Controller
             $result = $resevation->cancelReservation($_POST['reservation_id'], $_POST['reservation_passenger_nic']);
             if ($result) {
                 $this->redirect('staffticketing/reservationList');
-            } 
-        }else{
+            }
+        } else {
             $this->view('cancellation.staffticketing', $data);
         }
-
     }
 
 
@@ -146,16 +145,16 @@ class StaffTicketing extends Controller
         $data = array();
         $data['stations'] = $station->getStations();
 
-        if(isset($_SESSION['reservation'])){
+        if (isset($_SESSION['reservation'])) {
             unset($_SESSION['reservation']);
         }
-        
-        if(isset($_SESSION['errors'])){
+
+        if (isset($_SESSION['errors'])) {
             $data['errors'] = $_SESSION['errors'];
             unset($_SESSION['errors']);
         }
 
-        $this->view('home.staffticketing',$data);
+        $this->view('home.staffticketing', $data);
     }
 
     function trains($id = '')
@@ -165,7 +164,7 @@ class StaffTicketing extends Controller
         $data['trains_avilable'] = array();
 
         if (isset($_POST['to_station']) && isset($_POST['from_station']) && isset($_POST['from_date'])) {
-            
+
             $train = new Trains();
             $data['trains_available'] = $train->search();
 
@@ -179,46 +178,49 @@ class StaffTicketing extends Controller
         }
         // $this->view('trains.staffticketing');
     }
-    function verifiedWarrent($id = ''){
+    function verifiedWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'verified'
-            ),"warrant_id");
-        }catch(PDOException $e){
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'verified'
+            ), "warrant_id");
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
         $this->redirect('staffticketing/Warrant');
     }
 
-    function pendingWarrent($id = ''){
+    function pendingWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'pending'
-            ),"warrant_id");
-        }catch(PDOException $e){
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'pending'
+            ), "warrant_id");
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
         $this->redirect('staffticketing/Warrant');
     }
 
-    function rejectWarrent($id = ''){
+    function rejectWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'rejected'
-            ),"warrant_id");
-        }catch(PDOException $e){
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'rejected'
+            ), "warrant_id");
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
-        
+
         $this->redirect('staffticketing/warrant');
     }
 
@@ -301,6 +303,3 @@ class StaffTicketing extends Controller
         );
     }
 }
-
-
-

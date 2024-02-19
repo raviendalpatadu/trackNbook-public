@@ -13,6 +13,11 @@ class Home extends Controller
         $data['stations'] = $station->getStations();
 
         if (isset($_SESSION['reservation'])) {
+            $reservation = new Reservations();
+            foreach(Auth::reservation()['reservation_id'] as $key => $value){
+                $data['reservation'][$key] = $reservation->delete($value, 'reservation_id');
+            }
+
             unset($_SESSION['reservation']);
         }
 
@@ -20,6 +25,7 @@ class Home extends Controller
             $data['errors'] = $_SESSION['errors'];
             unset($_SESSION['errors']);
         }
+        // unset($_SESSION['error']);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['submit'])) {
             $home = new Homes();
@@ -36,6 +42,11 @@ class Home extends Controller
                 $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
                 $data['no_of_passengers'] = $_POST['no_of_passengers'];
 
+                // setcookie('reservation', json_encode($data), time() + 300, '/');
+                if (isset($data['stations'])) {
+                    unset($data['stations']);
+                }
+
                 $_SESSION['reservation'] = $data;
 
                 $this->redirect('train/available');
@@ -45,11 +56,12 @@ class Home extends Controller
         }
     }
 
-    function validate(){
+    function validate()
+    {
 
         $home = new Homes();
-        
-        if($home->validate($_POST)):
+
+        if ($home->validate($_POST)) :
             echo json_encode(true);
         else:
             echo json_encode($home->errors);

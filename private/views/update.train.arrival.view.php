@@ -59,7 +59,7 @@
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">End Station : Mount Lavinia</p>
                                         <p class="width-50">
-                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
+                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_compartment_id) : ''; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -67,7 +67,7 @@
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Date : 25-Jan-2024</p>
                                         <p class="width-50">
-                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
+                                            <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_compartment_id) : ''; ?>
                                         </p>
                                     </div>
                                 </div>

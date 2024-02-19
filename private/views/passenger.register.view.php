@@ -1,5 +1,5 @@
 <?php $this->view("./includes/header"); ?>
-<?php 
+<?php
 if (!isset($data['errors'])) {
     $data['errors'] = array();
 }
@@ -38,9 +38,8 @@ if (!isset($data['errors'])) {
                                                 <option>Miss.</option>
                                             </select>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_title', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class="assistive-text <?php echo (!array_key_exists('user_title', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_title', $data['errors'])) ? $data['errors']['user_title'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -51,13 +50,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">First Name </div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="user_first_name">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_first_name" value="<?= get_var('user_first_name') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_first_name', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class="assistive-text <?php echo (!array_key_exists('user_first_name', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -68,13 +65,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Last Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="user_last_name">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_last_name" value="<?= get_var('user_last_name') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_last_name', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('user_last_name', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -87,13 +82,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="user_nic">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_nic" value="<?= get_var('user_nic') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_nic', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('user_nic', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_nic', $data['errors'])) ? $data['errors']['user_nic'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -105,13 +98,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Mobile</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="user_phone_number">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_phone_number" value="<?= get_var('user_phone_number') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_phone_number', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('user_phone_number', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_phone_number', $data['errors'])) ? $data['errors']['user_phone_number'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -123,13 +114,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="user_email">
+                                                <input type="text" class="type-here" placeholder="Type here" name="user_email" value="<?= get_var('user_email') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('user_email', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('user_email', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('user_email', $data['errors'])) ? $data['errors']['user_email'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -145,13 +134,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Username</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="login_username">
+                                                <input type="text" class="type-here" placeholder="Type here" name="login_username" value="<?= get_var('login_username') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_username', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('login_username', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('login_username', $data['errors'])) ? $data['errors']['login_username'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -163,13 +150,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="password" class="type-here" placeholder="Type here"
-                                                    name="login_password">
+                                                <input type="password" class="type-here" placeholder="Type here" name="login_password" value="<?= get_var('login_password') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_password', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('login_password', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('login_password', $data['errors'])) ? $data['errors']['login_password'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -181,13 +166,11 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Confirm Password</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="password" class="type-here" placeholder="Type here"
-                                                    name="login_confirm_password">
+                                                <input type="password" class="type-here" placeholder="Type here" name="login_confirm_password" value="<?= get_var('login_confirm_password') ?>">
                                             </div>
                                         </div>
-                                        <?php if (isset($data['errors'])): ?>
-                                            <div
-                                                class="assistive-text <?php echo (!array_key_exists('login_confirm_password', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php if (isset($data['errors'])) : ?>
+                                            <div class=" assistive-text <?php echo (!array_key_exists('login_confirm_password', $data['errors'])) ? 'display-none' : ''; ?>">
                                                 <?php echo (array_key_exists('login_confirm_password', $data['errors'])) ? $data['errors']['login_confirm_password'] : ''; ?>
                                             </div>
                                         <?php endif ?>
@@ -201,20 +184,16 @@ if (!isset($data['errors'])) {
                                 <div class="col-12 d-flex justify-content-start">
                                     <div class="radio-buttons-container">
                                         <div class="radio-button">
-                                            <input name="user_gender" value="male" id="radio2"
-                                                class="radio-button__input" type="radio">
-                                            <label for="radio2"
-                                                class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_gender" value="male" id="radio2" class="radio-button__input" type="radio">
+                                            <label for="radio2" class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
 
                                                 Male
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_gender" value="female" id="radio1"
-                                                class="radio-button__input" type="radio">
-                                            <label for="radio1"
-                                                class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_gender" value="female" id="radio1" class="radio-button__input" type="radio">
+                                            <label for="radio1" class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
                                                 <span class="radio-button__custom"></span>
 
                                                 Female
@@ -255,7 +234,7 @@ if (!isset($data['errors'])) {
 </body>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
         var counter = 0;
 

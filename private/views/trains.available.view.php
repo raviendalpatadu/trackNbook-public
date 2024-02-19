@@ -3,7 +3,7 @@
 <?php
 
 echo "<pre>";
-// print_r($data);
+// print_r($_POST);
 // print_r($_SESSION);
 echo "</pre>";
 
@@ -14,7 +14,7 @@ echo "</pre>";
         <?php $this->view("./includes/navbar") ?>
         <main>
             <div class="container">
-                
+
                 <div class="width-80 mx-auto">
                     <!-- complete loader -->
                     <div class="row mb-50">
@@ -170,9 +170,9 @@ echo "</pre>";
                     <table class="">
                         <thead>
                             <tr class="row">
-                                <th class="col-6">Name</th>
-                                <th class="col-3">Time</th>
-                                <th class="col-3">Reservations</th>
+                                <th class="col-5">Name</th>
+                                <th class="col-2">Time</th>
+                                <th class="col-5 mobile-col-12">Reservations</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,9 +191,9 @@ echo "</pre>";
                                     }
                                     if ($unique_trains) :
                             ?>
-                                        <tr class="row">
-                                            <td class="col-6 d-flex align-items-center"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                            <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center">
+                                        <tr class="row py-10">
+                                            <td class="col-5 d-flex align-items-center mobile-pl-20"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
+                                            <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
                                                 <div class="badge-base bg-light-green">
                                                     <div class="dot">
                                                         <div class="dot2"></div>
@@ -201,23 +201,23 @@ echo "</pre>";
                                                     <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
                                                 </div>
                                             </td>
-                                            <td class="col-4">
+                                            <td class="col-5 mobile-col-12">
 
-                                                <div class="availabity">
+                                                <div class="availabity flex-auto">
                                                     <?php foreach ($data['trains_available']['trains'] as $key_res => $value_res) : ?>
                                                         <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
                                                             <a href="<?= ROOT ?>train/seatsAvailable/<?= $data['trains_available']['trains'][$key_res]->compartment_id ?>/<?= $value->train_id ?>">
                                                                 <div class="d-flex justify-content-between">
 
-                                                                    <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                    <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
                                                                         <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
                                                                     </div>
 
-                                                                    <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                    <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
                                                                         <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
                                                                     </div>
 
-                                                                    <div class="badge-base flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
+                                                                    <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?>">
                                                                         <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
                                                                     </div>
                                                                 </div>
@@ -305,11 +305,6 @@ echo "</pre>";
                             <a href="<?= ROOT ?>home">Back</a>
                         </div>
 
-                        <?php if (count($data) > 0) : ?>
-                            <div class="button-base">
-                                <input class="text" type="submit" value="Proceed" name="submit">
-                            </div>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -328,14 +323,7 @@ echo "</pre>";
         var formData = $(this).serialize();
         // console.log(formData);
 
-        getErrors('<?= ROOT ?>home/validate', formData, function(data) {
-            if (data == true) {
-                console.log(data);
-                $('form').unbind('submit').submit();
-            } else {
-                printErrors(data);
-            }
-        });
+        getErrors('<?= ROOT ?>home/validate', formData);
     });
 </script>
 

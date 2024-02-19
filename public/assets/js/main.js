@@ -10,23 +10,60 @@ function handleEvent() {
   );
 
   //get the count of elements with class selected
-  var selectedSeatCount = $(".comparment  .selected").length;
+  var selectedSeatCount = $(
+    ".comparment  .selected , .comparment .selected-complete"
+  ).length;
 
-  // get no of passengers from PHP session variable
-  var noOfPassengers = $("#noOfPassengers").val();
   // string to int conversion
-  noOfPassengers = parseInt(noOfPassengers);
+  // get no of passengers from PHP session variable
+  var noOfPassengers = parseInt($("#noOfPassengers").val());
 
-  if (selectedSeatCount < noOfPassengers) {
-    $(this).toggleClass("selected");
-    //add selected attribute to the selected seat option
+  if ($(this).hasClass("selected")) {
+    $(this).removeClass("selected");
+    if ($(this).hasClass("selected-complete")) {
+      $(this).removeClass("selected-complete");
+    }
+    --selectedSeatCount;
+    seatOption.removeAttr("selected");
+  } else {
+    $(this).addClass("selected");
+    ++selectedSeatCount;
+
     seatOption.attr("selected", "selected");
   }
-  if (selectedSeatCount >= noOfPassengers) {
-    $(".comparment  .selected").removeClass("selected");
-    // remove selected attribute to the selected seat option
-    $('#hiddenSeats > option[selected="selected"]').removeAttr("selected");
+
+  if (noOfPassengers == selectedSeatCount) {
+    $(".comparment .selected").addClass("selected-complete");
   }
+
+  if (selectedSeatCount < noOfPassengers) {
+    if ($(".comparment .selected").hasClass("selected-complete")) {
+      $(".comparment .selected").removeClass("selected-complete");
+      seatOption.removeAttr("selected");
+    }
+  }
+
+  if (selectedSeatCount > noOfPassengers) {
+    seatOption.removeAttr("selected");
+    $(".comparment .selected").removeClass("selected-complete");
+    $(".comparment .selected").removeClass("selected");
+    $("option[id*=seatNoOption-]").each(function (params) {
+      $(this).removeAttr("selected");
+    });
+    selectedSeatCount = 0;
+
+    console.log("selectd " + selectedSeatCount);
+    console.log("noOfPas " + noOfPassengers);
+
+    $(this).addClass("selected");
+    seatOption.attr("selected", "selected");
+    selectedSeatCount++;
+    if (noOfPassengers == selectedSeatCount) {
+      $(".comparment .selected").addClass("selected-complete");
+    }
+  }
+
+  $("#seatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
 }
 
 // Add click event to seats
@@ -145,35 +182,33 @@ $("#no").on("click", function () {
 
 //QR Code Scanner
 function domReady(fn) {
-    if (
-        document.readyState === "complete" ||
-        document.readyState === "interactive"
-    ) {
-        setTimeout(fn, 1000);
-    } else {
-        document.addEventListener("DOMContentLoaded", fn);
-    }
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    setTimeout(fn, 1000);
+  } else {
+    document.addEventListener("DOMContentLoaded", fn);
+  }
 }
- 
-domReady(function () {
- 
-    // If found you qr code
-    function onScanSuccess(decodeText, decodeResult) {
-        // alert("You Qr is : " + decodeText);
 
-        // redirect to decodetext
-        window.location.replace(decodeText);
-    }
- 
-    let htmlscanner = new Html5QrcodeScanner(
-        "my-qr-reader",
-        { fps: 10, qrbos: 250 }
-    );
-    htmlscanner.render(onScanSuccess);
+domReady(function () {
+  // If found you qr code
+  function onScanSuccess(decodeText, decodeResult) {
+    // alert("You Qr is : " + decodeText);
+
+    // redirect to decodetext
+    window.location.replace(decodeText);
+  }
+
+  let htmlscanner = new Html5QrcodeScanner("my-qr-reader", {
+    fps: 10,
+    qrbos: 250,
+  });
+  htmlscanner.render(onScanSuccess);
 });
 
 //popup
-
 
 function hello() {
   alert("hello");
@@ -181,18 +216,27 @@ function hello() {
 
 // get errors from the server
 
-function getErrors(url, data, callback) {
+function getErrors(url, data) {
   $.ajax({
     url: url,
     type: "post",
     data: data,
     success: function (response) {
       var res = JSON.parse(response);
-      callback(res);
+
+      // if res has error throw an error
+      if (res == true) {
+        console.log(res);
+        $("form").unbind().submit();
+      }
+
+      if (res.hasOwnProperty("errors")) {
+        console.log(res.errors);
+        printErrors(res);
+      }
     },
   });
 }
-
 
 function printErrors(errors) {
   if ($("div.assistive-text").length) {
@@ -204,7 +248,6 @@ function printErrors(errors) {
   for (var key in errs) {
     if (errs.hasOwnProperty(key)) {
       var value = errs[key];
-      console.log("key is " + key + " value " + value);
 
       var tag = $("[name=" + key + "]")
         .parent()
@@ -215,3 +258,66 @@ function printErrors(errors) {
     }
   }
 }
+
+var shown = false;
+setInterval(function () {
+  var ROOTURL = "http://localhost/trackNbook/public/";
+  $.ajax({
+    url: ROOTURL + "ajax/getSession/reservation",
+    type: "post",
+    success: function (response) {
+      var res = JSON.parse(response);
+      var created_time = new Date(res.reservation_created_time);
+
+      // console.log(created_time);
+      var now = new Date().getTime();
+      var distance = now - created_time;
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      if (minutes > 10) {
+        // create a popup message called reservation expired try again to book
+        if (!shown) {
+          shown = true;
+          var reservationExpMsg = $("<div/>")
+            .addClass("reservation-expired")
+            .appendTo("body");
+          var expBox = $("<div/>")
+            .addClass("exp-box")
+            .appendTo(reservationExpMsg);
+          //  <button class="button">
+          //    <div class="button-base">
+          //      <div class="text">Close</div>
+          //    </div>
+          //  </button>
+
+          var expMsg = $("<div/>").appendTo(expBox);
+          var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
+          var errDesc = $("<p/>").addClass("err-desc").appendTo(expMsg);
+          var expBtnBox = $("<div></div>")
+            .addClass("d-flex justify-content-end")
+            .appendTo(expBox);
+          var closeButton = $("<button/>")
+            .addClass("button")
+            .appendTo(expBtnBox);
+          var buttonBase = $("<div/>")
+            .addClass("button-base")
+            .appendTo(closeButton);
+          var buttonText = $("<div/>").addClass("text").appendTo(buttonBase);
+          buttonText.text("Close");
+
+          closeButton.on("click", function () {
+            reservationExpMsg.remove();
+            window.location.replace(ROOTURL);
+          });
+          errTitle.text("Reservation Expired");
+          errDesc.text(
+            "Your reservation has expired. Please try again to book."
+          );
+          // expBtn.text("Ok");
+
+
+        
+        }
+      }
+    },
+  });
+}, 1000);
