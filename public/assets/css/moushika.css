@@ -191,20 +191,6 @@
   .staff-container {
     width: 100%;
   }
-  .comparment.flex-row {
-    flex-direction: column;
-  }
-  .comparment .seat-row,
-  .comparment .seats-top,
-  .comparment .seats-bottom {
-    flex-direction: row;
-  }
-  .seat {
-    width: 20px;
-    height: 20px;
-    padding: 5px 4px;
-    font-size: 12px;
-  }
 }
 .line {
   border-bottom: 2px solid #000;

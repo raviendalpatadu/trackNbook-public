@@ -49,7 +49,7 @@ class Auth
         if (isset($_SESSION['USER']->$property)) {
             return $_SESSION['USER']->$property;
         }
-        if(isset($_SESSION['reservation'][$property])){
+        if (isset($_SESSION['reservation'][$property])) {
             return $_SESSION['reservation'][$property];
         }
         return 'unknown';
@@ -58,14 +58,14 @@ class Auth
 
     // handle payment
     public static function payment($data)
-    {       
+    {
         $payment['merchant_id'] = "1225507";
         $payment['return_url'] = "passenger/summary";
         $payment['cancel_url'] = "passenger/billing";
         $payment['notify_url'] = "passenger/summary";
         $payment['order_id'] = "142";
         $payment['items'] = "Door bell wireles";
-        $payment['amount'] = number_format($data['price'], 2, '.', '');
+        $payment['amount'] = number_format($data['fare']['fare_price'], 2, '.', '');
         $payment['currency'] = "LKR";
         $payment['first_name'] = "Saman";
         $payment['last_name'] = "Perera";
@@ -92,16 +92,18 @@ class Auth
 
         return $payment;
         // echo "heeejj";
-        
+
 
     }
 
-    public static function setError($data){
+    public static function setError($data)
+    {
         $_SESSION['errors'] = $data;
     }
 
-    public static function getError(){
-        if(isset($_SESSION['errors'])){
+    public static function getError()
+    {
+        if (isset($_SESSION['errors'])) {
             $errors = $_SESSION['errors'];
             unset($_SESSION['errors']);
             return $errors;
@@ -109,4 +111,14 @@ class Auth
         return false;
     }
 
+    public static function getTicketId()
+    {
+        $timestamp = date('YmdHis');
+        $randomValue = rand(1000, 9999); // Generate a random 4-digit number
+        $ticketId = $timestamp . "-" . $randomValue;
+
+        return $ticketId;
+    }
+
+    
 }

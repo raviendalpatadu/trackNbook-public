@@ -22,7 +22,7 @@ $sizes: (
   "100": 100px,
 );
 
-$vw : (
+$vw: (
   "10": 10vw,
   "20": 20vw,
   "30": 30vw,
@@ -32,7 +32,7 @@ $vw : (
   "70": 70vw,
   "80": 80vw,
   "90": 90vw,
-  "100": 100vw
+  "100": 100vw,
 );
 
 $colors: (
@@ -79,7 +79,6 @@ $colors: (
   .mx-#{$key} {
     margin-right: $val;
     margin-left: $val;
-
   }
   .mx-auto {
     margin-right: auto;
@@ -236,11 +235,10 @@ $colors: (
   max-width: none !important;
 }
 
-.min-width-none{
+.min-width-none {
   min-width: none !important;
 }
 @media screen and (max-width: 768px) {
-
   .loader-circle,
   .divider {
     display: none;
@@ -303,7 +301,7 @@ $colors: (
 .seat {
   width: 25px;
   height: 25px;
-  padding: 5px 4px;
+  padding: 17px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 2px solid #ccc;
@@ -323,6 +321,13 @@ $colors: (
   background: var(--Selected-Blue) !important;
   border: 2px solid var(--Border-blue) !important;
   cursor: pointer;
+}
+
+.seat.selected-complete:not(.reserved) {
+  background: map-get($colors, "light-green") !important;
+  border: 2px solid map-get($colors, "dark-green") !important;
+  cursor: pointer;
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .reserved {
@@ -351,7 +356,7 @@ $colors: (
   .seat {
     width: 20px;
     height: 20px;
-    padding: 5px 4px;
+    padding: 13px 13px;
     font-size: 12px;
   }
 }
@@ -507,9 +512,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width: 768px) {
   .bg-login-desktop {
     width: 100%;
-    background: linear-gradient(270deg,
+    background: linear-gradient(
+        270deg,
         rgba(255, 255, 255, 0.8) 5.1%,
-        rgba(255, 255, 255, 0.9) 101.92%),
+        rgba(255, 255, 255, 0.9) 101.92%
+      ),
       url("../images/home1.jpg"), no-repeat;
     background-size: cover;
   }
@@ -553,7 +560,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
   }
 
-  &>span {
+  & > span {
     cursor: pointer;
     padding: 8px;
     border-radius: 6px;
@@ -659,7 +666,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           }
 
           &:hover {
-
             &:before,
             &:after {
               --scale: 0.9;
@@ -684,13 +690,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   &.filled {
-    &>span {
+    & > span {
       color: var(--Secondary-Gray);
     }
   }
 
   &.open {
-    &>span {
+    & > span {
       border-color: var(--Selected-Blue);
       box-shadow: 0px 0px 5px 2px var(--Selected-Blue);
       transition: box-shadow 250ms ease-in;
@@ -811,7 +817,7 @@ input[type="file"]::file-selector-button {
   border: none;
 }
 
-h2.topic~p {
+h2.topic ~ p {
   font-size: 16px;
 }
 
@@ -842,7 +848,6 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .route-line {
@@ -951,4 +956,65 @@ table.price-table th {
     font-weight: 600;
     font-size: 12px;
   }
+}
+
+div.reservation-expired {
+  position: absolute;
+  z-index: 200;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4549019608);
+  // color: #fff;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.reservation-expired div.exp-box {
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+div.reservation-expired div.exp-box h2.err-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Secondary-Gray);
+}
+
+div.reservation-expired div.exp-box p.err-desc {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding: 1em 5em 1em 0em;
+}
+
+div.reservation-expired div.exp-box div button.exp-btn {
+  padding: 10px 20px;
+  background: var(--Primary-Blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--Selected-Blue);
+  }
+}
+
+// possition the cross svg on the top right of .exp-box
+div.reservation-expired div.exp-box svg {
+  position: relative;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
 }

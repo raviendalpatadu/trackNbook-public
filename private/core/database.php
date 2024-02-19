@@ -14,9 +14,10 @@ class Database
         return $con;
     }
 
+
     public function query($query, $data = array(), $data_type = "object")
     {
-        try{
+        try {
             $con = $this->connect();
             $stm = $con->prepare($query);
 
@@ -33,7 +34,7 @@ class Database
                     } elseif ($data_type == "array") {
                         $data = $stm->fetchAll(PDO::FETCH_ASSOC);
                     }
-    
+
                     if (is_array($data) && count($data) > 0) {
                         // echo "<pre>";
                         // print_r($data);
@@ -41,16 +42,13 @@ class Database
                         $con = null;
                         return $data;
                     }
-
                 }
             }
-        } catch(PDOException $e){
+        } catch (PDOException $e) {
             // echo $query;
             die($e->getMessage());
         }
         $con = null;
         return false;
     }
-
-
 }

@@ -2716,10 +2716,6 @@
   color: #12b76a;
 }
 
-.bg-Banner-green {
-  background-color: #12b76a;
-}
-
 .border-bottom-light-green {
   border-bottom: 10px;
   border-bottom-style: solid;
@@ -2964,7 +2960,7 @@
 .seat {
   width: 25px;
   height: 25px;
-  padding: 5px 4px;
+  padding: 17px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 2px solid #ccc;
@@ -2983,6 +2979,13 @@
   background: var(--Selected-Blue) !important;
   border: 2px solid var(--Border-blue) !important;
   cursor: pointer;
+}
+
+.seat.selected-complete:not(.reserved) {
+  background: #bffad7 !important;
+  border: 2px solid #027a48 !important;
+  cursor: pointer;
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .reserved {
@@ -3008,7 +3011,7 @@
   .seat {
     width: 20px;
     height: 20px;
-    padding: 5px 4px;
+    padding: 13px 13px;
     font-size: 12px;
   }
 }
@@ -3618,4 +3621,61 @@ table.price-table th {
     font-weight: 600;
     font-size: 12px;
   }
+}
+div.reservation-expired {
+  position: absolute;
+  z-index: 200;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4549019608);
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.reservation-expired div.exp-box {
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+div.reservation-expired div.exp-box h2.err-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Secondary-Gray);
+}
+
+div.reservation-expired div.exp-box p.err-desc {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding: 1em 5em 1em 0em;
+}
+
+div.reservation-expired div.exp-box div button.exp-btn {
+  padding: 10px 20px;
+  background: var(--Primary-Blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+div.reservation-expired div.exp-box div button.exp-btn:hover {
+  background: var(--Selected-Blue);
+}
+
+div.reservation-expired div.exp-box svg {
+  position: relative;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
 }/*# sourceMappingURL=ravien.css.map */

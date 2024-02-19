@@ -2,7 +2,7 @@
 
 echo "<pre>";
 // print_r($data);
-// print_r($_SESSION);
+print_r(Auth::reservation());
 echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
@@ -63,61 +63,61 @@ echo "</pre>";
                                     <div class="d-flex flex-column g-10 px-20">
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Number</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?></div>
+                                            <div class=""><?= Auth::reservation()['train']->train_id ?></div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Name</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_name : ''; ?></div>
+                                            <div class=""><?= Auth::reservation()['train']->train_name ?></div>
                                         </div>
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Type</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train_type']->train_type) : ''; ?></div>
+                                            <div class=""><?= ucfirst(Auth::reservation()['train']->train_type) ?></div>
                                         </div>
                                         <!-- start station -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Start Location</div>
-                                            <div class="width-40"><?php echo (array_key_exists('start_station', $data)) ? ucfirst($data['start_station']->station_name) : ''; ?></div>
+                                            <div class=""><?= ucfirst(Auth::reservation()['from_station']->station_name) ?></div>
                                         </div>
 
                                         <!-- end station -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">End Location</div>
-                                            <div class="width-40"><?php echo (array_key_exists('end_station', $data)) ? ucfirst($data['end_station']->station_name) : ''; ?></div>
+                                            <div class=""><?= ucfirst(Auth::reservation()['to_station']->station_name) ?></div>
                                         </div>
 
                                         <!-- class -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Train Class</div>
-                                            <div class="width-40"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class_type']->compartment_class_type) : ''; ?></div>
+                                            <div class=""><?= ucfirst(Auth::reservation()['compartment_type']->compartment_class_type) ?></div>
                                         </div>
 
                                         <!-- no of passengers -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">No of Passengers</div>
-                                            <div class="width-40"><?php echo (array_key_exists('no_of_passengers', $data)) ? ucfirst($data['no_of_passengers']) : ''; ?></div>
+                                            <div class=""><?= ucfirst(Auth::reservation()['no_of_passengers']) ?></div>
                                         </div>
 
                                         <!-- time start end -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Time Start &#8594 End</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? date("H:i", strtotime($data['train']->train_start_time)) . "->" . date("H:i", strtotime($data['train']->train_end_time)) : ''; ?></div>
+                                            <div class=""><?= date("H:i", strtotime(Auth::reservation()['train']->train_start_time)) . "->" . date("H:i", strtotime(Auth::reservation()['train']->train_end_time)) ?></div>
                                         </div>
 
                                         <!-- date -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Date</div>
-                                            <div class="width-40"><?php echo (array_key_exists('date', $data)) ? $data['date'] : ''; ?></div>
+                                            <div class=""><?= Auth::reservation()['from_date'] ?></div>
                                         </div>
 
                                         <!-- price for one -->
                                         <div class="d-flex flex-row align-items-center justify-content-between">
                                             <div class="">Price for 1 Person</div>
-                                            <div class="width-40"><?php echo (array_key_exists('price_for_one', $data)) ? $data['price_for_one'] : ''; ?></div>
+                                            <div class=""><?= Auth::reservation()['fare']->fare_price ?></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="bg-primary-gray d-flex flex-row justify-content-end row-bottom-round px-20 py-10 white">
-                                    <div>Total Price -> <?php echo (array_key_exists('price', $data)) ? $data['price'] : ''; ?></div>
+                                    <div>Total Price -> <?= Auth::reservation()['fare']->fare_price * Auth::reservation()['no_of_passengers'] ?></div>
                                 </div>
                             </div>
 
@@ -193,7 +193,7 @@ echo "</pre>";
                     type: "POST",
                     url: "<?= ROOT ?>passenger/payment",
                     data: {
-                        'payment_data': <?= json_encode($data) ?>
+                        'payment_data': <?= json_encode(Auth::reservation()) ?>
                     },
                     success: function(data) {
                         var paymentData = JSON.parse(data);

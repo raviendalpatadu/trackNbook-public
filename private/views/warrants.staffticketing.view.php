@@ -110,11 +110,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             <td class="col-2 d-flex align-items-center"><?= date("d-M-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
                                             <td class="col-2 d-flex align-items-center"><?php
 
-                                                                                        if ($data['reservations'][$reservation]->reservation_class == 1) {
+                                                                                        if ($data['reservations'][$reservation]->reservation_compartment_id == 1) {
                                                                                             echo "First Class";
-                                                                                        } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
+                                                                                        } elseif ($data['reservations'][$reservation]->reservation_compartment_id == 2) {
                                                                                             echo "Second Class";
-                                                                                        } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
+                                                                                        } elseif ($data['reservations'][$reservation]->reservation_compartment_id == 3) {
                                                                                             echo "Third Class";
                                                                                         }
                                                                                         ?></td>

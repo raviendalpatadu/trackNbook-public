@@ -57,9 +57,10 @@ class Trains extends Model
         }
     }
 
-    public function validate($values = array()){
+    public function validate($values = array())
+    {
 
-       
+
         if (empty($values['to_station']) || $values['to_station'] == 0) {
             $this->errors['errors']['to_station'] = 'Station is required';
         }
@@ -104,7 +105,7 @@ class Trains extends Model
 
         $data = array();
         //   //check if to_station is exists in post
-        
+
         if (!array_key_exists('errors', $errors)) {
 
             try {
@@ -181,11 +182,13 @@ class Trains extends Model
                         )
                         AND TS1.stop_no < TS2.stop_no
                         AND reservation.compartment_total_seats > reservation.no_of_reservations
+                        AND (compartment.compartment_total_seats - reservation.no_of_reservations) >= :no_of_passengers
                         
                         AND fare.fare_compartment_id = compartment.compartment_class_type
                         AND fare.fare_route_id = train.train_route
                         AND fare.fare_start_station = :from_station
                         AND fare.fare_end_station = :to_station
+                     
                         
                         ORDER BY train.train_start_time, compartment_type.compartment_class_type_id ASC";
 
@@ -193,7 +196,8 @@ class Trains extends Model
                 $data['trains'] = $this->query($query, array(
                     'from_station' => $values['from_station']->station_id,
                     'to_station' => $values['to_station']->station_id,
-                    'from_date' => $values['from_date']
+                    'from_date' => $values['from_date'],
+                    'no_of_passengers' => $values['no_of_passengers']
                 ));
             } catch (PDOException $e) {
                 echo $e->getMessage();
@@ -305,7 +309,7 @@ class Trains extends Model
     //get reservation for a specific train
     public function getTrainReservation($class_id = "", $train_id = "")
     {
-           
+
         $date = $_SESSION['reservation']['from_date'];
 
         try {
@@ -333,7 +337,6 @@ class Trains extends Model
                 'class' => $class_id,
                 'date' => $date
             ));
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
