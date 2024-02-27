@@ -26,7 +26,6 @@ class Login extends Controller
                     $this->redirect('home');
                 }
                 
-               
                 
             }
             else{
