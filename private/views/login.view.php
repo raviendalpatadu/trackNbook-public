@@ -11,19 +11,21 @@
         <?php $this->view("./includes/navbar") ?>
         <main class=" d-flex align-items-start justify-content-end">
             <div class="bg-login-desktop"></div>
-            <div class="container">
+            <div class="container ">
 
                 <div class="row">
                     <div class="col-12">
-                        <div class="login-form d-flex justify-content-center align-items-center p-100 flex-column g-20">
-                            <h1 class="d-flex justify-content-center width-fill">Login</h1>
+                        <div class="login-form d-flex justify-content-center align-items-center p-100 flex-column ">
+                            <h1 class="d-flex justify-content-center width-fill mb-10">Login</h1>
+                            <p class="text1 d-flex justify-content-center width-fill mb-30">Please enter your Username
+                                and password!</p>
 
                             <form action="" method="post" class="d-flex flex-column g-20">
 
 
                                 <!-- username -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Username</div>
+                                    <div class="input-text-label mb-5">Username</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="text" class="type-here" placeholder="Type here"
@@ -40,7 +42,7 @@
 
                                 <!-- password -->
                                 <div class="login-text-inputs">
-                                    <div class="input-text-label">Password</div>
+                                    <div class="input-text-label mb-5">Password</div>
                                     <div class="input-field">
                                         <div class="text">
                                             <input type="password" class="type-here " placeholder="Type here"
@@ -55,18 +57,37 @@
                                     <?php endif ?>
                                 </div>
 
+                                <!-- create account -->
+                                <div class="row mb-4 d-flex justify-content-between flex-fill">
+                                    <div class="col-6 d-flex justify-content-center form-check g-5">
+                                        <!-- remembre me -->
+
+                                        <input class="form-check-input" type="checkbox" value="" id="form2Example31"
+                                            checked />
+                                        <label class="form-check-label" for="form2Example31"> Remember me </label>
+
+                                    </div>
+
+                                    <div class="col-6">
+                                        <!-- Forgot password?-->
+                                        <a class="mou-span" href="#!">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <!-- Submit -->
+
+
+                                <div class="button-base">
+                                    <input class="text" type="submit" value="Login" name="submit">
+                                </div>
+
+
+
                                 <!-- submit -->
-                                <div class="d-flex justify-content-between flex-fill">
-                                    <!-- create account -->
-                                    <div class="button-base p-1 size-10 ">
-                                        <a href="<?= ROOT ?>passenger/register">Create Account</a>
-                                    </div>
-
-
-                                    <div class="button-base">
-                                        <input class="text" type="submit" value="Submit" name="submit">
-                                    </div>
-
+                                <div class="d-flex justify-content-center flex-fill">
+                                    <p class="mb-0 ">Don't have an account? <a href="passenger/register"
+                                            class="mou-span fw-bold">Sign Up</a>
+                                    </p>
                                 </div>
                             </form>
                         </div>
