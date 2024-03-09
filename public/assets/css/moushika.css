@@ -28,20 +28,64 @@
 }
 
 .mou-staff-login-container {
-  width: -moz-fit-content;
-  width: fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
   display: flex;
   flex-direction: column;
+  row-gap: 14px;
+}
+
+.mou-staff-login-container label {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 50px 40px 20px 40px;
-  background: lightblue;
-  box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01), 0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09), 0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 11px;
-  font-family: "Inter", sans-serif;
+  position: relative;
+  height: 38px;
+  border-radius: 3px;
+}
+
+.mou-staff-login-container span {
+  position: absolute;
+  text-overflow: ellipsis;
+  transform-origin: left;
+  font-size: 12px;
+  left: 8px;
+  pointer-events: none;
+  transition: transform ease-out 0.1s;
+}
+
+.mou-staff-login-container input {
+  width: 100%;
+  background: inherit;
+  border: 0;
+  outline: none;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.mou-staff-login-container input:valid + span {
+  transform: scale(0.8333333333) translateY(-10px);
+}
+
+.mou-staff-login-container input:valid {
+  font-size: 12px;
+}
+
+.staff-login-button {
+  background: rgb(0, 149, 246);
+  color: white !important;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.staff-login-button:hover {
+  background: rgb(24, 119, 242);
+}
+
+.staff-login-button:active:not(:hover) {
+  background: rgb(0, 149, 246);
+  opacity: 0.7;
 }
 
 .mou-title {
@@ -57,7 +101,7 @@
 
 .mou-subtitle {
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 500;
   max-width: 80%;
   text-align: center;
   line-height: 1.1rem;
@@ -304,13 +348,37 @@ h3.warrant {
   font-size: 30px;
 }
 
-.card-dashboard {
-  margin: 5px 5px;
-  padding: 10px 20px;
-  background-color: #FAFAFA;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-family: "Poppins-Medium", Helvetica;
-  border-radius: 10px;
+.dashboard-card {
+  height: 100%;
+  padding: 24px 19px;
+  border-radius: 5px;
+  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+}
+
+.dashboard-card .text {
+  color: #171717;
+}
+
+.bg {
+  background-color: #f0f2fa;
+}
+
+.graphbox {
+  min-height: 200px;
+  width: 100%;
+}
+
+.graphbox .box {
+  border-radius: 5px;
+  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+  height: 320px;
+  color: #171717;
+}
+
+.mou-dashboard-table {
+  width: 80%;
+  margin: 20px 0;
+  font-size: 12px;
 }
 
 .text-checker {
@@ -658,4 +726,11 @@ video {
 }
 .home-container {
   padding: 0 5%;
+}
+
+.add_text {
+  line-height: 22px;
+  font-size: 16px;
+  color: #4c7fd0;
+  letter-spacing: 1px;
 }/*# sourceMappingURL=moushika.css.map */

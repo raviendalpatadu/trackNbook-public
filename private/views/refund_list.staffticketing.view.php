@@ -19,7 +19,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
-        <main>
+        <main class="bg">
             <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12">
@@ -32,11 +32,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                         </div>
                         <form class="mt-30" action="" method="post">
                             <div class="row mb-30 g-20">
-                                <div class="col-3">
+                                <div class="col-3 ">
                                     <div class="text-inputs">
                                         <div class="input-text-label text lightgray-font">Train</div>
 
-                                        <div class="width-fill">
+                                        <div class="width-fill ">
                                             <select class="dropdown" name="reservation_train_id" placeholder="Please choose">
                                                 <!-- print data of $data -->
                                                 <option value="0">Please choose</option>
@@ -61,7 +61,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="text-inputs date">
+                                    <div class="text-inputs date d-flex">
                                         <div class="input-text-label text lightgray-font">Date</div>
                                         <div class="input-field">
                                             <div class="text">
@@ -83,11 +83,22 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                 </div>
                             </div>
                         </form>
+                        <div class="add_button">
+                            <a href="<?= ROOT ?>staffticketing/Refund">
+                                <button class="button">
+                                    <div class="button-base bg-white">
+                                        <div class="text add_text">Add Refund</div>
+                                    </div>
+                                </button>
+                            </a>
+
+
+                        </div>
                     </div>
 
 
 
-                    <div class="row mt-20">
+                    <div class="row mt-20 bg-white">
                         <div class="col-12">
 
                             <table class="">
@@ -137,7 +148,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                                    
+
                                         </td>
                                     </tr>
 
@@ -164,7 +175,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                                    
+
                                         </td>
                                     </tr>
 
@@ -191,7 +202,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            
+
                                         </td>
                                     </tr>
 
@@ -218,7 +229,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            
+
                                         </td>
                                     </tr>
 
@@ -245,7 +256,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            
+
                                         </td>
                                     </tr>
 
@@ -272,7 +283,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            
+
                                         </td>
                                     </tr>
 
@@ -299,7 +310,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                           
+
                                         </td>
                                     </tr>
 
@@ -327,7 +338,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            
+
                                         </td>
                                     </tr>
 

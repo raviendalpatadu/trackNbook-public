@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('ASSETS/fonts/Helvetica-Font');
 
 * {
   margin: 0;
   padding: 0;
-  font-family: Inter;
+  font-family: 'DM Sans', sans-serif;
 }
 
 main {
@@ -274,6 +276,7 @@ nav .menu div.profile-mobile {
 
 /* sidebar */
 div.sidebar {
+
   display: flex;
   padding: 20px;
   flex-direction: column;
@@ -281,6 +284,7 @@ div.sidebar {
   align-items: flex-start;
   flex-shrink: 0;
   background-color: var(--Background-colour-nav);
+
 }
 
 .sidebar .active {
