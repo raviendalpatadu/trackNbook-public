@@ -22,7 +22,7 @@ class Station extends Controller
             $data = $station->addStation();
         }
 
-        $this->view('add.station', $data);
+        $this->view('add.station.admin', $data);
     }
 
 }

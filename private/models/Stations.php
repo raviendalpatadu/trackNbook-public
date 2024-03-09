@@ -40,7 +40,7 @@ class Stations extends Model
             $stm = $con->prepare($query);
             $stm->execute(
                 array(
-                    'station_name' => $stationName
+                    'station_name' => $_POST['station_name']
                 )
             );
 

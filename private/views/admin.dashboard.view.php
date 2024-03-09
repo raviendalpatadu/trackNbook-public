@@ -1,4 +1,5 @@
 <?php $this->view("./includes/header"); ?>
+<?php $this->view("./includes/load-js"); ?>
 
 
 <body>
@@ -128,6 +129,19 @@
                     </div>
                 </div>
             </div>
+            <br><br>
+            <div class="col-12">
+
+                <div class="if-txt-wrapper">Reservation Analytics</div>
+
+            </div>
+            <br>
+            <div>
+                <canvas id="myChart" width="auto" height="60%"></canvas>
+            </div>
+
+
+
 
     </div>
 
@@ -138,3 +152,87 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '<?= ROOT ?>ajax/getAllReservations',
+            type: 'GET',
+            success: function (dataR, response) {
+                console.log(dataR);
+                var reservations = JSON.parse(dataR);
+                console.log(reservations);
+
+                // Get unique reservation dates
+                var uniqueDates = [...new Set(reservations.map(reservation => reservation.reservation_date.split(' ')[0]))];
+
+                // Sort dates in ascending order
+                uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+
+                var dataN = [];
+                uniqueDates.forEach(dateStr => {
+                    var count = reservations.filter(reservation => reservation.reservation_date.split(' ')[0] == dateStr).length;
+                    dataN.push(count);
+                });
+
+                console.log(dataN);
+                //setup Block
+                const data = {
+                    labels: uniqueDates,
+                    datasets: [{
+                        label: 'No of Reservations',
+                        data: dataN,
+                        borderWidth: 2,
+                    }]
+                };
+
+                const config = {
+                    type: 'line',
+                    data,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                };
+
+                const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+
+                );
+            }
+        });
+    });
+
+    // //setup Block
+    // const data = {
+    //     labels: ['1', '2', '3', '4', '5', '6'],
+    //     datasets: [{
+    //         label: '# of Votes',
+    //         data,
+    //         borderWidth: 1
+    //     }]
+    // };
+
+    // //config block
+    // const config = {
+    //     type: 'line',
+    //     data,
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // };
+
+    // //render block
+    // const myChart = new Chart(
+    //     document.getElementById('myChart'),
+    //     config
+
+    // );
+</script>
