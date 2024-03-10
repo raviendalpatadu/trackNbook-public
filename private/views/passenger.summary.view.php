@@ -15,7 +15,7 @@ echo "</pre>";
                 <div class="passenger-container">
                     <div class="row mb-50 mobile-mb-20">
                         <div class="col-12">
-                            <div class="loader d-flex align-items-center justify-content-center px-20">
+                            <d iv class="loader d-flex align-items-center justify-content-center px-20">
                                 <div class="loader-circle complete">
                                     <div class="loader-circle-text white">1</div>
                                 </div>
@@ -48,7 +48,7 @@ echo "</pre>";
                                 <div class="loader-circle  complete active">
                                     <div class="loader-circle-text white">6</div>
                                 </div>
-                            </div>
+                            </d>
                         </div>
                     </div>
 
@@ -74,6 +74,10 @@ echo "</pre>";
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Train Name</p>
                                                 <p class="width-fill"><?= ucfirst(Auth::reservation()['train']->train_name) ?></p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p class="width-fill heading">Reservation Date</p>
+                                                <p class="width-fill"><?= Auth::reservation()['from_date'] ?></p>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Start Station</p>
@@ -103,22 +107,39 @@ echo "</pre>";
                                     <p class="">Passenger and Compartment Details</p>
                                     <table class="ticket-summary-passenger-compartment-details text-align-center">
 
-                                        <tr>
-                                            <th>Seat No(s)</th>
+                                        <tr class="mobile-display-none">
+                                            <?php
+                                            $columns = array('Seat No(s)', 'Gender', 'NIC');
+                                            foreach ($columns as $column) : ?>
+                                                <th class="display-none mobile-display-block"><?= $column ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+
+                                        <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
+                                            <tr class="display-none mobile-display-block">
+                                                <td data-label="Seat No(s)"><?= (isset(Auth::getSelected_seats()[$i])) ? str_pad(Auth::getSelected_seats()[$i], 2, "0", STR_PAD_LEFT) : "-" ?></td>
+                                                <td data-label="Gender"><?= (isset(Auth::getpassenger_data()["reservation_passenger_gender"][$i])) ? ucfirst(Auth::getpassenger_data()["reservation_passenger_gender"]["$i"]) : "-" ?></td>
+                                                <td data-label="NIC"><?= (isset(Auth::getpassenger_data()['reservation_passenger_nic'][$i])) ? Auth::getpassenger_data()['reservation_passenger_nic'][$i] : "-" ?></td>
+                                            </tr>
+                                        <?php endfor; ?>
+
+                                        <tr class="mobile-display-none">
+                                            <th class="mobile-display-none">Seat No(s)</th>
                                             <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
-                                                <td><?= (isset(Auth::getSelected_seats()[$i])) ? str_pad(Auth::getSelected_seats()[$i], 2, "0", STR_PAD_LEFT) : "-" ?></td>
+                                                <td class="mobile-display-none" data-label="Seat No(s)"><?= (isset(Auth::getSelected_seats()[$i])) ? str_pad(Auth::getSelected_seats()[$i], 2, "0", STR_PAD_LEFT) : "-" ?></td>
                                             <?php endfor; ?>
                                         </tr>
-                                        <tr>
+
+                                        <tr class="mobile-display-none">
                                             <th>Gender</th>
                                             <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
-                                                <td><?= (isset(Auth::getpassenger_data()["reservation_passenger_gender"]["$i"])) ? ucfirst(Auth::getpassenger_data()["reservation_passenger_gender"]["$i"]) : "-" ?></td>
+                                                <td data-label="Gender"><?= (isset(Auth::getpassenger_data()["reservation_passenger_gender"]["$i"])) ? ucfirst(Auth::getpassenger_data()["reservation_passenger_gender"]["$i"]) : "-" ?></td>
                                             <?php endfor; ?>
                                         </tr>
-                                        <tr>
+                                        <tr class="mobile-display-none">
                                             <th>NIC</th>
                                             <?php for ($i = 0; $i < count(Auth::getSelected_seats()); $i++) : ?>
-                                                <td><?= (isset(Auth::getpassenger_data()['reservation_passenger_nic'][$i])) ? Auth::getpassenger_data()['reservation_passenger_nic'][$i] : "-" ?></td>
+                                                <td data-label="NIC"><?= (isset(Auth::getpassenger_data()['reservation_passenger_nic'][$i])) ? Auth::getpassenger_data()['reservation_passenger_nic'][$i] : "-" ?></td>
                                             <?php endfor; ?>
                                         </tr>
                                     </table>

@@ -69,4 +69,19 @@ function is_set($data)
     }
     return '';
 }
+function getRadioSelect($data, $value) {
+    if (isset($_POST[$value])) {
+        if ($_POST[$value] == $data) {
+            echo "checked";
+        }
+    }
+}
+
+function getRadioSelectClass($data, $value, $class) {
+    if (isset($_POST[$value])) {
+        if ($_POST[$value] == $data) {
+            echo $class;
+        }
+    }
+}
 

@@ -26,7 +26,15 @@ class Database
                 if ($check) {
                     // if a insert query is been executed return the id of the inserted row
                     if (preg_match("/^INSERT/i", $query)) {
+                        
                         return $con->lastInsertId();
+                    }
+
+                    // if a call procedure is been executed return the result of the procedure
+                    if (preg_match("/^CALL/i", $query)) {
+                        $data = $stm->fetchAll(PDO::FETCH_OBJ);
+                        $con = null;
+                        return $data;
                     }
 
                     if ($data_type == "object") {

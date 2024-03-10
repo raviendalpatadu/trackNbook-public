@@ -1,7 +1,7 @@
 <?php
 
 echo "<pre>";
-// print_r($data);
+// print_r($_POST);
 print_r(Auth::reservation());
 echo "</pre>";
 ?>
@@ -181,7 +181,7 @@ echo "</pre>";
                     console.log(data);
                 }
             });
-            // window.location.replace("<?= ROOT ?>passenger/billing");
+            window.location.replace("<?= ROOT ?>passenger/billing");
         };
 
 
@@ -206,14 +206,14 @@ echo "</pre>";
                             "cancel_url": "<?= ROOT ?>/passanger/billing", // Important
                             "notify_url": "passenger/summary", // Important
                             "order_id": paymentData.order_id,
-                            "items": "Door bell wireles",
+                            "items": paymentData.items[0],
                             "amount": paymentData.amount,
                             "currency": "LKR",
                             "hash": paymentData.hash, // *Replace with generated hash retrieved from backend
-                            "first_name": "Saman",
-                            "last_name": "Perera",
-                            "email": "samanp@gmail.com",
-                            "phone": "0771234567",
+                            "first_name": paymentData.first_name,
+                            "last_name": paymentData.last_name,
+                            "email": paymentData.email,
+                            "phone": paymentData.phone,
                             "address": "No.1, Galle Road",
                             "city": "Colombo",
                             "country": "Sri Lanka",
@@ -228,7 +228,7 @@ echo "</pre>";
                     }
                 });
             } catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         });
     });

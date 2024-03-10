@@ -63,22 +63,14 @@ class Auth
         $payment['return_url'] = "passenger/summary";
         $payment['cancel_url'] = "passenger/billing";
         $payment['notify_url'] = "passenger/summary";
-        $payment['order_id'] = "142";
-        $payment['items'] = "Door bell wireles";
+        $payment['order_id'] = $data['reservation_id'][0];
+        $payment['items'] = $data['reservation_id'];
         $payment['amount'] = number_format($data['fare']['fare_price'], 2, '.', '');
         $payment['currency'] = "LKR";
-        $payment['first_name'] = "Saman";
-        $payment['last_name'] = "Perera";
-        $payment['email'] = "";
-        $payment['phone'] = "";
-        $payment['address'] = "";
-        $payment['city'] = "";
-        $payment['country'] = "";
-        $payment['delivery_address'] = "";
-        $payment['delivery_city'] = "";
-        $payment['delivery_country'] = "";
-        $payment['custom_1'] = "";
-        $payment['custom_2'] = "";
+        $payment['first_name'] = $data['passenger_data']['reservation_passenger_first_name'][0];
+        $payment['last_name'] = $data['passenger_data']['reservation_passenger_last_name'][0];
+        $payment['email'] = $data['passenger_data']['reservation_passenger_email'][0];
+        $payment['phone'] = $data['passenger_data']['reservation_passenger_phone_number'][0];
 
         $payment['hash'] = strtoupper(
             md5(
@@ -119,6 +111,4 @@ class Auth
 
         return $ticketId;
     }
-
-    
 }

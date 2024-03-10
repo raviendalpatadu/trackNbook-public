@@ -882,13 +882,9 @@ tbody td {
   color: var(--Banner-red);
 }
 
-.button-base a {
+.button-base {
   cursor: pointer;
   font: var(--textxs-medium, 600 12px/18px "Inter", sans-serif);
-}
-
-.button-base a:hover {
-  color: var(--Primary-Blue);
 }
 
 .button-base input[type="submit"] {
@@ -974,6 +970,39 @@ tbody td {
   flex-shrink: 0;
   position: relative;
   overflow: visible;
+}
+
+.train-selected {
+  background: var(--blue) !important;
+}
+
+.train-selected .text {
+  color: var(--White) !important;
+}
+
+.train_and_compartment:hover .badge-base {
+  background: var(--blue) !important;
+}
+
+.train_and_compartment:hover .badge-base .text {
+  color: var(--White) !important;
+}
+
+#trainsAvailable .train-available-btn {
+  padding: 12px;
+  font-size: 12px;
+  border: none;
+  font-weight: 400;
+  color: var(--Primary-Gray);
+}
+
+#trainsAvailable .train-available-btn:hover {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#trainsAvailable .train-available-btn.active {
+  font-weight: 600;
 }
 
 @media screen and (max-width: 768px) {

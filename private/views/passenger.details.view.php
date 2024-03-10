@@ -4,7 +4,7 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 
 echo "<pre>";
 // print_r($_POST);
-// print_r($_SESSION);
+print_r($_SESSION);
 // print_r($data);
 
 echo "</pre>";
@@ -223,6 +223,12 @@ echo "</pre>";
         </main>
         <?php $this->view("./includes/footer") ?>
         <script>
+            // prevent going to back pages from a browser
+            history.pushState(null, null, location.href);
+            window.onpopstate = function(event) {
+                history.go(1);
+            };
+
             $(document).ready(function() {
                 var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
                 var counter = 0;

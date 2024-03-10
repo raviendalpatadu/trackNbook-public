@@ -1,5 +1,7 @@
 <?php
 
+use Sabberworm\CSS\Value\Value;
+
 class Trains extends Model
 {
     protected $table = 'tbl_train';
@@ -8,6 +10,49 @@ class Trains extends Model
     {
         parent::__construct();
     }
+
+    public function trainsAvailableValidate($values = array())
+    {
+        if (empty($values['from_station']) || $values['from_station'] == 0) {
+            $this->errors['errors']['from_station'] = 'Station is required';
+        }
+
+        if (empty($values['to_station']) || $values['to_station'] == 0) {
+            $this->errors['errors']['to_station'] = 'Station is required';
+        }
+
+        if (empty($values['from_date'])) {
+            $this->errors['errors']['from_date'] = 'Date is required';
+        }
+
+        if (empty($values['from_compartment_and_train']) || !isset($values['from_compartment_and_train'])) {
+            $this->errors['errors']['from_compartment_and_train'] = 'From compartment should be selected';
+        }
+
+        if (empty($values['no_of_passengers'])) {
+            $this->errors['errors']['no_of_passengers'] = 'Passenger count is required';
+        }
+
+        if (isset($values['return']) && $values['return'] == 'on') {
+            if (!isset($values['to_date'])) {
+                $this->errors['errors']['to_date'] = 'To date is required';
+            }
+
+            if(empty($values['to_date'])){
+                $this->errors['errors']['to_date'] = 'To date is required';
+            }
+
+            if (!isset($values['to_compartment_and_train'])) {
+                $this->errors['errors']['to_compartment_and_train'] = 'To compartment should be selected';
+            }
+        }
+
+        if (count($this->errors) > 0) {
+            return false;
+        }
+        return true;
+    }
+
 
 
     public function findAllTrains()
@@ -111,89 +156,156 @@ class Trains extends Model
             try {
                 //insert query to search train must come form route
                 $query = "WITH
-                        StartingTrains AS (
+                            StartingTrains AS (
+                                SELECT
+                                    *
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    station_id = :from_station
+                            ),
+                            res AS (
                             SELECT
-                                *
+                            r.reservation_id,
+                            r.reservation_ticket_id,
+                            r.reservation_train_id,
+                            r.reservation_compartment_id,
+                            r.reservation_date,
+                            s.station_name AS reservation_start_station,
+                            reservation_start_st.stop_no AS reservation_start_stop_no,
+                            e.station_name AS reservation_end_station,
+                            reservation_end_st.stop_no AS reservation_end_stop_no
                             FROM
-                                tbl_train_stop_station
-                            WHERE
-                                station_id = (
-                                    SELECT
-                                        station_id
-                                    FROM
-                                        tbl_station
-                                    WHERE
-                                        station_id = :from_station
-                                )
+                            tbl_reservation r
+                            JOIN tbl_train_stop_station reservation_start_st ON r.reservation_start_station = reservation_start_st.station_id
+                            JOIN tbl_train_stop_station reservation_end_st ON r.reservation_end_station = reservation_end_st.station_id
+                            JOIN tbl_station s ON reservation_start_st.station_id = s.station_id
+                            JOIN tbl_station e ON reservation_end_st.station_id = e.station_id
+                            GROUP BY
+                            r.reservation_id
                         ),
                         CountReservations AS (
                             SELECT
-                                c.*,
-                                COUNT(r.reservation_id) AS no_of_reservations
+                            ac.*,
+                            COUNT(r.reservation_compartment_id) AS no_of_reservations
                             FROM
-                                tbl_compartment c
-                                LEFT JOIN tbl_reservation r ON c.compartment_id = r.reservation_compartment_id
-                                AND r.reservation_date = :from_date
+                            tbl_compartment ac
+                            LEFT JOIN res r ON ac.compartment_id = r.reservation_compartment_id
+                            AND r.reservation_date = :from_date
+                            AND (
+                                (
+                                (
+                                    (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :from_station
+                                    )  <= r.reservation_start_stop_no
+                                    AND r.reservation_start_stop_no < 
+                                    (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :to_station
+                                    ) 
+                                )
+                                OR (
+                                    (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :from_station
+                                    )  < r.reservation_end_stop_no
+                                    AND r.reservation_end_stop_no <= 
+                                    (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :to_station
+                                    ) 
+                                )
+                                )
+                                OR (
+                                (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :from_station
+                                    )  >= r.reservation_start_stop_no
+                                AND r.reservation_end_stop_no >= 
+                                (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = r.reservation_train_id
+                                            AND station_id = :to_station
+                                    ) 
+                                )
+                            )
                             GROUP BY
-                                c.compartment_id,
-                                c.compartment_class_type
+                            ac.compartment_id,
+                            ac.compartment_class_type
                         )
-                    SELECT
-                        DISTINCT train.train_id,
-                        train.train_name,
-                        train_type.train_type,
-                        train.train_start_time,
-                        train.train_end_time,
-                        START.station_name AS train_start_station,
-                        END.station_name AS train_end_station,
-                        reservation.*,
-                        compartment_type.compartment_class_type_id,
-                        compartment_type.compartment_class_type,
-                        fare.fare_price
-                    FROM
-                        StartingTrains ST
-                        JOIN tbl_train_stop_station TS1 ON ST.train_id = TS1.train_id
-                        JOIN tbl_train_stop_station TS2 ON TS1.train_id = TS2.train_id
-                        JOIN tbl_train train ON ST.train_id = train.train_id
-                        JOIN tbl_train_type train_type ON train_type.train_type_id = train.train_type
-                        JOIN tbl_station AS START ON train.train_start_station = START.station_id
-                        JOIN tbl_station AS END ON train.train_end_station = END.station_id
-                        JOIN tbl_compartment AS compartment ON compartment.compartment_train_id = train.train_id
-                        JOIN tbl_compartment_class_type AS compartment_type ON compartment_type.compartment_class_type_id = compartment.compartment_class_type
-                        JOIN CountReservations AS reservation ON reservation.compartment_id = compartment.compartment_id
-                        JOIN tbl_fare AS fare ON fare.fare_train_type_id = train.train_type 
+                        SELECT
+                            DISTINCT train.train_id,
+                            train.train_name,
+                            train_type.train_type,
+                            train.train_start_time,
+                            train.train_end_time,
+                            START.station_name AS train_start_station,
+                            END.station_name AS train_end_station,
+                            reservation.*,
+                            compartment_type.compartment_class_type,
+                            fare.fare_price
+                        FROM
+                            StartingTrains ST
+                            JOIN tbl_train_stop_station TS1 ON ST.train_id = TS1.train_id
+                            JOIN tbl_train_stop_station TS2 ON TS1.train_id = TS2.train_id
+                            JOIN tbl_train train ON ST.train_id = train.train_id
+                            JOIN tbl_train_type train_type ON train_type.train_type_id = train.train_type
+                            JOIN tbl_station AS START ON train.train_start_station = START.station_id
+                            JOIN tbl_station AS END ON train.train_end_station = END.station_id
+                            JOIN tbl_compartment AS compartment ON compartment.compartment_train_id = train.train_id
+                            JOIN tbl_compartment_class_type AS compartment_type ON compartment_type.compartment_class_type_id = compartment.compartment_class_type
+                            JOIN CountReservations AS reservation ON reservation.compartment_id = compartment.compartment_id
+                            JOIN tbl_fare AS fare ON fare.fare_train_type_id = train.train_type 
 
-                    WHERE
-                        TS1.station_id = (
-                            SELECT
-                                station_id
-                            FROM
-                                tbl_station
-                            WHERE
-                                station_id = :from_station
-                        )
-                        AND TS2.station_id = (
-                            SELECT
-                                station_id
-                            FROM
-                                tbl_station
-                            WHERE
-                                station_id = :to_station
-                        )
-                        AND TS1.stop_no < TS2.stop_no
-                        AND reservation.compartment_total_seats > reservation.no_of_reservations
-                        AND (compartment.compartment_total_seats - reservation.no_of_reservations) >= :no_of_passengers
-                        
-                        AND fare.fare_compartment_id = compartment.compartment_class_type
-                        AND fare.fare_route_id = train.train_route
-                        AND fare.fare_start_station = :from_station
-                        AND fare.fare_end_station = :to_station
-                     
-                        
-                        ORDER BY train.train_start_time, compartment_type.compartment_class_type_id ASC";
+                        WHERE
+                            TS1.station_id = :from_station
+                            AND TS2.station_id = :to_station
+                            
+                            AND TS1.stop_no < TS2.stop_no
+                            AND reservation.compartment_total_seats > reservation.no_of_reservations
+                                                AND (compartment.compartment_total_seats - reservation.no_of_reservations) >= :no_of_passengers
+                            
+                            AND reservation.compartment_total_seats > reservation.no_of_reservations
+                            
+                            AND fare.fare_compartment_id = compartment.compartment_class_type
+                            AND fare.fare_route_id = train.train_route
+                            AND fare.fare_start_station = :from_station
+                            AND fare.fare_end_station = :to_station
+                            
+                            ORDER BY train.train_start_time, compartment_type.compartment_class_type_id ASC";
 
 
-                $data['trains'] = $this->query($query, array(
+                $data = $this->query($query, array(
                     'from_station' => $values['from_station']->station_id,
                     'to_station' => $values['to_station']->station_id,
                     'from_date' => $values['from_date'],

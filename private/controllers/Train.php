@@ -12,28 +12,84 @@ class Train extends Controller
         $this->view('trains');
     }
 
+    function trainsAvailableValidate()
+    {
+        if (!isset(Auth::reservation()['from_date']) || !isset(Auth::reservation()['from_station']) || !isset(Auth::reservation()['to_station']) || !isset(Auth::reservation()['no_of_passengers'])) {
+            $this->redirect('/home');
+        }
+
+        $train = new Trains();
+        if ($train->trainsAvailableValidate($_POST)) :
+            echo json_encode(true);
+        else :
+            echo json_encode($train->errors);
+        endif;
+    }
+
     function available($id = '')
     {
+        if (!isset(Auth::reservation()['from_date']) || !isset(Auth::reservation()['from_station']) || !isset(Auth::reservation()['to_station']) || !isset(Auth::reservation()['no_of_passengers'])) {
+            $this->redirect('/home');
+        }
+
         $station = new Stations();
         $data = array();
 
         $train = new Trains();
+        if (isset($_POST['proceed'])) {
+            $_SESSION['reservation']['from_compartment_and_train'] = mb_split('-', $_POST['from_compartment_and_train']);
+            if (isset($_POST['to_compartment_and_train'])) {
+                $_SESSION['reservation']['to_compartment_and_train'] = mb_split('-', $_POST['to_compartment_and_train']);
+            }
+
+            die("<h1>shdajhdsa</h1>");
+            echo "<h1>shdajhdsa</h1>";
+        }
+
+
         if (isset($_POST['submit'])) {
             $data['from_date'] = $_POST['from_date'];
             $data['from_station'] = $station->getOneStation('station_id', $_POST['from_station']);
             $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
             $data['no_of_passengers'] = $_POST['no_of_passengers'];
 
+            if (isset($_POST['to_date'])) {
+                $data['to_date'] = $_POST['to_date'];
+            }
 
             $_SESSION['reservation'] = $data;
         }
         $data = $_SESSION['reservation'];
+
         $data['stations'] = $station->findAll();
-        $data['trains_available'] = $train->search($_SESSION['reservation']);
+
+        if (isset($data['to_date']) && $data['to_date'] != '') {
+            $inverse_search['from_station'] = $data['to_station'];
+            $inverse_search['to_station'] = $data['from_station'];
+            $inverse_search['from_date'] = $data['to_date'];
+            $inverse_search['no_of_passengers'] = $data['no_of_passengers'];
+            $data['trains_available']['to_trains'] = $train->search($inverse_search);
+        }
+
+        $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
+
+        // $train_count = 0;
+        // foreach ($data['trains_available']['from_trains'] as $key => $value) {
+        //     if ($key > 0) {
+        //         if ($value->train_id != $data['trains_available']['from_trains'][$key - 1]->train_id) {
+        //             $train_count++;
+        //         }
+        //     } else {
+        //         $train_count++;
+        //     }
+        // }
+
+
 
 
         $this->view('trains.available', $data);
     }
+
     function availableNew($id = '')
     {
         $station = new Stations();
@@ -47,6 +103,10 @@ class Train extends Controller
 
     function seatsAvailable($class_id, $train_id)
     {
+        if (!Auth::reservation()) {
+            $this->redirect('/home');
+        }
+
         $data = array();
 
 
@@ -55,6 +115,8 @@ class Train extends Controller
         $seatData['reservation_train_id'] = $train_id;
         $seatData['reservation_compartment_id'] = $class_id;
         $seatData['reservation_date'] = Auth::reservation()['from_date'];
+        $seatData['reservation_start_station'] = Auth::reservation()['from_station']->station_id;
+        $seatData['reservation_end_station'] = Auth::reservation()['to_station']->station_id;
 
         $train = new Trains();
         $data['train'] = $train->whereOne('train_id', $train_id);
@@ -71,11 +133,11 @@ class Train extends Controller
         $fare =  new Fares();
         $data['fare'] = $fare->getFareData($data['train']->train_type, $data['compartment']->compartment_class_type, Auth::reservation()['from_station']->station_id, Auth::reservation()['to_station']->station_id)[0]; //get from db must be changed
 
-        
+
         if (isset($_POST['submit'])) {
-            
+
             $reservation = new Reservations();
-            
+
             $reservationData = array();
             $reservationData['reservation_passenger_id'] = Auth::user_id();
             $reservationData['reservation_train_id'] = $data['train']->train_id;
@@ -84,8 +146,9 @@ class Train extends Controller
             $reservationData['reservation_end_station'] = Auth::reservation()['to_station']->station_id;
             $reservationData['reservation_date'] = Auth::reservation()['from_date'];
 
-            $reservationData['reservation_created_time'] = date("Y-m-d H:i:s");
-            
+            date_default_timezone_set('Asia/Colombo');
+            $reservationData['reservation_created_time'] = date('m/d/Y h:i:s a', time());
+
             $reservationData['reservation_status'] = 'Pending';
 
             $data['reservation_created_time'] = $reservationData['reservation_created_time'];

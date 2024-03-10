@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2024 at 01:21 PM
+-- Generation Time: Feb 26, 2024 at 05:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -190,7 +190,8 @@ INSERT INTO `tbl_login` (`login_id`, `login_username`, `login_password`, `user_i
 (41, 'ravieem', '6f8f57715090da2632453988d9a1501b', 41),
 (42, 'qqqqqqqqqqq', 'f1290186a5d0b1ceab27f4e77c0c5d68', 42),
 (43, 'sil', '7694f4a66316e53c8cdd9d9954bd611d', 43),
-(44, 'sw', '43b36d42e7f8e60be58ba4356b6af40c', 44);
+(44, 'sw', '43b36d42e7f8e60be58ba4356b6af40c', 44),
+(45, 'menura', 'f14f8bc4096b7e695c328aed85c5b86c', 45);
 
 -- --------------------------------------------------------
 
@@ -235,7 +236,8 @@ INSERT INTO `tbl_passengers` (`passenger_id`, `passenger_email`, `passenger_nic`
 (41, 'daien@gmail.com', '200123602078'),
 (42, 'dalqien@gmail.com', '200123602023'),
 (43, 'dalpataduravien@gmail.com', '200123602078'),
-(44, 'dalpataduravien@gmail.com', '200123602078');
+(44, 'dalpataduravien@gmail.com', '200123602078'),
+(45, 'menu@gm.com', '200123602000');
 
 -- --------------------------------------------------------
 
@@ -245,13 +247,13 @@ INSERT INTO `tbl_passengers` (`passenger_id`, `passenger_email`, `passenger_nic`
 
 CREATE TABLE `tbl_reservation` (
   `reservation_id` int(11) NOT NULL,
+  `reservation_ticket_id` varchar(20) NOT NULL,
   `reservation_passenger_id` int(11) NOT NULL,
   `reservation_start_station` int(11) NOT NULL,
   `reservation_end_station` int(11) NOT NULL,
   `reservation_train_id` int(11) NOT NULL,
   `reservation_compartment_id` int(11) NOT NULL,
   `reservation_date` date NOT NULL,
-  `reservation_class` int(20) NOT NULL,
   `reservation_seat` int(20) NOT NULL,
   `reservation_passenger_title` varchar(5) NOT NULL,
   `reservation_passenger_first_name` varchar(50) NOT NULL,
@@ -259,17 +261,179 @@ CREATE TABLE `tbl_reservation` (
   `reservation_passenger_nic` bigint(12) NOT NULL,
   `reservation_passenger_phone_number` varchar(13) NOT NULL,
   `reservation_passenger_email` varchar(50) NOT NULL,
-  `reservation_passenger_gender` varchar(10) NOT NULL
+  `reservation_passenger_gender` varchar(10) NOT NULL,
+  `reservation_created_time` datetime DEFAULT NULL,
+  `reservation_status` varchar(20) NOT NULL DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_compartment_id`, `reservation_date`, `reservation_class`, `reservation_seat`, `reservation_passenger_title`, `reservation_passenger_first_name`, `reservation_passenger_last_name`, `reservation_passenger_nic`, `reservation_passenger_phone_number`, `reservation_passenger_email`, `reservation_passenger_gender`) VALUES
-(1, 40, 1, 2, 4, 12, '2024-01-30', 12, 2, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female'),
-(2, 40, 1, 2, 4, 12, '2024-01-30', 12, 40, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female'),
-(3, 40, 1, 14, 1, 1, '2024-01-29', 1, 1, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female');
+INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_ticket_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_compartment_id`, `reservation_date`, `reservation_seat`, `reservation_passenger_title`, `reservation_passenger_first_name`, `reservation_passenger_last_name`, `reservation_passenger_nic`, `reservation_passenger_phone_number`, `reservation_passenger_email`, `reservation_passenger_gender`, `reservation_created_time`, `reservation_status`) VALUES
+(1, '20240130075000-7183', 40, 1, 2, 4, 12, '2024-01-30', 2, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(2, '20240130075728-6213', 40, 1, 2, 4, 12, '2024-01-30', 40, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(3, '20240130075740-2534', 40, 1, 14, 1, 1, '2024-01-29', 1, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(4, '20240130075750-7886', 40, 2, 1, 2, 6, '2024-01-29', 9, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(5, '20240130075820-3451', 40, 1, 2, 1, 3, '2024-01-29', 9, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(6, '20240130075840-3370', 40, 1, 2, 1, 1, '2024-01-29', 16, 'Mr.', 'siluni', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(7, '20240130075851-7159', 40, 1, 2, 1, 1, '2024-01-29', 20, 'Mr.', 'moushika', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(8, '20240130075901-3415', 40, 1, 2, 1, 1, '2024-01-23', 15, 'Mr.', 'Prabhath', 'wije', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(9, '20240130075919-1427', 40, 1, 2, 4, 12, '2024-01-30', 6, 'Mr.', 'moushika', 'kriyanjalee', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(47, '20240130082224-8415', 40, 1, 2, 4, 12, '2024-01-30', 1, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(48, '20240131181107-7090', 40, 1, 2, 1, 1, '2024-01-31', 21, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(49, '20240131182147-9317', 40, 1, 2, 1, 1, '2024-01-31', 1, 'Mr.', 'Prabhath', 'wije', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(71, '20240201203059-9626', 40, 1, 2, 1, 2, '2024-03-04', 13, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(72, '20240201203059-9626', 40, 1, 2, 1, 2, '2024-03-04', 14, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(73, '20240201203827-8464', 40, 1, 12, 1, 2, '2024-03-04', 9, 'Mr.', 'e', 'c', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(74, '20240201204354-2578', 40, 1, 12, 1, 2, '2024-03-04', 2, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(75, '20240201205250-4613', 40, 1, 2, 1, 2, '2024-03-04', 1, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(76, '20240202055139-3143', 40, 2, 1, 2, 4, '2024-03-04', 22, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(77, '20240202060301-3070', 40, 2, 1, 2, 4, '2024-03-04', 9, 'Mr.', 'Prabhath', 'wije', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(78, '20240202060301-3070', 40, 2, 1, 2, 4, '2024-03-04', 10, 'Miss.', 'Prabhath', 'kriyanjalee', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(79, '20240205043452-3653', 40, 2, 12, 1, 2, '2024-03-04', 23, 'Mr.', 'Prabhath', 'sadsad', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(80, '20240205135255-8883', 40, 1, 2, 1, 2, '2024-03-04', 19, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved '),
+(81, '20240212055622-6326', 40, 1, 2, 1, 1, '2024-02-27', 1, 'Mr.', 'Prabhath', 'sadsad', 200123602067, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(82, '20240214170159-7626', 40, 1, 2, 1, 1, '2024-02-28', 35, 'Mr.', 'Prabhath', 'dalpe', 200123602078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved '),
+(98, '20240217152805-6864', 40, 2, 12, 1, 2, '2024-03-04', 24, 'Mr.', 'thanuja', 'hennaaa', 200012659800, '0123456789', 'thanu@mg.cm', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(99, '20240217163252-8322', 45, 1, 2, 1, 2, '2024-03-04', 20, 'Mr.', 'YASHMIKA', 'KRIYANJALEE', 129856482678, '0715465236', 'yashmika@fg.lk', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(102, '20240217165521-7176', 45, 1, 2, 1, 2, '2024-03-04', 45, 'Mr.', 'ravien', 'dalpatadu', 129856482678, '0701949400', 'dalpataduravien@gmail.com', 'female', '2024-02-19 19:46:20', 'Reserved'),
+(103, '20240217165521-7176', 45, 2, 14, 1, 2, '2024-03-04', 46, 'Mr.', 'ravien', 'dalpatadu', 129856482678, '0701949400', 'dalpataduravien@gmail.com', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(104, '20240217165521-7176', 45, 1, 14, 1, 2, '2024-03-04', 47, 'Mr.', 'ravien', 'dalpatadu', 129856482678, '0701949400', 'dalpataduravien@gmail.com', 'female', '2024-02-19 19:46:20', 'Reserved'),
+(117, '20240219131504-8020', 40, 1, 12, 1, 2, '2024-03-05', 1, 'Mr.', 'Prabhath', 'liyanage', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(118, '20240219144218-3262', 40, 1, 2, 1, 2, '2024-03-06', 20, 'Mr.', 'Prabhath', 'liyanage', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(149, '20240220174801-5568', 40, 1, 12, 1, 1, '2024-02-29', 1, 'Mr.', 'ravein', 'ewrw', 200023568978, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(150, '20240220174801-5568', 40, 1, 12, 1, 1, '2024-02-29', 2, 'Mr.', 'thanuja', 'hennaaa', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(151, '20240220174801-5568', 40, 1, 12, 1, 1, '2024-02-29', 3, 'Mr.', 'Prabhath', 'sangeewa', 200012659800, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved');
+
+--
+-- Triggers `tbl_reservation`
+--
+DELIMITER $$
+CREATE TRIGGER `move_to_reservation_expired` AFTER DELETE ON `tbl_reservation` FOR EACH ROW BEGIN
+    INSERT INTO tbl_reservation_expired (
+        reservation_expired_id,
+        reservation_expired_ticket_id, 
+        reservation_expired_passenger_id, 
+        reservation_expired_start_station, 
+        reservation_expired_end_station, 
+        reservation_expired_train_id, 
+        reservation_expired_compartment_id, 
+        reservation_expired_date, 
+        reservation_expired_seat, 
+        reservation_expired_passenger_title, 
+        reservation_expired_passenger_first_name, 
+        reservation_expired_passenger_last_name, 
+        reservation_expired_passenger_nic, 
+        reservation_expired_passenger_phone_number, 
+        reservation_expired_passenger_email, 
+        reservation_expired_passenger_gender, 
+        reservation_expired_created_time, 
+        reservation_expired_status
+    )
+    VALUES (
+        OLD.reservation_id,
+        OLD.reservation_ticket_id, 
+        OLD.reservation_passenger_id, 
+        OLD.reservation_start_station, 
+        OLD.reservation_end_station, 
+        OLD.reservation_train_id, 
+        OLD.reservation_compartment_id, 
+        OLD.reservation_date, 
+        OLD.reservation_seat, 
+        OLD.reservation_passenger_title, 
+        OLD.reservation_passenger_first_name, 
+        OLD.reservation_passenger_last_name, 
+        OLD.reservation_passenger_nic, 
+        OLD.reservation_passenger_phone_number, 
+        OLD.reservation_passenger_email, 
+        OLD.reservation_passenger_gender, 
+        OLD.reservation_created_time, 
+        OLD.reservation_status
+    );
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_reservation_expired`
+--
+
+CREATE TABLE `tbl_reservation_expired` (
+  `reservation_expired_id` int(11) NOT NULL,
+  `reservation_expired_ticket_id` varchar(20) NOT NULL,
+  `reservation_expired_passenger_id` int(11) NOT NULL,
+  `reservation_expired_start_station` int(11) NOT NULL,
+  `reservation_expired_end_station` int(11) NOT NULL,
+  `reservation_expired_train_id` int(11) NOT NULL,
+  `reservation_expired_compartment_id` int(11) NOT NULL,
+  `reservation_expired_date` date NOT NULL,
+  `reservation_expired_seat` int(20) NOT NULL,
+  `reservation_expired_passenger_title` varchar(5) NOT NULL,
+  `reservation_expired_passenger_first_name` varchar(50) NOT NULL,
+  `reservation_expired_passenger_last_name` varchar(50) NOT NULL,
+  `reservation_expired_passenger_nic` bigint(12) NOT NULL,
+  `reservation_expired_passenger_phone_number` varchar(13) NOT NULL,
+  `reservation_expired_passenger_email` varchar(50) NOT NULL,
+  `reservation_expired_passenger_gender` varchar(10) NOT NULL,
+  `reservation_expired_created_time` datetime DEFAULT NULL,
+  `reservation_expired_status` varchar(20) NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `tbl_reservation_expired`
+--
+
+INSERT INTO `tbl_reservation_expired` (`reservation_expired_id`, `reservation_expired_ticket_id`, `reservation_expired_passenger_id`, `reservation_expired_start_station`, `reservation_expired_end_station`, `reservation_expired_train_id`, `reservation_expired_compartment_id`, `reservation_expired_date`, `reservation_expired_seat`, `reservation_expired_passenger_title`, `reservation_expired_passenger_first_name`, `reservation_expired_passenger_last_name`, `reservation_expired_passenger_nic`, `reservation_expired_passenger_phone_number`, `reservation_expired_passenger_email`, `reservation_expired_passenger_gender`, `reservation_expired_created_time`, `reservation_expired_status`) VALUES
+(93, '', 40, 1, 2, 1, 1, '2024-02-28', 36, 'Mr.', 'Prabhath', 'fsd', 256523651547, '0215265984', 'eq@gm.com', 'male', '2024-02-19 19:46:20', 'Pending'),
+(94, '', 40, 1, 2, 1, 1, '2024-02-29', 1, 'Mr.', 'thanu', 'henn', 200012659845, '0718545629', 'fd@gm.com', 'male', '2024-02-19 19:46:20', 'Pending'),
+(95, '', 40, 1, 2, 1, 1, '2024-02-29', 2, 'Miss.', 'mous', 'shik', 200123659856, '0713256986', 'mou@gm.com', 'male', '2024-02-19 19:46:20', 'Pending'),
+(96, '', 40, 1, 2, 4, 10, '2024-02-28', 3, 'Mr.', 'Prabhath', 'henn', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:46:20', 'Reserved'),
+(97, '', 40, 1, 2, 4, 10, '2024-02-28', 4, 'Mr.', 'Prabhath', 'llllhenn', 200223405078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '2024-02-19 19:46:20', 'Reserved'),
+(100, '20240217163252-8322', 45, 1, 2, 1, 2, '2024-03-04', 28, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Reserved'),
+(101, '20240217163252-8322', 45, 1, 2, 1, 2, '2024-03-04', 27, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Reserved'),
+(105, '', 40, 1, 2, 1, 1, '2024-02-29', 3, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(106, '', 40, 1, 2, 1, 1, '2024-02-29', 4, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(107, '', 40, 1, 2, 1, 1, '2024-02-29', 5, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(108, '', 40, 1, 2, 1, 1, '2024-02-29', 9, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(109, '', 40, 1, 2, 1, 1, '2024-02-29', 10, '', '', '', 0, '', '', '', '2024-02-19 19:26:20', 'Pending'),
+(110, '', 40, 1, 12, 1, 1, '2024-02-29', 19, '', '', '', 0, '', '', '', '2024-02-19 19:26:20', 'Pending'),
+(111, '', 40, 1, 12, 1, 1, '2024-02-29', 20, '', '', '', 0, '', '', '', '2024-02-19 19:26:20', 'Pending'),
+(112, '', 40, 1, 2, 1, 1, '2024-02-27', 6, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(113, '', 40, 1, 2, 1, 1, '2024-02-29', 17, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(114, '', 40, 1, 14, 1, 1, '2024-02-29', 45, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(115, '', 40, 1, 14, 1, 2, '2024-03-04', 44, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(116, '', 40, 1, 14, 1, 3, '2024-03-06', 11, '', '', '', 0, '', '', '', '2024-02-19 19:46:20', 'Pending'),
+(119, '', 40, 2, 1, 3, 9, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-19 19:26:20', 'Pending'),
+(120, '', 40, 2, 1, 2, 6, '2024-02-29', 26, '', '', '', 0, '', '', '', '2024-02-19 19:26:20', 'Pending'),
+(121, '', 40, 1, 12, 1, 3, '2024-02-29', 1, 'Mr.', 'hasi', 'kavimi', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:51:38', 'Pending'),
+(122, '', 40, 1, 12, 1, 3, '2024-02-29', 2, 'Mr.', 'kavi', 'kavi', 200012345678, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '2024-02-19 19:51:38', 'Pending'),
+(123, '', 1, 12, 1, 3, 7, '2024-11-05', 1, 'mr', 'kj', 'jkjk', 20012360208, '0701949400', 'dalpe@gm.com', 'male', '2024-02-19 19:56:33', 'Pending'),
+(124, '', 40, 1, 2, 1, 2, '2024-02-29', 2, '', '', '', 0, '', '', '', NULL, 'Pending'),
+(125, '', 40, 1, 2, 1, 2, '2024-02-29', 13, '', '', '', 0, '', '', '', '2024-02-19 16:22:29', 'Pending'),
+(126, '', 40, 1, 2, 1, 2, '2024-02-29', 25, '', '', '', 0, '', '', '', '2024-02-19 16:26:42', 'Pending'),
+(127, '', 40, 1, 2, 1, 2, '2024-02-29', 41, '', '', '', 0, '', '', '', '2024-02-19 18:02:16', 'Pending'),
+(130, '', 40, 1, 12, 1, 1, '2024-02-07', 1, '', '', '', 0, '', '', '', '2024-02-20 06:36:30', 'Pending'),
+(131, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 06:44:49', 'Pending'),
+(132, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 06:46:34', 'Pending'),
+(133, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 06:49:53', 'Pending'),
+(134, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 07:03:02', 'Pending'),
+(135, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 07:09:59', 'Pending'),
+(136, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 07:18:39', 'Pending'),
+(137, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 07:22:08', 'Pending'),
+(138, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '2024-02-20 06:29:25', 'Pending'),
+(139, '', 40, 1, 2, 1, 1, '2024-02-29', 1, '', '', '', 0, '', '', '', '0000-00-00 00:00:00', 'Pending'),
+(140, '', 40, 1, 2, 1, 1, '2024-02-29', 2, '', '', '', 0, '', '', '', '0000-00-00 00:00:00', 'Pending'),
+(141, '', 40, 1, 2, 1, 1, '2024-02-29', 2, '', '', '', 0, '', '', '', '0000-00-00 00:00:00', 'Pending'),
+(142, '', 40, 1, 2, 1, 1, '2024-02-29', 6, '', '', '', 0, '', '', '', '0000-00-00 00:00:00', 'Pending'),
+(143, '20240220095149-3301', 40, 2, 12, 1, 1, '2024-02-29', 1, 'Miss.', 'moushika', 'kiriyanjalee', 200123589456, '0713407878', 'moushi@gmail.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(144, '20240220154920-5550', 40, 1, 2, 1, 1, '2024-02-29', 1, 'Mr.', 'Prabhath', 'sangeewa', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(145, '20240220154920-5550', 40, 1, 2, 1, 1, '2024-02-29', 2, 'Mrs.', 'Prabhath', 'fsd', 200223405078, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '0000-00-00 00:00:00', 'Reserved'),
+(146, '20240220173922-8376', 40, 1, 12, 1, 1, '2024-02-29', 1, 'Mr.', 'ravein', 'dalpe', 200012345678, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(147, '20240220173922-8376', 40, 1, 12, 1, 1, '2024-02-29', 2, 'Mr.', 'menura', 'wijesekara', 200012659845, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved'),
+(148, '20240220173922-8376', 40, 1, 12, 1, 1, '2024-02-29', 3, 'Mr.', 'thnujsa', 'hennaaa', 200012345678, '0718118969', 'sanath_dalpatadu@yahoo.com', 'male', '0000-00-00 00:00:00', 'Reserved');
 
 -- --------------------------------------------------------
 
@@ -490,11 +654,12 @@ INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_n
 (37, 'Mr.', 'passs', 'aasd', '0718118989', 'passenger', 'male', 'sanath_dalpatadu@yahoo.com', 200123602072),
 (38, 'Mr.', 'mous', 'm', '0718118969', 'staff_ticketing', 'female', 'sanat@yahoo.com', 200123602078),
 (39, 'Mr.', 'ravi', 'dalpatadu', '0701949400', 'passenger', 'male', 'dal@gmail.com', 200123602079),
-(40, 'Mr.', 'ravien', 'dalpatadu', '0701949400', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078),
+(40, 'Mr.', 'ravien', 'dalpatadu ', '0701949400', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078),
 (41, 'Mr.', 'ravien', 'dalpatadu', '0701949400', 'passenger', 'male', 'daien@gmail.com', 200123602078),
 (42, 'Mr.', 'ravien', 'dalpatadu', '0701949400', 'passenger', 'female', 'dalqien@gmail.com', 200123602023),
 (43, 'Mr.', 'ravien', 'dalpatadu', '0701949400', 'passenger', 'female', 'dalpataduravien@gmail.com', 200123602078),
-(44, 'Mr.', 'sil', 'dalpatadu', '0701949400', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078);
+(44, 'Mr.', 'sil', 'dalpatadu', '0701949400', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078),
+(45, 'Mr.', 'menu', 'meni', '0745674942', 'passenger', 'male', 'menu@gm.com', 200123602000);
 
 -- --------------------------------------------------------
 
@@ -507,13 +672,6 @@ CREATE TABLE `tbl_warrant_reservation` (
   `warrant_status` varchar(20) NOT NULL,
   `warrent_reservation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `tbl_warrant_reservation`
---
-
-INSERT INTO `tbl_warrant_reservation` (`warrant_id`, `warrant_status`, `warrent_reservation_id`) VALUES
-(3, 'verified', 43);
 
 --
 -- Indexes for dumped tables
@@ -562,12 +720,25 @@ ALTER TABLE `tbl_passengers`
 --
 ALTER TABLE `tbl_reservation`
   ADD PRIMARY KEY (`reservation_id`),
-  ADD UNIQUE KEY `reservation_date` (`reservation_date`,`reservation_class`,`reservation_seat`),
+  ADD UNIQUE KEY `reservation_id` (`reservation_id`,`reservation_ticket_id`),
+  ADD UNIQUE KEY `reservation_date` (`reservation_date`,`reservation_compartment_id`,`reservation_seat`,`reservation_train_id`) USING BTREE,
   ADD KEY `passenger_fk` (`reservation_passenger_id`),
   ADD KEY `start_station_fk` (`reservation_start_station`),
   ADD KEY `end_station_fk` (`reservation_end_station`),
   ADD KEY `train_fk` (`reservation_train_id`),
   ADD KEY `reservation_compartment_id` (`reservation_compartment_id`);
+
+--
+-- Indexes for table `tbl_reservation_expired`
+--
+ALTER TABLE `tbl_reservation_expired`
+  ADD PRIMARY KEY (`reservation_expired_id`),
+  ADD UNIQUE KEY `reservation_id` (`reservation_expired_id`,`reservation_expired_ticket_id`),
+  ADD KEY `passenger_fk` (`reservation_expired_passenger_id`),
+  ADD KEY `start_station_fk` (`reservation_expired_start_station`),
+  ADD KEY `end_station_fk` (`reservation_expired_end_station`),
+  ADD KEY `train_fk` (`reservation_expired_train_id`),
+  ADD KEY `reservation_compartment_id` (`reservation_expired_compartment_id`);
 
 --
 -- Indexes for table `tbl_route`
@@ -657,13 +828,19 @@ ALTER TABLE `tbl_fare`
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+
+--
+-- AUTO_INCREMENT for table `tbl_reservation_expired`
+--
+ALTER TABLE `tbl_reservation_expired`
+  MODIFY `reservation_expired_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `tbl_route`
@@ -693,7 +870,7 @@ ALTER TABLE `tbl_train_type`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tbl_warrant_reservation`

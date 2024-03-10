@@ -13,9 +13,13 @@ class Home extends Controller
         $data['stations'] = $station->getStations();
 
         if (isset($_SESSION['reservation'])) {
-            $reservation = new Reservations();
-            foreach(Auth::reservation()['reservation_id'] as $key => $value){
-                $data['reservation'][$key] = $reservation->delete($value, 'reservation_id');
+            if (Auth::reservation()['reservation_status'] == "Pending") {
+                $reservation = new Reservations();
+                try {
+                    $reservation->callProcedure('expire_reservation', Auth::reservation()['reservation_id']);
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
             }
 
             unset($_SESSION['reservation']);
@@ -42,6 +46,10 @@ class Home extends Controller
                 $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
                 $data['no_of_passengers'] = $_POST['no_of_passengers'];
 
+                if (isset($_POST['to_date'])) {
+                    $data['to_date'] = $_POST['to_date'];
+                }
+
                 // setcookie('reservation', json_encode($data), time() + 300, '/');
                 if (isset($data['stations'])) {
                     unset($data['stations']);
@@ -63,7 +71,7 @@ class Home extends Controller
 
         if ($home->validate($_POST)) :
             echo json_encode(true);
-        else:
+        else :
             echo json_encode($home->errors);
         endif;
     }

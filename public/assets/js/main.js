@@ -84,6 +84,12 @@ checkbox.click(function () {
   }
 });
 
+if (checkbox.is(":checked")) {
+  box.css("display", "block");
+}
+
+// clear the value in the box when the checkbox is unchecked
+
 //warrent booking toggle
 var warrent = $("#warrentBooking");
 var chooseImg = $("#chooseImg");
@@ -216,25 +222,28 @@ function hello() {
 
 // get errors from the server
 
-function getErrors(url, data) {
+function getErrors(url, data, callback) {
   $.ajax({
     url: url,
     type: "post",
     data: data,
-    success: function (response) {
-      var res = JSON.parse(response);
+    success: function (data, status) {
+      // console.log(data);
+
+      var res = JSON.parse(data);
 
       // if res has error throw an error
       if (res == true) {
-        console.log(res);
-        $("form").unbind().submit();
+        // console.log(res);
+        callback(res);
       }
 
       if (res.hasOwnProperty("errors")) {
-        console.log(res.errors);
+        callback(res.errors);
+        // xhr = res.errors;
         printErrors(res);
       }
-    },
+    }
   });
 }
 
@@ -269,11 +278,11 @@ setInterval(function () {
       var res = JSON.parse(response);
       var created_time = new Date(res.reservation_created_time);
 
-      // console.log(created_time);
-      var now = new Date().getTime();
+      var now = new Date();
       var distance = now - created_time;
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      if (minutes > 10) {
+      var reservation_status = res.reservation_status;
+      if (minutes > 10 && reservation_status == "Pending") {
         // create a popup message called reservation expired try again to book
         if (!shown) {
           shown = true;
@@ -283,11 +292,6 @@ setInterval(function () {
           var expBox = $("<div/>")
             .addClass("exp-box")
             .appendTo(reservationExpMsg);
-          //  <button class="button">
-          //    <div class="button-base">
-          //      <div class="text">Close</div>
-          //    </div>
-          //  </button>
 
           var expMsg = $("<div/>").appendTo(expBox);
           var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
@@ -313,9 +317,6 @@ setInterval(function () {
             "Your reservation has expired. Please try again to book."
           );
           // expBtn.text("Ok");
-
-
-        
         }
       }
     },

@@ -31,12 +31,14 @@ class Homes extends Model{
             $this->errors['errors']['from_date'] = 'date is required';
         }
 
-        if (isset($values['return'])) {
-            //check if to date is exists in post
-            if (empty($values['to_date'])) {
-                $this->errors['errors']['to_date'] = 'Date is required';
-            }
-        }
+        // if (isset($values['return'])) {
+        //     //check if to date is exists in post
+        //     if (empty($values['to_date'])) {
+        //         $this->errors['errors']['to_date'] = 'Date is required';
+        //     }
+        // }
+
+
 
         //check if from no of passengers is exists in post
         if (empty($values['no_of_passengers'])) {

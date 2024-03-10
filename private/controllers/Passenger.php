@@ -14,6 +14,10 @@ class Passenger extends Controller
             $this->redirect('/home');
         }
 
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
+
         $data = array();
 
         if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic'])) {
@@ -63,6 +67,10 @@ class Passenger extends Controller
 
     function billing($id = '')
     {
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
+
         if (!Auth::reservation()) {
             $this->redirect('/home');
         }
@@ -99,8 +107,7 @@ class Passenger extends Controller
 
             $this->view('passenger.billing.summary', $data);
         } else {
-            unset($_SESSION['reservation']);
-            $this->view('home');
+            $this->redirect('home');
         }
         // $data = $passenger->getPassengers();
     }
@@ -108,6 +115,10 @@ class Passenger extends Controller
 
     function payment($id = '')
     {
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
+
         if (!Auth::reservation()) {
             $this->redirect('/home');
         }
@@ -118,6 +129,13 @@ class Passenger extends Controller
 
     function addReservation()
     {
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
+
+        if (!Auth::reservation()) {
+            $this->redirect('/home');
+        }
 
         $reaservation = new Reservations();
         try {
@@ -139,7 +157,6 @@ class Passenger extends Controller
             echo $e->getMessage();
             $this->redirect('passenger/billing');
         }
-        
     }
 
     //add passenger
@@ -169,33 +186,24 @@ class Passenger extends Controller
 
     function summary($id = '')
     {
-        $data = array();
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
 
-        // $data = $reservation->getOneReservation($_SESSION['reservation']);
+        if (!Auth::reservation()) {
+            $this->redirect('/home');
+        }
 
-        // summary not comming and selected reservation not comming in seats available layout
-
-
-    
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-
-
-        $this->view('passenger.summary', $data);
-        // if (isset($_SESSION['reservation'])) {
-        // } else {
-        //     $this->redirect('home');
-        // }
+        $this->view('passenger.summary');
     }
 
     // reservations
     function reservation($id = '')
     {
         $data = array();
-        // $reservation = new Reservations();
-        // $data = $reservation->getReservationPassenger("reservation_passenger_id", $id);
+        $reservation = new Reservations();
+        $data['reservations'] = $reservation->getReservations($id);
+
         $this->view('passenger.reservations', $data);
     }
 

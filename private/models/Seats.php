@@ -65,15 +65,108 @@ class Seats extends Model
 
     public function getReservedSeats($values = array())
     {
-        $query = 'SELECT reservation_seat FROM tbl_reservation 
-                        WHERE reservation_train_id = :train_id   
-                        AND reservation_compartment_id  = :class_id
-                        AND reservation_date = :reservation_date';
+        $query = 'WITH
+                    res AS (
+                        SELECT
+                            r.reservation_id,
+                            r.reservation_ticket_id,
+                            r.reservation_train_id,
+                            r.reservation_compartment_id,
+                            r.reservation_date,
+                            r.reservation_seat,
+                            s.station_name AS reservation_start_station,
+                            reservation_start_st.stop_no AS reservation_start_stop_no,
+                            e.station_name AS reservation_end_station,
+                            reservation_end_st.stop_no AS reservation_end_stop_no
+                        FROM
+                            tbl_reservation r
+                            JOIN tbl_train_stop_station reservation_start_st ON r.reservation_start_station = reservation_start_st.station_id
+                            JOIN tbl_train_stop_station reservation_end_st ON r.reservation_end_station = reservation_end_st.station_id
+                            JOIN tbl_station s ON reservation_start_st.station_id = s.station_id
+                            JOIN tbl_station e ON reservation_end_st.station_id = e.station_id
+                        WHERE
+                            r.reservation_compartment_id = :class_id
+                            AND r.reservation_train_id = :train_id
+                            AND r.reservation_date = :reservation_date
+                        GROUP BY
+                            r.reservation_id
+                    )
+                SELECT
+                    *
+                FROM
+                    res r
+                WHERE
+                    (
+                        (
+                            (
+                                (
+                                    SELECT
+                                        stop_no
+                                    FROM
+                                        tbl_train_stop_station
+                                    WHERE
+                                        train_id = r.reservation_train_id
+                                        AND station_id = :from_station
+                                ) <= r.reservation_start_stop_no
+                                AND r.reservation_start_stop_no < (
+                                    SELECT
+                                        stop_no
+                                    FROM
+                                        tbl_train_stop_station
+                                    WHERE
+                                        train_id = r.reservation_train_id
+                                        AND station_id = :to_station
+                                )
+                            )
+                            OR (
+                                (
+                                    SELECT
+                                        stop_no
+                                    FROM
+                                        tbl_train_stop_station
+                                    WHERE
+                                        train_id = r.reservation_train_id
+                                        AND station_id = :from_station
+                                ) < r.reservation_end_stop_no
+                                AND r.reservation_end_stop_no <= (
+                                    SELECT
+                                        stop_no
+                                    FROM
+                                        tbl_train_stop_station
+                                    WHERE
+                                        train_id = r.reservation_train_id
+                                        AND station_id = :to_station
+                                )
+                            )
+                        )
+                        OR (
+                            (
+                                SELECT
+                                    stop_no
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    train_id = r.reservation_train_id
+                                    AND station_id = :from_station
+                            ) >= r.reservation_start_stop_no
+                            AND r.reservation_end_stop_no >= (
+                                SELECT
+                                    stop_no
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    train_id = r.reservation_train_id
+                                    AND station_id = :to_station
+                            )
+                        )
+                    )';
 
         $data = $this->query($query, array(
             ':train_id' => $values['reservation_train_id'],
             ':class_id' => $values['reservation_compartment_id'],
-            ':reservation_date' => $values['reservation_date']
+            ':reservation_date' => $values['reservation_date'],
+            ':from_station' => $values['reservation_start_station'],
+            ':to_station' => $values['reservation_end_station']
         ));
 
 
