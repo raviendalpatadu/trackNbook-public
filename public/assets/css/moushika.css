@@ -90,7 +90,7 @@
 
 .mou-title {
   color: #2E3E5C;
-  font-family: Inter;
+  font-family: "DM sans";
   font-size: 35px;
   font-style: normal;
   font-weight: 900;
@@ -143,7 +143,7 @@
 .trains-available h3 {
   color: var(--lightgray-font);
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
+  font-family: "DM sans";
   font-size: 30px;
   font-style: normal;
   font-weight: 700;
@@ -152,7 +152,7 @@
 .trains-available h2 {
   color: #000;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Inter;
+  font-family: "DM sans";
   font-size: 30px;
   font-style: normal;
   font-weight: 500;
@@ -553,9 +553,8 @@ video {
 .notificationCard {
   height: -moz-fit-content;
   height: fit-content;
-  background: rgb(245, 245, 245);
+  background: rgb(255, 255, 255);
   padding: 20px 35px;
-  gap: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
   border-radius: 5px;
 }
@@ -568,8 +567,8 @@ video {
 
 .notificationHeading {
   color: black;
-  font-family: "Open Sans";
-  font-size: 38px;
+  font-family: "DM sans";
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
 }
@@ -726,6 +725,13 @@ video {
 }
 .home-container {
   padding: 0 5%;
+}
+
+.home-container h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 42px;
+  color: var(--blue);
 }
 
 .add_text {

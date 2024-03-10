@@ -3,7 +3,7 @@
 <?php
 
 echo "<pre>";
-// print_r($data);
+print_r($data);
 // print_r($_SESSION);
 echo "</pre>";
 

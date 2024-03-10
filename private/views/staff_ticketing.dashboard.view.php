@@ -12,8 +12,8 @@
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-white Primary-Gray g-50">
                                 <div class="d-flex flex-column">
-                                    <p class="mb-4 text">Refund Requests</p>
-                                    <p>23</p>
+                                    <p class="mb-4 text">Total Reservations</p>
+                                    <p>230</p>
                                 </div>
                                 <div class="d-flex  ">
                                     <h4>ho</h4>
@@ -35,7 +35,7 @@
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-white Primary-Gray g-50">
                                 <div class="d-flex flex-column">
-                                    <p class="mb-4 text">Refund Requests</p>
+                                    <p class="mb-4 text">Warrants to be Verified</p>
                                     <p>23</p>
                                 </div>
                                 <div class="d-flex  ">
@@ -46,7 +46,7 @@
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-white Primary-Gray g-50">
                                 <div class="d-flex flex-column">
-                                    <p class="mb-4 text">Refund Requests</p>
+                                    <p class="mb-4 text">Warrants Rejected</p>
                                     <p>23</p>
                                 </div>
                                 <div class="d-flex  ">

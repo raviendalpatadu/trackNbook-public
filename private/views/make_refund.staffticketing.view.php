@@ -14,14 +14,15 @@
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
-        <main>
-            <div class="container d-flex flex-column justify-content-center align-items-center">
-                <div class="notificationCard  mt-50 d-flex flex-column justify-content-center align-items-center">
-                    <div class="d-flex flex-row lign-items-center justify-content-center   ">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <p class="notificationHeading ">Enter Ticket ID And NIC</p>
-                        </div>
+        <main class="bg">
+            <div class="d-flex flex-column align-items-center p-60 ">
+
+                <div class="notificationCard  mt-50 d-flex flex-column align-items-center g-10">
+
+                    <div class="">
+                        <p class="notificationHeading ">Enter Ticket ID And NIC</p>
                     </div>
+
 
 
                     <div class="text-inputs d-flex mt-20">
