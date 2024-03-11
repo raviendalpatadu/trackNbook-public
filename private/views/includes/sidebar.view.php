@@ -320,6 +320,13 @@ if (Auth::getuser_type() == "admin") {
       <div class="brand-text">TrackNBook</div>
     </div>
     <div class="sidebar-menu">
+      <!-- <label for="menu-icon" class="menu-icon">
+        <input id="menu-icon" type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </label> -->
+
       <ul>
 
         <?php foreach ($sidebar_list as $item) { ?>

@@ -1,8 +1,9 @@
 <?php $this->view("./includes/header"); ?>
 
 <body>
+
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
+        <?php $this->view("./includes/mobile.navbar") ?>
         <main>
             <div class="container d-flex flex-column justify-content-center align-items-center">
 
@@ -41,12 +42,12 @@
                             </div>
                         </a>
                     </button>
-                    
+
                 </div>
             </div>
         </main>
         <?php $this->view('includes/footer'); ?>
-</div>
+    </div>
 </body>
 
 </html>

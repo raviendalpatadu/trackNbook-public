@@ -594,6 +594,7 @@ table {
 
   .table tr{
     margin-bottom: 15px;
+    
   }
 
   .table td{
@@ -637,7 +638,8 @@ thead tr {
 
 tbody tr {
   padding: 12px 24px;
-  border-bottom: 1px solid var(--gray-200, #eaecf0);
+  border-bottom: 2px solid var(--Selected-Blue, #eaecf0);
+  
 }
 
 thead th {
@@ -648,17 +650,24 @@ thead th {
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  line-height: 18px;
+  line-height: 5px;
   /* 150% */
 }
 
-/* 
+
 tbody td {
   display: flex;
-  align-items: center;
+  align-items: end;
   gap: 12px;
   align-self: stretch;
-} */
+}
+
+.staff_table tbody{
+  background-color: white;
+}
+.staff_table tbody td{
+  font-size: 12px;
+}
 
 .availabity {
   display: flex;

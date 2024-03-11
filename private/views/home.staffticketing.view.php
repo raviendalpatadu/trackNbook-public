@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-12 d-flex flex-column g-20 align-items-center p-50">
                         <div class="home-text">
-                            <h1>Welcome to TrackNBook</h1>
+                            <h1 class="mou-home-text">Welcome to TrackNBook</h1>
                         </div>
                         <div class="search-box-home d-flex flex-row width-fill align0items-center justify-content-center ">
                             <div class="search-box-text">

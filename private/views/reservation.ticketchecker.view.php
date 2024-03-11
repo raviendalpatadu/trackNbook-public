@@ -19,9 +19,9 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 <body>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
-        <main>
-            <div class="home-container ">
-                <div class="d-flex  mr-20 mt-20">
+        <main class="bg">
+            <div class="home-container d-flex flex-column ">
+                <div class="d-flex m-20 justify-contents-start">
                     <div class="">
 
 
@@ -63,12 +63,10 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                 <div class="row  mr-20 mt-20">
                     <div class="col-12 ">
 
-
-
                         <div class="row">
                             <div class="col-12">
 
-                                <table class="table ">
+                                <table class="table">
                                     <thead>
                                         <tr class="row p-20 align-items-center justify-content-center">
                                             <th class="col-3 ">NIC</th>

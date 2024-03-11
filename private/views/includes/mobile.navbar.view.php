@@ -1,10 +1,12 @@
 <nav class="nav-dashboard">
   <div class="brand">
-    <div class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
-        <path d="M6.39383 9L0 2.1L1.94595 0L10.2857 9L1.94595 18L0 15.9L6.39383 9Z" fill="#324054" />
-      </svg>
-    </div>
+    <!-- <label for="menu-icon" class="menu-icon">
+      <input id="menu-icon" type="checkbox" />
+      <span></span>
+      <span></span>
+      <span></span>
+    </label> -->
+
     <div class="brand-text">TrackNBook</div>
   </div>
   <div class="menu">
@@ -58,3 +60,4 @@
     </div>
   </div>
 </nav>
+

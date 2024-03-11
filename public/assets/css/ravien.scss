@@ -415,10 +415,15 @@ $colors: (
 .home-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-
   font-size: 42px;
   color: var(--White);
 }
+
+.home-text .mou-home-text{
+  color: var(--blue);
+
+}
+
 
 @media screen and (max-width: 768px) {
   .bg-home-desktop {

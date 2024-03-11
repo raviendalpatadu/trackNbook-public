@@ -103,7 +103,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                     <div class="row mt-20 bg-white">
                         <div class="col-12">
 
-                            <table class="">
+                            <table class="staff_table">
                                 <thead>
                                     <tr class="row p-20">
                                         <th class="col-3 d-flex align-items-center">
@@ -147,7 +147,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="dot">
                                                         <div class="dot4"></div>
                                                     </div>
-                                                    <div class="text blue">View</div>
+                                                    <div class="text blue" id="myButton">View</div>
                                                 </div>
                                             </a>
 
@@ -410,10 +410,28 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                 </div>
             </div>
     </div>
+    <div id="login-modal" class="popup d-flex justify-content-center ">
+        <div class="modal d-flex flex-column ">
+            <div class="top-form">
+                <div class="close-modal">
+                    &#10006;
+                </div>
+            </div>
+            <div class="login-form">
+                <h1 style="color:green;">
+                    GeekforGeeks !
+                </h1>
+            </div>
+        </div>
+    </div>
     </main>
     </div>
     <?php $this->view("./includes/load-js") ?>
 
+
 </body>
+<script>
+
+</script>
 
 </html>

@@ -20,10 +20,8 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
         <main>
             <div class="container">
-
-                <div class="row ml-20 mr-20 mt-20">
+                <div class="row ">
                     <div class="col-12">
-
                         <div class="row mt-20 mb-20 ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">

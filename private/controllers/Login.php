@@ -85,7 +85,7 @@ class Login extends Controller
                     $this->redirect('dashboard/station_master');
 
                 } elseif (strtolower($user_type) == "ticket_checker") {
-                    $this->redirect('ticketchecker/reservationList');
+                    $this->redirect('ticketchecker/option');
                 }
             } else {
                 $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
