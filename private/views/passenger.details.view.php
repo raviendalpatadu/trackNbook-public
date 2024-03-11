@@ -183,7 +183,7 @@ echo "</pre>";
                                         <div class="d-flex align-items-center g-20">
                                             <div class="d-flex .flex-row g-5">
                                                 <label class="switch">
-                                                    <input type="checkbox" id="warrentBooking">
+                                                    <input type="checkbox" id="warrentBooking" name="warrant_booking" value="on">
                                                     <span class="slider"></span>
                                                 </label>
                                             </div>

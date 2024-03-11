@@ -34,8 +34,11 @@ class Passenger extends Controller
                     $count = 0;
                     if (isset(Auth::reservation()['reservation_id']) && count(Auth::reservation()['reservation_id']) == Auth::reservation()['no_of_passengers']) {
 
+
+
                         foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
                             $reservationPassengerData = array();
+
                             $reservationPassengerData['reservation_id'] = $value;
                             $reservationPassengerData['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
                             $reservationPassengerData['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
@@ -45,8 +48,11 @@ class Passenger extends Controller
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 
+                            if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                $reservationPassengerData['reservation_type'] = "Warrant";
+                            }
                             // echo "<pre>";
-                            // // print_r($_POST);
+                            // print_r($_POST);
                             // print_r($reservationPassengerData);
                             // echo "</pre>";
                             $data = $reaservation->update($value, $reservationPassengerData, 'reservation_id');
@@ -66,6 +72,10 @@ class Passenger extends Controller
                                 $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 
+                                if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                    $reservationPassengerDataTo['reservation_type'] = "Warrant";
+                                }
+
                                 $data = $reaservation->update($value, $reservationPassengerDataTo, 'reservation_id');
                                 $count++;
                             }
@@ -73,7 +83,6 @@ class Passenger extends Controller
                     } else {
                         $data['errors'][] = "Error in reservation id doesn't match with passenger count. Please try again.";
                     }
-                    // $data = $reaservation->update();
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -180,7 +189,7 @@ class Passenger extends Controller
                     $reservationPassengerDataTo['reservation_status'] = "Reserved"; // 1 for confirmed
                     $reaservation->update($value, $reservationPassengerDataTo, 'reservation_id');
                 }
-                
+
                 $_SESSION['reservation']['to_reservation_ticket_id'] = $reservationPassengerDataTo['reservation_ticket_id'];
             }
 
