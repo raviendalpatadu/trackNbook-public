@@ -1,10 +1,10 @@
 <?php $this->view("./includes/header") ?>
 <?php
-// echo "<pre>";
-// print_r($data);
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 // // // print_r($_SESSION);
 // // // print_r($_POST);
-// echo "</pre>";
 
 if (isset($data['reservations']) && $data['reservations'] != 0) {
     $count =  count($data['reservations']);
