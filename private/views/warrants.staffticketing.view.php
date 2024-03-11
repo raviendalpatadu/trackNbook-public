@@ -112,8 +112,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                                                         echo "First Class";
                                                                                     } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
                                                                                         echo "Second Class";
-                                                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
-                                                                                        echo "Third Class";
+                                                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 3) {                                                                                        echo "Third Class";
                                                                                     }
                                                                                     ?></td>
                                         <td class="col-2 d-flex align-items-center">
