@@ -9,9 +9,9 @@
 
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
-        <main class="bg-box-gray d-flex align-items-center justify-content-center">
+        <main class=" bg d-flex align-items-center justify-content-center">
 
-            <div class="bg-white p-50">
+            <div class="staff-login-box bg-box-gray p-50">
 
                 <form action="" method="post" class="mou-staff-login-container d-flex flex-column justify-content-center g-20">
                     <div class="d-flex flex-column justify-contet-center align-items-center">
@@ -25,7 +25,7 @@
                         <!-- username -->
                         <div class="d-flex flex-column">
                             <div class="input-field d-flex width-fill text">
-                                <input type="text" class="type-here pl-10" placeholder="Enter Your Email" name="username">
+                                <input type="text" class="type-here pl-10" placeholder="Enter Your Username" name="username">
                             </div>
                             <?php if (isset($data['errors'])) : ?>
                                 <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?></div>

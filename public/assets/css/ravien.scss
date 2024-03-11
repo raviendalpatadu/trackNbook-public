@@ -369,6 +369,10 @@ $colors: (
     .mobile-width-#{key} {
       width: $val !important;
     }
+
+    .mobile-d-flex{
+      display: flex !important;
+    }
   }
 }
 

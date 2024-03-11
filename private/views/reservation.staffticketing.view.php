@@ -129,9 +129,9 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             <td class="col-2 d-flex align-items-center"><?= date("d-m-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
                                             <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
                                             <td class="col-2 d-flex align-items-center">
-                                            <td class="d-flex .flex-row g-5 mr-5"><?php echo $data['reservations'][$reservation]->compartment_class_type; ?> </td>
+                                            <td class="d-flex .flex-row g-5 mr-5"> <?php echo $data['reservations'][$reservation]->compartment_class_type; ?></td>
                         </div>
-                        </td>
+
                         <td class="col-1 d-flex align-items-center g-5">
                             <div class="badge-base bg-Selected-Blue">
 

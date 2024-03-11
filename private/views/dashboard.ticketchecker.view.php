@@ -1,7 +1,7 @@
 <?php $this->view("./includes/header"); ?>
 
 
-<body>
+<body class="mobile-d-flex mobile-min-height-80">
     <div class="flex-grow">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class=" flex-grow d-flex align-items-end justify-content-center bg-ticket-checker">
