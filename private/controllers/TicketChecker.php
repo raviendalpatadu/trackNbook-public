@@ -64,10 +64,7 @@ class TicketChecker extends Controller
         
         $resevation = new Reservations();
         $data = array();
-        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
-
-        $train = new Trains();
-        $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+        $data['reservations'] = $resevation->getReservationDataTicket($id);
 
         $this->view('summary.ticketchecker', $data);
    
