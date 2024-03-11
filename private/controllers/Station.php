@@ -15,7 +15,7 @@ class Station extends Controller
     function addStation($id = '')
     {
         $data = array();
-        $station = new Station();
+        $station = new Stations();
 
         if (isset($_POST['station_id'])) {
             // Instantiate the $station variable

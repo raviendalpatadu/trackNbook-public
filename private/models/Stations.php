@@ -36,7 +36,7 @@ class Stations extends Model
             $con = $this->connect();
             $con->beginTransaction();
 
-            $query = "INSERT INTO tbl_station (station_name) VALUES (:station_name)";
+            $query = "SELECT * INSERT INTO tbl_station VALUES (:station_name)";
             $stm = $con->prepare($query);
             $stm->execute(
                 array(

@@ -98,4 +98,5 @@ class Admin extends Controller
         $this->view('admin.inquiry');
 
     }
+    
 }
