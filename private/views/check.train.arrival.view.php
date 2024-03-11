@@ -1,4 +1,10 @@
 <?php $this->view("./includes/header"); ?>
+<?php if (isset($data['trains']) && $data['trains'] != 0) {
+    $count = count($data['trains']);
+} else {
+    $count = 0;
+}
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -30,9 +36,9 @@
                                                 <option value="0">1006 Badulla → Colombo</option>
                                                 <option value="0">1006 Badulla → Colombo</option>
                                                 <?php foreach ($data['trains'] as $key => $value): ?>
-                                                    <option value="<?= $value->train_id ?>">
-                                                        <?= $value->train_name ?>
-                                                    </option>
+                                                <option value="<?= $value->train_id ?>">
+                                                    <?= $value->train_name ?>
+                                                </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -76,7 +82,7 @@
                                             <th class="col-1"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <!--<tbody>
                                         <tr class="row">
                                             <td class="col-3">Yal Devi</td>
                                             <td class="col-3">Kankesanthurai </td>
@@ -96,204 +102,114 @@
 
                                             </td>
                                         </tr>
-                                    </tbody>
+                                    </tbody> -->
+
                                     <tbody>
-                                        <tr class="row">
-                                            <td class="col-3">Yal Devi</td>
-                                            <td class="col-3">KKS </td>
-                                            <td class="col-3">Mount-Lavinia </td>
+
+                                        <?php for ($train = 0; $train < $count; $train++): ?>
+                                        <tr class="row p-20">
+                                            <td class="col-3 d-flex align-items-center">
+                                                <?= $data['trains'][$train]->train_name ?>
+                                            </td>
+
+                                            <td class="col-3">
+                                                <?= $data['trains'][$train]->start_station ?>
+                                            </td>
+                                            <td class="col-3">
+                                                <?= $data['trains'][$train]->end_station ?>
+                                            </td>
+
+
                                             <td class="col-1">
-
-
                                                 <div class="badge-base bg-Selected-red">
                                                     <div class="dot">
                                                         <div class="dot3"></div>
                                                     </div>
-                                                    <div class="text Banner-red">Not Arrived</div>
+                                                    <div class="text Banner-red">
+                                                        <?= $data['trains'][$train]->train_status ?>
+                                                    </div>
                                                 </div>
-                            </div>
-                            </td>
-                            <td class="col-1"></td>
-                            <td class="col-1">
-                                <a href="http://localhost/trackNbook/public/StationMaster/updateArrival"
-                                    class="blue">Check</a>
+                                            </td>
 
-                            </td>
-                            </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="dot">
-                                                <div class="dot2"></div>
+                                            <td class="col-1"></td>
+                                            <td class="col-1">
+                                                <a class="blue"
+                                                    href="<?= ROOT ?>stationmaster/updateArrival/<?= $data['trains'][$train]->train_id ?>">Check</a>
+
+                                            </td>
+
+
+
+
+                                        </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+
+                                </table>
+                                <div class="pagination">
+                                    <div class="button">
+                                        <div class="button-base">
+                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            <div class="text">Previous</div>
+                                        </div>
+                                    </div>
+                                    <div class="pagination-numbers">
+                                        <div class="pagination-number-base-active">
+                                            <div class="content">
+                                                <div class="number">1</div>
                                             </div>
-                                            <div class="text dark-green">Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="dot">
-                                                <div class="dot2"></div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">2</div>
                                             </div>
-                                            <div class="text dark-green">Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-Selected-red">
-                                            <div class="dot">
-                                                <div class="dot3"></div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">3</div>
                                             </div>
-                                            <div class="text Banner-red">Not Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="dot">
-                                                <div class="dot2"></div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">...</div>
                                             </div>
-                                            <div class="text dark-green">Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="dot">
-                                                <div class="dot2"></div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">8</div>
                                             </div>
-                                            <div class="text dark-green">Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody>
-                                <tr class="row">
-                                    <td class="col-3">Yal Devi</td>
-                                    <td class="col-3">KKS </td>
-                                    <td class="col-3">Mount-Lavinia </td>
-                                    <td class="col-1">
-                                        <div class="badge-base bg-Selected-red">
-                                            <div class="dot">
-                                                <div class="dot3"></div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">9</div>
                                             </div>
-                                            <div class="text Banner-red">Not Arrived</div>
                                         </div>
-                                    </td>
-                                    <td class="col-1"></td>
-                                    <td class="col-1"><a href="/" class="blue">Check</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            </table>
-                            <div class="pagination">
-                                <div class="button">
-                                    <div class="button-base">
-                                        <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
-                                                stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="text">Previous</div>
-                                    </div>
-                                </div>
-                                <div class="pagination-numbers">
-                                    <div class="pagination-number-base-active">
-                                        <div class="content">
-                                            <div class="number">1</div>
+                                        <div class="pagination-number-base">
+                                            <div class="content">
+                                                <div class="number2">10</div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">2</div>
+                                    <div class="button">
+                                        <div class="button-base">
+                                            <div class="text">Next</div>
+                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
+                                                    stroke="#344054" stroke-width="1.67" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
                                         </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">3</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">...</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">8</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">9</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">10</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="button">
-                                    <div class="button-base">
-                                        <div class="text">Next</div>
-                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
-                                                stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </svg>
                                     </div>
                                 </div>
                             </div>
-                        </div>
         </main>
     </div>
     <?php $this->view("./includes/load-js") ?>

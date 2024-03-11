@@ -20,54 +20,16 @@ class Login extends Controller
                 Auth::authenticate($data[0]);
 
                 $user_id = $data[0]->user_id;
-                $user_type = Auth::getUser_Type($user_id);
-                // redirect to dashboard passenger
-                if (strtolower($user_type) == "passenger") {
-                    $this->redirect('home');
-                }
-                
-               
-                
-            }
-            else{
-                $errors['username'] = (array_key_exists('invalid_uname',$data['error'])) ? $data['error']['invalid_uname'] : '';
-                $errors['password'] = (array_key_exists('invalid_password',$data['error'])) ? $data['error']['invalid_password'] : '';
-            }
-        }
-
-
-        //$errors['email'] = 'invalid Username or Password';
-        //}
-
-        $this->view(
-            'login',
-            array(
-                'errors' => $errors,
-            )
-        );
-    }
-
-    function staff($id = '')
-    {
-        $errors = array();
-
-
-        $user = new Users();
-        if (isset($_POST['username']) && isset($_POST['password'])) {
-            $data = $user->login();
-
-            if (!array_key_exists('error', $data)) {
-
-                Auth::authenticate($data[0]);
-
-                $user_id = $data[0]->user_id;
 
                 $user_type = Auth::getUser_Type($user_id);
                 // redirect to dashboard admin
                 if (strtolower($user_type) == "admin") {
                     $this->redirect('dashboard/admin');
                 }
-               
+                // redirect to dashboard passenger
+                elseif (strtolower($user_type) == "passenger") {
+                    $this->redirect('home');
+                }
                 //rederect to dashboard staff general
                 elseif (strtolower($user_type) == "staff_general") {
                     $this->redirect('dashboard/staff_general');
@@ -83,10 +45,10 @@ class Login extends Controller
                 //rederect to dashboard station master
                 elseif (strtolower($user_type) == "station_master") {
                     $this->redirect('dashboard/station_master');
-
                 } elseif (strtolower($user_type) == "ticket_checker") {
-                    $this->redirect('ticketchecker/reservationList');
+                    $this->redirect('dashboard/ticket_checker');
                 }
+
             } else {
                 $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
                 $errors['password'] = (array_key_exists('invalid_password', $data['error'])) ? $data['error']['invalid_password'] : '';
@@ -98,11 +60,10 @@ class Login extends Controller
         //}
 
         $this->view(
-            'staff.Login',
+            'login',
             array(
                 'errors' => $errors,
             )
         );
-
     }
 }

@@ -79,10 +79,11 @@
                         <div class="row d-flex g-8 justify-content-center">
                             <div class="col-4">
                                 <button class="button mt-20 " id="reject">
-
-                                    <div class="button-base bg-Selected-red">
-                                        <div class="text Banner-red">Not Arrived</div>
-                                    </div>
+                                    <a href="<?= ROOT ?>stationMaster/updateTrainStatus/<?= $data['train']->train_id ?>"
+                                        onclick="alert('are sure you want to change the train status?')">
+                                        <div class="button-base bg-Selected-red">
+                                            <div class="text Banner-red">Not Arrived</div>
+                                        </div>
                                     </a>
                                 </button>
                             </div>

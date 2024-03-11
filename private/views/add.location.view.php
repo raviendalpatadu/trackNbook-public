@@ -8,23 +8,23 @@
 
 <body>
 
-    <?php $this->view("./includes/sidebar") ?>
+
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main style="background-color:#EFF8FF;">
             <div class="container d-flex flex-column justify-content-center align-self-center">
                 <div class="row">
-                    <div class="col-4">
-                        <div class="warrant-container mt-30">
-                            <div class="ticket-details">
+                    <div class="col-3">
+                        <div class="add-location-container mt-30">
+                            <div class="update-location">
 
                             </div>
                         </div>
                     </div>
 
                     <div class="col-5">
-                        <div class="warrant-container-box mt-30">
-                            <div class="ticket-details">
+                        <div class="add-location-container-box mt-30">
+                            <div class="update-location">
                                 <div class="row mb-20 ">
                                     <div class="col-12 d-flex align-items-center flex-column line">
                                         <h1>Update Location</h1>
@@ -77,7 +77,7 @@
                                             <div class="input-text-label text lightgray-font">Current Station</div>
 
                                             <div class="width-fill">
-                                                <select class="dropdown2" name="reservation_train_id"
+                                                <select class="dropdown2-add-location" name="reservation_train_id"
                                                     placeholder="Please choose">
                                                     <!-- print data of $data -->
                                                     <option value="0">Jaffna</option>
@@ -104,7 +104,7 @@
 
                             </div>
                         </div>
-                        <div class="row d-flex g-8 justify-content-center">
+                        <div class="row d-flex add-location-g-8 justify-content-center">
                             <div class="col-4">
                                 <button class="button mt-20 "><a
                                         href="http://localhost/trackNbook/public/traindriver/updatelocation">
@@ -141,19 +141,6 @@
         <?php $this->view('includes/footer'); ?>
     </div>
 </body>
-<style>
-    .dropdown2 {
-        cursor: pointer;
-        padding: 8px;
-        border-radius: 6px;
-        display: block;
-        position: relative;
-        color: var(--Secondary-Gray);
-        border: 1px solid #ccc;
-        background: var(--White);
-        transition: all 0.3s ease;
-        width: 421px;
-    }
-</style>
+
 
 </html>

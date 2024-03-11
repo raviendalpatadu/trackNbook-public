@@ -12,8 +12,7 @@
                     <form class="update-schedule">
                         <div class="top-head-updatetrain">Update Schedule</div>
                         <div class="head-box">
-                            Train Details
-                        </div>
+                            Train Details </div>
                         <div class="form-group">
                             <label for="tamilNumberName">Train Number and Name</label>
                             <select class="text-field" id="tamilNumberName">
@@ -154,7 +153,9 @@
                                             </div>
                                         </div>
                                         <div class="activation-field">
-                                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button class="button-white"> Back</button></a>
+                                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule">
+
+                                                <button class="button-white"> Back</button></a>
                                             <button class="button-blue"> Update</button>
                                         </div>
                                 </form>

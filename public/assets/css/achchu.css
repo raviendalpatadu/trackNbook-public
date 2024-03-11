@@ -3,6 +3,1124 @@
   --collection-1-background-fade: rgba(71, 178, 255, 0.15);
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
+
+.button-base-update-location {
+  background: var(--white, #ffffff);
+  border: 1px solid var(--gray-300, #d0d5dd);
+  border-radius: 8px;
+  padding: 8px 14px 8px 14px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: 67px;
+  box-shadow: var(
+    --shadow-xs-box-shadow,
+    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
+  );
+  overflow: hidden;
+  margin-left: 131px;
+}
+.bg-ul-Selected-Blue {
+  background-color: #cae1ff;
+}
+thead tr {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--gray-200, #eaecf0);
+  background: var(--gray-50, #f9fafb);
+}
+
+.dropdown-update-location > span {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+  color: var(--Secondary-Gray);
+  border: 1px solid #ccc;
+  background: var(--White);
+  transition: all 0.3s ease;
+  width: 222px;
+}
+
+.badge-base-update-location {
+  background: var(--gray-100, #f2f4f7);
+  border-radius: 16px;
+  padding: 2px 8px 2px 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 80px;
+}
+/* Station Master Dashboard */
+
+.card-dashboard-sm {
+  margin: 5px 5px;
+  padding: 10px 20px;
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Poppins-Medium", Helvetica;
+  border-radius: 10px;
+  height: 117px;
+  width: 230px;
+}
+
+/* Staff Dashboard */
+
+.if-widgets .number {
+  position: relative;
+  width: fit-content;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: var(--textdark);
+  font-size: 31.1px;
+  letter-spacing: -0.49px;
+  line-height: 17px;
+}
+
+.if-widgets .div {
+  display: flex;
+  flex-direction: column;
+  width: 124.44px;
+  align-items: flex-start;
+  gap: 15.56px;
+  position: relative;
+  flex: 0 0 auto;
+  height: 92px;
+}
+.card-dashboard-sg {
+  margin: 5px 5px;
+  padding: 10px 20px;
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Poppins-Medium", Helvetica;
+  border-radius: 10px;
+  height: 117px;
+  width: 230px;
+}
+
+/* Train Driver Dashboard */
+/* Dashboard admin */
+
+.ach-widgets {
+  display: flex;
+  width: auto;
+  align-items: flex-start;
+  gap: 19.44px;
+  position: relative;
+}
+
+.ach-widgets .ach-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7.78px;
+  padding: 23.33px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+  background-color: var(--bgwhite-100);
+  border-radius: 23.33px;
+  box-shadow: 0px 1.94px 13.61px #0063e70f;
+}
+
+.ach-widgets .div {
+  display: flex;
+  flex-direction: column;
+  width: 124.44px;
+  align-items: flex-start;
+  gap: 15.56px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ach-widgets .ach-frame-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7.78px;
+  position: relative;
+  flex: 0 0 auto;
+  margin-right: -17.56px;
+}
+
+.ach-widgets .impressions {
+  position: relative;
+  width: fit-content;
+  margin-top: -0.97px;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: var(--textgray);
+  font-size: 11.7px;
+  letter-spacing: 0;
+  line-height: 19.4px;
+  white-space: nowrap;
+}
+
+.ach-widgets .number {
+  position: relative;
+  width: fit-content;
+  font-family: "Poppins-Medium", Helvetica;
+  font-weight: 500;
+  color: var(--textdark);
+  font-size: 31.1px;
+  letter-spacing: -0.49px;
+  line-height: normal;
+}
+
+.ach-widgets .if-frame-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15.56px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.ach-widgets .if-frame-4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7.78px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.ach-txt-wrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: 19.4px;
+  white-space: nowrap;
+}
+
+.ach-txt-wrapper2 {
+  position: relative;
+  top: 0;
+  left: 0;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 400;
+  color: #000000;
+  font-size: 25px;
+  letter-spacing: 0;
+  line-height: 19.4px;
+  white-space: nowrap;
+}
+
+.ach-box {
+  width: 1002px;
+  height: 438px;
+}
+
+.ach-box .group {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 1002px;
+  height: 438px;
+}
+
+.ach-box .group-wrapper {
+  height: 438px;
+}
+
+.ach-card {
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  margin: 50px 20px 20px 20px;
+  width: auto;
+  /* 1/3 minus the margins (20+20) */
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+
+  text-align: center;
+  color: #1f2124;
+  float: left;
+
+  @media (max-width: 768px) {
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+
+  .title {
+    font-size: 25px;
+    font-weight: bolder;
+  }
+
+  .ach-icon {
+    margin: 5px 0;
+
+    svg {
+      width: 10px;
+      height: 100px;
+
+      path {
+        fill: #0085e4;
+      }
+    }
+  }
+  .ach-icon1 {
+    margin: 50px 0;
+
+    svg {
+      width: 100px;
+      height: 100px;
+
+      path {
+        fill: #f5013e;
+      }
+    }
+  }
+
+  .features {
+    ul {
+      padding: 0;
+      margin: 20px 0 50px 0;
+      list-style-type: none;
+
+      li {
+        margin: 10px 0;
+        font-size: 14px;
+
+        span {
+          border-bottom: 2px dotted #0085e4;
+        }
+      }
+    }
+  }
+
+  .ach-btn {
+    display: block;
+    background: #0085e4;
+    color: white;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.9);
+    transition: all 200ms ease-in-out;
+    text-decoration: none;
+    width: fit-content;
+    margin-left: 31px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .btn1 {
+    display: block;
+    background: #f5013e;
+    color: white;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.9);
+    transition: all 200ms ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+/* ............................................................. */
+
+/* Train Driver add  location*/
+
+.add-location-container-box {
+  background-color: map-get($mou-colors, "box-gray");
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-left: -172px;
+}
+
+.update-location {
+  padding: 27px 50px;
+}
+/* Terms and Conditions */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.accordion-terms {
+  color: #000;
+  font-size: 14px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Background box of each para */
+
+.h2-terms {
+  font-size: 18px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding: 0;
+}
+
+li {
+  margin: 5px 0;
+}
+/* ................................................. */
+
+/* Wait list */
+
+.activation-field-waiting-list {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(1232% - 10px);
+  gap: 20px;
+}
+
+.button-blue-waiting-list {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background: #2185d5;
+  cursor: pointer;
+  color: white;
+  width: 6%;
+  margin-right: 50px;
+  /* Set the text color to white */
+  /* You can add additional styling here, such as padding, border, etc. */
+}
+
+/* ...................................................................................*/
+/* Add location */
+
+.justify-content-add-location {
+  justify-content: flex-start;
+  width: 339px;
+}
+
+.add-location-g-8 {
+  gap: 17px;
+  margin-right: 148px;
+}
+.dropdown2-add-location {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+  color: var(--Secondary-Gray);
+  border: 1px solid #ccc;
+  background: var(--White);
+  transition: all 0.3s ease;
+  width: auto;
+}
+
+/* Update train Location */
+
+.line-update-location {
+  width: 269px;
+  border-bottom: 2px solid #000;
+}
+
+.text-field-box-top-update-location {
+  display: flex;
+  width: 25%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.text-field-box-update-location {
+  display: flex;
+  width: 95%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.form-group-update-location {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.head-box-update-location {
+  position: relative;
+  display: flex;
+  width: 83%;
+  height: 36px;
+  padding: 1px 42px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: rgba(102, 102, 102, 0.94);
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+.activation-field-update-location {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(923.5% - 10px);
+  gap: 20px;
+}
+
+.button-blue-update-location {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background: #2185d5;
+  cursor: pointer;
+  color: white;
+  width: 13%;
+  /* Set the text color to white */
+  /* You can add additional styling here, such as padding, border, etc. */
+}
+
+.top-head-update-location {
+  display: inline-flex;
+  padding: 21px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(33, 133, 213, 0.77);
+  position: absolute;
+  top: 0;
+  margin-top: -23px;
+  margin-left: 222px;
+  color: #fff;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 19.444px;
+
+  /* 121.528% */
+}
+
+.fields-update-location {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
+  gap: 20px;
+}
+
+.text-update-location {
+  width: 175px;
+  color: var(--sementics-color-fg-default, #18181b);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 115%;
+  text-align: justify;
+}
+/* ....................................................................... */
+
+/* Update train delay */
+.dropdown2-update-delay {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+  color: var(--Secondary-Gray);
+  border: 1px solid #ccc;
+  background: var(--White);
+  transition: all 0.3s ease;
+  width: 100%; /* Adjusted for mobile responsiveness */
+  max-width: 100%; /* Added to ensure it doesn't exceed the container width */
+}
+
+.input-field3-update-delay {
+  background: var(--w-background, #ffffff);
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 1px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  width: 100%; /* Adjusted for mobile responsiveness */
+  max-width: 100%; /* Added to ensure it doesn't exceed the container width */
+  height: 100px;
+}
+
+.input-field4-update-delay {
+  background: var(--w-background, #ffffff);
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 1px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  width: 421px;
+}
+
+.delay-details-update-delay {
+  padding: 15px; /* Adjusted padding for mobile */
+  height: auto; /* Changed height to auto for dynamic sizing */
+}
+
+.type-here-update-delay {
+  font-size: 12px; /* Adjusted font size for mobile */
+  line-height: 20px; /* Adjusted line height for mobile */
+}
+
+/* Add train - New */
+.activation-field-add-train {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(410% - 10px);
+  gap: 0px;
+}
+
+.button-blue-add-train {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background: #2185d5;
+  cursor: pointer;
+  color: white;
+  width: 15%;
+  margin-left: 50px;
+
+  margin-top: 20px;
+  /* Set the text color to white */
+  /* You can add additional styling here, such as padding, border, etc. */
+}
+
+.button-white-add-train {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid #2185d5;
+  background: var(--W-Background, #fff);
+  margin-right: 311px;
+  width: 18%;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.top-head-add-train {
+  display: inline-flex;
+  padding: 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(33, 133, 213, 0.77);
+  position: absolute;
+  top: 0;
+  margin-top: 128px;
+  margin-left: 179px;
+  color: #fff;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 5.444px;
+  /* 121.528% */
+}
+
+.head-box-add-train {
+  position: relative;
+  display: flex;
+  width: 83%;
+  height: 36px;
+  padding: 1px 42px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: rgba(102, 102, 102, 0.94);
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+.add-train-new {
+  margin-top: 20%;
+  display: flex;
+  width: 500px;
+  height: auto;
+  padding: 50px;
+  padding-bottom: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group-add-train {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+label {
+  color: #666;
+  font-family: Noto Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  margin-bottom: 10px;
+
+  /* 112.5% */
+}
+
+.text-field-add-train {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.text-field-box-add-train {
+  display: flex;
+  width: 93%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.box-3-add-train {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 18px;
+}
+
+.box-4-add-train {
+  display: flex;
+  gap: 59px;
+}
+
+.box-add-train {
+  width: calc(25% - 0px);
+}
+
+.inputs1-add-train {
+  width: 114%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.inputs2-add-train {
+  width: 137%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.input1-add-train {
+  width: 90%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.input2-add-train {
+  width: 372%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.lab-small-add-train {
+  color: #666;
+  font-family: Noto Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  margin-top: 10px;
+  /* 138.462% */
+}
+
+/* ................................................ */
+
+/* Manage Schedule */
+.trains-available-manage-schedule {
+  padding: 12px 24px;
+}
+/* .................................................*/
+
+/* Contact*/
+
+.activation-field-contact {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(156% - 10px);
+  gap: 20px;
+}
+
+.button-white-contact {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid #2185d5;
+  background: var(--W-Background, #fff);
+  margin-right: 268px;
+  width: 9%;
+  cursor: pointer;
+}
+
+.contact {
+  margin-top: 4%;
+  display: flex;
+  width: 500px;
+  height: 700px;
+  padding: 51px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group-contact {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+label {
+  color: #666;
+  font-family: Noto Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  /* 112.5% */
+}
+
+.text-field-contact {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.text-field-box-contact {
+  display: flex;
+  width: 93%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.text-field-box-message-contact {
+  display: flex;
+  width: 93%;
+  height: 160px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+/* ............................................................ */
+
+/* Add schedule*/
+
+.activation-field-adsc {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(410% - 10px);
+  gap: 0px;
+}
+
+.button-blue-adsc {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  background: #2185d5;
+  cursor: pointer;
+  color: white;
+  width: 15%;
+  margin-left: 50px;
+
+  margin-top: 20px;
+  /* Set the text color to white */
+  /* You can add additional styling here, such as padding, border, etc. */
+}
+
+.button-white-adsc {
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid #2185d5;
+  background: var(--W-Background, #fff);
+  margin-right: 311px;
+  width: 18%;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.top-head-adsc {
+  display: inline-flex;
+  padding: 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(33, 133, 213, 0.77);
+  position: absolute;
+  top: 0;
+  margin-top: 128px;
+  margin-left: 179px;
+  color: #fff;
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 5.444px;
+  /* 121.528% */
+}
+
+.head-box-adsc {
+  position: relative;
+  display: flex;
+  width: 83%;
+  height: 36px;
+  padding: 1px 42px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: rgba(102, 102, 102, 0.94);
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+}
+
+.add-schedule {
+  margin-top: 20%;
+  display: flex;
+  width: 500px;
+  height: auto;
+  padding: 50px;
+  padding-bottom: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.form-group-adsc {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+label {
+  color: #666;
+  font-family: Noto Sans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+  margin-bottom: 18px;
+  width: 100%;
+
+  /* 112.5% */
+}
+
+.text-field-adsc {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.text-field-box-adsc {
+  display: flex;
+  width: 93%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.box-3-adsc {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 18px;
+}
+
+.box-adsc {
+  width: calc(25% - 0px);
+}
+
+.inputs-adsc {
+  width: 90%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.input1-adsc {
+  width: 90%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.input2-adsc {
+  width: 232%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+
+.lab-small-adsc {
+  color: #666;
+  font-family: Noto Sans;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  /* 138.462% */
+}
+
+/* ......................................  */
+
 .frame1 {
   width: 682px;
   height: 333px;
