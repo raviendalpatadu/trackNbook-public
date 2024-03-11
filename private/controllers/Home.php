@@ -16,7 +16,15 @@ class Home extends Controller
             if (Auth::reservation()['reservation_status'] == "Pending") {
                 $reservation = new Reservations();
                 try {
-                    $reservation->callProcedure('expire_reservation', Auth::reservation()['reservation_id']);
+                    foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
+                        $reservation->callProcedure('expire_reservation', array($value));
+                    }
+
+                    if (Auth::reservation()['return'] == 'on') {
+                        foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+                            $reservation->callProcedure('expire_reservation', array($value));
+                        }
+                    }
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }
@@ -45,6 +53,7 @@ class Home extends Controller
                 $data['from_station'] = $station->getOneStation('station_id', $_POST['from_station']);
                 $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
                 $data['no_of_passengers'] = $_POST['no_of_passengers'];
+                $data['return'] = (isset($_POST['return'])) ? $_POST['return'] : 0;
 
                 if (isset($_POST['to_date'])) {
                     $data['to_date'] = $_POST['to_date'];

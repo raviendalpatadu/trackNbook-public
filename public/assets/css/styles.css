@@ -988,7 +988,7 @@ tbody td {
   color: var(--White) !important;
 }
 
-#trainsAvailable .train-available-btn {
+.train-available-btn {
   padding: 12px;
   font-size: 12px;
   border: none;
@@ -996,12 +996,12 @@ tbody td {
   color: var(--Primary-Gray);
 }
 
-#trainsAvailable .train-available-btn:hover {
+.train-available-btn:hover {
   font-weight: 600;
   cursor: pointer;
 }
 
-#trainsAvailable .train-available-btn.active {
+.train-available-btn.active {
   font-weight: 600;
 }
 

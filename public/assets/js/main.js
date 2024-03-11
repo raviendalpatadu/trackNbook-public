@@ -1,17 +1,17 @@
 // Select seats using jQuery
-var seats = $('[id^="seatNo-"]:not(.reserved)');
+var fromSeats = $('[id^="fromSeatNo-"]:not(.reserved)');
 //   var seatsOption = $('[id^="seatNoOption-"]');
 
 // Function to handle the click event
-function handleEvent() {
+function handleEventFrom() {
   //add seletced attribute to the selected seat option
   var seatOption = $(
-    "#seatNoOption-" + parseInt($(this).attr("id").split("-")[1])
+    "#fromSeatNoOption-" + parseInt($(this).attr("id").split("-")[1])
   );
 
   //get the count of elements with class selected
   var selectedSeatCount = $(
-    ".comparment  .selected , .comparment .selected-complete"
+    "#fromSeatMap").find(".comparment  .selected , #fromSeatMap .comparment .selected-complete"
   ).length;
 
   // string to int conversion
@@ -33,21 +33,21 @@ function handleEvent() {
   }
 
   if (noOfPassengers == selectedSeatCount) {
-    $(".comparment .selected").addClass("selected-complete");
+    $("#fromSeatMap .comparment .selected").addClass("selected-complete");
   }
 
   if (selectedSeatCount < noOfPassengers) {
-    if ($(".comparment .selected").hasClass("selected-complete")) {
-      $(".comparment .selected").removeClass("selected-complete");
+    if ($("#fromSeatMap .comparment .selected").hasClass("selected-complete")) {
+      $("#fromSeatMap .comparment .selected").removeClass("selected-complete");
       seatOption.removeAttr("selected");
     }
   }
 
   if (selectedSeatCount > noOfPassengers) {
     seatOption.removeAttr("selected");
-    $(".comparment .selected").removeClass("selected-complete");
-    $(".comparment .selected").removeClass("selected");
-    $("option[id*=seatNoOption-]").each(function (params) {
+    $("#fromSeatMap .comparment .selected").removeClass("selected-complete");
+    $("#fromSeatMap .comparment .selected").removeClass("selected");
+    $("option[id*=fromSeatNoOption-]").each(function (params) {
       $(this).removeAttr("selected");
     });
     selectedSeatCount = 0;
@@ -59,15 +59,87 @@ function handleEvent() {
     seatOption.attr("selected", "selected");
     selectedSeatCount++;
     if (noOfPassengers == selectedSeatCount) {
-      $(".comparment .selected").addClass("selected-complete");
+      $("#fromSeatMap .comparment .selected").addClass("selected-complete");
     }
   }
 
-  $("#seatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
+  $("#fromSeatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
 }
 
 // Add click event to seats
-seats.click(handleEvent);
+fromSeats.click(handleEventFrom);
+
+// Select seats using jQuery
+var toSeats = $('[id^="toSeatNo-"]:not(.reserved)');
+
+// Function to handle the click event
+function handleEventTo() {
+  //add seletced attribute to the selected seat option
+  var seatOption = $(
+    "#toSeatNoOption-" + parseInt($(this).attr("id").split("-")[1])
+  );
+
+  //get the count of elements with class selected
+  var selectedSeatCount = $("#toSeatMap").find(
+    ".comparment  .selected , #toSeatMap .comparment .selected-complete"
+  ).length;
+
+  // string to int conversion
+  // get no of passengers from PHP session variable
+  var noOfPassengers = parseInt($("#noOfPassengers").val());
+
+  if ($(this).hasClass("selected")) {
+    $(this).removeClass("selected");
+    if ($(this).hasClass("selected-complete")) {
+      $(this).removeClass("selected-complete");
+    }
+    --selectedSeatCount;
+    seatOption.removeAttr("selected");
+  } else {
+    $(this).addClass("selected");
+    ++selectedSeatCount;
+
+    seatOption.attr("selected", "selected");
+  }
+
+  if (noOfPassengers == selectedSeatCount) {
+    $("#toSeatMap .comparment .selected").addClass("selected-complete");
+  }
+
+  if (selectedSeatCount < noOfPassengers) {
+    if ($("#toSeatMap .comparment .selected").hasClass("selected-complete")) {
+      $("#toSeatMap .comparment .selected").removeClass("selected-complete");
+      seatOption.removeAttr("selected");
+    }
+  }
+
+  if (selectedSeatCount > noOfPassengers) {
+    seatOption.removeAttr("selected");
+    $("#toSeatMap .comparment .selected").removeClass("selected-complete");
+    $("#toSeatMap .comparment .selected").removeClass("selected");
+    $("option[id*=toSeatNoOption-]").each(function (params) {
+      $(this).removeAttr("selected");
+    });
+    selectedSeatCount = 0;
+
+    console.log("selectd " + selectedSeatCount);
+    console.log("noOfPas " + noOfPassengers);
+
+    $(this).addClass("selected");
+    seatOption.attr("selected", "selected");
+    selectedSeatCount++;
+    if (noOfPassengers == selectedSeatCount) {
+      $("#toSeatMap .comparment .selected").addClass("selected-complete");
+    }
+  }
+
+  $("#toSeatCountSelected span").text(
+    selectedSeatCount + "/" + noOfPassengers
+  );
+}
+
+// Add click event to seats
+toSeats.click(handleEventTo);
 
 // Select checkbox and box using jQuery
 var checkbox = $("#return");

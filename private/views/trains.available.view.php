@@ -59,15 +59,16 @@ echo "</pre>";
                             </div>
                         </div>
                     </div>
-                    <form action="" method="post">
-                        <div class="row mb-20">
-                            <div class="col-6">
-                                <h1><?php echo (isset($data['trains_available']['from_trains'][0])) ? ucfirst($data['from_station']->station_name . "->") : "" ?> <?= (isset($data['trains_available']['from_trains'][0])) ? ucfirst($data['to_station']->station_name) : "No Trains" ?></h1>
-                                <p class="fs-12 pt-5 pb-5 Secondary-Gray">Date - <?= $data['from_date'] ?></p>
-                                <p>Select a train to proceed</p>
-                            </div>
 
-                            <div class="col-6">
+                    <div class="row mb-20">
+                        <div class="col-6">
+                            <h1><?php echo (isset($data['trains_available']['from_trains'][0])) ? ucfirst($data['from_station']->station_name . "->") : "" ?> <?= (isset($data['trains_available']['from_trains'][0])) ? ucfirst($data['to_station']->station_name) : "No Trains" ?></h1>
+                            <p class="fs-12 pt-5 pb-5 Secondary-Gray">Date - <?= $data['from_date'] ?></p>
+                            <p>Select a train to proceed</p>
+                        </div>
+
+                        <div class="col-6">
+                            <form action="" method="post" id="modifyForm">
                                 <div class=" d-flex flex-column g-20">
                                     <div class="d-flex g-20">
                                         <div class="text-inputs">
@@ -128,9 +129,9 @@ echo "</pre>";
                                                 <div class="d-flex align-items-center g-20">
                                                     <div class="d-flex .flex-row g-5">
                                                         <label class="switch">
-                                                            <input type="checkbox" name="return" id="return" <?php if (Auth::getTo_date() != null) {
-                                                                                                                    echo "checked";
-                                                                                                                } ?>>
+                                                            <input type="checkbox" name="return" id="return" value="on" <?php if (Auth::getTo_date() != null) {
+                                                                                                                            echo "checked";
+                                                                                                                        } ?>>
                                                             <span class="slider"></span>
                                                         </label>
                                                     </div>
@@ -154,26 +155,30 @@ echo "</pre>";
                                         </div>
                                     </div>
 
-                                    <!-- <div class="d-flex align-items-center justify-content-center flex-fill">
+                                    <div class="d-flex align-items-center justify-content-center flex-fill">
                                         <div class="button-base">
-                                            <button name="submit" id="search" value="">Search</button>
+                                            <input type="submit" name="submit" value="Search" class="button">
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                        <div class="row mb-20">
-                            <div class="col-12">
-                                <div class="trains-available">
-                                    <h2>Trains available</h2>
-                                    <div class="badge">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="text dark-green"><?= count($data['trains_available']['from_trains']) ?></div>
-                                        </div>
+                    </div>
+                    <div class="row mb-20">
+                        <div class="col-12">
+                            <div class="trains-available">
+                                <h2>Trains available</h2>
+                                <div class="badge">
+                                    <div class="badge-base bg-light-green">
+                                        <div class="text dark-green"><?= count($data['trains_available']['from_trains']) ?></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+
+                    <form action="" method="post" id="trainForm">
                         <div id="trainsAvailable">
                             <div id="trainButtons" class="d-flex g-3">
                                 <button id="fromTrainBtn" class="train-available-btn active">From Train</button>
@@ -456,13 +461,22 @@ echo "</pre>";
 
                         <div class="col-12 d-flex justify-content-end g-10">
                             <div class="button-base">
-                                <input type="submit" name="proceed" id="proceed" value="Proceed">
+                                <input type="submit" name="submit" value="Proceed" id="proceed">
                             </div>
 
                             <div class="button-base">
                                 <a href="<?= ROOT ?>home">Back</a>
                             </div>
 
+                        </div>
+
+                        <div class="diplay-none">
+                            <input type="hidden" name="from_date" value="<?= Auth::getFrom_date() ?>">
+                            <input type="hidden" name="to_date" value="<?= Auth::getTo_date() ?>">
+                            <input type="hidden" name="no_of_passengers" value="<?= Auth::getNo_of_passengers() ?>">
+                            <input type="hidden" name="return" value="<?= Auth::getReturn() ?>">
+                            <input type="hidden" name="from_station" value="<?= Auth::getFrom_station()->station_id ?>">
+                            <input type="hidden" name="to_station" value="<?= Auth::getTo_station()->station_id ?>">
                         </div>
                     </form>
                 </div>
@@ -541,26 +555,31 @@ echo "</pre>";
 
 
     // when form is submitted
-    // $('form').submit(function(e) {
+    $('form#modifyForm').submit(function(e) {
 
-    //     e.preventDefault();
-
-    //     var formData = $(this).serialize();
-    //     // console.log(formData);
-    //     getErrors('<?= ROOT ?>home/validate', formData);
-    // });
-
-    // get errors when proceed button is clicked
-    $('#proceed').click(function(e) {
         e.preventDefault();
 
-        var formData = $('form').serialize();
+        var formData = $(this).serialize();
+        // console.log(formData);
+        getErrors('<?= ROOT ?>home/validate', formData, function(res) {
+            if (res == true) {
+                console.log(res);
+                $('form#modifyForm').unbind().submit();
+            }
+
+        });
+    });
+
+
+    $('form#trainForm').submit(function(e) {
+        e.preventDefault();
+
+        var formData = $(this).serialize();
         // console.log(formData);
         getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
             if (res == true) {
-                $('form').submit();
+                $('form#trainForm').unbind().submit();
             }
-
         });
     });
 </script>

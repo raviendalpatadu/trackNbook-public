@@ -59,13 +59,16 @@ class Auth
     // handle payment
     public static function payment($data)
     {
+
+        $amount = $data['from_fare']['fare_price'] * $data['no_of_passengers'] + (Auth::reservation()['return'] == 'on' ? $data['to_fare']['fare_price'] * $data['no_of_passengers'] : 0);
+        $order_id = $data['reservation_id']['from'][0] . (Auth::reservation()['return'] == 'on' ? "={$data['reservation_id']['from'][0]}" : "");
         $payment['merchant_id'] = "1225507";
         $payment['return_url'] = "passenger/summary";
         $payment['cancel_url'] = "passenger/billing";
         $payment['notify_url'] = "passenger/summary";
-        $payment['order_id'] = $data['reservation_id'][0];
+        $payment['order_id'] = $order_id;
         $payment['items'] = $data['reservation_id'];
-        $payment['amount'] = number_format($data['fare']['fare_price'], 2, '.', '');
+        $payment['amount'] = number_format($amount, 2, '.', '');
         $payment['currency'] = "LKR";
         $payment['first_name'] = $data['passenger_data']['reservation_passenger_first_name'][0];
         $payment['last_name'] = $data['passenger_data']['reservation_passenger_last_name'][0];

@@ -26,7 +26,7 @@ class Database
                 if ($check) {
                     // if a insert query is been executed return the id of the inserted row
                     if (preg_match("/^INSERT/i", $query)) {
-                        
+
                         return $con->lastInsertId();
                     }
 

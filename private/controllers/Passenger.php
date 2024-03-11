@@ -34,7 +34,7 @@ class Passenger extends Controller
                     $count = 0;
                     if (isset(Auth::reservation()['reservation_id']) && count(Auth::reservation()['reservation_id']) == Auth::reservation()['no_of_passengers']) {
 
-                        foreach (Auth::reservation()['reservation_id'] as $key => $value) {
+                        foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
                             $reservationPassengerData = array();
                             $reservationPassengerData['reservation_id'] = $value;
                             $reservationPassengerData['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
@@ -45,15 +45,37 @@ class Passenger extends Controller
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 
+                            // echo "<pre>";
+                            // // print_r($_POST);
+                            // print_r($reservationPassengerData);
+                            // echo "</pre>";
                             $data = $reaservation->update($value, $reservationPassengerData, 'reservation_id');
                             $count++;
+                        }
+
+                        if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                            $count = 0;
+                            foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+                                $reservationPassengerDataTo = array();
+                                $reservationPassengerDataTo['reservation_id'] = $value;
+                                $reservationPassengerDataTo['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+
+                                $data = $reaservation->update($value, $reservationPassengerDataTo, 'reservation_id');
+                                $count++;
+                            }
                         }
                     } else {
                         $data['errors'][] = "Error in reservation id doesn't match with passenger count. Please try again.";
                     }
                     // $data = $reaservation->update();
                 } catch (Exception $e) {
-                    echo $e->getMessage();
+                    die($e->getMessage());
                 }
 
                 $this->redirect('passenger/billing');
@@ -143,13 +165,26 @@ class Passenger extends Controller
             $reservationPassengerData = array();
             $reservationPassengerData['reservation_ticket_id'] = Auth::getTicketId();
 
-            foreach (Auth::reservation()['reservation_id'] as $key => $value) {
+
+            foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
                 $reservationPassengerData['reservation_status'] = "Reserved"; // 1 for confirmed
                 $reaservation->update($value, $reservationPassengerData, 'reservation_id');
             }
+            $_SESSION['reservation']['from_reservation_ticket_id'] = $reservationPassengerData['reservation_ticket_id'];
+
+            if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                $reservationPassengerDataTo = array();
+                $reservationPassengerDataTo['reservation_ticket_id'] = Auth::getTicketId();
+
+                foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+                    $reservationPassengerDataTo['reservation_status'] = "Reserved"; // 1 for confirmed
+                    $reaservation->update($value, $reservationPassengerDataTo, 'reservation_id');
+                }
+                
+                $_SESSION['reservation']['to_reservation_ticket_id'] = $reservationPassengerDataTo['reservation_ticket_id'];
+            }
 
             // add reservation data to session['reservation']
-            $_SESSION['reservation']['reservation_ticket_id'] = Auth::getTicketId();
             $_SESSION['reservation']['reservation_status'] = "Reserved";
 
             $this->redirect('passenger/summary');

@@ -4,7 +4,7 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 
 echo "<pre>";
 // print_r($_POST);
-print_r($_SESSION);
+// print_r($_SESSION);
 // print_r($data);
 
 echo "</pre>";

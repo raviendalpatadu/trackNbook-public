@@ -2,7 +2,7 @@
 
 class Seats extends Model
 {
-
+    protected $table = 'tbl_reservation';
 
     public function __construct()
     {
@@ -17,7 +17,8 @@ class Seats extends Model
     public function validate($values = array())
     {
         if(count($values['reservation_seat']) != $values['no_of_passengers'] ){
-            $this->errors['errors']['reservation_seat'] = "Select " . ($values['no_of_passengers'] -  count($values['reservation_seat'])) . " more seat(s) to proceed";
+            // $this->errors['errors']['reservation_seat'] = "Select " . ($values['no_of_passengers'] -  count($values['reservation_seat'])) . " more seat(s) to proceed";
+            $this->errors['errors']['reservation_seat'] = "Select seat(s) to proceed";
             
         }
 
@@ -87,9 +88,11 @@ class Seats extends Model
                         WHERE
                             r.reservation_compartment_id = :class_id
                             AND r.reservation_train_id = :train_id
+                            AND reservation_start_st.train_id = :train_id
+                            AND reservation_end_st.train_id = :train_id
                             AND r.reservation_date = :reservation_date
                         GROUP BY
-                            r.reservation_id
+                            r.reservation_id, r.reservation_start_station, r.reservation_end_station
                     )
                 SELECT
                     *
