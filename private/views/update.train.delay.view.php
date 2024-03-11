@@ -15,7 +15,7 @@
             <div class="container d-flex flex-column justify-content-center align-self-center">
                 <div class="row">
                     <div class="col-4">
-                        <div class="warrant-container mt-30">
+                        <div class="delay-container mt-30">
                             <div class="ticket-details">
 
                             </div>
@@ -23,10 +23,10 @@
                     </div>
 
                     <div class="col-5">
-                        <div class="warrant-container-box mt-30">
+                        <div class="delay-container-box mt-30">
                             <div class="delay-details-update-delay">
                                 <div class="row mb-20 ">
-                                    <div class="col-12 d-flex align-items-center flex-column line">
+                                    <div class="col-12 d-flex align-items-start flex-column line">
                                         <h1>Update Train Delay</h1>
                                     </div>
                                 </div>
@@ -64,9 +64,9 @@
                                                     <option value="0">Vavuniya</option>
                                                     <option value="0">Anuradhapura</option>
                                                     <?php foreach ($data['trains'] as $key => $value): ?>
-                                                    <option value="<?= $value->train_id ?>">
-                                                        <?= $value->train_name ?>
-                                                    </option>
+                                                        <option value="<?= $value->train_id ?>">
+                                                            <?= $value->train_name ?>
+                                                        </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -99,7 +99,16 @@
 
                             </div>
                         </div>
-                        <div class="row d-flex g-8 justify-content-center">
+                        <div class="row d-flex delay-g-8 justify-content-center">
+                            <div class="col-4">
+                                <button class="button mt-20 "><a
+                                        href="http://localhost/trackNbook/public/dashboard/train_driver">
+                                        <div class="button-base bg-Selected-Blue">
+                                            <div class="text Blue">Back</div>
+                                        </div>
+                                    </a>
+                                </button>
+                            </div>
                             <div class="col-4">
                                 <button class="button mt-20 " id="reject">
 

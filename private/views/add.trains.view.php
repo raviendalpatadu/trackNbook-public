@@ -59,10 +59,11 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label mt-20">Train Route</div>
                                     <div class="width-fill" id="">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class=" input-field dropdown" name="train_route" placeholder="Please choose">
+                                        <select class=" input-field dropdown" name="train_route"
+                                            placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['routes'] as $key => $value) : ?>
+                                            <?php foreach ($data['routes'] as $key => $value): ?>
                                                 <option value="<?= $value->route_no ?>" id="trainRoute">
                                                     <?= $value->route_name ?>
                                                 </option>
@@ -79,7 +80,8 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Start Station</div>
                                     <div class="width-fill">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class="input-field dropdown" name="start_station" placeholder="Please choose" id="startStation">
+                                        <select class="input-field dropdown" name="start_station"
+                                            placeholder="Please choose" id="startStation">
                                             <option value="0">Please choose</option>
 
                                             <?php foreach ($data['stations'] as $key => $value): ?>
@@ -113,7 +115,8 @@ if (!isset($data['errors'])) {
                                 <div class="text-inputs">
                                     <div class="width-fill">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class="input-field dropdown" name="end_station" placeholder="Please choose" id="endStation">
+                                        <select class="input-field dropdown" name="end_station"
+                                            placeholder="Please choose" id="endStation">
                                             <option value="0">Please choose</option>
 
                                             <?php foreach ($data['stations'] as $key => $value): ?>
@@ -144,7 +147,8 @@ if (!isset($data['errors'])) {
                                 </div>
 
 
-                                <div class="train-stopping-stations mt-20 d-flex flex-row align-items-center g-10 flex-wrap justify-content-between">
+                                <div
+                                    class="train-stopping-stations mt-20 d-flex flex-row align-items-center g-10 flex-wrap justify-content-between">
                                     <div class="input-text-label">Train Stoping stations</div>
                                 </div>
 
@@ -154,17 +158,21 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">Train Type</div>
                                     <div class="width-fill" id="">
                                         <!-- show max of 5 items in select tag -->
-                                        <select class=" input-field dropdown" name="train_type" placeholder="Please choose">
+                                        <select class=" input-field dropdown" name="train_type"
+                                            placeholder="Please choose">
                                             <option value="0">Please choose</option>
 
-                                            <?php foreach ($data['train_types'] as $key => $value) : ?>
+                                            <?php foreach ($data['train_types'] as $key => $value): ?>
                                                 <option value="<?= $value->train_type_id ?>" id="traintype">
                                                     <?= $value->train_type ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?></div>
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (isset($data['errors']) && array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?>
+                                    </div>
                                 </div>
 
                             </div>
@@ -176,10 +184,14 @@ if (!isset($data['errors'])) {
                                     <div class="input-text-label">No of Compartments</div>
                                     <div class="input-field">
                                         <div class="text">
-                                            <input type="number" id="noOfCompartments" name="no_of_compartments" class="type-here" placeholder="Type here">
+                                            <input type="number" id="noOfCompartments" name="no_of_compartments"
+                                                class="type-here" placeholder="Type here">
                                         </div>
                                     </div>
-                                    <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?></div>
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?>
+                                    </div>
                                 </div>
 
 
@@ -248,7 +260,7 @@ if (!isset($data['errors'])) {
         var selectRoute = $('select[name="train_route"]');
 
         // Adding a change event handler
-        selectRoute.on('change', function() {
+        selectRoute.on('change', function () {
             // This code will be executed when the value of the select element changes
             var routeId = $('select[name="train_route"]').val();
             // console.log(routeId);
@@ -258,7 +270,7 @@ if (!isset($data['errors'])) {
                     url: '<?= ROOT ?>/route/getRouteStations/' + routeId,
                     type: 'POST',
 
-                    success: function(data) {
+                    success: function (data) {
                         // console.log(data);
                         var route = JSON.parse(data);
                         // console.log(route);
@@ -288,13 +300,15 @@ if (!isset($data['errors'])) {
                         endList.empty();
                         $(startStation)
                             .find("option")
-                            .each(function() {
-                                startList.append($("<li />").append($("<a />").text($(this).text())));
+                            .each(function () {
+                                startList.append($("<li />").append($("<a />").text($(this)
+                                    .text())));
                             });
                         $(endStation)
                             .find("option")
-                            .each(function() {
-                                endList.append($("<li />").append($("<a />").text($(this).text())));
+                            .each(function () {
+                                endList.append($("<li />").append($("<a />").text($(this)
+                                    .text())));
                             });
                     }
                 });
@@ -303,10 +317,11 @@ if (!isset($data['errors'])) {
 
         // when a user select a route
 
-        var selectElement = $('select[name="train_route"] , select[name="start_station"] , select[name="end_station"]');
+        var selectElement = $(
+            'select[name="train_route"] , select[name="start_station"] , select[name="end_station"]');
 
         // Adding a change event handler
-        selectElement.on('change', function() {
+        selectElement.on('change', function () {
             // This code will be executed when the value of the select element changes
             var routeId = $('select[name="train_route"]').val();
             var startStationId = $('select[name="start_station"]').val();
@@ -322,7 +337,7 @@ if (!isset($data['errors'])) {
                         start_station_id: startStationId,
                         end_station_id: endStationId
                     },
-                    success: function(data) {
+                    success: function (data) {
                         // console.log(data);
                         var route = JSON.parse(data);
                         // console.log(route);
@@ -332,7 +347,7 @@ if (!isset($data['errors'])) {
 
                         for (let i = 0; i < route.length; i++) {
                             const newRow = `
-                                            <div class="d-flex .flex-row g-5">${i+1}.
+                                            <div class="d-flex .flex-row g-5">${i + 1}.
                                                 <input type="checkbox" class="checkbox" name="stopping_station[id][]" value="${route[i].station_id}" id="">
                                                 <label for="">${route[i].station_name}</label>
                                             </div>
@@ -349,14 +364,14 @@ if (!isset($data['errors'])) {
         var noOfCompartments = $('#noOfCompartments').val();
 
         // update the value of a key when a user press the key
-        $('#noOfCompartments').keyup(function() {
+        $('#noOfCompartments').keyup(function () {
             noOfCompartments = $('#noOfCompartments').val();
 
             // add input fields for no of compartments entered
             // console.log(noOfCompartments)
             const outputContainer = $('.compartmentDetails');
 
-            $('#noOfCompartments').on('input', function() {
+            $('#noOfCompartments').on('input', function () {
                 generateTags(outputContainer);
             });
 
@@ -385,14 +400,14 @@ if (!isset($data['errors'])) {
                                             <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?></div>
                                         </div>
                                         <div class="text-inputs mt">
-                                            <div class="input-text-label mt-20">Compartment Type</div>
+                                            <div class="input-text-label mt-0">Compartment Type</div>
                                                 <select class="input-field dropdown" name="compartment[type][]" placeholder="Please choose">
                                                     <option value="0">Please choose</option>
 
-                                                    <?php foreach ($data['compartment_types'] as $key => $value) : ?>
-                                                        <option value="<?= $value->compartment_class_type_id ?>" id="trainRoute">
-                                                            <?= $value->compartment_class_type ?>
-                                                        </option>
+                                                    <?php foreach ($data['compartment_types'] as $key => $value): ?>
+                                                                <option value="<?= $value->compartment_class_type_id ?>" id="trainRoute">
+                                                                    <?= $value->compartment_class_type ?>
+                                                                </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             
@@ -412,7 +427,7 @@ if (!isset($data['errors'])) {
                                         </div>
                                        
                                         <div class="text-inputs mt">
-                                            <div class="input-text-label">Compartment Tital seats</div>
+                                            <div class="input-text-label">Compartment Total seats</div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="text" name="compartment[total_seats][]" class="type-here" placeholder="eg: 48">
@@ -437,7 +452,7 @@ if (!isset($data['errors'])) {
             }
 
             // bug when compartment ro is genarates the top select tags are not working
-            $(outputContainer).find("select.dropdown").each(function() {
+            $(outputContainer).find("select.dropdown").each(function () {
                 var dropdown = $("<div />").addClass("dropdown selectDropdown");
 
                 $(this).wrap(dropdown);
@@ -451,7 +466,7 @@ if (!isset($data['errors'])) {
 
                 $(this)
                     .find("option")
-                    .each(function() {
+                    .each(function () {
                         list.append($("<li />").append($("<a />").text($(this).text())));
                     });
 
@@ -467,7 +482,7 @@ if (!isset($data['errors'])) {
             });
 
 
-            $(outputContainer).on("click touch", ".selectDropdown ul li a", function(e) {
+            $(outputContainer).on("click touch", ".selectDropdown ul li a", function (e) {
                 e.stopImmediatePropagation();
                 console.log($(this).text());
                 var dropdown = $(this).parent().parent().parent();
@@ -500,12 +515,12 @@ if (!isset($data['errors'])) {
                 dropdown.find("select").trigger("change");
             });
 
-            $(".dropdown > span").on("click touch", function(e) {
+            $(".dropdown > span").on("click touch", function (e) {
                 var self = $(this).parent();
                 self.toggleClass("open");
             });
 
-            $(outputContainer).on("click touch", function(e) {
+            $(outputContainer).on("click touch", function (e) {
                 var dropdown = $(".dropdown");
                 if (dropdown !== e.target && !dropdown.has(e.target).length) {
                     dropdown.removeClass("open");

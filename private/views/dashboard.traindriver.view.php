@@ -24,7 +24,7 @@
 
 
             <div class="row">
-                <div class="col-12 center-col if-widgets">
+                <div class="col-12 center-col ach-widgets">
 
                     <!-- card style -->
                     <div class="ach-card">
@@ -38,14 +38,14 @@
                         </div>
                         <!--/icon-->
 
-                        <a href="<?= ROOT ?>traindriver/updatelocation" class="ach-btn">Check</a>
+                        <a href="<?= ROOT ?>traindriver/addlocation" class="ach-btn">Check</a>
 
                     </div>
                 </div>
             </div>
             <!--/card-->
             <div class="row">
-                <div class="col-12 center-col if-widgets">
+                <div class="col-12 center-col ach-widgets">
                     <div class="ach-card">
 
                         <div class="title">Update Delay</div>

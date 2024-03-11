@@ -32,24 +32,24 @@
                                 </div>
                                 <div class="row mb-10 mt-50 ml-20 ">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train ID : 1059</p>
-                                        <p class="width-50">
+                                        <p class="ad-width-100">Train ID : 1059</p>
+                                        <p class="ad-width-100">
                                             <?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Train Name : Yal Devi</p>
-                                        <p class="width-50">
+                                        <p class="ad-width-100">Train Name : Yal Devi</p>
+                                        <p class="wad-width-100">
                                             <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_name) : ''; ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Start Station : KKS</p>
-                                        <p class="width-50">
+                                        <p class="ad-width-100">Start Station : KKS</p>
+                                        <p class="ad-width-100">
                                             <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->start_station) . "&#8594" . ucfirst($data['train']->end_station) : ''; ?>
                                         </p>
                                     </div>
@@ -57,16 +57,16 @@
 
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">End Station : Mount Lavinia</p>
-                                        <p class="width-50">
+                                        <p class="ad-width-100">End Station : Mount Lavinia</p>
+                                        <p class="ad-width-100">
                                             <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="width-50">Date : 25-Jan-2024</p>
-                                        <p class="width-50">
+                                        <p class="ad-width-100">Date : 25-Jan-2024</p>
+                                        <p class="ad-width-100">
                                             <?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?>
                                         </p>
                                     </div>
@@ -107,21 +107,14 @@
                         <div class="row d-flex add-location-g-8 justify-content-center">
                             <div class="col-4">
                                 <button class="button mt-20 "><a
-                                        href="http://localhost/trackNbook/public/traindriver/updatelocation">
+                                        href="http://localhost/trackNbook/public/dashboard/train_driver">
                                         <div class="button-base bg-Selected-Blue">
                                             <div class="text Blue">Back</div>
                                         </div>
                                     </a>
                                 </button>
                             </div>
-                            <div class="col-4">
-                                <button class="button mt-20 " id="reject">
-                                    <div class="button-base bg-Selected-red">
-                                        <div class="text Banner-red">Pending</div>
-                                    </div>
-                                    </a>
-                                </button>
-                            </div>
+
                             <div class="col-4">
                                 <button class="button mt-20 ">
                                     <div class="button-base bg-light-green">

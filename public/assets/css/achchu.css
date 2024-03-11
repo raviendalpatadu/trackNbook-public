@@ -73,7 +73,7 @@ thead tr {
 
 /* Staff Dashboard */
 
-.if-widgets .number {
+.ach-widgets-s .number {
   position: relative;
   width: fit-content;
   font-family: "Poppins-Medium", Helvetica;
@@ -84,7 +84,7 @@ thead tr {
   line-height: 17px;
 }
 
-.if-widgets .div {
+.ach-widgets-s .div {
   display: flex;
   flex-direction: column;
   width: 124.44px;
@@ -174,7 +174,7 @@ thead tr {
   line-height: normal;
 }
 
-.ach-widgets .if-frame-3 {
+.ach-widgets .ach-frame-3 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -185,7 +185,7 @@ thead tr {
   flex: 0 0 auto;
 }
 
-.ach-widgets .if-frame-4 {
+.ach-widgets .ach-frame-4 {
   display: inline-flex;
   align-items: center;
   gap: 7.78px;
@@ -325,7 +325,7 @@ thead tr {
       opacity: 0.7;
     }
   }
-  .btn1 {
+  .ach-btn1 {
     display: block;
     background: #f5013e;
     color: white;
@@ -343,17 +343,6 @@ thead tr {
 }
 /* ............................................................. */
 
-/* Train Driver add  location*/
-
-.add-location-container-box {
-  background-color: map-get($mou-colors, "box-gray");
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-left: -172px;
-}
-
-.update-location {
-  padding: 27px 50px;
-}
 /* Terms and Conditions */
 body {
   font-family: Arial, sans-serif;
@@ -420,6 +409,27 @@ li {
 
 /* ...................................................................................*/
 /* Add location */
+
+/* Train Driver add  location*/
+
+.ad-width-70 {
+  width: 70vw;
+}
+
+.update-location {
+  padding: 27px 50px;
+}
+
+.add-location-container {
+  width: 100%;
+}
+
+.add-location-container-box {
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  margin-left: -172px;
+}
 
 .justify-content-add-location {
   justify-content: flex-start;
@@ -570,6 +580,24 @@ li {
 /* ....................................................................... */
 
 /* Update train delay */
+
+.delay-g-8 {
+  gap: 8px;
+  margin-right: 150px;
+}
+
+.delay-container {
+  width: 100%;
+}
+
+.delay-container-box {
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 296px;
+  margin-left: -143px;
+  margin-top: 56px;
+}
+
 .dropdown2-update-delay {
   cursor: pointer;
   padding: 8px;
@@ -580,8 +608,8 @@ li {
   border: 1px solid #ccc;
   background: var(--White);
   transition: all 0.3s ease;
-  width: 100%; /* Adjusted for mobile responsiveness */
-  max-width: 100%; /* Added to ensure it doesn't exceed the container width */
+  width: 221px; /* Adjusted for mobile responsiveness */
+  max-width: 221px; /* Added to ensure it doesn't exceed the container width */
 }
 
 .input-field3-update-delay {
@@ -599,8 +627,8 @@ li {
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
-  width: 100%; /* Adjusted for mobile responsiveness */
-  max-width: 100%; /* Added to ensure it doesn't exceed the container width */
+  width: 128%; /* Adjusted for mobile responsiveness */
+  max-width: 128%; /* Added to ensure it doesn't exceed the container width */
   height: 100px;
 }
 
@@ -619,7 +647,7 @@ li {
   align-self: stretch;
   flex-shrink: 0;
   position: relative;
-  width: 421px;
+  width: 219px;
 }
 
 .delay-details-update-delay {

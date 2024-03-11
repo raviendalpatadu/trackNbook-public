@@ -22,7 +22,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="if-txt-wrapper">Hello,
+                        <div class="ach-txt-wrapper">Hello,
                             <?= ucfirst(Auth::user()) ?>
                         </div>
 
@@ -33,7 +33,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="if-widgets">
+                        <div class="ach-widgets">
 
                             <div class="card-dashboard-sg">
                                 <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"

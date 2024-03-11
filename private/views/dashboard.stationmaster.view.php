@@ -28,7 +28,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
             <div class="row">
                 <div class="col-12">
-                    <div class="if-widgets">
+                    <div class="ach-widgets">
 
                         <div class="card-dashboard-sm">
                             <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
@@ -96,7 +96,6 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                 <img src="<?= ASSETS ?>images/notification.png" alt="profile img" width="400" height="400">
                 <img src="<?= ASSETS ?>images/SM." alt="profile img" width="370" height="380">
 
-                <img src="<?= ASSETS ?>images/notification.png" alt="profile img" width="400" height="400">
 
 
             </div>
