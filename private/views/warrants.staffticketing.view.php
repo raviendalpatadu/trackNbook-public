@@ -106,15 +106,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
                                         <td class="col-2 d-flex align-items-center lightgray-font "><?= $data['reservations'][$reservation]->reservation_passenger_nic ?></td>
                                         <td class="col-2 d-flex align-items-center"><?= date("d-M-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
-                                        <td class="col-2 d-flex align-items-center"><?php
-
-                                                                                    if ($data['reservations'][$reservation]->reservation_class == 1) {
-                                                                                        echo "First Class";
-                                                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
-                                                                                        echo "Second Class";
-                                                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 3) {                                                                                        echo "Third Class";
-                                                                                    }
-                                                                                    ?></td>
+                                        <td class="col-2 d-flex align-items-center"><?php echo $data['reservations'][$reservation]->compartment_class_type; ?></td>
                                         <td class="col-2 d-flex align-items-center">
                                             <div class="badge-base bg-light-green">
                                                 <div class="dot">

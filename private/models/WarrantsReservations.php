@@ -19,56 +19,65 @@ class WarrantsReservations extends Model
         }
         return $result;
     }
-    public function getReservations($column, $value ,$table='r')
+    public function getReservations($id)
     {
 
         try {
-            $con = $this->connect();
-            $con->beginTransaction();
-            
-            $query = "SELECT tbl_warrant_reservation.*, r.* FROM tbl_warrant_reservation JOIN tbl_reservation r ON tbl_warrant_reservation.warrent_reservation_id = r.reservation_id WHERE {$table}.{$column} = :value;";
-      
-            $stm = $con->prepare($query);
-            $stm->execute(array(
-                'value' => $value
-            ));
+            $query = "WITH compartments AS (
+                        SELECT c.compartment_id, ct.* 
+                        FROM tbl_compartment c
+                        JOIN tbl_compartment_class_type ct on c.compartment_class_type = ct.compartment_class_type_id
+                        )
 
-            $data = $stm->fetchAll(PDO::FETCH_OBJ);
+                        SELECT r.*, wr.* , c.compartment_class_type, t.*
+                        FROM tbl_reservation r
+                        JOIN tbl_warrant_reservation wr ON wr.warrant_reservation_id = r.reservation_id 
+                        JOIN tbl_train t ON r.reservation_train_id = t.train_id
+                        JOIN compartments c ON r.reservation_compartment_id = c.compartment_id
+
+                        WHERE wr.warrant_id = :id 
+
+                        GROUP BY r.reservation_id;";
+
+            $result = $this->query($query, ['id' => $id]);
+            return $result;
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
-        if ($data > 0) {
-            return $data;
-        } else {
-            return 0;
-        }
-
     }
 
     public function getjoinReservation()
     {
         try {
-            $con = $this->connect();
-            $con->beginTransaction();
 
-            //insert query to search train must come form route
-            $query = "SELECT tbl_warrant_reservation.*, r.*\n"
+            $query = "WITH compartments AS (\n"
 
-                . "FROM tbl_warrant_reservation\n"
+                . "	SELECT c.compartment_id, ct.* \n"
 
-                . "JOIN tbl_reservation r ON tbl_warrant_reservation.warrent_reservation_id  = r.reservation_id;";
-            $stm = $con->query($query);
+                . "    FROM tbl_compartment c \n"
 
-            $data = $stm->fetchAll(PDO::FETCH_OBJ);
+                . "    JOIN tbl_compartment_class_type ct on c.compartment_class_type = ct.compartment_class_type_id\n"
+
+                . ")\n"
+
+                . "SELECT wr.*, r.*, c.compartment_class_type\n"
+
+                . "FROM tbl_warrant_reservation wr\n"
+
+                . "JOIN tbl_reservation r ON r.reservation_id = wr.warrant_reservation_id\n"
+
+                . "JOIN compartments c ON r.reservation_compartment_id = c.compartment_id\n"
+
+                . "\n"
+
+                . "GROUP BY r.reservation_id";
+
+
+            $result = $this->query($query);
+            return $result;
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
-        if ($data > 0) {
-            return $data;
-        } else {
-            return 0;
-        }
-        
     }
 
     public function getOneReservation($column, $value)
@@ -150,7 +159,7 @@ class WarrantsReservations extends Model
     //         return false;
     //     }
     //     $con = null;
-    
+
     //     // echo true;//for ajax call
     //     return true;   
     // }

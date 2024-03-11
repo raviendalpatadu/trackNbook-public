@@ -208,6 +208,10 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.ticket-img {
+  width: -webkit-fill-available !important;
+}
+
 .checker-container {
   width: 70%;
   width: 70%;
@@ -222,7 +226,7 @@
 }
 
 .ticket-details {
-  padding: 23px 50px;
+  z-index: 100;
 }
 
 .cancel-container .ticket-details {

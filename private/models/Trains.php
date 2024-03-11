@@ -57,9 +57,10 @@ class Trains extends Model
         }
     }
 
-    public function validate($values = array()){
+    public function validate($values = array())
+    {
 
-       
+
         if (empty($values['to_station']) || $values['to_station'] == 0) {
             $this->errors['errors']['to_station'] = 'Station is required';
         }
@@ -104,7 +105,7 @@ class Trains extends Model
 
         $data = array();
         //   //check if to_station is exists in post
-        
+
         if (!array_key_exists('errors', $errors)) {
 
             try {
@@ -134,7 +135,7 @@ class Trains extends Model
                                 LEFT JOIN tbl_reservation r ON c.compartment_id = r.reservation_compartment_id
                                 AND r.reservation_date = :from_date
                             GROUP BY
-                                c.compartment_id,
+                                c.compartment_id,       
                                 c.compartment_class_type
                         )
                     SELECT
@@ -305,7 +306,7 @@ class Trains extends Model
     //get reservation for a specific train
     public function getTrainReservation($class_id = "", $train_id = "")
     {
-           
+
         $date = $_SESSION['reservation']['from_date'];
 
         try {
@@ -333,7 +334,6 @@ class Trains extends Model
                 'class' => $class_id,
                 'date' => $date
             ));
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

@@ -129,103 +129,94 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             <td class="col-2 d-flex align-items-center"><?= date("d-m-y", strtotime($data['reservations'][$reservation]->reservation_date)) ?></td>
                                             <td class="col-3 d-flex align-items-center"><?= ucfirst($data['reservations'][$reservation]->reservation_passenger_first_name) . " " . ucfirst($data['reservations'][$reservation]->reservation_passenger_last_name) ?></td>
                                             <td class="col-2 d-flex align-items-center">
-                                                <div class="d-flex .flex-row g-5 mr-5">
-                                                    <?php
-                                                    if ($data['reservations'][$reservation]->reservation_class == 1) {
-                                                        echo "First Class";
-                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 2) {
-                                                        echo "Second Class";
-                                                    } elseif ($data['reservations'][$reservation]->reservation_class == 3) {
-                                                        echo "Third Class";
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </td>
-                                            <td class="col-1 d-flex align-items-center g-5">
-                                                <div class="badge-base bg-Selected-Blue">
+                                            <td class="d-flex .flex-row g-5 mr-5"><?php echo $data['reservations'][$reservation]->compartment_class_type; ?> </td>
+                        </div>
+                        </td>
+                        <td class="col-1 d-flex align-items-center g-5">
+                            <div class="badge-base bg-Selected-Blue">
 
-                                                    <div class="dot">
-                                                        <a class="blue" href="<?= ROOT ?>staffticketing/summary">
-                                                            <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text blue">View</div>
-                                                    </a>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/cancel/<?= $data['reservations'][$reservation]->reservation_id ?>">
-                                                    <div class="badge-base bg-Selected-red">
-                                                        <div class="dot">
-                                                            <div class="dot4  bg-Banner-red"></div>
-                                                        </div>
-                                                        <div class="text red">Cancel</div>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php endfor; ?>
-                                </tbody>
-                            </table>
-                            <div class="pagination">
-                                <button class="button">
-                                    <div class="button-base">
-                                        <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-
-                                        <div class="text">Previous</div>
-                                    </div>
-                                </button>
-                                <div class="pagination-numbers">
-                                    <div class="pagination-number-base-active">
-                                        <div class="content">
-                                            <div class="number">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">2</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">3</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">...</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">8</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">9</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">10</div>
-                                        </div>
-                                    </div>
+                                <div class="dot">
+                                    <a class="blue" href="<?= ROOT ?>staffticketing/summary">
+                                        <div class="dot4"></div>
                                 </div>
-                                <button class="button">
-                                    <div class="button-base">
-                                        <div class="text">Next</div>
-                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                <div class="text blue">View</div>
+                                </a>
+                            </div>
+
+                            <a class="blue" href="<?= ROOT ?>staffticketing/cancel/<?= $data['reservations'][$reservation]->reservation_id ?>">
+                                <div class="badge-base bg-Selected-red">
+                                    <div class="dot">
+                                        <div class="dot4  bg-Banner-red"></div>
                                     </div>
-                                </button>
+                                    <div class="text red">Cancel</div>
+                                </div>
+                            </a>
+                        </td>
+                        </tr>
+                    <?php endfor; ?>
+                    </tbody>
+                    </table>
+                    <div class="pagination">
+                        <button class="button">
+                            <div class="button-base">
+                                <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+
+                                <div class="text">Previous</div>
+                            </div>
+                        </button>
+                        <div class="pagination-numbers">
+                            <div class="pagination-number-base-active">
+                                <div class="content">
+                                    <div class="number">1</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">2</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">3</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">...</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">8</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">9</div>
+                                </div>
+                            </div>
+                            <div class="pagination-number-base">
+                                <div class="content">
+                                    <div class="number2">10</div>
+                                </div>
                             </div>
                         </div>
+                        <button class="button">
+                            <div class="button-base">
+                                <div class="text">Next</div>
+                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </button>
                     </div>
-
+                    </div>
                 </div>
+
             </div>
+    </div>
     </div>
     </main>
     </div>
