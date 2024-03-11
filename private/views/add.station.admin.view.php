@@ -4,9 +4,11 @@ $this->view("includes/header");
 ?>
 
 <?php
-if(!isset($data['errors'])){
-    $data['errors'] = array();
-}
+
+
+// echo "<pre>";
+// print_r($data);
+// echo  "</pre>";
 ?>
 
 <body>
@@ -45,8 +47,7 @@ if(!isset($data['errors'])){
                                         <div class="input-text-label">Station Name</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here"
-                                                    name="station_name">
+                                                <input type="text" class="type-here" placeholder="Type here" name="station_name">
                                             </div>
                                         </div>
                                         <?php if (isset($data['errors'])): ?>

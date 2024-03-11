@@ -3,10 +3,23 @@
 class Stations extends Model
 {
     protected $table = 'tbl_station';
+    protected $allowedColumns = array('station_name'); 
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function validate($values){
+        if (empty($values['station_name'])) {
+            $this->errors['station_name'] =  "Station name is required.";
+        }
+
+        if (count($this->errors) ==  0 ) {
+            return true;
+        }
+        return false;
+
     }
 
     public function getStations()
@@ -30,31 +43,31 @@ class Stations extends Model
         return $result;
     }
 
-    public function addStation()
-    {
-        try {
-            $con = $this->connect();
-            $con->beginTransaction();
+    // public function addStation()
+    // {
+    //     try {
+    //         $con = $this->connect();
+    //         $con->beginTransaction();
 
-            $query = "SELECT * INSERT INTO tbl_station VALUES (:station_name)";
-            $stm = $con->prepare($query);
-            $stm->execute(
-                array(
-                    'station_name' => $_POST['station_name']
-                )
-            );
+    //         $query = "SELECT * INSERT INTO tbl_station VALUES (:station_name)";
+    //         $stm = $con->prepare($query);
+    //         $stm->execute(
+    //             array(
+    //                 'station_name' => $_POST['station_name']
+    //             )
+    //         );
 
-            $stationId = $con->lastInsertId();
+    //         $stationId = $con->lastInsertId();
 
-            $con->commit();
-            $con = null;
+    //         $con->commit();
+    //         $con = null;
 
-            return $stationId;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+    //         return $stationId;
+    //     } catch (PDOException $e) {
+    //         echo $e->getMessage();
+    //     }
 
 
-    }
+    // }
 
 }

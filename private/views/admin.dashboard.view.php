@@ -130,7 +130,7 @@
                 </div>
             </div>
             <br><br>
-            <div class="col-12">
+            <div class="col-12 text-align-center">
 
                 <div class="if-txt-wrapper">Reservation Analytics</div>
 
@@ -186,7 +186,7 @@
                 };
 
                 const config = {
-                    type: 'line',
+                    type: 'bar',
                     data,
                     options: {
                         scales: {
