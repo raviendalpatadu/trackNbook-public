@@ -312,7 +312,7 @@ class Trains extends Model
                     'no_of_passengers' => $values['no_of_passengers']
                 ));
             } catch (PDOException $e) {
-                echo $e->getMessage();
+                die($e->getMessage());
             }
 
             if ($data > 0) {

@@ -10,8 +10,8 @@ function handleEventFrom() {
   );
 
   //get the count of elements with class selected
-  var selectedSeatCount = $(
-    "#fromSeatMap").find(".comparment  .selected , #fromSeatMap .comparment .selected-complete"
+  var selectedSeatCount = $("#fromSeatMap").find(
+    ".comparment  .selected , #fromSeatMap .comparment .selected-complete"
   ).length;
 
   // string to int conversion
@@ -63,7 +63,9 @@ function handleEventFrom() {
     }
   }
 
-  $("#fromSeatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
+  $("#fromSeatCountSelected span").text(
+    selectedSeatCount + "/" + noOfPassengers
+  );
 }
 
 // Add click event to seats
@@ -133,9 +135,7 @@ function handleEventTo() {
     }
   }
 
-  $("#toSeatCountSelected span").text(
-    selectedSeatCount + "/" + noOfPassengers
-  );
+  $("#toSeatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
 }
 
 // Add click event to seats
@@ -167,6 +167,12 @@ var warrent = $("#warrentBooking");
 var chooseImg = $("#chooseImg");
 
 // Add click event to warrent
+
+if (warrent.is(":checked")) {
+  chooseImg.css("display", "block");
+} else {
+  chooseImg.css("display", "none");
+}
 warrent.click(function () {
   if (warrent.is(":checked")) {
     chooseImg.css("display", "block");
@@ -315,7 +321,7 @@ function getErrors(url, data, callback) {
         // xhr = res.errors;
         printErrors(res);
       }
-    }
+    },
   });
 }
 
@@ -340,57 +346,110 @@ function printErrors(errors) {
   }
 }
 
-var shown = false;
-setInterval(function () {
-  var ROOTURL = "http://localhost/trackNbook/public/";
-  $.ajax({
-    url: ROOTURL + "ajax/getSession/reservation",
-    type: "post",
-    success: function (response) {
-      var res = JSON.parse(response);
-      var created_time = new Date(res.reservation_created_time);
-
-      var now = new Date();
-      var distance = now - created_time;
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var reservation_status = res.reservation_status;
-      if (minutes > 10 && reservation_status == "Pending") {
-        // create a popup message called reservation expired try again to book
-        if (!shown) {
-          shown = true;
-          var reservationExpMsg = $("<div/>")
-            .addClass("reservation-expired")
-            .appendTo("body");
-          var expBox = $("<div/>")
-            .addClass("exp-box")
-            .appendTo(reservationExpMsg);
-
-          var expMsg = $("<div/>").appendTo(expBox);
-          var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
-          var errDesc = $("<p/>").addClass("err-desc").appendTo(expMsg);
-          var expBtnBox = $("<div></div>")
-            .addClass("d-flex justify-content-end")
-            .appendTo(expBox);
-          var closeButton = $("<button/>")
-            .addClass("button")
-            .appendTo(expBtnBox);
-          var buttonBase = $("<div/>")
-            .addClass("button-base")
-            .appendTo(closeButton);
-          var buttonText = $("<div/>").addClass("text").appendTo(buttonBase);
-          buttonText.text("Close");
-
-          closeButton.on("click", function () {
-            reservationExpMsg.remove();
-            window.location.replace(ROOTURL);
-          });
-          errTitle.text("Reservation Expired");
-          errDesc.text(
-            "Your reservation has expired. Please try again to book."
-          );
-          // expBtn.text("Ok");
-        }
-      }
-    },
+function changeImage(imageInput, imageBox) {
+  $(imageInput).change(function () {
+    var file = $(this)[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $(imageBox).attr("src", e.target.result);
+    };
+    reader.readAsDataURL(file);
   });
-}, 1000);
+}
+
+// make popup box
+
+function makePopupBox(title, description, buttonText, imgURL, action) {
+
+  if ($(".main-popup-box").length) {
+    return;
+  }
+
+  var popupBox = $("<div/>").addClass("main-popup-box").appendTo("body");
+  var box = $("<div/>").addClass("box").appendTo(popupBox);
+  var heading = $("<h2/>").addClass("heading").appendTo(box);
+  var body = $("<div/>").addClass("body").appendTo(box);
+  var img = $("<img/>").addClass("img").appendTo(body);
+  var desc = $("<p/>").addClass("desc").appendTo(body);
+
+  var btnBox = $("<div/>").addClass("footer").appendTo(box);
+  var button = $("<button/>").appendTo(btnBox);
+  // var buttonBase = $("<div/>").addClass("button-base").appendTo(button);
+  var proceedBtn = $("<div/>").appendTo(button);
+
+  heading.text(title);
+  img.attr("src", imgURL);
+  desc.text(description);
+  proceedBtn.text(buttonText);
+
+  button.on("click", function () {
+    popupBox.remove();
+
+    if(action){
+      action(true);
+    }
+  });
+
+  // if you click outside the popup box it will remove the box
+  popupBox.on("click", function (e) {
+    if (e.target == popupBox[0]) {
+      popupBox.remove();
+    }
+  });
+}
+
+
+// var shown = false;
+// setInterval(function () {
+//   var ROOTURL = "http://localhost/trackNbook/public/";
+//   $.ajax({
+//     url: ROOTURL + "ajax/getSession/reservation",
+//     type: "post",
+//     success: function (response) {
+//       var res = JSON.parse(response);
+//       var created_time = new Date(res.reservation_created_time);
+
+//       var now = new Date();
+//       var distance = now - created_time;
+//       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//       var reservation_status = res.reservation_status;
+//       if (minutes > 10 && reservation_status == "Pending") {
+//         // create a popup message called reservation expired try again to book
+//         if (!shown) {
+//           shown = true;
+//           var reservationExpMsg = $("<div/>")
+//             .addClass("reservation-expired")
+//             .appendTo("body");
+//           var expBox = $("<div/>")
+//             .addClass("exp-box")
+//             .appendTo(reservationExpMsg);
+
+//           var expMsg = $("<div/>").appendTo(expBox);
+//           var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
+//           var errDesc = $("<p/>").addClass("err-desc").appendTo(expMsg);
+//           var expBtnBox = $("<div></div>")
+//             .addClass("d-flex justify-content-end")
+//             .appendTo(expBox);
+//           var closeButton = $("<button/>")
+//             .addClass("button")
+//             .appendTo(expBtnBox);
+//           var buttonBase = $("<div/>")
+//             .addClass("button-base")
+//             .appendTo(closeButton);
+//           var buttonText = $("<div/>").addClass("text").appendTo(buttonBase);
+//           buttonText.text("Close");
+
+//           closeButton.on("click", function () {
+//             reservationExpMsg.remove();
+//             window.location.replace(ROOTURL);
+//           });
+//           errTitle.text("Reservation Expired");
+//           errDesc.text(
+//             "Your reservation has expired. Please try again to book."
+//           );
+//           // expBtn.text("Ok");
+//         }
+//       }
+//     },
+//   });
+// }, 1000);

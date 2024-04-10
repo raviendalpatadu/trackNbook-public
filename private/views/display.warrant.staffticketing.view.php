@@ -1,5 +1,8 @@
 <?php
 
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -17,7 +20,9 @@
                     <div class="col-7">
                         <div class="warrant-container mt-30">
                             <div class="ticket-details">
-
+                                    <!-- warrant img-->
+                                    <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                                    <img src="" alt="">
                             </div>
                         </div>
                     </div>

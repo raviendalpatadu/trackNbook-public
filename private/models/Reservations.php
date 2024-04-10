@@ -81,6 +81,11 @@ class Reservations extends Model
             if (empty($data['reservation_passenger_gender'][$entry])) {
                 $this->errors['reservation_passenger_gender'][$entry] = 'Gender Required';
             }
+
+            // check if warrent is uploaded
+            if (isset($data['warrant_booking']) && empty($_FILES['warrant_image']['name']) && $data['warrant_booking'] == "on") {
+                $this->errors['warrant_image'] = 'Warrent is required';
+            }
         }
 
         if (count($this->errors) > 0) {
@@ -141,6 +146,9 @@ class Reservations extends Model
 
     public function getReservationDataTicket($id)
     {
+        if ($id == '') {
+            return 'false';
+        }
         try {
             $query = "SELECT
                             	r.*,
@@ -201,58 +209,7 @@ class Reservations extends Model
         return $result;
     }
 
-    // public function addReservation($data)
-    // {
-    //     $user_id = $_SESSION['USER']->user_id;
-    //     $train_id = $data['train_id'];
-    //     $class_id = $data['class_id'];
-    //     $from_station = $data['from_station']->station_id;
-    //     $to_station = $data['to_station']->station_id;
-    //     $from_date = $data['from_date'];
-    //     $selected_seats = $data['selected_seats'];
-    //     $no_of_passengers = $data['no_of_passengers'];
-    //     $passenger_titles = $data['passenger_data']['user_title'];
-    //     $passenger_first_names = $data['passenger_data']['user_first_name'];
-    //     $passenger_last_names = $data['passenger_data']['user_last_name'];
-    //     $passenger_nics = $data['passenger_data']['user_nic'];
-    //     $passenger_phone_numbers = $data['passenger_data']['user_phone_number'];
-    //     $passenger_emails = $data['passenger_data']['user_email'];
-    //     $passenger_gender = $data['passenger_data']['user_gender'];
 
-    //     try {
-
-    //         for ($insert_count = 0; $insert_count < $no_of_passengers; ++$insert_count) {
-    //             $query = "INSERT INTO tbl_reservation "
-    //                 . "(reservation_ticket_id, reservation_passenger_id, reservation_start_station, reservation_end_station, reservation_train_id, reservation_compartment_id, reservation_date, reservation_class, reservation_seat, reservation_passenger_title, reservation_passenger_first_name, reservation_passenger_last_name, reservation_passenger_nic, reservation_passenger_phone_number, reservation_passenger_email, reservation_passenger_gender) "
-    //                 . "VALUES(:ticket_id, :passenger_id, :from_station, :end_station, :train_id, :compartment_id, :date, :class_id, :seat, :title, :first_name, :last_name, :nic, :phone_number, :email, :gender)";
-
-    //             $data = $this->query($query, array(
-    //                 'ticket_id' => $ticketId,
-    //                 'passenger_id' => $user_id,
-    //                 'from_station' => $from_station,
-    //                 'end_station' => $to_station,
-    //                 'train_id' => $train_id,
-    //                 'compartment_id' => $class_id,
-    //                 'date' => $from_date,
-    //                 'class_id' => $class_id,
-    //                 'seat' => $selected_seats[$insert_count],
-    //                 'title' => $passenger_titles[$insert_count],
-    //                 'first_name' => $passenger_first_names[$insert_count],
-    //                 'last_name' => $passenger_last_names[$insert_count],
-    //                 'nic' => $passenger_nics[$insert_count],
-    //                 'phone_number' => $passenger_phone_numbers[$insert_count],
-    //                 'email' => $passenger_emails[$insert_count],
-    //                 'gender' => $passenger_gender[$insert_count]
-    //             ));
-    //         }
-    //         $_SESSION['reservation']['reservation_ticket_id'] = $ticketId;
-    //     } catch (PDOException $e) {
-    //         echo $e->getMessage();
-    //         return false;
-    //     }
-
-    //     return $data;
-    // }
-
+    // cancel reservation
 
 }

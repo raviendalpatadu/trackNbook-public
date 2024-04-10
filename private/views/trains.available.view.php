@@ -68,7 +68,7 @@ echo "</pre>";
                         </div>
 
                         <div class="col-6">
-                            <form action="" method="post" id="modifyForm">
+                            <form action="<?= ROOT ?>train/available/modifysearch" method="post" id="modifyForm">
                                 <div class=" d-flex flex-column g-20">
                                     <div class="d-flex g-20">
                                         <div class="text-inputs">
@@ -157,13 +157,15 @@ echo "</pre>";
 
                                     <div class="d-flex align-items-center justify-content-center flex-fill">
                                         <div class="button-base">
-                                            <input type="submit" name="submit" value="Search" class="button">
+                                            <div class="text" id="modifysubmitbtn">Search</div>
+                                            <!-- <input type="submit" name="submit" value="Search" class="button"> -->
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+
                     <div class="row mb-20">
                         <div class="col-12">
                             <div class="trains-available">
@@ -178,7 +180,7 @@ echo "</pre>";
                     </div>
 
 
-                    <form action="" method="post" id="trainForm">
+                    <form action="<?= ROOT ?>train/available/seatsearch" method="post" id="trainForm">
                         <div id="trainsAvailable">
                             <div id="trainButtons" class="d-flex g-3">
                                 <button id="fromTrainBtn" class="train-available-btn active">From Train</button>
@@ -227,10 +229,7 @@ echo "</pre>";
                                                             <div class="availabity flex-auto">
                                                                 <?php foreach ($data['trains_available']['from_trains'] as $key_res => $value_res) : ?>
                                                                     <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
-                                                                        <!-- <a href="<?php //ROOT 
-                                                                                        ?>train/seatsAvailable/<?php //$data['trains_available']['from_trains'][$key_res]->compartment_id 
-                                                                                                                ?>/<?php //$value->train_id 
-                                                                                                                    ?>"> -->
+
                                                                         <div class="d-flex justify-content-between train_and_compartment">
                                                                             <input class="display-none" type="radio" name="from_compartment_and_train" <?= getRadioSelect($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train') ?> value="<?= $data['trains_available']['from_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
                                                                             <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
@@ -244,6 +243,10 @@ echo "</pre>";
                                                                             <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
                                                                                 <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
                                                                             </div>
+
+                                                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
+                                                                            </svg>
                                                                         </div>
                                                                         <!-- </a> -->
                                                                     <?php endif; ?>
@@ -461,7 +464,9 @@ echo "</pre>";
 
                         <div class="col-12 d-flex justify-content-end g-10">
                             <div class="button-base">
-                                <input type="submit" name="submit" value="Proceed" id="proceed">
+                                <div class="text" id="trainsubmitbtn">Proceed</div>
+
+                                <!-- <input type="submit" name="submit" value="Proceed" id="proceed"> -->
                             </div>
 
                             <div class="button-base">
@@ -555,30 +560,30 @@ echo "</pre>";
 
 
     // when form is submitted
-    $('form#modifyForm').submit(function(e) {
+    $('#modifysubmitbtn').click(function(e) {
 
         e.preventDefault();
 
-        var formData = $(this).serialize();
+        var formData = $('form#modifyForm').serialize();
         // console.log(formData);
         getErrors('<?= ROOT ?>home/validate', formData, function(res) {
             if (res == true) {
                 console.log(res);
-                $('form#modifyForm').unbind().submit();
+                $('form#modifyForm').submit();
             }
 
         });
     });
 
 
-    $('form#trainForm').submit(function(e) {
+    $('#trainsubmitbtn').click(function(e) {
         e.preventDefault();
 
-        var formData = $(this).serialize();
+        var formData = $('form#trainForm').serialize();
         // console.log(formData);
         getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
             if (res == true) {
-                $('form#trainForm').unbind().submit();
+                $('form#trainForm').submit();
             }
         });
     });

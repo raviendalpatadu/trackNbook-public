@@ -123,7 +123,7 @@ class Model extends Database
             }
             return $this->query($query, $data);
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
     }
 
@@ -173,4 +173,5 @@ class Model extends Database
         }
 
     }
+
 }

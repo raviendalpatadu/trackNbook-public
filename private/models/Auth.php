@@ -114,4 +114,13 @@ class Auth
 
         return $ticketId;
     }
+
+    public static function getTempReservationId()
+    {
+        $timestamp = date('YmdHis');
+        $randomValue = rand(1000, 9999); // Generate a random 4-digit number
+        $tempId = "TMP". $timestamp . "-" . $randomValue;
+
+        return $tempId;
+    }
 }

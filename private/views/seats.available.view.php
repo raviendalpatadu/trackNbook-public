@@ -131,7 +131,7 @@ if (Auth::getReturn() == 'on') {
                             <h1><?php echo (isset(Auth::reservation()['from_station'])) ? Auth::reservation()['from_station']->station_name . "->" : "" ?> <?= (isset(Auth::reservation()['to_station'])) ? Auth::reservation()['to_station']->station_name : "No Trains" ?></h1>
                             <p>Select a seat(s) to proceed</p>
                         </div>
-                        <div class="col-6 d-flex g-10">
+                        <div class="col-6 d-flex g-10 justify-content-end">
                             <!-- from seats selected -->
                             <div id="fromSeatCountSelected" class="d-flex fs-30 fw align-items-end flex-column mobile-align-items-center">
                                 <p class="fs-20">From Seat Seleted</p>
@@ -266,7 +266,7 @@ if (Auth::getReturn() == 'on') {
 
 
                                     <div class="button-base">
-                                        <input type="submit" value="proceed" name="submit">
+                                        <div class="text" id="submitbtn">Proceed</div>
                                         <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
@@ -306,4 +306,23 @@ if (Auth::getReturn() == 'on') {
         $('#fromBtn').removeClass('active');
         $('#toBtn').addClass('active');
     });
+
+    // var submitted = false;
+    $('#submitbtn').on('click', function(e) {
+        var title = 'Important Notice';
+        var message = 'Please note that the selected seats will be reserved for 10 minutes. If the payment is not completed within 10 minutes, the reservation will be cancelled and the seats will be released.';
+        var btnText = 'Proceed';
+        var imgSrc = '<?= ROOT ?>assets/images/sand-clock.png';
+
+
+        makePopupBox(title, message, btnText, imgSrc, function(data) {
+            if (data) {
+                $('#formFromSelectedSeats').submit();
+            }
+        });
+
+        e.preventDefault();
+    });
+
+
 </script>

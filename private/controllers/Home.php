@@ -13,7 +13,7 @@ class Home extends Controller
         $data['stations'] = $station->getStations();
 
         if (isset($_SESSION['reservation'])) {
-            if (Auth::reservation()['reservation_status'] == "Pending") {
+            if (isset(Auth::reservation()['reservation_status']) && Auth::reservation()['reservation_status'] == "Pending") {
                 $reservation = new Reservations();
                 try {
                     foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
@@ -25,6 +25,8 @@ class Home extends Controller
                             $reservation->callProcedure('expire_reservation', array($value));
                         }
                     }
+
+                    
                 } catch (Exception $e) {
                     die($e->getMessage());
                 }

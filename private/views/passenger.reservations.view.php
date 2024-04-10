@@ -2,16 +2,18 @@
 
 <?php
 
-echo "<pre>";
+// echo "<pre>";
 // print_r($data);
-echo "</pre>";
+// echo "</pre>";
 
+if (isset($data['reservations']) && $data['reservations'] != 0) {
 
-$seat_count = array_reduce($data['reservations'], function ($ticket_counts, $item) {
-    $ticket = $item->reservation_ticket_id;
-    $ticket_counts[$ticket] = (isset($ticket_counts[$ticket]) ? $ticket_counts[$ticket] : 0) + 1;
-    return $ticket_counts;
-}, []);
+    $seat_count = array_reduce($data['reservations'], function ($ticket_counts, $item) {
+        $ticket = $item->reservation_ticket_id;
+        $ticket_counts[$ticket] = (isset($ticket_counts[$ticket]) ? $ticket_counts[$ticket] : 0) + 1;
+        return $ticket_counts;
+    }, []);
+}
 
 ?>
 
@@ -56,107 +58,122 @@ $seat_count = array_reduce($data['reservations'], function ($ticket_counts, $ite
                         <?php
                         $count = 1;
                         ?>
-                        <?php foreach ($data['reservations'] as $reservation_key => $reservation) : ?>
-                            <?php
-                            // get previous object
-                            if ($reservation_key > 0) {
-                                $previous = $data['reservations'][$reservation_key - 1];
-                            }
-                            // check if previous object exists
-                            if (isset($previous)) {
-                                // check if previous objects ticket_number is equal to current objects ticket_number
-                                if ($previous->reservation_ticket_id == $reservation->reservation_ticket_id) {
-                                    // if true then continue to next iteration
-                                    continue;
+                        <?php if ($data['reservations'] != 0) : ?>
+                            <?php foreach ($data['reservations'] as $reservation_key => $reservation) : ?>
+                                <?php
+                                // get previous object
+                                if ($reservation_key > 0) {
+                                    $previous = $data['reservations'][$reservation_key - 1];
                                 }
-                            }
+                                // check if previous object exists
+                                if (isset($previous)) {
+                                    // check if previous objects ticket_number is equal to current objects ticket_number
+                                    if ($previous->reservation_ticket_id == $reservation->reservation_ticket_id) {
+                                        // if true then continue to next iteration
+                                        continue;
+                                    }
+                                }
 
-                            ?>
+                                ?>
 
-                            <div class="d-flex p-5 reservation-card width-fill" data-reservationdate="<?= $reservation->reservation_date ?>">
-                                <div class="d-flex flex-column flex-grow g-10 p-10">
-                                    <div class="d-flex justify-content-between">
-                                        <h1 class="fs-16 fw-400"><?= $reservation->reservation_ticket_id ?> </h1>
-                                        <span class="fs-14"><?= $reservation->reservation_date ?></span>
-                                    </div>
-                                    <!-- from station ,time with a arrow svg and to station and time -->
-                                    <div class="d-flex flex-wrap g-20 justify-content-between align-items-center">
-                                        <div class="d-flex flex-wrap justify-content-around align-items-center flex-grow">
-                                            <div class="d-flex flex-column g-20 align-items-center">
-                                                <div>
-                                                    <p class="fs-14 fw-500"><?= $reservation->reservation_start_station ?></p>
-                                                    <p class="fs-12"><?= $reservation->estimated_departure_time ?></p>
+                                <div class="d-flex p-5 reservation-card width-fill" data-reservationdate="<?= $reservation->reservation_date ?>">
+                                    <div class="d-flex flex-column flex-grow g-10 p-10">
+                                        <div class="d-flex justify-content-between">
+                                            <h1 class="fs-16 fw-400"><?= $reservation->reservation_ticket_id ?> </h1>
+                                            <span class="fs-14"><?= $reservation->reservation_date ?></span>
+                                        </div>
+                                        <!-- from station ,time with a arrow svg and to station and time -->
+                                        <div class="d-flex flex-wrap g-20 justify-content-between align-items-center">
+                                            <div class="d-flex flex-wrap justify-content-around align-items-center flex-grow">
+                                                <div class="d-flex flex-column g-20 align-items-center">
+                                                    <div>
+                                                        <p class="fs-14 fw-500"><?= $reservation->reservation_start_station ?></p>
+                                                        <p class="fs-12"><?= $reservation->estimated_departure_time ?></p>
+                                                    </div>
+
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                            <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                            <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                            <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                        </svg>
+
+                                                        <!-- time in hours and minutes using php-->
+                                                        <p class="fs-12 fw-400"><?php
+                                                                                // display time in hours and minutes eg 2h 30m
+                                                                                $start = new DateTime($reservation->estimated_arrival_time);
+                                                                                $end = new DateTime($reservation->estimated_departure_time);
+                                                                                $diff = $start->diff($end);
+                                                                                echo $diff->format('%hh %im');
+                                                                                ?></p>
+                                                    </div>
                                                 </div>
 
-                                                <div class="d-flex g-5 align-items-end">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
-                                                        <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
-                                                        <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
-                                                        <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                <div class="align-items-center arrow-svg d-flex flex-column g-20 ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                        <path fill="currentColor" d="m16.172 9l-6.071-6.071l1.414-1.414L20 10l-.707.707l-7.778 7.778l-1.414-1.414L16.172 11H0V9z"></path>
                                                     </svg>
 
-                                                    <!-- time in hours and minutes using php-->
-                                                    <p class="fs-12 fw-400"><?php
-                                                                            // display time in hours and minutes eg 2h 30m
-                                                                            $start = new DateTime($reservation->estimated_arrival_time);
-                                                                            $end = new DateTime($reservation->estimated_departure_time);
-                                                                            $diff = $start->diff($end);
-                                                                            echo $diff->format('%hh %im');
-                                                                            ?></p>
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                            <path fill="currentColor" d="M12.615 12V5H17v7zm1-1H16V6h-2.385zM17 17H8.615L6 8.058V5h1v3l2.385 8H17zm-8.596 3v-1h8.577v1zm5.211-14H16z"></path>
+                                                        </svg>
+                                                        <p class="fs-12 fw-400"><?= $reservation->reservation_compartment_type ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-column g-20 align-items-center">
+                                                    <div>
+                                                        <p class="fs-14 fw-500"><?= $reservation->reservation_end_station ?></p>
+                                                        <p class="fs-12"><?= $reservation->estimated_arrival_time ?></p>
+                                                    </div>
+
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                            <path fill="currentColor" d="M10.5 9A3.5 3.5 0 1 1 14 5.5A3.504 3.504 0 0 1 10.5 9m0-5A1.5 1.5 0 1 0 12 5.5A1.502 1.502 0 0 0 10.5 4m11.974 27.313L19.34 24h-7.101a4.007 4.007 0 0 1-3.867-2.97l-1.634-6.127a3.899 3.899 0 0 1 7.535-2.009L15.1 16H21v2h-7.436l-1.223-4.59a1.9 1.9 0 0 0-3.67.978l1.633 6.126A2.005 2.005 0 0 0 12.239 22h8.42l3.654 8.525zM30 6h-4V2h-2v4h-4v2h4v4h2V8h4z"></path>
+                                                            <path fill="currentColor" d="M18 28H7.768a2.003 2.003 0 0 1-1.933-1.485L2.033 12.258l1.933-.516L7.768 26H18Z"></path>
+                                                        </svg>
+
+                                                        <p class="fs-12 fw-400"><?= $seat_count[$reservation->reservation_ticket_id] ?></p>
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="align-items-center arrow-svg d-flex flex-column g-20 ">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
-                                                    <path fill="currentColor" d="m16.172 9l-6.071-6.071l1.414-1.414L20 10l-.707.707l-7.778 7.778l-1.414-1.414L16.172 11H0V9z"></path>
-                                                </svg>
+                                            <div class="d-flex align-items-end flex-column g-20">
+                                                <!-- more info button -->
+                                                <?php
+                                                $res_id = '';
+                                                if (!empty($reservation->reservation_ticket_id)) {
+                                                    $res_id = $reservation->reservation_ticket_id;
+                                                } else {
+                                                    $res_id = $reservation->reservation_status;
+                                                }
 
-                                                <div class="d-flex g-5 align-items-end">
+                                                ?>
+                                                <button class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8" id="more" data-ticketId="<?= $res_id ?>">
+                                                    More
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                        <path fill="currentColor" d="M12.615 12V5H17v7zm1-1H16V6h-2.385zM17 17H8.615L6 8.058V5h1v3l2.385 8H17zm-8.596 3v-1h8.577v1zm5.211-14H16z"></path>
+                                                        <g fill="currentColor">
+                                                            <path d="M12 9a2 2 0 1 0 0-4a2 2 0 0 0 0 4m2 3a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2 7a2 2 0 1 0 0-4a2 2 0 0 0 0 4"></path>
+                                                            <path fill-rule="evenodd" d="M24 12c0 6.627-5.373 12-12 12S0 18.627 0 12S5.373 0 12 0s12 5.373 12 12m-2 0c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" clip-rule="evenodd"></path>
+                                                        </g>
                                                     </svg>
-                                                    <p class="fs-12 fw-400"><?= $reservation->reservation_compartment_type ?></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex flex-column g-20 align-items-center">
-                                                <div>
-                                                    <p class="fs-14 fw-500"><?= $reservation->reservation_end_station ?></p>
-                                                    <p class="fs-12"><?= $reservation->estimated_arrival_time ?></p>
-                                                </div>
+                                                </button>
 
                                                 <div class="d-flex g-5 align-items-end">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
-                                                        <path fill="currentColor" d="M10.5 9A3.5 3.5 0 1 1 14 5.5A3.504 3.504 0 0 1 10.5 9m0-5A1.5 1.5 0 1 0 12 5.5A1.502 1.502 0 0 0 10.5 4m11.974 27.313L19.34 24h-7.101a4.007 4.007 0 0 1-3.867-2.97l-1.634-6.127a3.899 3.899 0 0 1 7.535-2.009L15.1 16H21v2h-7.436l-1.223-4.59a1.9 1.9 0 0 0-3.67.978l1.633 6.126A2.005 2.005 0 0 0 12.239 22h8.42l3.654 8.525zM30 6h-4V2h-2v4h-4v2h4v4h2V8h4z"></path>
-                                                        <path fill="currentColor" d="M18 28H7.768a2.003 2.003 0 0 1-1.933-1.485L2.033 12.258l1.933-.516L7.768 26H18Z"></path>
-                                                    </svg>
-
-                                                    <p class="fs-12 fw-400"><?= $seat_count[$reservation->reservation_ticket_id] ?></p>
+                                                    <p class="fs-14 fw-500"><?= $reservation->reservation_status ?></p>
                                                     </p>
                                                 </div>
                                             </div>
+
                                         </div>
 
-                                        <div class="d-flex align-items-center flex-column g-5">
-                                            <!-- more info button -->
-
-                                            <button class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8" id="more" data-ticketId="<?= $reservation->reservation_ticket_id ?>">
-                                                More
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                    <g fill="currentColor">
-                                                        <path d="M12 9a2 2 0 1 0 0-4a2 2 0 0 0 0 4m2 3a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2 7a2 2 0 1 0 0-4a2 2 0 0 0 0 4"></path>
-                                                        <path fill-rule="evenodd" d="M24 12c0 6.627-5.373 12-12 12S0 18.627 0 12S5.373 0 12 0s12 5.373 12 12m-2 0c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" clip-rule="evenodd"></path>
-                                                    </g>
-                                                </svg>
-                                            </button>
-                                        </div>
 
                                     </div>
-
-
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                     <!-- </div> -->
                 </div>
@@ -318,70 +335,160 @@ $seat_count = array_reduce($data['reservations'], function ($ticket_counts, $ite
             var ticketId = $(this).data('ticketid')
             console.log(ticketId);
 
+
+
             $('#selectResevation').addClass('display-none');
             // $('#loader').removeClass('display-none');
             $('#reservationData').removeClass('display-none');
             // $('#reservationData').hide();
 
-            $.ajax({
-                url: '<?= ROOT ?>ajax/getReservationData/' + ticketId,
-                type: 'GET',
 
-                success: function(data, response) {
-                    // console.log(data);
-                    var data = JSON.parse(data);
-                    console.log(data);
 
-                    var ticketDataDown = $('#ticketDataDown');
+            // check is the ticket id has the the 1st 3 letters as 'WRT'
+            var regex = new RegExp('TMP', 'i');
 
-                    // add data to the ticket summary
-                    ticketDataDown.find('#refNo').text('Ref No: ' + data[0].reservation_ticket_id);
-                    ticketDataDown.find('#price').text(data[0].reservation_price);
-                    ticketDataDown.find('#trainNo').text(data[0].reservation_train_id);
-                    ticketDataDown.find('#trainName').text(data[0].reservation_train_name);
-                    ticketDataDown.find('#reservationDate').text(data[0].reservation_date);
-                    ticketDataDown.find('#startStation').text(data[0].reservation_start_station);
-                    ticketDataDown.find('#endStation').text(data[0].reservation_end_station);
-                    ticketDataDown.find('#arraivalTime').text(data[0].estimated_arrival_time);
-                    ticketDataDown.find('#noOfPassengers').text(data.length)
-                    ticketDataDown.find('#cancelReservation').data('ticketid', data[0].reservation_ticket_id);
+            // warrant reservation data
 
-                    // add data to the compartment details
-                    var compartmentDeatails = $('#compartmentDetails');
-                    compartmentDeatails.empty();
+            // warrant reservation data
+            if (regex.test(ticketId)) {
+                $.ajax({
+                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId,
+                    type: 'GET',
 
-                    var thead = ['NIC', 'Gender', 'Seat No']
+                    success: function(data, response) {
+                        // console.log(data);
+                        var data = JSON.parse(data);
+                        console.log(data);
 
-                    thead.forEach(function(heading) {
-                        var tr = $('<tr id="heading" data-heading="' + heading + '"/>');
-                        tr.append('<th>' + heading + '</th>');
+                        var ticketDataDown = $('#ticketDataDown');
 
-                        data.forEach(function(passenger) {
-                            if (heading == 'NIC') {
-                                tr.append('<td>' + passenger.reservation_passenger_nic + '</td>');
-                            } else if (heading == 'Gender') {
-                                tr.append('<td>' + passenger.reservation_passenger_gender + '</td>');
-                            } else if (heading == 'Seat No') {
-                                tr.append('<td>' + passenger.reservation_seat + '</td>');
-                            }
+                        // add data to the ticket summary
+                        ticketDataDown.find('#refNo').text('Ref No: ' + data[0].reservation_ticket_id);
+                        ticketDataDown.find('#price').text(data[0].reservation_price);
+                        ticketDataDown.find('#trainNo').text(data[0].reservation_train_id);
+                        ticketDataDown.find('#trainName').text(data[0].reservation_train_name);
+                        ticketDataDown.find('#reservationDate').text(data[0].reservation_date);
+                        ticketDataDown.find('#startStation').text(data[0].reservation_start_station);
+                        ticketDataDown.find('#endStation').text(data[0].reservation_end_station);
+                        ticketDataDown.find('#arraivalTime').text(data[0].estimated_arrival_time);
+                        ticketDataDown.find('#noOfPassengers').text(data.length)
+                        ticketDataDown.find('#cancelReservation').data('ticketid', data[0].reservation_ticket_id);
+
+                        // add data to the compartment details
+                        var compartmentDeatails = $('#compartmentDetails');
+                        compartmentDeatails.empty();
+
+                        var thead = ['NIC', 'Gender', 'Seat No']
+
+                        thead.forEach(function(heading) {
+                            var tr = $('<tr id="heading" data-heading="' + heading + '"/>');
+                            tr.append('<th>' + heading + '</th>');
+
+                            data.forEach(function(passenger) {
+                                if (heading == 'NIC') {
+                                    tr.append('<td>' + passenger.reservation_passenger_nic + '</td>');
+                                } else if (heading == 'Gender') {
+                                    tr.append('<td>' + passenger.reservation_passenger_gender + '</td>');
+                                } else if (heading == 'Seat No') {
+                                    tr.append('<td>' + passenger.reservation_seat + '</td>');
+                                }
+                            });
+                            compartmentDeatails.append(tr);
                         });
-                        compartmentDeatails.append(tr);
-                    });
 
-                    // add qr code
-                    $('#qr_code').empty();
-                    var qrcode = new QRCode("qr_code", {
-                        text: data[0].reservation_ticket_id,
-                        width: 128,
-                        height: 128,
-                        colorDark: "#324054",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
+                        // 
+                       var reservation_status = $('<div></div>').text(data[0].reservation_status);
+                       reservation_status.addClass('fs-18 fw-800');
 
-                }
+                    //    chanege the reservation color according to the status
+                        if (data[0].reservation_status == 'Pending' || data[0].reservation_status == 'Approval Pending') {
+                            reservation_status.addClass('yellow');
+                        } else if (data[0].reservation_status == 'Reserved') {
+                            reservation_status.addClass('green');
+                        } else if (data[0].reservation_status == 'Cancelled' || data[0].reservation_status == 'Rejected') {
+                            reservation_status.addClass('red');
+                        } else if (data[0].reservation_status == 'Reserved') {
+                            reservation_status.addClass('Border-blue');
+                        }
 
-            });
+                        $('#qr_code').empty();
+                        $('#qr_code').append(reservation_status);
+
+                        //remove download ticket button
+                        $('#downloadTicket').hide();
+
+                        // change cancel reservation button text
+                        $('#cancelReservation').text('Cancel Warrant');
+
+                    }
+
+                });
+            }
+            // normal reservation data
+            else {
+                $.ajax({
+                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId,
+                    type: 'GET',
+
+                    success: function(data, response) {
+                        console.log(data);
+                        var data = JSON.parse(data);
+                        console.log(data);
+
+                        var ticketDataDown = $('#ticketDataDown');
+
+                        // add data to the ticket summary
+                        ticketDataDown.find('#refNo').text('Ref No: ' + data[0].reservation_ticket_id);
+                        ticketDataDown.find('#price').text(data[0].reservation_price);
+                        ticketDataDown.find('#trainNo').text(data[0].reservation_train_id);
+                        ticketDataDown.find('#trainName').text(data[0].reservation_train_name);
+                        ticketDataDown.find('#reservationDate').text(data[0].reservation_date);
+                        ticketDataDown.find('#startStation').text(data[0].reservation_start_station);
+                        ticketDataDown.find('#endStation').text(data[0].reservation_end_station);
+                        ticketDataDown.find('#arraivalTime').text(data[0].estimated_arrival_time);
+                        ticketDataDown.find('#noOfPassengers').text(data.length)
+                        ticketDataDown.find('#cancelReservation').data('ticketid', data[0].reservation_ticket_id);
+
+                        // add data to the compartment details
+                        var compartmentDeatails = $('#compartmentDetails');
+                        compartmentDeatails.empty();
+
+                        var thead = ['NIC', 'Gender', 'Seat No']
+
+                        thead.forEach(function(heading) {
+                            var tr = $('<tr id="heading" data-heading="' + heading + '"/>');
+                            tr.append('<th>' + heading + '</th>');
+
+                            data.forEach(function(passenger) {
+                                if (heading == 'NIC') {
+                                    tr.append('<td>' + passenger.reservation_passenger_nic + '</td>');
+                                } else if (heading == 'Gender') {
+                                    tr.append('<td>' + passenger.reservation_passenger_gender + '</td>');
+                                } else if (heading == 'Seat No') {
+                                    tr.append('<td>' + passenger.reservation_seat + '</td>');
+                                }
+                            });
+                            compartmentDeatails.append(tr);
+                        });
+
+                        // add qr code
+                        $('#qr_code').empty();
+                        var qrcode = new QRCode("qr_code", {
+                            text: data[0].reservation_ticket_id,
+                            width: 128,
+                            height: 128,
+                            colorDark: "#324054",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+
+                    }
+
+                });
+            }
+
+
+
         });
 
 

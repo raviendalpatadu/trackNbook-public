@@ -3463,6 +3463,26 @@
   color: #cccccc;
 }
 
+.border-bottom-yellow {
+  border-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-color: #f7b500;
+}
+
+.border-top-yellow {
+  border-top: 1px;
+  border-top-style: solid;
+  border-top-color: #f7b500;
+}
+
+.bg-yellow {
+  background-color: #f7b500;
+}
+
+.yellow {
+  color: #f7b500;
+}
+
 .fw-100 {
   font-weight: 100;
 }
@@ -3588,6 +3608,9 @@
 }
 .profile .profile-img img {
   width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 1000px;
 }
 
@@ -4489,4 +4512,164 @@ div#reservations div#loader {
   z-index: 999;
   background: rgba(0, 0, 0, 0.4);
   transform: translate(-50%, -50%);
+}
+
+.warrant-upload-success-popup-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+}
+
+.warrant-upload-success-popup-box .popup-box-content {
+  background: #fff;
+  width: 40vw;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-header h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Border-blue);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Border-blue);
+}
+
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-body img {
+  width: 10em;
+}
+
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-body p {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.warrant-upload-success-popup-box .popup-box-content div.popup-box-content-footer a div.popup-box-content-footer-button {
+  padding: 10px 15px;
+  background: var(--Border-blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: right;
+}
+.warrant-upload-success-popup-box .popup-box-content div.popup-box-content-footer a div.popup-box-content-footer-button:hover {
+  background: var(--Selected-Blue);
+  color: var(--Border-blue);
+}
+
+.main-popup-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+}
+
+.main-popup-box .box {
+  display: flex;
+  gap: 15px;
+  background: #fff;
+  width: 40vw;
+  max-height: 60vh;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+  animation: slide-down 0.5s ease;
+}
+
+.main-popup-box .box .heading {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Border-blue);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Border-blue);
+}
+
+.main-popup-box .box .body {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.main-popup-box .box .body img {
+  width: 10em;
+}
+
+.main-popup-box .box .body p {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.main-popup-box .box .footer {
+  float: right;
+}
+
+.main-popup-box .box .footer button {
+  border: none;
+  float: right;
+}
+
+.main-popup-box .box .footer button div {
+  padding: 10px 15px;
+  background: var(--Border-blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: -moz-fit-content;
+  width: fit-content;
+  float: right;
+}
+.main-popup-box .box .footer button div:hover {
+  background: var(--Selected-Blue);
+  color: var(--Border-blue);
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }/*# sourceMappingURL=ravien.css.map */

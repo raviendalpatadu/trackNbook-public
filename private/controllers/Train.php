@@ -40,7 +40,7 @@ class Train extends Controller
         $train = new Trains();
 
 
-        if (isset($_POST['submit'])) {
+        if (($id == 'modifysearch' || $id == 'seatsearch') && $_SERVER['REQUEST_METHOD'] == 'POST') {
             $data['from_date'] = $_POST['from_date'];
             $data['from_station'] = $station->getOneStation('station_id', $_POST['from_station']);
             $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
@@ -54,7 +54,7 @@ class Train extends Controller
 
             $_SESSION['reservation'] = $data;
 
-            if ($_POST['submit'] == 'Proceed') {
+            if ($id == 'seatsearch') {
                 $_SESSION['reservation']['from_compartment_and_train'] = mb_split('-', $_POST['from_compartment_and_train']);
                 if (isset($_POST['to_compartment_and_train'])) {
                     $_SESSION['reservation']['to_compartment_and_train'] = mb_split('-', $_POST['to_compartment_and_train']);
@@ -63,6 +63,7 @@ class Train extends Controller
                 $this->redirect('train/seatsAvailable/' . $_SESSION['reservation']['from_compartment_and_train'][0] . '/' . $_SESSION['reservation']['from_compartment_and_train'][1]);
             }
         }
+
         $data = $_SESSION['reservation'];
 
         $data['stations'] = $station->findAll();
@@ -75,20 +76,11 @@ class Train extends Controller
             $data['trains_available']['to_trains'] = $train->search($inverse_search);
         }
 
+        echo '<pre>';
+        print_r($_SESSION['reservation']);
+        echo '</pre>';
+
         $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
-
-        // $train_count = 0;
-        // foreach ($data['trains_available']['from_trains'] as $key => $value) {
-        //     if ($key > 0) {
-        //         if ($value->train_id != $data['trains_available']['from_trains'][$key - 1]->train_id) {
-        //             $train_count++;
-        //         }
-        //     } else {
-        //         $train_count++;
-        //     }
-        // }
-
-
 
 
         $this->view('trains.available', $data);
@@ -158,9 +150,10 @@ class Train extends Controller
 
         }
 
-        if (isset($_POST['submit'])) {
 
+        if (isset($_POST['submit']) || $_POST) {
 
+        
             $reservation = new Reservations();
 
             $reservationData = array();

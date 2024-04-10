@@ -3,11 +3,14 @@
 class WarrantsReservations extends Model
 {
     protected $table = 'tbl_warrant_reservation';
+    
 
     public function __construct()
     {
         parent::__construct();
     }
+
+    
 
     public function getReservation()
     {
@@ -25,8 +28,8 @@ class WarrantsReservations extends Model
         try {
             $con = $this->connect();
             $con->beginTransaction();
-
-            $query = "SELECT tbl_warrant_reservation.*, r.* FROM tbl_warrant_reservation JOIN tbl_reservation r ON tbl_warrant_reservation.warrent_reservation_id = r.reservation_id WHERE {$table}.{$column} = :value;";
+            // modify query to get image data as well
+            $query = "SELECT tbl_warrant_reservation.*, r.* FROM tbl_warrant_reservation JOIN tbl_reservation r ON tbl_warrant_reservation.warrant_reservation_id = r.reservation_id WHERE {$table}.{$column} = :value;";
 
             $stm = $con->prepare($query);
             $stm->execute(array(
@@ -55,7 +58,7 @@ class WarrantsReservations extends Model
 
                 . "FROM tbl_warrant_reservation\n"
 
-                . "JOIN tbl_reservation r ON tbl_warrant_reservation.warrent_reservation_id  = r.reservation_id;";
+                . "JOIN tbl_reservation r ON tbl_warrant_reservation.warrant_reservation_id  = r.reservation_id;";
             $stm = $con->query($query);
 
             $data = $stm->fetchAll(PDO::FETCH_OBJ);

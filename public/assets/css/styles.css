@@ -1595,3 +1595,16 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+.upload-img-btn {
+  border-radius: 100px;
+  display: inline-flex;
+  padding: 10px;
+  position: relative;
+  right: 60px;
+}
+
+.upload-img-btn input{
+  position: absolute;
+  opacity: 0;
+}
