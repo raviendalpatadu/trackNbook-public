@@ -216,7 +216,7 @@ $colors: (
 
 @each $key, $val in $colors {
   .border-bottom-#{$key} {
-    border-bottom: 10px;
+    border-bottom: 8px;
     border-bottom-style: solid;
     border-bottom-color: $val;
   }
@@ -417,6 +417,10 @@ $colors: (
     .mobile-width-#{key} {
       width: $val !important;
     }
+
+    .mobile-d-flex{
+      display: flex !important;
+    }
   }
 }
 
@@ -476,10 +480,15 @@ $colors: (
 .home-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-
   font-size: 42px;
   color: var(--White);
 }
+
+.home-text .mou-home-text{
+  color: var(--blue);
+
+}
+
 
 @media screen and (max-width: 768px) {
   .bg-home-desktop {

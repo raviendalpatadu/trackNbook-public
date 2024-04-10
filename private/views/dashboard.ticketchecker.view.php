@@ -1,9 +1,9 @@
 <?php $this->view("./includes/header"); ?>
 
 
-<body>
+<body class="mobile-d-flex mobile-min-height-80">
     <div class="flex-grow">
-        <?php $this->view("./includes/dashboard-navbar") ?>
+        <?php $this->view("./includes/mobile-navbar") ?>
         <main class=" flex-grow d-flex align-items-end justify-content-center bg-ticket-checker">
             <div class="notificationCard max-width  mt-50 d-flex flex-column flex-grow justify-content-center align-items-center">
                 <div class="d-flex flex-row">
@@ -13,7 +13,7 @@
                     <div class="d-flex flex-column justify-content-center align-items-center g-20">
 
                         <button class="mou-staff-card" id="qr">
-                            <a href="<?= ROOT ?>ticketchecker/QR" >
+                            <a href="<?= ROOT ?>ticketchecker/QR">
                                 <div class="mou-staff-card-text">QR Scan</div>
                             </a>
                         </button>

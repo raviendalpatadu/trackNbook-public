@@ -12,7 +12,7 @@
 <body>
 
     <?php $this->view("./includes/sidebar") ?>
-    <div class="column-left" id="blur">
+    <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="container">
@@ -123,39 +123,23 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12">
-                                    <button class="button mt-20" id="cancelReservationBtn">
+                                <div class="col-6">
+                                    <button class="button mt-20 ">
                                         <div class="button-base">
-                                            <div class="text">Cancel Reservation</div>
+                                            <div class="text">Print Ticket</div>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+                                    <button class="button mt-20 ">
+                                        <div class="button-base">
+                                            <div class="text">Cansel Reservation</div>
                                         </div>
                                     </button>
                                 </div>
                             </div>
 
-                            <div id="mou-popup">
-                                <div class="mou-popup-content p-10">
-                                    <div class="mou-popup-header">
-                                        <h2>Are you sure you want to cancel?</h2>
-                                    </div>
-                                    <div class="mou-popup-body">
-                                        <p>By cancelling this booking, you will lose the opportunity to travel on the selected train. Are you sure you want to cancel?</p>
-                                    </div>
-                                    <div class="mou-popup-footer g-50 d-flex flex-row">
-                                        <button class="button">
-                                            <a href="<?= ROOT ?>staffticketing/refund">
-                                                <div class="button-base">
-                                                    <div class="text">Yes</div>
-                                                </div>
-                                            </a>
-                                        </button>
-                                        <button class="button">
-                                            <div class="button-base">
-                                                <div class="text">No</div>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,13 +150,3 @@
 </body>
 
 </html>
-
-<script>
-    $(document).ready(function() {
-        $('#cancelReservationBtn').click(function() {
-            $('#mou-popup').css({
-                'display': 'flex'
-            });
-        });
-    });
-</script>

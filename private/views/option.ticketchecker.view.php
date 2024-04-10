@@ -1,9 +1,10 @@
 <?php $this->view("./includes/header"); ?>
 
 <body>
+
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
-        <main>
+        <?php $this->view("./includes/navbar") ?>
+        <main class="bg">
             <div class="container d-flex flex-column justify-content-center align-items-center">
 
                 <div class="notificationCard  mt-50 d-flex flex-column justify-content-center align-items-center">
@@ -17,10 +18,10 @@
 
 
                     <div class="text-inputs d-flex mt-20">
-                        <div class="input-text-label text lightgray-font">Train ID</div>
+                        <div class="input-text-label lightgray-font">Train ID</div>
                         <div class="input-field">
-                            <div class="text">
-                                <input type="text" class="type-here" placeholder="Staff ID" name="" id="trainId">
+                            <div class="">
+                                <input type="text" class="type-here" placeholder="Enter Your Train ID" name="" id="trainId">
                             </div>
                         </div>
                     </div>
@@ -41,12 +42,12 @@
                             </div>
                         </a>
                     </button>
-                    
+
                 </div>
             </div>
         </main>
         <?php $this->view('includes/footer'); ?>
-</div>
+    </div>
 </body>
 
 </html>

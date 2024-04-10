@@ -18,6 +18,18 @@ class StaffTicketing extends Controller
         $this->view('ticket.staffticketing');
     }
 
+    // function summary($id = '')
+    // {
+    //     $resevation = new Reservations();
+    //     $data = array();
+    //     $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+
+    //     $train = new Trains();
+    //     $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+    //     $this->view('summary.staffticketing', $data);
+    // }
+
     function summary($id = '')
     {
         $resevation = new Reservations();
@@ -87,7 +99,7 @@ class StaffTicketing extends Controller
     {
         $warrant_resevation = new WarrantsReservations();
         $data = array();
-        $result = $warrant_resevation->getReservations("warrant_id", $id, "tbl_warrant_reservation");
+        $result = $warrant_resevation->getReservations($id);
         $data['reservations'] = $result[0];
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
@@ -216,10 +228,10 @@ class StaffTicketing extends Controller
         // echo $id;
         try {
             $warrant_resevation->update($id, array(
-                'warrant_status' => 'rejected'
+                'warrant_status' => 'Rejected'
             ), "warrant_id");
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
 
 

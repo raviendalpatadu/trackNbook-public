@@ -1,81 +1,268 @@
-
 <?php $this->view("./includes/header") ?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
+        <main class="bg">
+            <div class="row">
+                <div class="col-12 p-20">
 
-        <main class="bg-light-blue" >
-            <div class="cotainer ">
-                <!-- <div class="row">
-                    <div class="col-12">
-                        <div class="card card-body">
-                            <h1>Dashboard Ticketing</h1>
-                            <p>Welcome to the dashboard</p>
+                    <div class="d-flex flex-row justify-content-between g-50">
+                        <div class="col-4">
+                            <div class="dashboard-card  d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/reservationList">
+                                    <div class="d-flex flex-column g-10">
+                                        <p1 class="mb-4 align-items-start ">Total Reservations</p1>
+                                        <p2>230</p2>
+                                    </div>
+                                </a>
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
+                                        <path d="M17.68 5.47H22V8h-4.32zM17.68 8.98H22v2.53h-4.32zM17.68 12.49H22v2.53h-4.32zM2 16h4.32v2.53H2zM7.22 16h4.32v2.53H7.22zM12.45 16h4.32v2.53h-4.32zM17.68 16H22v2.53h-4.32zM12.45 12.49h4.32v2.53h-4.32zM7.22 12.49h4.32v2.53H7.22zM7.22 8.98h4.32v2.53H7.22z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/refundList">
+                                    <div class="d-flex flex-column g-10">
+                                        <p1 class="mb-4">Refund Requests</p1>
+                                        <p2>23</p2>
+                                    </div>
+                                </a>
+                                <div class="d-flex  ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
+                                        <path d="M14 9h8v6h-8z"></path>
+                                        <path d="M20 3H5C3.346 3 2 4.346 2 6v12c0 1.654 1.346 3 3 3h15c1.103 0 2-.897 2-2v-2h-8c-1.103 0-2-.897-2-2V9c0-1.103.897-2 2-2h8V5c0-1.103-.897-2-2-2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
+                                    <div class="d-flex flex-column g-10">
+                                        <p1 class="mb-4">Warrants to be Verified</p1>
+                                        <p2>28</p2>
+                                    </div>
+                                </a>
+                                <div class="d-flex  ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
+                                        <path d="M12 2h-1v9H2v1a10 10 0 0 0 17.07 7.07A10 10 0 0 0 12 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                <div class="d-flex flex-column g-10">
+                                    <p1 class="mb-4">Warrants Rejected</p1>
+                                    <p2 class="blue">10</p2>
+                                </div>
+                                <div class="d-flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
+                                        <path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V7h16l.001 12H4z"></path>
+                                        <path d="m15.707 10.707-1.414-1.414L12 11.586 9.707 9.293l-1.414 1.414L10.586 13l-2.293 2.293 1.414 1.414L12 14.414l2.293 2.293 1.414-1.414L13.414 13z"></path>
+                                    </svg>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> -->
-                <div class="row g-20 mt-50 ml-20 mr-20">
-                    <div class="col-3">
-                        <div class="card-dashboard">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="37" viewBox="0 0 31 37" fill="none">
-                            <path d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z" fill="black"/>
-                        </svg>
-                            <p class="card-text lightgray-font">Number of Reservations</p>
-                            <p class="card-text lightgray-font">12,000</p>
+
+                    <!-- charts -->
+                    <div class="row g-20 py-20 graphbox">
+                        <!-- graph left -->
+                        <div class="col-12 box bg-light-blue p-20">
+                            <!-- graph head -->
+                            <h4 class="Primary-Gray">Reservation Analysis</h4>
+                            <h5 class="Primary-Gray">Overview of Latest Week</h5>
+                            <canvas id="bookingChart" height="100%" width="500px"></canvas>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7  d-flex  flex-column">
+                            <div class="d-flex flex-column align-items-start p-20">
+                                <div class="d-flex flex-column width-fill bg-white g-5 p-20 mb-10 align-items-start">
+                                    <div class="d-flex  ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
+                                            <path d="M14 9h8v6h-8z"></path>
+                                            <path d="M20 3H5C3.346 3 2 4.346 2 6v12c0 1.654 1.346 3 3 3h15c1.103 0 2-.897 2-2v-2h-8c-1.103 0-2-.897-2-2V9c0-1.103.897-2 2-2h8V5c0-1.103-.897-2-2-2z"></path>
+                                        </svg>
+                                    </div>
+                                    <h4 class="Primary-Gray">Refund Requests</h4>
+
+
+                                </div>
+                                <div class="d-flex align-items-center graphbox bg-light-blue">
+                                    <table class="mou-dashboard-table">
+                                        <thead>
+                                            <tr class="row p-20">
+                                                <th class="col-3 d-flex align-items-center">
+                                                    <div class="col-4">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+
+                                                        </div>
+                                                    </div>
+                                                    NIC
+                                                </th>
+                                                <th class="col-2">Date</th>
+                                                <th class="col-3">Passenger</th>
+                                                <th class="col-2 d-flex align-items-center">
+                                                    <div class="col-4">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
+
+                                                        </div>
+                                                    </div>
+                                                    Class
+
+                                                </th>
+                                                <th class="col-1"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr class="row p-20">
+                                                <td class="col-3 d-flex align-items-center">
+                                                    200167801725
+                                                </td>
+                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
+                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
+                                                <td class="col-2 d-flex align-items-center">
+                                                    First Class
+                                                </td>
+                                                <td class="col-1 d-flex align-items-center g-5">
+                                                    <div class="badge-base bg-Selected-Blue">
+                                                        <div class="button-base bg-light-blue">
+                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
+                                                                <div class="text blue">View</div>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tbody>
+
+                                            <tr class="row p-20">
+                                                <td class="col-3 d-flex align-items-center">
+                                                    200167801725
+                                                </td>
+                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
+                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
+                                                <td class="col-2 d-flex align-items-center">
+                                                    First Class
+                                                </td>
+                                                <td class="col-1 d-flex align-items-center g-5">
+                                                    <div class="badge-base bg-Selected-Blue">
+                                                        <div class="button-base bg-light-blue">
+                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
+                                                                <div class="text blue">View</div>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tbody>
+
+                                            <tr class="row p-20">
+                                                <td class="col-3 d-flex align-items-center">
+                                                    200167801725
+                                                </td>
+                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
+                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
+                                                <td class="col-2 d-flex align-items-center">
+                                                    First Class
+                                                </td>
+                                                <td class="col-1 d-flex align-items-center g-5">
+                                                    <div class="badge-base bg-Selected-Blue">
+                                                        <div class="button-base bg-light-blue">
+                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
+                                                                <div class="text blue">View</div>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tbody>
+
+                                            <tr class="row p-20">
+                                                <td class="col-3 d-flex align-items-center">
+                                                    200167801725
+                                                </td>
+                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
+                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
+                                                <td class="col-2 d-flex align-items-center">
+                                                    First Class
+                                                </td>
+                                                <td class="col-1 d-flex align-items-center g-5">
+                                                    <div class="badge-base bg-Selected-Blue">
+                                                        <div class="button-base bg-light-blue">
+                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
+                                                                <div class="text blue">View</div>
+
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="col-5 p-20 ">
+                            <div class="">
+                                <div class="box bg-light-blue">
+                                    <!--graph head -->
+                                    <h4 class="Primary-Gray">Reservation Analysis</h4>
+                                    <h5 class="Primary-Gray">Overview of Latest Month</h5>
+                                    <canvas id="bookingpie"></canvas>
+
+                                </div>
+                            </div>
+                            <!-- graph right -->
+
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="card-dashboard">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="37" viewBox="0 0 31 37" fill="none">
-                            <path d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z" fill="black"/>
-                        </svg>
-                            <p class="card-text lightgray-font">Number of Cancellations</p>
-                            <p class="card-text lightgray-font">12,000</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-3">
-                        <div class="card-dashboard"><a href="<?=ROOT?>staffticketing/warrant">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="37" viewBox="0 0 31 37" fill="none">
-                            <path d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z" fill="black"/>
-                        </svg>
-                            <p class="card-text lightgray-font">To be verify</p>
-                            <p class="card-text lightgray-font">View</p></a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card-dashboard "><a href="<?=ROOT?>staffticketing/warrant">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="31" height="37" viewBox="0 0 31 37" fill="none">
-                            <path d="M30.2465 8.88366L22.3889 15.5693V34.4356C22.3889 35.1378 22.0929 35.7407 21.5009 36.2444C20.9089 36.7481 20.2002 37 19.375 37C18.5498 37 17.8411 36.7481 17.2491 36.2444C16.6571 35.7407 16.3611 35.1378 16.3611 34.4356V25.6436H14.6389V34.4356C14.6389 35.1378 14.3429 35.7407 13.7509 36.2444C13.1589 36.7481 12.4502 37 11.625 37C10.7998 37 10.0911 36.7481 9.49913 36.2444C8.90712 35.7407 8.61111 35.1378 8.61111 34.4356V15.5693L0.753472 8.88366C0.251157 8.45627 0 7.93729 0 7.32673C0 6.71617 0.251157 6.1972 0.753472 5.7698C1.27373 5.34241 1.88817 5.12871 2.59679 5.12871C3.30541 5.12871 3.91088 5.34241 4.41319 5.7698L10.5486 10.9901H20.4514L26.5868 5.7698C27.0891 5.34241 27.6991 5.12871 28.4167 5.12871C29.1343 5.12871 29.7442 5.34241 30.2465 5.7698C30.7488 6.21246 31 6.73525 31 7.33818C31 7.94111 30.7488 8.45627 30.2465 8.88366ZM21.5278 5.12871C21.5278 6.54827 20.9402 7.75794 19.7652 8.75774C18.5901 9.75753 17.1684 10.2574 15.5 10.2574C13.8316 10.2574 12.4099 9.75753 11.2348 8.75774C10.0598 7.75794 9.47222 6.54827 9.47222 5.12871C9.47222 3.70916 10.0598 2.49948 11.2348 1.49969C12.4099 0.499897 13.8316 0 15.5 0C17.1684 0 18.5901 0.499897 19.7652 1.49969C20.9402 2.49948 21.5278 3.70916 21.5278 5.12871Z" fill="black"/>
-                        </svg>
-                            <p class="card-text lightgray-font">Number of Rejected</p>
-                            <p class="card-text lightgray-font">warrants</p>
-                        </a>
-                        </div>
-                    </div>
+
+
+
+
+
                 </div>
-
-                
-                <div class="row g-30 ml-80 mt-30">
-                
-                    <div class="col-6 justify-content-center  d-flex align-items-center flex-column">
-                        <img src="<?= ASSETS ?>images/report_staff.png" alt="" srcset="">
-                    </div>
-                    
-                    <div class="col-6 justify-content-center  d-flex align-items-center flex-column">
-                        <img src="<?= ASSETS ?>images/Analytics.png" alt="" srcset="">
-                    </div>
-
-                </div>
-
-           
             </div>
         </main>
-    </div>
+
+
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?= ASSETS ?>/js/mou_chart.js"></script>
 
 </html>
