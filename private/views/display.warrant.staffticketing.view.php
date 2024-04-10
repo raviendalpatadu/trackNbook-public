@@ -1,5 +1,8 @@
 <?php
 
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -17,7 +20,9 @@
                     <div class="col-7">
                         <div class="warrant-container mt-30">
                             <div class="ticket-details">
-
+                                    <!-- warrant img-->
+                                    <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                                    <img src="" alt="">
                             </div>
                         </div>
                     </div>
@@ -52,7 +57,7 @@
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="width-50">Train Class</p>
-                                        <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_class) : ''; ?></p>
+                                        <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_compartment_id) : ''; ?></p>
                                     </div>
                                 </div>
 
@@ -83,7 +88,7 @@
                         </div>
                         <div class="row d-flex g-8 justify-content-center">
                             <div class="col-4">
-                                <button class="button mt-20 " id="reject"><a href="<?= ROOT ?>staffticketing/rejectWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['reservations']->warrant_id : ''; ?>">
+                                <button class="button mt-20 " id="reject"><a href="<?= ROOT ?>staffticketing/rejectReason/<?php echo (array_key_exists('reservations', $data)) ? $data['reservations']->warrant_id : ''; ?>">
                                         <div class="button-base bg-Selected-red">
                                             <div class="text Banner-red">Rejected</div>
                                         </div>
