@@ -180,7 +180,7 @@ if (isset($data['users']) && $data['users'] != 0) {
 
                                     </table><br><br>
                                     <div class="pagination"
-                                        style="position: fixed; left: 50%; transform: translateX(-50%);">
+                                        style="">
                                         <?php if ($page > 1): ?>
                                             <a class="button" href="?page=<?= $page - 1 ?>">
                                                 <div class="button-base">

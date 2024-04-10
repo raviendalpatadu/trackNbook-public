@@ -32,7 +32,14 @@ class StaffTicketing extends Controller
 
     function summary($id = '')
     {
-        $this->view('summary.staffticketing');
+        $resevation = new Reservations();
+        $data = array();
+        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+
+        $train = new Trains();
+        $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+        $this->view('summary.staffticketing', $data);
     }
 
     function reservationList($id = '')
@@ -100,6 +107,8 @@ class StaffTicketing extends Controller
         $this->view('display.warrant.staffticketing', $data);
     }
 
+    // call getWarrantImage function from controller reffer user controller getUserImage function
+
     function seatMap($id = '')
     {
 
@@ -113,16 +122,16 @@ class StaffTicketing extends Controller
         $data['reservations'] = $resevation->whereOne("reservation_id", $id);
 
 
-        if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic']) && isset($_POST['reservation_id']) && !empty($_POST['reservation_id'])) {
-            $resevation = new Reservations();
+        // if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic']) && isset($_POST['reservation_id']) && !empty($_POST['reservation_id'])) {
+        //     $resevation = new Reservations();
 
-            $result = $resevation->cancelReservation($_POST['reservation_id'], $_POST['reservation_passenger_nic']);
-            if ($result) {
-                $this->redirect('staffticketing/reservationList');
-            }
-        } else {
-            $this->view('cancellation.staffticketing', $data);
-        }
+        //     $result = $resevation->cancelReservation($_POST['reservation_id'], $_POST['reservation_passenger_nic']);
+        //     if ($result) {
+        //         $this->redirect('staffticketing/reservationList');
+        //     }
+        // } else {
+        //     $this->view('cancellation.staffticketing', $data);
+        // }
     }
 
 

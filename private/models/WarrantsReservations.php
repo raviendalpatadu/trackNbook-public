@@ -3,11 +3,14 @@
 class WarrantsReservations extends Model
 {
     protected $table = 'tbl_warrant_reservation';
+    
 
     public function __construct()
     {
         parent::__construct();
     }
+
+    
 
     public function getReservation()
     {
