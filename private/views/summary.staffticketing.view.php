@@ -123,10 +123,18 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-6">
                                     <button class="button mt-20 ">
                                         <div class="button-base">
                                             <div class="text">Print Ticket</div>
+                                        </div>
+                                    </button>
+                                </div>
+
+                                <div class="col-6">
+                                    <button class="button mt-20 ">
+                                        <div class="button-base">
+                                            <div class="text">Cansel Reservation</div>
                                         </div>
                                     </button>
                                 </div>

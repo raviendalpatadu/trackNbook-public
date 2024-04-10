@@ -59,8 +59,8 @@
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
                                 <div class="d-flex flex-column g-10">
-                                    <p1 class="mb-4 align-items-start">Warrants Rejected</p1>
-                                    <p2>10</p2>
+                                    <p1 class="mb-4">Warrants Rejected</p1>
+                                    <p2 class="blue">10</p2>
                                 </div>
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);transform: ;msFilter:;">
@@ -77,8 +77,8 @@
                         <!-- graph left -->
                         <div class="col-12 box bg-light-blue p-20">
                             <!-- graph head -->
-                            <h4 class="Primary-Gray">Site Analysis</h4>
-                            <h5 class="Primary-Gray">Overview of Latest Month</h5>
+                            <h4 class="Primary-Gray">Reservation Analysis</h4>
+                            <h5 class="Primary-Gray">Overview of Latest Week</h5>
                             <canvas id="bookingChart" height="100%" width="500px"></canvas>
                         </div>
 
@@ -239,7 +239,7 @@
                             <div class="">
                                 <div class="box bg-light-blue">
                                     <!--graph head -->
-                                    <h4 class="Primary-Gray">Site Analysis</h4>
+                                    <h4 class="Primary-Gray">Reservation Analysis</h4>
                                     <h5 class="Primary-Gray">Overview of Latest Month</h5>
                                     <canvas id="bookingpie"></canvas>
 

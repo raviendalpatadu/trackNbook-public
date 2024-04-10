@@ -1,5 +1,5 @@
 <header>
-  <nav>
+  <nav class="px-20">
     <div class="brand">
       <img src="<?= ASSETS ?>images/track-n-book-logo-1.png" alt="TrackNBook">
       <div class="brand-text">TrackNBook</div>

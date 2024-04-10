@@ -8,8 +8,8 @@ echo "</pre>";
 <?php $this->view("./includes/header"); ?>
 
 <body>
+    <?php $this->view("./includes/navbar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
         <main>
             <div class="container d-flex justify-content-center">
                 <div class="passenger-container">

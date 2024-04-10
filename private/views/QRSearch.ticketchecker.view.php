@@ -1,11 +1,10 @@
 <?php $this->view("./includes/header"); ?>
 
-<body>
+<body class=" ">
+    <?php $this->view("./includes/mobile-navbar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
-        <main class="bg">
-            <div class=" container d-flex width-fill justify-content-center  ">
-
+        <main class="bg ">
+            <div class=" container d-flex justify-content-center  ">
                 <div class="p-20 align-items-center">
                     <div class="d-flex flex-row">
                         <div class="d-flex align-items-center flex-column">

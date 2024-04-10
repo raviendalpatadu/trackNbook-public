@@ -1,8 +1,8 @@
 <?php $this->view("./includes/header"); ?>
 
 <body>
+    <?php $this->view("./includes/mobile-navbar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
             <div class="container d-flex justify-content-center">
                 <div class="ticket-container">

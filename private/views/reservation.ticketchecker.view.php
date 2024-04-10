@@ -21,8 +21,8 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 ?>
 
 <body>
+    <?php $this->view("./includes/mobile-navbar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="home-container d-flex flex-column ">
                 <div class="d-flex m-20 justify-contents-start">

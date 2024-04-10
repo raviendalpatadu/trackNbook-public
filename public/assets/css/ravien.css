@@ -2477,7 +2477,7 @@
   }
 }
 .border-bottom-transparent {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: transparent;
 }
@@ -2497,7 +2497,7 @@
 }
 
 .border-bottom-Primary-Blue {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #2d68fe;
 }
@@ -2517,7 +2517,7 @@
 }
 
 .border-bottom-Primary-Gray {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #324054;
 }
@@ -2537,7 +2537,7 @@
 }
 
 .border-bottom-Secondary-Gray {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #71839b;
 }
@@ -2557,7 +2557,7 @@
 }
 
 .border-bottom-Selected-Blue {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #cae1ff;
 }
@@ -2577,7 +2577,7 @@
 }
 
 .border-bottom-Banner-red {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #f00;
 }
@@ -2597,7 +2597,7 @@
 }
 
 .border-bottom-Selected-red {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #ffd1cf;
 }
@@ -2617,7 +2617,7 @@
 }
 
 .border-bottom-White {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #fff;
 }
@@ -2637,7 +2637,7 @@
 }
 
 .border-bottom-Lightgray {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #d3d3d3;
 }
@@ -2657,7 +2657,7 @@
 }
 
 .border-bottom-Border-blue {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #0085e4;
 }
@@ -2677,7 +2677,7 @@
 }
 
 .border-bottom-Background-colour-nav {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: rgba(250, 250, 250, 0.9019607843);
 }
@@ -2697,7 +2697,7 @@
 }
 
 .border-bottom-green {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #12b76a;
 }
@@ -2717,7 +2717,7 @@
 }
 
 .border-bottom-light-green {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #bffad7;
 }
@@ -2737,7 +2737,7 @@
 }
 
 .border-bottom-dark-green {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #027a48;
 }
@@ -2757,7 +2757,7 @@
 }
 
 .border-bottom-blue {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #2185d5;
 }
@@ -2777,7 +2777,7 @@
 }
 
 .border-bottom-lightgray-font {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #646464;
 }
@@ -2797,7 +2797,7 @@
 }
 
 .border-bottom-box-gray {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #cccccc;
 }

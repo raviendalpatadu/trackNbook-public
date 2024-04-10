@@ -215,3 +215,16 @@ function printErrors(errors) {
     }
   }
 }
+
+
+// mobile hamburger menu
+var checkbox = $("#burger");
+
+checkbox.click(function () {
+  if (checkbox.is(":checked")) {
+    $(".nav-menu-items").addClass("nav-menu-items-show");
+  } else {
+    $(".nav-menu-items").removeClass("nav-menu-items-show");
+  }
+});
+

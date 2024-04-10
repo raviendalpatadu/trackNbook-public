@@ -192,7 +192,7 @@ $colors: (
 
 @each $key, $val in $colors {
   .border-bottom-#{$key} {
-    border-bottom: 10px;
+    border-bottom: 8px;
     border-bottom-style: solid;
     border-bottom-color: $val;
   }
@@ -908,11 +908,6 @@ table.price-table th {
   padding: 5px;
   border: 1px solid #000;
   font-size: 14px;
-}
-
-.ticket-summary-passenger-compartment-details td {
-  // max-width: 100%;
-  // min-width: 100px;
 }
 
 .ticket-summary-train-data p.ref-no {

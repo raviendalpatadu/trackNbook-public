@@ -11,8 +11,8 @@
 
 <body>
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
-        <main>
+        <?php $this->view("./includes/mobile-navbar") ?>
+        <main class="bg">
             <div class="container d-flex justify-content-center">
                 <div class="passenger-container">
 
@@ -122,15 +122,17 @@
                         <div class="d-flex g-20 justify-content-center">
                             <!-- home btn and print btn -->
                             <button class="button mx-10">
-                                <div class="button-base"><a href="<?= ROOT ?>">
-                                        <div class="text">Home</div>
+                                <div class="button-base"><a href="<?= ROOT ?>ticketchecker/reservationList">
+                                        <div class="text">Done</div>
                                 </div></a>
                             </button>
-                            <button class="button mx-10" id="downloadTicket">
-                                <div class="button-base">
-                                    <div class="text">Download Ticket</div>
-                                </div>
-                            </button>
+                            <!-- <button class="button mx-10" id="downloadTicket">
+                                <div class=""><a href="<?= ROOT ?>ticketchecker/QR">
+                                        <div class="button-base">
+                                            <div class="text">Scan</div>
+                                        </div>
+                                    </a>
+                            </button> -->
                         </div>
                     </div>
                 </div>

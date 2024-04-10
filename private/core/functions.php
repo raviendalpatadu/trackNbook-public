@@ -1,5 +1,6 @@
 <?php
 
+
 function get_var($key, $default = '')
 {
     if (isset($_POST[$key])) {
@@ -68,4 +69,7 @@ function is_set($data){
         return $data;
     }
     return '';
+
+    
 }
+

@@ -298,32 +298,37 @@ h2.text {
   margin: 30px 0 10px;
 }
 
-.popup {
-  width: 400px;
-  background: 0, 0, 0, 0.6;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 100;
-  border-radius: 5px;
+#mou-popup {
   position: fixed;
-  top: 30%;
-  left: 40%;
-  translate: -50%, -50% scale(0.1);
-  text-align: center;
-  padding: 0 30px 30px;
-  color: #333;
-  transition: transform 0.5s ease-in-out;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
-.popup .button {
-  width: 100%;
-  padding: 10px 20px;
-  border-radius: 5px;
-  margin: 20px 0;
+#mou-popup .mou-popup-content {
+  width: 40vw;
+  max-height: 50vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  padding: 20px;
+}
+
+#mou-popup .button {
   cursor: pointer;
 }
 
-.popup .open-btn {
+#mou-popup .yes-btn {
   visibility: visible;
   top: 50%;
   transform: translate(-50%, -50%) scale(1);
@@ -333,11 +338,8 @@ h2.text {
   border: 2px solid #333;
 }
 
-.popup .close-btn {
+#mou-popup .no-btn {
   cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
   width: 30px;
   height: 30px;
   background: #222;
@@ -349,23 +351,11 @@ h2.text {
   border-radius: 50%;
 }
 
-.popup .close-btn:hover {
+#mou-popup .no-btn:hover {
   background: #444;
 }
 
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-.popup .content img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.popup.active {
+#mou-popup.active {
   visibility: visible;
   opacity: 1;
 }
@@ -595,7 +585,7 @@ video {
   background: rgb(255, 255, 255);
   padding: 20px 35px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
-  border-radius: 5px;
+  border-radius: 8px 8px 0 0;
 }
 
 .notificationCard img.checker-img {

@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('ASSETS/fonts/Helvetica-Font');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("ASSETS/fonts/Helvetica-Font");
 
 * {
   margin: 0;
   padding: 0;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 main {
@@ -140,12 +140,250 @@ nav {
   display: flex;
   width: -webkit-fill-available;
   height: fit-content;
-  padding: 0px 20px;
   justify-content: space-between;
   align-items: center;
   border-top: 10px solid var(--Border-blue);
   background: var(--Background-colour-nav);
 }
+
+/* ............................ */
+/* 
+
+nav.nav-dashboard .brand .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+}
+
+nav.nav-dashboard .brand .menu-items {
+  display: flex;
+}
+
+nav.nav-dashboard .brand .nav-container li {
+  list-style: none;
+}
+
+nav.nav-dashboard .brand .nav-container a {
+  text-decoration: none;
+  color: #0e2431;
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding: 0.7rem;
+}
+
+nav.nav-dashboard .brand .nav-container a:hover {
+  font-weight: bolder;
+}
+
+.nav-container {
+  display: block;
+  position: relative;
+  height: 60px;
+}
+
+.nav-container .checkbox {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  top: 20px;
+
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.nav-container .hamburger-lines {
+  display: block;
+  height: 26px;
+  width: 32px;
+  position: absolute;
+  top: 17px;
+  
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav-container .hamburger-lines .line {
+  display: block;
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: #0e2431;
+}
+
+.nav-container .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-container .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+nav.nav-dashboard  .menu-items {
+  z-index: 5;
+  padding-top: 15px;
+  position: absolute;
+  top: 65px;
+  bottom: 0;
+   background-color: white;
+  /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 1); */
+/* height: fit-content;
+  width:100vw;  
+  transform: translate(-150%);
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  transition: transform 0.5s ease-in-out;
+  text-align: left;
+} */
+/* ////// */
+
+/* -------------------------------- */
+.nav-menu-items {
+  display: none;
+  
+}
+
+.nav-menu-items.nav-menu-items-show {
+  display: block;
+  position: absolute;
+  width: 100vw;
+  background-color: white;
+ box-shadow: 0px 5px 10px 0px #aaa;
+  transition: color 0.3s ease-in-out;
+  z-index: 12;
+  opacity: 0.85;
+}
+
+.nav-menu-items ul{
+  list-style-type: none;
+}
+
+.menu-items a {
+  
+}
+
+.menu-items a:hover {
+  color: #117964;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-menu-items li {
+  padding:10px 5px;
+  list-style: none;
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #444;
+  font-weight: 700;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-menu-items li :hover {
+  color: #117964;
+  transition: color 0.3s ease-in-out;
+}
+
+.burger {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.burger input {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
+}
+
+/* -------------------------------- */
+
+nav.nav-dashboard .brand .menu-items li {
+  margin-bottom: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+  transform: translateX(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  transform: rotate(45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  transform: rotate(-45deg);
+}
+
+.nav-container input[type="checkbox"]:checked ~ .logo {
+  display: none;
+}
+
+/* ............................ */
 
 nav.nav-dashboard {
   border-top: none;
@@ -154,8 +392,8 @@ nav.nav-dashboard {
 nav .brand {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 12px;
+  gap: 15px;
+  padding: 12 px;
 }
 
 nav .brand img {
@@ -276,7 +514,6 @@ nav .menu div.profile-mobile {
 
 /* sidebar */
 div.sidebar {
-
   display: flex;
   padding: 20px;
   flex-direction: column;
@@ -284,7 +521,6 @@ div.sidebar {
   align-items: flex-start;
   flex-shrink: 0;
   background-color: var(--Background-colour-nav);
-
 }
 
 .sidebar .active {
@@ -382,7 +618,7 @@ div.sidebar .sidebar-menu ul li.sidebar-item .sidebar-content:hover {
   transition: all 0.4s ease-in-out;
 }
 
-div.sidebar-menu ul li.sidebar-item .sidebar-content:hover .sidebar-icon svg{
+div.sidebar-menu ul li.sidebar-item .sidebar-content:hover .sidebar-icon svg {
   width: 20px !important;
   height: 20px !important;
 }
@@ -396,7 +632,6 @@ div.sidebar
   path {
   fill: var(--Primary-Gray);
   transition: all 0.4s ease-in-out;
-  
 }
 
 div.sidebar
@@ -409,9 +644,7 @@ div.sidebar
   path {
   fill: var(--Primary-Blue);
   transition: all 0.4s ease-in-out;
-  
 }
-
 
 svg.sidebar-dote {
   display: none;
@@ -583,28 +816,30 @@ table {
 } */
 
 @media (max-width: 800px) {
-  .table thead{
+  .table thead {
     display: none;
   }
 
-  .table , .table tbody, .table tr, .table td{
+  .table,
+  .table tbody,
+  .table tr,
+  .table td {
     display: block;
     width: 100%;
   }
 
-  .table tr{
+  .table tr {
     margin-bottom: 15px;
-    
   }
 
-  .table td{
+  .table td {
     text-align: right;
     /* padding-left: 50%; */
     text-align: right;
     position: relative;
   }
 
-  .table td::before{
+  .table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
@@ -613,9 +848,7 @@ table {
     font-size: 12px;
     font-weight: bold;
     text-align: left;
-  } 
-
-  
+  }
 }
 
 .trains-available {
@@ -639,7 +872,6 @@ thead tr {
 tbody tr {
   padding: 12px 24px;
   border-bottom: 2px solid var(--Selected-Blue, #eaecf0);
-  
 }
 
 thead th {
@@ -654,7 +886,6 @@ thead th {
   /* 150% */
 }
 
-
 tbody td {
   display: flex;
   align-items: end;
@@ -662,10 +893,10 @@ tbody td {
   align-self: stretch;
 }
 
-.staff_table tbody{
+.staff_table tbody {
   background-color: white;
 }
-.staff_table tbody td{
+.staff_table tbody td {
   font-size: 12px;
 }
 
@@ -726,7 +957,7 @@ tbody td {
   width: -webkit-fill-available;
   color: var(--Primary-Gray);
   text-align: center;
-  font: var(--textxs-medium, 600 12px/18px "Inter", sans-serif);
+  font: var(--textxs-medium, 600 12px/18px "DM Sans", sans-serif);
   position: relative;
 }
 
@@ -1025,10 +1256,9 @@ input:focus {
 .input-text-label {
   color: #000000;
   text-align: left;
-  font: 300 14px "Noto Sans", sans-serif;
+  font: 400 14px "DM Sans", sans-serif;
   position: relative;
   align-self: stretch;
-  
 }
 
 .input-field {
@@ -1062,7 +1292,7 @@ input:focus {
 .type-here {
   color: #666666;
   text-align: left;
-  font: 400 14px/24px "Noto Sans", sans-serif;
+  font: 400 14px/24px "DM Sans", sans-serif;
   position: relative;
 }
 
