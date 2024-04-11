@@ -1,11 +1,7 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "..\\PMS"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": ".."
+        }
+    ]
 }
