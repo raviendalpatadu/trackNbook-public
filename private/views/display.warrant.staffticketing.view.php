@@ -17,9 +17,13 @@
             <div class="container d-flex ">
                 <div class="row  bg-white p-20 ">
                     <div class="col-7">
-
-                        <img src="<?= ASSETS ?>images/sample-ticket.jpg" class="ticket-img" alt="" srcset="">
-
+                        <div class="warrant-container mt-30">
+                            <div class="ticket-details">
+                                    <!-- warrant img-->
+                                    <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                                    <img src="" alt="">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-5">
@@ -49,12 +53,12 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-10 ml-20">
-                                <div class="col-12 d-flex align-items-center justify-content-start">
-                                    <p class="width-50">Train Class</p>
-                                    <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->compartment_class_type) : ''; ?></p>
+                                <div class="row mb-10 ml-20">
+                                    <div class="col-12 d-flex align-items-center justify-content-start">
+                                        <p class="width-50">Train Class</p>
+                                        <p class="width-50"><?php echo (array_key_exists('reservations', $data)) ? ucfirst($data['reservations']->reservation_compartment_id) : ''; ?></p>
+                                    </div>
                                 </div>
-                            </div>
 
                             <div class="row mb-10 ml-20">
                                 <div class="col-12 d-flex align-items-center justify-content-start">

@@ -379,7 +379,7 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 
   heading.text(title);
   img.attr("src", imgURL);
-  desc.text(description);
+  desc.html(description);
   proceedBtn.text(buttonText);
 
   button.on("click", function () {
@@ -456,13 +456,13 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 
 
 // mobile hamburger menu
-// var checkbox = $("#burger");
+var checkboxBurger = $("#burger");
 
-// checkbox.click(function () {
-//   if (checkbox.is(":checked")) {
-//     $(".nav-menu-items").addClass("nav-menu-items-show");
-//   } else {
-//     $(".nav-menu-items").removeClass("nav-menu-items-show");
-//   }
-// });
+checkboxBurger.click(function () {
+  if (checkboxBurger.is(":checked")) {
+    $(".nav-menu-items").addClass("nav-menu-items-show");
+  } else {
+    $(".nav-menu-items").removeClass("nav-menu-items-show");
+  }
+});
 
