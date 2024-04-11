@@ -379,7 +379,7 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 
   heading.text(title);
   img.attr("src", imgURL);
-  desc.text(description);
+  desc.html(description);
   proceedBtn.text(buttonText);
 
   button.on("click", function () {

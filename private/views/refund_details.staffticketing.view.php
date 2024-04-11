@@ -12,7 +12,7 @@
 <body>
 
     <?php $this->view("./includes/sidebar") ?>
-    <div class="column-left" id="blur">
+    <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="container">
@@ -170,9 +170,7 @@
 <script>
     $(document).ready(function() {
         $('#cancelReservationBtn').click(function() {
-            $('#mou-popup').css({
-                'display': 'flex'
-            });
+            $('#mou-popup').css('display','flex');
         });
     });
 </script>

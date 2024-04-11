@@ -34,7 +34,7 @@ class StaffTicketing extends Controller
     {
         $resevation = new Reservations();
         $data = array();
-        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+        $data['reservations'] = $resevation->whereOne("reservation_ticket_id", $id);
 
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
@@ -46,23 +46,24 @@ class StaffTicketing extends Controller
     {
         $resevation = new Reservations();
 
+
         $train = new Trains();
 
         $data = array();
 
-        $data['trains'] = $train->findAll();
+        $data['trains'] = $train->findAllTrains();
         $data['reservations'] = $resevation->getReservation();
         if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_date', $_POST['reservation_date']);
+            $data['reservations'] = $resevation->where('reservation_date', $_POST['reservation_date']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
+            $data['reservations'] = $resevation->where('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
+            $data['reservations'] = $resevation->where('reservation_train_id', $_POST['reservation_train_id']);
         }
 
-
+ 
 
         $this->view('reservation.staffticketing', $data);
     }

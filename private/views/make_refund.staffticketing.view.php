@@ -27,7 +27,7 @@
                     <form action="" method="post" class="profile">
 
                         <div class="row g-20 mb-20 ">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <div class="text-inputs ">
                                     <div class="input-text-label">Ticket ID</div>
                                     <div class="input-field">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-5">
                                 <div class="text-inputs">
                                     <div class="input-text-label">NIC</div>
                                     <div class="input-field">
@@ -51,7 +51,25 @@
 
                                 </div>
                             </div>
+
+                            <button class="button btn mt-20 " id="loginBtn">
+                                <a href="<?= ROOT ?>staffticketing/refundDetails">
+                                    <div class="button-base btn bg-Border-blue ">
+                                        <div class="text White">Enter</div>
+                                    </div>
+                                </a>
+                            </button>
                         </div>
+
+                        <!-- <script>
+                            $(document).ready(function() {
+                                        $('#loginBtn').click(function() {
+                                                $('mou-canceldetails').css('display', 'flex')
+
+                                            }
+                                        }
+                                    )
+                        </script> -->
 
                         <div class="row  border-bottom-Lightgray">
                             <div class="col-12">
@@ -141,7 +159,7 @@
                         </div>
 
                         <div class="row g-20 mt-20 mb-20 ">
-                            
+
                             <div class="col-5">
                                 <div class="text-inputs">
                                     <div class="input-text-label">Train Name</div>
@@ -171,29 +189,25 @@
                             <div class="col-12 d-flex justify-content-center">
                                 <button class="button mx-10">
                                     <div class="button-base">
-                                        <div class="text">Cancel</div>
+                                        <div class="text">Back</div>
                                     </div>
                                 </button>
 
-                                <button class="button mx-10">
+                                <button class="button mx-10" id="cancelReservationBtn">
                                     <div class="button-base">
-                                        <div class="text">Proceed</div>
+                                        <div class="text">Cancel Reservation</div>
                                     </div>
                                 </button>
+                                <div class="" id="popoupError">
 
-
+                                </div>
                             </div>
                         </div>
                     </form>
 
 
-                    <button class="button btn mt-20 " id="loginBtn">
-                        <a href="<?= ROOT ?>staffticketing/refundDetails">
-                            <div class="button-base btn bg-Border-blue ">
-                                <div class="text White">Enter</div>
-                            </div>
-                        </a>
-                    </button>
+
+
                 </div>
             </div>
         </main>
@@ -202,3 +216,16 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function() {
+        $('#cancelReservationBtn').click(function(event) {
+            event.preventDefault();
+            var div = $('body');
+            var imgURL = '<?= ASSETS . 'images/error.jpg' ?>';
+            var description1 = "By cancelling this booking, you will lose the opportunity to travel on the selected train. ";
+            var description2 = "<br><br>Are you sure you want to cancel?";
+            var description = description1 + description2;
+            div.append(makePopupBox('Are you sure you want to cancel?', description, 'OK', imgURL))
+        });
+    });
+</script>
