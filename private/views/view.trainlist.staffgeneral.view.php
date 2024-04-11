@@ -115,19 +115,16 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                         <table class="">
                                             <thead>
                                                 <tr class="row p-20">
-                                                    <th class="col-3 d-flex align-items-center">Train Name</th>
+                                                    <th class="col-4 d-flex align-items-center">Train Name</th>
                                                     <th class="col-1">Train No</th>
-                                                    <th class="col-2">Train Type</th>
-                                                    <th class="col-3">Start & End Station</th>
-                                                    <th class="col-2 d-flex align-items-center">Start & End Time</th>
-                                                    <th class="col-1 d-flex align-items-center g-5">
-                                                        <div class="badge-base bg-Selected-Blue">
-                                                            <div class="text blue">View</div>
-                                                        </div>
-                                                        OR
-                                                        <div class="badge-base bg-Selected-red"></div>
-                                                        <div class="text red">Delete</div>
-                                                    </th>
+                                                    <th class="col-1">Train Type</th>
+                                                    <th class="col-2">Start & End Station</th>
+                                                    <th class="col-2 ">Start & End Time</th>
+                                                    <th class="col-2 d-flex align-items-center"></th>
+
+
+
+
                                                 </tr>
                                             </thead>
 
@@ -135,23 +132,23 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                                                 <?php for ($train = 0; $train < $count; $train++): ?>
                                                 <tr class="row p-20">
-                                                    <td class="col-3 d-flex align-items-center">
+                                                    <td class="col-4 d-flex align-items-center">
                                                         <?= $data['trains'][$train]->train_name ?>
                                                     </td>
                                                     <td class="col-1">
                                                         <?= $data['trains'][$train]->train_id ?>
                                                     </td>
-                                                    <td class="col-2">
+                                                    <td class="col-1">
                                                         <?= $data['trains'][$train]->train_type ?>
                                                     </td>
-                                                    <td class="col-3">
+                                                    <td class="col-2">
                                                         <?= $data['trains'][$train]->start_station . " " . $data['trains'][$train]->end_station ?>
                                                     </td>
-                                                    <td class="col-2 d-flex align-items-center">
+                                                    <td class="col-2 ">
                                                         <?= date("H:i", strtotime($data['trains'][$train]->train_start_time)) . " " . date("H:i", strtotime($data['trains'][$train]->train_end_time)) ?>
                                                     </td>
 
-                                                    <td class="col-1 d-flex align-items-center g-5">
+                                                    <td class="col-2 d-flex align-items-center g-5">
                                                         <a class="blue"
                                                             href="<?= ROOT ?>staffgeneral/updateTrain/<?= $data['trains'][$train]->train_id ?>">
                                                             <div class="badge-base bg-Selected-Blue">

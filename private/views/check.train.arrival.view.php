@@ -31,14 +31,14 @@
                                             <select class="dropdown" name="reservation_train_id"
                                                 placeholder="Please choose">
                                                 <!-- print data of $data -->
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
+                                                <option value="0">Badulla → Colombo</option>
+                                                <option value="0">Badulla → Colombo</option>
+                                                <option value="0">Badulla → Colombo</option>
+                                                <option value="0 width=30px">Badulla → Colombo</option>
                                                 <?php foreach ($data['trains'] as $key => $value): ?>
-                                                <option value="<?= $value->train_id ?>">
-                                                    <?= $value->train_name ?>
-                                                </option>
+                                                    <option value="<?= $value->train_id ?>">
+                                                        <?= $value->train_name ?>
+                                                    </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -107,41 +107,41 @@
                                     <tbody>
 
                                         <?php for ($train = 0; $train < $count; $train++): ?>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center">
-                                                <?= $data['trains'][$train]->train_name ?>
-                                            </td>
+                                            <tr class="row p-20">
+                                                <td class="col-3 d-flex align-items-center">
+                                                    <?= $data['trains'][$train]->train_name ?>
+                                                </td>
 
-                                            <td class="col-3">
-                                                <?= $data['trains'][$train]->start_station ?>
-                                            </td>
-                                            <td class="col-3">
-                                                <?= $data['trains'][$train]->end_station ?>
-                                            </td>
+                                                <td class="col-3">
+                                                    <?= $data['trains'][$train]->start_station ?>
+                                                </td>
+                                                <td class="col-3">
+                                                    <?= $data['trains'][$train]->end_station ?>
+                                                </td>
 
 
-                                            <td class="col-1">
-                                                <div class="badge-base bg-Selected-red">
-                                                    <div class="dot">
-                                                        <div class="dot3"></div>
+                                                <td class="col-1">
+                                                    <div class="badge-base bg-Selected-red">
+                                                        <div class="dot">
+                                                            <div class="dot3"></div>
+                                                        </div>
+                                                        <div class="text Banner-red">
+                                                            <?= $data['trains'][$train]->train_status ?>
+                                                        </div>
                                                     </div>
-                                                    <div class="text Banner-red">
-                                                        <?= $data['trains'][$train]->train_status ?>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                                </td>
 
-                                            <td class="col-1"></td>
-                                            <td class="col-1">
-                                                <a class="blue"
-                                                    href="<?= ROOT ?>stationmaster/updateArrival/<?= $data['trains'][$train]->train_id ?>">Check</a>
+                                                <td class="col-1"></td>
+                                                <td class="col-1">
+                                                    <a class="blue"
+                                                        href="<?= ROOT ?>stationmaster/updateArrival/<?= $data['trains'][$train]->train_id ?>">Check</a>
 
-                                            </td>
+                                                </td>
 
 
 
 
-                                        </tr>
+                                            </tr>
                                         <?php endfor; ?>
                                     </tbody>
 

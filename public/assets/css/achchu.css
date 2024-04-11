@@ -4,59 +4,24 @@
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
 
-.button-base-update-location {
-  background: var(--white, #ffffff);
-  border: 1px solid var(--gray-300, #d0d5dd);
-  border-radius: 8px;
-  padding: 8px 14px 8px 14px;
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: 67px;
-  box-shadow: var(
-    --shadow-xs-box-shadow,
-    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
-  );
-  overflow: hidden;
-  margin-left: 131px;
-}
-.bg-ul-Selected-Blue {
-  background-color: #cae1ff;
-}
-thead tr {
-  padding: 12px 24px;
-  border-bottom: 1px solid var(--gray-200, #eaecf0);
-  background: var(--gray-50, #f9fafb);
+/* Station Master update Arrival */
+.update-arrival {
+  padding: 46px 23px;
 }
 
-.dropdown-update-location > span {
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 6px;
-  display: block;
-  position: relative;
-  color: var(--Secondary-Gray);
-  border: 1px solid #ccc;
-  background: var(--White);
-  transition: all 0.3s ease;
-  width: 222px;
-}
-
-.badge-base-update-location {
-  background: var(--gray-100, #f2f4f7);
-  border-radius: 16px;
-  padding: 2px 8px 2px 8px;
-  display: flex;
-  flex-direction: row;
-  gap: 3px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  position: relative;
-  width: 80px;
+.card-update-arrival {
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  margin: 50px 20px 20px 20px;
+  width: 443px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 19px;
+  padding-right: 25px;
+  text-align: left;
+  color: #1f2124;
+  float: left;
 }
 /* Station Master Dashboard */
 
@@ -71,7 +36,7 @@ thead tr {
   width: 230px;
 }
 
-/* Staff Dashboard */
+/* Staff General Dashboard */
 
 .ach-widgets-s .number {
   position: relative;
@@ -236,12 +201,13 @@ thead tr {
   height: 438px;
 }
 
-.ach-card {
+.card-dashboard-td {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
   margin: 50px 20px 20px 20px;
-  width: auto;
+  width: 210px;
+  height: 200px;
   /* 1/3 minus the margins (20+20) */
   padding-top: 30px;
   padding-bottom: 20px;
@@ -308,24 +274,22 @@ thead tr {
     }
   }
 
-  .ach-btn {
+  .btn-td {
     display: block;
     background: #0085e4;
     color: white;
     padding: 15px 20px;
-    margin: 20px 0;
+    margin: 10px 0;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.9);
     transition: all 200ms ease-in-out;
     text-decoration: none;
-    width: fit-content;
-    margin-left: 31px;
 
     &:hover {
       opacity: 0.7;
     }
   }
-  .ach-btn1 {
+  .btn1-td {
     display: block;
     background: #f5013e;
     color: white;
@@ -411,6 +375,79 @@ li {
 /* Add location */
 
 /* Train Driver add  location*/
+/* Train Driver - Update Location */
+
+.button-base-update-location {
+  background: var(--white, #ffffff);
+  border: 1px solid var(--gray-300, #d0d5dd);
+  border-radius: 8px;
+  padding: 8px 14px 8px 14px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: 67px;
+  box-shadow: var(
+    --shadow-xs-box-shadow,
+    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
+  );
+  overflow: hidden;
+  margin-left: 131px;
+}
+.bg-ul-Selected-Blue {
+  background-color: #cae1ff;
+}
+thead tr {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--gray-200, #eaecf0);
+  background: var(--gray-50, #f9fafb);
+}
+
+.dropdown-update-location > span {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+  color: var(--Secondary-Gray);
+  border: 1px solid #ccc;
+  background: var(--White);
+  transition: all 0.3s ease;
+  width: 222px;
+}
+
+.badge-base-update-location {
+  background: var(--gray-100, #f2f4f7);
+  border-radius: 16px;
+  padding: 2px 8px 2px 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 80px;
+}
+
+/* Train Driver - Update delay */
+
+.card-update-delay {
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  margin: 50px 20px 20px -8px;
+  width: 258px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 19px;
+  padding-right: 25px;
+  text-align: left;
+  color: #1f2124;
+  float: left;
+}
 
 .ad-width-70 {
   width: 70vw;
@@ -420,6 +457,75 @@ li {
   padding: 27px 50px;
 }
 
+.button-base-add-location {
+  background: var(--white, #ffffff);
+  border: 1px solid var(--gray-300, #d0d5dd);
+  border-radius: 8px;
+  padding: 8px 14px 8px 14px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: 67px;
+  box-shadow: var(
+    --shadow-xs-box-shadow,
+    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
+  );
+  overflow: hidden;
+  margin-left: 44px;
+}
+.bg-ul-Selected-Blue {
+  background-color: #cae1ff;
+}
+thead tr {
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--gray-200, #eaecf0);
+  background: var(--gray-50, #f9fafb);
+}
+
+.dropdown-add-location > span {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  display: block;
+  position: relative;
+  color: var(--Secondary-Gray);
+  border: 1px solid #ccc;
+  background: var(--White);
+  transition: all 0.3s ease;
+  width: 222px;
+}
+
+.badge-base-add-location {
+  background: var(--gray-100, #f2f4f7);
+  border-radius: 16px;
+  padding: 2px 8px 2px 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  width: 80px;
+}
+
+.card-add-location {
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 30px;
+  margin: 50px 20px 20px 20px;
+  width: 258px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 19px;
+  padding-right: 25px;
+  text-align: left;
+  color: #1f2124;
+  float: left;
+}
 .add-location-container {
   width: 100%;
 }
@@ -438,7 +544,7 @@ li {
 
 .add-location-g-8 {
   gap: 17px;
-  margin-right: 148px;
+  margin-left: 44px;
 }
 .dropdown2-add-location {
   cursor: pointer;
@@ -583,7 +689,7 @@ li {
 
 .delay-g-8 {
   gap: 8px;
-  margin-right: 150px;
+  margin-right: 12px;
 }
 
 .delay-container {

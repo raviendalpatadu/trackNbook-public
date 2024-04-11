@@ -17,58 +17,55 @@
 
                     </div>
                 </div>
-            </div>
-
-            <!-- cards -->
 
 
-
-            <div class="row">
-                <div class="col-12 center-col ach-widgets">
-
-                    <!-- card style -->
-                    <div class="ach-card">
-
-                        <div class="title">Update Location</div>
-
-                        <div class="ach-icon">
+                <!-- cards -->
 
 
-                            <img src="<?= ASSETS ?>images/UpdateLocation.png" width="80" height="80">
+                <br /><br />
+                <div class="row">
+                    <div class="col-12 center-col ach-widgets">
+
+                        <!-- card style -->
+                        <div class="card-dashboard-td">
+
+                            <div class="title">Update Location</div>
+
+                            <div class="ach-icon">
+
+
+                                <img src="<?= ASSETS ?>images/UpdateLocation.png" width="80" height="80">
+                            </div>
+                            <!--/icon-->
+
+                            <a href="<?= ROOT ?>traindriver/addlocation" class="btn-td">Check</a>
+
                         </div>
-                        <!--/icon-->
-
-                        <a href="<?= ROOT ?>traindriver/addlocation" class="ach-btn">Check</a>
-
                     </div>
                 </div>
-            </div>
-            <!--/card-->
-            <div class="row">
-                <div class="col-12 center-col ach-widgets">
-                    <div class="ach-card">
+                <!--/card-->
+                <div class="row">
+                    <div class="col-12 center-col ach-widgets">
 
-                        <div class="title">Update Delay</div>
+                        <!-- card style -->
+                        <div class="card-dashboard-td ">
 
-                        <div class="ach-icon">
+                            <div class="title">Update Delay</div>
 
-                            <img src="<?= ASSETS ?>images/UpdateDelay.png" width="100" height="100">
+                            <div class="ach-icon">
+
+
+                                <img src="<?= ASSETS ?>images/UpdateDelay.png" width="80" height="80">
+                            </div>
+                            <!--/icon-->
+
+                            <a href="<?= ROOT ?>traindriver/trainDelay" class="btn-td">Check</a>
 
                         </div>
-                        <!--/icon-->
-
-
-                        <a href="<?= ROOT ?>trainDriver/trainDelay" class="ach-btn">Check</a>
-
                     </div>
-                    <!--/card-->
-                    <!-- need to edit the card -->
-
-
                 </div>
             </div>
     </div>
-
 
     </div>
 

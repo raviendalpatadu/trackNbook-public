@@ -103,15 +103,15 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
 
                                         <script>
-                                            const ctx = document.getElementById('myChart');
+                                        const ctx = document.getElementById('myChart');
 
-                                            new Chart(ctx, {
-                                                type: 'line',
-                                                data: {
-                                                    labels: ['January', 'February', 'March', 'April', 'May',
-                                                        'June'
-                                                    ],
-                                                    datasets: [{
+                                        new Chart(ctx, {
+                                            type: 'line',
+                                            data: {
+                                                labels: ['5/3/24', '6/3/24y', '6/3/24', '7/3/24l', '8/3/24',
+                                                    '9/3/24'
+                                                ],
+                                                datasets: [{
                                                         label: 'Yal Devi',
                                                         data: [12, 19, 3, 5, 2, 3],
                                                         borderWidth: 2
@@ -126,59 +126,59 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                         data: [8, 5, 6, 8, 5, 8],
                                                         borderWidth: 2
                                                     }
-                                                    ]
+                                                ]
+                                            },
+                                            options: {
+                                                plugins: {
+                                                    legend: {
+                                                        position: 'right', // Set legend position to 'right'
+                                                        align: 'centre', // Align legend to the start of the chart area
+                                                        labels: {
+                                                            font: {
+                                                                size: 18, // Adjust the font size of legend labels
+                                                                weight: 'normal' // Make legend labels bold
+                                                            }
+                                                        }
+                                                    }
                                                 },
-                                                options: {
-                                                    plugins: {
-                                                        legend: {
-                                                            position: 'right', // Set legend position to 'right'
-                                                            align: 'centre', // Align legend to the start of the chart area
-                                                            labels: {
-                                                                font: {
-                                                                    size: 18, // Adjust the font size of legend labels
-                                                                    weight: 'normal' // Make legend labels bold
-                                                                }
+                                                layout: {
+                                                    padding: {
+                                                        right: 5 // Add padding to the right side of the chart area
+                                                    }
+                                                },
+                                                scales: {
+                                                    x: {
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Date', // Description for the x-axis
+                                                            font: {
+                                                                size: 16, // Adjust the font size of the x-axis label
+                                                                weight: 'bold' // Make the x-axis label bold
                                                             }
                                                         }
                                                     },
-                                                    layout: {
-                                                        padding: {
-                                                            right: 5 // Add padding to the right side of the chart area
-                                                        }
-                                                    },
-                                                    scales: {
-                                                        x: {
-                                                            title: {
-                                                                display: true,
-                                                                text: 'Month', // Description for the x-axis
-                                                                font: {
-                                                                    size: 16, // Adjust the font size of the x-axis label
-                                                                    weight: 'bold' // Make the x-axis label bold
-                                                                }
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            font: {
+                                                                size: 15 // Adjust the font size of the tick labels
                                                             }
                                                         },
-                                                        y: {
-                                                            beginAtZero: true,
-                                                            ticks: {
-                                                                callback: function (value, index, values) {
-                                                                    return value;
-                                                                },
-                                                                font: {
-                                                                    size: 15 // Adjust the font size of the tick labels
-                                                                }
-                                                            },
-                                                            title: {
-                                                                display: true,
-                                                                text: 'Delay Time (minutes)', // Description for the y-axis
-                                                                font: {
-                                                                    size: 16, // Adjust the font size of the y-axis label
-                                                                    weight: 'bold' // Make the y-axis label bold
-                                                                }
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Delay Time (minutes)', // Description for the y-axis
+                                                            font: {
+                                                                size: 16, // Adjust the font size of the y-axis label
+                                                                weight: 'bold' // Make the y-axis label bold
                                                             }
                                                         }
                                                     }
                                                 }
-                                            });
+                                            }
+                                        });
                                         </script>
 
 

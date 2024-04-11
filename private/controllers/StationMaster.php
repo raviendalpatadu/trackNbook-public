@@ -13,7 +13,7 @@ class StationMaster extends Controller
     }
     function updateArrival($id = '')
     {
-        $train = new Trains();
+       /** */ $train = new Trains();
         $data = array();
         $data['train'] = $train->whereOne('train_id', $id);
 
