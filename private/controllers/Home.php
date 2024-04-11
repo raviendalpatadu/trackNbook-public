@@ -8,9 +8,6 @@ class Home extends Controller
 {
     function index($id = '')
     {
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
         $station = new Stations();
         $data = array();
         $data['stations'] = $station->getStations();
@@ -35,7 +32,7 @@ class Home extends Controller
                 }
             }
 
-            // unset($_SESSION['reservation']);
+            unset($_SESSION['reservation']);
         }
 
         if (isset($_SESSION['errors'])) {

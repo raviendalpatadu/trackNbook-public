@@ -31,7 +31,7 @@ class Train extends Controller
     function available($id = '')
     {
         if (!isset(Auth::reservation()['from_date']) || !isset(Auth::reservation()['from_station']) || !isset(Auth::reservation()['to_station']) || !isset(Auth::reservation()['no_of_passengers'])) {
-            // $this->redirect('/home');
+            $this->redirect('/home');
         }
 
         $station = new Stations();
@@ -65,6 +65,7 @@ class Train extends Controller
         }
 
         $data = $_SESSION['reservation'];
+
 
         $data['stations'] = $station->findAll();
 
