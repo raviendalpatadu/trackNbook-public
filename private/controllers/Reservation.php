@@ -8,7 +8,10 @@ class Reservation extends Controller
 {
     function add($id = '')
     {   
-        $this->view('');
+        // $this->view('');
+        $this->view('includes/header');
+        $this->view('includes/loader');
+
     }
 
     function getReservation($id = '')
@@ -17,10 +20,10 @@ class Reservation extends Controller
         echo "<pre>";
         print_r($_SESSION);
         echo "</pre>";
+
+
     }
 
-    public function scan($id = '')
-    {
-        
-    }
+    
+
 }

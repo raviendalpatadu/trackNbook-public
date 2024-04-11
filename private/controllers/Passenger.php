@@ -182,39 +182,13 @@ class Passenger extends Controller
 
         $data = array();
 
-        // $fare =  new Fares();
 
-        // $price_for_one = $fare->getFareData($_SESSION['reservation']['train_type'], $_SESSION['reservation']['class_type'], $_SESSION['reservation']['from_station']->station_id, $_SESSION['reservation']['to_station']->station_id); //get from db must be changed
-        // $price_for_one = $price_for_one[0]->fare_price;
         if (isset($_SESSION['reservation']['passenger_data']) && !empty($_SESSION['reservation']['passenger_data'])) {
-            // $station = new Stations();
-            // $data['start_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['from_station']->station_id);
-            // $data['end_station'] = $station->getOneStation('station_id', $_SESSION['reservation']['to_station']->station_id);
-
-            // $train = new Trains();
-            // $data['train'] = $train->whereOne('train_id', $_SESSION['reservation']['train_id']);
-
-            // $train_type = new TrainTypes();
-            // $data['train_type'] = $train_type->whereOne('train_type_id', $_SESSION['reservation']['train_type']);
-
-            // $compartment = new Compartments();
-            // $data['class'] = $compartment->whereOne('compartment_id', $_SESSION['reservation']['class_id']);
-
-
-            // $compartment_type = new CompartmentTypes();
-            // $data['class_type'] = $compartment_type->whereOne('compartment_class_type_id', $_SESSION['reservation']['class_type']);
-
-            // $data['no_of_passengers'] = $_SESSION['reservation']['no_of_passengers'];
-            // $data['price_for_one'] = $price_for_one;
-            // $data['price'] = $price_for_one * $_SESSION['reservation']['no_of_passengers'];
-            // $data['date'] = $_SESSION['reservation']['from_date'];
-
-
+           
             $this->view('passenger.billing.summary', $data);
         } else {
             $this->redirect('home');
         }
-        // $data = $passenger->getPassengers();
     }
 
 
@@ -270,6 +244,7 @@ class Passenger extends Controller
             // add reservation data to session['reservation']
             $_SESSION['reservation']['reservation_status'] = "Reserved";
 
+            
             $this->redirect('passenger/summary');
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -367,7 +342,18 @@ class Passenger extends Controller
             $this->redirect('/home');
         }
 
+        // to show the loder
         $this->view('passenger.summary');
+
+        // send email to each email
+        foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+            $to_email = $email;
+            $subject = "Reservation Confirmation";
+            $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
+            $message = Auth::getReservationConfirmationEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key]);
+
+            $this->sendMail($to_email,$recipient, $subject, $message);
+        }
     }
 
     // reservations

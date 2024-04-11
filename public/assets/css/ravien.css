@@ -3464,7 +3464,7 @@
 }
 
 .border-bottom-yellow {
-  border-bottom: 10px;
+  border-bottom: 8px;
   border-bottom-style: solid;
   border-bottom-color: #f7b500;
 }
@@ -4697,6 +4697,24 @@ div#reservations div#loader {
 .main-popup-box .box .footer button div:hover {
   background: var(--Selected-Blue);
   color: var(--Border-blue);
+}
+
+.loader__main {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.loader__main .loader__text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  padding-bottom: 0.5em;
 }
 
 @keyframes slide-down {

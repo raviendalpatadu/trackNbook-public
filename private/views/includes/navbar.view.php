@@ -1,3 +1,5 @@
+<?php $this->view('includes/loader'); ?>
+
 <header>
   <nav class="px-20">
     <div class="brand">

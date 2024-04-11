@@ -379,7 +379,7 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 
   heading.text(title);
   img.attr("src", imgURL);
-  desc.text(description);
+  desc.html(description);
   proceedBtn.text(buttonText);
 
   button.on("click", function () {
@@ -465,4 +465,9 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 //     $(".nav-menu-items").removeClass("nav-menu-items-show");
 //   }
 // });
+
+// loader when the page is loading
+$(window).on("load", function () {
+  $(".loader__main").fadeOut();
+});
 

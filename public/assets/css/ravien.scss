@@ -1303,6 +1303,25 @@ div#reservations div#loader {
   }
 }
 
+.loader__main{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+
+}
+
+.loader__main .loader__text{
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  padding-bottom: 0.5em;
+}
+
 @keyframes slide-down {
   0% {
     transform: translateY(-100%);

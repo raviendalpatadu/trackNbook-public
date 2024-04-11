@@ -76,10 +76,7 @@ class Train extends Controller
             $inverse_search['no_of_passengers'] = $data['no_of_passengers'];
             $data['trains_available']['to_trains'] = $train->search($inverse_search);
         }
-
-        echo '<pre>';
-        print_r($_SESSION['reservation']);
-        echo '</pre>';
+        
 
         $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
 

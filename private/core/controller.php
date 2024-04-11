@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+
 /**
  * main home controller
  */
@@ -19,8 +23,8 @@ class Controller
     }
     public function load_model($model)
     {
-        if (file_exists("../private/models/". ucfirst($model) .".php")) {
-            require("../private/models/". ucfirst($model) .".php");
+        if (file_exists("../private/models/" . ucfirst($model) . ".php")) {
+            require("../private/models/" . ucfirst($model) . ".php");
             return $model = new $model();
         }
         return false;
@@ -33,17 +37,17 @@ class Controller
 
     function getPrivateImage($folder, $file)
     {
-        $mediapath = '../private/private_assets/imgs/'.$folder.'/' . $file;
+        $mediapath = '../private/private_assets/imgs/' . $folder . '/' . $file;
         if (file_exists($mediapath)) {
             readfile($mediapath);
-        }else{
+        } else {
             echo "File not found!";
         }
     }
 
     public function setPrivateImage($folder, $file, $old_image = 'default.jpg')
     {
-      
+
         $target_file = '../private/private_assets/imgs/';
 
         // Move the uploaded file
@@ -52,14 +56,14 @@ class Controller
         $image_size = $file['size'];
         $image_type = $file['type'];
 
-       
+
         $image_path =  $target_file . $folder . "/" . $image_name;
 
         $folder_path = $target_file . $folder;
 
-        
-        
-        if(!file_exists($folder_path)){
+
+
+        if (!file_exists($folder_path)) {
             mkdir($folder_path, 0777, true);
         }
 
@@ -68,15 +72,54 @@ class Controller
         if (file_exists($image_old_path) and strpos($old_image, 'default.jpg') === false) {
             unlink($image_old_path);
         }
-        
+
         move_uploaded_file($image_tmp, $image_path);
-        
+
         $image = [
             'image_name' => $image_name,
             'image_path' => $folder . "/" . $image_name,
             'image_type' => $image_type,
             'image_size' => $image_size,
         ];
-        return $image;    
+        return $image;
+    }
+
+    public function sendMail($to, $recipent_name, $subject, $message)
+    {
+        try{
+            $mail = new PHPMailer();
+            $mail->IsSMTP();
+    
+            $mail->SMTPDebug  = 0;
+            $mail->SMTPAuth   = TRUE;
+            $mail->SMTPSecure = "tls";
+            $mail->Port       = 587;
+            $mail->Host       = "smtp.gmail.com";
+    
+            $mail->Username   = "ravienkavisha@gmail.com";
+            $mail->Password   = "objb glvn fxgx isxo";
+    
+            $mail->IsHTML(true);
+            $mail->AddAddress($to, $recipent_name);
+            $mail->SetFrom("ravienkavisha@gmail.com", "TrackNBook");
+    
+            // $mail->AddEmbeddedImage('../public/assets/images/shika.jpg', 'logo');
+            //$mail->AddReplyTo("reply-to-email", "reply-to-name");
+            //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
+            $mail->Subject = $subject;
+            $content = $message;
+    
+            $mail->MsgHTML($content);
+            if (!$mail->Send()) {
+                // echo "Error while sending Email.";
+                // var_dump($mail);
+                return false;
+            } else {
+                // echo "Email sent successfully";
+                return true;
+            }
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }   
     }
 }
