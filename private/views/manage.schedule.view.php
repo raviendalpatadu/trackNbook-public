@@ -13,7 +13,7 @@
                 <div class="table" style="background-color:white;max-width:100%;">
                     <div class="row">
                         <div class="col-12">
-                            <div class="trains-available">
+                            <div class="trains-available-manage-schedule">
                                 <h2>Trains available</h2>
                                 <div class="badge">
                                     <div class="badge-base bg-light-green">
@@ -364,8 +364,3 @@
 </body>
 
 </html>
-<style>
-.trains-available {
-    padding: 12px 24px;
-}
-</style>

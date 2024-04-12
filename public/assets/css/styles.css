@@ -329,9 +329,9 @@ nav .menu div.profile-mobile {
   list-style-type: none;
 }
 
-.menu-items a {
+/* .menu-items a {
   
-}
+} */
 
 .menu-items a:hover {
   color: #117964;
@@ -544,13 +544,13 @@ div.sidebar-menu ul li.sidebar-item .sidebar-content:hover .sidebar-icon svg {
 div.sidebar .sidebar-menu ul li.sidebar-item .sidebar-content .sidebar-icon svg path {
   fill: var(--Primary-Gray);
   transition: all 0.4s ease-in-out;
-
+  
 }
 
 div.sidebar .sidebar-menu ul li.sidebar-item .sidebar-content:hover .sidebar-icon svg path {
   fill: var(--Primary-Blue);
   transition: all 0.4s ease-in-out;
-
+  
 }
 
 svg.sidebar-dote {
@@ -756,8 +756,6 @@ table {
     font-weight: bold;
     text-align: left;
   }
-
-
 }
 
 .trains-available {

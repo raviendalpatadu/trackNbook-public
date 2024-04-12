@@ -9,6 +9,8 @@ class StaffGeneral extends Controller
     function index($id = '')
     {
 
+
+
         $this->view('staff_general.dashboard');
     }
 
@@ -50,6 +52,8 @@ class StaffGeneral extends Controller
 
         $this->view('view.trainlist.staffgeneral', $data);
     }
+
+
 
     function updateTrain($id = '')
     {

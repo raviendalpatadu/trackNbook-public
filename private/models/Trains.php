@@ -75,6 +75,8 @@ class Trains extends Model
 
                 . "end.station_name AS end_station\n"
 
+
+
                 . "\n"
 
                 . "FROM\n"
@@ -361,19 +363,21 @@ class Trains extends Model
                 // $con = $this->connect();
                 $con->beginTransaction();
 
-                $query = "INSERT INTO tbl_train (train_name, train_type, train_start_time, train_end_time, train_start_station, train_end_station, train_route)
-                          VALUES (:train_name, :train_type, :train_start_time, :train_end_time, :train_start_station, :train_end_station, :train_route)";
+                $query = "INSERT INTO tbl_train (train_name, train_type, train_start_time, train_end_time, train_start_station, train_end_station, train_route, train_status)
+                          VALUES (:train_name, :train_type, :train_start_time, :train_end_time, :train_start_station, :train_end_station, :train_route, 'Not Arrived')";
 
                 $stm = $con->prepare($query);
-                $out = $stm->execute(array(
-                    'train_name' => $_POST['train_name'],
-                    'train_type' => $_POST['train_type'],
-                    'train_start_time' => $_POST['start_time'],
-                    'train_end_time' => $_POST['end_time'],
-                    'train_start_station' => $_POST['start_station'],
-                    'train_end_station' => $_POST['end_station'],
-                    'train_route' => $_POST['train_route']
-                ));
+                $out = $stm->execute(
+                    array(
+                        'train_name' => $_POST['train_name'],
+                        'train_type' => $_POST['train_type'],
+                        'train_start_time' => $_POST['start_time'],
+                        'train_end_time' => $_POST['end_time'],
+                        'train_start_station' => $_POST['start_station'],
+                        'train_end_station' => $_POST['end_station'],
+                        'train_route' => $_POST['train_route']
+                    )
+                );
 
                 $train_id = $con->lastInsertId();
 
@@ -381,11 +385,13 @@ class Trains extends Model
                     $query_stop_staion = "INSERT INTO tbl_train_stop_station (train_id, station_id, stop_no)
                           VALUES (:train_id, :station_id, :stop_no)";
                     $stm3 = $con->prepare($query_stop_staion);
-                    $out3 = $stm3->execute(array(
-                        'train_id' => $train_id,
-                        'station_id' => $value,
-                        'stop_no' => $key + 1
-                    ));
+                    $out3 = $stm3->execute(
+                        array(
+                            'train_id' => $train_id,
+                            'station_id' => $value,
+                            'stop_no' => $key + 1
+                        )
+                    );
                 }
 
 
@@ -395,14 +401,16 @@ class Trains extends Model
                     $query_compartment = "INSERT INTO tbl_compartment (compartment_train_id, compartment_class_type, compartment_class, compartment_seat_layout, compartment_total_seats, compartment_total_number)
                               VALUES (:compartment_train_id, :compartment_class_type, :compartment_class, :compartment_seat_layout, :compartment_total_seats, :compartment_total_no)";
                     $stm2 = $con->prepare($query_compartment);
-                    $out2 = $stm2->execute(array(
-                        'compartment_train_id' => $train_id,
-                        'compartment_class_type' => $_POST['compartment']['type'][$key],
-                        'compartment_class' => $value,
-                        'compartment_seat_layout' => $_POST['compartment']['seat_layout'][$key],
-                        'compartment_total_seats' => $_POST['compartment']['total_seats'][$key],
-                        'compartment_total_no' => $_POST['compartment']['total_no'][$key]
-                    ));
+                    $out2 = $stm2->execute(
+                        array(
+                            'compartment_train_id' => $train_id,
+                            'compartment_class_type' => $_POST['compartment']['type'][$key],
+                            'compartment_class' => $value,
+                            'compartment_seat_layout' => $_POST['compartment']['seat_layout'][$key],
+                            'compartment_total_seats' => $_POST['compartment']['total_seats'][$key],
+                            'compartment_total_no' => $_POST['compartment']['total_no'][$key]
+                        )
+                    );
                 }
             } catch (PDOException $e) {
                 $data['errors'][] = $e->getMessage();
@@ -492,9 +500,11 @@ class Trains extends Model
                 . "	tbl_train.train_id = :train_id LIMIT 1";
             $stm = $con->prepare($query);
 
-            $stm->execute(array(
-                'train_id' => $id
-            ));
+            $stm->execute(
+                array(
+                    'train_id' => $id
+                )
+            );
 
             $data = $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -545,16 +555,18 @@ class Trains extends Model
                 $query = "UPDATE tbl_train SET train_name = :train_name, train_type = :train_type, train_start_time = :train_start_time, train_end_time = :train_end_time, train_start_station = :train_start_station, train_end_station = :train_end_station, train_route = :train_route WHERE train_id = :train_id";
 
                 $stm = $con->prepare($query);
-                $stm->execute(array(
-                    'train_name' => $data['train_name'],
-                    'train_type' => $data['train_type'],
-                    'train_start_time' => $data['start_time'],
-                    'train_end_time' => $data['end_time'],
-                    'train_start_station' => $data['start_station'],
-                    'train_end_station' => $data['end_station'],
-                    'train_route' => $data['train_route'],
-                    'train_id' => $id
-                ));
+                $stm->execute(
+                    array(
+                        'train_name' => $data['train_name'],
+                        'train_type' => $data['train_type'],
+                        'train_start_time' => $data['start_time'],
+                        'train_end_time' => $data['end_time'],
+                        'train_start_station' => $data['start_station'],
+                        'train_end_station' => $data['end_station'],
+                        'train_route' => $data['train_route'],
+                        'train_id' => $id
+                    )
+                );
 
                 return true; // Successful insertion
             } catch (PDOException $e) {
@@ -563,4 +575,34 @@ class Trains extends Model
         }
         return $errors;
     }
+
+    //Update Train Status
+    public function updateStatus($id)
+    {
+        $con = $this->connect();
+        $errors = array();
+
+        try {
+            $query = "UPDATE tbl_train SET  WHERE train_id = :train_id";
+
+            $stm = $con->prepare($query);
+            $stm->execute(
+                array(
+                    'train_name' => $data['train_name'],
+                    'train_type' => $data['train_type'],
+                    'train_start_time' => $data['start_time'],
+                    'train_end_time' => $data['end_time'],
+                    'train_start_station' => $data['start_station'],
+                    'train_end_station' => $data['end_station'],
+                    'train_route' => $data['train_route'],
+                    'train_id' => $id
+                )
+            );
+
+            return true; // Successful insertion
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }

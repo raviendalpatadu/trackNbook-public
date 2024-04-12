@@ -86,10 +86,10 @@ class Login extends Controller
                 //rederect to dashboard station master
                 elseif (strtolower($user_type) == "station_master") {
                     $this->redirect('dashboard/station_master');
-
                 } elseif (strtolower($user_type) == "ticket_checker") {
                     $this->redirect('ticketchecker/option');
                 }
+
             } else {
                 $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
                 $errors['password'] = (array_key_exists('invalid_password', $data['error'])) ? $data['error']['invalid_password'] : '';
@@ -101,11 +101,10 @@ class Login extends Controller
         //}
 
         $this->view(
-            'staff.Login',
+            'staff.login',
             array(
                 'errors' => $errors,
             )
         );
-
     }
 }

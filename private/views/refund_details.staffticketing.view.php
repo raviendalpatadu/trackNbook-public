@@ -12,7 +12,7 @@
 <body>
 
     <?php $this->view("./includes/sidebar") ?>
-    <div class="column-left">
+    <div class="column-left" id="blur">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="container">

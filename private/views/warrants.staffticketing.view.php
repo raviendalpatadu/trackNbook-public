@@ -206,6 +206,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
 
 
+
 </body>
 
 </html>
