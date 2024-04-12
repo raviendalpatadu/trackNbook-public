@@ -12,10 +12,3 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-<link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
-
-<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
-
-
-<script src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.2/b-3.0.1/sl-2.0.0/datatables.min.js"></script>
-<script src="Editor-2.3.2/js/dataTables.editor.js"></script>

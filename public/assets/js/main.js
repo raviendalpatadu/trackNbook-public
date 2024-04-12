@@ -456,10 +456,10 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 
 
 // mobile hamburger menu
-var checkbox = $("#burger");
+var checkboxBurger = $("#burger");
 
-checkbox.click(function () {
-  if (checkbox.is(":checked")) {
+checkboxBurger.click(function () {
+  if (checkboxBurger.is(":checked")) {
     $(".nav-menu-items").addClass("nav-menu-items-show");
   } else {
     $(".nav-menu-items").removeClass("nav-menu-items-show");

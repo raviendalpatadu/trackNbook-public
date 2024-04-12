@@ -38,7 +38,7 @@ class Trains extends Model
                 $this->errors['errors']['to_date'] = 'To date is required';
             }
 
-            if(empty($values['to_date'])){
+            if (empty($values['to_date'])) {
                 $this->errors['errors']['to_date'] = 'To date is required';
             }
 
@@ -177,8 +177,8 @@ class Trains extends Model
                             reservation_end_st.stop_no AS reservation_end_stop_no
                             FROM
                             tbl_reservation r
-                            JOIN tbl_train_stop_station reservation_start_st ON r.reservation_start_station = reservation_start_st.station_id
-                            JOIN tbl_train_stop_station reservation_end_st ON r.reservation_end_station = reservation_end_st.station_id
+                            JOIN tbl_train_stop_station reservation_start_st ON r.reservation_start_station = reservation_start_st.station_id AND r.reservation_train_id = reservation_start_st.train_id
+                            JOIN tbl_train_stop_station reservation_end_st ON r.reservation_end_station = reservation_end_st.station_id AND r.reservation_train_id = reservation_end_st.train_id
                             JOIN tbl_station s ON reservation_start_st.station_id = s.station_id
                             JOIN tbl_station e ON reservation_end_st.station_id = e.station_id
                             GROUP BY

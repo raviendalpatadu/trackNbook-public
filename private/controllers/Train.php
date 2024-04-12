@@ -66,6 +66,7 @@ class Train extends Controller
 
         $data = $_SESSION['reservation'];
 
+
         $data['stations'] = $station->findAll();
 
         if (isset($data['to_date']) && $data['to_date'] != '') {

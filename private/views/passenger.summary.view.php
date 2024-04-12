@@ -7,7 +7,7 @@ echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 
-<body>
+<body class="flex-column">
     <?php $this->view("./includes/navbar") ?>
     <div class="column-left">
         <main>
