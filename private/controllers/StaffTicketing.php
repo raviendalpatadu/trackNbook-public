@@ -53,6 +53,7 @@ class StaffTicketing extends Controller
 
         $data['trains'] = $train->findAllTrains();
         $data['reservations'] = $resevation->getReservation();
+
         if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
             $data['reservations'] = $resevation->where('reservation_date', $_POST['reservation_date']);
         }
@@ -62,6 +63,7 @@ class StaffTicketing extends Controller
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
             $data['reservations'] = $resevation->where('reservation_train_id', $_POST['reservation_train_id']);
         }
+
 
  
 
@@ -78,18 +80,18 @@ class StaffTicketing extends Controller
 
         $data = array();
 
-        $data['trains'] = $train->findAll();
+        $data['trains'] = $train->findAllTrains();
         $data['reservations'] = $warrent_resevation->getjoinReservation();
 
 
         if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_date', $_POST['reservation_date']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_date', $_POST['reservation_date']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_passenger_nic', $_POST['reservation_passenger_nic']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_train_id', $_POST['reservation_train_id']);
         }
 
 

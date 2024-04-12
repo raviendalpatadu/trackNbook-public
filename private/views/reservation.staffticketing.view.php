@@ -49,7 +49,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                 <!-- print data of $data -->
                                                 <option value="0">Please choose</option>
                                                 <?php foreach ($data['trains'] as $key => $value) : ?>
-                                                    <option value="<?= $value->train_id ?>"> <?= $value->train_name . ' (' . $value->start_station . '-' . $value->end_station . ')' ?></option>
+                                                    <option value="<?= $value->train_id ?>" <?php get_select('reservation_train_id', $value->train_id) ?>> <?= $value->train_name . ' (' . $value->start_station . '-' . $value->end_station . ')' ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -62,11 +62,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <div class="input-text-label text lightgray-font">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?php
-                                                                                                                    if (isset($_POST['reservation_passenger_nic'])) {
-                                                                                                                        echo $_POST['reservation_passenger_nic'];
-                                                                                                                    }
-                                                                                                                    ?>" name="reservation_passenger_nic">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('reservation_passenger_nic', '') ?>" name="reservation_passenger_nic">
                                             </div>
                                         </div>
                                         <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
