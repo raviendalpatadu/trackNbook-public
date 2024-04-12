@@ -1,6 +1,6 @@
 <?php
 
-
+//get post date in inputs 
 function get_var($key, $default = '')
 {
     if (isset($_POST[$key])) {

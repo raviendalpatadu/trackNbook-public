@@ -51,6 +51,7 @@ class WarrantsReservations extends Model
 
     public function getjoinReservation()
     {
+        
         try {
 
             $query = "WITH compartments AS (\n"
