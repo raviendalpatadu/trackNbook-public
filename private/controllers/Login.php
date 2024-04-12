@@ -104,7 +104,7 @@ class Login extends Controller
         //}
 
         $this->view(
-            'login',
+            'staff.login',
             array(
                 'errors' => $errors,
             )
