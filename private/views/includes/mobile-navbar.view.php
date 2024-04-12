@@ -1,12 +1,55 @@
-<nav class="nav-dashboard">
+<?php
+if (Auth::getuser_type() == "ticket_checker") {
+  $sidebar_list = [
+    [
+      "name" => "Home",
+      "link" => "ticketchecker/dashboard",
+      "icon" => "home.svg"
+    ],
+
+    [
+      "name" => "QR Scan",
+      "link" => "ticketchecker/QR",
+      "icon" => "qr.svg"
+    ],
+    [
+      "name" => "Reservation List",
+      "link" => "ticketchecker/reservationList",
+      "icon" => "reservation.svg"
+    ]
+  ];
+}
+
+?>
+<nav class="nav-dashboard px-20">
   <div class="brand">
-    <div class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18" fill="none">
-        <path d="M6.39383 9L0 2.1L1.94595 0L10.2857 9L1.94595 18L0 15.9L6.39383 9Z" fill="#324054" />
-      </svg>
-    </div>
+    <!-- <div class=" nav-container">
+      <input class="checkbox" type="checkbox" name="" id="" />
+      <div class="hamburger-lines">
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+        <span class="line line3"></span>
+      </div>
+      <div class="menu-items">
+        <?php foreach ($sidebar_list as $item) { ?>
+          <a href="<?= ROOT . $item['link'] ?>">
+      
+            <li> <?= $item['name'] ?></li>
+        </a>
+        <?php } ?>
+      </div>
+    </div> -->
+    <label class="burger" for="burger">
+      <input type="checkbox" id="burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
     <div class="brand-text">TrackNBook</div>
+
   </div>
+
   <div class="menu">
     <ul>
       <li class="navbar-item"><a href="<?= ROOT ?>notification">
@@ -58,3 +101,13 @@
     </div>
   </div>
 </nav>
+
+<div class="nav-menu-items px-50" id="menu items">
+  <ul>
+    <?php foreach ($sidebar_list as $item) { ?>
+      <a href="<?= ROOT . $item['link'] ?>">
+        <li> <?= $item['name'] ?></li>
+      </a>
+    <?php } ?>
+  </ul>
+</div>

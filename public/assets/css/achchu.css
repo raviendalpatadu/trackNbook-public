@@ -1260,7 +1260,7 @@ label {
   height: 333px;
   background-color: #fafafa;
 }
-.badge-base {
+/* .badge-base {
   background: var(--gray-100, #f2f4f7);
   border-radius: 16px;
   padding: 2px 8px 2px 8px;
@@ -1271,7 +1271,7 @@ label {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-}
+} */
 
 .colorful-table {
   background-color: lightblue;

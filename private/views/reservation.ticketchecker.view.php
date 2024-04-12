@@ -14,14 +14,18 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 } else {
     $count = 0;
 }
+
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 ?>
 
 <body>
+    <?php $this->view("./includes/mobile-navbar") ?>
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
-        <main>
-            <div class="home-container ">
-                <div class="d-flex  mr-20 mt-20">
+        <main class="bg">
+            <div class="home-container d-flex flex-column ">
+                <div class="d-flex m-20 justify-contents-start">
                     <div class="">
 
 
@@ -63,151 +67,47 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                 <div class="row  mr-20 mt-20">
                     <div class="col-12 ">
 
-
-
                         <div class="row">
                             <div class="col-12">
 
-                                <table class="table ">
+                                <table class="table bg-white">
                                     <thead>
                                         <tr class="row p-20 align-items-center justify-content-center">
                                             <th class="col-3 ">NIC</th>
-                                            <th class="col-1">Ticket ID</th>
+                                            <th class="col-3">Ticket ID</th>
                                             <th class="col-2">Date</th>
                                             <th class="col-3">Passenger</th>
-                                            <th class="col-2">Class</th>
+                                            <!-- <th class="col-2">Class</th> -->
                                             <th class="col-1"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class=" row p-20">
-                                            <td data-label="NIC" class="col-3 d-flex align-items-center">200164812536</td>
-                                            <td data-label="Ticket ID" class="col-1 d-flex align-items-center lightgray-font">WD1001</td>
-                                            <td data-label="Date" class="col-2 d-flex align-items-center">2023.10.24</td>
-                                            <td data-label="Passenger" class="col-3 d-flex align-items-center">Dinesh Perera</td>
-                                            <td data-label="Class" class="col-2 d-flex align-items-center">First Class</td>
-                                            <td class="col-1 d-flex align-items-center g-20">
-                                                <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>ticketchecker/summary">
-                                                    <div class="badge-base bg-Selected-Blue">
+                                        <?php foreach ($data['reservations'] as $key => $reservation) : ?>
+                                            <tr class=" row p-20">
+                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
+                                                <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
+                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
+                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
+                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->
+                                                <td class="col-1 d-flex align-items-center g-20">
+                                                    <div class="badge-base bg-light-green">
                                                         <div class="dot">
                                                             <div class="dot4"></div>
                                                         </div>
-                                                        <div class="text blue">View</div>
+                                                        <div class="text dark-green">Pending</div>
                                                     </div>
-                                                </a>
-                                            </td>
 
-                                        </tr>
-                                        <tr class=" row p-20">
-                                            <td data-label="NIC" class="col-3 d-flex align-items-center">200164812536</td>
-                                            <td data-label="Ticket ID" class="col-1 d-flex align-items-center lightgray-font">WD1001</td>
-                                            <td data-label="Date" class="col-2 d-flex align-items-center">2023.10.24</td>
-                                            <td data-label="Passenger" class="col-3 d-flex align-items-center">Dinesh Perera</td>
-                                            <td data-label="Class" class="col-2 d-flex align-items-center">First Class</td>
-                                            <td class="col-1 d-flex align-items-center g-20">
-                                                <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/summary">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="dot">
-                                                            <div class="dot4"></div>
+                                                    <a class="blue" href="<?= ROOT ?>ticketchecker/summary/<?= $reservation->reservation_ticket_id  ?>">
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="dot">
+                                                                <div class="dot4"></div>
+                                                            </div>
+                                                            <div class="text blue">View</div>
                                                         </div>
-                                                        <div class="text blue">View</div>
-                                                    </div>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                        <tr class=" row p-20">
-                                            <td data-label="NIC" class="col-3 d-flex align-items-center">200164812536</td>
-                                            <td data-label="Ticket ID" class="col-1 d-flex align-items-center lightgray-font">WD1001</td>
-                                            <td data-label="Date" class="col-2 d-flex align-items-center">2023.10.24</td>
-                                            <td data-label="Passenger" class="col-3 d-flex align-items-center">Dinesh Perera</td>
-                                            <td data-label="Class" class="col-2 d-flex align-items-center">First Class</td>
-                                            <td class="col-1 d-flex align-items-center g-20">
-                                                <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/summary">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="dot">
-                                                            <div class="dot4"></div>
-                                                        </div>
-                                                        <div class="text blue">View</div>
-                                                    </div>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                        <tr class=" row p-20">
-                                            <td data-label="NIC" class="col-3 d-flex align-items-center">200164812536</td>
-                                            <td data-label="Ticket ID" class="col-1 d-flex align-items-center lightgray-font">WD1001</td>
-                                            <td data-label="Date" class="col-2 d-flex align-items-center">2023.10.24</td>
-                                            <td data-label="Passenger" class="col-3 d-flex align-items-center">Dinesh Perera</td>
-                                            <td data-label="Class" class="col-2 d-flex align-items-center">First Class</td>
-                                            <td class="col-1 d-flex align-items-center g-20">
-                                                <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/summary">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="dot">
-                                                            <div class="dot4"></div>
-                                                        </div>
-                                                        <div class="text blue">View</div>
-                                                    </div>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                        <tr class=" row p-20">
-                                            <td data-label="NIC" class="col-3 d-flex align-items-center">200164812536</td>
-                                            <td data-label="Ticket ID" class="col-1 d-flex align-items-center lightgray-font">WD1001</td>
-                                            <td data-label="Date" class="col-2 d-flex align-items-center">2023.10.24</td>
-                                            <td data-label="Passenger" class="col-3 d-flex align-items-center">Dinesh Perera</td>
-                                            <td data-label="Class" class="col-2 d-flex align-items-center">First Class</td>
-                                            <td class="col-1 d-flex align-items-center g-20">
-                                                <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div>
-
-                                                <a class="blue" href="<?= ROOT ?>staffticketing/summary">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="dot">
-                                                            <div class="dot4"></div>
-                                                        </div>
-                                                        <div class="text blue">View</div>
-                                                    </div>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-
-
-
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 <div class="pagination">
