@@ -15,6 +15,50 @@ class Login extends Controller
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $data = $user->login();
 
+            if (!array_key_exists('error', $data) && $data[0]->user_type == 'passenger') {
+
+                Auth::authenticate($data[0]);
+
+                $user_id = $data[0]->user_id;
+                $user_type = Auth::getUser_Type($user_id);
+                // redirect to dashboard passenger
+                if (strtolower($user_type) == "passenger") {
+                    $this->redirect('home');
+                }  
+            }
+            else{
+                if ($data[0]->user_type == 'passenger') {
+                    $errors['username'] = (array_key_exists('invalid_uname',$data['error'])) ? $data['error']['invalid_uname'] : '';
+                    $errors['password'] = (array_key_exists('invalid_password',$data['error'])) ? $data['error']['invalid_password'] : '';
+                }else{
+                    $errors['username'] = 'invalid Username or Password';
+                    $errors['password'] = 'invalid Username or Password';
+                }
+
+            }
+        }
+
+
+        //$errors['email'] = 'invalid Username or Password';
+        //}
+
+        $this->view(
+            'login',
+            array(
+                'errors' => $errors,
+            )
+        );
+    }
+
+    function staff($id = '')
+    {
+        $errors = array();
+
+
+        $user = new Users();
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $data = $user->login();
+
             if (!array_key_exists('error', $data)) {
 
                 Auth::authenticate($data[0]);
@@ -46,7 +90,7 @@ class Login extends Controller
                 elseif (strtolower($user_type) == "station_master") {
                     $this->redirect('dashboard/station_master');
                 } elseif (strtolower($user_type) == "ticket_checker") {
-                    $this->redirect('dashboard/ticket_checker');
+                    $this->redirect('ticketchecker/option');
                 }
 
             } else {
@@ -60,7 +104,7 @@ class Login extends Controller
         //}
 
         $this->view(
-            'login',
+            'staff.login',
             array(
                 'errors' => $errors,
             )

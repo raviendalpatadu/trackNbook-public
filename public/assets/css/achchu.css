@@ -23,8 +23,8 @@
   color: #1f2124;
   float: left;
 }
-/* Station Master Dashboard */
 
+/* Station Master Dashboard */
 .card-dashboard-sm {
   margin: 5px 5px;
   padding: 10px 20px;
@@ -37,9 +37,9 @@
 }
 
 /* Staff General Dashboard */
-
 .ach-widgets-s .number {
   position: relative;
+  width: -moz-fit-content;
   width: fit-content;
   font-family: "Poppins-Medium", Helvetica;
   font-weight: 500;
@@ -59,6 +59,7 @@
   flex: 0 0 auto;
   height: 92px;
 }
+
 .card-dashboard-sg {
   margin: 5px 5px;
   padding: 10px 20px;
@@ -72,7 +73,6 @@
 
 /* Train Driver Dashboard */
 /* Dashboard admin */
-
 .ach-widgets {
   display: flex;
   width: auto;
@@ -93,7 +93,7 @@
   flex-grow: 1;
   background-color: var(--bgwhite-100);
   border-radius: 23.33px;
-  box-shadow: 0px 1.94px 13.61px #0063e70f;
+  box-shadow: 0px 1.94px 13.61px rgba(0, 99, 231, 0.0588235294);
 }
 
 .ach-widgets .div {
@@ -117,6 +117,7 @@
 
 .ach-widgets .impressions {
   position: relative;
+  width: -moz-fit-content;
   width: fit-content;
   margin-top: -0.97px;
   font-family: "Inter-Medium", Helvetica;
@@ -130,6 +131,7 @@
 
 .ach-widgets .number {
   position: relative;
+  width: -moz-fit-content;
   width: fit-content;
   font-family: "Poppins-Medium", Helvetica;
   font-weight: 500;
@@ -205,108 +207,90 @@
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 50px 20px 20px 20px;
-  width: 210px;
-  height: 200px;
-  /* 1/3 minus the margins (20+20) */
-  padding-top: 30px;
-  padding-bottom: 20px;
-  padding-left: 100px;
-  padding-right: 100px;
-
+  width: -moz-max-content;
+  width: max-content;
+  padding: 20px;
   text-align: center;
   color: #1f2124;
   float: left;
-
-  @media (max-width: 768px) {
-    margin: 10px 20px;
-    width: calc(100% - 40px);
-
-    &:first-child {
-      margin-top: 20px;
-    }
-  }
-
-  .title {
-    font-size: 25px;
-    font-weight: bolder;
-  }
-
-  .ach-icon {
-    margin: 5px 0;
-
-    svg {
-      width: 10px;
-      height: 100px;
-
-      path {
-        fill: #0085e4;
-      }
-    }
-  }
-  .ach-icon1 {
-    margin: 50px 0;
-
-    svg {
-      width: 100px;
-      height: 100px;
-
-      path {
-        fill: #f5013e;
-      }
-    }
-  }
-
-  .features {
-    ul {
-      padding: 0;
-      margin: 20px 0 50px 0;
-      list-style-type: none;
-
-      li {
-        margin: 10px 0;
-        font-size: 14px;
-
-        span {
-          border-bottom: 2px dotted #0085e4;
-        }
-      }
-    }
-  }
-
-  .btn-td {
-    display: block;
-    background: #0085e4;
-    color: white;
-    padding: 15px 20px;
-    margin: 10px 0;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.9);
-    transition: all 200ms ease-in-out;
-    text-decoration: none;
-
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-  .btn1-td {
-    display: block;
-    background: #f5013e;
-    color: white;
-    padding: 15px 20px;
-    margin: 20px 0;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.9);
-    transition: all 200ms ease-in-out;
-    text-decoration: none;
-
-    &:hover {
-      opacity: 0.7;
-    }
+}
+@media (max-width: 768px) {
+  .card-dashboard-td:first-child {
+    margin-top: 20px;
   }
 }
-/* ............................................................. */
 
+.title {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.ach-icon {
+  margin: 5px 0;
+}
+.ach-icon svg {
+  width: 10px;
+  height: 100px;
+}
+.ach-icon svg path {
+  fill: #0085e4;
+}
+
+.ach-icon1 {
+  margin: 50px 0;
+}
+.ach-icon1 svg {
+  width: 100px;
+  height: 100px;
+}
+.ach-icon1 svg path {
+  fill: #f5013e;
+}
+
+.features ul {
+  padding: 0;
+  margin: 20px 0 50px 0;
+  list-style-type: none;
+}
+.features ul li {
+  margin: 10px 0;
+  font-size: 14px;
+}
+.features ul li span {
+  border-bottom: 2px dotted #0085e4;
+}
+
+.btn-td {
+  display: block;
+  background: #0085e4;
+  color: white;
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.9);
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+}
+.btn-td:hover {
+  opacity: 0.7;
+}
+
+.btn1-td {
+  display: block;
+  background: #f5013e;
+  color: white;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.9);
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+}
+.btn1-td:hover {
+  opacity: 0.7;
+}
+
+/* ............................................................. */
 /* Terms and Conditions */
 body {
   font-family: Arial, sans-serif;
@@ -325,7 +309,6 @@ body {
 }
 
 /* Background box of each para */
-
 .h2-terms {
   font-size: 18px;
   text-decoration: underline;
@@ -343,10 +326,9 @@ ul {
 li {
   margin: 5px 0;
 }
+
 /* ................................................. */
-
 /* Wait list */
-
 .activation-field-waiting-list {
   display: flex;
   justify-content: flex-end;
@@ -373,10 +355,8 @@ li {
 
 /* ...................................................................................*/
 /* Add location */
-
 /* Train Driver add  location*/
 /* Train Driver - Update Location */
-
 .button-base-update-location {
   background: var(--white, #ffffff);
   border: 1px solid var(--gray-300, #d0d5dd);
@@ -389,16 +369,15 @@ li {
   justify-content: center;
   flex-shrink: 0;
   position: 67px;
-  box-shadow: var(
-    --shadow-xs-box-shadow,
-    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
-  );
+  box-shadow: var(--shadow-xs-box-shadow, 0px 1px 2px 0px rgba(16, 24, 40, 0.05));
   overflow: hidden;
   margin-left: 131px;
 }
+
 .bg-ul-Selected-Blue {
   background-color: #cae1ff;
 }
+
 thead tr {
   padding: 12px 24px;
   border-bottom: 1px solid var(--gray-200, #eaecf0);
@@ -433,7 +412,6 @@ thead tr {
 }
 
 /* Train Driver - Update delay */
-
 .card-update-delay {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
@@ -469,16 +447,15 @@ thead tr {
   justify-content: center;
   flex-shrink: 0;
   position: 67px;
-  box-shadow: var(
-    --shadow-xs-box-shadow,
-    0px 1px 2px 0px rgba(16, 24, 40, 0.05)
-  );
+  box-shadow: var(--shadow-xs-box-shadow, 0px 1px 2px 0px rgba(16, 24, 40, 0.05));
   overflow: hidden;
   margin-left: 44px;
 }
+
 .bg-ul-Selected-Blue {
   background-color: #cae1ff;
 }
+
 thead tr {
   padding: 12px 24px;
   border-bottom: 1px solid var(--gray-200, #eaecf0);
@@ -516,8 +493,6 @@ thead tr {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 50px 20px 20px 20px;
-  width: 258px;
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 19px;
@@ -526,6 +501,7 @@ thead tr {
   color: #1f2124;
   float: left;
 }
+
 .add-location-container {
   width: 100%;
 }
@@ -533,8 +509,6 @@ thead tr {
 .add-location-container-box {
   background-color: #fafafa;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-  margin-left: -172px;
 }
 
 .justify-content-add-location {
@@ -546,6 +520,7 @@ thead tr {
   gap: 17px;
   margin-left: 44px;
 }
+
 .dropdown2-add-location {
   cursor: pointer;
   padding: 8px;
@@ -560,7 +535,6 @@ thead tr {
 }
 
 /* Update train Location */
-
 .line-update-location {
   width: 269px;
   border-bottom: 2px solid #000;
@@ -661,7 +635,6 @@ thead tr {
   font-style: normal;
   font-weight: 700;
   line-height: 19.444px;
-
   /* 121.528% */
 }
 
@@ -683,10 +656,9 @@ thead tr {
   line-height: 115%;
   text-align: justify;
 }
+
 /* ....................................................................... */
-
 /* Update train delay */
-
 .delay-g-8 {
   gap: 8px;
   margin-right: 12px;
@@ -787,7 +759,6 @@ thead tr {
   color: white;
   width: 15%;
   margin-left: 50px;
-
   margin-top: 20px;
   /* Set the text color to white */
   /* You can add additional styling here, such as padding, border, etc. */
@@ -880,7 +851,6 @@ label {
   font-weight: 600;
   line-height: 18px;
   margin-bottom: 10px;
-
   /* 112.5% */
 }
 
@@ -967,15 +937,13 @@ label {
 }
 
 /* ................................................ */
-
 /* Manage Schedule */
 .trains-available-manage-schedule {
   padding: 12px 24px;
 }
+
 /* .................................................*/
-
 /* Contact*/
-
 .activation-field-contact {
   display: flex;
   justify-content: flex-end;
@@ -1064,9 +1032,7 @@ label {
 }
 
 /* ............................................................ */
-
 /* Add schedule*/
-
 .activation-field-adsc {
   display: flex;
   justify-content: flex-end;
@@ -1087,7 +1053,6 @@ label {
   color: white;
   width: 15%;
   margin-left: 50px;
-
   margin-top: 20px;
   /* Set the text color to white */
   /* You can add additional styling here, such as padding, border, etc. */
@@ -1181,7 +1146,6 @@ label {
   line-height: 18px;
   margin-bottom: 18px;
   width: 100%;
-
   /* 112.5% */
 }
 
@@ -1254,13 +1218,13 @@ label {
 }
 
 /* ......................................  */
-
 .frame1 {
   width: 682px;
   height: 333px;
   background-color: #fafafa;
 }
-.badge-base {
+
+/* .badge-base {
   background: var(--gray-100, #f2f4f7);
   border-radius: 16px;
   padding: 2px 8px 2px 8px;
@@ -1271,35 +1235,10 @@ label {
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-}
-
+} */
 .colorful-table {
   background-color: lightblue;
   color: white; /* Set the text color to white for better visibility on a black background */
-  .dashboard-container {
-    background-color: #fafafa; /* Black background color */
-    width: 645px;
-    height: 740px;
-    margin: 50px auto 0 auto; /* Add margin to create space at the top */
-    padding: 20px;
-    color: #fff;
-  }
-
-  .card.card-body {
-    background-color: #fff; /* Set the background color for the card within the black container */
-    color: #000; /* Set the text color for the card */
-  }
-
-  .image-field {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .field-select {
-    height: 78px;
-  }
-
   /* .button {
     display: inline-flex;
     padding: 15px;
@@ -1314,132 +1253,138 @@ label {
   /* margin-left: 10px; Adjust this value to control the amount of spacing */
   /* margin-right: 0px; Set margin-right to 0 to ensure no extra spacing on the right */
   /*} */
-
   /* .button:hover {
     background-color: lightgray;
     color: blue;
   }
    */
-
-  .form1 {
-    background-color: #fafafa;
-    padding: 10px;
-  }
-
-  .activation-field {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .activation-field a {
-    text-decoration-line: underline;
-  }
-
-  .field {
-    margin-bottom: 6px;
-  }
-
-  .text-field {
-    display: flex;
-    width: 100%;
-    padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: var(--W-Background, #fff);
-  }
-
-  .text-field1 {
-    display: flex;
-    width: 90%;
-    padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: var(--W-Background, #fff);
-  }
-  .select-field {
-    display: flex;
-    width: 135.492px;
-    padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: var(--W-Background, #fff);
-    margin-top: 18px;
-    margin-left: 40px;
-  }
-
-  .image {
-    margin-left: 182px;
-    width: 542px;
-  }
-  main {
-    height: -webkit-fill-available;
-  }
-
   /*Train Book Update Styles*/
-
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 740px;
-  }
-
-  .center-form {
-    background-color: #655e97;
-    width: 300px;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .center_form1 {
-    background-color: #655e97;
-    width: 23vw;
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 14vh;
-  }
-
-  .update-schedule {
-    display: flex;
-    width: 645px;
-    height: 740px;
-    padding: 50px;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 0;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-
-  .card-dashboard {
-    margin: 5px 5px;
-    padding: 10px 20px;
-    background-color: #fafafa;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    font-family: "Poppins-Medium", Helvetica;
-    border-radius: 10px;
-  }
 }
+.colorful-table .dashboard-container {
+  background-color: #fafafa; /* Black background color */
+  width: 645px;
+  height: 740px;
+  margin: 50px auto 0 auto; /* Add margin to create space at the top */
+  padding: 20px;
+  color: #fff;
+}
+.colorful-table .card.card-body {
+  background-color: #fff; /* Set the background color for the card within the black container */
+  color: #000; /* Set the text color for the card */
+}
+.colorful-table .image-field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.colorful-table .field-select {
+  height: 78px;
+}
+.colorful-table .form1 {
+  background-color: #fafafa;
+  padding: 10px;
+}
+.colorful-table .activation-field {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.colorful-table .activation-field a {
+  text-decoration-line: underline;
+}
+.colorful-table .field {
+  margin-bottom: 6px;
+}
+.colorful-table .text-field {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+.colorful-table .text-field1 {
+  display: flex;
+  width: 90%;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+}
+.colorful-table .select-field {
+  display: flex;
+  width: 135.492px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: var(--W-Background, #fff);
+  margin-top: 18px;
+  margin-left: 40px;
+}
+.colorful-table .image {
+  margin-left: 182px;
+  width: 542px;
+}
+.colorful-table main {
+  height: -webkit-fill-available;
+}
+.colorful-table .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 740px;
+}
+.colorful-table .center-form {
+  background-color: #655e97;
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.colorful-table .center_form1 {
+  background-color: #655e97;
+  width: 23vw;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 14vh;
+}
+.colorful-table .update-schedule {
+  display: flex;
+  width: 645px;
+  height: 740px;
+  padding: 50px;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.colorful-table .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.colorful-table .card-dashboard {
+  margin: 5px 5px;
+  padding: 10px 20px;
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: "Poppins-Medium", Helvetica;
+  border-radius: 10px;
+}/*# sourceMappingURL=achchu.css.map */

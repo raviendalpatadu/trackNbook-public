@@ -64,7 +64,7 @@ class Admin extends Controller
         // if(isset($_POST['delete'])){
         try {
             $result = $user->delete($id, "user_id");
-            $this->redirect('admin/getUsers');
+            $this->redirect('admin/usersList');
 
             // if($result !=1 && array_key_exists('errors', $result)){
             //     $data['errors'] = $result['errors'];

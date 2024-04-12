@@ -15,15 +15,7 @@
         <main style="background-color:#EFF8FF;">
             <div class="container d-flex flex-column justify-content-center align-self-center">
                 <div class="row">
-                    <div class="col-3">
-                        <div class="add-location-container mt-30">
-                            <div class="update-location">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-5">
+                    <div class="col-12">
                         <div class="add-location-container-box mt-30">
                             <div class="card-add-location">
                                 <div class="row mb-20 ">

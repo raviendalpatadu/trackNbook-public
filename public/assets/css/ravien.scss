@@ -11,7 +11,11 @@ $sizes: (
   "10": 10px,
   "11": 11px,
   "12": 12px,
+  "14": 14px,
+  "16": 16px,
+  "18": 18px,
   "20": 20px,
+  "22": 22px,
   "30": 30px,
   "40": 40px,
   "50": 50px,
@@ -22,7 +26,7 @@ $sizes: (
   "100": 100px,
 );
 
-$vw : (
+$vw: (
   "10": 10vw,
   "20": 20vw,
   "30": 30vw,
@@ -32,7 +36,19 @@ $vw : (
   "70": 70vw,
   "80": 80vw,
   "90": 90vw,
-  "100": 100vw
+  "100": 100vw,
+);
+
+$font-weight: (
+  "100": 100,
+  "200": 200,
+  "300": 300,
+  "400": 400,
+  "500": 500,
+  "600": 600,
+  "700": 700,
+  "800": 800,
+  "900": 900,
 );
 
 $colors: (
@@ -53,6 +69,7 @@ $colors: (
   "blue": #2185d5,
   "lightgray-font": #646464,
   "box-gray": #cccccc,
+  "yellow" : #f7b500,
 );
 
 @each $key, $val in $sizes {
@@ -79,7 +96,6 @@ $colors: (
   .mx-#{$key} {
     margin-right: $val;
     margin-left: $val;
-
   }
   .mx-auto {
     margin-right: auto;
@@ -122,6 +138,10 @@ $colors: (
 
   .fs-#{$key} {
     font-size: $val;
+  }
+
+  .border-radius-#{$key} {
+    border-radius: $val;
   }
 
   @media screen and (max-width: 768px) {
@@ -187,12 +207,16 @@ $colors: (
     .mobile-fs-#{$key} {
       font-size: $val !important;
     }
+
+    .mobile-border-radius {
+      border-radius: $val !important;
+    }
   }
 }
 
 @each $key, $val in $colors {
   .border-bottom-#{$key} {
-    border-bottom: 10px;
+    border-bottom: 8px;
     border-bottom-style: solid;
     border-bottom-color: $val;
   }
@@ -210,6 +234,22 @@ $colors: (
   .#{$key} {
     color: $val;
   }
+}
+
+@each $key, $val in $font-weight {
+  .fw-#{$key} {
+    font-weight: $val;
+  }
+
+  @media screen and (max-width: 768px) {
+    .mobile-fw-#{$key} {
+      font-weight: $val !important;
+    }
+  }
+}
+
+.border-none {
+  border: none;
 }
 
 .loader-circle {
@@ -236,11 +276,10 @@ $colors: (
   max-width: none !important;
 }
 
-.min-width-none{
+.min-width-none {
   min-width: none !important;
 }
 @media screen and (max-width: 768px) {
-
   .loader-circle,
   .divider {
     display: none;
@@ -254,6 +293,8 @@ $colors: (
 
 .profile .profile-img img {
   width: 200px;
+  height: 200px;
+  object-fit: cover;
   border-radius: 1000px;
 }
 
@@ -303,7 +344,7 @@ $colors: (
 .seat {
   width: 25px;
   height: 25px;
-  padding: 5px 4px;
+  padding: 17px 16px;
   gap: 10px;
   border-radius: 10px;
   border: 2px solid #ccc;
@@ -323,6 +364,13 @@ $colors: (
   background: var(--Selected-Blue) !important;
   border: 2px solid var(--Border-blue) !important;
   cursor: pointer;
+}
+
+.seat.selected-complete:not(.reserved) {
+  background: map-get($colors, "light-green") !important;
+  border: 2px solid map-get($colors, "dark-green") !important;
+  cursor: pointer;
+  transition: 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .reserved {
@@ -351,7 +399,7 @@ $colors: (
   .seat {
     width: 20px;
     height: 20px;
-    padding: 5px 4px;
+    padding: 13px 13px;
     font-size: 12px;
   }
 }
@@ -368,6 +416,10 @@ $colors: (
   @media screen and (max-width: 768px) {
     .mobile-width-#{key} {
       width: $val !important;
+    }
+
+    .mobile-d-flex{
+      display: flex !important;
     }
   }
 }
@@ -412,13 +464,31 @@ $colors: (
   display: none;
 }
 
+.display-block {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-display-none {
+    display: none;
+  }
+
+  .mobile-display-block {
+    display: block;
+  }
+}
 .home-text h1 {
   padding-top: 30px;
   padding-bottom: 30px;
-
   font-size: 42px;
   color: var(--White);
 }
+
+.home-text .mou-home-text{
+  color: var(--blue);
+
+}
+
 
 @media screen and (max-width: 768px) {
   .bg-home-desktop {
@@ -507,9 +577,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media screen and (max-width: 768px) {
   .bg-login-desktop {
     width: 100%;
-    background: linear-gradient(270deg,
+    background: linear-gradient(
+        270deg,
         rgba(255, 255, 255, 0.8) 5.1%,
-        rgba(255, 255, 255, 0.9) 101.92%),
+        rgba(255, 255, 255, 0.9) 101.92%
+      ),
       url("../images/home1.jpg"), no-repeat;
     background-size: cover;
   }
@@ -553,7 +625,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
   }
 
-  &>span {
+  & > span {
     cursor: pointer;
     padding: 8px;
     border-radius: 6px;
@@ -659,7 +731,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
           }
 
           &:hover {
-
             &:before,
             &:after {
               --scale: 0.9;
@@ -684,13 +755,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   &.filled {
-    &>span {
+    & > span {
       color: var(--Secondary-Gray);
     }
   }
 
   &.open {
-    &>span {
+    & > span {
       border-color: var(--Selected-Blue);
       box-shadow: 0px 0px 5px 2px var(--Selected-Blue);
       transition: box-shadow 250ms ease-in;
@@ -811,7 +882,7 @@ input[type="file"]::file-selector-button {
   border: none;
 }
 
-h2.topic~p {
+h2.topic ~ p {
   font-size: 16px;
 }
 
@@ -842,7 +913,6 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
 .route-line {
@@ -901,11 +971,6 @@ table.price-table th {
   font-size: 14px;
 }
 
-.ticket-summary-passenger-compartment-details td {
-  // max-width: 100%;
-  // min-width: 100px;
-}
-
 .ticket-summary-train-data p.ref-no {
   font-size: 20px;
   font-weight: 500;
@@ -929,18 +994,36 @@ table.price-table th {
     padding: 20px 20px;
     gap: 20px;
   }
+  .ticket-summary-passenger-compartment-details {
+    border: none;
+  }
 
-  .ticket-summary-passenger-compartment-details td,
-  .ticket-summary-passenger-compartment-details th {
-    padding: 5px;
-    border: 1px solid #000;
+  table.ticket-summary-passenger-compartment-details tr {
+    border: 1px solid var(--Primary-Gray);
+    margin-bottom: 0.5em;
+  }
+  table.ticket-summary-passenger-compartment-details th {
+    display: none;
+    border: none;
+  }
+
+  table.ticket-summary-passenger-compartment-details td {
+    display: block;
+    text-align: end;
+    border: 1px solid var(--Primary-Gray);
     font-size: 12px;
   }
 
-  .ticket-summary-passenger-compartment-details td {
-    // max-width: 100%;
-    // min-width: 50px;
+  .ticket-summary-passenger-compartment-details td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+    text-transform: uppercase;
   }
+
+  // table.ticket-summary-passenger-compartment-details td:last-child {
+  //   // border-bottom: 0;
+  // }
 
   .ticket-summary-train-data p.ref-no {
     font-size: 14px;
@@ -950,5 +1033,281 @@ table.price-table th {
   .ticket-summary-train-data p {
     font-weight: 600;
     font-size: 12px;
+  }
+}
+
+div.reservation-expired {
+  position: fixed;
+  z-index: 200;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4549019608);
+  // color: #fff;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.reservation-expired div.exp-box {
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+div.reservation-expired div.exp-box h2.err-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Secondary-Gray);
+}
+
+div.reservation-expired div.exp-box p.err-desc {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--Secondary-Gray);
+  padding: 1em 5em 1em 0em;
+}
+
+div.reservation-expired div.exp-box div button.exp-btn {
+  padding: 10px 20px;
+  background: var(--Primary-Blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--Selected-Blue);
+  }
+}
+
+// possition the cross svg on the top right of .exp-box
+div.reservation-expired div.exp-box svg {
+  position: relative;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
+}
+
+div.reservations {
+  height: 10vh;
+  overflow-y: scroll;
+}
+div .reservations div.reservation-card {
+  // border-radius: 20px;
+  background: #fafafa;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+div.reservations div.reservation-card div.arrow-svg > svg:first-child {
+  width: 35px;
+  height: 35px;
+}
+
+div.reservations div.reservation-card div.arrow-svg > svg path:first-child {
+  fill: var(--Border-blue);
+}
+
+div#reservations div#loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* semi-transparent white background */
+  z-index: 9999;
+}
+
+.confirm-box {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  z-index: 999;
+  background: rgba($color: #000000, $alpha: 0.4);
+
+  transform: translate(-50%, -50%);
+}
+
+.warrant-upload-success-popup-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  z-index: 999;
+  background: rgba($color: #000000, $alpha: 0.4);
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+}
+
+.warrant-upload-success-popup-box .popup-box-content {
+  background: #fff;
+  width: 40vw;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.warrant-upload-success-popup-box
+  .popup-box-content
+  .popup-box-content-header
+  h2 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Border-blue);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Border-blue);
+}
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.warrant-upload-success-popup-box
+  .popup-box-content
+  .popup-box-content-body
+  img {
+  width: 10em;
+}
+
+.warrant-upload-success-popup-box .popup-box-content .popup-box-content-body p {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.warrant-upload-success-popup-box
+  .popup-box-content
+  div.popup-box-content-footer
+  a
+  div.popup-box-content-footer-button {
+  padding: 10px 15px;
+  background: var(--Border-blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  float: right;
+
+  &:hover {
+    background: var(--Selected-Blue);
+    color: var(--Border-blue);
+  }
+}
+
+.main-popup-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  z-index: 999;
+  background: rgba($color: #000000, $alpha: 0.4);
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+
+ 
+}
+
+.main-popup-box .box {
+  display: flex;
+  gap: 15px;
+  background: #fff;
+  width: 40vw;
+  max-height: 60vh;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
+
+  animation: slide-down 0.5s ease;
+}
+
+.main-popup-box .box .heading {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Border-blue);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Border-blue);
+}
+
+.main-popup-box .box .body {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.main-popup-box .box .body img {
+  width: 10em;
+}
+
+.main-popup-box .box .body p {
+  font-size: 16px;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.main-popup-box .box .footer {
+  float: right;
+}
+.main-popup-box .box .footer button {
+  border: none;
+  float: right;
+
+}
+.main-popup-box .box .footer button div {
+  padding: 10px 15px;
+  background: var(--Border-blue);
+  color: var(--White);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  float: right;
+
+  &:hover {
+    background: var(--Selected-Blue);
+    color: var(--Border-blue);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

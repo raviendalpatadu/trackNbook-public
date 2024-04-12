@@ -1,9 +1,11 @@
 <?php
 
 echo "<pre>";
-// print_r($data);
-// print_r($_SESSION);
+// print_r($_POST);
+// print_r(Auth::reservation());
 echo "</pre>";
+
+$total_amount = Auth::reservation()['from_fare']->fare_price * Auth::reservation()['no_of_passengers'] + (Auth::getReturn() == 'on' ? Auth::reservation()['to_fare']->fare_price * Auth::reservation()['no_of_passengers'] : 0);
 ?>
 <?php $this->view("./includes/header"); ?>
 
@@ -51,77 +53,159 @@ echo "</pre>";
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center flex-column align-items-center g-10">
 
-                        <div class="d-flex width-fill justify-content-center">
 
-                            <div class="d-flex flex-column ticket-container flex-grow">
-                                <div class="d-flex p-20 flex-column g-20">
-                                    <div class="d-flex justify-content-center ticket-container-heading-bottom-border">
-                                        <h1>Ticket Details</h1>
+                    <div class="d-flex  flex-column align-items-center g-10">
+                        <div id="trainButtons" class="d-flex g-3">
+                            <button id="fromBtn" class="train-available-btn active">From Train</button>
+
+                            <?php if (Auth::getReturn() == 'on') : ?>
+                                <button id="toBtn" class="train-available-btn">To Train</button>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="d-flex flex-column flex-grow width-fill">
+                            <!-- from ticket -->
+                            <div class="d-flex width-fill justify-content-center" id="fromTicket">
+                                <div class="d-flex flex-column ticket-container flex-grow">
+                                    <div class="d-flex p-20 flex-column g-20">
+                                        <div class="d-flex justify-content-center ticket-container-heading-bottom-border">
+                                            <h1>From Ticket Details</h1>
+                                        </div>
+                                        <div class="d-flex flex-column g-10 px-20">
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Train Number</div>
+                                                <div class=""><?= Auth::reservation()['from_train']->train_id ?></div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Train Name</div>
+                                                <div class=""><?= Auth::reservation()['from_train']->train_name ?></div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Train Type</div>
+                                                <div class=""><?= ucfirst(Auth::reservation()['from_train']->train_type) ?></div>
+                                            </div>
+                                            <!-- start station -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Start Location</div>
+                                                <div class=""><?= ucfirst(Auth::reservation()['from_station']->station_name) ?></div>
+                                            </div>
+
+                                            <!-- end station -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">End Location</div>
+                                                <div class=""><?= ucfirst(Auth::reservation()['to_station']->station_name) ?></div>
+                                            </div>
+
+                                            <!-- class -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Train Class</div>
+                                                <div class=""><?= ucfirst(Auth::reservation()['from_compartment_type']->compartment_class_type) ?></div>
+                                            </div>
+
+                                            <!-- no of passengers -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">No of Passengers</div>
+                                                <div class=""><?= ucfirst(Auth::reservation()['no_of_passengers']) ?></div>
+                                            </div>
+
+                                            <!-- time start end -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Time Start &#8594 End</div>
+                                                <div class=""><?= date("H:i", strtotime(Auth::reservation()['from_train']->train_start_time)) . "->" . date("H:i", strtotime(Auth::reservation()['from_train']->train_end_time)) ?></div>
+                                            </div>
+
+                                            <!-- date -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Date</div>
+                                                <div class=""><?= Auth::reservation()['from_date'] ?></div>
+                                            </div>
+
+                                            <!-- price for one -->
+                                            <div class="d-flex flex-row align-items-center justify-content-between">
+                                                <div class="">Price for 1 Person</div>
+                                                <div class=""><?= Auth::reservation()['from_fare']->fare_price ?></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-column g-10 px-20">
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Train Number</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?></div>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Train Name</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? $data['train']->train_name : ''; ?></div>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Train Type</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? ucfirst($data['train_type']->train_type) : ''; ?></div>
-                                        </div>
-                                        <!-- start station -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Start Location</div>
-                                            <div class="width-40"><?php echo (array_key_exists('start_station', $data)) ? ucfirst($data['start_station']->station_name) : ''; ?></div>
-                                        </div>
-
-                                        <!-- end station -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">End Location</div>
-                                            <div class="width-40"><?php echo (array_key_exists('end_station', $data)) ? ucfirst($data['end_station']->station_name) : ''; ?></div>
-                                        </div>
-
-                                        <!-- class -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Train Class</div>
-                                            <div class="width-40"><?php echo (array_key_exists('class', $data)) ? ucfirst($data['class_type']->compartment_class_type) : ''; ?></div>
-                                        </div>
-
-                                        <!-- no of passengers -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">No of Passengers</div>
-                                            <div class="width-40"><?php echo (array_key_exists('no_of_passengers', $data)) ? ucfirst($data['no_of_passengers']) : ''; ?></div>
-                                        </div>
-
-                                        <!-- time start end -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Time Start &#8594 End</div>
-                                            <div class="width-40"><?php echo (array_key_exists('train', $data)) ? date("H:i", strtotime($data['train']->train_start_time)) . "->" . date("H:i", strtotime($data['train']->train_end_time)) : ''; ?></div>
-                                        </div>
-
-                                        <!-- date -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Date</div>
-                                            <div class="width-40"><?php echo (array_key_exists('date', $data)) ? $data['date'] : ''; ?></div>
-                                        </div>
-
-                                        <!-- price for one -->
-                                        <div class="d-flex flex-row align-items-center justify-content-between">
-                                            <div class="">Price for 1 Person</div>
-                                            <div class="width-40"><?php echo (array_key_exists('price_for_one', $data)) ? $data['price_for_one'] : ''; ?></div>
-                                        </div>
+                                    <div class="bg-primary-gray d-flex flex-row justify-content-end row-bottom-round px-20 py-10 white">
+                                        <div>Total Price -> <?= $total_amount ?></div>
                                     </div>
-                                </div>
-                                <div class="bg-primary-gray d-flex flex-row justify-content-end row-bottom-round px-20 py-10 white">
-                                    <div>Total Price -> <?php echo (array_key_exists('price', $data)) ? $data['price'] : ''; ?></div>
                                 </div>
                             </div>
 
+                            <!-- to ticket -->
+                            <?php if (Auth::getReturn() == 'on') : ?>
+                                <div class="d-flex width-fill justify-content-center display-none" id="toTicket">
+                                    <div class="d-flex flex-column ticket-container flex-grow">
+                                        <div class="d-flex p-20 flex-column g-20">
+                                            <div class="d-flex justify-content-center ticket-container-heading-bottom-border">
+                                                <h1>To Ticket Details</h1>
+                                            </div>
+                                            <div class="d-flex flex-column g-10 px-20">
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Train Number</div>
+                                                    <div class=""><?= Auth::reservation()['to_train']->train_id ?></div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Train Name</div>
+                                                    <div class=""><?= Auth::reservation()['to_train']->train_name ?></div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Train Type</div>
+                                                    <div class=""><?= ucfirst(Auth::reservation()['to_train']->train_type) ?></div>
+                                                </div>
+                                                <!-- start station -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Start Location</div>
+                                                    <div class=""><?= ucfirst(Auth::reservation()['to_station']->station_name) ?></div>
+                                                </div>
+
+                                                <!-- end station -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">End Location</div>
+                                                    <div class=""><?= ucfirst(Auth::reservation()['from_station']->station_name) ?></div>
+                                                </div>
+
+                                                <!-- class -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Train Class</div>
+                                                    <div class=""><?= ucfirst(Auth::reservation()['to_compartment_type']->compartment_class_type) ?></div>
+                                                </div>
+
+                                                <!-- no of passengers -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">No of Passengers</div>
+                                                    <div class=""><?= ucfirst(Auth::reservation()['no_of_passengers']) ?></div>
+                                                </div>
+
+                                                <!-- time start end -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Time Start &#8594 End</div>
+                                                    <div class=""><?= date("H:i", strtotime(Auth::reservation()['to_train']->train_start_time)) . "->" . date("H:i", strtotime(Auth::reservation()['to_train']->train_end_time)) ?></div>
+                                                </div>
+
+                                                <!-- date -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Date</div>
+                                                    <div class=""><?= Auth::reservation()['to_date'] ?></div>
+                                                </div>
+
+                                                <!-- price for one -->
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div class="">Price for 1 Person</div>
+                                                    <div class=""><?= Auth::reservation()['to_fare']->fare_price ?></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-primary-gray d-flex flex-row justify-content-end row-bottom-round px-20 py-10 white">
+                                            <div>Total Price -> <?= $total_amount?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
+
 
                         <div class="row">
                             <div class="col-12 d-flex align-items-center flex-column">
@@ -151,6 +235,24 @@ echo "</pre>";
 
 
 <script>
+    $('#fromBtn').click(function(e) {
+        e.preventDefault();
+        $('#fromTicket').removeClass('display-none');
+        $('#toTicket').addClass('display-none');
+
+        $('#toBtn').removeClass('active');
+        $('#fromBtn').addClass('active');
+
+    });
+    // tab btns
+    $('#toBtn').click(function(e) {
+        e.preventDefault();
+        $('#toTicket').removeClass('display-none');
+        $('#fromTicket').addClass('display-none');
+
+        $('#fromBtn').removeClass('active');
+        $('#toBtn').addClass('active');
+    });
     $(document).ready(function() {
         // Payment completed. It can be a successful failure.
         payhere.onCompleted = function onCompleted(orderId) {
@@ -181,7 +283,7 @@ echo "</pre>";
                     console.log(data);
                 }
             });
-            // window.location.replace("<?= ROOT ?>passenger/billing");
+            window.location.replace("<?= ROOT ?>passenger/billing");
         };
 
 
@@ -193,7 +295,7 @@ echo "</pre>";
                     type: "POST",
                     url: "<?= ROOT ?>passenger/payment",
                     data: {
-                        'payment_data': <?= json_encode($data) ?>
+                        'payment_data': <?= json_encode(Auth::reservation()) ?>
                     },
                     success: function(data) {
                         var paymentData = JSON.parse(data);
@@ -206,14 +308,14 @@ echo "</pre>";
                             "cancel_url": "<?= ROOT ?>/passanger/billing", // Important
                             "notify_url": "passenger/summary", // Important
                             "order_id": paymentData.order_id,
-                            "items": "Door bell wireles",
+                            "items": paymentData.items[0],
                             "amount": paymentData.amount,
                             "currency": "LKR",
                             "hash": paymentData.hash, // *Replace with generated hash retrieved from backend
-                            "first_name": "Saman",
-                            "last_name": "Perera",
-                            "email": "samanp@gmail.com",
-                            "phone": "0771234567",
+                            "first_name": paymentData.first_name,
+                            "last_name": paymentData.last_name,
+                            "email": paymentData.email,
+                            "phone": paymentData.phone,
                             "address": "No.1, Galle Road",
                             "city": "Colombo",
                             "country": "Sri Lanka",
@@ -228,7 +330,7 @@ echo "</pre>";
                     }
                 });
             } catch (error) {
-                // console.log(error);
+                console.log(error);
             }
         });
     });
