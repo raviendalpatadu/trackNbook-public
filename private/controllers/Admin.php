@@ -17,11 +17,9 @@ class Admin extends Controller
 
         $user = new Users();
 
-        // $train = new Trains();
-
         $data = array();
 
-        // $data['trains'] = $train->findAll();
+        
         $data['users'] = $user->findAll();
         if (isset($_POST['submit']) && !empty($_POST['user_first_name'])) {
             $data['users'] = $user->getUsers('user_first_name', $_POST['user_first_name']);
@@ -32,6 +30,8 @@ class Admin extends Controller
 
         $this->view('display.users.admin', $data);
     }
+
+
 
     function updateUser($id = '')
     {
@@ -98,4 +98,5 @@ class Admin extends Controller
         $this->view('admin.inquiry');
 
     }
+    
 }

@@ -12,4 +12,10 @@ class Ajax extends Controller
             echo json_encode(false);
         }
     }
+
+    public function getAllReservations()
+    {
+        $reservation = new Reservations();
+        echo json_encode($reservation->findAll());
+    }
 }

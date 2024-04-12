@@ -25,13 +25,12 @@ class Login extends Controller
                 if (strtolower($user_type) == "passenger") {
                     $this->redirect('home');
                 }
-                
-               
-                
-            }
-            else{
-                $errors['username'] = (array_key_exists('invalid_uname',$data['error'])) ? $data['error']['invalid_uname'] : '';
-                $errors['password'] = (array_key_exists('invalid_password',$data['error'])) ? $data['error']['invalid_password'] : '';
+
+
+
+            } else {
+                $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
+                $errors['password'] = (array_key_exists('invalid_password', $data['error'])) ? $data['error']['invalid_password'] : '';
             }
         }
 
@@ -67,7 +66,7 @@ class Login extends Controller
                 if (strtolower($user_type) == "admin") {
                     $this->redirect('dashboard/admin');
                 }
-               
+
                 //rederect to dashboard staff general
                 elseif (strtolower($user_type) == "staff_general") {
                     $this->redirect('dashboard/staff_general');
@@ -85,7 +84,7 @@ class Login extends Controller
                     $this->redirect('dashboard/station_master');
 
                 } elseif (strtolower($user_type) == "ticket_checker") {
-                    $this->redirect('ticketchecker/reservationList');
+                    $this->redirect('ticketchecker/option');
                 }
             } else {
                 $errors['username'] = (array_key_exists('invalid_uname', $data['error'])) ? $data['error']['invalid_uname'] : '';
