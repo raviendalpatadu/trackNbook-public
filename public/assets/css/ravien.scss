@@ -342,8 +342,8 @@ $colors: (
 }
 
 .seat {
-  width: 25px;
-  height: 25px;
+  width: 5px;
+  height: 5px;
   padding: 17px 16px;
   gap: 10px;
   border-radius: 10px;
@@ -397,8 +397,8 @@ $colors: (
   }
 
   .seat {
-    width: 20px;
-    height: 20px;
+    width: 5px;
+    height: 5px;
     padding: 13px 13px;
     font-size: 12px;
   }
@@ -1154,10 +1154,6 @@ div#reservation_type div.active{
   }
   
 }
-
-
-
-
 
 .confirm-box {
   position: fixed;

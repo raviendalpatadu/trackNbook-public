@@ -3,7 +3,7 @@
 <body>
 
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
+        <?php $this->view("./includes/mobile-navbar") ?>
         <main class="bg">
             <div class="container d-flex flex-column justify-content-center align-items-center">
 
