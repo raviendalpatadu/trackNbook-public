@@ -109,9 +109,10 @@
 
         // access errors array
         var arr = <?php echo json_encode($data); ?>;
+        console.log(arr);
 
         // check errors key exists
-        if (arr.hasOwnProperty('errors')) {
+        if (arr.hasOwnProperty('errors') && arr.errors.empty == false) {
             tag.each(() => {
                 if (tag[counter++].innerHTML != " ") {
                     tag.parent().children('.input-field').addClass('border-red');
