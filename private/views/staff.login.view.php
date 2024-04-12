@@ -27,28 +27,20 @@
                         <!-- username -->
                         <div class="d-flex flex-column">
                             <div class="input-field d-flex width-fill text">
-                                <input type="text" class="type-here pl-10" placeholder="Enter Your Username"
-                                    name="username">
+                                <input type="text" class="type-here pl-10" placeholder="Enter Your Username" name="username">
                             </div>
-                            <?php if (isset($data['errors'])): ?>
-                                <div
-                                    class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                    <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?>
-                                </div>
+                            <?php if (isset($data['errors'])) : ?>
+                                <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?></div>
                             <?php endif ?>
                         </div>
 
                         <!-- password -->
                         <div class="d-flex flex-column ">
                             <div class="input-field d-flex width-fill text ">
-                                <input type="password" class="type-here ml-10 " placeholder="Enter Your Password"
-                                    name="password">
+                                <input type="password" class="type-here ml-10 " placeholder="Enter Your Password" name="password">
                             </div>
-                            <?php if (isset($data['errors'])): ?>
-                                <div
-                                    class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                    <?php echo (array_key_exists('password', $data['errors'])) ? $data['errors']['password'] : ''; ?>
-                                </div>
+                            <?php if (isset($data['errors'])) : ?>
+                                <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('password', $data['errors'])) ? $data['errors']['password'] : ''; ?></div>
                             <?php endif ?>
                         </div>
 
@@ -68,7 +60,7 @@
 
                         <!-- submit -->
                         <div class="button-base staff-login-button">
-                            <input class="text" type="submit" value="Login" name="submit">
+                            <input class="text white" type="submit" value="Login" name="submit">
                         </div>
 
                     </div>

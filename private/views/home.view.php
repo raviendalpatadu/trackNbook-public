@@ -111,7 +111,8 @@ echo "</pre>";
 
                                     <div class="d-flex align-items-end justify-content-end flex-fill mt-10">
                                         <div class="button-base">
-                                            <input type="submit" name="submit" id="next" value="Next" />
+                                            <button class="button" id="next">Search</button>
+                                            <!-- <input type="submit" name="submit" id="next" value="Next" /> -->
                                             <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
@@ -132,17 +133,17 @@ echo "</pre>";
 
 </body>
 <script>
-    $('form').submit(function(e) {
+    $('#next').click(function(e) {
 
         e.preventDefault();
 
-        var formData = $(this).serialize();
-        // console.log(formData);
+        var formData = $('form').serialize();
+        console.log(formData);
 
         getErrors('<?= ROOT ?>home/validate', formData, function(data) {
             console.log(data);
             if (data == true) {
-                $('form').unbind('submit').submit().submit();
+                $('form').submit();
             } else {
                 printErrors(data);
             }

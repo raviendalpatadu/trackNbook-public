@@ -63,6 +63,7 @@
 
 
 </body>
+<?php $this->view('includes/load-js');?>
 
 </html>
 

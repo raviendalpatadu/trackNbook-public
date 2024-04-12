@@ -1,17 +1,17 @@
 // Select seats using jQuery
-var seats = $('[id^="seatNo-"]:not(.reserved)');
+var fromSeats = $('[id^="fromSeatNo-"]:not(.reserved)');
 //   var seatsOption = $('[id^="seatNoOption-"]');
 
 // Function to handle the click event
-function handleEvent() {
+function handleEventFrom() {
   //add seletced attribute to the selected seat option
   var seatOption = $(
-    "#seatNoOption-" + parseInt($(this).attr("id").split("-")[1])
+    "#fromSeatNoOption-" + parseInt($(this).attr("id").split("-")[1])
   );
 
   //get the count of elements with class selected
-  var selectedSeatCount = $(
-    ".comparment  .selected , .comparment .selected-complete"
+  var selectedSeatCount = $("#fromSeatMap").find(
+    ".comparment  .selected , #fromSeatMap .comparment .selected-complete"
   ).length;
 
   // string to int conversion
@@ -33,21 +33,21 @@ function handleEvent() {
   }
 
   if (noOfPassengers == selectedSeatCount) {
-    $(".comparment .selected").addClass("selected-complete");
+    $("#fromSeatMap .comparment .selected").addClass("selected-complete");
   }
 
   if (selectedSeatCount < noOfPassengers) {
-    if ($(".comparment .selected").hasClass("selected-complete")) {
-      $(".comparment .selected").removeClass("selected-complete");
+    if ($("#fromSeatMap .comparment .selected").hasClass("selected-complete")) {
+      $("#fromSeatMap .comparment .selected").removeClass("selected-complete");
       seatOption.removeAttr("selected");
     }
   }
 
   if (selectedSeatCount > noOfPassengers) {
     seatOption.removeAttr("selected");
-    $(".comparment .selected").removeClass("selected-complete");
-    $(".comparment .selected").removeClass("selected");
-    $("option[id*=seatNoOption-]").each(function (params) {
+    $("#fromSeatMap .comparment .selected").removeClass("selected-complete");
+    $("#fromSeatMap .comparment .selected").removeClass("selected");
+    $("option[id*=fromSeatNoOption-]").each(function (params) {
       $(this).removeAttr("selected");
     });
     selectedSeatCount = 0;
@@ -59,15 +59,87 @@ function handleEvent() {
     seatOption.attr("selected", "selected");
     selectedSeatCount++;
     if (noOfPassengers == selectedSeatCount) {
-      $(".comparment .selected").addClass("selected-complete");
+      $("#fromSeatMap .comparment .selected").addClass("selected-complete");
     }
   }
 
-  $("#seatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
+  $("#fromSeatCountSelected span").text(
+    selectedSeatCount + "/" + noOfPassengers
+  );
 }
 
 // Add click event to seats
-seats.click(handleEvent);
+fromSeats.click(handleEventFrom);
+
+// Select seats using jQuery
+var toSeats = $('[id^="toSeatNo-"]:not(.reserved)');
+
+// Function to handle the click event
+function handleEventTo() {
+  //add seletced attribute to the selected seat option
+  var seatOption = $(
+    "#toSeatNoOption-" + parseInt($(this).attr("id").split("-")[1])
+  );
+
+  //get the count of elements with class selected
+  var selectedSeatCount = $("#toSeatMap").find(
+    ".comparment  .selected , #toSeatMap .comparment .selected-complete"
+  ).length;
+
+  // string to int conversion
+  // get no of passengers from PHP session variable
+  var noOfPassengers = parseInt($("#noOfPassengers").val());
+
+  if ($(this).hasClass("selected")) {
+    $(this).removeClass("selected");
+    if ($(this).hasClass("selected-complete")) {
+      $(this).removeClass("selected-complete");
+    }
+    --selectedSeatCount;
+    seatOption.removeAttr("selected");
+  } else {
+    $(this).addClass("selected");
+    ++selectedSeatCount;
+
+    seatOption.attr("selected", "selected");
+  }
+
+  if (noOfPassengers == selectedSeatCount) {
+    $("#toSeatMap .comparment .selected").addClass("selected-complete");
+  }
+
+  if (selectedSeatCount < noOfPassengers) {
+    if ($("#toSeatMap .comparment .selected").hasClass("selected-complete")) {
+      $("#toSeatMap .comparment .selected").removeClass("selected-complete");
+      seatOption.removeAttr("selected");
+    }
+  }
+
+  if (selectedSeatCount > noOfPassengers) {
+    seatOption.removeAttr("selected");
+    $("#toSeatMap .comparment .selected").removeClass("selected-complete");
+    $("#toSeatMap .comparment .selected").removeClass("selected");
+    $("option[id*=toSeatNoOption-]").each(function (params) {
+      $(this).removeAttr("selected");
+    });
+    selectedSeatCount = 0;
+
+    console.log("selectd " + selectedSeatCount);
+    console.log("noOfPas " + noOfPassengers);
+
+    $(this).addClass("selected");
+    seatOption.attr("selected", "selected");
+    selectedSeatCount++;
+    if (noOfPassengers == selectedSeatCount) {
+      $("#toSeatMap .comparment .selected").addClass("selected-complete");
+    }
+  }
+
+  $("#toSeatCountSelected span").text(selectedSeatCount + "/" + noOfPassengers);
+}
+
+// Add click event to seats
+toSeats.click(handleEventTo);
 
 // Select checkbox and box using jQuery
 var checkbox = $("#return");
@@ -84,11 +156,23 @@ checkbox.click(function () {
   }
 });
 
+if (checkbox.is(":checked")) {
+  box.css("display", "block");
+}
+
+// clear the value in the box when the checkbox is unchecked
+
 //warrent booking toggle
 var warrent = $("#warrentBooking");
 var chooseImg = $("#chooseImg");
 
 // Add click event to warrent
+
+if (warrent.is(":checked")) {
+  chooseImg.css("display", "block");
+} else {
+  chooseImg.css("display", "none");
+}
 warrent.click(function () {
   if (warrent.is(":checked")) {
     chooseImg.css("display", "block");
@@ -216,22 +300,25 @@ function hello() {
 
 // get errors from the server
 
-function getErrors(url, data) {
+function getErrors(url, data, callback) {
   $.ajax({
     url: url,
     type: "post",
     data: data,
-    success: function (response) {
-      var res = JSON.parse(response);
+    success: function (data, status) {
+      // console.log(data);
+
+      var res = JSON.parse(data);
 
       // if res has error throw an error
       if (res == true) {
-        console.log(res);
-        $("form").unbind().submit();
+        // console.log(res);
+        callback(res);
       }
 
       if (res.hasOwnProperty("errors")) {
-        console.log(res.errors);
+        callback(res.errors);
+        // xhr = res.errors;
         printErrors(res);
       }
     },
@@ -259,65 +346,128 @@ function printErrors(errors) {
   }
 }
 
-var shown = false;
-setInterval(function () {
-  var ROOTURL = "http://localhost/trackNbook/public/";
-  $.ajax({
-    url: ROOTURL + "ajax/getSession/reservation",
-    type: "post",
-    success: function (response) {
-      var res = JSON.parse(response);
-      var created_time = new Date(res.reservation_created_time);
-
-      // console.log(created_time);
-      var now = new Date().getTime();
-      var distance = now - created_time;
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      if (minutes > 10) {
-        // create a popup message called reservation expired try again to book
-        if (!shown) {
-          shown = true;
-          var reservationExpMsg = $("<div/>")
-            .addClass("reservation-expired")
-            .appendTo("body");
-          var expBox = $("<div/>")
-            .addClass("exp-box")
-            .appendTo(reservationExpMsg);
-          //  <button class="button">
-          //    <div class="button-base">
-          //      <div class="text">Close</div>
-          //    </div>
-          //  </button>
-
-          var expMsg = $("<div/>").appendTo(expBox);
-          var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
-          var errDesc = $("<p/>").addClass("err-desc").appendTo(expMsg);
-          var expBtnBox = $("<div></div>")
-            .addClass("d-flex justify-content-end")
-            .appendTo(expBox);
-          var closeButton = $("<button/>")
-            .addClass("button")
-            .appendTo(expBtnBox);
-          var buttonBase = $("<div/>")
-            .addClass("button-base")
-            .appendTo(closeButton);
-          var buttonText = $("<div/>").addClass("text").appendTo(buttonBase);
-          buttonText.text("Close");
-
-          closeButton.on("click", function () {
-            reservationExpMsg.remove();
-            window.location.replace(ROOTURL);
-          });
-          errTitle.text("Reservation Expired");
-          errDesc.text(
-            "Your reservation has expired. Please try again to book."
-          );
-          // expBtn.text("Ok");
-
-
-        
-        }
-      }
-    },
+function changeImage(imageInput, imageBox) {
+  $(imageInput).change(function () {
+    var file = $(this)[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $(imageBox).attr("src", e.target.result);
+    };
+    reader.readAsDataURL(file);
   });
-}, 1000);
+}
+
+// make popup box
+
+function makePopupBox(title, description, buttonText, imgURL, action) {
+
+  if ($(".main-popup-box").length) {
+    return;
+  }
+
+  var popupBox = $("<div/>").addClass("main-popup-box").appendTo("body");
+  var box = $("<div/>").addClass("box").appendTo(popupBox);
+  var heading = $("<h2/>").addClass("heading").appendTo(box);
+  var body = $("<div/>").addClass("body").appendTo(box);
+  var img = $("<img/>").addClass("img").appendTo(body);
+  var desc = $("<p/>").addClass("desc").appendTo(body);
+
+  var btnBox = $("<div/>").addClass("footer").appendTo(box);
+  var button = $("<button/>").appendTo(btnBox);
+  // var buttonBase = $("<div/>").addClass("button-base").appendTo(button);
+  var proceedBtn = $("<div/>").appendTo(button);
+
+  heading.text(title);
+  img.attr("src", imgURL);
+  desc.html(description);
+  proceedBtn.text(buttonText);
+
+  button.on("click", function () {
+    popupBox.remove();
+
+    if(action){
+      action(true);
+    }
+  });
+
+  // if you click outside the popup box it will remove the box
+  popupBox.on("click", function (e) {
+    if (e.target == popupBox[0]) {
+      popupBox.remove();
+    }
+  });
+}
+
+
+// var shown = false;
+// setInterval(function () {
+//   var ROOTURL = "http://localhost/trackNbook/public/";
+//   $.ajax({
+//     url: ROOTURL + "ajax/getSession/reservation",
+//     type: "post",
+//     success: function (response) {
+//       var res = JSON.parse(response);
+//       var created_time = new Date(res.reservation_created_time);
+
+//       var now = new Date();
+//       var distance = now - created_time;
+//       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//       var reservation_status = res.reservation_status;
+//       if (minutes > 10 && reservation_status == "Pending") {
+//         // create a popup message called reservation expired try again to book
+//         if (!shown) {
+//           shown = true;
+//           var reservationExpMsg = $("<div/>")
+//             .addClass("reservation-expired")
+//             .appendTo("body");
+//           var expBox = $("<div/>")
+//             .addClass("exp-box")
+//             .appendTo(reservationExpMsg);
+
+//           var expMsg = $("<div/>").appendTo(expBox);
+//           var errTitle = $("<h2/>").addClass("err-title").appendTo(expMsg);
+//           var errDesc = $("<p/>").addClass("err-desc").appendTo(expMsg);
+//           var expBtnBox = $("<div></div>")
+//             .addClass("d-flex justify-content-end")
+//             .appendTo(expBox);
+//           var closeButton = $("<button/>")
+//             .addClass("button")
+//             .appendTo(expBtnBox);
+//           var buttonBase = $("<div/>")
+//             .addClass("button-base")
+//             .appendTo(closeButton);
+//           var buttonText = $("<div/>").addClass("text").appendTo(buttonBase);
+//           buttonText.text("Close");
+
+//           closeButton.on("click", function () {
+//             reservationExpMsg.remove();
+//             window.location.replace(ROOTURL);
+//           });
+//           errTitle.text("Reservation Expired");
+//           errDesc.text(
+//             "Your reservation has expired. Please try again to book."
+//           );
+//           // expBtn.text("Ok");
+//         }
+//       }
+//     },
+//   });
+// }, 1000);
+
+
+// mobile hamburger menu
+var checkboxBurger = $("#burger");
+
+checkboxBurger.click(function () {
+  if (checkboxBurger.is(":checked")) {
+    $(".nav-menu-items").addClass("nav-menu-items-show");
+  } else {
+    $(".nav-menu-items").removeClass("nav-menu-items-show");
+  }
+});
+
+// loader when the page is loading
+$(window).on("load", function () {
+  $(".loader__main").fadeOut();
+});
+

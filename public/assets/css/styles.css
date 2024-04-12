@@ -875,13 +875,9 @@ tbody td {
   color: var(--Banner-red);
 }
 
-.button-base a {
+.button-base {
   cursor: pointer;
   font: var(--textxs-medium, 600 12px/18px "Inter", sans-serif);
-}
-
-.button-base a:hover {
-  color: var(--Primary-Blue);
 }
 
 .button-base input[type="submit"] {
@@ -967,6 +963,39 @@ tbody td {
   flex-shrink: 0;
   position: relative;
   overflow: visible;
+}
+
+.train-selected {
+  background: var(--blue) !important;
+}
+
+.train-selected .text {
+  color: var(--White) !important;
+}
+
+.train_and_compartment:hover .badge-base {
+  background: var(--blue) !important;
+}
+
+.train_and_compartment:hover .badge-base .text {
+  color: var(--White) !important;
+}
+
+.train-available-btn {
+  padding: 12px;
+  font-size: 12px;
+  border: none;
+  font-weight: 400;
+  color: var(--Primary-Gray);
+}
+
+.train-available-btn:hover {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.train-available-btn.active {
+  font-weight: 600;
 }
 
 @media screen and (max-width: 768px) {
@@ -1543,4 +1572,34 @@ input.type-here.green::placeholder {
 main {
   /* height: -webkit-fill-available; */
   flex-grow: 1;
+}
+
+.alert {
+  padding: 20px;
+  /* background-color: var(--light-red); */
+  color: var(--Banner-red);
+  border: 1px solid var(--Banner-red);
+  font-weight: 500;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* remove bullet points in ul */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.upload-img-btn {
+  border-radius: 100px;
+  display: inline-flex;
+  padding: 10px;
+  position: relative;
+  right: 60px;
+}
+
+.upload-img-btn input {
+  position: absolute;
+  opacity: 0;
 }

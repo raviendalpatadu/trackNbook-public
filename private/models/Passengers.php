@@ -2,6 +2,8 @@
 class Passengers extends Model
 {
     protected $table = 'tbl_passengers';
+    protected $allowedColumns = array('passenger_id', 'passenger_email', 'passenger_nic');
+
 
     public function __construct()
     {
@@ -14,7 +16,7 @@ class Passengers extends Model
         return $result;
     }
 
-    public function addPassenger()
+    public function addPassengerValidation()
     {
         $errors = array();
 
@@ -110,73 +112,24 @@ class Passengers extends Model
             $errors['errors']['user_gender'] = 'Gender is required';
         }
 
-        // auto pgender validatiaon
+        // is image uploaded
+        if (isset($_POST['user_image']) && empty($_FILES['user_image']['name'])) {
+            $allowed_types = array('image/jpeg', 'image/jpg', 'image/png');
 
-
-
-
-
-
-
-        if (!array_key_exists('errors', $errors)) {
-            
-            try { 
-                $con = $this->connect();
-                $con->beginTransaction() ;
-
-                //insert query to add passenger account
-                $query = "Insert INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
-                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
-
-                $stm = $con->prepare($query);
-                $stm->execute(array(
-                    'user_title' => $_POST['user_title'],
-                    'user_first_name' => $_POST['user_first_name'],
-                    'user_last_name' => $_POST['user_last_name'],
-                    'user_phone_number' => $_POST['user_phone_number'],
-                    'user_type' => "passenger",
-                    'user_gender' => $_POST['user_gender'],
-                    'user_email' => $_POST['user_email'],
-                    'user_nic' => $_POST['user_nic']
-                ));
-                $user_id = $con->lastInsertId();
-                $query2 = "Insert INTO tbl_login (login_username,login_password, user_id) VALUES (:login_username, :login_password, :user_id)";
-
-                $stm2 = $con->prepare($query2);
-                $stm2->execute(array(
-                    'login_username' => $_POST['login_username'],
-                    'login_password' => md5($_POST['login_password']),
-                    'user_id' => $user_id
-                ));
-
-
-                $stm3 = "INSERT INTO `tbl_passengers` (passenger_id, passenger_email, passenger_nic) VALUES (:user_id, :user_email, :user_nic)";
-                $stm3 = $con->prepare($stm3);
-                $stm3->execute(array(
-                    'user_id' => $user_id,
-                    'user_email' => $_POST['user_email'],
-                    'user_nic' => $_POST['user_nic']
-                ));
-            } catch (PDOException $e) {
-                echo $e->getMessage();
+            if (!in_array($_FILES['user_image']['type'], $allowed_types)) {
+                $errors['errors']['user_image'] = 'Image is invalid';
             }
 
+            // if ($_FILES['user_image']['size'] > 2097152) {
+            //     $errors['errors']['user_image'] = 'Image is too large';
+            // }
 
-            $data = array();
-            $con->commit();
-            $con = null;
-
-
-            if ($data > 0) {
-                return $data;
+            if ($_FILES['user_image']['error'] > 0) {
+                $errors['errors']['user_image'] = 'Image is invalid';
             }
-            
         }
+
+        // auto pgender validatiaon
         return $errors;
     }
-
-
-
-
-    
 }

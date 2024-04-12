@@ -5,6 +5,7 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 echo "<pre>";
 // print_r($_POST);
 // print_r($_SESSION);
+// print_r($_FILES);
 // print_r($data);
 
 echo "</pre>";
@@ -58,7 +59,7 @@ echo "</pre>";
                         </div>
                     </div>
 
-                    <form action="" method="post" class="profile p-50 shadow">
+                    <form action="" method="post" class="profile p-50 shadow" enctype="multipart/form-data">
                         <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
                             <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger <?= $i + 1 ?></h3>
                             <div class="row g-20 mb-20">
@@ -183,7 +184,7 @@ echo "</pre>";
                                         <div class="d-flex align-items-center g-20">
                                             <div class="d-flex .flex-row g-5">
                                                 <label class="switch">
-                                                    <input type="checkbox" id="warrentBooking">
+                                                    <input type="checkbox" id="warrentBooking" name="warrant_booking" value="on" <?= getCheckBox('on', 'warrant_booking') ?>>
                                                     <span class="slider"></span>
                                                 </label>
                                             </div>
@@ -199,11 +200,13 @@ echo "</pre>";
                                 <div class="input-text-label mt-5">
                                     Please upload a clear photo of the warrent.
                                 </div>
-                                <div class="d-flex flex-row align-items-center mt-10">
-
+                                <div class="d-flex flex-column align-items-start mt-10 g-10">
                                     <div class="file-upload">
-                                        <input type="file" class="" name="file-upload-input" id="file-upload-input">
+                                        <input type="file" class="" name="warrant_image" id="file-upload-input">
                                     </div>
+                                    <?php if (isset($data['errors'])) : ?>
+                                        <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['warrant_image'])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['warrant_image'])) ? $data['errors']['warrant_image'] : "") : ''; ?></div>
+                                    <?php endif ?>
                                 </div>
                             </div>
                         </div>
@@ -223,6 +226,12 @@ echo "</pre>";
         </main>
         <?php $this->view("./includes/footer") ?>
         <script>
+            // prevent going to back pages from a browser
+            // history.pushState(null, null, location.href);
+            // window.onpopstate = function(event) {
+            //     history.go(1);
+            // };
+
             $(document).ready(function() {
                 var tag = $('.text-inputs').children('.assistive-text:not(.display-none)');
                 var counter = 0;
