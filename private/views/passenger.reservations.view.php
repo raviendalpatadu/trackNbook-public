@@ -2,9 +2,9 @@
 
 <?php
 
-// echo "<pre>";
+echo "<pre>";
 // print_r($data);
-// echo "</pre>";
+echo "</pre>";
 
 if (isset($data['reservations']) && $data['reservations'] != 0) {
 
@@ -15,15 +15,23 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
     }, []);
 }
 
+if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] != 0) {
+
+    $cancelled_seat_count = array_reduce($data['cancelled_reservations'], function ($ticket_counts, $item) {
+        $ticket = $item->reservation_ticket_id;
+        $ticket_counts[$ticket] = (isset($ticket_counts[$ticket]) ? $ticket_counts[$ticket] : 0) + 1;
+        return $ticket_counts;
+    }, []);
+}
 ?>
 
-<body class="flex-column">
+<body class="flex-column mobile-d-flex">
     <div class="d-flex flex-column flex-grow justify-content-between">
         <?php $this->view("./includes/navbar") ?>
         <main class="d-flex flex-column flex-grow">
 
             <div class="row flex-grow">
-                <div class="col-4 d-flex flex-column">
+                <div class="col-4 d-flex flex-column mobile-col-12" id="resevationList">
 
                     <!-- modify search -->
                     <!-- <div class=""> -->
@@ -50,9 +58,14 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     </svg>
                                 </button>
                             </div>
-                        </div>
-
+                        </div>    
                     </form>
+
+                    <!-- reservations and cancellation tabs -->
+                    <div class="d-flex flex-row justify-content-center" id="reservation_type">
+                        <div class="p-10 flex-grow text-align-center" id="res_tab_btn">Reservations</div>
+                        <div class="p-10 flex-grow text-align-center" id="cancelled_tab_btn">Cancelled Reservations</div>
+                    </div>
 
                     <div class="reservations d-flex flex-column flex-grow g-16 p-5" id="reservations">
                         <?php
@@ -81,10 +94,15 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <div class="d-flex justify-content-between">
                                             <h1 class="fs-16 fw-400"><?= $reservation->reservation_ticket_id ?> </h1>
                                             <span class="fs-14"><?= $reservation->reservation_date ?></span>
+                                            <?php if (strtolower($reservation->reservation_type) == 'normal') : ?>
+                                                <img class="ticket-icon-res" src="<?= ASSETS ?>images/ticket-icon.png" alt="">
+                                            <?php else : ?>
+                                                <img class="ticket-icon-res" src="<?= ASSETS ?>images/warrant-icon.png" alt="">
+                                            <?php endif; ?>
                                         </div>
                                         <!-- from station ,time with a arrow svg and to station and time -->
-                                        <div class="d-flex flex-wrap g-20 justify-content-between align-items-center">
-                                            <div class="d-flex flex-wrap justify-content-around align-items-center flex-grow">
+                                        <div class="d-flex g-20 justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-around align-items-center flex-grow">
                                                 <div class="d-flex flex-column g-20 align-items-center">
                                                     <div>
                                                         <p class="fs-14 fw-500"><?= $reservation->reservation_start_station ?></p>
@@ -151,7 +169,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                 }
 
                                                 ?>
-                                                <button class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8" id="more" data-ticketId="<?= $res_id ?>">
+                                                <button class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8" id="more" data-ticketId="<?= $res_id ?>" data-reservationstatus="<?= $reservation->reservation_status ?>">
                                                     More
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                                                         <g fill="currentColor">
@@ -175,24 +193,158 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
+
+                    <div class="reservations d-flex flex-column flex-grow g-16 p-5 display-none" id="cancelledReservations">
+                        <?php
+                        $count = 1;
+                        ?>
+                        <?php if ($data['cancelled_reservations'] != 0) : ?>
+                            <?php foreach ($data['cancelled_reservations'] as $cancel_reservation_key => $cancel_reservation) : ?>
+                                <?php
+                                // get previous object
+                                if ($cancel_reservation_key > 0) {
+                                    $previous = $data['cancelled_reservations'][$cancel_reservation_key - 1];
+                                }
+                                // check if previous object exists
+                                if (isset($previous)) {
+                                    // check if previous objects ticket_number is equal to current objects ticket_number
+                                    if ($previous->reservation_ticket_id == $cancel_reservation->reservation_ticket_id) {
+                                        // if true then continue to next iteration
+                                        continue;
+                                    }
+                                }
+
+                                ?>
+
+                                <div class="d-flex p-5 reservation-card width-fill" data-reservationdate="<?= $cancel_reservation->reservation_date ?>">
+                                    <div class="d-flex flex-column flex-grow g-10 p-10">
+                                        <div class="d-flex justify-content-between">
+                                            <h1 class="fs-16 fw-400"><?= $cancel_reservation->reservation_ticket_id ?> </h1>
+                                            <span class="fs-14"><?= $cancel_reservation->reservation_date ?></span>
+                                            <?php if (strtolower($cancel_reservation->reservation_type) == 'normal') : ?>
+                                                <img class="ticket-icon-res" src="<?= ASSETS ?>images/ticket-icon.png" alt="">
+                                            <?php else : ?>
+                                                <img class="ticket-icon-res" src="<?= ASSETS ?>images/warrant-icon.png" alt="">
+                                            <?php endif; ?>
+                                        </div>
+                                        <!-- from station ,time with a arrow svg and to station and time -->
+                                        <div class="d-flex g-20 justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-around align-items-center flex-grow">
+                                                <div class="d-flex flex-column g-20 align-items-center">
+                                                    <div>
+                                                        <p class="fs-14 fw-500"><?= $cancel_reservation->reservation_start_station ?></p>
+                                                        <p class="fs-12"><?= $cancel_reservation->estimated_departure_time ?></p>
+                                                    </div>
+
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                            <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                            <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                            <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                        </svg>
+
+                                                        <!-- time in hours and minutes using php-->
+                                                        <p class="fs-12 fw-400"><?php
+                                                                                // display time in hours and minutes eg 2h 30m
+                                                                                $start = new DateTime($cancel_reservation->estimated_arrival_time);
+                                                                                $end = new DateTime($cancel_reservation->estimated_departure_time);
+                                                                                $diff = $start->diff($end);
+                                                                                echo $diff->format('%hh %im');
+                                                                                ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="align-items-center arrow-svg d-flex flex-column g-20 ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                        <path fill="currentColor" d="m16.172 9l-6.071-6.071l1.414-1.414L20 10l-.707.707l-7.778 7.778l-1.414-1.414L16.172 11H0V9z"></path>
+                                                    </svg>
+
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                            <path fill="currentColor" d="M12.615 12V5H17v7zm1-1H16V6h-2.385zM17 17H8.615L6 8.058V5h1v3l2.385 8H17zm-8.596 3v-1h8.577v1zm5.211-14H16z"></path>
+                                                        </svg>
+                                                        <p class="fs-12 fw-400"><?= $cancel_reservation->reservation_compartment_type ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex flex-column g-20 align-items-center">
+                                                    <div>
+                                                        <p class="fs-14 fw-500"><?= $cancel_reservation->reservation_end_station ?></p>
+                                                        <p class="fs-12"><?= $cancel_reservation->estimated_arrival_time ?></p>
+                                                    </div>
+
+                                                    <div class="d-flex g-5 align-items-end">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                            <path fill="currentColor" d="M10.5 9A3.5 3.5 0 1 1 14 5.5A3.504 3.504 0 0 1 10.5 9m0-5A1.5 1.5 0 1 0 12 5.5A1.502 1.502 0 0 0 10.5 4m11.974 27.313L19.34 24h-7.101a4.007 4.007 0 0 1-3.867-2.97l-1.634-6.127a3.899 3.899 0 0 1 7.535-2.009L15.1 16H21v2h-7.436l-1.223-4.59a1.9 1.9 0 0 0-3.67.978l1.633 6.126A2.005 2.005 0 0 0 12.239 22h8.42l3.654 8.525zM30 6h-4V2h-2v4h-4v2h4v4h2V8h4z"></path>
+                                                            <path fill="currentColor" d="M18 28H7.768a2.003 2.003 0 0 1-1.933-1.485L2.033 12.258l1.933-.516L7.768 26H18Z"></path>
+                                                        </svg>
+
+                                                        <p class="fs-12 fw-400"><?= $cancelled_seat_count[$cancel_reservation->reservation_ticket_id] ?></p>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex align-items-end flex-column g-20">
+                                                <!-- more info button -->
+                                                <?php
+                                                $res_id = '';
+                                                if (!empty($cancel_reservation->reservation_ticket_id)) {
+                                                    $res_id = $cancel_reservation->reservation_ticket_id;
+                                                } else {
+                                                    $res_id = $cancel_reservation->reservation_status;
+                                                }
+
+                                                ?>
+                                                <button class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8" id="more" data-ticketId="<?= $res_id ?>" data-reservationstatus="<?= $cancel_reservation->reservation_status ?>">
+                                                    More
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                        <g fill="currentColor">
+                                                            <path d="M12 9a2 2 0 1 0 0-4a2 2 0 0 0 0 4m2 3a2 2 0 1 1-4 0a2 2 0 0 1 4 0m-2 7a2 2 0 1 0 0-4a2 2 0 0 0 0 4"></path>
+                                                            <path fill-rule="evenodd" d="M24 12c0 6.627-5.373 12-12 12S0 18.627 0 12S5.373 0 12 0s12 5.373 12 12m-2 0c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10" clip-rule="evenodd"></path>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+
+                                                <div class="d-flex g-5 align-items-end">
+                                                    <p class="fs-14 fw-500"><?= $cancel_reservation->reservation_status ?></p>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
                     <!-- </div> -->
                 </div>
 
-                <div class="col-8 d-flex flex-column justify-content-center">
-                    <div class="d-flex flex-grow" id="reservations">
+                <div class="col-8 d-flex flex-column justify-content-center mobile-display-none" id="reservationDataContainer">
+                    <div class="d-flex flex-grow">
                         <div class="align-items-center align-self-center d-flex flex-auto flex-column" id="selectResevation">
                             <img width="80" height="80" src="https://img.icons8.com/dotty/80/ticket.png" alt="ticket">
                             <p>Select reservation </p>
                         </div>
 
                         <div class="d-flex flex-column flex-grow g-10 p-10 display-none" id="reservationData">
+                            <div id="closeCross" class="display-none mobile-display-block ">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.2575 3.84056C13.3515 3.74111 13.4249 3.62412 13.4737 3.49628C13.5225 3.36844 13.5456 3.23224 13.5417 3.09547C13.5378 2.9587 13.5071 2.82403 13.4511 2.69915C13.3952 2.57426 13.3153 2.46162 13.2158 2.36764C13.1164 2.27367 12.9994 2.2002 12.8715 2.15143C12.7437 2.10266 12.6075 2.07956 12.4707 2.08342C12.334 2.08729 12.1993 2.11806 12.0744 2.17398C11.9495 2.22989 11.8369 2.30986 11.7429 2.40931L2.88874 11.7843C2.70589 11.9777 2.604 12.2338 2.604 12.4999C2.604 12.7661 2.70589 13.0222 2.88874 13.2156L11.7429 22.5916C11.8363 22.6932 11.9489 22.7753 12.0742 22.833C12.1996 22.8908 12.3351 22.923 12.473 22.9279C12.6109 22.9328 12.7485 22.9103 12.8776 22.8616C13.0067 22.8129 13.1249 22.739 13.2252 22.6443C13.3255 22.5495 13.406 22.4358 13.462 22.3097C13.518 22.1835 13.5484 22.0475 13.5514 21.9096C13.5544 21.7716 13.53 21.6344 13.4795 21.506C13.4291 21.3775 13.3536 21.2604 13.2575 21.1614L5.07832 12.4999L13.2575 3.84056Z" fill="black" />
+                                </svg>
+
+                            </div>
+
                             <!-- map -->
-                            <div id="map" class="d-flex">
+                            <div id="map" class="d-flex mobile-display-none">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6390377948733!2d79.84543356983846!3d6.933673902963031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25922460c269b%3A0x6acb064d943db619!2sColombo%20Fort%20Station%2C%20Colombo!5e0!3m2!1sen!2slk!4v1709633170370!5m2!1sen!2slk" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="flex-fill"></iframe>
                             </div>
                             <!-- data -->
                             <div class="bg-background-colour-nav d-flex flex-grow" id="reaservationData">
-                                <div class="d-flex flex-grow" id="ticketSummary">
+                                <div class="d-flex flex-grow mobile-flex-column" id="ticketSummary">
                                     <div class="d-flex flex-grow flex-column g-10 p-10" id="ticketDataDown">
 
                                         <div class="border-bottom d-flex g-100 mobile-flex-column-reverse mobile-g-20 width-fill">
@@ -237,15 +389,14 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex justify-content-center align-items-center">
+                                            <div class="d-flex flex-column g-10 justify-content-center align-items-center">
                                                 <div id="qr_code"></div>
+                                                <div class="fs-20 fw-500" id="resStatus">Cancelled</div>
                                             </div>
                                         </div>
                                         <div class="align-items-start d-flex flex-column g-10">
                                             <p class="fs-14">Passenger and Compartment Details</p>
                                             <table class="ticket-summary-passenger-compartment-details text-align-center" id="compartmentDetails">
-
-
 
                                             </table>
                                         </div>
@@ -256,7 +407,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <button id="downloadTicket" class=" width-fill btn btn-primary white bg-blue border-none border-radius-6 p-8 fw-300">Download Ticket</button>
 
                                         <!-- canel reservation btn -->
-                                        <button id='cancelReservation' class="btn btn-primary bg-red border-none border-radius-6 p-8 white fw-300">Cancel Reservation</button>
+                                        <button id='cancelReservation' class="width-fill btn btn-primary bg-red border-none border-radius-6 p-8 white fw-300">Cancel Reservation</button>
                                     </div>
                                 </div>
                             </div>
@@ -325,8 +476,23 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                     $(element).removeClass('display-none');
                 }
             });
+
+            $('#cancelledReservations').find('.reservation-card').each(function(index, element) {
+                var reservationDate = $(element).data('reservationdate');
+                console.log(reservationDate);
+
+                if (reservationDate < startDate || reservationDate > endDate) {
+                    $(element).addClass('display-none');
+                } else {
+                    $(element).removeClass('display-none');
+                }
+            });
         }
 
+        $('#closeCross').click(function() {
+            $('#resevationList').removeClass('mobile-display-none');
+            $('#reservationDataContainer').addClass('mobile-display-none');
+        });
 
 
 
@@ -335,6 +501,16 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
             var ticketId = $(this).data('ticketid')
             console.log(ticketId);
 
+            var reservationStatus = $(this).data('reservationstatus');
+            console.log(reservationStatus);
+
+            // if in mobile view
+            if ($(window).width() < 768) {
+                $('#resevationList').addClass('mobile-display-none');
+
+                $('#reservationDataContainer').removeClass('mobile-display-none');
+            }
+
 
 
             $('#selectResevation').addClass('display-none');
@@ -342,18 +518,18 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
             $('#reservationData').removeClass('display-none');
             // $('#reservationData').hide();
 
-
-
             // check is the ticket id has the the 1st 3 letters as 'WRT'
             var regex = new RegExp('TMP', 'i');
 
-            // warrant reservation data
+            if (reservationStatus != "Cancelled") {
+                reservationStatus = '';
+            }
 
             // warrant reservation data
             if (regex.test(ticketId)) {
                 $.ajax({
-                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId,
-                    type: 'GET',
+                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId + '/' + reservationStatus,
+                    type: 'POST',
 
                     success: function(data, response) {
                         // console.log(data);
@@ -386,21 +562,21 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                             data.forEach(function(passenger) {
                                 if (heading == 'NIC') {
-                                    tr.append('<td>' + passenger.reservation_passenger_nic + '</td>');
+                                    tr.append('<td  data-label="NIC">' + passenger.reservation_passenger_nic + '</td>');
                                 } else if (heading == 'Gender') {
-                                    tr.append('<td>' + passenger.reservation_passenger_gender + '</td>');
+                                    tr.append('<td  data-label="Genger">' + passenger.reservation_passenger_gender + '</td>');
                                 } else if (heading == 'Seat No') {
-                                    tr.append('<td>' + passenger.reservation_seat + '</td>');
+                                    tr.append('<td  data-label="Seat No">' + passenger.reservation_seat + '</td>');
                                 }
                             });
                             compartmentDeatails.append(tr);
                         });
 
                         // 
-                       var reservation_status = $('<div></div>').text(data[0].reservation_status);
-                       reservation_status.addClass('fs-18 fw-800');
+                        var reservation_status = $('<div></div>').text(data[0].reservation_status);
+                        reservation_status.addClass('fs-18 fw-800');
 
-                    //    chanege the reservation color according to the status
+                        //    chanege the reservation color according to the status
                         if (data[0].reservation_status == 'Pending' || data[0].reservation_status == 'Approval Pending') {
                             reservation_status.addClass('yellow');
                         } else if (data[0].reservation_status == 'Reserved') {
@@ -412,7 +588,8 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                         }
 
                         $('#qr_code').empty();
-                        $('#qr_code').append(reservation_status);
+                        $('#resStatus').empty();
+                        $('#resStatus').append(reservation_status);
 
                         //remove download ticket button
                         $('#downloadTicket').hide();
@@ -427,8 +604,8 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
             // normal reservation data
             else {
                 $.ajax({
-                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId,
-                    type: 'GET',
+                    url: '<?= ROOT ?>ajax/getReservationData/' + ticketId + '/' + reservationStatus,
+                    type: 'POST',
 
                     success: function(data, response) {
                         console.log(data);
@@ -461,11 +638,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                             data.forEach(function(passenger) {
                                 if (heading == 'NIC') {
-                                    tr.append('<td>' + passenger.reservation_passenger_nic + '</td>');
+                                    tr.append('<td  data-label="NIC">' + passenger.reservation_passenger_nic + '</td>');
                                 } else if (heading == 'Gender') {
-                                    tr.append('<td>' + passenger.reservation_passenger_gender + '</td>');
+                                    tr.append('<td  data-label="Genger">' + passenger.reservation_passenger_gender + '</td>');
                                 } else if (heading == 'Seat No') {
-                                    tr.append('<td>' + passenger.reservation_seat + '</td>');
+                                    tr.append('<td  data-label="Seat No">' + passenger.reservation_seat + '</td>');
                                 }
                             });
                             compartmentDeatails.append(tr);
@@ -482,9 +659,30 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             correctLevel: QRCode.CorrectLevel.H
                         });
 
+                        var reservation_status = $('<div></div>').text(data[0].reservation_status);
+                        reservation_status.addClass('fs-18 fw-800');
+
+                        if (data[0].reservation_status == 'Pending' || data[0].reservation_status == 'Approval Pending') {
+                            reservation_status.addClass('yellow');
+                        } else if (data[0].reservation_status == 'Reserved') {
+                            reservation_status.addClass('green');
+                        } else if (data[0].reservation_status == 'Cancelled' || data[0].reservation_status == 'Rejected') {
+                            reservation_status.addClass('red');
+                        } else if (data[0].reservation_status == 'Reserved') {
+                            reservation_status.addClass('Border-blue');
+                        }
+
+                        $('#resStatus').empty();
+                        $('#resStatus').append(reservation_status);
+
                     }
 
                 });
+            }
+
+            if (reservationStatus == 'Cancelled') {
+                $('#cancelReservation').remove();
+                $('#downloadTicket').remove();
             }
 
 
@@ -492,6 +690,31 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
         });
 
 
+        $('#cancelled_tab_btn').click(function() {
+
+            $('#selectResevation').removeClass('display-none');
+            $('#reservationData').addClass('display-none');
+
+            $('#cancelledReservations').removeClass('display-none');
+            $('#reservations').addClass('display-none');
+
+            //add active class to the tab
+            $('#cancelled_tab_btn').addClass('active');
+            $('#res_tab_btn').removeClass('active');
+
+        });
+
+        $('#res_tab_btn').click(function() {
+            $('#selectResevation').removeClass('display-none');
+            $('#reservationData').addClass('display-none');
+
+            $('#reservations').removeClass('display-none');
+            $('#cancelledReservations').addClass('display-none');
+
+            //add active class to the tab
+            $('#res_tab_btn').addClass('active');
+            $('#cancelled_tab_btn').removeClass('active');
+        });
 
 
         // poup alert to confirm cancelation
@@ -500,32 +723,32 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
             console.log(ticketId);
 
             // make a custopm confirm box
+            var tiile = 'Confirm Cancelation';
+            var desc = 'Are you sure you want to cancel this reservation?';
+            var btnTxt = 'Cancel Reservation'; 
+            var img = 'https://img.icons8.com/ios/50/000000/question-mark.png';
 
-            var alertBox = $('<div class="confirm-box"><div class="d-flex flex-column justify-content-center align-items-center p-20 g-10"><p>Are you sure you want to cancel this reservation?</p><div class="d-flex g-10"><button id="confirmCancel" class="btn btn-primary bg-red border-none border-radius-6 p-8 white fw-300">Yes</button><button id="cancelCancel" class="btn btn-primary bg-blue border-none border-radius-6 p-8 white fw-300">No</button></div></div></div>');
-            $('#reservations').append(alertBox);
-
-            $('#confirmCancel').click(function() {
-                $.ajax({
-                    url: '<?= ROOT ?>ajax/cancelReservation/' + ticketId,
-                    type: 'GET',
-
-                    success: function(data, response) {
-                        console.log(data);
-                        var data = JSON.parse(data);
-                        console.log(data);
-                        if (data.length == 0) {
-                            alert('Reservation has been canceled');
-                            location.reload();
-                        } else {
-                            alert('Failed to cancel reservation');
+            makePopupBox(tiile, desc, btnTxt, img, function(res) {
+                if (res) {     
+                    $.ajax({
+                        url: '<?= ROOT ?>ajax/cancelReservation/' + ticketId,
+                        type: 'GET',
+    
+                        success: function(data, response) {
+                            console.log(data);
+                            var data = JSON.parse(data);
+                            console.log(data);
+                            if (data.length == 0) {
+                                alert('Reservation has been canceled');
+                                location.reload();
+                            } else {
+                                alert('Failed to cancel reservation');
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
 
-            $('#cancelCancel').click(function() {
-                alertBox.remove();
-            });
         });
     });
 

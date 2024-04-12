@@ -1131,6 +1131,34 @@ div#reservations div#loader {
   z-index: 9999;
 }
 
+div#reservations img.ticket-icon-res , div#cancelledReservations img.ticket-icon-res{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+div#reservation_type{
+  font-size: 14px;
+  background-color: var(--Lightgray);
+  cursor: pointer;
+}
+
+div#reservation_type div.active{
+  font-weight: 600;
+    color: var(--Border-blue);
+}
+
+@media screen and (max-width: 768px) {
+  div.reservations {
+    height: auto;
+    overflow: hidden;
+  }
+  
+}
+
+
+
+
+
 .confirm-box {
   position: fixed;
   top: 50vh;

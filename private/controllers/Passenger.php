@@ -362,6 +362,7 @@ class Passenger extends Controller
         $data = array();
         $reservation = new Reservations();
         $data['reservations'] = $reservation->getReservations($id);
+        $data['cancelled_reservations'] = $reservation->getReservations($id, 'Cancelled');
 
         $this->view('passenger.reservations', $data);
     }

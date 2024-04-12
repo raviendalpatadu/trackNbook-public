@@ -104,10 +104,14 @@ class Reservations extends Model
         }
         return $result;
     }
-    public function getReservations($id)
+    public function getReservations($id , $type = '')
     {
 
         try {
+            $table = 'tbl_reservation';
+            if(strtolower($type) == 'cancelled'){
+                $table = 'tbl_reservation_cancelled';
+            }
 
             $query = "SELECT
                             	r.*,
@@ -117,7 +121,7 @@ class Reservations extends Model
                                 e.station_name AS reservation_end_station,
                                 ct.compartment_class_type AS reservation_compartment_type
                         FROM
-                            tbl_reservation r
+                            {$table} r
                             JOIN tbl_train_stop_station tstop_start_time ON tstop_start_time.station_id = r.reservation_start_station
                             JOIN tbl_train_stop_station tstop_end_time ON tstop_end_time.station_id = r.reservation_end_station
                             JOIN tbl_station s ON s.station_id = r.reservation_start_station
@@ -144,10 +148,15 @@ class Reservations extends Model
         }
     }
 
-    public function getReservationDataTicket($id)
+
+    public function getReservationDataTicket($id, $type = '')
     {
         if ($id == '') {
             return 'false';
+        }
+        $table = 'tbl_reservation';
+        if(strtolower($type) == 'cancelled'){
+            $table = 'tbl_reservation_cancelled';
         }
         try {
             $query = "SELECT
@@ -159,7 +168,7 @@ class Reservations extends Model
                                 e.station_name AS reservation_end_station,
                                 ct.compartment_class_type AS reservation_compartment_type
                         FROM
-                            tbl_reservation r
+                            {$table} r
                             JOIN tbl_train_stop_station tstop_start_time ON tstop_start_time.station_id = r.reservation_start_station
                             JOIN tbl_train_stop_station tstop_end_time ON tstop_end_time.station_id = r.reservation_end_station
                             JOIN tbl_station s ON s.station_id = r.reservation_start_station

@@ -13,10 +13,11 @@ class Ajax extends Controller
         }
     }
 
-    public function getReservationData($id)
+    public function getReservationData($id, $type = '')
+
     {
         $reservation = new Reservations();
-        echo json_encode($reservation->getReservationDataTicket($id));
+        echo json_encode($reservation->getReservationDataTicket($id, $type));
     }
 
     public function cancelReservation($id)
