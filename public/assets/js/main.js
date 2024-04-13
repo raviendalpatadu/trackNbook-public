@@ -471,3 +471,34 @@ $(window).on("load", function () {
   $(".loader__main").fadeOut();
 });
 
+
+function makeCalendar(id, startDate, endDate){
+  // if start date is not provided
+  var element = $(id);
+
+  if(!element.hasClass("calendar-none")){
+    element.addClass("calendar-none");
+  }
+  if(!startDate){
+    startDate = moment();
+  }
+
+  // if end date is not provided
+  if(!endDate){
+    endDate = moment().add(1, 'months');
+  }
+
+  $(id).daterangepicker({
+    "singleDatePicker": true,
+        "autoApply": true,
+        "linkedCalendars": false,
+        "autoUpdateInput": false,
+        "showCustomRangeLabel": false,
+        "alwaysShowCalendars": true,
+        "minDate": startDate.format('MM/DD/YYYY'),
+        "maxDate": endDate.format('MM/DD/YYYY'),
+        "opens": "center"
+  }, function(start, end, label) {
+    $(id).val(start.format('YYYY-MM-DD'));
+  });
+}

@@ -4746,4 +4746,7 @@ div#reservation_type div.active {
   100% {
     transform: translateY(0);
   }
+}
+input.calendar-none::-webkit-calendar-picker-indicator {
+  display: none;
 }/*# sourceMappingURL=ravien.css.map */

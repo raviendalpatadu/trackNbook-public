@@ -469,8 +469,7 @@ class Trains extends Model
     public function getTrain($id)
     {
         try {
-            $con = $this->connect();
-            $con->beginTransaction();
+           
 
             //insert query to search train must come form route
             $query = "SELECT\n"
@@ -498,22 +497,17 @@ class Trains extends Model
                 . "WHERE\n"
 
                 . "	tbl_train.train_id = :train_id LIMIT 1";
-            $stm = $con->prepare($query);
 
-            $stm->execute(
-                array(
-                    'train_id' => $id
-                )
-            );
-
-            $data = $stm->fetchAll(PDO::FETCH_OBJ);
+            $data = $this->query($query, array(
+                'train_id' => $id
+            ));
+            
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
-        if ($data > 0) {
-            return $data[0];
-        }
+        
+            return $data;
     }
 
     public function updateTrain($id, $data)
@@ -577,7 +571,7 @@ class Trains extends Model
     }
 
     //Update Train Status
-    public function updateStatus($id)
+    public function updateStatus($id, $data)
     {
         $con = $this->connect();
         $errors = array();

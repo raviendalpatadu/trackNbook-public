@@ -28,6 +28,13 @@ class Homes extends Model
             $this->errors['errors']['to_station'] = 'From and To stations are same';
         }
 
+        // check if to and from date are with in the range of 1 month
+        if (!(array_key_exists('errors', $this->errors)) && strtotime($values['from_date']) > strtotime('+1 month', strtotime(date('Y-m-d')))) {
+            $this->errors['errors']['from_date'] = 'Date should be within 01 month';
+        }
+
+
+
         //check if from date is exists in post
         if (empty($values['from_date'])) {
             $this->errors['errors']['from_date'] = 'date is required';
@@ -52,6 +59,13 @@ class Homes extends Model
             if (!(array_key_exists('errors', $this->errors)) && strtotime($values['to_date']) < strtotime($values['from_date'])) {
                 $this->errors['errors']['to_date'] = 'To Date should be greater than From Date';
             }
+
+            // check if to and to date are with in the range of 1 month
+            if (!(array_key_exists('errors', $this->errors)) && strtotime($values['to_date']) > strtotime('+1 month', strtotime(date('Y-m-d')))) {
+                $this->errors['errors']['to_date'] = 'To Date should be within 01 month';
+            }
+
+
         }
 
 
