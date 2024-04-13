@@ -15,6 +15,8 @@ class Login extends Controller
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $data = $user->login();
 
+
+
             if (!array_key_exists('error', $data) && $data[0]->user_type == 'passenger') {
 
                 Auth::authenticate($data[0]);
@@ -27,7 +29,7 @@ class Login extends Controller
                 }  
             }
             else{
-                if ($data[0]->user_type == 'passenger') {
+                if (isset($data[0]) && $data[0]->user_type == 'passenger') {
                     $errors['username'] = (array_key_exists('invalid_uname',$data['error'])) ? $data['error']['invalid_uname'] : '';
                     $errors['password'] = (array_key_exists('invalid_password',$data['error'])) ? $data['error']['invalid_password'] : '';
                 }else{
