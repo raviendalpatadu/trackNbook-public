@@ -15,3 +15,5 @@
         </div>
     </div>
 </div>
+
+<?php $this->view("./includes/load-js"); ?>

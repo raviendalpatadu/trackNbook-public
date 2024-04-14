@@ -519,6 +519,7 @@ function makePopupModel(title, description, buttons, imgURL, action) {
 var checkboxBurger = $("#burger");
 
 checkboxBurger.click(function () {
+  console.log("clicked"); 
   if (checkboxBurger.is(":checked")) {
     $(".nav-menu-items").addClass("nav-menu-items-show");
   } else {

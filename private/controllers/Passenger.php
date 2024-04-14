@@ -154,6 +154,21 @@ class Passenger extends Controller
                 // if redirect according to the reservation type
                 if(empty($data['errors'])){
                     if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {    
+                        // send email to each email
+                        foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+                            $to_email = $email;
+                            $subject = "Warrant Reservation Request";
+                            $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
+                            
+                            $messege = "<p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#999999;font-size:18px\" class=\"p_description\"><p>We are pleased to inform you that your Warrant Reservation Request has been successfully submitted. Your booking details are now in our system.</p>
+                            <p>You can expect to receive a confirmation email within 2-3 business days, containing all the necessary information regarding your reservation.</p>
+                            <p>If you have any questions or need further assistance, feel free to <a href=\"mailto:".EMAIL."\">contact us</a>.</p>";
+
+                            $message = Auth::getEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key], $messege);
+
+                            $this->sendMail($to_email,$recipient, $subject, $message);
+                        }
+
                         $this->view('passenger.warrant');
     
                     } else {

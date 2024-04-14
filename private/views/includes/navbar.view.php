@@ -7,7 +7,7 @@
       <div class="brand-text">TrackNBook</div>
     </div>
     <div class="menu">
-      <ul>
+      <ul class="mobile-display-block">
         <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
         <!-- <li class="navbar-item"><a href="<?php //ROOT
                                               ?>services">Services</a></li> -->
@@ -49,10 +49,21 @@
         <?php endif; ?>
       </ul>
       <div class="profile-mobile">
-        <div class="profile-img">
-          <img src="<?= ASSETS ?>images/avatar1.png" alt="TrackNBook">
-        </div>
+        <label class="burger" for="burger">
+          <input type="checkbox" id="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+
       </div>
     </div>
+    <!-- menu items -->
+    <!-- <div class="menu">
+      <ul class="nav-menu-items">
+        <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
+        <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
+      </ul>
+    </div> -->
   </nav>
 </header>
