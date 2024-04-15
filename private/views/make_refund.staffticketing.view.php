@@ -24,33 +24,25 @@
                     </div>
 
 
-                    <form action="" method="post" class="profile">
-
-                        <div class="row g-20 mb-20 ">
-                            <div class="col-5">
-                                <div class="text-inputs ">
-                                    <div class="input-text-label">Ticket ID</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" class="type-here" placeholder="Ticket ID" name="" id="trainId">
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="text-inputs d-flex mt-20">
+                        <div class="input-text-label text lightgray-font">NIC</div>
+                        <div class="input-field">
+                            <div class="text">
+                                <input type="text" class="type-here" placeholder="NIC" name="" id="trainId">
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="col-5">
-                                <div class="text-inputs">
-                                    <div class="input-text-label">NIC</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" class="type-here" placeholder="Type here" value="<?= Auth::getuser_nic() ?>" name="user_nic" disabled>
-                                            <input type="hidden" class="type-here" placeholder="Type here" value="<?= Auth::getuser_nic() ?>" name="user_nic">
-
-                                        </div>
-                                    </div>
-
-                                </div>
+                    <div class="text-inputs d-flex mt-20">
+                        <div class="input-text-label text lightgray-font">Ticket ID</div>
+                        <div class="input-field">
+                            <div class="text">
+                                <input type="text" class="type-here" placeholder="Ticket ID" name="" id="trainId">
                             </div>
+                        </div>
+                    </div>
+
+
 
                             <button class="button btn mt-20 " id="loginBtn">
                                 <a href="<?= ROOT ?>staffticketing/refundDetails">

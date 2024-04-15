@@ -17,7 +17,7 @@ class Database
 
     public function query($query, $data = array(), $data_type = "object")
     {
-        try {
+        // try {
             $con = $this->connect();
             $stm = $con->prepare($query);
 
@@ -52,10 +52,10 @@ class Database
                     }
                 }
             }
-        } catch (PDOException $e) {
+        // } catch (PDOException $e) {
             // echo $query;
-            die($e->getMessage());
-        }
+            // die($e->getMessage());
+        // }
         $con = null;
         return false;
     }

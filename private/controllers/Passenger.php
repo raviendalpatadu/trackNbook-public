@@ -379,6 +379,10 @@ class Passenger extends Controller
         $data['reservations'] = $reservation->getReservations($id);
         $data['cancelled_reservations'] = $reservation->getReservations($id, 'Cancelled');
 
+        // waiting list
+        $waiting_list = new WaitingLists();
+        $data['waiting_list_reservations'] = $waiting_list->getWaitingListPassenger($id);  
+
         $this->view('passenger.reservations', $data);
     }
 

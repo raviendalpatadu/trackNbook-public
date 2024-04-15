@@ -1136,16 +1136,17 @@ div#reservations img.ticket-icon-res , div#cancelledReservations img.ticket-icon
   height: 1.5em;
 }
 
-div#reservation_type{
+div#reservation_type_tab{
   font-size: 14px;
   background-color: var(--Lightgray);
   cursor: pointer;
+  
+  div.active{
+    font-weight: 600;
+      color: var(--Border-blue);
+  }
 }
 
-div#reservation_type div.active{
-  font-weight: 600;
-    color: var(--Border-blue);
-}
 
 @media screen and (max-width: 768px) {
   div.reservations {
@@ -1359,4 +1360,16 @@ div#reservation_type div.active{
 
 input.calendar-none::-webkit-calendar-picker-indicator{
     display: none;
+}
+
+#waitingList:hover{
+
+  .text{
+    cursor: pointer;
+    color: var(--Border-blue);
+
+    svg path{
+      stroke: var(--Border-blue);
+    }
+  }
 }

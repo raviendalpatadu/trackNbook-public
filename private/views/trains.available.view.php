@@ -2,10 +2,10 @@
 
 <?php
 
-// echo "<pre>";
+echo "<pre>";
 // print_r($data);
 // // print_r($_SESSION);
-// echo "</pre>";
+echo "</pre>";
 
 ?>
 
@@ -240,11 +240,25 @@
                                                                                 <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
                                                                             </div>
 
-                                                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
-                                                                            </svg>
+                                                                            <!-- show add to waiting list icon-->
+
                                                                         </div>
                                                                         <!-- </a> -->
+                                                                        
+                                                                        <?php
+                                                                            $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
+
+                                                                            if ($available_seats <= 0) :
+                                                                            ?>
+                                                                            <div id="waitingList" data-trainid="<?=$value->train_id?>" data-compartmentid="<?=$value->compartment_id?>" data-reservationdate="<?=$data['from_date']?>">
+                                                                                    <div class="align-items-center d-flex g-5 justify-content-end text">Add to waiting list
+                                                                                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                            </div>
+
+                                                                            <?php endif; ?>
                                                                     <?php endif; ?>
                                                                 <?php endforeach; ?>
                                                             </div>
@@ -361,11 +375,7 @@
 
                                                             <div class="availabity flex-auto">
                                                                 <?php foreach ($data['trains_available']['to_trains'] as $key_res => $value_res) : ?>
-                                                                    <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
-                                                                        <!-- <a href="<?php //ROOT 
-                                                                                        ?>train/seatsAvailable/<?php //$data['trains_available']['to_trains'][$key_res]->compartment_id 
-                                                                                                                ?>/<?php //$value->train_id 
-                                                                                                                    ?>"> -->
+                                                                    <?php if ($value->train_id == $value_res->compartment_train_id) : ?>                                                
                                                                         <div class="d-flex justify-content-between train_and_compartment">
                                                                             <input class="display-none" type="radio" name="to_compartment_and_train" <?= getRadioSelect($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train') ?> value="<?= $data['trains_available']['to_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
                                                                             <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
@@ -380,7 +390,6 @@
                                                                                 <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
                                                                             </div>
                                                                         </div>
-                                                                        <!-- </a> -->
                                                                     <?php endif; ?>
                                                                 <?php endforeach; ?>
                                                             </div>
@@ -587,6 +596,88 @@
                 $('form#trainForm').submit();
             }
         });
+    });
+
+
+    $('#waitingList').click(function(e) {
+        e.preventDefault();
+        // makemodel box
+        var title = 'Add to waiting list';
+        var messege_confirm = 'When have been added to the waiting list. You will be notified when a seat becomes available.<br>';
+        messege_confirm += 'If a passenger cancels a reservation, you will be notified according to the priorty and you can proceed to make a reservation.';
+
+        messege_confirm += ' If staff reserved seats become available, Everyone in the list will be notified via an email. And the reservation will be made according to the first come first serve basis.';
+       
+        messege_confirm += 'Do you want to proceed?';
+        var btn = "Proceed";
+
+        var image = '<?= ASSETS ?>images/waiting-list.png';
+
+        makePopupBox(title, messege_confirm, btn, image, function(res) {
+            if (res == true) {
+                var train_id = $('#waitingList').data('trainid');
+                var compartment_id = $('#waitingList').data('compartmentid');
+                var reservation_date = $('#waitingList').data('reservationdate');
+                var passenger_id = <?= Auth::getUser_id() ?>;
+                var reservation_start_station = <?= Auth::getFrom_station()->station_id ?>;
+                var reservation_end_station = <?= Auth::getTo_station()->station_id ?>;
+        
+                var data = {
+                    "waiting_list_passenger_id": passenger_id,
+                    "waiting_list_train_id": train_id,
+                    "waiting_list_compartment_id": compartment_id,
+                    "waiting_list_reservation_start_station": reservation_start_station,
+                    "waiting_list_reservation_end_station": reservation_end_station,
+                    "waiting_list_reservation_date": reservation_date
+                };
+
+                
+                $('.main-popup-box').remove();
+                $.ajax({
+                    url: '<?= ROOT ?>train/addToWaitingList',
+                    type: 'POST',
+                    data: data,
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        console.log(res);
+                        
+                        // check if errorInfo is set
+                        if (res.errorInfo == null || res == true) {
+                            var title = 'Added to waiting list';
+                            var message = 'You have been added to the waiting list. You will be notified if a seat becomes available.';
+                            var btnText = 'Go to home';
+                            var imgURL = '<?= ASSETS ?>images/waiting-list-sucess.png';
+                            
+                            makePopupBox(title, message, btnText, imgURL, function(res) {
+                                if (res == true) {
+                                    window.location.href = '<?= ROOT ?>home';
+                                }
+                            });
+                        } else {
+                            if( res.errorInfo[1] == 1062){
+
+                                var title = 'Already added to waiting list';
+                                var message = 'You have been already been added to the waiting list.';
+                                var btnText = 'Go to home';
+                                var imgURL = '<?= ASSETS ?>images/waiting-list.png';
+                                
+                                makePopupBox(title, message, btnText, imgURL, function(res) {
+                                    if (res == true) {
+                                        window.location.href = '<?= ROOT ?>home';
+                                    }
+                                });
+                            }else
+                            {
+                                alert('Failed to add to waiting list ' + res.errorInfo[2]);
+                            }
+
+                        }
+                       
+                    }
+                });
+            }
+        });
+
     });
 </script>
 
