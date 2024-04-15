@@ -1,78 +1,53 @@
 <?php $this->view("./includes/header"); ?>
 
 
-<body>
+<body class="mobile-d-flex mobile-min-height-80">
+    <div class="flex-grow">
+        <?php $this->view("./includes/mobile-navbar") ?>
+        <main class=" flex-grow d-flex align-items-end justify-content-center bg-train-driver">
+            <div class="notificationCard max-width  mt-50 d-flex flex-column flex-grow justify-content-center align-items-center">
+                <div class="d-flex flex-row">
+                    <!-- <div class="d-flex align-items-center">
+                        <img src="<?= ASSETS ?>images/train_driver.jpg" class="bg-staff-home-mobile" alt="" srcset="">
+                    </div> -->
+                    <div class="d-flex flex-column justify-content-center align-items-center g-20">
 
-    <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
+                        <button class="mou-staff-card" id="qr">
+                            <a href="<?= ROOT ?>traindriver/addlocation">
+                                <div class="mou-staff-card-text">Update Location</div>
+                            </a>
+                        </button>
 
-        <main style="background-color:#EFF8FF;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-
-                        <div class="ach-txt-wrapper">Hello,
-                            <?= ucfirst(Auth::user()) ?>
-                        </div>
-
+                        <button class="mou-staff-card">
+                            <a href="<?= ROOT ?>traindriver/trainDelay">
+                                <div class="mou-staff-card-text">Update Delay</div>
+                            </a>
+                        </button>
                     </div>
-                </div>
 
-
-                <!-- cards -->
-
-
-                <br /><br />
-                <div class="row">
-                    <div class="col-12 center-col ach-widgets">
-
-                        <!-- card style -->
-                        <div class="card-dashboard-td">
-
-                            <div class="title">Update Location</div>
-
-                            <div class="ach-icon">
-
-
-                                <img src="<?= ASSETS ?>images/UpdateLocation.png" width="80" height="80">
-                            </div>
-                            <!--/icon-->
-
-                            <a href="<?= ROOT ?>traindriver/addlocation" class="btn-td">Check</a>
-
-                        </div>
-                    </div>
-                </div>
-                <!--/card-->
-                <div class="row">
-                    <div class="col-12 center-col ach-widgets">
-
-                        <!-- card style -->
-                        <div class="card-dashboard-td ">
-
-                            <div class="title">Update Delay</div>
-
-                            <div class="ach-icon">
-
-
-                                <img src="<?= ASSETS ?>images/UpdateDelay.png" width="80" height="80">
-                            </div>
-                            <!--/icon-->
-
-                            <a href="<?= ROOT ?>traindriver/trainDelay" class="btn-td">Check</a>
-
-                        </div>
-                    </div>
                 </div>
             </div>
+
+            <!-- <div class="home-container width-fill justify-content-center">
+                            <div class="ticketchecker-container d-flex justify-content-center">
+                                <div class="d-flex g-50 flex-column  "> -->
+
+
+
+
+
+
+
+            <!-- <form class=" mou-form" action="">
+                            <input placeholder="E-mail" id="email" name="email" type="email" class="input" required="" />
+                            <input placeholder="Password" id="password" name="password" type="password" class="input" required="" />
+                            <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
+                            <input value="Sign In" type="submit" class="login-button" />
+                            </form> -->
+
+
+        </main>
+        <?php $this->view("./includes/footer") ?>
     </div>
-
-    </div>
-
-    </main>
-
-
-
 </body>
 
-</html>

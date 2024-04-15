@@ -112,7 +112,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <table class="">
+                                    <table class="table bg-white">
                                             <thead>
                                                 <tr class="row p-20">
                                                     <th class="col-4 d-flex align-items-center">Train Name</th>
