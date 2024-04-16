@@ -4751,10 +4751,10 @@ input.calendar-none::-webkit-calendar-picker-indicator {
   display: none;
 }
 
-#waitingList:hover .text {
+.waiting-list-btn:hover .text {
   cursor: pointer;
   color: var(--Border-blue);
 }
-#waitingList:hover .text svg path {
+.waiting-list-btn:hover .text svg path {
   stroke: var(--Border-blue);
 }/*# sourceMappingURL=ravien.css.map */

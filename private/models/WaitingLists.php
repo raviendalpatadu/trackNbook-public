@@ -80,4 +80,119 @@ class WaitingLists extends Model
 
         return $result;
     }
+
+    public function notifyWaitingList($id)
+    {
+        // if a passenger cancels send mails to the top 10 in the waiting list
+        $passenger_count = '10';
+
+        try {
+            $query = "WITH getData AS(
+                SELECT 
+                    *
+                FROM 
+                    tbl_reservation 
+                WHERE
+                    reservation_ticket_id = :reservation_ticket_id
+                LIMIT 1
+            ),
+            SortedRows AS (
+                SELECT
+                    w.*,
+                    ROW_NUMBER() OVER (PARTITION BY w.waiting_list_train_id, w.waiting_list_compartment_id, w.waiting_list_reservation_date ORDER BY w.waiting_list_time_created) AS priority_number
+                FROM
+                    tbl_waiting_list w
+                JOIN
+                    getData g ON w.waiting_list_train_id = g.reservation_train_id 
+                              AND w.waiting_list_compartment_id = g.reservation_compartment_id 
+                              AND w.waiting_list_reservation_date = g.reservation_date
+            )
+            SELECT
+                s.waiting_list_passenger_id,
+                s.priority_number,
+                s.waiting_list_reservation_date,
+                t.train_id,
+                t.train_name,
+                start_st.station_name AS start_station_name,
+                end_st.station_name AS end_station_name,
+                ts_start.train_stop_time AS estimated_start_time,
+                ts_end.train_stop_time AS estimated_end_time
+                
+            FROM
+                SortedRows s
+            
+            JOIN tbl_train t ON t.train_id = s.waiting_list_train_id
+            JOIN tbl_station start_st ON s.waiting_list_reservation_start_station = start_st.station_id
+            JOIN tbl_station end_st ON s.waiting_list_reservation_end_station = end_st.station_id
+            JOIN tbl_train_stop_station ts_start ON ts_start.train_id = s.waiting_list_train_id and ts_start.station_id = s.waiting_list_reservation_start_station
+            JOIN tbl_train_stop_station ts_end ON ts_end.train_id = s.waiting_list_train_id and ts_end.station_id = s.waiting_list_reservation_end_station
+                
+                
+            ORDER BY
+                s.waiting_list_train_id, s.waiting_list_compartment_id, s.waiting_list_reservation_date, s.waiting_list_time_created";
+            // --LIMIT :passenger_count";
+
+            $result = $this->query($query, array(
+                ':reservation_ticket_id' => $id
+            ));
+        } catch (PDOException $e) {
+            return $e;
+        }
+
+        if (is_array($result) && count($result) > 0) {
+            return $result;
+        }
+        return 0;
+    }
+
+    public function inWaitingList($waiting_list)
+    {
+
+        $query = "SELECT *
+        FROM
+            tbl_waiting_list
+        WHERE
+            waiting_list_train_id = :waiting_list_train_id
+            AND waiting_list_compartment_id = :waiting_list_compartment_id
+            AND waiting_list_reservation_date = :waiting_list_reservation_date
+            AND waiting_list_passenger_id = :waiting_list_passenger_id";
+
+        $data = $this->query($query, $waiting_list);
+
+        if ($data) {
+            return true;
+        }
+        return false;
+    }
+
+    public function removeFromWaitingList($waiting_list)
+    {
+        try {
+            $query = "SELECT *
+        FROM
+            tbl_waiting_list
+        WHERE
+            waiting_list_train_id = :waiting_list_train_id
+            AND waiting_list_compartment_id = :waiting_list_compartment_id
+            AND waiting_list_reservation_date = :waiting_list_reservation_date
+            AND waiting_list_passenger_id = :waiting_list_passenger_id";
+
+            $data = $this->query($query, $waiting_list);
+
+            if ($data) {
+                $query = "DELETE FROM tbl_waiting_list
+            WHERE
+                waiting_list_train_id = :waiting_list_train_id
+                AND waiting_list_compartment_id = :waiting_list_compartment_id
+                AND waiting_list_reservation_date = :waiting_list_reservation_date
+                AND waiting_list_passenger_id = :waiting_list_passenger_id";
+
+                $this->query($query, $waiting_list);
+                return true;
+            }
+        } catch (PDOException $e) {
+            return $e;
+        }
+        return false;
+    }
 }

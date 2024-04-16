@@ -26,6 +26,9 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 ?>
 
 <body class="flex-column mobile-d-flex">
+    <div id="loadingScreen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">Loading...</p>
+    </div>
     <div class="d-flex flex-column flex-grow justify-content-between">
         <?php $this->view("./includes/navbar") ?>
         <main class="d-flex flex-column flex-grow">
@@ -58,7 +61,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                                     </svg>
                                 </button>
                             </div>
-                        </div>    
+                        </div>
                     </form>
 
                     <!-- reservations and cancellation tabs -->
@@ -324,96 +327,96 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
 
                     <div class="reservations d-flex flex-column flex-grow g-16 p-5 display-none" id="waitingListReservations">
-                     
-                            <?php foreach ($data['waiting_list_reservations'] as $waiting_list_reservation_key => $waiting_list_reservation) : ?>
-                               
 
-                                <div class="d-flex p-5 reservation-card width-fill" data-reservationdate="<?= $waiting_list_reservation->waiting_list_reservation_date ?>">
-                                    <div class="d-flex flex-column flex-grow g-10 p-10">
-                                        <div class="d-flex justify-content-between">
-                                            <h1 class="fs-16 fw-600"><?= $waiting_list_reservation->train_name ?> </h1>
-                                            <span class="fs-16 fw-500">Queue No</span>
-                                        </div>
-                                        <!-- from station ,time with a arrow svg and to station and time -->
-                                        <div class="d-flex g-20 justify-content-between align-items-center">
-                                            <div class="d-flex justify-content-around align-items-center flex-grow">
-                                                <div class="d-flex flex-column g-20 align-items-center">
-                                                    <div>
-                                                        <p class="fs-14 fw-500"><?= $waiting_list_reservation->start_station_name ?></p>
-                                                        <p class="fs-12"><?= $waiting_list_reservation->estimated_start_time ?></p>
-                                                    </div>
+                        <?php foreach ($data['waiting_list_reservations'] as $waiting_list_reservation_key => $waiting_list_reservation) : ?>
 
-                                                    <div class="d-flex g-5 align-items-end">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
-                                                            <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
-                                                            <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
-                                                            <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
-                                                        </svg>
 
-                                                        <!-- time in hours and minutes using php-->
-                                                        <p class="fs-12 fw-400"><?php
-                                                                                // display time in hours and minutes eg 2h 30m
-                                                                                $start = new DateTime($waiting_list_reservation->estimated_start_time);
-                                                                                $end = new DateTime($waiting_list_reservation->estimated_end_time);
-                                                                                $diff = $start->diff($end);
-                                                                                echo $diff->format('%hh %im');
-                                                                                ?></p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="align-items-center arrow-svg d-flex flex-column g-20 ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
-                                                        <path fill="currentColor" d="m16.172 9l-6.071-6.071l1.414-1.414L20 10l-.707.707l-7.778 7.778l-1.414-1.414L16.172 11H0V9z"></path>
-                                                    </svg>
-
-                                                    <div class="d-flex g-5 align-items-end">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                                                            <path fill="currentColor" d="M12.615 12V5H17v7zm1-1H16V6h-2.385zM17 17H8.615L6 8.058V5h1v3l2.385 8H17zm-8.596 3v-1h8.577v1zm5.211-14H16z"></path>
-                                                        </svg>
-                                                        <p class="fs-12 fw-400"><?= $waiting_list_reservation->compartment_class_type ?></p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-flex flex-column g-20 align-items-center">
-                                                    <div>
-                                                        <p class="fs-14 fw-500"><?= $waiting_list_reservation->end_station_name ?></p>
-                                                        <p class="fs-12"><?= $waiting_list_reservation->estimated_end_time ?></p>
-                                                    </div>
-
-                                                    <div class="d-flex g-5 align-items-end">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
-                                                            <path fill="currentColor" d="M10.5 9A3.5 3.5 0 1 1 14 5.5A3.504 3.504 0 0 1 10.5 9m0-5A1.5 1.5 0 1 0 12 5.5A1.502 1.502 0 0 0 10.5 4m11.974 27.313L19.34 24h-7.101a4.007 4.007 0 0 1-3.867-2.97l-1.634-6.127a3.899 3.899 0 0 1 7.535-2.009L15.1 16H21v2h-7.436l-1.223-4.59a1.9 1.9 0 0 0-3.67.978l1.633 6.126A2.005 2.005 0 0 0 12.239 22h8.42l3.654 8.525zM30 6h-4V2h-2v4h-4v2h4v4h2V8h4z"></path>
-                                                            <path fill="currentColor" d="M18 28H7.768a2.003 2.003 0 0 1-1.933-1.485L2.033 12.258l1.933-.516L7.768 26H18Z"></path>
-                                                        </svg>
-
-                                                        <!-- <p class="fs-12 fw-400"></p> -->
-                                                        <!-- </p> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex align-items-end flex-column g-20">
-                                                <!-- more info button -->
-                                                
-                                                <div class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8">
-                                                     <?= str_pad($waiting_list_reservation->priority_number,2, "0", STR_PAD_LEFT) ?>
+                            <div class="d-flex p-5 reservation-card width-fill" data-reservationdate="<?= $waiting_list_reservation->waiting_list_reservation_date ?>">
+                                <div class="d-flex flex-column flex-grow g-10 p-10">
+                                    <div class="d-flex justify-content-between">
+                                        <h1 class="fs-16 fw-600"><?= $waiting_list_reservation->train_name ?> </h1>
+                                        <span class="fs-16 fw-500">Queue No</span>
+                                    </div>
+                                    <!-- from station ,time with a arrow svg and to station and time -->
+                                    <div class="d-flex g-20 justify-content-between align-items-center">
+                                        <div class="d-flex justify-content-around align-items-center flex-grow">
+                                            <div class="d-flex flex-column g-20 align-items-center">
+                                                <div>
+                                                    <p class="fs-14 fw-500"><?= $waiting_list_reservation->start_station_name ?></p>
+                                                    <p class="fs-12"><?= $waiting_list_reservation->estimated_start_time ?></p>
                                                 </div>
 
                                                 <div class="d-flex g-5 align-items-end">
-                                                    <p class="fs-14"><?= $waiting_list_reservation->waiting_list_reservation_date ?></p>
-                                                    </p>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                        <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                        <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                        <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                    </svg>
+
+                                                    <!-- time in hours and minutes using php-->
+                                                    <p class="fs-12 fw-400"><?php
+                                                                            // display time in hours and minutes eg 2h 30m
+                                                                            $start = new DateTime($waiting_list_reservation->estimated_start_time);
+                                                                            $end = new DateTime($waiting_list_reservation->estimated_end_time);
+                                                                            $diff = $start->diff($end);
+                                                                            echo $diff->format('%hh %im');
+                                                                            ?></p>
                                                 </div>
                                             </div>
 
+                                            <div class="align-items-center arrow-svg d-flex flex-column g-20 ">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20">
+                                                    <path fill="currentColor" d="m16.172 9l-6.071-6.071l1.414-1.414L20 10l-.707.707l-7.778 7.778l-1.414-1.414L16.172 11H0V9z"></path>
+                                                </svg>
+
+                                                <div class="d-flex g-5 align-items-end">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                                                        <path fill="currentColor" d="M12.615 12V5H17v7zm1-1H16V6h-2.385zM17 17H8.615L6 8.058V5h1v3l2.385 8H17zm-8.596 3v-1h8.577v1zm5.211-14H16z"></path>
+                                                    </svg>
+                                                    <p class="fs-12 fw-400"><?= $waiting_list_reservation->compartment_class_type ?></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-column g-20 align-items-center">
+                                                <div>
+                                                    <p class="fs-14 fw-500"><?= $waiting_list_reservation->end_station_name ?></p>
+                                                    <p class="fs-12"><?= $waiting_list_reservation->estimated_end_time ?></p>
+                                                </div>
+
+                                                <div class="d-flex g-5 align-items-end">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                        <path fill="currentColor" d="M10.5 9A3.5 3.5 0 1 1 14 5.5A3.504 3.504 0 0 1 10.5 9m0-5A1.5 1.5 0 1 0 12 5.5A1.502 1.502 0 0 0 10.5 4m11.974 27.313L19.34 24h-7.101a4.007 4.007 0 0 1-3.867-2.97l-1.634-6.127a3.899 3.899 0 0 1 7.535-2.009L15.1 16H21v2h-7.436l-1.223-4.59a1.9 1.9 0 0 0-3.67.978l1.633 6.126A2.005 2.005 0 0 0 12.239 22h8.42l3.654 8.525zM30 6h-4V2h-2v4h-4v2h4v4h2V8h4z"></path>
+                                                        <path fill="currentColor" d="M18 28H7.768a2.003 2.003 0 0 1-1.933-1.485L2.033 12.258l1.933-.516L7.768 26H18Z"></path>
+                                                    </svg>
+
+                                                    <!-- <p class="fs-12 fw-400"></p> -->
+                                                    <!-- </p> -->
+                                                </div>
+                                            </div>
                                         </div>
 
+                                        <div class="d-flex align-items-end flex-column g-20">
+                                            <!-- more info button -->
+
+                                            <div class="White align-items-end bg-blue border-none border-radius-6 btn btn-primary d-flex fw-200 g-5 p-8">
+                                                <?= str_pad($waiting_list_reservation->priority_number, 2, "0", STR_PAD_LEFT) ?>
+                                            </div>
+
+                                            <div class="d-flex g-5 align-items-end">
+                                                <p class="fs-14"><?= $waiting_list_reservation->waiting_list_reservation_date ?></p>
+                                                </p>
+                                            </div>
+                                        </div>
 
                                     </div>
+
+
                                 </div>
-                            <?php endforeach; ?>
-                        
+                            </div>
+                        <?php endforeach; ?>
+
                     </div>
-                    
+
 
                 </div>
 
@@ -520,9 +523,10 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 </html>
 
 <script>
-    var loadingDiv = '<div class="d-flex justify-content-center align-items-center flex-grow display-none" id="loader"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+    // var loadingDiv = '<div class="d-flex justify-content-center align-items-center flex-grow bg-Primary-Blue" id="loader"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 
-    $('#selectResevation').after(loadingDiv);
+
+    // $('#selectResevation').after(loadingDiv);
 
 
     $(document).ready(function() {
@@ -840,7 +844,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             $('#cancelled_tab_btn').removeClass('active');
         });
 
-        
+
 
 
         // poup alert to confirm cancelation
@@ -851,15 +855,17 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             // make a custopm confirm box
             var tiile = 'Confirm Cancelation';
             var desc = 'Are you sure you want to cancel this reservation?';
-            var btnTxt = 'Cancel Reservation'; 
+            var btnTxt = 'Cancel Reservation';
             var img = 'https://img.icons8.com/ios/50/000000/question-mark.png';
 
             makePopupBox(tiile, desc, btnTxt, img, function(res) {
-                if (res) {     
+                if (res) {
+                    $('#loadingScreen').show();
+
                     $.ajax({
                         url: '<?= ROOT ?>ajax/cancelReservation/' + ticketId,
                         type: 'GET',
-    
+
                         success: function(data, response) {
                             console.log(data);
                             var data = JSON.parse(data);
@@ -868,9 +874,18 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                                 alert('Reservation has been canceled');
                                 location.reload();
                             } else {
-                                alert('Failed to cancel reservation');
+                                console.log(data);
+                                console.log('Failed to cancel reservation');
                             }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        },
+                        // Hide the loading screen when the AJAX request is complete
+                        complete: function() {
+                            $('#loadingScreen').hide();
                         }
+
                     });
                 }
             });

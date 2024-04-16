@@ -1140,7 +1140,7 @@ div#reservation_type_tab{
   font-size: 14px;
   background-color: var(--Lightgray);
   cursor: pointer;
-  
+
   div.active{
     font-weight: 600;
       color: var(--Border-blue);
@@ -1362,8 +1362,7 @@ input.calendar-none::-webkit-calendar-picker-indicator{
     display: none;
 }
 
-#waitingList:hover{
-
+.waiting-list-btn:hover{
   .text{
     cursor: pointer;
     color: var(--Border-blue);

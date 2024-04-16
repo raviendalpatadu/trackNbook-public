@@ -163,7 +163,7 @@ class Train extends Controller
             $reservationData['from']['reservation_date'] = Auth::reservation()['from_date'];
 
             date_default_timezone_set('Asia/Colombo');
-            $reservationData['from']['reservation_created_time'] = date('m/d/Y h:i:s a', time());
+            $reservationData['from']['reservation_created_time'] = date('Y-m-d h:i:s a', time());
 
             $reservationData['from']['reservation_status'] = 'Pending';
 
@@ -191,7 +191,7 @@ class Train extends Controller
                 $reservationData['to']['reservation_end_station'] = Auth::reservation()['from_station']->station_id;
                 $reservationData['to']['reservation_date'] = Auth::reservation()['to_date'];
 
-                $reservationData['to']['reservation_created_time'] = date('m/d/Y h:i:s a', time());
+                $reservationData['to']['reservation_created_time'] = date('Y-m-d h:i:s a', time());
                 $reservationData['to']['reservation_status'] = 'Pending';
 
                 if (isset($_POST['to_selected_seats'])) {

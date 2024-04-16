@@ -165,13 +165,11 @@ class Model extends Database
             $str .= '?,';
         }
         $str = trim($str, ',');
-        try{
+        try {
             $query = "call $procedure($str)";
             return $this->query($query, $data);
         } catch (PDOException $e) {
             die($e->getMessage());
         }
-
     }
-
 }

@@ -218,7 +218,6 @@ class Reservations extends Model
         return $result;
     }
 
-
     // cancel reservation
 
 }
