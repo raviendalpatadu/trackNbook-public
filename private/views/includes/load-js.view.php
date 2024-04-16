@@ -1,5 +1,6 @@
-<script src="<?= ASSETS ?>/js/jquery.js"></script>
 <script src="<?= ASSETS ?>/js/main.js"></script>
+<!-- DataTables js & jquery -->
+<script src="<?= ASSETS ?>/lib/jquery/jquery-3.7.1.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
 
@@ -16,3 +17,6 @@
 
 <!-- chart js library -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+<script src="<?= ASSETS ?>/lib/datatables/dataTables.js"></script>
+
+

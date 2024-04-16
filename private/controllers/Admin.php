@@ -19,7 +19,7 @@ class Admin extends Controller
 
         $data = array();
 
-        
+
         $data['users'] = $user->findAll();
         if (isset($_POST['submit']) && !empty($_POST['user_first_name'])) {
             $data['users'] = $user->getUsers('user_first_name', $_POST['user_first_name']);
@@ -98,5 +98,28 @@ class Admin extends Controller
         $this->view('admin.inquiry');
 
     }
-    
+
+    function test()
+    {
+
+        $user = new Users();
+        $data = array();
+
+        $data['users'] = $user->findAll();
+
+        $this->view('displaytest.users.admin', $data);
+
+    }
+
+    function test2()
+    {
+
+        $user = new Users();
+        $data = array();
+
+        $data['users'] = $user->findAll();
+
+        $this->view('displaytest2.users.admin', $data);
+
+    }
 }

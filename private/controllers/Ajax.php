@@ -14,7 +14,6 @@ class Ajax extends Controller
     }
 
     public function getReservationData($id, $type = '')
-
     {
         $reservation = new Reservations();
         echo json_encode($reservation->getReservationDataTicket($id, $type));
@@ -37,5 +36,15 @@ class Ajax extends Controller
     {
         $reservation = new Reservations();
         echo json_encode($reservation->findAll());
+    }
+
+    public function getUsers()
+    {
+        $user = new Users();
+        $result = $user->findAll();
+
+       
+
+        echo json_encode($result); // Wrap the output array inside a "data" key
     }
 }
