@@ -59,12 +59,12 @@ class Dashboard extends Controller
     {
         $station = new Stations();
         $data = array();
-        $data['stations'] = $station->findAllStation();
+        $data['stations'] = $station->getStations();
         $train = new Trains();
 
 
         $data['trains'] = $train->findAllTrains();
-        $this->view('dashboard.stationmaster', $data, $data);
+        $this->view('dashboard.stationmaster', $data);
 
     }
 

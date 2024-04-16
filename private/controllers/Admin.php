@@ -111,4 +111,15 @@ class Admin extends Controller
 
     }
 
+    function test2()
+    {
+
+        $user = new Users();
+        $data = array();
+
+        $data['users'] = $user->findAll();
+
+        $this->view('displaytest2.users.admin', $data);
+
+    }
 }
