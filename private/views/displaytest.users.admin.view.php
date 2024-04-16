@@ -15,6 +15,23 @@ if (isset($data['users']) && $data['users'] != 0) {
 // echo $count;
 ?>
 
+<style>
+    .display{
+        width: 100% !important;
+        font-family: Arial, sans-serif !important;
+    }
+
+    .display th{
+        background-color: #f2f2f2;
+        padding: 14px !important;
+        font-size: medium !important;
+    }
+
+    .display td{
+        padding: 14px !important;
+        font-size: 14px !important;
+    }
+</style>
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
@@ -37,49 +54,33 @@ if (isset($data['users']) && $data['users'] != 0) {
 
                                     <table id="myTable" class="display">
                                         <thead>
-                                            <tr class="row p-20">
-                                                <th class="col-3 d-flex align-items-center">
-                                                    <div class="col-4">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-                                                        </div>
-                                                    </div>
-                                                    Name
-                                                </th>
-                                                <th class="col-1">Type</th>
-                                                <th class="col-2">Phone</th>
-                                                <th class="col-3">Email</th>
-                                                <th class="col-2 d-flex align-items-center">
-                                                    <div class="col-4">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-
-                                                        </div>
-                                                    </div>
-                                                    NIC
-
-                                                </th>
-                                                <th class="col-1"></th>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>NIC</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if (!empty($data['users'])): ?>
                                                 <?php foreach ($data['users'] as $key => $user): ?>
-                                                    <tr class=" row p-20">
-                                                        <td class="col-3 d-flex align-items-center">
+                                                    <tr>
+                                                        <td>
                                                             <?= $user->user_first_name ?>
                                                         </td>
-                                                        <td class="col-3 d-flex align-items-center">
+                                                        <td>
                                                             <?= $user->user_type ?>
                                                         </td>
-                                                        <td class="col-1 d-flex align-items-center">
+                                                        <td>
                                                             <?= $user->user_phone_number ?>
                                                         </td>
-                                                        <td class="col-2 d-flex align-items-center">
+                                                        <td>
                                                             <?= $user->user_email ?>
                                                         </td>
-                                                        <td class="col-3 d-flex align-items-center">
+                                                        <td>
                                                             <?= $user->user_nic ?>
-                                                        </td>
-                                                        <td class="col-1"></td>
+                                                        </td>     
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php else: ?>
