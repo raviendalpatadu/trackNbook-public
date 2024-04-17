@@ -219,5 +219,4 @@ class Reservations extends Model
     }
 
     // cancel reservation
-
 }

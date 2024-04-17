@@ -148,6 +148,7 @@ echo "</pre>";
         e.preventDefault();
 
         var formData = $('form').serialize();
+        
         console.log(formData);
 
         getErrors('<?= ROOT ?>home/validate', formData, function(data) {

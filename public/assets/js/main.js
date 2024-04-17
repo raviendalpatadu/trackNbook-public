@@ -302,9 +302,9 @@ function hello() {
 
 function getErrors(url, data, callback) {
   $.ajax({
-    url: url,
+    url: url, //<?= ROOT ?>home/validate
     type: "post",
-    data: data,
+    data: data, //formData
     success: function (data, status) {
       // console.log(data);
 

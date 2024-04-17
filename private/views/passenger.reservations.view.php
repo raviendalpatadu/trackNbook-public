@@ -26,9 +26,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 ?>
 
 <body class="flex-column mobile-d-flex">
-    <div id="loadingScreen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
-        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white;">Loading...</p>
-    </div>
+    <?php // $this->view('includes/loader');?>
     <div class="d-flex flex-column flex-grow justify-content-between">
         <?php $this->view("./includes/navbar") ?>
         <main class="d-flex flex-column flex-grow">
@@ -608,7 +606,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
         $('button#more').click(function(event) {
 
             var ticketId = $(this).data('ticketid')
-            console.log(ticketId);
+            // console.log(ticketId);
 
             var reservationStatus = $(this).data('reservationstatus');
             console.log(reservationStatus);
@@ -784,15 +782,28 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         $('#resStatus').empty();
                         $('#resStatus').append(reservation_status);
 
+                        // // show download ticket button
+                        // $('#downloadTicket').show();
+
+                        // // change cancel reservation button text
+                        // $('#cancelReservation').text('Cancel Reservation');
+
                     }
 
                 });
             }
 
             if (reservationStatus == 'Cancelled') {
-                $('#cancelReservation').remove();
-                $('#downloadTicket').remove();
+                $('#cancelReservation').hide();
+                $('#downloadTicket').hide();
+            } else{
+                console.log('not cancelled');
+                $('#downloadTicket').show();
+                $('#cancelReservation').show();
             }
+
+
+            // reservationStatus = '';
 
 
 
@@ -860,7 +871,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
             makePopupBox(tiile, desc, btnTxt, img, function(res) {
                 if (res) {
-                    $('#loadingScreen').show();
+                    $('.loader__main').fadeIn();
 
                     $.ajax({
                         url: '<?= ROOT ?>ajax/cancelReservation/' + ticketId,
@@ -871,8 +882,12 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                             var data = JSON.parse(data);
                             console.log(data);
                             if (data.length == 0) {
-                                alert('Reservation has been canceled');
-                                location.reload();
+                                // alert('Reservation has been canceled');
+                                makePopupBox('Reservation Cancelled', 'Reservation has been canceled', 'OK', 'https://img.icons8.com/ios/50/000000/checked-2.png', function(res) {
+                                    if (res) {
+                                        location.reload();
+                                    }
+                                });
                             } else {
                                 console.log(data);
                                 console.log('Failed to cancel reservation');
@@ -883,7 +898,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         },
                         // Hide the loading screen when the AJAX request is complete
                         complete: function() {
-                            $('#loadingScreen').hide();
+                            $('.loader__main').fadeOut();
                         }
 
                     });
