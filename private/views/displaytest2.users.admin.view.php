@@ -2,6 +2,7 @@
 <?php $this->view("./includes/load-js") ?>
 <!DOCTYPE html>
 <html>
+
 <body>
     <div class="container">
         <h1>User DataTable</h1>
@@ -34,8 +35,10 @@
                                     <div class="text blue">View</div>
                                 </div>
                             </a>
-                            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
-                                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/<?= $user->user_id ?>">
+                            <div class="badge-base bg-Selected-red"
+                                onclick="alert('Are you sure you want to delete record')">
+                                <a class="blue d-flex flex-row g-2 align-items-center"
+                                    href="<?= ROOT ?>admin/deleteUser/<?= $user->user_id ?>">
                                     <div class="dot">
                                         <div class="dot4 bg-Banner-red"></div>
                                     </div>
@@ -54,30 +57,30 @@
             let table = new DataTable("#userTable", {
                 ajax: {
                     url: "<?= ROOT ?>ajax/getUsers",
-                    dataSrc: "" 
+                    dataSrc: ""
                 },
                 columns: [
-                    { 
+                    {
                         title: 'Name',
-                        data :  'user_first_name'
+                        data: 'user_first_name'
                     },
-                    { 
+                    {
                         title: 'Type',
-                        data :  'user_type'
+                        data: 'user_type'
                     },
-                    { 
+                    {
                         title: 'Phone',
-                        data :  'user_phone_number'
+                        data: 'user_phone_number'
                     },
-                    { 
+                    {
                         title: 'Email',
-                        data :  'user_email'
+                        data: 'user_email'
                     },
-                    { 
+                    {
                         title: 'NIC',
-                        data : 'user_nic'
+                        data: 'user_nic'
                     },
-                    { 
+                    {
                         title: 'Actions',
                         data: null,
                         render: function (data, type, row) {
@@ -106,4 +109,5 @@
         });
     </script>
 </body>
+
 </html>
