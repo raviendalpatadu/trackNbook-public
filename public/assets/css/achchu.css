@@ -4,11 +4,17 @@
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
 
+.mt--20 {
+  margin-top: -20px;
+}
+.mt--70 {
+  margin-top: -70px;
+}
 .notificationCard-SG {
-  height: -moz-fit-content;
+
   height: fit-content;
   background: rgb(255, 255, 255);
-  padding: 20px 35px;
+  padding: 0px 0px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
   border-radius: 8px 8px 0 0;
   width: fit-content;

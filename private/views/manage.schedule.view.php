@@ -278,7 +278,7 @@
                                             </svg>
                                         </div>
                                     </a></td>
-                                <td class="col-1"><a href="http://localhost/trackNbook/public/StaffGeneral/addSchedule"
+                                <td class="col-1"><a href="http://localhost/trackNbook/public/train/add"
                                         class="blue">Add Train</a></td>
                             </tr>
 
