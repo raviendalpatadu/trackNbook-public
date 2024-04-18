@@ -110,7 +110,7 @@
                                 <div class="row">
                                     <div class="col-12" style="padding:20px;">
 
-                                        <table class="">
+                                    <table class="table bg-white">
                                             <thead>
                                                 <tr class="row p-20">
                                                     <th class="col-2 d-flex align-items-center">

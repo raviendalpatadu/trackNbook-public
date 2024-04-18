@@ -19,6 +19,26 @@ if (Auth::getuser_type() == "ticket_checker") {
     ]
   ];
 }
+elseif (Auth::getuser_type() == "train_driver") {
+  $sidebar_list = [
+    [
+      "name" => "Home",
+      "link" => "dashboard/train_driver",
+      "icon" => "home.svg"
+    ],
+
+    [
+      "name" => "Update Location",
+      "link" => "traindriver/addlocation",
+      "icon" => "qr.svg"
+    ],
+    [
+      "name" => "Update Delay",
+      "link" => "traindriver/trainDelay",
+      "icon" => "reservation.svg"
+    ]
+  ];
+}
 
 ?>
 <nav class="nav-dashboard px-20">
