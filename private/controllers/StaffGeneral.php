@@ -15,9 +15,14 @@ class StaffGeneral extends Controller
     }
 
     function manageSchedule($id = '')
-    {
 
-        $this->view('manage.schedule');
+    {
+        $train = new Trains();
+        $data = array();
+
+        $data['trains'] = $train->findAllTrains();
+
+        $this->view('manage.schedule', $data);
     }
 
     function updateSchedule($id = '')
