@@ -134,8 +134,12 @@
                     {
                         title: 'Actions',
                         data: null,
+                        width: '15%',
                         render: function (data, type, row) {
                             return `
+                            
+
+                            <div class="row">
                             <a class="blue" href="<?= ROOT ?>admin/updateUser/${data.user_id}">
                                 <div class="badge-base bg-Selected-Blue">
                                     <div class="dot">
@@ -144,7 +148,8 @@
                                     <div class="text blue">View</div>
                                 </div>
                             </a>
-                            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
+                            <div class="g-5"></div> <!-- Add a small gap -->
+                            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete user')">
                                 <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/${data.user_id}">
                                     <div class="dot">
                                         <div class="dot4 bg-Banner-red"></div>
