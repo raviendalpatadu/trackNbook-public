@@ -1,18 +1,10 @@
 <?php $this->view("./includes/header") ?>
-<?php
-// echo "<pre>";
-// print_r($data);
-// // print_r($_SESSION);
-// // print_r($_POST);
-// echo "</pre>";
+<?php $this->view("./includes/load-js") ?>
 
-if (isset($data['users']) && $data['users'] != 0) {
-    $count = count($data['users']);
-} else {
-    $count = 0;
-}
-// echo $count;
-?>
+<head>
+
+</head>
+
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -22,8 +14,6 @@ if (isset($data['users']) && $data['users'] != 0) {
         <main>
             <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
-
-
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
@@ -32,82 +22,150 @@ if (isset($data['users']) && $data['users'] != 0) {
                                         <h3>Available Users</h3>
                                     </div>
                                     <br>
-
-
-                                    <table id="myTable" class="display">
+                                    <hr style="color: gray">
+                                    <br><br>
+                                    <table class="if-table stripe hover" id="userTable" style:width=100%>
                                         <thead>
-                                            <tr class="row p-20">
-                                                <th class="col-3 d-flex align-items-center">
-                                                    <div class="col-4">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-                                                        </div>
-                                                    </div>
+                                            <tr>
+                                                <th class="col-3 align-items-center ">
+                                                    <!-- Add 'text-left' class for left alignment -->
                                                     Name
                                                 </th>
-                                                <th class="col-1">Type</th>
-                                                <th class="col-2">Phone</th>
-                                                <th class="col-3">Email</th>
-                                                <th class="col-2 d-flex align-items-center">
-                                                    <div class="col-4">
-                                                        <div class="d-flex .flex-row g-5 mr-5">
-
-                                                        </div>
-                                                    </div>
+                                                <th class="col-1 "> <!-- Add 'text-left' class for left alignment -->
+                                                    Type
+                                                </th>
+                                                <th class="col-2 "> <!-- Add 'text-left' class for left alignment -->
+                                                    Phone
+                                                </th>
+                                                <th class="col-3 "> <!-- Add 'text-left' class for left alignment -->
+                                                    Email
+                                                </th>
+                                                <th class="col-2 "> <!-- Add 'text-left' class for left alignment -->
                                                     NIC
-
                                                 </th>
                                                 <th class="col-1"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if (!empty($data['users'])): ?>
-                                                <?php foreach ($data['users'] as $key => $user): ?>
-                                                    <tr class=" row p-20">
-                                                        <td class="col-3 d-flex align-items-center">
-                                                            <?= $user->user_first_name ?>
-                                                        </td>
-                                                        <td class="col-3 d-flex align-items-center">
-                                                            <?= $user->user_type ?>
-                                                        </td>
-                                                        <td class="col-1 d-flex align-items-center">
-                                                            <?= $user->user_phone_number ?>
-                                                        </td>
-                                                        <td class="col-2 d-flex align-items-center">
-                                                            <?= $user->user_email ?>
-                                                        </td>
-                                                        <td class="col-3 d-flex align-items-center">
+                                            <?php foreach ($data['users'] as $user): ?>
+                                                <tr class="row ">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <?= $user->user_first_name ?>
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center lightgray-font ">
+                                                        <?= $user->user_type ?>
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <?= $user->user_phone_number ?>
+                                                    </td>
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <?= $user->user_email ?>
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <div class="d-flex .flex-row g-5 mr-5">
                                                             <?= $user->user_nic ?>
-                                                        </td>
-                                                        <td class="col-1"></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            <?php else: ?>
-                                                <div id="popoupError">
+                                                        </div>
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center g-5">
+                                                        <a class="blue"
+                                                            href="<?= ROOT ?>admin/updateUser/<?= $user->user_id ?>">
+                                                            <div class="badge-base bg-Selected-Blue align-items-center">
+                                                                <div class="dot">
+                                                                    <div class="dot4 "></div>
+                                                                </div>
+                                                                <div class="text blue">View</div>
+                                                            </div>
+                                                        </a>
 
-                                                </div>
-                                            <?php endif; ?>
+                                                        <div class="badge-base bg-Selected-red"
+                                                            onclick="alert('Are you sure you want to delete record')">
+                                                            <a class="blue d-flex  g-2 align-items-center"
+                                                                href="<?= ROOT ?>admin/deleteUser/<?= $user->user_id ?>">
+                                                                <div class="dot">
+                                                                    <div class="dot4  bg-Banner-red"></div>
+                                                                </div>
+                                                                <div class="text red">Delete</div>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
                                     </table>
-
-
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
-
-        </main>
     </div>
-
-    <?php $this->view("./includes/load-js") ?>
-
+    </main>
+    </div>
     <script>
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            let table = new DataTable("#userTable", {
+                ajax: {
+                    url: "<?= ROOT ?>ajax/getUsers",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        title: 'Name',
+                        data: 'user_first_name',
+                        width: '20%' // Set the width for the first column
+                    },
+                    {
+                        title: 'Type',
+                        data: 'user_type'
+                    },
+                    {
+                        title: 'Phone',
+                        data: 'user_phone_number'
+                    },
+                    {
+                        title: 'Email',
+                        data: 'user_email'
+                    },
+                    {
+                        title: 'NIC',
+                        data: 'user_nic'
+                    },
+                    {
+                        title: 'Actions',
+                        data: null,
+                        render: function (data, type, row) {
+                            return `
+                            <a class="blue" href="<?= ROOT ?>admin/updateUser/${data.user_id}">
+                                <div class="badge-base bg-Selected-Blue">
+                                    <div class="dot">
+                                        <div class="dot4"></div>
+                                    </div>
+                                    <div class="text blue">View</div>
+                                </div>
+                            </a>
+                            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
+                                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/${data.user_id}">
+                                    <div class="dot">
+                                        <div class="dot4 bg-Banner-red"></div>
+                                    </div>
+                                    <div class="text red">Delete</div>
+                                </a>
+                            </div>
+                        `;
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0, // Target the first column
+                        className: 'dt-body-left' // Left-align the content in the first column
+                    }
+                ]
+            });
         });
     </script>
+
 </body>
 
 </html>

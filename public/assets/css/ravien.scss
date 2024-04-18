@@ -1354,3 +1354,8 @@ div#reservation_type div.active{
     transform: translateY(0);
   }
 }
+
+
+input.calendar-none::-webkit-calendar-picker-indicator{
+    display: none;
+}
