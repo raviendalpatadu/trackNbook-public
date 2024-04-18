@@ -83,52 +83,52 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php for ($train = 0; $train < $count; $train++): ?>
-                                                <tr class="row p-20">
-                                                    <td class="col-4 d-flex align-items-center">
-                                                        <?= $data['trains'][$train]->train_name ?>
-                                                    </td>
-                                                    <td class="col-1">
-                                                        <?= $data['trains'][$train]->train_id ?>
-                                                    </td>
-                                                    <td class="col-1">
-                                                        <?= $data['trains'][$train]->train_type ?>
-                                                    </td>
-                                                    <td class="col-2">
-                                                        <?= $data['trains'][$train]->start_station . "-" . $data['trains'][$train]->end_station ?>
-                                                    </td>
-                                                    <td class="col-2 ">
-                                                        <?= date("H:i", strtotime($data['trains'][$train]->train_start_time)) . " " . date("H:i", strtotime($data['trains'][$train]->train_end_time)) ?>
-                                                    </td>
+                                                    <?php foreach ($data['trains'] as $train): ?>
+                                                        <tr class="row p-20">
+                                                            <td class="col-4 d-flex align-items-center">
+                                                                <?= $train->train_name ?>
+                                                            </td>
+                                                            <td class="col-1">
+                                                                <?= $train->train_id ?>
+                                                            </td>
+                                                            <td class="col-1">
+                                                                <?= $train->train_type ?>
+                                                            </td>
+                                                            <td class="col-2">
+                                                                <?= $train->start_station . "-" . $train->end_station ?>
+                                                            </td>
+                                                            <td class="col-2 ">
+                                                                <?= date("H:i", strtotime($train->train_start_time)) . " " . date("H:i", strtotime($train->train_end_time)) ?>
+                                                            </td>
 
-                                                    <td class="col-2 d-flex align-items-center g-5">
-                                                        <a class="blue"
-                                                            href="<?= ROOT ?>staffgeneral/updateTrain/<?= $data['trains'][$train]->train_id ?>">
-                                                            <div class="badge-base bg-Selected-Blue">
-                                                                <div class="dot">
-                                                                    <div class="dot4"></div>
-                                                                </div>
-                                                                <div class="text blue">View</div>
-                                                            </div>
-                                                        </a>
-                                                        <a class="blue"
-                                                            href="<?= ROOT ?>staffgeneral/deleteTrain/<?= $data['trains'][$train]->train_id ?>"
-                                                            onclick="alert('are sure you wat to delete the train?')">
-                                                            <div class="badge-base bg-Selected-red">
-                                                                <div class="dot">
-                                                                    <div class="dot4  bg-Banner-red"></div>
-                                                                </div>
-                                                                <div class="text red">Delete</div>
-                                                            </div>
-                                                        </a>
-                                                    </td>
+                                                            <td class="col-2 d-flex align-items-center g-5">
+                                                                <a class="blue"
+                                                                    href="<?= ROOT ?>staffgeneral/updateTrain/<?= $train->train_id ?>">
+                                                                    <div class="badge-base bg-Selected-Blue">
+                                                                        <div class="dot">
+                                                                            <div class="dot4"></div>
+                                                                        </div>
+                                                                        <div class="text blue">View</div>
+                                                                    </div>
+                                                                </a>
+                                                                <a class="blue"
+                                                                    href="<?= ROOT ?>staffgeneral/deleteTrain/<?= $train->train_id ?>"
+                                                                    onclick="alert('are sure you wat to delete the train?')">
+                                                                    <div class="badge-base bg-Selected-red">
+                                                                        <div class="dot">
+                                                                            <div class="dot4  bg-Banner-red"></div>
+                                                                        </div>
+                                                                        <div class="text red">Delete</div>
+                                                                    </div>
+                                                                </a>
+                                                            </td>
 
-                                                </tr>
-                                                <?php endfor; ?>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
 
-                                            
+
                                         </div>
 
                                     </div>
@@ -136,7 +136,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                             </div>
         </main>
     </div>
-    <?php $this->view("./includes/load-js") ?>
+
     <script>
         $(document).ready(function () {
             let table = new DataTable("#userTable", {
@@ -160,11 +160,15 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     },
                     {
                         title: 'Start & End Station',
-                        data: 'train_start_station . "-" . train_end_station'
+                        data: function (row) {
+                            return row.start_station + " - " + row.end_station;
+                        }
                     },
                     {
                         title: 'Start & End Time',
-                        data: 'train_start_time . "-" . train_end_time'
+                        data: function (row) {
+                            return row.train_start_time + " - " + row.train_end_time;
+                        }
                     },
                     {
                         title: 'Actions',
