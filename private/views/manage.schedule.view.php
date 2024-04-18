@@ -7,7 +7,7 @@
         <main style="background-color:#EFF8FF; padding:20px;">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-10">
                     </div>
                 </div>
                 <div class="table" style="background-color:white;max-width:100%;">
@@ -26,17 +26,17 @@
                     <table class="">
                         <thead>
                             <tr class="row">
-                                <th class="col-4">Name</th>
-                                <th class="col-2">Time</th>
-                                <th class="col-4">Reservations</th>
-                                <th class="col-1"></th>
-                                <th class="col-1">Action</th>
+                                <th class="col-3">Name</th>
+                                <th class="col-1">Time</th>
+                                <th class="col-6">Reservations</th>
+
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="row">
-                                <td class="col-4">Udarata menike Express Train<br>Badulla - Colombo Fort</td>
-                                <td class="col-2">
+                                <td class="col-3">Udarata menike Express Train<br> Badulla - Colombo Fort</td>
+                                <td class="col-1">
                                     <div class="badge-base bg-light-green">
                                         <div class="dot">
                                             <div class="dot2"></div>
@@ -50,7 +50,7 @@
 
                                     <div class="availabity">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-5">
                                                 <div class="badge-base">
                                                     <div class="text">1st Class Reservation</div>
                                                 </div>
@@ -60,7 +60,7 @@
                                                     <div class="text">20</div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="badge-base">
                                                     <div class="text">LKR.2500.00</div>
 
@@ -69,7 +69,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-5">
                                                 <div class="badge-base bg-selected-blue">
                                                     <div class="text primary-blue">2nd Class Reservation</div>
                                                 </div>
@@ -79,7 +79,7 @@
                                                     <div class="text primary-blue">230</div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="badge-base bg-selected-blue">
                                                     <div class="text primary-blue">LKR.2000.00</div>
 
@@ -90,7 +90,7 @@
 
 
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-5">
                                                 <div class="badge-base bg-selected-blue">
                                                     <div class="text blue">3rd Class Reservation</div>
                                                 </div>
@@ -100,7 +100,7 @@
                                                     <div class="text blue">60</div>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div class="badge-base bg-selected-blue">
                                                     <div class="text blue">LKR.1500.00</div>
 
@@ -111,16 +111,12 @@
 
 
                                 </td>
-                                <td class="col-1"></td>
-                                <td class="col-1"><a
-                                        href="http://localhost/trackNbook/public/StaffGeneral/updateSchedule"
-                                        class="blue">Edit</a></td>
+
                             </tr>
-                            
+
                             </tr>
                             <tr class="row">
-                                <td class="col-1"><a href="http://localhost/trackNbook/public/StaffGeneral/addSchedule"
-                                        class="blue">
+                                <td class="col-1"><a href="<?= ROOT ?>train/add" class="blue">
                                         <div class="sidebar-icon plus"><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" viewBox="0 0 20 20" fill="none">
                                                 <path
@@ -129,8 +125,7 @@
                                             </svg>
                                         </div>
                                     </a></td>
-                                <td class="col-1"><a href="http://localhost/trackNbook/public/train/add"
-                                        class="blue">Add Train</a></td>
+                                <td class="col-1"><a href="<?= ROOT ?>train/add" class="blue">Add Train</a></td>
                             </tr>
 
 
@@ -157,59 +152,8 @@
                                 <div class="text">Previous</div>
                             </div>
                         </div>
-                        <div class="pagination-numbers">
-                            <div class="pagination-number-base-active">
-                                <div class="content">
-                                    <div class="number">1</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">2</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">3</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">...</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">8</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">9</div>
-                                </div>
-                            </div>
-                            <div class="pagination-number-base">
-                                <div class="content">
-                                    <div class="number2">10</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <div class="button-base">
-                                <div class="text">Next</div>
-                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
-                                        stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-
-                            </div>
-                        </div>
 
                     </div>
-                </div>
         </main>
     </div>
 </body>
