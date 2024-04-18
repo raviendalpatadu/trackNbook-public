@@ -285,25 +285,209 @@ if (!isset($data['errors'])) {
 
 <script>
     $(document).ready(function () {
-        var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
-        var counter = 0;
+    var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
+    var counter = 0;
 
-        // access errors array
-        var arr = <?php echo json_encode($data); ?>;
-        console.log(arr);
+    // Access errors array
+    var arr = <?php echo json_encode($data); ?>;
+    console.log(arr);
 
-        // check errors key exists
-        if (arr.hasOwnProperty('errors')) {
-            tag.each(() => {
-                console.log(tag[counter]);
-                if (tag[counter++].innerHTML != " ") {
-                    tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
-                    tag.parent().children('.input-text-label').addClass('red');
-                    tag.addClass('red');
-                }
-            });
-        }
+    // Check errors key exists
+    if (arr.hasOwnProperty('errors')) {
+        tag.each(() => {
+            console.log(tag[counter]);
+            if (tag[counter++].innerHTML != " ") {
+                tag.parent().children('.input-field').addClass('border-red');
+                tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
+                tag.parent().children('.input-text-label').addClass('red');
+                tag.addClass('red');
+            }
+        });
+    }
 
+    // Function to populate form fields with existing train part data
+    function populateFormFields(trainPartData) {
+        // Example: $('#compartmentClassInput').val(trainPartData.compartmentClass);
+        // Example: $('select[name="compartmentType"]').val(trainPartData.compartmentType);
+        // Trigger change event for any dynamically populated dropdowns or dependent fields
+    }
+
+    // Handle edit train part action
+    $('.edit-train-part').on('click', function() {
+        var trainPartId = $(this).data('train-part-id');
+
+        // Assuming you have an endpoint to fetch train part details by ID
+        $.ajax({
+            url: '<?= ROOT ?>/train_part/getTrainPartDetails/' + trainPartId,
+            type: 'GET',
+            success: function (data) {
+                // Populate the form fields with the fetched train part details
+                populateFormFields(data);
+            }
+        });
     });
+
+    // Handle form submission for updating train part
+    $('#editTrainPartForm').on('submit', function(event) {
+        event.preventDefault();
+
+        // Serialize form data
+        var formData = $(this).serialize();
+
+        // Assuming you have an endpoint to handle updating train part details
+        $.ajax({
+            url: '<?= ROOT ?>/train_part/updateTrainPart',
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                // Handle success response
+                console.log('Train part updated successfully');
+                // Optionally, redirect or perform any other action after successful update
+            },
+            error: function (xhr, status, error) {
+                // Handle error response
+                console.error('Error updating train part:', error);
+            }
+        });
+    });
+    $(document).ready(function () {
+    // Populate compartment details based on existing data
+    populateCompartmentDetails();
+
+    // Update compartment details when the number of compartments changes
+    $('#noOfCompartments').on('input', function () {
+        populateCompartmentDetails();
+    });
+
+    function populateCompartmentDetails() {
+        var noOfCompartments = $('#noOfCompartments').val();
+        const outputContainer = $('.compartmentDetails');
+
+        // Clear previous content
+        outputContainer.empty();
+
+        // Generate tags based on the input value
+        for (let i = 0; i < noOfCompartments; i++) {
+            const newRow = `
+                <div class="row g-20 mt-20 mb-20 ">
+                    <div class="col-2">
+                        <div class="text-inputs">
+                            <div class="input-text-label">Compartment Class</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" name="compartment[class][]" class="type-here" placeholder="eg: 1st class">
+                                </div>
+                            </div>
+                            <div class="assistive-text display-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-inputs">
+                            <div class="input-text-label">Train Route</div>
+                            <div class="width-fill">
+                                <select class="input-field dropdown" name="compartment[type][]" placeholder="Please choose">
+                                    <option value="0">Please choose</option>
+                                    <!-- Options populated dynamically -->
+                                </select>
+                            </div>
+                            <div class="assistive-text display-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="text-inputs">
+                            <div class="input-text-label">Seat layout</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" name="compartment[seat_layout][]" class="type-here" placeholder="eg: 2x3">
+                                </div>
+                            </div>
+                            <div class="assistive-text display-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="text-inputs">
+                            <div class="input-text-label">Total Seats</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" name="compartment[total_seats][]" class="type-here" placeholder="eg: 48">
+                                </div>
+                            </div>
+                            <div class="assistive-text display-none"></div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="text-inputs">
+                            <div class="input-text-label">No of Compartments</div>
+                            <div class="input-field">
+                                <div class="text">
+                                    <input type="text" name="compartment[total_no][]" class="type-here" placeholder="eg: no of compartments">
+                                </div>
+                            </div>
+                            <div class="assistive-text display-none"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            outputContainer.append(newRow);
+        }
+        // Initialize dropdowns for compartment types
+        initializeDropdowns(outputContainer);
+    }
+
+    function initializeDropdowns(outputContainer) {
+        $(outputContainer).find("select.dropdown").each(function () {
+            var dropdown = $("<div />").addClass("dropdown selectDropdown");
+            $(this).wrap(dropdown);
+            var label = $("<span />").text($(this).attr("placeholder")).insertAfter($(this));
+            var list = $("<ul />");
+            label.attr("class", "input-field");
+
+            $(this).find("option").each(function () {
+                list.append($("<li />").append($("<a />").text($(this).text())));
+            });
+
+            list.insertAfter($(this));
+
+            if ($(this).find("option:selected").length) {
+                label.text($(this).find("option:selected").text());
+                list.find("li:contains(" + $(this).find("option:selected").text() + ")").addClass("active");
+                $(this).parent().addClass("filled");
+            }
+        });
+    }
+
+    $(outputContainer).on("click touch", ".selectDropdown ul li a", function (e) {
+        e.stopImmediatePropagation();
+        var dropdown = $(this).parent().parent().parent();
+        var active = $(this).parent().hasClass("active");
+        var label = active ? dropdown.find("select").attr("placeholder") : $(this).text();
+        dropdown.find("option").prop("selected", false);
+        dropdown.find("ul li").removeClass("active");
+        dropdown.toggleClass("filled", !active);
+        dropdown.children("span").text(label);
+        if (!active) {
+            dropdown.find("option:contains(" + $(this).text() + ")").prop("selected", true);
+            $(this).parent().addClass("active");
+        }
+        dropdown.removeClass("open");
+        dropdown.find("select").trigger("change");
+    });
+
+    $(".dropdown > span").on("click touch", function (e) {
+        var self = $(this).parent();
+        self.toggleClass("open");
+    });
+
+    $(outputContainer).on("click touch", function (e) {
+        var dropdown = $(".dropdown");
+        if (dropdown !== e.target && !dropdown.has(e.target).length) {
+            dropdown.removeClass("open");
+        }
+    });
+});
+
+    // Add any other edit functionalities here
+});
+
+
 </script>
