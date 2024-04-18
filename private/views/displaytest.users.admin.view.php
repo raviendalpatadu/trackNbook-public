@@ -163,6 +163,11 @@
                     }
                 ]
             });
+
+            drawCallback: function () {
+                $('table#import_list tbody tr td').css('padding', '5px 8px 5px 8px');
+                // Adjust padding or other styles as needed
+            }
         });
     </script>
 
