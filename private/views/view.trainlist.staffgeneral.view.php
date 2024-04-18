@@ -1,4 +1,5 @@
 <?php $this->view("./includes/header") ?>
+<?php $this->view("./includes/load-js") ?>
 
 <?php
 
@@ -13,12 +14,16 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 // echo "</pre>";
 ?>
 
+<head>
+
+</head>
+
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
-        <main style="background-color:#EFF8FF;">
+        <main class="bg">
             <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12">
@@ -29,107 +34,55 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                 </div>
                             </div>
                         </div>
-                        <form class="mt-30" action="" method="post">
-                            <div class="row mb-30 g-20">
-                                <div class="col-3">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Train Route</div>
+                        <br>
 
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id"
-                                                placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <option value="0">1006 Badulla → Colombo</option>
-                                                <?php foreach ($data['trains'] as $key => $value): ?>
-                                                <option value="<?= $value->train_id ?>">
-                                                    <?= $value->train_name ?>
-                                                </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
 
-                                        <div
-                                            class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                            <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
-                                        </div>
-                                    </div>
+
+                        <div class="col-3">
+                            <div class="row g-5">
+                                <div class="col-4">
+
                                 </div>
-                                <div class="col-3">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Train Type</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id"
-                                                placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Express</option>
-                                                <option value="0">Mail</option>
-                                                <option value="0">Intercity</option>
-
-                                                <?php foreach ($data['trains'] as $key => $value): ?>
-                                                <option value="<?= $value->train_id ?>">
-                                                    <?= $value->train_name ?>
-                                                </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                        <div
-                                            class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                            <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-3 d-flex align-self-end">
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <input type="submit" value="Search" name="submit">
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-3">
-                        <div class="row g-5">
-                            <div class="col-4">
-
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
 
-                        <div class="row">
-                            <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
 
-                                <div class="row">
-                                    <div class="col-12">
-                                    <table class="table bg-white">
-                                            <thead>
-                                                <tr class="row p-20">
-                                                    <th class="col-4 d-flex align-items-center">Train Name</th>
-                                                    <th class="col-1">Train No</th>
-                                                    <th class="col-1">Train Type</th>
-                                                    <th class="col-2">Start & End Station</th>
-                                                    <th class="col-2 ">Start & End Time</th>
-                                                    <th class="col-2 d-flex align-items-center"></th>
+                                    <div class="row">
+                                        <div class="col-12">
 
-
-
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
+                                            <table class="if-table stripe hover" id="userTable" style:width=100%>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-4 ">
+                                                            <!-- Add 'text-left' class for left alignment -->
+                                                            Train Name
+                                                        </th>
+                                                        <th class="col-1 ">
+                                                            <!-- Add 'text-left' class for left alignment -->
+                                                            Train No
+                                                        </th>
+                                                        <th class="col-1 ">
+                                                            <!-- Add 'text-left' class for left alignment -->
+                                                            Train Type
+                                                        </th>
+                                                        <th class="col-2 ">
+                                                            <!-- Add 'text-left' class for left alignment -->
+                                                            Start & End Station
+                                                        </th>
+                                                        <th class="col-2 ">
+                                                            <!-- Add 'text-left' class for left alignment -->
+                                                            Start & End Time
+                                                        </th>
+                                                        <th class="col-2">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
                                                 <?php for ($train = 0; $train < $count; $train++): ?>
                                                 <tr class="row p-20">
                                                     <td class="col-4 d-flex align-items-center">
@@ -172,82 +125,81 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                                                 </tr>
                                                 <?php endfor; ?>
-                                            </tbody>
-                                        </table>
-                                        <div class="pagination">
-                                            <button class="button">
-                                                <div class="button-base">
-                                                    <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602"
-                                                            stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
+                                                </tbody>
+                                            </table>
 
-                                                    <div class="text">Previous</div>
-                                                </div>
-                                            </button>
-                                            <div class="pagination-numbers">
-                                                <div class="pagination-number-base-active">
-                                                    <div class="content">
-                                                        <div class="number">1</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">2</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">3</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">...</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">8</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">9</div>
-                                                    </div>
-                                                </div>
-                                                <div class="pagination-number-base">
-                                                    <div class="content">
-                                                        <div class="number2">10</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button class="button">
-                                                <div class="button-base">
-                                                    <div class="text">Next</div>
-                                                    <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20"
-                                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path
-                                                            d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327"
-                                                            stroke="#344054" stroke-width="1.67" stroke-linecap="round"
-                                                            stroke-linejoin="round" />
-                                                    </svg>
-                                                </div>
-                                            </button>
+                                            
                                         </div>
+
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
-                    </div>
         </main>
     </div>
     <?php $this->view("./includes/load-js") ?>
-
+    <script>
+        $(document).ready(function () {
+            let table = new DataTable("#userTable", {
+                ajax: {
+                    url: "<?= ROOT ?>ajax/getTrainList",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        title: 'Train Name',
+                        data: 'train_name',
+                        width: '20%' // Set the width for the first column
+                    },
+                    {
+                        title: 'Train No',
+                        data: 'train_id'
+                    },
+                    {
+                        title: 'Train Type',
+                        data: 'train_type'
+                    },
+                    {
+                        title: 'Start & End Station',
+                        data: 'train_start_station . "-" . train_end_station'
+                    },
+                    {
+                        title: 'Start & End Time',
+                        data: 'train_start_time . "-" . train_end_time'
+                    },
+                    {
+                        title: 'Actions',
+                        data: null,
+                        render: function (data, type, row) {
+                            return `
+                            <a class="blue" href="<?= ROOT ?>staffgeneral/getTrainList/${data.user_id}">
+                                <div class="badge-base bg-Selected-Blue">
+                                    <div class="dot">
+                                        <div class="dot4"></div>
+                                    </div>
+                                    <div class="text blue">View</div>
+                                </div>
+                            </a>
+                            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
+                                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/${data.user_id}">
+                                    <div class="dot">
+                                        <div class="dot4 bg-Banner-red"></div>
+                                    </div>
+                                    <div class="text red">Delete</div>
+                                </a>
+                            </div>
+                        `;
+                        }
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: 0, // Target the first column
+                        className: 'dt-body-left' // Left-align the content in the first column
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

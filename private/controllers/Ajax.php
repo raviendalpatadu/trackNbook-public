@@ -47,4 +47,15 @@ class Ajax extends Controller
 
         echo json_encode($result); // Wrap the output array inside a "data" key
     }
+
+    public function getTrainList()
+    {
+        $user = new Trains();
+        $result = $user->findAll();
+
+       
+
+        echo json_encode($result); // Wrap the output array inside a "data" key
+    }
+
 }
