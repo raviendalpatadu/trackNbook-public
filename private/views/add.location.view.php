@@ -11,7 +11,7 @@
 
 
     <div class="column-left">
-        <?php $this->view("./includes/dashboard-navbar") ?>
+    <?php $this->view("./includes/mobile-navbar") ?>
         <main style="background-color:#EFF8FF;">
             <div class="container d-flex flex-column justify-content-center align-self-center">
                 <div class="row">

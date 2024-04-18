@@ -81,7 +81,7 @@ class Login extends Controller
                 }
                 //rederect to dashboard train driver
                 elseif (strtolower($user_type) == "train_driver") {
-                    $this->redirect('dashboard/train_driver');
+                    $this->redirect('traindriver/idoption');
                 }
                 //rederect to dashboard station master
                 elseif (strtolower($user_type) == "station_master") {
