@@ -49,8 +49,9 @@ class Ajax extends Controller
     public function getTrains()
     {
         $train = new Trains();
-        $result = $train->findAllTrains();
+        $data = array();
+        $data = $train->findAllTrains();
 
-        echo json_encode($result); 
+        echo json_encode($data); 
     }
 }
