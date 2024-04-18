@@ -112,7 +112,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                                 <div class="row">
                                     <div class="col-12">
-                                    <table class="table bg-white">
+                                        <table class="">
                                             <thead>
                                                 <tr class="row p-20">
                                                     <th class="col-4 d-flex align-items-center">Train Name</th>
@@ -142,7 +142,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                         <?= $data['trains'][$train]->train_type ?>
                                                     </td>
                                                     <td class="col-2">
-                                                        <?= $data['trains'][$train]->start_station . "-" . $data['trains'][$train]->end_station ?>
+                                                        <?= $data['trains'][$train]->start_station . " " . $data['trains'][$train]->end_station ?>
                                                     </td>
                                                     <td class="col-2 ">
                                                         <?= date("H:i", strtotime($data['trains'][$train]->train_start_time)) . " " . date("H:i", strtotime($data['trains'][$train]->train_end_time)) ?>

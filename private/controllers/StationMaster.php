@@ -47,16 +47,6 @@ class StationMaster extends Controller
 
         $this->view('check.train.arrival', $data);
     }
-    function checkarrivalcopy($id = '')
-    {
-        $train = new Trains();
-        $data = array();
-
-        $data['trains'] = $train->findAllTrains();
-
-
-        $this->view('check.train.arrival.copy', $data);
-    }
 
     function updateTrainStatus($id = '')
     {

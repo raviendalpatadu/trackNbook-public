@@ -1,11 +1,10 @@
-/*:root {
+:root {
   --collection-1-primary-blue: rgba(33, 133, 213, 1);
   --collection-1-background-fade: rgba(71, 178, 255, 0.15);
   --collection-1-seat: rgba(33, 133, 213, 0);
 }
 
 /* Station Master update Arrival */
-/*
 .update-arrival {
   padding: 46px 23px;
 }
@@ -14,8 +13,8 @@
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 50px 20px 20px -17px
-  width: 488px;
+  margin: 50px 20px 20px 20px;
+  width: 443px;
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 19px;
@@ -25,7 +24,7 @@
   float: left;
 }
 /* Station Master Dashboard */
-/*
+
 .card-dashboard-sm {
   margin: 5px 5px;
   padding: 10px 20px;
@@ -38,7 +37,7 @@
 }
 
 /* Staff General Dashboard */
-/*
+
 .ach-widgets-s .number {
   position: relative;
   width: fit-content;
@@ -73,7 +72,7 @@
 
 /* Train Driver Dashboard */
 /* Dashboard admin */
-/*
+
 .ach-widgets {
   display: flex;
   width: auto;
@@ -305,7 +304,6 @@
 /* ............................................................. */
 
 /* Terms and Conditions */
-/*
 body {
   font-family: Arial, sans-serif;
 }
@@ -323,7 +321,7 @@ body {
 }
 
 /* Background box of each para */
-/*
+
 .h2-terms {
   font-size: 18px;
   text-decoration: underline;
@@ -344,7 +342,7 @@ li {
 /* ................................................. */
 
 /* Wait list */
-/*
+
 .activation-field-waiting-list {
   display: flex;
   justify-content: flex-end;
@@ -374,7 +372,7 @@ li {
 
 /* Train Driver add  location*/
 /* Train Driver - Update Location */
-/*
+
 .button-base-update-location {
   background: var(--white, #ffffff);
   border: 1px solid var(--gray-300, #d0d5dd);
@@ -431,7 +429,7 @@ thead tr {
 }
 
 /* Train Driver - Update delay */
-/*
+
 .card-update-delay {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
@@ -542,7 +540,7 @@ thead tr {
 
 .add-location-g-8 {
   gap: 17px;
-  margin-left: 66px;
+  margin-left: 44px;
 }
 .dropdown2-add-location {
   cursor: pointer;
@@ -558,7 +556,7 @@ thead tr {
 }
 
 /* Update train Location */
-/*
+
 .line-update-location {
   width: 269px;
   border-bottom: 2px solid #000;
@@ -638,7 +636,7 @@ thead tr {
   /* Set the text color to white */
   /* You can add additional styling here, such as padding, border, etc. */
 }
-/*
+
 .top-head-update-location {
   display: inline-flex;
   padding: 21px;
@@ -662,7 +660,7 @@ thead tr {
 
   /* 121.528% */
 }
-/*
+
 .fields-update-location {
   display: flex;
   align-items: center;
@@ -684,7 +682,7 @@ thead tr {
 /* ....................................................................... */
 
 /* Update train delay */
-/*
+
 .delay-g-8 {
   gap: 8px;
   margin-right: 12px;
@@ -715,7 +713,7 @@ thead tr {
   width: 221px; /* Adjusted for mobile responsiveness */
   max-width: 221px; /* Added to ensure it doesn't exceed the container width */
 }
-/*
+
 .input-field3-update-delay {
   background: var(--w-background, #ffffff);
   border-radius: 5px;
@@ -735,7 +733,7 @@ thead tr {
   max-width: 128%; /* Added to ensure it doesn't exceed the container width */
   height: 100px;
 }
-/*
+
 .input-field4-update-delay {
   background: var(--w-background, #ffffff);
   border-radius: 5px;
@@ -758,14 +756,13 @@ thead tr {
   padding: 15px; /* Adjusted padding for mobile */
   height: auto; /* Changed height to auto for dynamic sizing */
 }
-/*
+
 .type-here-update-delay {
   font-size: 12px; /* Adjusted font size for mobile */
   line-height: 20px; /* Adjusted line height for mobile */
 }
 
 /* Add train - New */
-/*
 .activation-field-add-train {
   display: flex;
   justify-content: flex-end;
@@ -791,7 +788,7 @@ thead tr {
   /* Set the text color to white */
   /* You can add additional styling here, such as padding, border, etc. */
 }
-/*
+
 .button-white-add-train {
   display: inline-flex;
   padding: 16px;
@@ -829,7 +826,7 @@ thead tr {
   line-height: 5.444px;
   /* 121.528% */
 }
-/*
+
 .head-box-add-train {
   position: relative;
   display: flex;
@@ -882,7 +879,7 @@ thead tr {
 
 //   /* 112.5% */
 // }
-/*
+
 .text-field-add-train {
   display: flex;
   width: 100%;
@@ -968,14 +965,12 @@ thead tr {
 /* ................................................ */
 
 /* Manage Schedule */
-/*
 .trains-available-manage-schedule {
   padding: 12px 24px;
 }
 /* .................................................*/
 
 /* Contact*/
-/*
 
 .activation-field-contact {
   display: flex;
@@ -1026,7 +1021,7 @@ thead tr {
 //   line-height: 18px;
 //   /* 112.5% */
 // }
-/*
+
 .text-field-contact {
   display: flex;
   width: 100%;
@@ -1067,7 +1062,7 @@ thead tr {
 /* ............................................................ */
 
 /* Add schedule*/
-/*
+
 .activation-field-adsc {
   display: flex;
   justify-content: flex-end;
@@ -1093,7 +1088,7 @@ thead tr {
   /* Set the text color to white */
   /* You can add additional styling here, such as padding, border, etc. */
 }
-/*
+
 .button-white-adsc {
   display: inline-flex;
   padding: 16px;
@@ -1131,7 +1126,7 @@ thead tr {
   line-height: 5.444px;
   /* 121.528% */
 }
-/*
+
 .head-box-adsc {
   position: relative;
   display: flex;
@@ -1185,7 +1180,7 @@ thead tr {
 
 //   /* 112.5% */
 // }
-/*
+
 .text-field-adsc {
   display: flex;
   width: 100%;
@@ -1255,7 +1250,7 @@ thead tr {
 }
 
 /* ......................................  */
-/*
+
 .frame1 {
   width: 682px;
   height: 333px;
@@ -1277,7 +1272,6 @@ thead tr {
 .colorful-table {
   background-color: lightblue;
   color: white; /* Set the text color to white for better visibility on a black background */
-
   .dashboard-container {
     background-color: #fafafa; /* Black background color */
     width: 645px;
@@ -1322,7 +1316,7 @@ thead tr {
     color: blue;
   }
    */
-/*
+
   .form1 {
     background-color: #fafafa;
     padding: 10px;
@@ -1388,7 +1382,7 @@ thead tr {
   }
 
   /*Train Book Update Styles*/
-/*
+
   .container {
     display: flex;
     justify-content: center;
@@ -1444,8 +1438,4 @@ thead tr {
     font-family: "Poppins-Medium", Helvetica;
     border-radius: 10px;
   }
-
-
-  /* tables */
-  
 }
