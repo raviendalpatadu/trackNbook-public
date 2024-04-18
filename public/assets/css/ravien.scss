@@ -291,9 +291,10 @@ $colors: (
   }
 }
 
+
+
 .profile .profile-img img {
-  width: 200px;
-  height: 200px;
+  width: 150px !important;
   object-fit: cover;
   border-radius: 1000px;
 }
@@ -481,7 +482,7 @@ $colors: (
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 42px;
-  color: var(--White);
+  color: var(--White) !important;
 }
 
 .home-text .mou-home-text{
@@ -1371,4 +1372,9 @@ input.calendar-none::-webkit-calendar-picker-indicator{
       stroke: var(--Border-blue);
     }
   }
+}
+
+
+.reservation-map-view {
+  height: 40vh !important;
 }

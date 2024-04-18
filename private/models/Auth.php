@@ -35,6 +35,13 @@ class Auth
         return false;
     }
 
+    public static function isUserType($usert_type){
+        if (strtolower($_SESSION['USER']->user_type) == $usert_type) {
+            return true;
+        }
+        return false;
+    }
+
     public static function __callStatic($method, $params)
     /**meken wenne unknown method ekak call karoth ee method eke name eka aran eke name session eke user ge
      * propery ekak thiyenawada balala eka return karana eka.

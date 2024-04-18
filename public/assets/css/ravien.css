@@ -3607,8 +3607,7 @@
   }
 }
 .profile .profile-img img {
-  width: 200px;
-  height: 200px;
+  width: 150px !important;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 1000px;
@@ -3962,7 +3961,7 @@
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 42px;
-  color: var(--White);
+  color: var(--White) !important;
 }
 
 .home-text .mou-home-text {
@@ -4757,4 +4756,8 @@ input.calendar-none::-webkit-calendar-picker-indicator {
 }
 .waiting-list-btn:hover .text svg path {
   stroke: var(--Border-blue);
+}
+
+.reservation-map-view {
+  height: 40vh !important;
 }/*# sourceMappingURL=ravien.css.map */

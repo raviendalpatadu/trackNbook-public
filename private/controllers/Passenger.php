@@ -25,9 +25,9 @@ class Passenger extends Controller
             $reservation = new Reservations();
 
             if ($reservation->validatePassenger($_POST)) {
-                echo "<pre>";
-                print_r($_SESSION);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($_SESSION);
+                // echo "</pre>";
 
 
                 $_SESSION['reservation']['passenger_data'] = $_POST;

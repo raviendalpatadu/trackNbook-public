@@ -4,6 +4,7 @@
 
 echo "<pre>";
 // print_r($data);
+// print_r($_SESSION);
 echo "</pre>";
 
 if (isset($data['reservations']) && $data['reservations'] != 0) {
@@ -26,7 +27,8 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 ?>
 
 <body class="flex-column mobile-d-flex">
-    <?php // $this->view('includes/loader');?>
+    <?php // $this->view('includes/loader');
+    ?>
     <div class="d-flex flex-column flex-grow justify-content-between">
         <?php $this->view("./includes/navbar") ?>
         <main class="d-flex flex-column flex-grow">
@@ -434,9 +436,10 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                             </div>
 
                             <!-- map -->
-                            <div id="map" class="d-flex mobile-display-none">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.6390377948733!2d79.84543356983846!3d6.933673902963031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25922460c269b%3A0x6acb064d943db619!2sColombo%20Fort%20Station%2C%20Colombo!5e0!3m2!1sen!2slk!4v1709633170370!5m2!1sen!2slk" width="600" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="flex-fill"></iframe>
+                            <div id="map" class="reservation-map-view mobile-display-none">
+
                             </div>
+
                             <!-- data -->
                             <div class="bg-background-colour-nav d-flex flex-grow" id="reaservationData">
                                 <div class="d-flex flex-grow mobile-flex-column" id="ticketSummary">
@@ -519,16 +522,87 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 </body>
 
 </html>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCranEueyo_pnCvKoHJwegdlluPvTPjyhU&callback=initMap&v=weekly" defer></script>
 
 <script>
-    // var loadingDiv = '<div class="d-flex justify-content-center align-items-center flex-grow bg-Primary-Blue" id="loader"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+    function initMap() {
+        function calculateAndDisplayRoute(directionsService, directionsRenderer, originLatLng, destinationLatLng) {
+            directionsService
+                .route({
+                    origin: {
+                        lat: originLatLng.lat,
+                        lng: originLatLng.lng
+                    },
+                    destination: {
+                        lat: destinationLatLng.lat,
+                        lng: destinationLatLng.lng
+                    },
+                    travelMode: google.maps.TravelMode.TRANSIT,
+                    transitOptions: {
+                        modes: [google.maps.TransitMode.TRAIN]
+                    }
+                })
+                .then((response) => {
+                    // const route = response.routes[0].overview_polyline;
+                    directionsRenderer.setDirections(response);
+                })
+                .catch((e) => window.alert("Directions request failed due to " + status));
+        }
 
 
-    // $('#selectResevation').after(loadingDiv);
+        async function findPlaces(stationName, callback) {
+            const {
+                Place
+            } = await google.maps.importLibrary("places");
+            const {
+                AdvancedMarkerElement
+            } = await google.maps.importLibrary("marker");
+            const request = {
+                textQuery: stationName,
+                fields: ["displayName", "location"],
+                includedType: "train_station"
+            };
+            //@ts-ignore
+            const {
+                places
+            } = await Place.searchByText(request);
+
+            if (places.length) {
+                callback(places);
+            } else {
+                console.log("No results");
+            }
+        }
+
+        function drawMap(startStationMap, endStationMap) {
+
+            findPlaces(startStationMap + ' railway station', function(res) {
+                var startStation = res[0].Fg.location
+                findPlaces(endStationMap + ' railway station', function(resp) {
+                    var endStation = resp[0].Fg.location
+                    calculateAndDisplayRoute(directionsService, directionsRenderer, startStation, endStation);
+                });
+            });
+
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: {
+                    lat: 6.9337010999999995,
+                    lng: 79.85003019999999
+                }
+            });
+
+            directionsRenderer.setMap(map);
+        }
 
 
-    $(document).ready(function() {
 
+        // window.initMap = initMap;
+
+        // $(document).ready(function() {
         // stop default popup in date input
         $('input[name="from_date"]').on('focus', function(e) {
             e.preventDefault();
@@ -609,7 +683,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             // console.log(ticketId);
 
             var reservationStatus = $(this).data('reservationstatus');
-            console.log(reservationStatus);
+            // console.log(reservationStatus);
 
             // if in mobile view
             if ($(window).width() < 768) {
@@ -617,8 +691,6 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
                 $('#reservationDataContainer').removeClass('mobile-display-none');
             }
-
-
 
             $('#selectResevation').addClass('display-none');
             // $('#loader').removeClass('display-none');
@@ -634,6 +706,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
             // warrant reservation data
             if (regex.test(ticketId)) {
+
                 $.ajax({
                     url: '<?= ROOT ?>ajax/getReservationData/' + ticketId + '/' + reservationStatus,
                     type: 'POST',
@@ -641,7 +714,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                     success: function(data, response) {
                         // console.log(data);
                         var data = JSON.parse(data);
-                        console.log(data);
+                        // console.log(data);
 
                         var ticketDataDown = $('#ticketDataDown');
 
@@ -704,6 +777,11 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         // change cancel reservation button text
                         $('#cancelReservation').text('Cancel Warrant');
 
+                        startStationMap = data[0].reservation_start_station;
+                        endStationMap = data[0].reservation_end_station;
+
+                        drawMap(startStationMap, endStationMap);
+
                     }
 
                 });
@@ -715,9 +793,9 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                     type: 'POST',
 
                     success: function(data, response) {
-                        console.log(data);
+                        // console.log(data);
                         var data = JSON.parse(data);
-                        console.log(data);
+                        // console.log(data);
 
                         var ticketDataDown = $('#ticketDataDown');
 
@@ -758,7 +836,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         // add qr code
                         $('#qr_code').empty();
                         var qrcode = new QRCode("qr_code", {
-                            text: data[0].reservation_ticket_id,
+                            text: "http://localhost/trackNbook/public/ticketchecker/summary/" + data[0].reservation_ticket_id,
                             width: 128,
                             height: 128,
                             colorDark: "#324054",
@@ -782,11 +860,11 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         $('#resStatus').empty();
                         $('#resStatus').append(reservation_status);
 
-                        // // show download ticket button
-                        // $('#downloadTicket').show();
 
-                        // // change cancel reservation button text
-                        // $('#cancelReservation').text('Cancel Reservation');
+                        startStationMap = data[0].reservation_start_station;
+                        endStationMap = data[0].reservation_end_station;
+
+                        drawMap(startStationMap, endStationMap);
 
                     }
 
@@ -796,14 +874,14 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             if (reservationStatus == 'Cancelled') {
                 $('#cancelReservation').hide();
                 $('#downloadTicket').hide();
-            } else{
+            } else {
                 console.log('not cancelled');
                 $('#downloadTicket').show();
                 $('#cancelReservation').show();
             }
 
 
-            // reservationStatus = '';
+
 
 
 
@@ -855,9 +933,6 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             $('#cancelled_tab_btn').removeClass('active');
         });
 
-
-
-
         // poup alert to confirm cancelation
         $('#cancelReservation').click(function() {
             var ticketId = $('#refNo').text().split(' ')[2];
@@ -906,16 +981,17 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
             });
 
         });
-    });
 
-    $("#downloadTicket").click(function() {
-        var element = $('#reservationData');
-        var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
-        var pdf = new jsPDF();
+        $("#downloadTicket").click(function() {
+            var element = $('#reservationData');
+            var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
+            var pdf = new jsPDF();
 
 
-        pdf.addHTML(element, function() {
-            pdf.save(name + '.pdf');
-        })
-    });
+            pdf.addHTML(element, function() {
+                pdf.save(name + '.pdf');
+            })
+        });
+        // });
+    }
 </script>
