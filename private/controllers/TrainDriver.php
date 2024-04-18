@@ -37,10 +37,5 @@ class TrainDriver extends Controller
     {
         $this->view('QRSearch.traindriver.view');
     }
-    function idoption($id = '')
-    {
-         
-        $this->view('option.traindriver');
-    }
 
 }

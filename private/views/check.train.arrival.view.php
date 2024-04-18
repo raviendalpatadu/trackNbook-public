@@ -10,14 +10,14 @@
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
-        <main class="bg">
+        <main style="background-color:#EFF8FF; padding:20px;">
             <div class="container">
                 <div class="row ml-20 mr-20 mt-20">
                     <div class="col-12">
                         <div class="row mt-20  ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
-                                    <h3>Trains Arrivals </h3>
+                                    <h3>Available Trains</h3>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-12">
 
-                            <table class="table bg-white">
+                                <table class="">
                                     <thead>
                                         <tr class="row">
                                             <th class="col-3">Train Name</th>
@@ -213,7 +213,6 @@
         </main>
     </div>
     <?php $this->view("./includes/load-js") ?>
-    
 </body>
 
 </html>
