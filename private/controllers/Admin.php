@@ -88,6 +88,7 @@ class Admin extends Controller
         $this->view('admin.trainList');
 
     }
+ 
     function trainRequest()
     {
         $this->view('admin.trainRequest');
@@ -120,6 +121,16 @@ class Admin extends Controller
         $data['users'] = $user->findAll();
 
         $this->view('displaytest2.users.admin', $data);
+
+    }
+
+    function trainListtest()
+    {
+        $train = new Trains();
+        $data = array();
+
+        $data['trains'] = $train->findAllTrains();
+        $this->view('admintest.trainList', $data);
 
     }
 }
