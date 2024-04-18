@@ -148,7 +148,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     {
                         title: 'Train Name',
                         data: 'train_name',
-                        width: '20%' // Set the width for the first column
+                        width: '30%' // Set the width for the first column
                     },
                     {
                         title: 'Train No',
@@ -173,9 +173,12 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     {
                         title: 'Actions',
                         data: null,
+                        width: '15%',
                         render: function (data, type, row) {
                             return `
-                            <a class="blue" href="<?= ROOT ?>staffgeneral/getTrainList/${data.user_id}">
+                            <div class="row">
+                           
+                            <a class="blue" href="<?= ROOT ?>staffgeneral/updateTrain/${data.train_id}">
                                 <div class="badge-base bg-Selected-Blue">
                                     <div class="dot">
                                         <div class="dot4"></div>
@@ -184,12 +187,13 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                 </div>
                             </a>
                             <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete record')">
-                                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/${data.user_id}">
+                                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>admin/deleteUser/${data.train_id}">
                                     <div class="dot">
                                         <div class="dot4 bg-Banner-red"></div>
                                     </div>
                                     <div class="text red">Delete</div>
                                 </a>
+                            </div>
                             </div>
                         `;
                         }
