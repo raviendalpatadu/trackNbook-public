@@ -54,7 +54,7 @@ class Database
             }
         } catch (PDOException $e) {
             // echo $query;
-            die($e->getMessage());
+            die($e);
         }
         $con = null;
         return false;

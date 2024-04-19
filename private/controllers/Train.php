@@ -264,6 +264,9 @@ class Train extends Controller
         $data['routes'] = $route->findAll();
         //get route stations
 
+        // $station = new Stations();
+        // $data['stations'] = $station->findAll();
+
         $compartment_types = new CompartmentTypes();
         $data['compartment_types'] = $compartment_types->findAll();
 

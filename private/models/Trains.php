@@ -5,6 +5,7 @@ use Sabberworm\CSS\Value\Value;
 class Trains extends Model
 {
     protected $table = 'tbl_train';
+    protected $allowedColumns = ['train_name', 'train_type', 'train_start_time', 'train_end_time', 'train_start_station', 'train_end_station', 'train_route'];
 
     public function __construct()
     {
@@ -512,62 +513,168 @@ class Trains extends Model
 
     public function updateTrain($id, $data)
     {
-        $con = $this->connect();
-        $errors = array();
-
+        
         // Check if required fields are empty
         if (empty($data['train_name'])) {
-            $errors['train_name'] = 'Train Name is required';
+            $this->errors['errors']['train_name'] = 'Train Name is required';
         }
 
         if (empty($data['train_route'])) {
-            $errors['train_route'] = 'Train route is required';
+            $this->errors['errors']['train_route'] = 'Train route is required';
         }
 
-        if (empty($data['start_station'])) {
-            $errors['start_station'] = 'Start Station is required';
+        if (empty($data['train_start_station'])) {
+            $this->errors['errors']['train_start_station'] = 'Start Station is required';
         }
 
-        if (empty($data['end_station'])) {
-            $errors['end_station'] = 'End Station is required';
+        if (empty($data['train_end_station'])) {
+            $this->errors['errors']['train_end_station'] = 'End Station is required';
         }
 
-        if (empty($data['start_time'])) {
-            $errors['start_time'] = 'Start Time is required';
+        if (empty($data['train_start_time'])) {
+            $this->errors['errors']['train_start_time'] = 'Start Time is required';
         }
 
-        if (empty($data['end_time'])) {
-            $errors['end_time'] = 'End Time is required';
+        if (empty($data['train_end_time'])) {
+            $this->errors['errors']['train_end_time'] = 'End Time is required';
         }
 
         if (empty($data['train_type'])) {
-            $errors['train_type'] = 'Train Type is required';
+            $this->errors['errors']['train_type'] = 'Train Type is required';
         }
 
-        if (empty($errors)) {
-            try {
-                $query = "UPDATE tbl_train SET train_name = :train_name, train_type = :train_type, train_start_time = :train_start_time, train_end_time = :train_end_time, train_start_station = :train_start_station, train_end_station = :train_end_station, train_route = :train_route WHERE train_id = :train_id";
+        if(empty($data['no_of_compartments']) || $data['no_of_compartments'] == 0){
+            $this->errors['errors']['no_of_compartments'] = 'No of compartments is required';
+        }
 
-                $stm = $con->prepare($query);
-                $stm->execute(
-                    array(
-                        'train_name' => $data['train_name'],
-                        'train_type' => $data['train_type'],
-                        'train_start_time' => $data['start_time'],
-                        'train_end_time' => $data['end_time'],
-                        'train_start_station' => $data['start_station'],
-                        'train_end_station' => $data['end_station'],
-                        'train_route' => $data['train_route'],
-                        'train_id' => $id
-                    )
-                );
+        if(isset($data['compartment']['class']) && count($data['compartment']['class']) == $data['no_of_compartments']){
+
+            foreach ($data['compartment']['class'] as $key => $value) {
+                if (empty($value)) {
+                    $this->errors['errors']['compartment_class'] = 'Compartment class is required';
+                }
+            }
+
+            foreach ($data['compartment']['type'] as $key => $value) {
+                if (empty($value)) {
+                    $this->errors['errors']['compartment_type'] = 'Compartment type is required';
+                }
+            }
+
+            foreach ($data['compartment']['seat_layout'] as $key => $value) {
+                if (empty($value)) {
+                    $this->errors['errors']['compartment_seat_layout'] = 'Compartment seat layout is required';
+                }
+            }
+
+
+            foreach ($data['compartment']['total_seats'] as $key => $value) {
+                if (empty($value)) {
+                    $this->errors['errors']['compartment_total_seats'] = 'Compartment total seats is required';
+                }
+            }
+
+            foreach ($data['compartment']['total_number'] as $key => $value) {
+                if (empty($value)) {
+                    $this->errors['errors']['compartment_total_number'] = 'Compartment total number is required';
+                }
+            }
+
+        }
+
+        if (isset($data['stopping_station']['id'])) {
+            
+            foreach ($data['stopping_station']['id'] as $key => $value) {
+                if (empty($value)) {
+                    // $this->errors['errors']['stopping_station'] = 'Stopping station is required';
+                    unset($data['stopping_station']['id'][$key]);
+                }
+            }
+            $data['stopping_station']['time_verified'] = $data['stopping_station']['time'];
+            foreach ($data['stopping_station']['time'] as $key => $value) {
+                if (empty($value)) {
+                    // unset and reindex the array
+                    unset($data['stopping_station']['time'][$key]);
+                    $data['stopping_station']['time_verified'] = array_values($data['stopping_station']['time']);
+                }
+            }
+            
+            echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
+            if($data['stopping_station']['time_verified'][0] != $data['train_start_time']){
+                $this->errors['errors']['train_start_time'] = 'First stopping station time should be same as start time';
+            }
+
+            if($data['stopping_station']['time_verified'][count($data['stopping_station']['time_verified']) - 1] != $data['train_end_time']){
+                $this->errors['errors']['train_end_time'] = 'Last stopping station time should be same as end time';
+            }
+
+            if(count($data['stopping_station']['id']) != count($data['stopping_station']['time_verified'])){
+                $this->errors['errors']['stopping_station'] = 'Stopping station and time is required';
+            }
+
+            if($data['train_start_station'] != $data['stopping_station']['id'][0]){
+                $this->errors['errors']['train_start_station'] = 'First stopping station should be same as start station';
+            }
+
+            if($data['train_end_station'] != $data['stopping_station']['id'][count($data['stopping_station']['id']) - 1]){
+                $this->errors['errors']['train_end_station'] = 'Last stopping station should be same as end station';
+            }
+        }
+
+        if (empty($this->errors['errors'])) {
+            try {
+                // tbl_tain
+                $this->update($id, [
+                    'train_name' => $data['train_name'],
+                    'train_type' => $data['train_type'],
+                    'train_start_time' => $data['train_start_time'],
+                    'train_end_time' => $data['train_end_time'],
+                    'train_start_station' => $data['train_start_station'],
+                    'train_end_station' => $data['train_end_station'],
+                    'train_route' => $data['train_route']
+                ], 'train_id');
+
+                // tbl_compartment
+                $compartment = new Compartments();
+                $compartment->delete($id, 'compartment_train_id');
+
+                foreach ($data['compartment']['class'] as $key => $value) {
+                    $compartment->insert(array(
+                        'compartment_train_id' => $id,
+                        'compartment_class_type' => $data['compartment']['type'][$key],
+                        'compartment_class' => $value,
+                        'compartment_seat_layout' => $data['compartment']['seat_layout'][$key],
+                        'compartment_total_seats' => $data['compartment']['total_seats'][$key],
+                        'compartment_total_number' => $data['compartment']['total_number'][$key]
+                    ));
+                }
+
+                // tbl_train_stop_station
+
+                $train_stop_stations = new TrainStopStations();
+                $train_stop_stations->delete($id, 'train_id');
+
+                foreach ($data['stopping_station']['id'] as $key => $value) {
+                    // echo $key . " =>" . $value . " " . $data['stopping_station']['time'][$key] . "<br>";
+                    $train_stop_stations->insert(array(
+                        'train_id' => $id,
+                        'station_id' => $value,
+                        'stop_no' => $key + 1,
+                        'train_stop_time' => $data['stopping_station']['time_verified'][$key]
+                        
+                    ));
+                    
+                }
 
                 return true; // Successful insertion
             } catch (PDOException $e) {
-                echo $e->getMessage();
+                die ($e->getMessage());
             }
         }
-        return $errors;
+        return $this->errors;
     }
 
     //Update Train Status

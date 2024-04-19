@@ -106,15 +106,25 @@ class Model extends Database
 
     public function update($id, $data, $id_feild = '')
     {
+        // revmove unwanted columns
+        if (property_exists($this, 'allowedColumns')) {
+            foreach ($data as $key => $column) {
+                if (!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+        
         $str = '';
         foreach ($data as $key => $value) {
             $str .= $key . "= :" . $key . ",";
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        // echo "{$id}<pre>";
-        //     print_r($data);
-        //     echo "</pre>";
+        echo "{$id}<pre>";
+            print_r($data);
+            echo "</pre>";
+            
         try {
             if ($id_feild == '') {
                 $query = "update $this->table set $str where " . strtolower(get_class($this)) . "_id = :id";
