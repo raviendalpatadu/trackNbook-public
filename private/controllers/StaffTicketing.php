@@ -131,7 +131,7 @@ class StaffTicketing extends Controller
 
 
         $train = new Trains();
-        $data['train'] = $train->getTrain($data['reservations'][0]->reservation_train_id);
+        $data['train'] = $train->getTrain($data['reservations'][0]->reservation_train_id)[0];
 
         $warrant_image = new WarrantImages();
         $data['warrant_img'] = $warrant_image->whereOne('warrant_image_id', $data['warrant_reservations'][0]->warrant_image_id);

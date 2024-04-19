@@ -268,12 +268,11 @@
                             <div class="button-base bg-Selected-red">
                                 <div class="text Banner-red">Rejected</div>
                             </div>
-                            </a>
                         </button>
                     </div>
 
                     <div class="col-4">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['reservations'][0]->warrant_id : ''; ?>">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
                                 <div class="button-base bg-light-green">
                                     <div class="text dark-green ">Verified</div>
                                 </div>
