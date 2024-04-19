@@ -1,433 +1,309 @@
 <?php $this->view("./includes/header") ?>
+<?php
+
+if (!isset($data['errors'])) {
+    $data['errors'] = array();
+}
+
+// echo "<pre>";
+
+// // print_r($_POST);
+// // print_r($data);
+// echo "</pre>";
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
-        <main style="background-color:#EFF8FF; padding:20px;">
-            <div class="row">
-                <div class="col-3"></div>
-                <div class="col-4 center_form1">
-                    <form class="update-schedule">
-                        <div class="top-head-updatetrain">Update Schedule</div>
-                        <div class="head-box">
-                            Train Details
-                        </div>
-                        <div class="form-group">
-                            <label for="tamilNumberName">Train Number and Name</label>
-                            <select class="text-field" id="tamilNumberName">
-                                <option value="option1">YAL NILA - 1095</option>
-                                <option value="option2">UTHTHARA DEVI - 1021</option>
-                                <option value="option3">YAL DEVI - 1025</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="departure">Departure</label>
-                            <select class="text-field" id="departure">
-                                <option value="option1">Colombo</option>
-                                <option value="option2">Anuradhapura</option>
-                                <option value="option3">Jaffna</option>
-                                <option value="option3">Vavuniya</option>
-                                <option value="option3">Kodikamam</option>
-                                <option value="option3">Kankesanthurai</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="departureTime">Departure Time</label>
-                            <input class="text-field-box" placeholder="Ex : 05.30" />
-                        </div>
-                        <div class="form-group">
-                            <label for="departure">Arrival</label>
-                            <select class="text-field" id="departure">
-                                <option value="option1">Colombo</option>
-                                <option value="option2">Anuradhapura</option>
-                                <option value="option3">Jaffna</option>
-                                <option value="option3">Vavuniya</option>
-                                <option value="option3">Kodikamam</option>
-                                <option value="option3">Kankesanthurai</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="departureTime">Arrival Time</label>
-                            <input class="text-field-box" placeholder="Ex : 13.30" />
-                        </div>
-                        <label for="departureTime">Seat count</label>
-                        <div class="box-3">
-                            <div class="box">
-                                <label class="lab-small">1st Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 100" />
-                            </div>
-                            <div class="box">
-                                <label class="lab-small">2nd Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 80" />
-                            </div>
-                            <div class="box">
-                                <label class="lab-small">3rd Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 60" />
-                            </div>
-                        </div>
-                        <label for="departureTime">Ticket price</label>
-                        <div class="box-3">
-                            <div class="box">
-                                <label class="lab-small">1st Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 3000.00" />
-                            </div>
-                            <div class="box">
-                                <label class="lab-small">2nd Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 2000.00" />
-                            </div>
-                            <div class="box">
-                                <label class="lab-small">3rd Class Reserved</label>
-                                <input class="inputs" placeholder="Ex : 1000.00" />
+        <main class="bg">
+            <div class="d-flex flex-column align-items-center p-60 ">
+                <div class="notificationCard-SG  mt-50 d-flex flex-column align-items-center g-10">
 
-                                <form class="add-schedule p-50 shadow" style="background-color: white;">
-                                    <div class="top-head-addtrain">Update Train</div>
+                    <div class="row">
+
+                        <div class="col-8 center-col table profile">
+                            <div class="d-flex flex-column align-items-center p-60 ">
 
 
 
-                                    <div class="form-group">
-                                        <div class="box-3">
-                                            <div class="form-group">
-                                                <label for="departureTime">Train Name</label>
-                                                <input class="text-field-box" placeholder="Ex : 2" />
+                                <div class="">
+                                    <p class="notificationHeading mt--20 mb-10">Add New Train</p>
+                                </div>
+
+
+
+                                <form action="" method="post" class="profile">
+                                    <div class="row g-20 mb-20 ">
+                                        <div class="row  border-bottom-Lightgray">
+                                            <div class="col-12">
+                                                <h9 class="text">Train Details</h9>
                                             </div>
+                                        </div>
 
-                                            <div class="form-group">
-                                                <label for="departure">Train Route</label>
-                                                <select class="text-field" id="departure">
-                                                    <option value="option1"> Main</option>
-                                                    <option value="option2">North</option>
-                                                    <option value="option3">Main</option>
+                                        <div class="col-5">
+                                            <div class="text-inputs ">
+                                                <div class="input-text-label">Train Name</div>
+                                                <div class="input-field">
+                                                    <div class="text">
+                                                        <input type="text" name="train_name" class="type-here"
+                                                            placeholder="Type here"
+                                                            value="<?= $data['train']->train_name ?>">
+                                                    </div>
+                                                </div>
 
-                                                </select>
+                                            </div>
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('train_name', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                <?php echo (isset($data['errors']) && array_key_exists('train_name', $data['errors'])) ? $data['errors']['train_name'] : ''; ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">Train Route</div>
+                                                <div class="width-fill">
+                                                    <select class=" input-field dropdown" name="train_route"
+                                                        placeholder="Please choose">
+                                                        <option value="0">Please choose</option>
+
+                                                        <?php foreach ($data['routes'] as $key => $value): ?>
+                                                            <option value="<?= $value->route_no ?>" <?php echo ($data['train']->train_route == $value->route_no) ? "selected" : ""; ?>>
+                                                                <?= $value->route_name ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="assistive-text display-none">Assistive Text</div>
                                             </div>
 
                                         </div>
-                                        <div class="box-3">
-                                            <div class="form-group">
-                                                <label for="departure">Start Station</label>
-                                                <select class="text-field" id="departure">
-                                                    <option value="option1">Colombo</option>
-                                                    <option value="option2">Anuradhapura</option>
-                                                    <option value="option3">Jaffna</option>
-                                                    <option value="option3">Vavuniya</option>
-                                                    <option value="option3">Kodikamam</option>
-                                                    <option value="option3">Kankesanthurai</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="departureTime">Start Time</label>
-                                                <input class="text-field-box" placeholder="Ex : 13.30" />
-                                            </div>
+                                        <div
+                                            class="assistive-text <?php echo (!array_key_exists('train_route', $data['errors'])) ? 'display-none' : ''; ?>">
+                                            <?php echo (array_key_exists('train_route', $data['errors'])) ? $data['errors']['train_route'] : ''; ?>
                                         </div>
-                                        <div class="box-3">
-                                            <div class="form-group">
-                                                <label for="departure">End Station</label>
-                                                <select class="text-field" id="departure">
-                                                    <option value="option1"> Colombo</option>
-                                                    <option value="option2">Anuradhapura</option>
-                                                    <option value="option3">Jaffna</option>
-                                                    <option value="option3">Vavuniya</option>
-                                                    <option value="option3">Kodikamam</option>
-                                                    <option value="option3">Kankesanthurai</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="departureTime">End Time</label>
-                                                <input class="text-field-box" placeholder="Ex : 13.30" />
-                                            </div>
-                                        </div>
-                                        <div class="box-3">
-                                            <div class="form-group">
-                                                <label for="departure">Train Type</label>
-                                                <select class="text-field" id="departure">
-                                                    <option value="option1"> Express</option>
-                                                    <option value="option2">Mail</option>
-                                                    <option value="option3">Intercity</option>
 
-                                                </select>
+
+                                    </div>
+
+                                    <div class="row g-20 mt-20 mb-20 ">
+                                        <div class="col-6">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">Start Station</div>
+                                                <div class="width-fill">
+                                                    <select class="input-field dropdown" name="start_station"
+                                                        placeholder="Please choose" id="startStation">
+                                                        <option value="0">Please choose</option>
+
+                                                        <?php foreach ($data['stations'] as $key => $value): ?>
+                                                            <option value="<?= $value->station_id ?>" <?php echo ($data['train']->train_start_station == $value->station_id) ? "selected" : ""; ?>>
+                                                                <?= $value->station_name ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="assistive-text display-none">Assistive Text</div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="departureTime">No of Compartments</label>
-                                                <input class="text-field-box" placeholder="Ex : 2" />
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('start_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                <?php echo (array_key_exists('start_station', $data['errors'])) ? $data['errors']['start_station'] : ''; ?>
                                             </div>
                                         </div>
-                                        <div class="activation-field">
-                                            <a href="http://localhost/trackNbook/public/StaffGeneral/manageSchedule"> <button class="button-white"> Back</button></a>
-                                            <button class="button-blue"> Update</button>
+                                        <div class="col-3">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">Start Time</div>
+                                                <div class="input-field">
+                                                    <div class="text">
+                                                        <input type="time" name="start_time" class="type-here"
+                                                            placeholder="Type here"
+                                                            value="<?= $data['train']->train_start_time ?>">
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="assistive-text">Assistive Text</div> -->
+                                            </div>
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('start_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                <?php echo (array_key_exists('start_time', $data['errors'])) ? $data['errors']['start_time'] : ''; ?>
+                                            </div>
                                         </div>
-                                </form>
+                                    </div>
+
+                                    <div class="row g-20 mt-20 mb-20 ">
+                                        <div class="col-6">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">End Station</div>
+                                                <div class="width-fill">
+                                                    <!-- show max of 5 items in select tag -->
+                                                    <select class="input-field dropdown" name="end_station"
+                                                        placeholder="Please choose" id="endStation">
+                                                        <option value="0">Please choose</option>
+
+                                                        <?php foreach ($data['stations'] as $key => $value): ?>
+                                                            <option value="<?= $value->station_id ?>" <?php echo ($data['train']->train_end_station == $value->station_id) ? "selected" : ""; ?>>
+                                                                <?= $value->station_name ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div class="assistive-text display-none">Assistive Text</div>
+                                            </div>
+                                            <div
+                                                class="assistive-text <?php echo (!array_key_exists('end_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                <?php echo (array_key_exists('end_station', $data['errors'])) ? $data['errors']['end_station'] : ''; ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">End Time</div>
+                                                <div class="input-field">
+                                                    <div class="text">
+                                                        <input type="time" name="end_time" class="type-here"
+                                                            placeholder="Type here"
+                                                            value="<?= $data['train']->train_end_time ?>">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="assistive-text <?php echo (!array_key_exists('end_time', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                    <?php echo (array_key_exists('end_time', $data['errors'])) ? $data['errors']['end_time'] : ''; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div
+                                        class="train-stopping-stations mt-20 d-flex flex-row align-items-center g-10 flex-wrap justify-content-left">
+                                        <div class="input-text-label">Train Stoping stations</div>
+
+                                    </div>
+
+
+
+                                    <div class="row g-30 mb-20">
+
+                                        <div class="row g-20 mt-10 mb-10 ">
+                                            <div class="col-6">
+                                                <div class="text-inputs ">
+                                                    <div class="input-text-label">Train Type</div>
+                                                    <div class="input-field">
+                                                        <div class="text">
+                                                            <input type="text" name="train_type" class="type-here"
+                                                                placeholder="Type here"
+                                                                value="<?= $data['train']->train_type ?>">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div
+                                                    class="assistive-text <?php echo (!array_key_exists('train_type', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                    <?php echo (isset($data['errors']) && array_key_exists('train_type', $data['errors'])) ? $data['errors']['train_type'] : ''; ?>
+                                                </div>
+                                            </div>
+                                        
+                                        <div class="col-2">
+                                            <div class="text-inputs">
+                                                <div class="input-text-label">No of Compartments</div>
+                                                <div class="input-field">
+                                                    <div class="text">
+                                                        <input type="number" id="noOfCompartments"
+                                                            name="no_of_compartments" class="type-here"
+                                                            placeholder="Type here">
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="assistive-text">Assistive Text</div> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?>
+                                    </div>
+                                    </div>
+
+
+                                    <div class="row  border-bottom-Lightgray mb-10">
+                                        <div class="col-12">
+                                            <h7 class="text">Compartment Details</h7>
+                                        </div>
+                                    </div>
+                                    <div class="compartmentDetails mt-20">
+
+                                    </div>
 
 
                             </div>
-                            <div class="col-4"></div>
 
 
+                            <div class="row mt--70 mb-20 g-0 d-flex justify-content-center">
 
 
+                                <!--    <button class="button mx-10 px-10">
+                                        <div class="button-base">
+                                            <input type="submit" value="Add" name="submit">
+                                        </div>
+                                    </button>
 
-                    </form>
-                </div>
+                                    <button class="button mx-10 px-10">
+                                        <div class="button-base">
+                                            <input type="reset" value="reset">
+                                        </div>
+                                    </button> -->
+                                <button class="button mx-10 px-10">
+                                    <div class="button-base">
+                                    <input type="hidden" name="train_id" value="<?= $data['train']->train_id ?>">
+                                            <input type="submit" value="Update" name="update">
+                                    </div>
+                                </button>
+
+                                <button class="button mx-10" id="cancelReservationBtn">
+                                    <div class="button-base">
+                                    <input type="hidden" name="train_id" value="<?= $data['train']->train_id ?>">
+                                        <input type="reset" value="Reset">
+
+                                    </div>
+                                </button>
 
 
-                <div class="col-4"></div>
+                            </div>
+                            </form>
+                        </div>
 
-            </div>
+
+                    </div>
+
         </main>
+        <?php $this->view("./includes/footer") ?>
     </div>
 
-    <style>
-        .activation-field {
-            display: flex;
-            justify-content: flex-end;
-            width: calc(103% - 10px);
-            gap: 0px;
-        }
 
-
-        .button-blue {
-            display: inline-flex;
-            padding: 16px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            border-radius: 8px;
-            border: 2px solid #FFF;
-            background: #2185D5;
-            cursor: pointer;
-            color: white;
-            width: 15%;
-            margin-left: 50px;
-
-            margin-top: 20px;
-            /* Set the text color to white */
-            /* You can add additional styling here, such as padding, border, etc. */
-        }
-
-        .button-white {
-            display: inline-flex;
-            padding: 16px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            border-radius: 8px;
-            border: 2px solid #2185D5;
-            background: var(--W-Background, #FFF);
-            margin-right: 311px;
-            width: 18%;
-            cursor: pointer;
-            margin-top: 20px;
-
-        }
-
-        .input2 {
-            width: 200px;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-            margin-right: 20px;
-        }
-
-        .activation-field {
-            display: flex;
-            justify-content: flex-end;
-            width: calc(410% - 10px);
-            gap: 0px;
-        }
-
-
-        .button-blue {
-            display: inline-flex;
-            padding: 16px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            border-radius: 8px;
-            border: 2px solid #FFF;
-            background: #2185D5;
-            cursor: pointer;
-            color: white;
-            width: 15%;
-            margin-left: 50px;
-
-            margin-top: 20px;
-            /* Set the text color to white */
-            /* You can add additional styling here, such as padding, border, etc. */
-        }
-
-        .update-schedule {
-            margin-top: 20%;
-            display: flex;
-            width: 500px;
-            height: auto;
-            padding: 50px;
-            padding-bottom: 30px;
-            flex-direction: column;
-            align-items: flex-start;
-            background: #FAFAFA;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 18px;
-            width: 100%;
-        }
-
-        label {
-            color: #666;
-            font-family: Noto Sans;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            margin-bottom: 18px;
-            /* 112.5% */
-        }
-
-        .head-box {
-            position: relative;
-            display: flex;
-            width: 83%;
-            height: 36px;
-            padding: 1px 42px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-            border-radius: 2px;
-            background: rgba(102, 102, 102, 0.94);
-            color: #FFF;
-            font-family: Inter;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            margin-bottom: 20px;
-        }
-
-        .add-schedule {
-            margin-top: 8%;
-            display: flex;
-            width: 900px;
-            height: auto;
-            padding: 50px;
-            padding-bottom: 30px;
-            flex-direction: column;
-            align-items: flex-start;
-            background: #FFFFFF;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-
-        .box-3 {
-            display: flex;
-            gap: 50px;
-            margin-bottom: 18px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 18px;
-            width: 100%;
-        }
-
-        label {
-            color: #666;
-            font-family: Noto Sans;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            margin-bottom: 10px;
-
-            /* 112.5% */
-        }
-
-        .text-field {
-            display: flex;
-            width: 100%;
-            padding: 16px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-        }
-
-        .text-field-box {
-            display: flex;
-            width: 93%;
-            padding: 16px;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-        }
-
-        .box-3 {
-            display: flex;
-            gap: 21px;
-            margin-bottom: -7px;
-
-
-        }
-
-        .box-4 {
-            display: flex;
-            gap: 59px;
-        }
-
-        .box {
-            width: calc(25% - 0px);
-        }
-
-        .inputs1 {
-            width: 114%;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-
-        }
-
-        .inputs2 {
-            width: 137%;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-        }
-
-        .input1 {
-            width: 90%;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid #CCC;
-            background: var(--W-Background, #FFF);
-        }
-
-
-
-
-
-        .lab-small {
-            color: #666;
-            font-family: Noto Sans;
-            font-size: 13px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 18px;
-            margin-top: 10px;
-            /* 138.462% */
-        }
-    </style>
 </body>
 
 </html>
+
+<script>
+    $(document).ready(function () {
+        var tag = $('.text-inputs, .login-text-inputs').children('.assistive-text:not(.display-none)');
+        var counter = 0;
+
+        // access errors array
+        var arr = <?php echo json_encode($data); ?>;
+        console.log(arr);
+
+        // check errors key exists
+        if (arr.hasOwnProperty('errors')) {
+            tag.each(() => {
+                console.log(tag[counter]);
+                if (tag[counter++].innerHTML != " ") {
+                    tag.parent().children('.input-field').addClass('border-red');
+                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
+                    tag.parent().children('.input-text-label').addClass('red');
+                    tag.addClass('red');
+                }
+            });
+        }
+
+    });
+</script>

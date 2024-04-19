@@ -17,11 +17,9 @@ class Admin extends Controller
 
         $user = new Users();
 
-        // $train = new Trains();
-
         $data = array();
 
-        // $data['trains'] = $train->findAll();
+
         $data['users'] = $user->findAll();
         if (isset($_POST['submit']) && !empty($_POST['user_first_name'])) {
             $data['users'] = $user->getUsers('user_first_name', $_POST['user_first_name']);
@@ -32,6 +30,8 @@ class Admin extends Controller
 
         $this->view('display.users.admin', $data);
     }
+
+
 
     function updateUser($id = '')
     {
@@ -64,7 +64,7 @@ class Admin extends Controller
         // if(isset($_POST['delete'])){
         try {
             $result = $user->delete($id, "user_id");
-            $this->redirect('admin/getUsers');
+            $this->redirect('admin/usersList');
 
             // if($result !=1 && array_key_exists('errors', $result)){
             //     $data['errors'] = $result['errors'];
@@ -88,6 +88,7 @@ class Admin extends Controller
         $this->view('admin.trainList');
 
     }
+ 
     function trainRequest()
     {
         $this->view('admin.trainRequest');
@@ -96,6 +97,40 @@ class Admin extends Controller
     function inquiry()
     {
         $this->view('admin.inquiry');
+
+    }
+
+    function test()
+    {
+
+        $user = new Users();
+        $data = array();
+
+        $data['users'] = $user->findAll();
+
+        $this->view('displaytest.users.admin', $data);
+
+    }
+
+    function test2()
+    {
+
+        $user = new Users();
+        $data = array();
+
+        $data['users'] = $user->findAll();
+
+        $this->view('displaytest2.users.admin', $data);
+
+    }
+
+    function trainListtest()
+    {
+        $train = new Trains();
+        $data = array();
+
+        $data['trains'] = $train->findAllTrains();
+        $this->view('admintest.trainList', $data);
 
     }
 }

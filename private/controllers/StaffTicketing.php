@@ -18,15 +18,27 @@ class StaffTicketing extends Controller
         $this->view('ticket.staffticketing');
     }
 
+    // function summary($id = '')
+    // {
+    //     $resevation = new Reservations();
+    //     $data = array();
+    //     $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+
+    //     $train = new Trains();
+    //     $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+    //     $this->view('summary.staffticketing', $data);
+    // }
+
     function summary($id = '')
     {
         $resevation = new Reservations();
         $data = array();
-        $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+        $data['reservations'] = $resevation->whereOne("reservation_ticket_id", $id);
 
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
-        
+
         $this->view('summary.staffticketing', $data);
     }
 
@@ -34,23 +46,26 @@ class StaffTicketing extends Controller
     {
         $resevation = new Reservations();
 
+
         $train = new Trains();
 
         $data = array();
 
-        $data['trains'] = $train->findAll();
+        $data['trains'] = $train->findAllTrains();
         $data['reservations'] = $resevation->getReservation();
+
         if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_date', $_POST['reservation_date']);
+            $data['reservations'] = $resevation->where('reservation_date', $_POST['reservation_date']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
+            $data['reservations'] = $resevation->where('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
+            $data['reservations'] = $resevation->where('reservation_train_id', $_POST['reservation_train_id']);
         }
 
 
+ 
 
         $this->view('reservation.staffticketing', $data);
     }
@@ -65,35 +80,37 @@ class StaffTicketing extends Controller
 
         $data = array();
 
-        $data['trains'] = $train->findAll();
+        $data['trains'] = $train->findAllTrains();
         $data['reservations'] = $warrent_resevation->getjoinReservation();
 
 
         if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_date', $_POST['reservation_date']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_date', $_POST['reservation_date']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_passenger_nic', $_POST['reservation_passenger_nic']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
-            $data['reservations'] = $warrent_resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
+            $data['reservations'] = $warrent_resevation->getjoinReservation('r.reservation_train_id', $_POST['reservation_train_id']);
         }
 
 
-        $this->view('warrants.staffticketing',$data);
+        $this->view('warrants.staffticketing', $data);
     }
 
     function displayWarrent($id = '')
     {
         $warrant_resevation = new WarrantsReservations();
         $data = array();
-        $result = $warrant_resevation->getReservations("warrant_id", $id, "tbl_warrant_reservation");
+        $result = $warrant_resevation->getReservations($id);
         $data['reservations'] = $result[0];
         $train = new Trains();
         $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
 
         $this->view('display.warrant.staffticketing', $data);
     }
+
+    // call getWarrantImage function from controller reffer user controller getUserImage function
 
     function seatMap($id = '')
     {
@@ -108,17 +125,16 @@ class StaffTicketing extends Controller
         $data['reservations'] = $resevation->whereOne("reservation_id", $id);
 
 
-        if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic']) && isset($_POST['reservation_id']) && !empty($_POST['reservation_id'])) {
-            $resevation = new Reservations();
+        // if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic']) && isset($_POST['reservation_id']) && !empty($_POST['reservation_id'])) {
+        //     $resevation = new Reservations();
 
-            $result = $resevation->cancelReservation($_POST['reservation_id'], $_POST['reservation_passenger_nic']);
-            if ($result) {
-                $this->redirect('staffticketing/reservationList');
-            } 
-        }else{
-            $this->view('cancellation.staffticketing', $data);
-        }
-
+        //     $result = $resevation->cancelReservation($_POST['reservation_id'], $_POST['reservation_passenger_nic']);
+        //     if ($result) {
+        //         $this->redirect('staffticketing/reservationList');
+        //     }
+        // } else {
+        //     $this->view('cancellation.staffticketing', $data);
+        // }
     }
 
 
@@ -146,16 +162,16 @@ class StaffTicketing extends Controller
         $data = array();
         $data['stations'] = $station->getStations();
 
-        if(isset($_SESSION['reservation'])){
+        if (isset($_SESSION['reservation'])) {
             unset($_SESSION['reservation']);
         }
-        
-        if(isset($_SESSION['errors'])){
+
+        if (isset($_SESSION['errors'])) {
             $data['errors'] = $_SESSION['errors'];
             unset($_SESSION['errors']);
         }
 
-        $this->view('home.staffticketing',$data);
+        $this->view('home.staffticketing', $data);
     }
 
     function trains($id = '')
@@ -165,7 +181,7 @@ class StaffTicketing extends Controller
         $data['trains_avilable'] = array();
 
         if (isset($_POST['to_station']) && isset($_POST['from_station']) && isset($_POST['from_date'])) {
-            
+
             $train = new Trains();
             $data['trains_available'] = $train->search();
 
@@ -179,46 +195,49 @@ class StaffTicketing extends Controller
         }
         // $this->view('trains.staffticketing');
     }
-    function verifiedWarrent($id = ''){
+    function verifiedWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'verified'
-            ),"warrant_id");
-        }catch(PDOException $e){
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'verified'
+            ), "warrant_id");
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
         $this->redirect('staffticketing/Warrant');
     }
 
-    function pendingWarrent($id = ''){
+    function pendingWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'pending'
-            ),"warrant_id");
-        }catch(PDOException $e){
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'pending'
+            ), "warrant_id");
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
         $this->redirect('staffticketing/Warrant');
     }
 
-    function rejectWarrent($id = ''){
+    function rejectWarrent($id = '')
+    {
         $warrant_resevation = new WarrantsReservations();
         // echo $id;
-        try{
-            $warrant_resevation->update($id,array(
-                'warrant_status'=>'rejected'
-            ),"warrant_id");
-        }catch(PDOException $e){
-            echo $e->getMessage();
+        try {
+            $warrant_resevation->update($id, array(
+                'warrant_status' => 'Rejected'
+            ), "warrant_id");
+        } catch (PDOException $e) {
+            die($e->getMessage());
         }
 
-        
+
         $this->redirect('staffticketing/warrant');
     }
 
@@ -301,6 +320,3 @@ class StaffTicketing extends Controller
         );
     }
 }
-
-
-

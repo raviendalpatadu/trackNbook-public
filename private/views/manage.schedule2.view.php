@@ -5,8 +5,8 @@
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
-        <main style="background-color:#EFF8FF; padding:20px;">
-            <div class="row">
+        <main class="bg">
+           <!-- <div class="row">
                 <div class="col-3"></div>
                 <div class="col-4 center_form1">
                     <form class="add-schedule">
@@ -120,7 +120,7 @@
                 <div class="col-4"></div>
 
             </div>
-        </main>
+        </main> -->
     </div>
 
     <style>

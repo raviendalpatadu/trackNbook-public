@@ -1,4 +1,6 @@
 <?php $this->view("./includes/header") ?>
+<?php $this->view("./includes/load-js") ?>
+
 <?php
 // echo "<pre>";
 // print_r($data);
@@ -25,7 +27,6 @@ if (isset($data['users']) && $data['users'] != 0) {
                     <div class="col-12">
                         <form action="" method="post">
                             <div class="row mb-30 g-10">
-
 
                                 <div class="col-3">
                                     <div class="text-inputs">
@@ -180,7 +181,7 @@ if (isset($data['users']) && $data['users'] != 0) {
 
                                     </table><br><br>
                                     <div class="pagination"
-                                        style="position: fixed; left: 50%; transform: translateX(-50%);">
+                                        style="">
                                         <?php if ($page > 1): ?>
                                             <a class="button" href="?page=<?= $page - 1 ?>">
                                                 <div class="button-base">
@@ -241,7 +242,7 @@ if (isset($data['users']) && $data['users'] != 0) {
             </div>
         </main>
     </div>
-    <?php $this->view("./includes/load-js") ?>
+    
 
 </body>
 

@@ -4,6 +4,7 @@ class Users extends Model
 {
 
     protected $table = 'tbl_user';
+    protected $alloewdCollumns = array('user_title', 'user_first_name', 'user_last_name', 'user_phone_number', 'user_type', 'user_gender', 'user_email', 'user_nic');
 
     public function __construct()
     {
@@ -23,7 +24,11 @@ class Users extends Model
 
         if ($data > 0) {
             //check if username and password is correct
-            $query = "SELECT u.user_id, u.user_title, u.user_first_name , u.user_last_name, u.user_phone_number,u.user_type, u.user_gender, u.user_email, u.user_nic FROM tbl_user as u JOIN tbl_login ON u.user_id = tbl_login.user_id WHERE login_username = :username and login_password = :password";
+            $query = "SELECT u.user_id, u.user_title, u.user_first_name , u.user_last_name, u.user_phone_number,u.user_type, u.user_gender, u.user_email, u.user_nic, tbl_image.image_path 
+                    FROM tbl_user as u 
+                    JOIN tbl_login ON u.user_id = tbl_login.user_id 
+                    LEFT JOIN tbl_image ON u.user_id = tbl_image.user_id
+                    WHERE login_username = :username and login_password = :password";
             $data_pass = $this->query($query, array(
                 'username' => $_POST['username'],
                 'password' => md5($_POST['password'])
@@ -57,7 +62,22 @@ class Users extends Model
         }
     }
 
-    public function addUser()
+    public function getUserImage($userid)
+    {
+        $query = "select * from tbl_image where user_id = :userid";
+        $data = $this->query($query, array(
+            'userid' => $userid
+        ));
+
+        if ($data > 0) {
+            return $data[0]->image_path;
+        } elseif (!$data) {
+            $errors['error'] = 'invalid userid or no user found';
+            return $errors;
+        }
+    }
+
+    public function addUserValidateAdmin()
     {
         $errors = array();
 
@@ -135,55 +155,6 @@ class Users extends Model
             $errors['errors']['user_type'] = 'Gender is required';
         }
 
-
-
-
-
-
-        if (!array_key_exists('errors', $errors)) {
-
-            try {
-                $con = $this->connect();
-                $con->beginTransaction();
-
-                //insert query to add passenger account
-                $query = "Inse INTO tbl_user (user_title, user_first_name,user_last_name,user_phone_number,user_type, user_gender, user_email, user_nic) 
-                VALUES (:user_title, :user_first_name,:user_last_name,:user_phone_number, :user_type, :user_gender, :user_email, :user_nic)";
-
-                $stm = $con->prepare($query);
-                $stm->execute(array(
-                    'user_title' => $_POST['user_title'],
-                    'user_first_name' => $_POST['user_first_name'],
-                    'user_last_name' => $_POST['user_last_name'],
-                    'user_phone_number' => $_POST['user_phone_number'],
-                    'user_type' => $_POST["user_type"],
-                    'user_gender' => $_POST['user_gender'],
-                    'user_email' => $_POST['user_email'],
-                    'user_nic' => $_POST['user_nic']
-                ));
-                $user_id = $con->lastInsertId();
-                $query2 = "Insert INTO tbl_login (login_username,login_password, user_id) VALUES (:login_username, :login_password, :user_id)";
-
-                $stm2 = $con->prepare($query2);
-                $stm2->execute(array(
-                    'login_username' => $_POST['login_username'],
-                    'login_password' => md5($_POST['login_password']),
-                    'user_id' => $user_id
-                ));
-            } catch (PDOException $e) {
-                echo $e->getMessage();
-            }
-
-
-            $data = array();
-            $con->commit();
-            $con = null;
-
-
-            if ($data > 0) {
-                return $data;
-            }
-        }
         return $errors;
     }
 
@@ -285,7 +256,7 @@ class Users extends Model
         return $errors;
     }
 
-    public function updateUserProfile($id, $data)
+    public function updateUserProfileValidate($id, $data)
     {
         $errors = array();
 
@@ -344,30 +315,6 @@ class Users extends Model
         }
 
 
-        if (!array_key_exists('errors', $errors)) {
-            try {
-                $con = $this->connect();
-
-                $sql = "UPDATE tbl_user SET user_title = :user_title, user_first_name = :user_first_name, user_last_name = :user_last_name, user_phone_number = :user_phone_number, user_email = :user_email, user_nic = :user_nic WHERE user_id = :user_id;";
-                $stmt = $con->prepare($sql);
-                $result = $stmt->execute(array(
-                    'user_title' => $data['user_title'],
-                    'user_first_name' => $data['user_first_name'],
-                    'user_last_name' => $data['user_last_name'],
-                    'user_phone_number' => $data['user_phone_number'],
-                    'user_email' => $data['user_email'],
-                    'user_nic' => $data['user_nic'],
-                    'user_id' => $data['user_id']
-                ));
-
-                if ($result == true) {
-                    // $_SESSION['USER'] = $data;
-                    return $result;
-                }
-            } catch (PDOException $e) {
-                return $e->getMessage();
-            }
-        }
         return $errors;
     }
 
@@ -385,6 +332,5 @@ class Users extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
 }

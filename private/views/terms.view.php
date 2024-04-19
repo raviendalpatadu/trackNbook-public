@@ -27,8 +27,8 @@
                         </head>
 
                         <body>
-                            <div class="accordion">
-                                <h2>01. Reservation Guidelines</h2>
+                            <div class="accordion-terms">
+                                <h2 class="h2-terms">01. Reservation Guidelines</h2>
                                 <p>
                                     Prior to making a reservation through the Service, you are strongly advised to be
                                     vigilant of the following guidelines and comply with the same:
@@ -171,8 +171,8 @@
 
 
 
-                            <div class="accordion">
-                                <h2>02. Cancellation Policy</h2>
+                            <div class="accordion-terms">
+                                <h2 class="h2-terms">02. Cancellation Policy</h2>
                                 <p>
                                     If you wish to cancel the journey, you have to visit the nearest Railway station
                                     where the mTicketing service is available together with reservation tickets issued
@@ -183,7 +183,7 @@
                                     <li>Fill the appropriate application supplied carefully.</li>
                                     <li>Refund percentage will be calculated according to the below table exclusive of
                                         service charge.</li>
-                                    <div class="accordion">
+                                    <div class="accordion-terms">
                                         <font style="color: #000; font-size: 14px;">
                                             <table
                                                 style="border: 1px solid black;border-collapse: collapse;width:100%;margin-bottom: 15px;">
@@ -237,8 +237,8 @@
 
 
 
-                            <div class="accordion">
-                                <h2>03. Refund Policy</h2>
+                            <div class="accordion-terms">
+                                <h2 class="h2-terms">03. Refund Policy</h2>
                                 <p>
                                     Refunds will be available only for the particular train (journey) which has been
                                     completely unavailable due to an interruption.
@@ -253,8 +253,8 @@
                         </body>
 
                         </html>
-                        <div class="accordion">
-                            <h2>04. Liability clause</h2>
+                        <div class="accordion-terms">
+                            <h2 class="h2-terms">04. Liability clause</h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 SLR shall not be held liable for any damages; loss or theft of personal luggage
                                 and belongings, nor can SLR be held liable for personal injury, accident,
@@ -289,8 +289,8 @@
                             </p>
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2>05. CHILD POLICY</h2>
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms">05. CHILD POLICY</h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 Children from the age of 3 (three) years and younger sharing a seat with their
                                 parents travel free of charge (maximum of 1 (one)child per adult). Due to space
@@ -306,8 +306,8 @@
                             </p>
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2>06. DANGEROUS GOODS </h2>
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms">06. DANGEROUS GOODS </h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 For safety reasons, no guest is allowed to bring dangerous goods such as
                                 firearms, flammable substances, and fireworks, poisonous or toxic substances on
@@ -315,15 +315,15 @@
                             </p>
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2>07. PETS</h2>
-                            <p> class="faq_style" style="color: #000;font-size: 14px">
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms">07. PETS</h2>
+                            <p class="faq_style" style="color: #000;font-size: 14px">
                                 No pets are allowed onboard.
                             </p>
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2> 08. LUGGAGE</h2>
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms"> 08. LUGGAGE</h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 Each adult passenger will be allowed, to bring on board their luggage, free of
                                 charge as per SLR’s general regulation. (Refer to general commercial rules set
@@ -351,8 +351,8 @@
                             </p>
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2> 09. General</h2>
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms"> 09. General</h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 You agree that Sri Lanka Railways at its sole discretion may revise the Terms
                                 and Conditions herein at any time without assigning any reasons therefore and
@@ -374,8 +374,8 @@
 
                         </div>
 
-                        <div class="accordion" style="color: #000; font-size: 14px;">
-                            <h2>10. GOVERNING LAWS</h2>
+                        <div class="accordion-terms" style="color: #000; font-size: 14px;">
+                            <h2 class="h2-terms">10. GOVERNING LAWS</h2>
                             <p class="faq_style" style="color: #000;font-size: 14px">
                                 These terms and conditions and the Service shall be subject to and construed in
                                 accordance with the laws of the Democratic Socialist Republic of Sri Lanka and
@@ -400,225 +400,12 @@
 
 
 </body>
+<?php $this->view('includes/load-js');?>
 
 </html>
 
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
 
-    .accordion {
-        color: #000;
-        font-size: 14px;
-        margin: 20px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f8f8f8;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .sub-table {
-        margin-top: 20px;
-    }
-
-    h2 {
-        font-size: 18px;
-        text-decoration: underline;
-        font-weight: bold;
-        color: #000;
-        margin-bottom: 10px;
-    }
-
-    ul {
-        list-style-type: disc;
-        margin-left: 20px;
-        padding: 0;
-    }
-
-    li {
-        margin: 5px 0;
-    }
-
-    .activation-field {
-        display: flex;
-        justify-content: flex-end;
-        width: calc(156% - 10px);
-        gap: 20px;
-    }
-
-    .button-blue {
-        display: inline-flex;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #FFF;
-        background: #2185D5;
-        cursor: pointer;
-        color: white;
-        width: 13%;
-        /* Set the text color to white */
-        /* You can add additional styling here, such as padding, border, etc. */
-    }
-
-    .button-white {
-        display: inline-flex;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 2px solid #2185D5;
-        background: var(--W-Background, #FFF);
-        margin-right: 268px;
-        width: 9%;
-        cursor: pointer;
-
-    }
-
-
-    .top-head-updatetrain {
-        display: inline-flex;
-        padding: 32px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border-radius: 5px;
-        background: rgba(33, 133, 213, 0.77);
-        position: absolute;
-        top: 0;
-        margin-top: 133px;
-        margin-left: 145px;
-        color: #FFF;
-        text-align: center;
-        font-feature-settings: 'clig' off, 'liga' off;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 0.444px;
-        /* 121.528% */
-    }
-
-    .head-box {
-        position: relative;
-        display: flex;
-        width: 83%;
-        height: 36px;
-        padding: 1px 42px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        flex-shrink: 0;
-        border-radius: 2px;
-        background: rgba(102, 102, 102, 0.94);
-        color: #FFF;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        margin-bottom: 20px;
-    }
-
-    .update-schedule {
-        margin-top: 4%;
-        display: flex;
-        width: 500px;
-        height: 614px;
-        padding: 51px;
-        flex-direction: column;
-        align-items: flex-start;
-        background: #FAFAFA;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-        width: 100%;
-    }
-
-    label {
-        color: #666;
-        font-family: Noto Sans;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 18px;
-        /* 112.5% */
-    }
-
-    .text-field {
-        display: flex;
-        width: 100%;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-    .text-field-box {
-        display: flex;
-        width: 93%;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-    .text-field-box-message {
-        display: flex;
-        width: 93%;
-        height: 160px;
-        padding: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-    .box-3 {
-        display: flex;
-        gap: 50px;
-    }
-
-    .box {
-        width: calc(25% - 0px);
-    }
-
-    .inputs {
-        width: 90%;
-        padding: 16px;
-        border-radius: 8px;
-        border: 1px solid #CCC;
-        background: var(--W-Background, #FFF);
-    }
-
-    .lab-small {
-        color: #666;
-        font-family: Noto Sans;
-        font-size: 13px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 18px;
-        /* 138.462% */
-    }
-</style>
 </body>
 
 </html>

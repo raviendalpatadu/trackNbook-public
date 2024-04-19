@@ -3,6 +3,7 @@
 class Compartments extends Model
 {
     protected $table = 'tbl_compartment';
+    protected $allowedColumns = ['compartment_train_id', 'compartment_class', 'compartment_class_type', 'compartment_seat_layout', 'compartment_total_seats', 'compartment_total_number'];
 
     public function __construct()
     {

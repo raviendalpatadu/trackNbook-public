@@ -1,5 +1,7 @@
+<?php $this->view('includes/loader'); ?>
+
 <header>
-  <nav>
+  <nav class="px-20">
     <div class="brand">
       <img src="<?= ASSETS ?>images/track-n-book-logo-1.png" alt="TrackNBook">
       <div class="brand-text">TrackNBook</div>
@@ -25,7 +27,7 @@
           <li class="navbar-item"><a href="<?= ROOT ?>profile">
               <div class="profile">
                 <div class="profile-img">
-                  <img src="<?= ASSETS ?>images/avatar1.png" alt="TrackNBook">
+                  <img src="<?= getPrivateImage('user', 'getuserimage', Auth::getImage_path()) ?>" alt="TrackNBook">
 
                 </div>
                 <div class="profile-right">

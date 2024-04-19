@@ -9,26 +9,25 @@
 
     <div class="column-left">
         <?php $this->view("./includes/navbar") ?>
-        <main class=" d-flex align-items-center justify-content-center">
-            <div class="bg-staff-login-desktop"></div>
-            <div class="container">
+        <main class=" bg d-flex align-items-center justify-content-center">
 
-                <form action="" method="post" class="mou-staff-login-container d-flex flex-column justify-content-center g-20">
+            <div class="staff-login-box bg-box-gray p-50">
+
+                <form action="" method="post"
+                    class="mou-staff-login-container d-flex flex-column justify-content-center g-20">
                     <div class="d-flex flex-column justify-contet-center align-items-center">
                         <h1 class="mou-title d-flex justify-content-center width-fill mb-10">Login</h1>
                     </div>
                     <div class="d-flex flex-column justify-contet-center align-items-center">
-                        <p class="mou-subtitle d-flex justify-content-center width-fill mb-30">Please enter your Username and password!</p>
+                        <p class="mou-subtitle d-flex justify-content-center width-fill mb-30">Please enter your
+                            Username and password!</p>
                     </div>
 
                     <div class="input_container">
                         <!-- username -->
-                        <div class="login-text-inputs">
-                            <div class="input-text-label mb-5">Username</div>
-                            <div class="input-field ">
-                                <div class="text ">
-                                    <input type="text" class="type-here ml-10" placeholder="Enter Your Email" name="username">
-                                </div>
+                        <div class="d-flex flex-column">
+                            <div class="input-field d-flex width-fill text">
+                                <input type="text" class="type-here pl-10" placeholder="Enter Your Username" name="username">
                             </div>
                             <?php if (isset($data['errors'])) : ?>
                                 <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('username', $data['errors'])) ? $data['errors']['username'] : ''; ?></div>
@@ -36,20 +35,16 @@
                         </div>
 
                         <!-- password -->
-                        <div class="login-text-inputs">
-                            <div class="input-text-label mt-10 mb-5">Password</div>
-                            <div class="input-field">
-                                <div class="text">
-                                    <input type="password" class="type-here ml-10 " placeholder="Enter Your Password" name="password">
-                                </div>
+                        <div class="d-flex flex-column ">
+                            <div class="input-field d-flex width-fill text ">
+                                <input type="password" class="type-here ml-10 " placeholder="Enter Your Password" name="password">
                             </div>
-
                             <?php if (isset($data['errors'])) : ?>
                                 <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('password', $data['errors'])) ? $data['errors']['password'] : ''; ?></div>
                             <?php endif ?>
                         </div>
 
-                    
+
                         <!-- remeber me  -->
                         <div class="mou-flex-row justify-content-between flex-fill py-10">
                             <div class="d-flex justify-content-center form-check g-5">
@@ -64,23 +59,13 @@
                         </div>
 
                         <!-- submit -->
-                        <div class="button-base mt-10">
-                            <input class="text" type="submit" value="Login" name="submit">
+                        <div class="button-base staff-login-button">
+                            <input class="text white" type="submit" value="Login" name="submit">
                         </div>
 
                     </div>
-
-
-
-
                 </form>
-
-
-
-
             </div>
-
-
         </main>
         <?php $this->view("./includes/footer") ?>
     </div>
@@ -89,7 +74,7 @@
 </html>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var tag = $('.login-text-inputs:not(.display-none)').children('.assistive-text');
         var counter = 0;
 

@@ -5,13 +5,16 @@
 
 class Model extends Database
 {
-    
+
     public $errors = array();
     // public $table;
+    // public $allowedColumns;
+    // public $beforeInsert;
+    // public $afterSelect;
 
     public function __construct()
-    { 
-        if(!property_exists($this, 'table')){
+    {
+        if (!property_exists($this, 'table')) {
             $this->table = "tbl_" . strtolower(get_class($this));
         }
     }
@@ -97,31 +100,40 @@ class Model extends Database
 
         $query = "insert into $this->table ($column) values(:$value)";
         // echo $query;
-        return $this->query($query,$data);
+        return $this->query($query, $data);
     }
 
 
     public function update($id, $data, $id_feild = '')
     {
+        // revmove unwanted columns
+        if (property_exists($this, 'allowedColumns')) {
+            foreach ($data as $key => $column) {
+                if (!in_array($key, $this->allowedColumns)) {
+                    unset($data[$key]);
+                }
+            }
+        }
+        
         $str = '';
         foreach ($data as $key => $value) {
             $str .= $key . "= :" . $key . ",";
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        // echo "{$id}<pre>";
-        //     print_r($data);
-        //     echo "</pre>";
-        try{
-            if($id_feild == ''){
-                $query = "update $this->table set $str where ".strtolower(get_class($this))."_id = :id";
-            }else
-            {
+        echo "{$id}<pre>";
+            print_r($data);
+            echo "</pre>";
+            
+        try {
+            if ($id_feild == '') {
+                $query = "update $this->table set $str where " . strtolower(get_class($this)) . "_id = :id";
+            } else {
                 $query = "update $this->table set $str where $id_feild = :id";
             }
             return $this->query($query, $data);
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            die($e->getMessage());
         }
     }
 
@@ -130,22 +142,19 @@ class Model extends Database
     {
         $data['id'] = $id;
 
-        try{
-            if($id_feild == ''){
-                $query = "delete from $this->table where ".strtolower(get_class($this))."_id = :id";
-            }else
-            {
+        try {
+            if ($id_feild == '') {
+                $query = "delete from $this->table where " . strtolower(get_class($this)) . "_id = :id";
+            } else {
                 $query = "delete from $this->table where $id_feild = :id";
             }
             return $this->query($query, $data);
         } catch (PDOException $e) {
             die($e->getMessage());
-
         }
-
     }
 
-   
+
 
     public function getCount()
     {
@@ -155,9 +164,24 @@ class Model extends Database
             return $data[0]->count;
         } catch (PDOException $e) {
             die($e->getMessage());
-
         }
     }
 
-}
+    public function callProcedure($procedure, $data)
+    {
+        // no of arguments arw in $data
+        $str = '';
+        for ($i = 0; $i < count($data); $i++) {
+            $str .= '?,';
+        }
+        $str = trim($str, ',');
+        try{
+            $query = "call $procedure($str)";
+            return $this->query($query, $data);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
 
+    }
+
+}

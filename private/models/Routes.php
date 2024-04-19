@@ -49,10 +49,11 @@ class Routes extends Model
     public function getRouteStations($route_id)
     {
         try {
-            $query = "SELECT s.*
+            $query = "SELECT s.*, r.route_station_order
                         FROM tbl_station s
                         JOIN tbl_route_station r ON r.station_id = s.station_id 
-                        WHERE r.route_no = :route_id;";
+                        WHERE r.route_no = :route_id
+                        ORDER BY r.route_station_order ASC;";
 
         $result = $this->query($query, [
             'route_id' => $route_id

@@ -1,4 +1,16 @@
 <?php $this->view("./includes/header") ?>
+<?php
+
+if (isset($data['trains']) && $data['trains'] != 0) {
+    $count = count($data['trains']);
+} else {
+    $count = 0;
+}
+
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -10,7 +22,7 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <div class="if-txt-wrapper">Hello,
+                        <div class="ach-txt-wrapper">Hello,
                             <?= ucfirst(Auth::user()) ?>
                         </div>
 
@@ -21,9 +33,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="if-widgets">
+                        <div class="ach-widgets">
 
-                            <div class="card-dashboard1">
+                            <div class="card-dashboard-sg">
                                 <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
                                         viewBox="0 0 31 37" fill="none">
                                         <path
@@ -31,11 +43,14 @@
                                             fill="black" />
                                     </svg>
 
-                                    <div class="impressions">Number of Trains Onboard</div>
+                                    <div class="impressions"><a href="<?= ROOT ?>staffgeneral/gettrainlist/">Number
+                                            of Trains Onboard</a></div>
                                 </div>
-                                <div class="number">24</div>
+                                <div class="number"><a href="<?= ROOT ?>staffgeneral/gettrainlist/">
+                                        <?php echo $count; ?>
+                                    </a></div>
                             </div>
-                            <div class="card-dashboard1">
+                            <div class="card-dashboard-sg">
                                 <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
                                         viewBox="0 0 31 37" fill="none">
                                         <path
@@ -48,7 +63,7 @@
                                 <div class="number">03</div>
                             </div>
 
-                            <div class="card-dashboard1">
+                            <div class="card-dashboard-sg">
                                 <div class="div"><svg xmlns="http://www.w3.org/2000/svg" width="31" height="37"
                                         viewBox="0 0 31 37" fill="none">
                                         <path
@@ -56,73 +71,136 @@
                                             fill="black" />
                                     </svg>
 
-                                    <div class="impressions">Waiting List</div>
+                                    <div class="impressions"><a href="<?= ROOT ?>staffgeneral/waitlist/">Wait List</a>
+                                    </div>
                                 </div>
-                                <div class="number">24</div>
+                                <div class="number"><a href="<?= ROOT ?>staffgeneral/waitlist/">15</a></div>
 
                             </div>
+
+                            <img src="<?= ASSETS ?>images/SG.png" style="margin-top: -38px" width=" 300" height="180">
+
+
+
+
+
+
+
+
+
+
                         </div>
-                    </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mychart">
+
+                                        <div>
+                                            <canvas id="myChart" width="6" height="2"></canvas>
+                                        </div>
+
+                                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+                                        <script>
+                                        const ctx = document.getElementById('myChart');
+
+                                        new Chart(ctx, {
+                                            type: 'line',
+                                            data: {
+                                                labels: ['5/3/24', '6/3/24y', '6/3/24', '7/3/24l', '8/3/24',
+                                                    '9/3/24'
+                                                ],
+                                                datasets: [{
+                                                        label: 'Yal Devi',
+                                                        data: [12, 19, 3, 5, 2, 3],
+                                                        borderWidth: 2
+                                                    },
+                                                    {
+                                                        label: 'Uthara Devi',
+                                                        data: [8, 15, 7, 10, 5, 9],
+                                                        borderWidth: 2
+                                                    },
+                                                    {
+                                                        label: 'Udarata Menike',
+                                                        data: [8, 5, 6, 8, 5, 8],
+                                                        borderWidth: 2
+                                                    }
+                                                ]
+                                            },
+                                            options: {
+                                                plugins: {
+                                                    legend: {
+                                                        position: 'right', // Set legend position to 'right'
+                                                        align: 'centre', // Align legend to the start of the chart area
+                                                        labels: {
+                                                            font: {
+                                                                size: 18, // Adjust the font size of legend labels
+                                                                weight: 'normal' // Make legend labels bold
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                layout: {
+                                                    padding: {
+                                                        right: 5 // Add padding to the right side of the chart area
+                                                    }
+                                                },
+                                                scales: {
+                                                    x: {
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Date', // Description for the x-axis
+                                                            font: {
+                                                                size: 16, // Adjust the font size of the x-axis label
+                                                                weight: 'bold' // Make the x-axis label bold
+                                                            }
+                                                        }
+                                                    },
+                                                    y: {
+                                                        beginAtZero: true,
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            font: {
+                                                                size: 15 // Adjust the font size of the tick labels
+                                                            }
+                                                        },
+                                                        title: {
+                                                            display: true,
+                                                            text: 'Delay Time (minutes)', // Description for the y-axis
+                                                            font: {
+                                                                size: 16, // Adjust the font size of the y-axis label
+                                                                weight: 'bold' // Make the y-axis label bold
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        });
+                                        </script>
 
 
 
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="profile-img d-flex flex-column1 align-items-center justify-content-center">
-                                <img src="<?= ASSETS ?>images/traindelay.png" alt="profile img" width="800"
-                                    height="500">
-                            </div>
-                        </div>
+
+                                    </div>
+
+
+
+
+
+
+                                </div>
+
+
 
         </main>
     </div>
-</body>
-
-</html>
-<style>
-    .card-dashboard1 {
-        margin: 5px 5px;
-        padding: 10px 20px;
-        background-color: #FAFAFA;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        font-family: "Poppins-Medium", Helvetica;
-        border-radius: 10px;
-        height: 106px;
-        width: 381px;
 
 
-    }
-
-
-    .trains-available {
-        padding: 12px 24px;
-    }
-</style>
-
-
-</main>
-</div>
 
 
 </body>
 
 </html>
-<style>
-    .if-widgets .if-frame {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 7.78px;
-        padding: 23.33px;
-        position: relative;
-        flex: 1;
-        flex-grow: 0.15;
-        background-color: var(--bgwhite-100);
-        border-radius: 23.33px;
-        box-shadow: 0px 1.94px 13.61px #0063e70f;
-        width: 100px;
-    }
-</style>

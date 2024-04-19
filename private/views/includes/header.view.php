@@ -11,5 +11,9 @@
     <link rel="stylesheet" href=" <?= ASSETS ?>css/iflal.scss">
     <link rel="stylesheet" href=" <?= ASSETS ?>css/moushika.css">
     <link rel="stylesheet" href=" <?= ASSETS ?>css/achchu.css">
+
+
+    <!-- Datatables -->
+    <link rel="stylesheet" type="text/css" href="<?= ASSETS ?>lib/datatables/dataTables.css">
     
 </head>
