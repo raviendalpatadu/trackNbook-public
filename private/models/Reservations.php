@@ -218,9 +218,7 @@ class Reservations extends Model
         return $result;
     }
 
-
     // cancel reservation
-
 
     //refund
     public function getRefund($reservation_id, $total_fare_amount)

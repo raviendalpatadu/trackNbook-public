@@ -3607,8 +3607,7 @@
   }
 }
 .profile .profile-img img {
-  width: 200px;
-  height: 200px;
+  width: 150px !important;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 1000px;
@@ -3962,7 +3961,7 @@
   padding-top: 30px;
   padding-bottom: 30px;
   font-size: 42px;
-  color: var(--White);
+  color: var(--White) !important;
 }
 
 .home-text .mou-home-text {
@@ -4544,13 +4543,12 @@ div#reservations img.ticket-icon-res, div#cancelledReservations img.ticket-icon-
   height: 1.5em;
 }
 
-div#reservation_type {
+div#reservation_type_tab {
   font-size: 14px;
   background-color: var(--Lightgray);
   cursor: pointer;
 }
-
-div#reservation_type div.active {
+div#reservation_type_tab div.active {
   font-weight: 600;
   color: var(--Border-blue);
 }
@@ -4679,7 +4677,7 @@ div#reservation_type div.active {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: justify-content-start;
   gap: 20px;
 }
 
@@ -4688,6 +4686,7 @@ div#reservation_type div.active {
 }
 
 .main-popup-box .box .body p {
+  flex-grow: 1;
   font-size: 16px;
   font-weight: 400;
   text-align: justify;
@@ -4749,4 +4748,16 @@ div#reservation_type div.active {
 }
 input.calendar-none::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+.waiting-list-btn:hover .text {
+  cursor: pointer;
+  color: var(--Border-blue);
+}
+.waiting-list-btn:hover .text svg path {
+  stroke: var(--Border-blue);
+}
+
+.reservation-map-view {
+  height: 40vh !important;
 }/*# sourceMappingURL=ravien.css.map */

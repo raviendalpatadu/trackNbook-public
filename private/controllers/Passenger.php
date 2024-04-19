@@ -24,13 +24,15 @@ class Passenger extends Controller
 
             $reservation = new Reservations();
 
-
             if ($reservation->validatePassenger($_POST)) {
+                // echo "<pre>";
+                // print_r($_SESSION);
+                // echo "</pre>";
 
-                
+
                 $_SESSION['reservation']['passenger_data'] = $_POST;
-                
-                if (!isset($_POST['warrant_booking'])) {    
+
+                if (!isset($_POST['warrant_booking'])) {
                     // echo "off";
                     $_SESSION['reservation']['passenger_data']['warrant_booking'] = "off";
                 }
@@ -39,7 +41,7 @@ class Passenger extends Controller
                 try {
                     $count = 0;
                     if (isset(Auth::reservation()['reservation_id']['from']) && count(Auth::reservation()['reservation_id']['from']) == Auth::reservation()['no_of_passengers']) {
-                        
+
                         // upload warrant img
                         $warrant_image_id = null;
                         $warrant_temp_id = null;
@@ -62,7 +64,6 @@ class Passenger extends Controller
                             // get warrant tempory warrant id
                             $warrant_temp_id = Auth::getTempReservationId();
                         }
-
 
                         // loop thourugh from reservation id's
                         foreach (Auth::reservation()['reservation_id']['from'] as $key => $reservation_id) {
@@ -93,7 +94,7 @@ class Passenger extends Controller
                                 // if warrant image is null throw an execption
                                 if ($warrant_image_id == null) {
                                     throw new Exception("Error in warrant image upload. Please try again.");
-                                }else{
+                                } else {
                                     $warrant_reservation = new WarrantsReservations();
                                     $warrant_reservation->update($reservation_id, ['warrant_image_id' => $warrant_image_id, 'warrant_status' => 'Approval Pending'], 'warrant_reservation_id');
 
@@ -101,7 +102,7 @@ class Passenger extends Controller
                                 }
                             }
 
-                            
+
                             $count++;
                         }
 
@@ -144,6 +145,17 @@ class Passenger extends Controller
                                 $count++;
                             }
                         }
+
+                        // if in waitnig list remove from waiting list
+                        $waiting_list = new WaitingLists();
+                        $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+                        $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+                        $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+                        $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
+
+                        if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                            $waiting_list->removeFromWaitingList($waiting_list_arr);
+                        }
                     } else {
                         $data['errors'][] = "Error in reservation id doesn't match with passenger count. Please try again.";
                     }
@@ -152,15 +164,40 @@ class Passenger extends Controller
                 }
 
                 // if redirect according to the reservation type
-                if(empty($data['errors'])){
-                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {    
+                if (empty($data['errors'])) {
+
+                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                        // send email to each email
+                        foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+                            $to_email = $email;
+                            $subject = "Warrant Reservation Request";
+                            $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
+
+                            $messege = "<p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#999999;font-size:18px\" class=\"p_description\"><p>We are pleased to inform you that your Warrant Reservation Request has been successfully submitted. Your booking details are now in our system.</p>
+                            <p>You can expect to receive a confirmation email within 2-3 business days, containing all the necessary information regarding your reservation.</p>
+                            <p>If you have any questions or need further assistance, feel free to <a href=\"mailto:" . EMAIL . "\">contact us</a>.</p>";
+
+                            $message = Auth::getEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key], $messege);
+
+                            $this->sendMail($to_email, $recipient, $subject, $message);
+                        }
+
+                        // if in waitnig list remove from waiting list
+                        $waiting_list = new WaitingLists();
+                        $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+                        $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+                        $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+                        $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
+
+                        if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                            $waiting_list->removeFromWaitingList($waiting_list_arr);
+                        }
+
                         $this->view('passenger.warrant');
-    
                     } else {
                         $this->redirect('passenger/billing');
                     }
                 }
-
             } else {
                 $data['errors'] = $reservation->__get('errors');
             }
@@ -184,7 +221,7 @@ class Passenger extends Controller
 
 
         if (isset($_SESSION['reservation']['passenger_data']) && !empty($_SESSION['reservation']['passenger_data'])) {
-           
+
             $this->view('passenger.billing.summary', $data);
         } else {
             $this->redirect('home');
@@ -244,7 +281,18 @@ class Passenger extends Controller
             // add reservation data to session['reservation']
             $_SESSION['reservation']['reservation_status'] = "Reserved";
 
-            
+            // if in waitnig list remove from waiting list
+            $waiting_list = new WaitingLists();
+            $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+            $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+            $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+            $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
+
+            if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                $waiting_list->removeFromWaitingList($waiting_list_arr);
+            }
+
+
             $this->redirect('passenger/summary');
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -264,59 +312,58 @@ class Passenger extends Controller
             if (!array_key_exists('errors', $data)) {
                 // print_r($data);
 
-                    try {
+                try {
 
-                        $user = new Users();
-                        $user_id = $user->insert(array(
-                            'user_title' => $_POST['user_title'],
-                            'user_first_name' => $_POST['user_first_name'],
-                            'user_last_name' => $_POST['user_last_name'],
-                            'user_phone_number' => $_POST['user_phone_number'],
-                            'user_type' => "passenger",
-                            'user_gender' => $_POST['user_gender'],
-                            'user_email' => $_POST['user_email'],
-                            'user_nic' => $_POST['user_nic']
+                    $user = new Users();
+                    $user_id = $user->insert(array(
+                        'user_title' => $_POST['user_title'],
+                        'user_first_name' => $_POST['user_first_name'],
+                        'user_last_name' => $_POST['user_last_name'],
+                        'user_phone_number' => $_POST['user_phone_number'],
+                        'user_type' => "passenger",
+                        'user_gender' => $_POST['user_gender'],
+                        'user_email' => $_POST['user_email'],
+                        'user_nic' => $_POST['user_nic']
+                    ));
+
+                    $login = new Logins();
+                    $login->insert(array(
+                        'login_username' => $_POST['login_username'],
+                        'login_password' => md5($_POST['login_password']),
+                        'user_id' => $user_id
+                    ));
+
+
+
+                    $passenger = new Passengers();
+                    $passenger->insert(array(
+                        'passenger_id' => $user_id,
+                        'passenger_email' => $_POST['user_email'],
+                        'passenger_nic' => $_POST['user_nic']
+                    ));
+
+                    $image = new Images();
+
+                    if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] == 0) {
+                        $image_file = $this->setPrivateImage('userImg', $_FILES['user_image']);
+
+                        $image->insert(array(
+                            'user_id' => $user_id,
+                            'image_name' => $image_file['image_name'],
+                            'image_path' => $image_file['image_path'],
+                            'image_type' => $image_file['image_type']
                         ));
-
-                        $login = new Logins();
-                        $login->insert(array(
-                            'login_username' => $_POST['login_username'],
-                            'login_password' => md5($_POST['login_password']),
-                            'user_id' => $user_id
+                    } else {
+                        $image->insert(array(
+                            'user_id' => $user_id,
+                            'image_name' => 'default.jpg',
+                            'image_path' => 'userImg/default.jpg',
+                            'image_type' => 'image/jpg'
                         ));
-
-
-
-                        $passenger = new Passengers();
-                        $passenger->insert(array(
-                            'passenger_id' => $user_id,
-                            'passenger_email' => $_POST['user_email'],
-                            'passenger_nic' => $_POST['user_nic']
-                        ));
-
-                        $image = new Images();
-
-                        if (isset($_FILES['user_image']) && $_FILES['user_image']['error'] == 0) {
-                            $image_file = $this->setPrivateImage('userImg', $_FILES['user_image']);
-
-                            $image->insert(array(
-                                'user_id' => $user_id,
-                                'image_name' => $image_file['image_name'],
-                                'image_path' => $image_file['image_path'],
-                                'image_type' => $image_file['image_type']
-                            ));
-                        } else {
-                            $image->insert(array(
-                                'user_id' => $user_id,
-                                'image_name' => 'default.jpg',
-                                'image_path' => 'userImg/default.jpg',
-                                'image_type' => 'image/jpg'
-                            ));
-                        }
-
-                    } catch (PDOException $e) {
-                        die($e->getMessage());
                     }
+                } catch (PDOException $e) {
+                    die($e->getMessage());
+                }
 
                 $this->redirect('login');
             } else {
@@ -352,7 +399,7 @@ class Passenger extends Controller
             $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
             $message = Auth::getReservationConfirmationEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key]);
 
-            $this->sendMail($to_email,$recipient, $subject, $message);
+            $this->sendMail($to_email, $recipient, $subject, $message);
         }
     }
 
@@ -363,6 +410,10 @@ class Passenger extends Controller
         $reservation = new Reservations();
         $data['reservations'] = $reservation->getReservations($id);
         $data['cancelled_reservations'] = $reservation->getReservations($id, 'Cancelled');
+
+        // waiting list
+        $waiting_list = new WaitingLists();
+        $data['waiting_list_reservations'] = $waiting_list->getWaitingListPassenger($id);
 
         $this->view('passenger.reservations', $data);
     }
@@ -377,6 +428,7 @@ class Passenger extends Controller
     }
 
     // recancel reservation
+
 
 
     // show reservation

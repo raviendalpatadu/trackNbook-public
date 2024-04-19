@@ -59,12 +59,12 @@ elseif (Auth::getuser_type() == "train_driver") {
         <?php } ?>
       </div>
     </div> -->
-    <label class="burger" for="burger">
-      <input type="checkbox" id="burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
+      <label class="burger" for="burger">
+        <input type="checkbox" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
 
     <div class="brand-text">TrackNBook</div>
 

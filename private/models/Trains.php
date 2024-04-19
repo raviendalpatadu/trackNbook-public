@@ -331,10 +331,10 @@ class Trains extends Model
                             AND TS2.station_id = :to_station
                             
                             AND TS1.stop_no < TS2.stop_no
-                            AND reservation.compartment_total_seats > reservation.no_of_reservations
-                                                AND (compartment.compartment_total_seats - reservation.no_of_reservations) >= :no_of_passengers
+                            -- AND reservation.compartment_total_seats > reservation.no_of_reservations 
+                            -- AND (compartment.compartment_total_seats - reservation.no_of_reservations) >= :no_of_passengers
                             
-                            AND reservation.compartment_total_seats > reservation.no_of_reservations
+                            -- AND reservation.compartment_total_seats > reservation.no_of_reservations
                             
                             AND fare.fare_compartment_id = compartment.compartment_class_type
                             AND fare.fare_route_id = train.train_route

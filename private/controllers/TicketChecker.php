@@ -61,6 +61,10 @@ class TicketChecker extends Controller
     }
 
     function summary($id = ''){
+
+        if(!Auth::is_logged_in() || !Auth::isUserType('ticket_checker')){
+            $this->redirect('login');
+        }
         
         $resevation = new Reservations();
         $data = array();

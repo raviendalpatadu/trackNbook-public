@@ -303,13 +303,14 @@ function hello() {
 
 function getErrors(url, data, callback) {
   $.ajax({
-    url: url,
+    url: url, //<?= ROOT ?>home/validate
     type: "post",
-    data: data,
+    data: data, //formData
     success: function (data, status) {
       // console.log(data);
 
       var res = JSON.parse(data);
+
 
       // if res has error throw an error
       if (res == true) {
@@ -361,7 +362,6 @@ function changeImage(imageInput, imageBox) {
 // make popup box
 
 function makePopupBox(title, description, buttonText, imgURL, action) {
-
   if ($(".main-popup-box").length) {
     return;
   }
@@ -386,11 +386,10 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
   button.on("click", function () {
     popupBox.remove();
 
-    if(action){
+    if (action) {
       action(true);
     }
   });
-
   // if you click outside the popup box it will remove the box
   popupBox.on("click", function (e) {
     if (e.target == popupBox[0]) {
@@ -399,6 +398,68 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
   });
 }
 
+// make popup box model with close btn
+function makePopupModel(title, description, buttons, imgURL, action) {
+  if ($(".main-popup-box").length) {
+    return;
+  }
+
+  if (!buttons) {
+    buttons = ["Close", "Ok"];
+  }
+  var popupBox = $("<div/>").addClass("main-popup-box").appendTo("body");
+  var box = $("<div/>").addClass("box").appendTo(popupBox);
+  var heading = $("<h2/>").addClass("heading").appendTo(box);
+  var body = $("<div/>").addClass("body").appendTo(box);
+  var img = $("<img/>").addClass("img").appendTo(body);
+  var desc = $("<p/>").addClass("desc").appendTo(body);
+
+  // print the buttons
+  var btnBox = $("<div/>").addClass("footer d-flex g-5 justify-content-end").appendTo(box);
+  if (buttons.length > 0) {
+    buttons.forEach((button) => {
+      var btn = $("<button/>").addClass('model-btn').appendTo(btnBox);
+      // var buttonBase = $("<div/>").addClass("button-base").appendTo(btn);
+      var buttonText = $("<div/>").addClass("text").appendTo(btn);
+      buttonText.text(button);
+    });
+  }
+
+  // close button
+  var closeBtn = $("<button/>").addClass('model-btn').appendTo(btnBox);
+  var closeButtonText = $("<div/>").addClass("text").appendTo(closeBtn);
+  closeBtn.attr("id", "closeModelBtn");
+  closeButtonText.text("Close");
+
+
+  heading.text(title);
+  img.attr("src", imgURL);
+  desc.html(description);
+
+  // if you click outside the popup box it will remove the box
+  popupBox.on("click", function (e) {
+    if (e.target == popupBox[0]) {
+      popupBox.remove();
+    }
+  });
+
+  // if clicked on the close button
+  closeBtn.on("click", function () {
+    popupBox.remove();
+  });
+
+  // add click event to the buttons
+  var btns = $("button.model-btn");
+  btns.each(function (index, element) {
+    console.log(element);
+    $(element).on("click", function (e) {  
+      e.preventDefault();    
+      if (action) {
+        action(popupBox);
+      }
+    });
+  });
+}
 
 // var shown = false;
 // setInterval(function () {
@@ -455,11 +516,11 @@ function makePopupBox(title, description, buttonText, imgURL, action) {
 //   });
 // }, 1000);
 
-
 // mobile hamburger menu
 var checkboxBurger = $("#burger");
 
 checkboxBurger.click(function () {
+  console.log("clicked"); 
   if (checkboxBurger.is(":checked")) {
     $(".nav-menu-items").addClass("nav-menu-items-show");
   } else {
@@ -472,34 +533,36 @@ $(window).on("load", function () {
   $(".loader__main").fadeOut();
 });
 
-
-function makeCalendar(id, startDate, endDate){
+function makeCalendar(id, startDate, endDate) {
   // if start date is not provided
   var element = $(id);
 
-  if(!element.hasClass("calendar-none")){
+  if (!element.hasClass("calendar-none")) {
     element.addClass("calendar-none");
   }
-  if(!startDate){
+  if (!startDate) {
     startDate = moment();
   }
 
   // if end date is not provided
-  if(!endDate){
-    endDate = moment().add(1, 'months');
+  if (!endDate) {
+    endDate = moment().add(1, "months");
   }
 
-  $(id).daterangepicker({
-    "singleDatePicker": true,
-        "autoApply": true,
-        "linkedCalendars": false,
-        "autoUpdateInput": false,
-        "showCustomRangeLabel": false,
-        "alwaysShowCalendars": true,
-        "minDate": startDate.format('MM/DD/YYYY'),
-        "maxDate": endDate.format('MM/DD/YYYY'),
-        "opens": "center"
-  }, function(start, end, label) {
-    $(id).val(start.format('YYYY-MM-DD'));
-  });
+  $(id).daterangepicker(
+    {
+      singleDatePicker: true,
+      autoApply: true,
+      linkedCalendars: false,
+      autoUpdateInput: false,
+      showCustomRangeLabel: false,
+      alwaysShowCalendars: true,
+      minDate: startDate.format("MM/DD/YYYY"),
+      maxDate: endDate.format("MM/DD/YYYY"),
+      opens: "center",
+    },
+    function (start, end, label) {
+      $(id).val(start.format("YYYY-MM-DD"));
+    }
+  );
 }

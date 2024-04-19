@@ -10,6 +10,7 @@ class Profile extends Controller
     {
         $user = new Users();
         $errors = array();
+        // echo $_SESSION['USER']->user_id;
 
         if (isset($_POST['update'])) {
             try {
@@ -44,8 +45,8 @@ class Profile extends Controller
 
 
                             $image = new Images();
-                            
-                            
+
+
                             $image_file = $this->setPrivateImage('userImg', $_FILES['user_image'], $user->getUserImage($data['user_id']));
 
                             $image->update($data['user_id'], array(
@@ -68,5 +69,44 @@ class Profile extends Controller
         }
 
         $this->view('profile');
+    }
+
+    function delete($id = '')
+    {
+        $user = new Users();
+        try {
+            $user->delete(Auth::getUser_Id(), 'user_id');
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        session_destroy();
+        $this->redirect('login');
+    }
+
+    function changePasswordValidate(){
+        
+        $login = new Logins();
+        if ($login->changePasswordValidate($_POST)) :
+            echo json_encode(true);
+        else :
+            echo json_encode($login->errors);
+        endif;
+
+        // echo json_encode($login->changePasswordValidate($_POST));
+
+    }
+
+    function changePassword()
+    {
+
+        $login = new Logins();
+        try {
+            $login->update(Auth::getUser_Id(), array(
+                'login_password' => md5($_POST['new_password'])
+            ), 'user_id');
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        echo json_encode(true);
     }
 }

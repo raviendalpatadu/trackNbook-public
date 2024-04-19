@@ -289,4 +289,20 @@ class Train extends Controller
 
         $this->view('add.trains', $data);
     }
+
+    public function addToWaitingList(){
+        $waitingList = new WaitingLists();
+        
+        if ($waitingList->validate($_POST)) :
+            try {
+                $waitingList->insert($_POST);
+                echo json_encode(true);
+            } catch (PDOException $e) {
+
+                echo json_encode($e);
+            }
+        else :
+            echo json_encode($waitingList->errors);
+        endif;
+    }
 }
