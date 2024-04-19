@@ -1,8 +1,8 @@
 <?php
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
 ?>
 
@@ -33,7 +33,7 @@
                                             <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Price</p>
-                                                <p class="width-fill"><?= number_format(floatval(1000), 2) ?></p>
+                                                <p class="width-fill">1500</p>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Train No</p>
@@ -61,14 +61,14 @@
                                             </div>
                                             <div class="d-flex">
                                                 <p class="width-fill heading">No of Passengers</p>
-                                                <p class="width-fill"><?= count($data['reservations']) ?></p>
+                                                <p class="width-fill"><?= str_pad(count($data['reservations']), 2, "0", STR_PAD_LEFT) ?></p>
                                             </div>
 
                                         </div>
                                     </div>
 
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <div id="from_qr_code"></div>
+                                        <div id="qr_code"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column align-items-start g-10 passenger-compartment-details">
@@ -142,3 +142,14 @@
 </body>
 
 </html>
+<script>
+     $('#qr_code').empty();
+                        var qrcode = new QRCode("qr_code", {
+                            text: 'localhost/trackNbook/public/ticketchecker/summary/'+ data[0].reservation_ticket_id,
+                            width: 128,
+                            height: 128,
+                            colorDark: "#324054",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+</script>

@@ -810,4 +810,67 @@ video {
 
 .menu-icon input:checked ~ span:nth-of-type(3) {
   transform: rotate(-45deg);
+}
+
+.mou-text_price {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "DM sans";
+}
+
+.mou-warrant_imgCard {
+  background: rgb(255, 255, 255);
+  padding: 20px 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
+  border-radius: 8px 8px 0 0;
+}
+
+.mou-warrant_Card {
+  width: 25vw;
+  background: rgb(255, 255, 255);
+  padding: 20px 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
+  border-radius: 8px 8px 0 0;
+}
+
+.mou-ticket-details-warrant {
+  gap: 32px;
+}
+
+.mou-warrant_image_width {
+  max-width: 730px;
+}
+
+.mou-reject_form {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 30px 30px -30px rgba(27, 26, 26, 0.315);
+}
+
+.mou-reject_form .title {
+  color: royalblue;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mou-reject_form textarea {
+  border-radius: 8px;
+  height: 100px;
+  width: 100%;
+  resize: none;
+  outline: 0;
+  padding: 8px 14px;
+  border: 1px solid rgb(219, 213, 213);
 }/*# sourceMappingURL=moushika.css.map */

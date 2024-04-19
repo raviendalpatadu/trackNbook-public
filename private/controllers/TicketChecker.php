@@ -72,6 +72,10 @@ class TicketChecker extends Controller
 
     function QR($id = '')
     {
+         
+        $resevation = new Reservations();
+        $data = array();
+        $data['reservations'] = $resevation->getReservationDataTicket($id);
 
         $this->view('QRSearch.ticketchecker');
     }
