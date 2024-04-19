@@ -17,5 +17,22 @@ class TrainStopStations extends Model
         return $this->query($query, ['train_id' => $train_id]);
     }
 
-   
+    public function getTrainStopStationNames($train_id)
+    {
+        $query = "SELECT * FROM $this->table tss
+        JOIN tbl_station s ON s.station_id = tss.station_id
+         WHERE tss.train_id = :train_id
+         Group BY tss.station_id;";
+
+        return $this->query($query, ['train_id' => $train_id]);
+    }
+
+    public function updateStopStation($station_id)
+    {
+        $query = "UPDATE tbl_train_location tl
+        JOIN $this->table tss ON tl.train_location = tss.station_id
+        SET tl.station_id = :station_id
+        WHERE tss.train_id = :train_id";
+        return $this->query($query, ['station_id' => $station_id]);
+    }
 }

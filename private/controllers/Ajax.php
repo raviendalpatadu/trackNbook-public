@@ -43,8 +43,6 @@ class Ajax extends Controller
         $user = new Users();
         $result = $user->findAll();
 
-       
-
         echo json_encode($result); // Wrap the output array inside a "data" key
     }
 
@@ -58,4 +56,23 @@ class Ajax extends Controller
         echo json_encode($data);
     }
 
+
+    public function getTrains()
+    {
+        $train = new Trains();
+        $data = array();
+        $data = $train->findAllTrains();
+
+        echo json_encode($data); 
+    }
+
+    public function updateLocation()
+    {
+        $train = new Trains();
+        $data = array();
+        $data['train'] = $train->whereOne('train_id', $_POST['train_id']);
+        $train_stop_station = new TrainStopStations();
+        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($_POST['train_id']);
+        echo json_encode($data);
+    }
 }
