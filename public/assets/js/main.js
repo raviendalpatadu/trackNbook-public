@@ -282,6 +282,7 @@ domReady(function () {
     // alert("You Qr is : " + decodeText);
 
     // redirect to decodetext
+    // http://localhost/trackNbook/public/traindriver/addlocation/342
     window.location.replace(decodeText);
   }
 

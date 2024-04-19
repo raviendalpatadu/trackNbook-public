@@ -104,6 +104,42 @@ class Trains extends Model
         }
     }
 
+    public function findTrain($trainId)
+    {
+
+        try {
+
+
+            // Insert query to search train based on trainId
+            $query = "SELECT
+                            tbl_train.*,
+                            start.station_name AS start_station,
+                            end.station_name AS end_station
+                        FROM
+                            tbl_train
+                        JOIN
+                            tbl_station AS start ON tbl_train.train_start_station = start.station_id
+                        JOIN
+                            tbl_station AS end ON tbl_train.train_end_station = end.station_id
+                            
+                        WHERE
+                            tbl_train.train_id = :train_id;"; // Add WHERE condition to filter by trainId
+            $result = $this->query(
+                $query,
+                array(
+                    'train_id' => $trainId
+                )
+            );
+            
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        if ($result > 0) {
+            return $result;
+        }
+    }
+
     public function validate($values = array())
     {
 
@@ -307,12 +343,15 @@ class Trains extends Model
                             ORDER BY train.train_start_time, compartment_type.compartment_class_type_id ASC";
 
 
-                $data = $this->query($query, array(
-                    'from_station' => $values['from_station']->station_id,
-                    'to_station' => $values['to_station']->station_id,
-                    'from_date' => $values['from_date'],
-                    'no_of_passengers' => $values['no_of_passengers']
-                ));
+                $data = $this->query(
+                    $query,
+                    array(
+                        'from_station' => $values['from_station']->station_id,
+                        'to_station' => $values['to_station']->station_id,
+                        'from_date' => $values['from_date'],
+                        'no_of_passengers' => $values['no_of_passengers']
+                    )
+                );
             } catch (PDOException $e) {
                 die($e->getMessage());
             }
@@ -452,11 +491,14 @@ class Trains extends Model
 
                 . " WHERE r.reservation_train_id = :train_id AND r.reservation_compartment_id = :class AND r.reservation_date = :date";
 
-            $data = $this->query($query, array(
-                'train_id' => $train_id,
-                'class' => $class_id,
-                'date' => $date
-            ));
+            $data = $this->query(
+                $query,
+                array(
+                    'train_id' => $train_id,
+                    'class' => $class_id,
+                    'date' => $date
+                )
+            );
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -469,7 +511,7 @@ class Trains extends Model
     public function getTrain($id)
     {
         try {
-           
+
 
             //insert query to search train must come form route
             $query = "SELECT\n"
@@ -498,16 +540,19 @@ class Trains extends Model
 
                 . "	tbl_train.train_id = :train_id LIMIT 1";
 
-            $data = $this->query($query, array(
-                'train_id' => $id
-            ));
-            
+            $data = $this->query(
+                $query,
+                array(
+                    'train_id' => $id
+                )
+            );
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
 
-        
-            return $data;
+
+        return $data;
     }
 
     public function updateTrain($id, $data)

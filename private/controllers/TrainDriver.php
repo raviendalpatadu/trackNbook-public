@@ -18,13 +18,25 @@ class TrainDriver extends Controller
     }
     function updateLocation($id = '')
     {
+        $train = new Trains();
+        $data = array();
+        $data['train'] = $train->whereOne('train_id', $id);
 
         $this->view('update.location');
     }
-    function addLocation($id = '')
-    {
 
-        $this->view('add.location');
+
+
+    function addLocation($id='')
+    {
+        $train = new Trains();
+        $data = array();
+        $data['train'] = $train->findTrain($id)[0];
+
+        $train_stop_station = new TrainStopStations();
+        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($id);
+
+        $this->view('add.location', $data);
     }
 
     function scanLocation($id = '')
@@ -35,8 +47,9 @@ class TrainDriver extends Controller
 
     function qr()
     {
-        $this->view('QRSearch.traindriver.view');
+        $this->view('QRSearch.traindriver');
     }
+
     function idoption($id = '')
     {
          
