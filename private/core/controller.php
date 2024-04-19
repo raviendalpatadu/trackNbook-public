@@ -119,7 +119,7 @@ class Controller
                 return true;
             }
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }   
     }
 }

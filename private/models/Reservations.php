@@ -104,12 +104,12 @@ class Reservations extends Model
         }
         return $result;
     }
-    public function getReservations($id , $type = '')
+    public function getReservations($id, $type = '')
     {
 
         try {
             $table = 'tbl_reservation';
-            if(strtolower($type) == 'cancelled'){
+            if (strtolower($type) == 'cancelled') {
                 $table = 'tbl_reservation_cancelled';
             }
 
@@ -155,7 +155,7 @@ class Reservations extends Model
             return 'false';
         }
         $table = 'tbl_reservation';
-        if(strtolower($type) == 'cancelled'){
+        if (strtolower($type) == 'cancelled') {
             $table = 'tbl_reservation_cancelled';
         }
         try {
@@ -220,5 +220,72 @@ class Reservations extends Model
 
 
     // cancel reservation
+
+
+    //refund
+    public function getRefund($reservation_id, $total_fare_amount)
+    {
+
+        try {
+            $data = $this->getReservationDataTicket($reservation_id);
+            
+
+            $refundedAmount = 0;
+            // $remainTime= $data[0]->estimated_departure_time - $data[0]->reservation_created_time;
+            $reservation_depature_date = new DateTime($data[0]->reservation_date);
+            $reservation_time = new DateTime($data[0]->estimated_departure_time);
+
+            $time_hour = $reservation_time->format('H');
+            $time_minute = $reservation_time->format('i');
+            $time_second = $reservation_time->format('s');
+
+            // Combine date and time
+            $reservation_depature_date->setTime($time_hour, $time_minute, $time_second);
+            // echo "<pre>";
+            // print_r($reservation_depature_date);
+            // echo "</pre>";
+
+            $reservation_created_time = new DateTime($data[0]->reservation_created_time);
+            // echo "<pre>";
+            // print_r($reservation_created_time);
+            // echo "</pre>";
+
+            
+            // get the differencr in total hours
+            $remainTime = $reservation_depature_date->diff($reservation_created_time);
+
+            
+
+             $remainTime = hms_date_diff($remainTime);
+
+            // $remainTime = $remainTime->format('%h');
+            // echo "remainging time : " . $remainTime;
+        //    echo "<pre>";
+        //     var_dump($remainTime);
+        //     echo "</pre>";
+
+            if ($remainTime > 168) {
+                $refundedAmount =  $total_fare_amount * 0.75;
+            } elseif ($remainTime > 48) {
+                $refundedAmount = $total_fare_amount * 0.50;
+            } else {
+                $refundedAmount = 0;
+            }
+
+           return $refundedAmount;
+           
+          
+         
+
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // getRefundDetails oka haddnna 
+    // eya reservation id eka, total_fare_amount
+
+    // return 
 
 }

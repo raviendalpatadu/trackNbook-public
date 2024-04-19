@@ -1,4 +1,9 @@
 <?php $this->view("./includes/header"); ?>
+<?php
+echo "<pre>";
+print_r( $data);
+echo "</pre>";
+?>
 
 <body class=" ">
     <?php $this->view("./includes/mobile-navbar") ?>
@@ -43,5 +48,7 @@
 </html>
 
 <script src="https://unpkg.com/html5-qrcode">
+   
+    
 </script>
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->

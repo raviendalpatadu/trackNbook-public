@@ -69,8 +69,6 @@ function is_set($data)
         return $data;
     }
     return '';
-
-    
 }
 function getRadioSelect($data, $value)
 {
@@ -130,7 +128,33 @@ function getImage($data = '')
 
 function getPrivateImage($controller, $functionName, $data)
 {
-    return ROOT .  $controller . "/" .$functionName ."/" . $data;
+    return ROOT .  $controller . "/" . $functionName . "/" . $data;
+}
+
+function get_data_view($data, $key)
+{
+    // check if $data is array
+    if (is_array($data)) {
+        if (isset($data[$key])) {
+            return $data[$key];
+        }
+    } else if (is_object($data)) {
+        if (isset($data->$key)) {
+            return $data->$key;
+        }
+    }
+    return '';
 }
 
 
+function hms_date_diff(DateInterval $date_diff)
+{
+    $total_days = $date_diff->days;
+    $hours      = $date_diff->h;
+    if ($total_days !== FALSE) {
+        $hours += 24 * $total_days;
+    }
+    $minutes    = $date_diff->i;
+    $seconds    = $date_diff->s;
+    return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+}

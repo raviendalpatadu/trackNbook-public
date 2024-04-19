@@ -7,10 +7,10 @@
 
 // echo "</pre>";
 
-// echo "<pre>";
-// print_r($data);
-// print_r($_POST);
-// echo "</pre>";
+//echo "<pre>";
+//print_r($data);
+//print_r($_POST);
+//echo "</pre>";
 
 
 
@@ -40,21 +40,15 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                         </div>
                         <form class="mt-30" action="" method="post">
                             <div class="row mb-30 g-20">
-                                <div class="col-3">
+                            <div class="col-3">
                                     <div class="text-inputs">
-                                        <div class="input-text-label text lightgray-font">Train</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id" placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
-                                                <?php foreach ($data['trains'] as $key => $value) : ?>
-                                                    <option value="<?= $value->train_id ?>" <?php get_select('reservation_train_id', $value->train_id) ?>> <?= $value->train_name . ' (' . $value->start_station . '-' . $value->end_station . ')' ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                        <div class="input-text-label text lightgray-font">Ticket ID</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('reservation_ticket_id', '') ?>" name="reservation_ticket_id">
+                                            </div>
                                         </div>
-
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?></div>
+                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -103,10 +97,10 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             <table class="table bg-white">
                                 <thead>
                                     <tr class="row p-20 align-items-center justify-content-center">
-                                        <th class="col-3 ">NIC</th>
                                         <th class="col-3">Ticket ID</th>
-                                        <th class="col-2">Date</th>
+                                        <th class="col-3 ">NIC</th>
                                         <th class="col-3">Passenger</th>
+                                        <th class="col-2">Date</th>
                                         <!-- <th class="col-2">Class</th> -->
                                         <th class="col-1"></th>
                                     </tr>
@@ -115,10 +109,10 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     <?php if (!empty($data['reservations'])) : ?>
                                         <?php foreach ($data['reservations'] as $key => $reservation) : ?>
                                             <tr class=" row p-20">
-                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
                                                 <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
-                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
+                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
                                                 <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
+                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
                                                 <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->
                                                 <td class="col-1 d-flex align-items-center g-20">
                                                     <!-- <div class="badge-base bg-light-green">

@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 
 if (isset($data['reservations']) && $data['reservations'] != 0) {
@@ -13,7 +13,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 ?>
 <?php $this->view("./includes/header") ?>
 
-<body>
+<body class="bg">
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
@@ -32,21 +32,15 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
                         <form class="mt-30" action="" method="post">
                             <div class="row mb-30 g-10">
-                                <div class="col-3">
+                            <div class="col-3">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Train</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="reservation_train_id" placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
-                                                <?php foreach ($data['trains'] as $key => $value) : ?>
-                                                    <option value="<?= $value->train_id ?>" <?php get_select('reservation_train_id', $value->train_id) ?>><?= $value->train_name. ' ('.$value->start_station .'-'. $value->end_station.')'?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                                        <div class="input-text-label text lightgray-font">Temporary Ticket ID</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('reservation_ticket_id', '') ?>" name="reservation_ticket_id">
+                                            </div>
                                         </div>
-
-                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?></div>
+                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -91,7 +85,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                 <div class="row">
                     <div class="col-12">
 
-                        <table class="">
+                        <table class="bg-white">
                             <thead>
                                 <tr class="row p-20">
                                     <th class="col-3 d-flex align-items-center">Name</th>
@@ -123,11 +117,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                 <div class="dot">
                                                     <div class="dot4"></div>
                                                 </div>
-                                                <div class="text blue "><a href="<?= ROOT ?>staffticketing/displayWarrent/<?= $data['reservations'][$reservation]->warrant_id ?>">View </div> </a>
+                                                <div class="text blue "><a href="<?= ROOT ?>staffticketing/displayWarrent/<?= $data['reservations'][$reservation]->warrant_id . '/' . $data['reservations'][$reservation]->reservation_ticket_id ?>">View </div> </a>
                                             </div>
                                         </td>
                                     </tr>
-                                <?php endfor; ?>
+                                <?php endfor; ?>    
                                 <?php else :?>
                                     <div id="popupError">
 
