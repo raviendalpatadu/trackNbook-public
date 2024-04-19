@@ -111,9 +111,6 @@ class StaffGeneral extends Controller
                 $result = $train->updatetrain($id, $_POST);
 
                 if (isset($train->errors['errors'])) {
-                    // echo "<pre>";
-                    // print_r($train->errors['errors']);
-                    // echo "</pre>";
 
                     $data['errors'] = $train->errors['errors'];
 

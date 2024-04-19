@@ -598,10 +598,6 @@ class Trains extends Model
                     $data['stopping_station']['time_verified'] = array_values($data['stopping_station']['time']);
                 }
             }
-            
-            echo "<pre>";
-        print_r($data);
-        echo "</pre>";
 
             if($data['stopping_station']['time_verified'][0] != $data['train_start_time']){
                 $this->errors['errors']['train_start_time'] = 'First stopping station time should be same as start time';
@@ -622,7 +618,13 @@ class Trains extends Model
             if($data['train_end_station'] != $data['stopping_station']['id'][count($data['stopping_station']['id']) - 1]){
                 $this->errors['errors']['train_end_station'] = 'Last stopping station should be same as end station';
             }
+        } 
+        
+        if (!isset($data['stopping_station']['id']) || empty($data['stopping_station']['id'])) {
+            $this->errors['errors']['stopping_station'] = 'Stopping station is required';
         }
+
+        
 
         if (empty($this->errors['errors'])) {
             try {
@@ -670,6 +672,7 @@ class Trains extends Model
                 }
 
                 return true; // Successful insertion
+                // die('update');
             } catch (PDOException $e) {
                 die ($e->getMessage());
             }

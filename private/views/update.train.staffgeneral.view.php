@@ -8,7 +8,7 @@ if (!isset($data['errors'])) {
 echo "<pre>";
 
 // print_r($_POST);
-print_r($data['errors']);
+// print_r($data['errors']);
 echo "</pre>";
 ?>
 
@@ -160,28 +160,29 @@ echo "</pre>";
                                     <div class="row g-20 mt-20 mb-20 ">
                                         <div class="col-12 ">
                                             <div class="input-text-label">Train Stoping stations</div>
+                                            <div class="assistive-text <?php echo (!array_key_exists('stopping_station', $data['errors'])) ? 'display-none' : ''; ?>">
+                                                <?php echo (isset($data['errors']) && array_key_exists('stopping_station', $data['errors'])) ? $data['errors']['stopping_station'] : ''; ?>
+                                            </div>
                                             <div class="train-stopping-stations mt-20 d-flex align-items-start g-20 flex-wrap justify-content-between">
                                                 <!-- <div class="d-flex g-20"> -->
-                                                    <?php $stop_staions = array_column($data['train_stop_stations'], 'station_id'); ?>
-                                                    <?php
-                                                    $stop_times = array_column($data['train_stop_stations'], 'train_stop_time');
-                                                    $count = 0;
-                                                    ?>
-                                                    <?php foreach ($data['route_stations'] as $key => $route_station) : ?>
-                                                        <div class="d-flex g-30"><!--train stop staion and stop time -->
-                                                            <div class="d-flex .flex-row g-5">(<?= $key + 1 ?>)
-                                                                <input type="checkbox" class="checkbox" name="stopping_station[id][]" value="<?= $route_station->station_id ?>" id="" <?php echo (in_array($route_station->station_id, $stop_staions)) ? "checked" : ""; ?>>
-                                                                <label for=""><?= $route_station->station_name ?></label>
-                                                            </div>
-
-                                                            <div class="d-flex g-5">
-                                                                <input type="time" name="stopping_station[time][]" class="type-here" placeholder="Type here" value="<?php echo (in_array($route_station->station_id, $stop_staions)) ? $stop_times[$count++] : ""; ?>">
-                                                            </div>
+                                                <?php $stop_staions = array_column($data['train_stop_stations'], 'station_id'); ?>
+                                                <?php
+                                                $stop_times = array_column($data['train_stop_stations'], 'train_stop_time');
+                                                $count = 0;
+                                                ?>
+                                                <?php foreach ($data['route_stations'] as $key => $route_station) : ?>
+                                                    <div class="d-flex g-30"><!--train stop staion and stop time -->
+                                                        <div class="d-flex .flex-row g-5">(<?= $key + 1 ?>)
+                                                            <input type="checkbox" class="checkbox" name="stopping_station[id][]" value="<?= $route_station->station_id ?>" id="" <?php echo (in_array($route_station->station_id, $stop_staions)) ? "checked" : ""; ?>>
+                                                            <label for=""><?= $route_station->station_name ?></label>
                                                         </div>
-                                                    <?php endforeach; ?>
+
+                                                        <div class="d-flex g-5">
+                                                            <input type="time" name="stopping_station[time][]" class="type-here" placeholder="Type here" value="<?php echo (in_array($route_station->station_id, $stop_staions)) ? $stop_times[$count++] : ""; ?>">
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
                                                 <!-- </div> -->
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -568,13 +569,13 @@ echo "</pre>";
         //if route is changed, change select values of start and end stations
         var routeId = $('select[name="train_route"]');
 
-        function changeSelect(routeId){
+        function changeSelect(routeId) {
             if (routeId != 0) {
                 $.ajax({
                     url: '<?= ROOT ?>/route/getRouteStations/' + routeId,
                     type: 'POST',
 
-                    success: function (data) {
+                    success: function(data) {
                         // console.log(data);
                         var route = JSON.parse(data);
                         // console.log(route);
@@ -613,13 +614,13 @@ echo "</pre>";
                         endList.empty();
                         $(startStation)
                             .find("option")
-                            .each(function () {
+                            .each(function() {
                                 startList.append($("<li />").append($("<a />").text($(this)
                                     .text())));
                             });
                         $(endStation)
                             .find("option")
-                            .each(function () {
+                            .each(function() {
                                 endList.append($("<li />").append($("<a />").text($(this)
                                     .text())));
                             });
@@ -628,19 +629,20 @@ echo "</pre>";
             }
         }
 
-         // Adding a change event handler
-         routeId.on('change', function(e){
+        // Adding a change event handler
+        routeId.on('change', function(e) {
             e.stopImmediatePropagation();
             changeSelect(routeId.val());
         });
 
-        var selectElement = $('select[name="train_route"] , select[name="start_station"] , select[name="end_station"]');
+        var selectElement = $('select[name="train_route"] , select[name="train_start_station"] , select[name="train_end_station"]');
 
         function showStopStations() {
+            console.log("mnfdsm,fsnmnfms");
             // This code will be executed when the value of the select element changes
             var routeId = $('select[name="train_route"]').val();
-            var startStationId = $('select[name="start_station"]').val();
-            var endStationId = $('select[name="end_station"]').val();
+            var startStationId = $('select[name="train_start_station"]').val();
+            var endStationId = $('select[name="train_end_station"]').val();
 
             // get route details
             if (routeId != 0 && startStationId != 0 && endStationId != 0) {
@@ -681,7 +683,7 @@ echo "</pre>";
         }
 
         // Adding a change event handler
-        selectElement.on('change', function(e){
+        selectElement.on('change', function(e) {
             e.stopImmediatePropagation();
             showStopStations();
         });
