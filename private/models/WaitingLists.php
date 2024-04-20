@@ -181,7 +181,7 @@ class WaitingLists extends Model
 
             if ($data) {
                 $query = "DELETE FROM tbl_waiting_list
-            WHERE
+            WHERE 
                 waiting_list_train_id = :waiting_list_train_id
                 AND waiting_list_compartment_id = :waiting_list_compartment_id
                 AND waiting_list_reservation_date = :waiting_list_reservation_date
