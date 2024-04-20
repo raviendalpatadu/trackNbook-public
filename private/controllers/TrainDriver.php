@@ -52,6 +52,15 @@ class TrainDriver extends Controller
 
     function idoption($id = '')
     {
+        if(!Auth::is_logged_in() || !Auth::isUserType('train_driver')){
+            $this->redirect('login');
+        }
+
+        if(!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')){
+            // get user id
+            $user_id = Auth::getUser_id();
+            $this->redirect('login/changepin/'.$user_id);
+        }
          
         $this->view('option.traindriver');
     }

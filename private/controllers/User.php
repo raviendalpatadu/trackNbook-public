@@ -30,10 +30,13 @@ class User extends Controller
         $data = array();
         $user = new Users();
 
-        if (isset($_POST['user_title'])) {
-            $data = $user->addUserValidateAdmin();
+        $station = new Stations();
+        $data['stations'] = $station->getStations();
 
-            if (!array_key_exists('errors', $data)) {
+        if (isset($_POST['user_title'])) {
+            // $data = ;
+
+            if ($user->addUserValidateAdmin()) {
 
                 try {
                     $user = new Users();
@@ -54,6 +57,48 @@ class User extends Controller
                         'login_password' => md5($_POST['login_password']),
                         'user_id' => $user_id
                     ));
+
+                    // add to relavanet user table based on user type
+                    // station_master
+                    if($_POST["user_type"] == 'station_master'){
+                        $station_master = new StationMasters();
+                        $station_master->insert(array(
+                            'station_master_id' => $user_id,
+                            'station_master_station' => $_POST['station_master_station']
+                        ));
+                    }
+                    // train_driver
+                    else if($_POST["user_type"] == 'train_driver'){
+                        $pin_code = '0000';
+                        $hash_pin_code = md5($pin_code);
+
+                        $train_driver = new TrainDrivers();
+                        $train_driver->insert(array(
+                            'train_driver_id' => $user_id,
+                            'train_driver_pin_code' => $hash_pin_code
+                        ));
+                    }
+                    
+                    // staff_ticketing
+                    else if($_POST["user_type"] == 'staff_ticketing'){
+                        $staff_ticketing = new StaffTicketings();
+                        $staff_ticketing->insert(array(
+                            'staff_ticketing_id' => $user_id,
+                            'staff_ticketing_station' => $_POST['staff_ticketing_station']
+                        ));
+                    }
+
+                    // ticket_checker
+                    else if($_POST["user_type"] == 'ticket_checker'){
+                        $pin_code = '0000';
+                        $hash_pin_code = md5($pin_code);
+
+                        $ticket_checker = new TicketCheckers();
+                        $ticket_checker->insert(array(
+                            'ticket_checker_id' => $user_id,
+                            'ticket_checker_pin_code' => $hash_pin_code
+                        ));
+                    }
 
 
                     // check if files are set in $_FIlES
@@ -83,13 +128,9 @@ class User extends Controller
                     die($e->getMessage());
                 }
 
-                // $this->redirect('services/manage');
+                $this->redirect('services/manage');
             } else {
-                $errors['user_first_name'] = (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : '';
-                $errors['user_last_name'] = (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : '';
-                $errors['user_phone_number'] = (array_key_exists('user_phone_number', $data['errors'])) ? $data['errors']['user_phone_number'] : '';
-                $errors['login_username'] = (array_key_exists('login_username', $data['errors'])) ? $data['errors']['login_username'] : '';
-                $errors['login_password'] = (array_key_exists('login_password', $data['errors'])) ? $data['errors']['login_password'] : '';
+                $data['errors'] = $user->errors;
             }
         }
 

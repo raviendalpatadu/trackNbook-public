@@ -54,46 +54,27 @@ if (!isset($data['errors'])) {
                                         <div class="input-text-label">Title</div>
                                         <div class="width-fill">
                                             <select class="dropdown" placeholder="Please choose" name="user_title">
-                                                <option>Mr.</option>
-                                                <option>Mrs.</option>
-                                                <option>Miss.</option>
+                                                <option value="<?= get_select('user_email', 'Mr.') ?>">Mr.</option>
+                                                <option value="<?= get_select('user_email', 'Mrs.') ?>">Mrs.</option>
+                                                <option value="<?= get_select('user_email', 'Miss.') ?>">Miss.</option>
                                             </select>
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_title', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_title', $data['errors'])) ? $data['errors']['user_title'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="text-inputs">
                                         <div class="input-text-label">First Name</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_first_name">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="user_first_name" value="<?= get_var('user_first_name') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_first_name', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-5">
                                     <div class="text-inputs">
                                         <div class="input-text-label">Last Name</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_last_name">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="user_last_name" value="<?= get_var('user_last_name') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_last_name', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                             </div>
@@ -102,45 +83,24 @@ if (!isset($data['errors'])) {
                                     <div class="text-inputs">
                                         <div class="input-text-label">Staff NIC</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_nic">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="user_nic" value="<?= get_var('user_nic') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_nic', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_nic', $data['errors'])) ? $data['errors']['user_nic'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="text-inputs">
                                         <div class="input-text-label">Mobile</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_phone_number">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="user_phone_number" value="<?= get_var('user_phone_number') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_phone_number', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_phone_number', $data['errors'])) ? $data['errors']['user_phone_number'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="text-inputs">
                                         <div class="input-text-label">Email</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="user_email">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="user_email" value="<?= get_var('user_email') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('user_email', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('user_email', $data['errors'])) ? $data['errors']['user_email'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                             </div>
@@ -150,45 +110,24 @@ if (!isset($data['errors'])) {
                                     <div class="text-inputs">
                                         <div class="input-text-label">Username</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" name="login_username">
-                                            </div>
+                                            <input type="text" class="type-here" placeholder="Type here" name="login_username" value="<?= get_var('login_username') ?>">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('login_username', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_username', $data['errors'])) ? $data['errors']['login_username'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="text-inputs">
                                         <div class="input-text-label">Password</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="password" class="type-here" placeholder="Type here" name="login_password">
-                                            </div>
+                                            <input type="password" class="type-here" placeholder="Type here" name="login_password">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('login_password', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_password', $data['errors'])) ? $data['errors']['login_password'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="text-inputs">
                                         <div class="input-text-label">Confirm Password</div>
                                         <div class="input-field">
-                                            <div class="text">
-                                                <input type="password" class="type-here" placeholder="Type here" name="login_confirm_password">
-                                            </div>
+                                            <input type="password" class="type-here" placeholder="Type here" name="login_confirm_password">
                                         </div>
-                                        <?php if (isset($data['errors'])) : ?>
-                                            <div class="assistive-text <?php echo (!array_key_exists('login_confirm_password', $data['errors'])) ? 'display-none' : ''; ?>">
-                                                <?php echo (array_key_exists('login_confirm_password', $data['errors'])) ? $data['errors']['login_confirm_password'] : ''; ?>
-                                            </div>
-                                        <?php endif ?>
                                     </div>
                                 </div>
                             </div>
@@ -202,41 +141,45 @@ if (!isset($data['errors'])) {
                                 <div class="col-12 d-flex justify-content-start">
                                     <div class="radio-buttons-container">
                                         <div class="radio-button">
-                                            <input name="user_type" value="staff_ticketing" id="radio1" class="radio-button__input" type="radio">
-                                            <label for="radio1" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_type" value="staff_ticketing" id="radio1" class="radio-button__input" type="radio" <?= getRadioSelect('staff_ticketing', 'user_type') ?>>
+                                            <label for="radio1" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
                                                 Staff Ticketing
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="staff_general" id="radio2" class="radio-button__input" type="radio">
-                                            <label for="radio2" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_type" value="staff_general" id="radio2" class="radio-button__input" type="radio" <?= getRadioSelect('staff_general', 'user_type') ?>>
+                                            <label for="radio2" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
                                                 Staff General
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="train_driver" id="radio3" class="radio-button__input" type="radio">
-                                            <label for="radio3" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_type" value="train_driver" id="radio3" class="radio-button__input" type="radio" <?= getRadioSelect('train_driver', 'user_type') ?>>
+                                            <label for="radio3" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
                                                 Train Driver
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="ticket_checker" id="radio4" class="radio-button__input" type="radio">
-                                            <label for="radio4" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_type" value="ticket_checker" id="radio4" class="radio-button__input" type="radio" <?= getRadioSelect('ticket_checker', 'user_type') ?>>
+                                            <label for="radio4" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
                                                 Ticket Checker
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="station_master" id="radio7" class="radio-button__input" type="radio">
-                                            <label for="radio7" class="radio-button__label <?php echo (array_key_exists('user_type', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_type" value="station_master" id="radio7" class="radio-button__input" type="radio" <?= getRadioSelect('station_master', 'user_type') ?>>
+                                            <label for="radio7" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
                                                 Station Master
                                             </label>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 userTypeData">
                                 </div>
                             </div>
                             <br>
@@ -249,16 +192,16 @@ if (!isset($data['errors'])) {
                                 <div class="col-12 d-flex justify-content-start">
                                     <div class="radio-buttons-container">
                                         <div class="radio-button">
-                                            <input name="user_gender" value="male" id="radio5" class="radio-button__input" type="radio">
-                                            <label for="radio5" class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_gender" value="male" id="radio5" class="radio-button__input" type="radio" <?=getRadioSelect('male', 'user_gender')?>>
+                                            <label for="radio5" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
 
                                                 Male
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_gender" value="female" id="radio6" class="radio-button__input" type="radio">
-                                            <label for="radio6" class="radio-button__label <?php echo (array_key_exists('user_gender', $data['errors'])) ? 'red' : ''; ?>">
+                                            <input name="user_gender" value="female" id="radio6" class="radio-button__input" type="radio" <?=getRadioSelect('female', 'user_gender')?>>
+                                            <label for="radio6" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>
 
                                                 Female
@@ -304,20 +247,83 @@ if (!isset($data['errors'])) {
 
         // check errors key exists
         if (arr.hasOwnProperty('errors')) {
-            tag.each(() => {
-                console.log(tag[counter]);
-                if (tag[counter++].innerHTML != " ") {
-                    tag.parent().children('.input-field').addClass('border-red');
-                    tag.parent().children('.input-field').children('.text').children('.type-here').addClass('red');
-                    tag.parent().children('.input-text-label').addClass('red');
-                    tag.addClass('red');
+            printErrors(arr.errors);
+        }
+        // works only for staions nameAttr mus have the valuse on the name attribute in select box
+        function addNewDataToUserTypeData(nameAttr) {
+            // split the name attr by _ and drop the last element and make the first letter capital
+            var nametext = nameAttr.split('_').slice(0, -1).join(' ');
+            nametext = nametext.charAt(0).toUpperCase() + nametext.slice(1);
+            var errorDiv = '<div class="assistive-text"></div>';
+
+            var selectBox = `<div class="text-inputs">
+                                    <div class="input-text-label">` + nametext + ` Station</div>
+                                        <div class="width-fill">
+                                            <select class="input-field dropdown" name="` + nameAttr + `" placeholder="Please choose">
+                                            <option value="0">Please choose</option>
+                                            <?php foreach ($data['stations'] as $key => $value) : ?>
+                                                            <option value="<?= $value->station_id ?>">
+                                                                <?= $value->station_name ?>
+                                                            </option>
+                                            <?php endforeach; ?>
+                                            </select>                   
+                                        </div>
+                                        ` + errorDiv + `
+                                    </div>
+                                </div>`;
+
+            $('.userTypeData').append(selectBox);
+
+            $.ajax({
+                url: '<?= ROOT ?>ajax/getStation',
+                type: 'GET',
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    var select = $('select[name=' + nameAttr + ']');
+                    console.log(select);
+                    data.forEach(element => {
+                        select.append('<option value="' + element.station_id + '">' + element.station_name + '</option>');
+                    });
                 }
             });
         }
 
+                     
+        
+        var outputContainer = $('.userTypeData');
+        // if the user type is already selected, show the relevant input field
+        if ($('input[type=radio][name=user_type]:checked').val() == 'station_master') {
+            console.log($('input[type=radio][name=user_type]:checked').val());
+            addNewDataToUserTypeData('station_master_station');
+        } else if ($('input[type=radio][name=user_type]:checked').val() == 'staff_ticketing') {
+            addNewDataToUserTypeData('staff_ticketing_station');
+        }
+
+
+        // add a station_master_station input field if the user type is station_master
+        $('input[type=radio][name=user_type]').change(function() {
+
+            outputContainer.empty();
+            if (this.value == 'station_master') {
+                addNewDataToUserTypeData('station_master_station');
+            } else if (this.value == 'staff_ticketing') {
+                addNewDataToUserTypeData('staff_ticketing_station');
+            } else {
+                outputContainer.empty();
+            }
+
+            makeSelectDropdown(outputContainer);
+        });
+        makeSelectDropdown(outputContainer);
+
+
+
+
     });
 
-    changeImage('#userImage', '#imgDiv')
+
+
+    changeImage('#userImage', '#imgDiv');
 </script>
 
 </html>
