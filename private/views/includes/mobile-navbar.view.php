@@ -124,7 +124,7 @@ elseif (Auth::getuser_type() == "train_driver") {
 
 <div class="nav-menu-items px-50" id="menu items">
   <ul>
-    <?php foreach ($sidebar_list as $item) { ?>
+    <?php foreach ($sidebar as $item) { ?>
       <a href="<?= ROOT . $item['link'] ?>">
         <li> <?= $item['name'] ?></li>
       </a>

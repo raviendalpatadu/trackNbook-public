@@ -13,8 +13,14 @@ class TrainDriver extends Controller
     }
     function trainDelay($id = '')
     {
+        $train = new Trains();
+        $data = array();
+        $data['train'] = $train->findTrain($id)[0];
 
-        $this->view('update.train.delay');
+        $train_stop_station = new TrainStopStations();
+        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($id);
+
+        $this->view('update.train.delay',$data);
     }
     function updateLocation($id = '')
     {
