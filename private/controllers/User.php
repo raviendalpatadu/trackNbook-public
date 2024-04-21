@@ -123,6 +123,24 @@ class User extends Controller
                         ));
                     }
 
+                    $this->view('includes/loader');
+
+                    $to = $_POST['user_email'];
+                    $recipient = $_POST['user_first_name'] . " " . $_POST['user_last_name'];
+                    $subject = "Account Created";
+                    $message = "Your account has been created. Please login to the system using the following credentials.
+                                 <h3>Username: " . $_POST['login_username']. "<h3>
+                                 <h3>Password: " . $_POST['login_password']. "<h3>
+                                <br>
+                                Make sure to change your password after login.
+                                <br>
+                                <a href='http://localhost/Train-Booking-System/public/login/staff'>Click here to login</a>";
+
+                    $body = Auth::getEmailBody($recipient, $message);
+
+                    $this->sendMail($to,$recipient, $subject, $body);
+
+
 
                 } catch (PDOException $e) {
                     die($e->getMessage());
