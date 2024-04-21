@@ -145,7 +145,7 @@ echo "</pre>";
                                     <button id="toTrainBtn" class="train-available-btn bg-Selected-Blue">To Train</button>
                                 <?php endif; ?>
                             </div>
-                            <!-- <form action="<?= ROOT ?>/staffticketing/trainSelected" method="post" id="trainForm"> -->
+                            
                             <div class="d-flex flex-auto">
                                 <div id="fromTrains" class="flex-auto">
                                     <table class="bg-white flex-auto">
@@ -410,7 +410,9 @@ echo "</pre>";
     // when a compartment is selected on a from train
     $('#fromTrains .train_and_compartment').click(function() {
         var radio = $(this).find('input[type=radio]');
+        console.log(radio.val());
 
+        // add checked to the radio btn
         if (radio.prop('checked')) {
             radio.prop('checked', false);
         } else {
@@ -452,11 +454,12 @@ echo "</pre>";
     $('#trainsubmitbtn').click(function(e) {
         e.preventDefault();
 
-        var formData = $('form#trainForm').serialize();
+        var formData = $('form').serialize();
         // console.log(formData);
         getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
+            console.log(res);
             if (res == true) {
-                $('form#trainForm').submit();
+                $('form').submit();
             }
         });
     });

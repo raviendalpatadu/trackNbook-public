@@ -12,7 +12,7 @@ class StaffTicketing extends Controller
         $this->view('staff_ticketing.dashboard');
     }
 
-    
+
     function reservation($id = '')
     {
         $station = new Stations();
@@ -22,44 +22,42 @@ class StaffTicketing extends Controller
         $data['trains_available']['from_trains'] = array();
 
 
-        if (isset($_SESSION['reservation'])) {
-            if (isset(Auth::reservation()['reservation_status']) && Auth::reservation()['reservation_status'] == "Pending") {
-                $reservation = new Reservations();
-                try {
-                    foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
-                        $reservation->callProcedure('expire_reservation', array($value));
-                    }
+        // if (isset($_SESSION['reservation'])) {
+        //     if (isset(Auth::reservation()['reservation_status']) && Auth::reservation()['reservation_status'] == "Pending") {
+        //         $reservation = new Reservations();
+        //         try {
+        //             foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
+        //                 $reservation->callProcedure('expire_reservation', array($value));
+        //             }
 
-                    if (Auth::reservation()['return'] == 'on') {
-                        foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
-                            $reservation->callProcedure('expire_reservation', array($value));
-                        }
-                    }
+        //             if (Auth::reservation()['return'] == 'on') {
+        //                 foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+        //                     $reservation->callProcedure('expire_reservation', array($value));
+        //                 }
+        //             }
 
-                    
-                } catch (Exception $e) {
-                    die($e->getMessage());
-                }
-            }
 
-            unset($_SESSION['reservation']);
-        }
+        //         } catch (Exception $e) {
+        //             die($e->getMessage());
+        //         }
+        //     }
 
-        if (isset($_SESSION['errors'])) {
-            $data['errors'] = $_SESSION['errors'];
-            unset($_SESSION['errors']);
-        }
+        //     unset($_SESSION['reservation']);
+        // }
+
+        // if (isset($_SESSION['errors'])) {
+        //     $data['errors'] = $_SESSION['errors'];
+        //     unset($_SESSION['errors']);
+        // }
         // unset($_SESSION['error']);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['submit'])) {
-            
+
             $home = new Homes();
 
             if ($home->validate($_POST) == false) {
-
                 // concat 2 arrays
                 $data = array_merge($data, $home->errors);
-                $this->view('home', $data);
             } else {
 
                 $data['from_date'] = $_POST['from_date'];
@@ -77,6 +75,8 @@ class StaffTicketing extends Controller
                 $_SESSION['reservation'] = $data;
 
                 $train = new Trains();
+                $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
+
                 if (isset($data['to_date']) && $data['to_date'] != '') {
                     $inverse_search['from_station'] = $data['to_station'];
                     $inverse_search['to_station'] = $data['from_station'];
@@ -84,49 +84,365 @@ class StaffTicketing extends Controller
                     $inverse_search['no_of_passengers'] = $data['no_of_passengers'];
                     $data['trains_available']['to_trains'] = $train->search($inverse_search);
                 }
-                
-        
-                $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
 
-                
-                
 
-                // $this->redirect('staffticketing/trainAvailable');
+
+                if (isset($_POST['from_compartment_and_train'])) {
+                    $_SESSION['reservation']['from_compartment_and_train'] = mb_split('-', $_POST['from_compartment_and_train']);
+                    if (isset($_POST['to_compartment_and_train'])) {
+                        $_SESSION['reservation']['to_compartment_and_train'] = mb_split('-', $_POST['to_compartment_and_train']);
+                    }
+
+                    if (isset(Auth::reservation()['stations'])) {
+                        unset(Auth::reservation()['stations']);
+                    }
+
+                    $this->redirect('staffticketing/seatmap/' . $_SESSION['reservation']['from_compartment_and_train'][0] . '/' . $_SESSION['reservation']['from_compartment_and_train'][1]);
+                }
             }
-        } 
-        
+        }
+
         $this->view('booking.staffticketing', $data);
     }
 
-    function trainSelected($id = ''){
+    function seatMap($id = '')
+    {
+        $data = array();
+        $seatData = array();
 
-        if($_SERVER['REQUEST_METHOD']=='POST'){
-            echo "<pre>";
-            print_r($_POST);
-            print_r($_SESSION);
-            echo "</pre>";
+
+
+
+        $seatData['from']['reservation_train_id'] = Auth::reservation()['from_compartment_and_train'][1];
+        $seatData['from']['reservation_compartment_id'] = Auth::reservation()['from_compartment_and_train'][0];
+        $seatData['from']['reservation_date'] = Auth::reservation()['from_date'];
+        $seatData['from']['reservation_start_station'] = Auth::reservation()['from_station']->station_id;
+        $seatData['from']['reservation_end_station'] = Auth::reservation()['to_station']->station_id;
+
+        $train = new Trains();
+        $data['from_train'] = $train->whereOne('train_id', Auth::reservation()['from_compartment_and_train'][1]);
+
+        $seat = new Seats();
+        $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
+
+        $compartment = new Compartments();
+        $data['from_compartment'] = $compartment->whereOne('compartment_id', Auth::reservation()['from_compartment_and_train'][0]);
+
+        $compartment_types = new CompartmentTypes();
+        $data['from_compartment_type'] = $compartment_types->whereOne('compartment_class_type_id', $data['from_compartment']->compartment_class_type);
+
+        $fare =  new Fares();
+        $data['from_fare'] = $fare->getFareData($data['from_train']->train_type, $data['from_compartment']->compartment_class_type, Auth::reservation()['from_station']->station_id, Auth::reservation()['to_station']->station_id)[0]; //get from db must be changed
+
+        if (Auth::reservation()['return'] == 'on') {
+            $seatData['to']['reservation_train_id'] = Auth::reservation()['to_compartment_and_train'][1];
+            $seatData['to']['reservation_compartment_id'] = Auth::reservation()['to_compartment_and_train'][0];
+            $seatData['to']['reservation_date'] = Auth::reservation()['to_date'];
+            $seatData['to']['reservation_start_station'] = Auth::reservation()['to_station']->station_id;
+            $seatData['to']['reservation_end_station'] = Auth::reservation()['from_station']->station_id;
+
+            $data['to_train'] = $train->whereOne('train_id', Auth::reservation()['to_compartment_and_train'][1]);
+
+            $seatnew = new Seats();
+            $data['to_reservation_seats'] = $seatnew->getReservedSeats($seatData['to']);
+
+            $data['to_compartment'] = $compartment->whereOne('compartment_id', Auth::reservation()['to_compartment_and_train'][0]);
+
+            $data['to_compartment_type'] = $compartment_types->whereOne('compartment_class_type_id', $data['to_compartment']->compartment_class_type);
+
+            $data['to_fare'] = $fare->getFareData($data['to_train']->train_type, $data['to_compartment']->compartment_class_type, Auth::reservation()['to_station']->station_id, Auth::reservation()['from_station']->station_id)[0]; //get from db must be changed
+
         }
 
-    }
-   
 
-    function pay($id = '')
+        if (isset($_POST['submit']) || $_POST) {
+
+
+            $reservation = new Reservations();
+
+            $reservationData = array();
+            $reservationData['from']['reservation_passenger_id'] = Auth::user_id();
+            $reservationData['from']['reservation_train_id'] = Auth::reservation()['from_compartment_and_train'][1];
+            $reservationData['from']['reservation_compartment_id'] = Auth::reservation()['from_compartment_and_train'][0];
+            $reservationData['from']['reservation_start_station'] = Auth::reservation()['from_station']->station_id;
+            $reservationData['from']['reservation_end_station'] = Auth::reservation()['to_station']->station_id;
+            $reservationData['from']['reservation_date'] = Auth::reservation()['from_date'];
+
+            date_default_timezone_set('Asia/Colombo');
+            $reservationData['from']['reservation_created_time'] = date('Y-m-d h:i:s a', time());
+
+            $reservationData['from']['reservation_status'] = 'Pending';
+
+            $data['reservation_created_time'] = $reservationData['from']['reservation_created_time'];
+            $data['reservation_status'] = $reservationData['from']['reservation_status'];
+
+            if (isset($_POST['from_selected_seats'])) {
+                $reservationData['from']['reservation_seat'] = $_POST['from_selected_seats'];
+            } else {
+                $reservationData['from']['reservation_seat'] = array();
+            }
+
+            $reservationData['from']['no_of_passengers'] = Auth::reservation()['no_of_passengers'];
+
+            if (!$seat->validate($reservationData['from'])) {
+                $data = array_merge($data, $seat->errors);
+            }
+
+            // is return set 
+            if (Auth::reservation()['return'] == 'on') {
+                $reservationData['to']['reservation_passenger_id'] = Auth::user_id();
+                $reservationData['to']['reservation_train_id'] = Auth::reservation()['to_compartment_and_train'][1];
+                $reservationData['to']['reservation_compartment_id'] = Auth::reservation()['to_compartment_and_train'][0];
+                $reservationData['to']['reservation_start_station'] = Auth::reservation()['to_station']->station_id;
+                $reservationData['to']['reservation_end_station'] = Auth::reservation()['from_station']->station_id;
+                $reservationData['to']['reservation_date'] = Auth::reservation()['to_date'];
+
+                $reservationData['to']['reservation_created_time'] = date('Y-m-d h:i:s a', time());
+                $reservationData['to']['reservation_status'] = 'Pending';
+
+                if (isset($_POST['to_selected_seats'])) {
+                    $reservationData['to']['reservation_seat'] = $_POST['to_selected_seats'];
+                } else {
+                    $reservationData['to']['reservation_seat'] = array();
+                }
+
+                $reservationData['to']['no_of_passengers'] = Auth::reservation()['no_of_passengers'];
+
+                if (!$seat->validate($reservationData['to'])) {
+                    $data = array_merge($data, $seat->errors);
+                }
+            }
+
+            if (!isset($data['errors'])) {
+
+                foreach ($_POST['from_selected_seats'] as $seat) {
+                    $reservationData['from']['reservation_seat'] = $seat;
+
+                    $data['reservation_id']['from'][] = $reservation->insert($reservationData['from']);
+                }
+
+                if (Auth::reservation()['return'] == 'on') {
+                    foreach ($_POST['to_selected_seats'] as $seat) {
+                        $reservationData['to']['reservation_seat'] = $seat;
+
+                        $data['reservation_id']['to'][] = $reservation->insert($reservationData['to']);
+                    }
+                }
+                // remove array key reservation_seats from $data
+                unset($data['from_reservation_seats']);
+
+                if (Auth::reservation()['return'] == 'on') {
+                    // unset($data['to_reservation_seats']);
+                }
+
+                // add post['selected_seats'] to $data
+                $data['from_selected_seats'] = $_POST['from_selected_seats'];
+
+                if (Auth::reservation()['return'] == 'on') {
+                    $data['to_selected_seats'] = $_POST['to_selected_seats'];
+                }
+
+                $_SESSION['reservation'] = array_merge($_SESSION['reservation'], $data);
+
+                $this->redirect('staffticketing/passengerdetails');
+            }
+        }
+
+        $this->view('seatmap.staffticketing', $data);
+    }
+
+
+    function passengerdetails($id = '')
     {
+        $data = array();
 
-        $this->view('ticket.staffticketing');
+        if (isset($_POST['reservation_passenger_nic']) && !empty($_POST['reservation_passenger_nic'])) {
+
+            $reservation = new Reservations();
+
+            if ($reservation->validatePassenger($_POST)) {
+                echo "<pre>";
+                // print_r($_SESSION);
+                echo "</pre>";
+
+
+                $_SESSION['reservation']['passenger_data'] = $_POST;
+
+                if (!isset($_POST['warrant_booking'])) {
+                    // echo "off";
+                    $_SESSION['reservation']['passenger_data']['warrant_booking'] = "off";
+                }
+
+                $reaservation = new Reservations();
+                try {
+                    $count = 0;
+                    if (isset(Auth::reservation()['reservation_id']['from']) && count(Auth::reservation()['reservation_id']['from']) == Auth::reservation()['no_of_passengers']) {
+
+
+                        // loop thourugh from reservation id's
+                        foreach (Auth::reservation()['reservation_id']['from'] as $key => $reservation_id) {
+                            $reservationPassengerData = array();
+
+                            $reservationPassengerData['reservation_id'] = $reservation_id;
+                            $reservationPassengerData['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
+                            $reservationPassengerData['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
+                            $reservationPassengerData['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
+                            $reservationPassengerData['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
+                            $reservationPassengerData['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                            $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
+                            $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+
+                            //update passenger details to tbl_reservtion
+                            $data = $reaservation->update($reservation_id, $reservationPassengerData, 'reservation_id');
+
+                            // update warrant reservations table
+                            if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant') {
+                                // if warrant image is null throw an execption
+                                $warrant_reservation = new WarrantsReservations();
+                                $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Manually_Verified'], 'warrant_reservation_id');
+
+                                $_SESSION['reservation']['reservation_status'] = "Reserved";
+                            }
+
+
+                            $count++;
+                        }
+
+                        // to reservation details
+                        if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                            $count = 0;
+                            foreach (Auth::reservation()['reservation_id']['to'] as $key => $reaservation_id) {
+                                $reservationPassengerDataTo = array();
+                                $reservationPassengerDataTo['reservation_id'] = $reaservation_id;
+                                $reservationPassengerDataTo['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
+                                $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+
+
+                                $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
+
+                                if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant') {
+                                    // if warrant image is null throw an execption
+                                    $warrant_reservation = new WarrantsReservations();
+                                    $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Manually_Verified'], 'warrant_reservation_id');
+
+                                    $_SESSION['reservation']['reservation_status'] = "Reserved";
+                                }
+
+                                $count++;
+                            }
+                        }
+                    } else {
+                        $data['errors'][] = "Error in reservation id doesn't match with passenger count. Please try again.";
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+
+                // if redirect according to the reservation type
+                if (empty($data['errors'])) {
+
+                    if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant' || Auth::reservation()['passenger_data']['payment_method'] == 'cash'){
+                        // send email to each email
+                        foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+                            $to_email = $email;
+                            $subject = "Reservation Successfull - Warrant";
+                            $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
+
+                        
+                            $message = Auth::getReservationConfirmationEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key]);
+
+                            $this->sendMail($to_email, $recipient, $subject, $message);
+                        }
+
+                        $this->redirect('staffticketing/addreservation');
+
+                    } else if(Auth::reservation()['passenger_data']['payment_method'] == 'card') {
+
+                        $this->redirect('staffticketing/payment');
+                    }
+                }
+            } else {
+                $data['errors'] = $reservation->__get('errors');
+            }
+        }
+
+        $this->view('details.staffticketing', $data);
     }
 
-    // function summary($id = '')
-    // {
-    //     $resevation = new Reservations();
-    //     $data = array();
-    //     $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+    function payment($id = '')
+    {
+        $data = array();
+        $this->view('staffticketing.payment', $data);
+    }
 
-    //     $train = new Trains();
-    //     $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
 
-    //     $this->view('summary.staffticketing', $data);
-    // }
+    function addReservation(){
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/home');
+        }
+
+        if (!Auth::reservation()) {
+            $this->redirect('/home');
+        }
+
+        $reaservation = new Reservations();
+        try {
+            // $data = $reaservation->addReservation($_SESSION['reservation']);
+            $reservationPassengerData = array();
+            $reservationPassengerData['reservation_ticket_id'] = Auth::getTicketId();
+
+
+            foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
+                $reservationPassengerData['reservation_status'] = "Reserved"; // 1 for confirmed
+                $reaservation->update($value, $reservationPassengerData, 'reservation_id');
+            }
+            $_SESSION['reservation']['from_reservation_ticket_id'] = $reservationPassengerData['reservation_ticket_id'];
+
+            if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                $reservationPassengerDataTo = array();
+                $reservationPassengerDataTo['reservation_ticket_id'] = Auth::getTicketId();
+
+                foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+                    $reservationPassengerDataTo['reservation_status'] = "Reserved"; // 1 for confirmed
+                    $reaservation->update($value, $reservationPassengerDataTo, 'reservation_id');
+                }
+
+                $_SESSION['reservation']['to_reservation_ticket_id'] = $reservationPassengerDataTo['reservation_ticket_id'];
+            }
+
+            // add reservation data to session['reservation']
+            $_SESSION['reservation']['reservation_status'] = "Reserved";
+
+            // if in waitnig list remove from waiting list
+            $waiting_list = new WaitingLists();
+            $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+            $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+            $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+            $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
+
+            if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                $waiting_list->removeFromWaitingList($waiting_list_arr);
+            }
+
+
+            $this->redirect('staffticketing/reservationSummary');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function reservationSummary()
+    {
+        $data = array();
+
+        $data = $_SESSION['reservation'];
+        $this->view('reservation.summary.staffticketing', $data);
+    }
 
     function summary($id = '')
     {
@@ -161,6 +477,28 @@ class StaffTicketing extends Controller
 
         $this->view('summary.staffticketing', $data);
     }
+
+
+
+    function pay($id = '')
+    {
+
+        $this->view('ticket.staffticketing');
+    }
+
+    // function summary($id = '')
+    // {
+    //     $resevation = new Reservations();
+    //     $data = array();
+    //     $data['reservations'] = $resevation->whereOne("reservation_id", $id);
+
+    //     $train = new Trains();
+    //     $data['train'] = $train->getTrain($data['reservations']->reservation_train_id);
+
+    //     $this->view('summary.staffticketing', $data);
+    // }
+
+   
 
     function reservationList($id = '')
     {
@@ -248,11 +586,7 @@ class StaffTicketing extends Controller
     //     $this->getPrivateImage($folder, $file);
     // }
 
-    function seatMap($id = '')
-    {
 
-        $this->view('seatmap.staffticketing');
-    }
 
     function cancel($id = '')
     {
@@ -321,7 +655,7 @@ class StaffTicketing extends Controller
     // }
 
 
-  
+
 
     function verifiedWarrent($id = '')
     {
@@ -401,7 +735,7 @@ class StaffTicketing extends Controller
 
         try {
 
-           
+
 
             if (isset($_POST['warrantRejectReason']) && !empty($_POST['warrantRejectReason'])) {
                 $rejectionReason = $_POST['warrantRejectReason'];
@@ -434,7 +768,6 @@ class StaffTicketing extends Controller
             }
 
             $reject_warrant->callProcedure('reject_warrant_reservation', array($id));
-            
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -451,17 +784,9 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
-    function passengerdetails($id = '')
-    {
 
-        $this->view('details.staffticketing');
-    }
 
-    function payment($id = '')
-    {
 
-        $this->view('staffticketing.payment');
-    }
 
 
     function StaffLogin($id = '')

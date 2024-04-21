@@ -6,7 +6,7 @@ define('PRIVATE_ASSETS', 'http://localhost/trackNbook/private/private_assets/');
 define('APPROOT', dirname(dirname(__FILE__)));
 // echo ROOT;
 
-define('DBNAME' ,'tracknbook_new');// change this
+define('DBNAME' ,'tracknbook');// change this
 define('DBHOST' ,'localhost');
 define('DBUSER' ,'root');
 define('DBPASS' ,'');

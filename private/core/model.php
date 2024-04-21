@@ -121,9 +121,7 @@ class Model extends Database
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        echo "{$id}<pre>";
-            print_r($data);
-            echo "</pre>";
+        
             
         try {
             if ($id_feild == '') {
