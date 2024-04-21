@@ -4,7 +4,7 @@ class Users extends Model
 {
 
     protected $table = 'tbl_user';
-    protected $alloewdCollumns = array('user_title', 'user_first_name', 'user_last_name', 'user_phone_number', 'user_type', 'user_gender', 'user_email', 'user_nic');
+    protected $alloewdCollumns = array('user_title', 'user_first_name', 'user_last_name', 'user_phone_number', 'user_type', 'user_gender', 'user_email', 'user_nic', 'user_is_email_verified');
 
     public function __construct()
     {
@@ -28,10 +28,11 @@ class Users extends Model
                     FROM tbl_user as u 
                     JOIN tbl_login ON u.user_id = tbl_login.user_id 
                     LEFT JOIN tbl_image ON u.user_id = tbl_image.user_id
-                    WHERE login_username = :username and login_password = :password";
+                    WHERE login_username = :username and login_password = :password and u.user_is_email_verified = :user_is_email_verified";
             $data_pass = $this->query($query, array(
                 'username' => $_POST['username'],
-                'password' => md5($_POST['password'])
+                'password' => md5($_POST['password']),
+                'user_is_email_verified' => 1
             ));
 
 

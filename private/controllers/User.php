@@ -124,6 +124,16 @@ class User extends Controller
                     }
 
 
+                     // send email to verify email
+                     $to_email = $_POST['user_email'];
+                     $subject = "Email Verification";
+                     $recipient = $_POST['user_first_name'];
+                     $message ="Please verify your email address by clicking the link below.<br> <a href='" . ROOT . "/user/verifyEmail/" . $user_id . "'>Verify Email</a>";
+                     $message = Auth::getEmailBody($_POST['user_first_name'], $message);
+ 
+                     $this->sendMail($to_email, $recipient, $subject, $message);
+
+
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
@@ -146,5 +156,15 @@ class User extends Controller
     public function getUserImage($folder, $file)
     {
         $this->getPrivateImage($folder, $file);
+    }
+
+    public function verifyEmail($user_id)
+    {
+        $data = array();
+        $user = new Users();
+        $user->update($user_id, array('user_is_email_verified' => 1), 'user_id');
+
+        $this->redirect('login');
+        
     }
 }

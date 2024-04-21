@@ -361,6 +361,16 @@ class Passenger extends Controller
                             'image_type' => 'image/jpg'
                         ));
                     }
+
+                    // send email to verify email
+                    $to_email = $_POST['user_email'];
+                    $subject = "Email Verification";
+                    $recipient = $_POST['user_first_name'];
+                    $message ="Please verify your email address by clicking the link below.<br> <a href='" . ROOT . "/user/verifyEmail/" . $user_id . "'>Verify Email</a>";
+                    $message = Auth::getEmailBody($_POST['user_first_name'], $message);
+
+                    $this->sendMail($to_email, $recipient, $subject, $message);
+
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
