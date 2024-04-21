@@ -19,6 +19,28 @@ $mou-colors: (
   }
 }
 
+
+.mou-staff-reservation-welcomeBox{
+  width: 40vw;
+}
+
+.mou-staff-reservation-home-img{
+  width: 500px;
+}
+
+
+.mou-staff-reservation-home-text h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 42px;
+  color: var(--blue);
+  align-items: center;
+}
+
+.mou-staff-reservation-search-box h2 {
+  background-color: var(--blue);
+}
+
 .mou-staff-login-container {
   display: flex;
   flex-direction: column;
@@ -237,6 +259,15 @@ $mou-colors: (
   width: -webkit-fill-available;
 }
 
+.staff-ticket-summary {
+  width: 50vw;
+  padding: 20px 50px;
+  gap: 40px;
+  border-radius: 5px;
+  background: #fafafa;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
 .cancel-container {
   width: 630px;
   height: 450px;
@@ -371,10 +402,9 @@ h2.text {
   margin: 30px 0 10px;
 }
 
-
 #mou-popup {
   position: fixed;
-  top: 0 ;
+  top: 0;
   left: 0;
   display: flex;
   justify-content: center;
@@ -386,16 +416,16 @@ h2.text {
   // filter: blur(20px);
 }
 #mou-popup .mou-popup-content {
- width: 40vw;
-    max-height: 50vh;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: space-evenly;
-    gap: 10px;
-    padding: 20px;
+  width: 40vw;
+  max-height: 50vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  padding: 20px;
 }
 
 #mou-popup .button {
@@ -432,7 +462,6 @@ h2.text {
 #mou-popup .no-btn:hover {
   background: #444;
 }
-
 
 #mou-popup.active {
   visibility: visible;
@@ -765,7 +794,7 @@ video {
   background: rgb(255, 255, 255);
   padding: 20px 35px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
-  border-radius:8px 8px 0 0 ;
+  border-radius: 8px 8px 0 0;
 }
 
 .notificationCard img.checker-img {
@@ -1179,39 +1208,35 @@ video {
   transform: rotate(-45deg);
 }
 
-
-.mou-text_price{
+.mou-text_price {
   font-size: 14px;
-    font-weight: 500;
-    font-family: "DM sans";
+  font-weight: 500;
+  font-family: "DM sans";
 }
 
-.mou-warrant_imgCard{
+.mou-warrant_imgCard {
   background: rgb(255, 255, 255);
   padding: 20px 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
   border-radius: 8px 8px 0 0;
-
 }
 
-.mou-warrant_Card{
+.mou-warrant_Card {
   width: 25vw;
   background: rgb(255, 255, 255);
   padding: 20px 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
   border-radius: 8px 8px 0 0;
-
 }
-.mou-ticket-details-warrant{
+.mou-ticket-details-warrant {
   gap: 32px;
-
 }
 
-.mou-warrant_image_width{
+.mou-warrant_image_width {
   max-width: 730px;
 }
 
-.mou-reject_form{
+.mou-reject_form {
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -1224,7 +1249,7 @@ video {
   box-shadow: 0 30px 30px -30px rgba(27, 26, 26, 0.315);
 }
 
-.mou-reject_form .title{
+.mou-reject_form .title {
   color: royalblue;
   font-size: 16px;
   font-weight: 600;
@@ -1235,19 +1260,16 @@ video {
   justify-content: center;
 }
 
-.mou-reject_form textarea{
-
+.mou-reject_form textarea {
   border-radius: 8px;
-    height: 100px;
-    width: 100%;
-    resize: none;
-    outline: 0;
-    padding: 8px 14px;
-    border: 1px solid rgb(219, 213, 213);
+  height: 100px;
+  width: 100%;
+  resize: none;
+  outline: 0;
+  padding: 8px 14px;
+  border: 1px solid rgb(219, 213, 213);
 }
 
 // #mou-rejectReason{
 //   display: none;
 // }
-
-
