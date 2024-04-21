@@ -12,9 +12,12 @@ spl_autoload_register(function ($class_name)
     require("../private/models/" . $class_name . ".php");
 });
 
+require("../vendor/autoload.php");
+
 require("../private/private_assets/PHPMailer-master/src/Exception.php");
 require("../private/private_assets/PHPMailer-master/src/PHPMailer.php");
 require("../private/private_assets/PHPMailer-master/src/SMTP.php");
+
 
 
 ?>
