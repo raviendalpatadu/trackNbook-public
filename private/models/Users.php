@@ -4,7 +4,7 @@ class Users extends Model
 {
 
     protected $table = 'tbl_user';
-    protected $alloewdCollumns = array('user_title', 'user_first_name', 'user_last_name', 'user_phone_number', 'user_type', 'user_gender', 'user_email', 'user_nic');
+    protected $alloewdCollumns = array('user_title', 'user_first_name', 'user_last_name', 'user_phone_number', 'user_type', 'user_gender', 'user_email', 'user_nic', 'user_is_email_verified');
 
     public function __construct()
     {

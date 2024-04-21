@@ -140,8 +140,6 @@ class User extends Controller
 
                     $this->sendMail($to,$recipient, $subject, $body);
 
-
-
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
