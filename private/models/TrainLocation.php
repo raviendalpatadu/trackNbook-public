@@ -24,7 +24,8 @@ class TrainLocation extends Model
         $train_location = $this->query($query, ['train_id' => $data['train_id'], 'date' => $data['date']]);
 
 
-        if (count($train_location) != 1) {
+        if (count($train_location) == 0) {
+            
             $this->errors['errors']['station_id'] = 'Train is no in the table';
         }
 
@@ -50,14 +51,30 @@ class TrainLocation extends Model
         $previous_station_stop_no = $this->query($query, ['train_id' => $train_id, 'date' => date('Y-m-d')]);
 
         // get the current station stop number
-        $train_stop_station = new TrainStopStations();
-        $current_station_data = $train_stop_station->getTrainStopStation($train_id, $station_id);
-
-
-        if ($previous_station_stop_no[0]->stop_no < $current_station_data[0]->stop_no) {
-            return false;
+        if (is_array($previous_station_stop_no) && count($previous_station_stop_no) > 0) {
+            $train_stop_station = new TrainStopStations();
+            $current_station_data = $train_stop_station->getTrainStopStationData($train_id, $station_id);
+            echo "<pre>";
+            print_r($current_station_data);
+            echo "</pre>";  
+    
+            if ($previous_station_stop_no[0]->stop_no < $current_station_data[0]->stop_no) {
+                return false;
+            }
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    public function isTrainExists($train_id, $date)
+    {
+        $query = "SELECT * FROM $this->table WHERE train_id = :train_id AND date = :date";
+        $train_location = $this->query($query, ['train_id' => $train_id, 'date' => $date]);
+
+        if (is_array($train_location) && count($train_location) > 0) {
+            return true;
+        }
+        return false;
     }
 
     public function updateLocation($data)
@@ -66,13 +83,11 @@ class TrainLocation extends Model
         $query = "SELECT * FROM $this->table WHERE train_id = :train_id AND date = :date";
         $train_location = $this->query($query, ['train_id' => $data['train_id'], 'date' => $data['date']]);
 
-        if (count($train_location) > 0) {
+        if (is_array($train_location) && count($train_location) > 0) {
             // update the location
             $update_query = "UPDATE $this->table SET train_location = :train_location, train_location_updated_time = :train_location_updated_time WHERE train_id = :train_id AND date = :date";
             return $this->query($update_query, $data);
-        } else {
-            // insert the location
-            return $this->insert($data);
-        }
+        } 
+        return false;
     }
 }

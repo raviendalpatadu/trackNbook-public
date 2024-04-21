@@ -1,5 +1,10 @@
 <?php $this->view("./includes/header"); ?>
+<?php
+echo "<pre>";
+print_r($_SESSION);
+echo "</pre>";
 
+?>
 
 <body class="mobile-d-flex mobile-min-height-80">
     <div class="flex-grow">

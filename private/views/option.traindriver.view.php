@@ -64,7 +64,7 @@
                 var error = '<div class="assistive-text">Please Enter Train ID</div>';
                 $("#trainId").parent().parent().after(error);
             } else {
-                window.location.href = "<?= ROOT ?>traindriver/index/" + trainId;
+                window.location.href = "<?= ROOT ?>traindriver/index/" + trainId + "/" + "<?= Auth::getUser_id() ?>";
                 
             }
         });

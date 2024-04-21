@@ -124,7 +124,7 @@ class Passenger extends Controller
                                     $reservationPassengerDataTo['reservation_type'] = "Warrant";
 
                                     // tempory warrant id
-                                    $reservationPassengerData['reservation_ticket_id'] = $warrant_temp_id;
+                                    $reservationPassengerDataTo['reservation_ticket_id'] = $warrant_temp_id;
                                 }
 
                                 $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');

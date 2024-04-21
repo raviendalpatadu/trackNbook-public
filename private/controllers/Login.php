@@ -10,7 +10,10 @@ class Login extends Controller
     {
         $errors = array();
 
-
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+        
         $user = new Users();
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $data = $user->login();

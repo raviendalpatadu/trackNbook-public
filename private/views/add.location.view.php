@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -58,7 +58,7 @@ echo "</pre>";
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="ad-width-100" style="font-weight:bold;">Last Updated Station:
-                                            <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->end_station) : ''; ?>
+                                            <?php echo (array_key_exists('location', $data)) ? ucfirst($data['location']->station_name) : ''; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@ echo "</pre>";
                                                         <select class="dropdown" name="station_id" placeholder="Please choose">
 
                                                             <?php foreach ($data['train_stop_stations'] as $key => $value): ?>
-                                                                <option value="<?= $value->station_id ?>">
+                                                                <option value="<?= $value->station_id ?>" <?=($data['location']->station_id ==  $value->station_id) ? "selected" : "" ?>>
                                                                     <?= $value->station_name ?>
                                                                 </option>
                                                             <?php endforeach; ?>
