@@ -80,7 +80,7 @@ $stationCount = isset($_POST['station_count']) ? intval($_POST['station_count'])
                                                 <div class="text-inputs">
                                                     <div class="input-text-label">Station <?= $i ?></div>
                                                     <div class="width-fill">
-                                                        <select class="input-field dropdown" name="station<?= $i ?>"
+                                                        <select class="input-field dropdown" name="station[]"
                                                             placeholder="Please choose">
                                                             <option value="0">Please choose</option>
 
