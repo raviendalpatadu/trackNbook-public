@@ -1,10 +1,10 @@
 <?php
 $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
-// echo "<pre>";
+echo "<pre>";
 // print_r($_POST);
-// print_r($_SESSION);
+print_r($_SESSION);
 // print_r($data);
-// echo "</pre>";
+echo "</pre>";
 
 ?>
 
@@ -18,9 +18,9 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg ">
             <div class="container ">
-                <form action="" method="post" class="profile p-50 shadow" enctype="multipart/form-data">
+                <form action="" method="post" class="bg-white p-30 shadow" enctype="multipart/form-data">
                     <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
-                        <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger <?= $i + 1 ?></h3>
+                        <h3 class="mb-20 Primary-Gray input-text-label border-bottom-Lightgray">Enter Details of Passenger <?= $i + 1 ?></h3>
                         <div class="row g-20 mb-20">
                             <div class="col-2">
                                 <div class="text-inputs">
@@ -136,9 +136,9 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
                     <?php } ?>
 
 
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="text-inputs">
+                    <div class="row mt-10">
+                        <div class="col-4 ">
+                            <div class="text-inputs g-10">
                                 <div class="input-text-label">Payment Method</div>
                                 <div class="width-fill">
                                     <select class="dropdown" placeholder="Please choose" name="payment_method">

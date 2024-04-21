@@ -1,10 +1,10 @@
 <?php
 
-echo "<pre>";
-print_r($_POST);
-print_r($_SESSION);
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// print_r($_SESSION);
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -35,9 +35,9 @@ echo "</pre>";
                     <form action="" method="post" class=" flex-auto">
                         <div class="d-flex flex-auto flex-column  border-bottom-Lightgray ">
                             <div class="d-flex bg-blue justify-content-center  p-20">
-                                <h1 class="white">Search Train - Reserve Seats </h1>
+                                <h1 class="white">Guide for a Secure Journey</h1>
                             </div>
-                            <div class="d-flex justify-content-center bg-white p-20">
+                            <div class="d-flex flex-column justify-content-center bg-white p-20">
 
                                 <div class="d-flex flex-row g-20">
                                     <div class="text-inputs">
@@ -136,16 +136,19 @@ echo "</pre>";
 
 
                         <!-- trains -->
-                        <div class="d-flex flex-auto flex-column ">
+                        <div class="d-flex flex-auto flex-column mt-40">
+                            <!-- <div class="d-flex bg-blue justify-content-center py-10">
+                                <h1 class="white">Available Trains </h1>
+                            </div> -->
                             <!-- from to tags -->
-                            <div id="trainButtons" class="d-flex g-3">
+                            <div id="trainButtons" class="d-flex g-10">
                                 <button id="fromTrainBtn" class="train-available-btn bg-Selected-Blue active">From Train</button>
 
                                 <?php if (isset($data['to_date']) && $data['to_date'] != null) : ?>
                                     <button id="toTrainBtn" class="train-available-btn bg-Selected-Blue">To Train</button>
                                 <?php endif; ?>
                             </div>
-                            
+
                             <div class="d-flex flex-auto">
                                 <div id="fromTrains" class="flex-auto">
                                     <table class="bg-white flex-auto">
