@@ -23,24 +23,93 @@ class Route extends Controller
     public function addRoute()
     {
         $data = array();
-        // data['stations'] send them to view
         $station = new Stations();
         $data['stations'] = $station->findAll();
+        $errors = array();
 
         if (isset($_POST['submit'])) {
-            // $route = new Routes();
-            
-            // $rid = rute->insert([route_name => $_POST['route_name']);
+            // Validate route_name
+            if (empty($_POST['route_name'])) {
+                $errors['route_name'] = 'Route name is required';
+            }
 
-            // route_station = new RouteStations();
+            // Check if stations are selected
+            if (!isset($_POST['station']) || !is_array($_POST['station'])) {
+                $errors['stations'] = 'At least one station must be selected';
+            }
 
-            // foreach ($_POST['station'] as $key => $value) {
-                // $route_station->insert([route_id => $rid, station_id => $value, station_order => $key]);
-            // }
+            if (count($errors) === 0) {
+                $route = new Routes();
+                $routeid = $route->insert(['route_name' => $_POST['route_name']]);
 
-            // header('location: /route/add');
+                if (!$routeid) {
+                    $errors['database'] = 'Failed to add route';
+                }
+
+                $routestation = new RoutesStations();
+                foreach ($_POST['station'] as $key => $value) {
+                    $result = $routestation->insert(['route_no' => $routeid, 'station_id' => $value, 'route_station_order' => $key+1]);
+                    if (!$result) {
+                        $errors['station' . $key] = 'Failed to add station';
+                    }
+                }
+
+                if (count($errors) === 0) {
+                    // Successfully added route and stations
+                    // Redirect or set a success message
+                }
+            }
+
+            $data['errors'] = $errors;
         }
 
         $this->view("add.route.admin", $data);
     }
+
+    // public function addRoute()
+    // {
+    //     $data = array();
+    //     $station = new Stations();
+    //     $data['stations'] = $station->findAll();
+    //     $errors = array();
+    
+    //     if (isset($_POST['submit'])) {
+    //         // Validate route_name
+    //         if (empty($_POST['route_name'])) {
+    //             $errors['route_name'] = 'Route name is required';
+    //         }
+    
+    //         // Check if stations are selected
+    //         if (!isset($_POST['station']) || !is_array($_POST['station'])) {
+    //             $errors['stations'] = 'At least one station must be selected';
+    //         }
+    
+    //         if (count($errors) === 0) {
+    //             $route = new Routes();
+    //             $routeid = $route->insert(['route_name' => $_POST['route_name']]);
+    
+    //             if (!$routeid) {
+    //                 $errors['database'] = 'Failed to add route';
+    //             }
+    
+    //             foreach ($_POST['station'] as $key => $value) {
+    //                 $result = $station->insert(['route_id' => $routeid, 'station_id' => $value, 'station_order' => $key]);
+    //                 if (!$result) {
+    //                     $errors['station' . $key] = 'Failed to add station';
+    //                 }
+    //             }
+    
+    //             if (count($errors) === 0) {
+    //                 // Successfully added route and stations
+    //                 // Redirect or set a success message
+    //             }
+    //         }
+    
+    //         $data['errors'] = $errors;
+    //     }
+    
+    //     $this->view("add.route.admin", $data);
+    // }
+    
+
 }

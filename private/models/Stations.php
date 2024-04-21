@@ -66,8 +66,6 @@ class Stations extends Model
     //     } catch (PDOException $e) {
     //         echo $e->getMessage();
     //     }
-
-
     // }
 
 }

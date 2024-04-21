@@ -16,17 +16,9 @@ class Admin extends Controller
     {
 
         $user = new Users();
-
         $data = array();
 
-
         $data['users'] = $user->findAll();
-        if (isset($_POST['submit']) && !empty($_POST['user_first_name'])) {
-            $data['users'] = $user->getUsers('user_first_name', $_POST['user_first_name']);
-        }
-        if (isset($_POST['submit']) && !empty($_POST['user_nic'])) {
-            $data['users'] = $user->getUsers('user_nic', $_POST['user_nic']);
-        }
 
         $this->view('display.users.admin', $data);
     }
@@ -85,7 +77,11 @@ class Admin extends Controller
 
     function trainList()
     {
-        $this->view('admin.trainList');
+        $train = new Trains();
+        $data = array();
+
+        $data['trains'] = $train->findAllTrains();
+        $this->view('admin.trainList', $data);
 
     }
  
@@ -100,39 +96,8 @@ class Admin extends Controller
 
     }
 
-    function test()
-    {
+    
 
-        $user = new Users();
-        $data = array();
-
-        $data['users'] = $user->findAll();
-
-        $this->view('displaytest.users.admin', $data);
-
-    }
-
-    function test2()
-    {
-
-        $user = new Users();
-        $data = array();
-
-        $data['users'] = $user->findAll();
-
-        $this->view('displaytest2.users.admin', $data);
-
-    }
-
-    function trainListtest()
-    {
-        $train = new Trains();
-        $data = array();
-
-        $data['trains'] = $train->findAllTrains();
-        $this->view('admintest.trainList', $data);
-
-    }
 
     function addRoute(){
         
