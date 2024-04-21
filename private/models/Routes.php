@@ -64,4 +64,23 @@ class Routes extends Model
             echo $e->getMessage();
         }
     }
+
+    
+    public function addRoute(){
+        $query = "INSERT INTO $this->table (route_name) VALUES (:route_name)";
+        $route_id = $this->query($query, ['route_name' => $_POST['route_name']]);
+        
+        // Update tbl_route_station
+        $stations = $_POST['stations'];
+        foreach ($stations as $station) {
+            $query = "INSERT INTO tbl_route_station (route_no, station_id, route_station_order) VALUES (:route_id, :station_id, :route_station_order)";
+            $this->query($query, [
+            'route_id' => $route_id,
+            'station_id' => $station['station_id'],
+            'route_station_order' => $station['route_station_order']
+            ]);
+        }
+        
+        return $route_id;
+    }
 }

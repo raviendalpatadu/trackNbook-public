@@ -133,4 +133,9 @@ class Admin extends Controller
         $this->view('admintest.trainList', $data);
 
     }
+
+    function addRoute(){
+        
+    }
+
 }

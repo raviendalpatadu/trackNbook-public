@@ -18,4 +18,24 @@ class Route extends Controller
             echo json_encode($route_stations);
         }
     }
+
+    public function addRoute(){
+
+        if(isset($_POST['submit'])){
+        
+        $route = new Routes();
+        $result = $route->addRoute();
+
+        if($result){
+            //echo a success message
+            echo "Route added successfully";
+        }else{
+            $data['errors'] = $result;
+        }
+    }
+
+    $this->view("add.route.admin", $data);
+
+    }
+
 }
