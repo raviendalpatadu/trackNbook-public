@@ -172,7 +172,6 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
                         </div>
                     </div> -->
 
-                    </form>
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
                             <div class="button-base">
@@ -183,6 +182,7 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
 
 
