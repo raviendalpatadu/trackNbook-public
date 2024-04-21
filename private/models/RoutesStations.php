@@ -10,4 +10,17 @@ class RoutesStations extends Model
         parent::__construct();
     }
 
+    
+    public function validate($values)
+    {
+        if (!isset($values['station']) || !is_array($values['station']) || empty($values['station'])) {
+            $this->errors['stations'] = 'At least one station must be selected';
+        }
+
+        if (count($this->errors) === 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

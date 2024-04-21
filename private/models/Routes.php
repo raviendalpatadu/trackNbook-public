@@ -46,6 +46,8 @@ class Routes extends Model
             echo $e->getMessage();
         }
     }
+
+
     public function getRouteStations($route_id)
     {
         try {
@@ -63,6 +65,19 @@ class Routes extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    
+    public function validate($values)
+    {
+        if (empty($values['route_name'])) {
+            $this->errors['route_name'] = 'Route name is required';
+        }
+
+        if(count($this->errors) === 0){
+            return true;
+        }
+        return false;
     }
 
     
