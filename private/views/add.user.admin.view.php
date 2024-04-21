@@ -317,7 +317,7 @@ if (!isset($data['errors'])) {
 
     });
 
-    changeImage('#userImage', '#imgDiv')
+    changeImage('#userImage', '#imgDiv');
 </script>
 
 </html>
