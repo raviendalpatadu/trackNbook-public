@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="delay-container-box mt-30">
-                            <div class="card-update-delay">
+                            <div class="card-update-delay ">
                                 <div class="row mb-20 ">
                                     <div class="col-12 d-flex align-items-start flex-column line">
                                         <h1>Update Train Delay</h1>

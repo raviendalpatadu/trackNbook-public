@@ -18,6 +18,10 @@
 <script src="<?= ASSETS ?>/js/main.js"></script>
 
 
+<!-- mobile nav bar - dropdownshow icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 
 
 
