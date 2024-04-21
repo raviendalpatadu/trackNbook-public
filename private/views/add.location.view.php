@@ -1,5 +1,7 @@
 <?php
-
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
 ?>
 
@@ -69,10 +71,9 @@
                                         <div class="col-3">
                                             <div class="text-inputs">
                                                 <div class="input-text-label text lightgray-font">Current Station</div>
-                                                <form action="<?= ROOT ?>/traindriver/addlocation/<?= $data['train']->train_id ?>">
-                                                    <div class="width-fill">
-                                                        <select class="dropdown2-add-location" name="station_id"
-                                                            placeholder="Please choose">
+                                                <form action="<?= ROOT ?>/traindriver/addlocation/" method="post">
+                                                    <div class="">
+                                                        <select class="dropdown" name="station_id" placeholder="Please choose">
 
                                                             <?php foreach ($data['train_stop_stations'] as $key => $value): ?>
                                                                 <option value="<?= $value->station_id ?>">
@@ -82,10 +83,7 @@
                                                         </select>
                                                     </div>
 
-                                                    <div
-                                                        class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                                        <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
-                                                    </div>
+                                                    <?= printError($data, 'station_id')?>
                                                     <div class="row d-flex add-location-g-8 justify-content-center">
                                                         <div class="col-4">
                                                             <button class="button mt-20 "><a
@@ -98,16 +96,15 @@
                                                         </div>
 
                                                         <div class="col-4">
-                                                            <!-- <button class="button mt-20 "> -->
+                                                            <span class="button mt-20 ">
                                                                 <div class="button-base bg-light-green">
                                                                     <div class="text dark-green">
                                                                         <input type="submit" name="submit" value="update">
                                                                     </div>
                                                                 </div>
                                                                 
-                                                            <!-- </button> -->
+                                                            </span>
                                                         </div>
-
                                                     </div>
                                                 </form>
                                             </div>
@@ -131,3 +128,4 @@
 
 
 </html>
+
