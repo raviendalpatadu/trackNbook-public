@@ -1,8 +1,8 @@
 <?php
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -16,20 +16,17 @@ echo "</pre>";
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="container d-flex flex-column justify-content-center align-items-center">
-                <div class="ticket-summary d-flex flex-column align-items-center">
-                    <h3 class="width-fill text-align-center">Booking Summary</h3>
-                    <div class="d-flex flex-column align-items-center g-20 p-10">
+                <div class="staff-ticket-summary d-flex flex-column ">
+                    <h2 class="width-fill text-align-center pt-10">Booking Summary</h2>
+                    <div class="d-flex flex-column  g-20 p-10">
 
-                        <div class="d-flex g-20 p-10 border-bottom">
+                        <div class="d-flex g-20 p-10 border-bottom-light-gray">
                             <!-- train details and qr code -->
                             <div class="d-flex g-20 flex-column ticket-summary-train-data flex-grow">
                                 <p class="ref-no" id="ticket_ref_no">Ref No: <?= $data['from_reservation_ticket_id'] ?></p>
                                 <div class="d-flex g-5 ticket-summary-train-data-details flex-grow flex-column">
                                     <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
-                                    <div class="d-flex">
-                                        <p class="width-fill heading">Price</p>
-                                        <p class="width-fill"><?= number_format(floatval($data['from_fare']->fare_price), 2) ?></p>
-                                    </div>
+                                    
                                     <div class="d-flex">
                                         <p class="width-fill heading">Train No</p>
                                         <p class="width-fill"><?= str_pad($data['from_train']->train_id, 4, "0", STR_PAD_LEFT) ?></p>
@@ -55,6 +52,10 @@ echo "</pre>";
                                         <p class="width-fill"><?= ucfirst($data['from_compartment_type']->compartment_class_type) ?></p>
                                     </div>
                                     <div class="d-flex">
+                                        <p class="width-fill heading">Price</p>
+                                        <p class="width-fill"><?= number_format(floatval($data['from_fare']->fare_price), 2) ?></p>
+                                    </div>
+                                    <div class="d-flex">
                                         <p class="width-fill heading">No of Passengers</p>
                                         <p class="width-fill"><?= str_pad(($data['no_of_passengers']), 2, "0", STR_PAD_LEFT) ?></p>
                                     </div>
@@ -66,7 +67,7 @@ echo "</pre>";
                                 <div id="from_qr_code"></div>
                             </div>
                         </div>
-                        <div class="d-flex flex-column align-items-start g-10 passenger-compartment-details">
+                        <div class="d-flex flex-column align-items-center g-10 passenger-compartment-details">
                             <p class="">Passenger and Compartment Details</p>
                             <table class="ticket-summary-passenger-compartment-details text-align-center">
 
@@ -227,7 +228,7 @@ echo "</pre>";
 
 </html>
 <script>
-    
+
     var fromTicketID = <?= Auth::getfrom_reservation_ticket_id() ?>;
     var fromQrcode = new QRCode("from_qr_code", {
         text: 'http://localhost/trackNbook/public/ticketchecker/summary/'+ fromTicketID, 
