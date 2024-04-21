@@ -76,173 +76,175 @@ if (Auth::getReturn() == 'on') {
         <main class="bg ">
             <div class="container ">
 
-            <?php if (isset($data['errors'])) : ?>
-                        <div class="row mb-20">
-                            <div class="col-12">
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        <?php foreach ($data['errors'] as $error) : ?>
-                                            <li><?= $error ?></li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                </div>
+                <?php if (isset($data['errors'])) : ?>
+                    <div class="row mb-20">
+                        <div class="col-12">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    <?php foreach ($data['errors'] as $error) : ?>
+                                        <li><?= $error ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
-                    <div class="row mb-20 mobile-g-20">
-                        <div class="col-6">
-                            <h1><?php echo (isset(Auth::reservation()['from_station'])) ? Auth::reservation()['from_station']->station_name . "->" : "" ?> <?= (isset(Auth::reservation()['to_station'])) ? Auth::reservation()['to_station']->station_name : "No Trains" ?></h1>
-                            <p>Select a seat(s) to proceed</p>
+                <div class="row mb-20 bg-white shadow p-20 g-20">
+                    <div class="col-6">
+                        <h1><?php echo (isset(Auth::reservation()['from_station'])) ? Auth::reservation()['from_station']->station_name . "->" : "" ?> <?= (isset(Auth::reservation()['to_station'])) ? Auth::reservation()['to_station']->station_name : "No Trains" ?></h1>
+                        <p>Select a seat(s) to proceed</p>
+                    </div>
+                    <div class="col-6 d-flex g-10 justify-content-end">
+                        <!-- from seats selected -->
+                        <div id="fromSeatCountSelected" class="d-flex fs-30 fw align-items-end flex-column mobile-align-items-center">
+                            <p class="fs-20">From Seat Seleted</p>
+                            <span>
+                                0/<?= Auth::reservation()['no_of_passengers'] ?>
+                            </span>
                         </div>
-                        <div class="col-6 d-flex g-10 justify-content-end">
-                            <!-- from seats selected -->
-                            <div id="fromSeatCountSelected" class="d-flex fs-30 fw align-items-end flex-column mobile-align-items-center">
-                                <p class="fs-20">From Seat Seleted</p>
+
+                        <!-- to seats selected -->
+                        <?php if (Auth::getReturn() == 'on') : ?>
+                            <div id="toSeatCountSelected" class="d-flex fs-30 fw align-items-end flex-column mobile-align-items-center">
+                                <p class="fs-20">To Seat Seleted</p>
                                 <span>
                                     0/<?= Auth::reservation()['no_of_passengers'] ?>
                                 </span>
                             </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
-                            <!-- to seats selected -->
-                            <?php if (Auth::getReturn() == 'on') : ?>
-                                <div id="toSeatCountSelected" class="d-flex fs-30 fw align-items-end flex-column mobile-align-items-center">
-                                    <p class="fs-20">To Seat Seleted</p>
-                                    <span>
-                                        0/<?= Auth::reservation()['no_of_passengers'] ?>
-                                    </span>
-                                </div>
-                            <?php endif; ?>
-                        </div>
+                <div class="row g-5">
+                    <div id="trainButtons" class="col-12 d-flex ">
+                        <button id="fromBtn" class="train-available-btn bg-Selected-Blue active">From Train</button>
+
+                        <?php if (Auth::getReturn() == 'on') : ?>
+                            <button id="toBtn" class="train-available-btn bg-Selected-Blue ">To Train</button>
+                        <?php endif; ?>
                     </div>
 
-                    <div class="row">
-                        <div id="trainButtons" class="col-12 d-flex g-3">
-                            <button id="fromBtn" class="train-available-btn active">From Train</button>
 
+                    <div class="col-12 d-flex align-items-center flex-column bg-white shadow p-20 g-20">
+                        <form action="" method="post" class="d-flex align-items-center flex-column g-20" id="formFromSelectedSeats">
+
+                            <!-- from selected seats -->
+                            <div class="d-flex flex-column align-items-center g-10" id="fromSeatMap">
+                                <h2><?= (isset($data['from_compartment_type'])) ? $data['from_compartment_type']->compartment_class_type : "Class type not found" ?></h2>
+                                <?php for ($from_compartment = 0; $from_compartment < $from_compartment_total_number; $from_compartment++) : ?>
+                                    <div class="comparment d-flex flex-row g-10 p-30 mobile-p-20">
+                                        <?php for ($i = 0; $i < $from_total_columns; $i++) { ?>
+                                            <div class="seat-row d-flex flex-column align-items-start">
+                                                <div class="seats-top d-flex flex-column align-items-start">
+                                                    <?php for ($j = 0; $j < $from_top_seats; $j++) { ?>
+                                                        <div id="fromSeatNo-<?= $from_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($from_seat_no, $from_reserved_seats)) ? "reserved" : "" ?>">
+                                                            <?= $from_seat_no++ ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <div class="seats-bottom d-flex flex-column align-items-start">
+                                                    <?php for ($j = 0; $j < $from_bottom_seats; $j++) { ?>
+                                                        <div id="fromSeatNo-<?= $from_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($from_seat_no, $from_reserved_seats) ? "reserved" : "" ?>">
+                                                            <?= $from_seat_no++ ?>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        <input type="hidden" name="no_of_passengers" id="noOfPassengers" value="<?= $_SESSION['reservation']['no_of_passengers'] ?>">
+                                    </div>
+                                <?php endfor; ?>
+                                <select name="from_selected_seats[]" class="display-none" id="hiddenSeats" multiple="true">
+                                    <?php for ($i = 1; $i <= $from_total_seats; $i++) : ?>
+                                        <option id="fromSeatNoOption-<?= $i ?>" value="<?= $i ?>"></option>
+                                    <?php endfor; ?>
+                                </select>
+                            </div>
+
+                            <!-- to selected seats -->
                             <?php if (Auth::getReturn() == 'on') : ?>
-                                <button id="toBtn" class="train-available-btn">To Train</button>
-                            <?php endif; ?>
-                        </div>
-
-
-                        <div class="col-12 d-flex align-items-center flex-column g-20">
-                            <form action="" method="post" class="d-flex align-items-center flex-column g-20" id="formFromSelectedSeats">
-
-                                <!-- from selected seats -->
-                                <div class="d-flex flex-column align-items-center g-10" id="fromSeatMap">
-                                    <h2><?= (isset($data['from_compartment_type'])) ? $data['from_compartment_type']->compartment_class_type : "Class type not found" ?></h2>
-                                    <?php for ($from_compartment = 0; $from_compartment < $from_compartment_total_number; $from_compartment++) : ?>
+                                <div class="d-flex flex-column align-items-center g-10 display-none" id="toSeatMap">
+                                    <h2><?= (isset($data['to_compartment_type'])) ? $data['to_compartment_type']->compartment_class_type : "Class type not found" ?></h2>
+                                    <?php for ($to_compartment = 0; $to_compartment < $to_compartment_total_number; $to_compartment++) : ?>
                                         <div class="comparment d-flex flex-row g-10 p-30 mobile-p-20">
-                                            <?php for ($i = 0; $i < $from_total_columns; $i++) { ?>
+                                            <?php for ($i = 0; $i < $to_total_columns; $i++) { ?>
                                                 <div class="seat-row d-flex flex-column align-items-start">
                                                     <div class="seats-top d-flex flex-column align-items-start">
-                                                        <?php for ($j = 0; $j < $from_top_seats; $j++) { ?>
-                                                            <div id="fromSeatNo-<?= $from_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($from_seat_no, $from_reserved_seats)) ? "reserved" : "" ?>">
-                                                                <?= $from_seat_no++ ?>
+                                                        <?php for ($j = 0; $j < $to_top_seats; $j++) { ?>
+                                                            <div id="toSeatNo-<?= $to_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($to_seat_no, $to_reserved_seats)) ? "reserved" : "" ?>">
+                                                                <?= $to_seat_no++ ?>
                                                             </div>
                                                         <?php } ?>
                                                     </div>
                                                     <div class="seats-bottom d-flex flex-column align-items-start">
-                                                        <?php for ($j = 0; $j < $from_bottom_seats; $j++) { ?>
-                                                            <div id="fromSeatNo-<?= $from_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($from_seat_no, $from_reserved_seats) ? "reserved" : "" ?>">
-                                                                <?= $from_seat_no++ ?>
+                                                        <?php for ($j = 0; $j < $to_bottom_seats; $j++) { ?>
+                                                            <div id="toSeatNo-<?= $to_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($to_seat_no, $to_reserved_seats) ? "reserved" : "" ?>">
+                                                                <?= $to_seat_no++ ?>
                                                             </div>
                                                         <?php } ?>
                                                     </div>
                                                 </div>
                                             <?php } ?>
-                                            <input type="hidden" name="no_of_passengers" id="noOfPassengers" value="<?= $_SESSION['reservation']['no_of_passengers'] ?>">
                                         </div>
                                     <?php endfor; ?>
-                                    <select name="from_selected_seats[]" class="display-none" id="hiddenSeats" multiple="true">
-                                        <?php for ($i = 1; $i <= $from_total_seats; $i++) : ?>
-                                            <option id="fromSeatNoOption-<?= $i ?>" value="<?= $i ?>"></option>
+
+
+                                    <select name="to_selected_seats[]" class="display-none" id="hiddenSeats" multiple="true">
+                                        <?php for ($i = 1; $i <= $to_total_seats; $i++) : ?>
+                                            <option id="toSeatNoOption-<?= $i ?>" value="<?= $i ?>"></option>
                                         <?php endfor; ?>
                                     </select>
                                 </div>
-
-                                <!-- to selected seats -->
-                                <?php if (Auth::getReturn() == 'on') : ?>
-                                    <div class="d-flex flex-column align-items-center g-10 display-none" id="toSeatMap">
-                                        <h2><?= (isset($data['to_compartment_type'])) ? $data['to_compartment_type']->compartment_class_type : "Class type not found" ?></h2>
-                                        <?php for ($to_compartment = 0; $to_compartment < $to_compartment_total_number; $to_compartment++) : ?>
-                                            <div class="comparment d-flex flex-row g-10 p-30 mobile-p-20">
-                                                <?php for ($i = 0; $i < $to_total_columns; $i++) { ?>
-                                                    <div class="seat-row d-flex flex-column align-items-start">
-                                                        <div class="seats-top d-flex flex-column align-items-start">
-                                                            <?php for ($j = 0; $j < $to_top_seats; $j++) { ?>
-                                                                <div id="toSeatNo-<?= $to_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($to_seat_no, $to_reserved_seats)) ? "reserved" : "" ?>">
-                                                                    <?= $to_seat_no++ ?>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                        <div class="seats-bottom d-flex flex-column align-items-start">
-                                                            <?php for ($j = 0; $j < $to_bottom_seats; $j++) { ?>
-                                                                <div id="toSeatNo-<?= $to_seat_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($to_seat_no, $to_reserved_seats) ? "reserved" : "" ?>">
-                                                                    <?= $to_seat_no++ ?>
-                                                                </div>
-                                                            <?php } ?>
-                                                        </div>
-                                                    </div>
-                                                <?php } ?>
-                                            </div>
-                                        <?php endfor; ?>
+                            <?php endif; ?>
 
 
-                                        <select name="to_selected_seats[]" class="display-none" id="hiddenSeats" multiple="true">
-                                            <?php for ($i = 1; $i <= $to_total_seats; $i++) : ?>
-                                                <option id="toSeatNoOption-<?= $i ?>" value="<?= $i ?>"></option>
-                                            <?php endfor; ?>
-                                        </select>
+                            <div class="ledgend d-flex flex-row g-20 align-items-center">
+                                <div class="ledgend-item d-flex align-items-center flex-column g-5">
+                                    <div class="ledgend-item-box ">
+                                        <div class="seat d-flex flex-column align-items-center justify-content-center reserved"></div>
                                     </div>
-                                <?php endif; ?>
-
-
-                                <div class="ledgend d-flex flex-row g-20 align-items-center">
-                                    <div class="ledgend-item d-flex align-items-center flex-column g-5">
-                                        <div class="ledgend-item-box ">
-                                            <div class="seat d-flex flex-column align-items-center justify-content-center reserved"></div>
-                                        </div>
-                                        <p>Reserved</p>
-                                    </div>
-                                    <div class="ledgend-item d-flex align-items-center flex-column g-5">
-                                        <div class="ledgend-item-box">
-                                            <div class="seat d-flex flex-column align-items-center justify-content-center selected"></div>
-                                        </div>
-                                        <p>Selected</p>
-                                    </div>
-                                    <div class="ledgend-item d-flex align-items-center flex-column g-5">
-                                        <div class="ledgend-item-box">
-                                            <div class="seat d-flex flex-column align-items-center justify-content-center"></div>
-                                        </div>
-                                        <p>Available</p>
-                                    </div>
+                                    <p>Reserved</p>
                                 </div>
-
-
-                                <div class="d-flex justify-content-end align-items-end g-20 width-fill">
-                                    <a class="button" href="<?= ROOT ?>home">
-                                        <div class="button-base">
-                                            <div class="text">Cancel</div>
-                                        </div>
-                                    </a>
-
-
-                                    <div class="button-base">
-                                        <div class="text" id="submitbtn">Proceed</div>
-                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
+                                <div class="ledgend-item d-flex align-items-center flex-column g-5">
+                                    <div class="ledgend-item-box">
+                                        <div class="seat d-flex flex-column align-items-center justify-content-center selected"></div>
                                     </div>
+                                    <p>Selected</p>
                                 </div>
-                            </form>
+                                <div class="ledgend-item d-flex align-items-center flex-column g-5">
+                                    <div class="ledgend-item-box">
+                                        <div class="seat d-flex flex-column align-items-center justify-content-center"></div>
+                                    </div>
+                                    <p>Available</p>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column m-20 ">
+                        <div class="d-flex justify-content-center align-items-center g-20 width-fill">
+                            <a class="button" href="<?= ROOT ?>home">
+                                <div class="button-base">
+                                    <div class="text">Cancel</div>
+                                </div>
+                            </a>
+
+
+                            <div class="button-base">
+                                <div class="text" id="submitbtn">Proceed</div>
+                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
                         </div>
 
-
-
                     </div>
-               
+
+
             </div>
 
         </main>
@@ -289,6 +291,4 @@ if (Auth::getReturn() == 'on') {
 
         e.preventDefault();
     });
-
-
 </script>
