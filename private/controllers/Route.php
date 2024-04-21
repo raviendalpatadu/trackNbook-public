@@ -44,9 +44,11 @@ class Route extends Controller
                     $data['errors']['database'] = 'Failed to add route';
                 }
             }
+
+            $this->redirect('route/addRoute?success=1');
     
-            $this->view("add.route.admin", $data);
         }
+        $this->view("add.route.admin", $data);
     }    
 
         // public function addRoute()
