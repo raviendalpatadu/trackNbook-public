@@ -1,9 +1,9 @@
 <?php
-use function Amp\delay;
-use function Amp\async;
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 
 
 /**
@@ -125,37 +125,8 @@ class Controller
         }   
     }
 
-    public function sendMailAsync($to, $recipent_name, $subject, $message)
-    {
-        async(function () use ($to, $recipent_name, $subject, $message) {
-            $mail = new PHPMailer();
-            $mail->IsSMTP();
     
-            $mail->SMTPDebug  = 0;
-            $mail->SMTPAuth   = TRUE;
-            $mail->SMTPSecure = "tls";
-            $mail->Port       = 587;
-            $mail->Host       = "smtp.gmail.com";
-    
-            $mail->Username   = "ravienkavisha@gmail.com";
-            $mail->Password   = "objb glvn fxgx isxo";
-    
-            $mail->IsHTML(true);
-            $mail->AddAddress($to, $recipent_name);
-            $mail->SetFrom("ravienkavisha@gmail.com", "TrackNBook");
+      
 
-            $mail->Subject = $subject;
-            $content = $message;
-
-            $mail->MsgHTML($content);
-            if (!$mail->Send()) {
-                echo "Error while sending Email.";
-                var_dump($mail);
-                return false;
-            } else {
-                echo "Email sent successfully";
-                return true;
-            }
-        });   
-    }   
+    
 }

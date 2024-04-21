@@ -179,7 +179,7 @@ class Passenger extends Controller
 
                                 $message = Auth::getEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key], $messege);
 
-                                $this->sendMailAsync($to_email, $recipient, $subject, $message);
+                                $this->sendMail($to_email, $recipient, $subject, $message);
                             }
 
 
