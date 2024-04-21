@@ -365,7 +365,7 @@ class Passenger extends Controller
                     die($e->getMessage());
                 }
 
-                $this->redirect('login');
+                $this->redirect('login?register=success');
             } else {
                 $errors['user_first_name'] = (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : '';
                 $errors['user_last_name'] = (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : '';

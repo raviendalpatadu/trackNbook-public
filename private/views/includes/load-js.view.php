@@ -16,6 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 <script src="<?= ASSETS ?>/lib/datatables/dataTables.js"></script>
 <script src="<?= ASSETS ?>/js/main.js"></script>
+<script src="<?= ASSETS ?>/lib/toaster/build/toastr.min.js"></script>
+
 
 
 

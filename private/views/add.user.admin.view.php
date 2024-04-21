@@ -321,9 +321,11 @@ if (!isset($data['errors'])) {
 
     });
 
-
-
     changeImage('#userImage', '#imgDiv');
+
+    if(checkNotification('success=1') > -1){
+        makeSuccessToast('User created successfully!', '');
+    }
 </script>
 
 </html>

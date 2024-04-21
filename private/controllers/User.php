@@ -146,7 +146,7 @@ class User extends Controller
                     die($e->getMessage());
                 }
 
-                $this->redirect('services/manage');
+                $this->redirect('user/register?success=1');
             } else {
                 $data['errors'] = $user->errors;
             }
