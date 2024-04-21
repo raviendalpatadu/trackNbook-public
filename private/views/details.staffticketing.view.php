@@ -1,10 +1,10 @@
 <?php
 $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
-echo "<pre>";
-// print_r($_POST);
-print_r($_SESSION);
-// print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// // print_r($_POST);
+// print_r($_SESSION);
+// // print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -17,8 +17,8 @@ echo "</pre>";
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg ">
-            <div class="container ">
-                <div class="d-flex align-items-centergit">
+            <div class="container  ">
+                <div class="d-flex mt-50 flex-column g-20 justify-content-center">
                     <form action="" method="post" class="bg-white p-30 shadow" enctype="multipart/form-data">
                         <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
                             <h3 class="mb-20 Primary-Gray input-text-label border-bottom-Lightgray">Enter Details of Passenger <?= $i + 1 ?></h3>
@@ -171,19 +171,20 @@ echo "</pre>";
                             </div>
                         </div>
                     </div> -->
-                        <div class="row">
-                            <div class="col-12 d-flex justify-content-end">
-                                <div class="button-base">
-                                    <input type="submit" value="proceed" name="submit">
-                                    <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </div>
+
+                    </form>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-end">
+                            <div class="button-base">
+                                <input type="submit" value="proceed" name="submit">
+                                <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
                             </div>
                         </div>
-                    </form>
-
+                    </div>
                 </div>
+
 
             </div>
 
