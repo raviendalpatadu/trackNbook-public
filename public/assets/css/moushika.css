@@ -26,6 +26,26 @@
   color: #f2f9fe;
 }
 
+.mou-staff-reservation-welcomeBox {
+  width: 40vw;
+}
+
+.mou-staff-reservation-home-img {
+  width: 500px;
+}
+
+.mou-staff-reservation-home-text h1 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 42px;
+  color: var(--blue);
+  align-items: center;
+}
+
+.mou-staff-reservation-search-box h2 {
+  background-color: var(--blue);
+}
+
 .mou-staff-login-container {
   display: flex;
   flex-direction: column;

@@ -89,6 +89,12 @@
                                             class="mou-span fw-bold">Sign Up</a>
                                     </p>
                                 </div>
+
+                                <div class="d-flex justify-content-center flex-fill">
+                                    <p class="mb-0 "><a href="login/staff"
+                                            class="mou-span fw-bold">Staff Login</a>
+                                    </p>
+                                </div>
                             </form>
                         </div>
                     </div>

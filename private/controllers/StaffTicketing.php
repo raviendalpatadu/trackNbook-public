@@ -12,6 +12,104 @@ class StaffTicketing extends Controller
         $this->view('staff_ticketing.dashboard');
     }
 
+    
+    function reservation($id = '')
+    {
+        $station = new Stations();
+        $data = array();
+        $data['stations'] = $station->getStations();
+        $data['trains_available'] = array();
+        $data['trains_available']['from_trains'] = array();
+
+
+        if (isset($_SESSION['reservation'])) {
+            if (isset(Auth::reservation()['reservation_status']) && Auth::reservation()['reservation_status'] == "Pending") {
+                $reservation = new Reservations();
+                try {
+                    foreach (Auth::reservation()['reservation_id']['from'] as $key => $value) {
+                        $reservation->callProcedure('expire_reservation', array($value));
+                    }
+
+                    if (Auth::reservation()['return'] == 'on') {
+                        foreach (Auth::reservation()['reservation_id']['to'] as $key => $value) {
+                            $reservation->callProcedure('expire_reservation', array($value));
+                        }
+                    }
+
+                    
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            }
+
+            unset($_SESSION['reservation']);
+        }
+
+        if (isset($_SESSION['errors'])) {
+            $data['errors'] = $_SESSION['errors'];
+            unset($_SESSION['errors']);
+        }
+        // unset($_SESSION['error']);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' || isset($_POST['submit'])) {
+            
+            $home = new Homes();
+
+            if ($home->validate($_POST) == false) {
+
+                // concat 2 arrays
+                $data = array_merge($data, $home->errors);
+                $this->view('home', $data);
+            } else {
+
+                $data['from_date'] = $_POST['from_date'];
+                $data['from_station'] = $station->getOneStation('station_id', $_POST['from_station']);
+                $data['to_station'] = $station->getOneStation('station_id', $_POST['to_station']);
+                $data['no_of_passengers'] = $_POST['no_of_passengers'];
+                $data['return'] = (isset($_POST['return'])) ? $_POST['return'] : 0;
+
+                if (isset($_POST['to_date'])) {
+                    $data['to_date'] = $_POST['to_date'];
+                }
+
+
+
+                $_SESSION['reservation'] = $data;
+
+                $train = new Trains();
+                if (isset($data['to_date']) && $data['to_date'] != '') {
+                    $inverse_search['from_station'] = $data['to_station'];
+                    $inverse_search['to_station'] = $data['from_station'];
+                    $inverse_search['from_date'] = $data['to_date'];
+                    $inverse_search['no_of_passengers'] = $data['no_of_passengers'];
+                    $data['trains_available']['to_trains'] = $train->search($inverse_search);
+                }
+                
+        
+                $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
+
+                
+                
+
+                // $this->redirect('staffticketing/trainAvailable');
+            }
+        } 
+        
+        $this->view('booking.staffticketing', $data);
+    }
+
+    function trainSelected($id = ''){
+
+        if($_SERVER['REQUEST_METHOD']=='POST'){
+            echo "<pre>";
+            print_r($_POST);
+            print_r($_SESSION);
+            echo "</pre>";
+        }
+
+    }
+   
+
     function pay($id = '')
     {
 
@@ -222,45 +320,9 @@ class StaffTicketing extends Controller
     //     $this->view('refund_details.staffticketing');
     // }
 
-    function home($id = '')
-    {
-        $station = new Stations();
-        $data = array();
-        $data['stations'] = $station->getStations();
 
-        if (isset($_SESSION['reservation'])) {
-            unset($_SESSION['reservation']);
-        }
+  
 
-        if (isset($_SESSION['errors'])) {
-            $data['errors'] = $_SESSION['errors'];
-            unset($_SESSION['errors']);
-        }
-
-        $this->view('home.staffticketing', $data);
-    }
-
-    function trains($id = '')
-    {
-        $station = new Stations();
-        $data = array();
-        $data['trains_avilable'] = array();
-
-        if (isset($_POST['to_station']) && isset($_POST['from_station']) && isset($_POST['from_date'])) {
-
-            $train = new Trains();
-            $data['trains_available'] = $train->search();
-
-
-            if (array_key_exists('errors', $data['trains_available'])) {
-                $_SESSION['errors'] = $data['trains_available'];
-                // $this->redirect('home');
-            } else {
-                $this->view('trains.staffticketing', $data);
-            }
-        }
-        // $this->view('trains.staffticketing');
-    }
     function verifiedWarrent($id = '')
     {
         $warrant_resevation = new WarrantsReservations();
