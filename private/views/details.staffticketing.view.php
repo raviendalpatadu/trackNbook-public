@@ -21,7 +21,7 @@ $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
                 <div class="d-flex mt-50 flex-column g-20 justify-content-center">
                     <form action="" method="post" class="bg-white p-30 shadow" enctype="multipart/form-data">
                         <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
-                            <h3 class="mb-20 Primary-Gray input-text-label border-bottom-Lightgray">Enter Details of Passenger <?= $i + 1 ?></h3>
+                            <h3 class="mb-20 Primary-Gray input-text-label border-bottom-Lightgray">Enter Details of Passenger: <?= '0'.$i + 1 ?></h3>
                             <div class="row g-20 mb-20">
                                 <div class="col-2">
                                     <div class="text-inputs">
