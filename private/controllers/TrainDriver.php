@@ -16,14 +16,17 @@ class TrainDriver extends Controller
 
         $this->view('update.train.delay');
     }
-    function updateLocation($id = '')
-    {
-        $train = new Trains();
-        $data = array();
-        $data['train'] = $train->whereOne('train_id', $id);
+    // function updateLocation($id = '')
+    // {
+    //     $train = new Trains();
+    //     $data = array();
+    //     $data['train'] = $train->whereOne('train_id', $id);
 
-        $this->view('update.location');
-    }
+    //     $trainlocation = new TrainLocation();
+
+
+    //     $this->view('update.location');
+    // }
 
 
 
@@ -35,6 +38,16 @@ class TrainDriver extends Controller
 
         $train_stop_station = new TrainStopStations();
         $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($id);
+
+        if(isset($_POST['submit'])){
+            $trainlocation = new TrainLocation();
+            $trainlocation->updateStopStation($id, $_POST['station_id']);
+
+            if($trainlocation->insert($data)){
+                $this->redirect('train_driver');
+            }
+        }
+
 
         $this->view('add.location', $data);
     }
