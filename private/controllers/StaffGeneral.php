@@ -36,7 +36,7 @@ class StaffGeneral extends Controller
 
         $this->view('add.schedule');
     }
-    function waitList($id = '')
+    function waitList()
     {   
         
         $waitinglist = new WaitingLists();

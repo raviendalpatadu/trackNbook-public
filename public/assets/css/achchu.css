@@ -20,6 +20,10 @@
   width: 422px;
 }
 
+.mr--13 {
+  margin-right: -13px;
+}
+
 .mt--20 {
   margin-top: -20px;
 }
@@ -43,7 +47,7 @@
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 105%;
+  height: 106%;
   flex-shrink: 0;
   background: url("../images/checker-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
   background-position-y: 100% !important;
@@ -490,8 +494,8 @@ thead tr {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 67px 20px 75px -8px;
-  width: 303px;
+  margin: 67px 20px 75px 142px;
+  width: 350px;
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 19px;
@@ -536,7 +540,7 @@ thead tr {
   background: var(--gray-50, #f9fafb);
 }
 
-.dropdown-add-location > span {
+.input-field-dropdown-al > span {
   cursor: pointer;
   padding: 8px;
   border-radius: 6px;
@@ -567,13 +571,13 @@ thead tr {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 67px 20px 75px 25px;
-  width: 303px;
+  margin: 67px 20px 75px 0px;
+  width: 350px;
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 19px;
   padding-right: 25px;
-  text-align: center;
+  text-align: left;
   color: #1f2124;
   float: left;
 }
@@ -594,7 +598,7 @@ thead tr {
 
 .add-location-g-8 {
   gap: 17px;
-  margin-left: 40px;
+  margin-left: -4px;
 }
 
 .dropdown2-add-location {
@@ -607,7 +611,7 @@ thead tr {
   border: 1px solid #ccc;
   background: var(--White);
   transition: all 0.3s ease;
-  width: auto;
+  width: 250px;
 }
 
 /* Update train Location */
@@ -766,7 +770,7 @@ thead tr {
   max-width: 221px; /* Added to ensure it doesn't exceed the container width */
 }
 
-.input-field3-update-delay {
+.input-text-update-delay {
   background: var(--w-background, #ffffff);
   border-radius: 5px;
   border-style: solid;

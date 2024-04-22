@@ -196,38 +196,4 @@ class WaitingLists extends Model
         return false;
     }
 
-    public function getAllWaitingList()
-    {
-        $query = "WITH SortedRows AS (
-            SELECT
-                *,
-                ROW_NUMBER() OVER (PARTITION BY waiting_list_train_id, waiting_list_compartment_id, waiting_list_reservation_date ORDER BY waiting_list_time_created) AS priority_number
-            FROM
-                tbl_waiting_list
-        )
-        SELECT
-            s.*,
-            start_st.station_name AS start_station_name,
-            end_st.station_name AS end_station_name,
-            t.train_name,
-            t.train_type,
-            ct.compartment_class_type,
-            ts_start.train_stop_time AS estimated_start_time,
-            ts_end.train_stop_time AS estimated_end_time
-            
-        FROM
-           SortedRows s
-           JOIN tbl_station start_st ON s.waiting_list_reservation_start_station = start_st.station_id
-           JOIN tbl_station end_st ON s.waiting_list_reservation_end_station = end_st.station_id
-           JOIN tbl_train t ON s.waiting_list_train_id = t.train_id
-           JOIN tbl_compartment c ON s.waiting_list_compartment_id = c.compartment_id
-           JOIN tbl_compartment_class_type ct ON c.compartment_class_type = ct.compartment_class_type_id
-           JOIN tbl_train_stop_station ts_start ON ts_start.train_id = s.waiting_list_train_id and ts_start.station_id = s.waiting_list_reservation_start_station
-           JOIN tbl_train_stop_station ts_end ON ts_end.train_id = s.waiting_list_train_id and ts_end.station_id = s.waiting_list_reservation_end_station
-        ORDER BY
-            waiting_list_train_id, waiting_list_compartment_id, waiting_list_reservation_date, waiting_list_time_created;";
-        $result = $this->query($query);
-
-        return $result;
-    }
 }

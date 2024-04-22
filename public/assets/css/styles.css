@@ -315,16 +315,20 @@ nav .menu div.profile-mobile {
   
 }
 
+
 .nav-menu-items.nav-menu-items-show {
   display: block;
-  /* position: absolute; */
-  width: 100vw;
+  position: absolute;
+  top: 61px; /* Position below the nav bar */
+  left: -60px;
   background-color: white;
- box-shadow: 0px 5px 10px 0px #aaa;
+  box-shadow: 0px 5px 10px 0px #aaa;
   transition: color 0.3s ease-in-out;
   z-index: 12;
-  opacity: 0.85;
+  opacity: 1.05;
+  width: 450px;
 }
+
 
 .nav-menu-items ul{
   list-style-type: none;
@@ -1717,3 +1721,111 @@ ul {
 .width-none{
   width: none !important;
 }
+
+
+/*mobile nav bar ......................................... */
+
+
+    body.nav-open {
+      overflow: hidden;
+    }
+
+    .profile-dropdown-mobile-nav-bar {
+      position: absolute;
+      background-color: #fafafa;
+      min-width: 185px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 9px 10px;
+      margin: 467px 0 0;
+      font-size: 23px;
+      color: #373a3c;
+      text-align: left;
+      list-style: none;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, .15);
+      z-index: 1000;
+      display: none;
+    }
+
+    .profile-dropdown-mobile-nav-bar.show {
+      display: block;
+      right: 0;
+    }
+
+    .dropdown-menu-mobile-nav-bar {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      min-width: 160px;
+      padding: 8px 0;
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: #373a3c;
+      text-align: left;
+      list-style: none;
+      background-color: #fff;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, .15);
+    }
+
+    .dropdown-menu-mobile-nav-bar.show {
+      display: block;
+    }
+
+    .navbar.fixed-top .dropdown .dropdown-menu-mobile-nav-bar {
+      max-height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+
+    .navbar-expand .navbar-nav .dropdown-menu-mobile-nav-bar {
+      position: absolute;
+    }
+
+    .navbar-nav .dropdown-menu-mobile-nav-bar {
+      position: static;
+      float: none;
+    }
+
+    .mobile-navbar-profile-img {
+      margin-right: 110px;
+    }
+    .mobile-navbar-notification-icon {
+      margin-left: 60px;
+    }
+
+    .dropdown-icon {
+      margin-left: -113px;
+    }
+
+    .profile-dropdown-mobile-nav-bar li a {
+      display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: #373a3c;
+      border: 1px solid #ccc;
+    }
+
+    .profile-dropdown-mobile-nav-bar li a:hover {
+      background-color: #f2f2f2;
+    }
+
+    .profile-dropdown-mobile-nav-bar li a i {
+      margin-right: 5px;
+    }
+
+    /* Rename border-top style */
+    .border-top-mobile-nav-bar {
+      border-top: 8px;
+      border-top-style: solid;
+      border-top-color: #0085e4;
+    }
+
+
+    
+  

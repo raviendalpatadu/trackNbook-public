@@ -725,7 +725,7 @@ video {
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 100%;
+  height: 106%;
   flex-shrink: 0;
   background: url("../images/checker-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
   background-position-y: 100% !important;
