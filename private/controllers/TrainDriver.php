@@ -84,6 +84,20 @@ class TrainDriver extends Controller
 
     function addLocation()
     {
+        if (!Auth::is_logged_in() || !Auth::isUserType('train_driver')) {
+            $this->redirect('login');
+        }
+
+        if (!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')) {
+            // get user id
+            $user_id = Auth::getUser_id();
+            $this->redirect('login/changepin/' . $user_id);
+        }
+
+        // if session is set redirect to train driver page
+        if (!isset($_SESSION['train_driver'])) {
+            $this->redirect('traindriver/idoption');
+        }
         $train = new Trains();
         $data = array();
         $train_id = $_SESSION['train_driver']['train_id'];

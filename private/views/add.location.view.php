@@ -121,3 +121,9 @@
 
 
 </html>
+<script>
+    // show user regiserted sucessfully if exists in get method 
+    if (checkNotification('success=1') > -1) {
+        makeSuccessToast('Location updated successfully!', '');
+    }
+</script>

@@ -54,9 +54,7 @@ class TrainLocation extends Model
         if (is_array($previous_station_stop_no) && count($previous_station_stop_no) > 0) {
             $train_stop_station = new TrainStopStations();
             $current_station_data = $train_stop_station->getTrainStopStationData($train_id, $station_id);
-            echo "<pre>";
-            print_r($current_station_data);
-            echo "</pre>";  
+        
     
             if ($previous_station_stop_no[0]->stop_no < $current_station_data[0]->stop_no) {
                 return false;

@@ -1,6 +1,6 @@
 <?php
-use function Amp\delay;
-use function Amp\sync;
+// use function Amp\delay;
+// use function Amp\sync;
 
 
 use PHPMailer\PHPMailer\PHPMailer;

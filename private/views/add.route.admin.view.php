@@ -152,10 +152,15 @@ $stationCount = isset($_POST['station_count']) ? intval($_POST['station_count'])
                 const outputContainer = $('#stationDropdowns');
                 makeSelectDropdown(outputContainer);
 
-                
+
 
             });
         });
+
+        // show user regiserted sucessfully if exists in get method 
+        if (checkNotification('success=1') > -1) {
+            makeSuccessToast('Route added successfully!', '');
+        }
     </script>
 </body>
 
