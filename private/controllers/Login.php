@@ -9,10 +9,6 @@ class Login extends Controller
     function index($id = '')
     {
         $errors = array();
-
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
         
         $user = new Users();
         if (isset($_POST['username']) && isset($_POST['password'])) {

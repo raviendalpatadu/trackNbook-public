@@ -190,7 +190,7 @@ nav {
   display: flex;
   width: -webkit-fill-available;
   height: fit-content;
-  padding: 0px 20px;
+  padding: 0px;
   justify-content: space-between;
   align-items: center;
   border-top: 10px solid var(--Border-blue);
@@ -1792,7 +1792,7 @@ ul {
     }
 
     .mobile-navbar-profile-img {
-      margin-right: 110px;
+      /* margin-right: 110px; */
     }
     .mobile-navbar-notification-icon {
       margin-left: 60px;
@@ -1819,12 +1819,12 @@ ul {
       margin-right: 5px;
     }
 
-    /* Rename border-top style */
+    /* /* Rename border-top style */
     .border-top-mobile-nav-bar {
       border-top: 8px;
       border-top-style: solid;
       border-top-color: #0085e4;
-    }
+    } 
 
 
     

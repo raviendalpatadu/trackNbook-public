@@ -128,22 +128,17 @@ echo "</pre>";
                             <div class="row">
 
                                 <div class="col-12 d-flex justify-content-center">
-                                    <button class="button mx-10">
-                                        <div class="button-base">
-                                            <div class="text">Reset</div>
-                                        </div>
-                                    </button>
 
                                     <button class="button mx-10" id="deleteBtn">
                                         <div class="button-base">
-                                            <div class="text">Delete</div>
+                                            <div class="text">Delete Account</div>
                                         </div>
                                     </button>
 
                                     <button class="button mx-10">
                                         <div class="button-base">
                                             <input type="hidden" name="user_id" value="<?= Auth::getuser_id() ?>">
-                                            <input type="submit" value="Update" name="update">
+                                            <input type="submit" value="Update Changes" name="update">
                                         </div>
                                     </button>
                                 </div>
