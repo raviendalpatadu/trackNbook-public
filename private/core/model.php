@@ -23,8 +23,8 @@ class Model extends Database
     public function where($column, $value)
     {
         $column = addslashes($column);
-        $query = "select * from $this->table where $column = :value";
-        // echo 'where ::  '.$query .'<br>';
+        $query = "select * from $this->table where $column = $value";
+        echo 'where ::  '.$query .'<br>';
         $data = $this->query($query, [
             'value' => $value
         ]);
@@ -121,7 +121,9 @@ class Model extends Database
         }
         $str = trim($str, ",");
         $data['id'] = $id;
-        
+        // echo "{$id}<pre>";
+        //     print_r($data);
+        //     echo "</pre>";
             
         try {
             if ($id_feild == '') {

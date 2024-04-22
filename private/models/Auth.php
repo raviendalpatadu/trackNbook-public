@@ -180,4 +180,11 @@ class Auth
             </td></tr></table></td></tr></table></div></body></html>";
 
     }
+
+    public static function isPinChanged($user_data, $user_type) {
+        if(($user_type == 'ticket_checker' || $user_type == 'train_driver') && $user_data == 1) {
+            return true;
+        }
+        return false;     
+    }
 }

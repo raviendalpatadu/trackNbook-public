@@ -16,6 +16,12 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 <script src="<?= ASSETS ?>/lib/datatables/dataTables.js"></script>
 <script src="<?= ASSETS ?>/js/main.js"></script>
+<script src="<?= ASSETS ?>/lib/toaster/build/toastr.min.js"></script>
+
+
+
+<!-- mobile nav bar - dropdownshow icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
 

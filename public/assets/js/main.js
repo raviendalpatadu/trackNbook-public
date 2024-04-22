@@ -311,7 +311,6 @@ function getErrors(url, data, callback) {
 
       var res = JSON.parse(data);
 
-
       // if res has error throw an error
       if (res == true) {
         // console.log(res);
@@ -415,10 +414,12 @@ function makePopupModel(title, description, buttons, imgURL, action) {
   var desc = $("<p/>").addClass("desc").appendTo(body);
 
   // print the buttons
-  var btnBox = $("<div/>").addClass("footer d-flex g-5 justify-content-end").appendTo(box);
+  var btnBox = $("<div/>")
+    .addClass("footer d-flex g-5 justify-content-end")
+    .appendTo(box);
   if (buttons.length > 0) {
     buttons.forEach((button) => {
-      var btn = $("<button/>").addClass('model-btn').appendTo(btnBox);
+      var btn = $("<button/>").addClass("model-btn").appendTo(btnBox);
       // var buttonBase = $("<div/>").addClass("button-base").appendTo(btn);
       var buttonText = $("<div/>").addClass("text").appendTo(btn);
       buttonText.text(button);
@@ -426,11 +427,10 @@ function makePopupModel(title, description, buttons, imgURL, action) {
   }
 
   // close button
-  var closeBtn = $("<button/>").addClass('model-btn').appendTo(btnBox);
+  var closeBtn = $("<button/>").addClass("model-btn").appendTo(btnBox);
   var closeButtonText = $("<div/>").addClass("text").appendTo(closeBtn);
   closeBtn.attr("id", "closeModelBtn");
   closeButtonText.text("Close");
-
 
   heading.text(title);
   img.attr("src", imgURL);
@@ -452,8 +452,8 @@ function makePopupModel(title, description, buttons, imgURL, action) {
   var btns = $("button.model-btn");
   btns.each(function (index, element) {
     console.log(element);
-    $(element).on("click", function (e) {  
-      e.preventDefault();    
+    $(element).on("click", function (e) {
+      e.preventDefault();
       if (action) {
         action(popupBox);
       }
@@ -520,7 +520,7 @@ function makePopupModel(title, description, buttons, imgURL, action) {
 var checkboxBurger = $("#burger");
 
 checkboxBurger.click(function () {
-  console.log("clicked"); 
+  console.log("clicked");
   if (checkboxBurger.is(":checked")) {
     $(".nav-menu-items").addClass("nav-menu-items-show");
   } else {
@@ -565,4 +565,106 @@ function makeCalendar(id, startDate, endDate) {
       $(id).val(start.format("YYYY-MM-DD"));
     }
   );
+}
+
+function makeSelectDropdown(outputContainer) {
+  $(outputContainer)
+    .find("select.dropdown")
+    .each(function () {
+      var dropdown = $("<div />").addClass("dropdown selectDropdown");
+
+      $(this).wrap(dropdown);
+
+      var label = $("<span />")
+        .text($(this).attr("placeholder"))
+        .insertAfter($(this));
+      var list = $("<ul />");
+
+      label.attr("class", "input-field");
+
+      $(this)
+        .find("option")
+        .each(function () {
+          list.append($("<li />").append($("<a />").text($(this).text())));
+        });
+
+      list.insertAfter($(this));
+
+      if ($(this).find("option:selected").length) {
+        label.text($(this).find("option:selected").text());
+        list
+          .find("li:contains(" + $(this).find("option:selected").text() + ")")
+          .addClass("active");
+        $(this).parent().addClass("filled");
+      }
+    });
+
+  $(outputContainer).on("click touch", ".selectDropdown ul li a", function (e) {
+    e.stopImmediatePropagation();
+    console.log($(this).text());
+    var dropdown = $(this).parent().parent().parent();
+    // console.log(dropdown);
+    var active = $(this).parent().hasClass("active");
+    var label = active
+      ? dropdown.find("select").attr("placeholder")
+      : $(this).text();
+
+    console.log($(this));
+
+    dropdown.find("option").prop("selected", false);
+    dropdown.find("ul li").removeClass("active");
+
+    dropdown.toggleClass("filled", !active);
+    dropdown.children("span").text(label);
+    if (!active) {
+      dropdown
+        .find("option:contains(" + $(this).text() + ")")
+        .prop("selected", true);
+
+      $(this).parent().addClass("active");
+    }
+
+    dropdown.removeClass("open");
+
+    //trigger change event
+    dropdown.find("select").trigger("change");
+  });
+
+  $(".dropdown > span").on("click touch", function (e) {
+    var self = $(this).parent();
+    self.toggleClass("open");
+  });
+
+  $(outputContainer).on("click touch", function (e) {
+    var dropdown = $(".dropdown");
+    if (dropdown !== e.target && !dropdown.has(e.target).length) {
+      dropdown.removeClass("open");
+    }
+  });
+}
+
+function checkNotification(getParam){
+  return window.location.href.indexOf(getParam);
+}
+
+function makeSuccessToast(title, description) {
+  toastr["success"](title, description);
+
+  toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: false,
+    progressBar: false,
+    positionClass: "toast-top-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "5000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+  };
 }

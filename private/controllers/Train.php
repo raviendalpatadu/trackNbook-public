@@ -76,7 +76,7 @@ class Train extends Controller
             $inverse_search['no_of_passengers'] = $data['no_of_passengers'];
             $data['trains_available']['to_trains'] = $train->search($inverse_search);
         }
-        
+
 
         $data['trains_available']['from_trains'] = $train->search($_SESSION['reservation']);
 
@@ -88,7 +88,6 @@ class Train extends Controller
     {
         $station = new Stations();
         $data = array();
-        // $data['trains_avilable'] = array();
 
         $data['stations'] = $station->findAll();
 
@@ -151,7 +150,7 @@ class Train extends Controller
 
         if (isset($_POST['submit']) || $_POST) {
 
-        
+
             $reservation = new Reservations();
 
             $reservationData = array();
@@ -290,9 +289,10 @@ class Train extends Controller
         $this->view('add.trains', $data);
     }
 
-    public function addToWaitingList(){
+    public function addToWaitingList()
+    {
         $waitingList = new WaitingLists();
-        
+
         if ($waitingList->validate($_POST)) :
             try {
                 $waitingList->insert($_POST);
