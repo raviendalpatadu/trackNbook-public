@@ -24,6 +24,18 @@
                                     <br>
                                     <hr style="color: gray">
                                     <br><br>
+                                    <div class="filter-container mb-20">
+                                        <label for="typeFilter" class="mr-20">Filter by Type </label>
+                                        <select id="typeFilter">
+                                            <option value="">All</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="passenger">Passenger</option>
+                                            <option value="station_master">Station Master</option>
+                                            <option value="staff_general">Staff General</option>
+                                            <option value="staff_ticket">Staff Ticket</option>
+                                            <option value="train_driver">Train Driver</option>
+                                        </select>
+                                    </div>
                                     <table class="if-table stripe hover" id="userTable" style:width=100%>
                                         <thead>
                                             <tr>
@@ -167,6 +179,12 @@
                         className: 'dt-body-left' // Left-align the content in the first column
                     }
                 ]
+            });
+
+            // Apply the filter
+            $('#typeFilter').on('change', function () {
+                let type = $(this).val();
+                table.column(1).search(type).draw();
             });
         });
     </script>
