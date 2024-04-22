@@ -12,11 +12,11 @@ class TrainDriver extends Controller
             $this->redirect('login');
         }
 
-        if (!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')) {
-            // get user id
-            $user_id = Auth::getUser_id();
-            $this->redirect('login/changepin/' . $user_id);
-        }
+        // if (!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')) {
+        //     // get user id
+        //     $user_id = Auth::getUser_id();
+        //     $this->redirect('login/changepin/' . $user_id);
+        // }
 
         $train = new Trains();
         $data = array();
@@ -34,31 +34,36 @@ class TrainDriver extends Controller
         // create a session to store the train id and driver id
         $train_data = $train->whereOne('train_id', $id);
 
-        if ($train_data) {
-            // set the session of duration + 2 hours
+        echo "sesseion created";
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+
+        // if ($train_data) {
+        //     // set the session of duration + 2 hours
 
 
-            // insert in train location at the start station
-            $trainlocation = new TrainLocation();
+        //     // insert in train location at the start station
+        //     $trainlocation = new TrainLocation();
 
-            // if record is not in the table
-            if (!$trainlocation->istrainExists($id, date('Y-m-d'))) {
+        //     // if record is not in the table
+        //     if (!$trainlocation->istrainExists($id, date('Y-m-d'))) {
 
-                $location_data = array(
-                    'train_id' => $id,
-                    'date' => date('Y-m-d'),
-                    'train_location' => $train_data->train_start_station,
-                    'train_location_updated_time' => date('Y-m-d H:i:s')
-                );
-                $trainlocation->insert($location_data);
-                // notify passenger who are at the start station
-                $passenger = new Passengers();
-                $passenger_data = $passenger->getPassengerDataOfNextStation($id, $train_data->train_start_station);
+        //         $location_data = array(
+        //             'train_id' => $id,
+        //             'date' => date('Y-m-d'),
+        //             'train_location' => $train_data->train_start_station,
+        //             'train_location_updated_time' => date('Y-m-d H:i:s')
+        //         );
+        //         $trainlocation->insert($location_data);
+        //         // notify passenger who are at the start station
+        //         $passenger = new Passengers();
+        //         $passenger_data = $passenger->getPassengerDataOfNextStation($id, $train_data->train_start_station);
 
-                // send a mail to the passengers    
-                $this->notifyPassengers($train_data, $passenger_data, $train_data->train_start_station);
-            }
-        }
+        //         // send a mail to the passengers    
+        //         $this->notifyPassengers($train_data, $passenger_data, $train_data->train_start_station);
+        //     }
+        // }
 
 
         $this->view('dashboard.traindriver');
@@ -179,6 +184,7 @@ class TrainDriver extends Controller
                 $this->redirect('traindriver/index/' . $data['train_id'] . '/' . Auth::getUser_id());
             }
         }
+        
 
         $this->view('option.traindriver');
     }

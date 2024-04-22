@@ -132,9 +132,8 @@ class User extends Controller
                                  <h3>Username: " . $_POST['login_username']. "<h3>
                                  <h3>Password: " . $_POST['login_password']. "<h3>
                                 <br>
-                                Make sure to change your password after login.
-                                <br>
-                                <a href='http://localhost/Train-Booking-System/public/login/staff'>Click here to login</a>";
+                                Make sure to verify the email before login.
+                                <br>";
 
                     $body = Auth::getEmailBody($recipient, $message);
 

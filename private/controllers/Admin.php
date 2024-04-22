@@ -82,6 +82,7 @@ class Admin extends Controller
 
         $data['trains'] = $train->findAllTrains();
         $this->view('admin.trainList', $data);
+        
 
     }
  
