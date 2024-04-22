@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Varela+Round);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 *,
 *:before,
 *:after {
@@ -559,4 +558,53 @@
   font-weight: 500;
   font-size: 16px;
   padding-bottom: 5px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  float: left;
+  align-items: center;
+  justify-content: center;
+}
+
+#typeFilter {
+  padding: 12px 20px;
+  border: var(--textdark);
+  border-radius: 5px;
+  font-size: 16px;
+  color: var(--textdark);
+  background-color: rgb(231, 231, 231);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: var(--textgray);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#typeFilter:hover {
+  background-color: #00b4cc;
+  transform: scale(1.05);
+  color: floralwhite;
+  font-weight: bold;
+}
+
+#typeFilter:focus {
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+#typeFilter option {
+  background-color: #ffffff;
+  color: #333;
+  margin-top: 2px;
 }/*# sourceMappingURL=iflal.css.map */
