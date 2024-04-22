@@ -4760,4 +4760,39 @@ input.calendar-none::-webkit-calendar-picker-indicator {
 
 .reservation-map-view {
   height: 40vh !important;
+}
+
+.change-pin {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+.change-pin .change-pin__header {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--Border-blue);
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--Border-blue);
+}
+.change-pin .change-pin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+  width: 40vw;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
+}
+.change-pin .change-pin__form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }/*# sourceMappingURL=ravien.css.map */

@@ -9,8 +9,7 @@ class Login extends Controller
     function index($id = '')
     {
         $errors = array();
-
-
+        
         $user = new Users();
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $data = $user->login();
@@ -59,7 +58,7 @@ class Login extends Controller
 
         $user = new Users();
         if (isset($_POST['username']) && isset($_POST['password'])) {
-            $data = $user->login();
+            $data = $user->staffLogin();
 
             if (!array_key_exists('error', $data)) {
 
@@ -108,5 +107,55 @@ class Login extends Controller
                 'errors' => $errors,
             )
         );
+    }
+
+    function changePin($id){
+        $user_id = $id;
+        $user = new Users();
+        $user_data = $user->whereOne('user_id',$user_id);
+
+        if($user_data->user_type == 'ticket_checker'){
+            $ticket_checker = new TicketCheckers();
+            $ticket_checker_data = $ticket_checker->whereOne('ticket_checker_id',$user_id);
+            if ($ticket_checker_data->pin_changed == 1) {
+                $this->view('option.ticketchecker');
+                return;
+            }
+            if(isset($_POST['pin_changed']) && isset($_POST['pin_changed_confirm']) && $_POST['pin_changed'] == $_POST['pin_changed_confirm']){
+
+                $ticket_checker->update($user_id,array(
+                    'ticket_checker_pin_code' => md5($_POST['pin_changed']),
+                    'pin_changed' => 1
+                ),'ticket_checker_id');
+
+                $this->redirect('ticketchecker/option');
+            }
+        }
+
+        if($user_data->user_type == 'train_driver'){
+            $train_driver = new TrainDrivers();
+            $train_driver_data = $train_driver->whereOne('train_driver_id',$user_id);
+            if ($train_driver_data->pin_changed == 1) {
+                $this->view('option.traindriver');
+                return;
+            }
+            if(isset($_POST['pin_changed']) && isset($_POST['pin_changed_confirm']) && $_POST['pin_changed'] == $_POST['pin_changed_confirm']){
+
+                $train_driver->update($user_id,array(
+                    'train_driver_pin_code' => md5($_POST['pin_changed']),
+                    'pin_changed' => 1
+                ),'train_driver_id');
+                 
+                // $_SESSION['USER']->user_data set this property to 1
+                $user = new Users();
+                $user_data = $user->whereOne('user_id', $user_id);
+                unset($_SESSION['USER']);
+                $_SESSION['USER'] = $user_data;
+
+                $this->redirect('traindriver/idoption');
+            }
+        }
+
+        $this->view('includes/changepin', $user_data);
     }
 }

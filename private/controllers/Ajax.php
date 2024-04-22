@@ -2,8 +2,6 @@
 class Ajax extends Controller
 {
 
-
-
     public function getSession($name)
     {
         if (isset($_SESSION[$name])) {

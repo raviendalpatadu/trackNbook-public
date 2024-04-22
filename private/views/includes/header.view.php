@@ -16,5 +16,6 @@
 
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="<?= ASSETS ?>lib/datatables/dataTables.css">
+    <link rel="stylesheet" type="text/css" href="<?= ASSETS ?>lib/toaster/toastr.css">
     
 </head>
