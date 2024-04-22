@@ -13,8 +13,8 @@
                     <div class="d-flex flex-column justify-content-center align-items-center g-20">
 
                         <button class="mou-staff-card" id="qr">
-                            <a href="<?= ROOT ?>traindriver/addlocation">
-                                <div class="mou-staff-card-text">Update Location</div>
+                            <a href="<?= ROOT ?>traindriver/qr">
+                                <div class="mou-staff-card-text">QR-Update Location</div>
                             </a>
                         </button>
 
