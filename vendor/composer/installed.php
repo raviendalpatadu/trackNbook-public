@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '6c20f08ff648a7069d52e6a971b024b80db8c75a',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '6c20f08ff648a7069d52e6a971b024b80db8c75a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'amphp/amp' => array(
+            'pretty_version' => 'v3.0.1',
+            'version' => '3.0.1.0',
+            'reference' => 'ff63f10210adb6e83335e0e25522bac5cd7dc4e2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../amphp/amp',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'revolt/event-loop' => array(
+            'pretty_version' => 'v1.0.6',
+            'version' => '1.0.6.0',
+            'reference' => '25de49af7223ba039f64da4ae9a28ec2d10d0254',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../revolt/event-loop',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

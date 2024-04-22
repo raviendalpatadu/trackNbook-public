@@ -2,8 +2,10 @@
 use function Amp\delay;
 use function Amp\sync;
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
 
 
 /**
@@ -124,4 +126,9 @@ class Controller
             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
         }   
     }
+
+    
+      
+
+    
 }
