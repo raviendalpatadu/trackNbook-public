@@ -37,9 +37,14 @@ class StaffGeneral extends Controller
         $this->view('add.schedule');
     }
     function waitList($id = '')
-    {
+    {   
+        
+        $waitinglist = new WaitingLists();
+        $data = array();
+        $data['waitinglist'] = $waitinglist->findAll();
 
-        $this->view('view.waitinglist');
+
+        $this->view('view.waitinglist', $data);
     }
     function manageSchedule2($id = '')
     {

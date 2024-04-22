@@ -103,6 +103,15 @@ class Ajax extends Controller
         echo json_encode($data); 
     }
 
+    public function getWaitingList(){
+        $waitinglist = new WaitingLists();
+        $data = array();
+        $data = $waitinglist->findAll();
+
+        echo json_encode($data);
+
+
+    }
     public function updateLocation()
     {
         $train = new Trains();

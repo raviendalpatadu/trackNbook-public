@@ -62,13 +62,12 @@
                                         </p>
                                     </div>
                                 </div>
-
                                 <div class="row mb-10 ml-20">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
-                                        <p class="ad-width-100">Date : <?php echo date('Y-m-d'); ?></p>
+                                        <p class="ad-width-100 mb-5">Date : <?php echo date('Y-m-d'); ?></p>
                                     </div>
-                                    <div class="row mb-10 ml-20">
-                                        <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-12 d-flex align-items-center justify-content-start">
                                             <div class="text-inputs">
                                                 <div class="input-text-label text lightgray-font">Current Station</div>
                                                 <form action="<?= ROOT ?>/traindriver/addlocation/" method="post">
@@ -110,19 +109,16 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-        </main>
-        <?php $this->view('includes/footer'); ?>
+            </div>
+    </div>
+    </div>
+    </main>
+    <?php $this->view('includes/footer'); ?>
     </div>
 </body>
 
