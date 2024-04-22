@@ -1,7 +1,8 @@
 
 <?php $this->view("./includes/header") ?>
+
 <body>
-    <?php $this->view("./includes/sidebar") ?>
+    <?php $this->view("./includes/sidebar", array("admin")) ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
 
@@ -16,6 +17,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    
 
                     <div class="col-6">
                         <p>Welcome to the dashboard</p>
