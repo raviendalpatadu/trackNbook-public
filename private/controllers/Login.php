@@ -145,6 +145,8 @@ class Login extends Controller
                     'train_driver_pin_code' => md5($_POST['pin_changed']),
                     'pin_changed' => 1
                 ),'train_driver_id');
+                 
+                $_SESSION['USER']->user_data = 1; 
 
                 $this->redirect('traindriver/idoption');
             }
