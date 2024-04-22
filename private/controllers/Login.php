@@ -146,7 +146,11 @@ class Login extends Controller
                     'pin_changed' => 1
                 ),'train_driver_id');
                  
-                $_SESSION['USER']->user_data = 1; 
+                // $_SESSION['USER']->user_data set this property to 1
+                $user = new Users();
+                $user_data = $user->whereOne('user_id', $user_id);
+                unset($_SESSION['USER']);
+                $_SESSION['USER'] = $user_data;
 
                 $this->redirect('traindriver/idoption');
             }

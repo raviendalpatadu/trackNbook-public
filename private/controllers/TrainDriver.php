@@ -184,6 +184,7 @@ class TrainDriver extends Controller
                 $this->redirect('traindriver/index/' . $data['train_id'] . '/' . Auth::getUser_id());
             }
         }
+        
 
         $this->view('option.traindriver');
     }
