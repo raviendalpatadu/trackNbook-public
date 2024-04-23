@@ -103,8 +103,7 @@ class Ajax extends Controller
 
     public function getWaitingList(){
         $waitinglist = new WaitingLists();
-        $data = array();
-        $data = $waitinglist->findAll();
+        $data = $waitinglist->getWaitingList();
 
         echo json_encode($data);
 

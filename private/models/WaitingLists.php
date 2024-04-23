@@ -13,31 +13,31 @@ class WaitingLists extends Model
     public function validate($values)
     {
         if (empty($values['waiting_list_passenger_id'])) {
-            $this->errors['waiting_list_passenger_id'] =  "Passenger id is required.";
+            $this->errors['waiting_list_passenger_id'] = "Passenger id is required.";
         }
 
         if (empty($values['waiting_list_train_id'])) {
-            $this->errors['waiting_list_train_id'] =  "Train id is required.";
+            $this->errors['waiting_list_train_id'] = "Train id is required.";
         }
 
         if (empty($values['waiting_list_compartment_id'])) {
-            $this->errors['waiting_list_compartment_id'] =  "Compartment id is required.";
+            $this->errors['waiting_list_compartment_id'] = "Compartment id is required.";
         }
 
         if (empty($values['waiting_list_reservation_start_station'])) {
-            $this->errors['waiting_list_reservation_start_station'] =  "Start station is required.";
+            $this->errors['waiting_list_reservation_start_station'] = "Start station is required.";
         }
 
         if (empty($values['waiting_list_reservation_end_station'])) {
-            $this->errors['waiting_list_reservation_end_station'] =  "End station is required.";
+            $this->errors['waiting_list_reservation_end_station'] = "End station is required.";
         }
 
         if (empty($values['waiting_list_reservation_date'])) {
-            $this->errors['waiting_list_reservation_date'] =  "Date is required.";
+            $this->errors['waiting_list_reservation_date'] = "Date is required.";
         }
 
 
-        if (count($this->errors) ==  0) {
+        if (count($this->errors) == 0) {
             return true;
         }
         return false;
@@ -132,9 +132,12 @@ class WaitingLists extends Model
                 s.waiting_list_train_id, s.waiting_list_compartment_id, s.waiting_list_reservation_date, s.waiting_list_time_created";
             // --LIMIT :passenger_count";
 
-            $result = $this->query($query, array(
-                ':reservation_ticket_id' => $id
-            ));
+            $result = $this->query(
+                $query,
+                array(
+                    ':reservation_ticket_id' => $id
+                )
+            );
         } catch (PDOException $e) {
             return $e;
         }
@@ -194,6 +197,38 @@ class WaitingLists extends Model
             return $e;
         }
         return false;
+    }
+
+    //need all waiting list passengers with the train name and start and end station names
+    public function getWaitingList()
+    {
+        try {
+            $query = "SELECT 
+                    s.waiting_list_id,
+                    s.waiting_list_passenger_id,
+                    s.waiting_list_reservation_start_station,
+                    s.waiting_list_reservation_end_station,
+                    s.waiting_list_reservation_date,
+                    start_st.station_name AS start_station_name,
+                    end_st.station_name AS end_station_name,
+                    t.train_name,
+                    u.user_nic,
+                    ROW_NUMBER() OVER (PARTITION BY s.waiting_list_train_id, s.waiting_list_compartment_id, s.waiting_list_reservation_date ORDER BY s.waiting_list_time_created) AS priority_number
+                  FROM
+                    $this->table s
+                    JOIN tbl_user u ON s.waiting_list_passenger_id = u.user_id
+                    JOIN tbl_station start_st ON s.waiting_list_reservation_start_station = start_st.station_id
+                    JOIN tbl_station end_st ON s.waiting_list_reservation_end_station = end_st.station_id
+                    JOIN tbl_train t ON s.waiting_list_train_id = t.train_id";
+
+            $result = $this->query($query);
+
+            return $result;
+        } catch (PDOException $e) {
+            // Log the error or handle it appropriately
+            error_log("Error fetching waiting list: " . $e->getMessage());
+            return false;
+        }
     }
 
 }

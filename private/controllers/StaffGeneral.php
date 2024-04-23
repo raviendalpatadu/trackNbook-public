@@ -41,8 +41,7 @@ class StaffGeneral extends Controller
         
         $waitinglist = new WaitingLists();
         $data = array();
-        $data['waitinglist'] = $waitinglist->findAll();
-
+        $data['waitinglist'] = $waitinglist->getWaitingList();
 
         $this->view('view.waitinglist', $data);
     }

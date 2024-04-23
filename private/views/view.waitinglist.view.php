@@ -66,20 +66,23 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                                 <?php foreach ($data['waitinglist'] as $waitinglist): ?>
                                     <tr class="row p-20">
                                         <td class="col-3 d-flex align-items-center">
-                                            <?= $waitinglist->waiting_list_passenger_id ?>
+                                            <?= $waitinglist->user_nic ?>
                                         </td>
                                         <td class="col-3">
-                                            <?= $waitinglist->waiting_list_train_id ?>
+                                            <?= $waitinglist->train_name ?>
                                         </td>
                                         <td class="col-2">
-                                            <?= $waitinglist->waiting_list_reservation_start_station ?>
+                                            <?= $waitinglist->start_station_name ?>
                                         </td>
                                         <td class="col-2">
-                                            <?= $waitinglist->waiting_list_reservation_end_station ?>
+                                            <?= $waitinglist->end_station_name ?>
                                         </td>
                                         <td class="col-2 ">
                                             <?= $waitinglist->waiting_list_reservation_date ?>
                                         </td>
+                                        <td class="col-2 ">
+                                            <?= $waitinglist->priority_number ?>
+                                        </td> 
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -103,23 +106,23 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                 },
                 columns: [
                     {
-                        title: 'Passenger Name',
-                        data: 'waiting_list_passenger_id',
+                        title: 'Passenger NIC',
+                        data: 'user_nic',
                         width: '20%' // Set the width for the first column
                     },
                     {
                         title: 'Train Name',
-                        data: 'waiting_list_train_id',
+                        data: 'train_name',
                         width: '20%' // Set the width for the first column
                     },
                     {
-                        title: 'Start Station',
-                        data: 'waiting_list_reservation_start_station',
+                        title: 'Reservertion Start Station',
+                        data: 'start_station_name',
                         width: '20%' // Set the width for the first column
                     },
                     {
-                        title: 'End Station',
-                        data: 'waiting_list_reservation_end_station',
+                        title: 'Reservertion End Station',
+                        data: 'end_station_name',
                         width: '20%' // Set the width for the first column
 
                     }
@@ -129,6 +132,11 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                         data: 'waiting_list_reservation_date',
                         width: '20%' // Set the width for the first column
                     },
+                    {
+                        title: 'Priority NO',
+                        data: 'priority_number',
+                        width: '20%'
+                    }
 
 
                 ],
