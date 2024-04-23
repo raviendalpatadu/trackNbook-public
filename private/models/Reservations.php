@@ -3,7 +3,7 @@
 class Reservations extends Model
 {
     protected $table = 'tbl_reservation';
-    protected $allowedColumns = array('reservation_id', 'reservation_ticket_id', 'reservation_passenger_id', 'reservation_start_station', 'reservation_end_station', 'reservation_train_id', 'reservation_compartment_id', 'reservation_date', 'reservation_seat', 'reservation_passenger_title', 'reservation_passenger_first_name', 'reservation_passenger_last_name', 'reservation_passenger_nic', 'reservation_passenger_phone_number', 'reservation_passenger_email', 'reservation_passenger_gender', 'reservation_created_time', 'reservation_status', 'reservation_type');
+    protected $allowedColumns = array('reservation_id', 'reservation_ticket_id', 'reservation_passenger_id', 'reservation_start_station', 'reservation_is_dependent', 'reservation_end_station', 'reservation_train_id', 'reservation_compartment_id', 'reservation_date', 'reservation_seat', 'reservation_passenger_title', 'reservation_passenger_first_name', 'reservation_passenger_last_name', 'reservation_passenger_nic', 'reservation_passenger_phone_number', 'reservation_passenger_email', 'reservation_passenger_gender', 'reservation_created_time', 'reservation_status', 'reservation_type', 'reservation_amount');
 
 
 
@@ -38,17 +38,18 @@ class Reservations extends Model
                 $this->errors['reservation_passenger_last_name'][$entry] = 'Last Name is required';
             }
 
-            //check if phone number is exists in post
-            if (empty($data['reservation_passenger_phone_number'][$entry])) {
-                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
-            }
+            // //check if phone number is exists in post
+            // if (empty($data['reservation_passenger_phone_number'][$entry]) || !is_numeric($data['reservation_passenger_phone_number'][$entry])) {
+            //     $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
+            // }
 
             // 10 number validation
-            if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
+            if (!empty($data['reservation_passenger_phone_number'][$entry]) && strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
                 $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
             }
 
             //check nic is exists in post
+            
             if (empty($data['reservation_passenger_nic'][$entry])) {
                 $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
             } else {
@@ -67,13 +68,13 @@ class Reservations extends Model
 
 
 
-            //check if email is exists in post
-            if (empty($data['reservation_passenger_email'][$entry])) {
-                $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
-            }
+            // //check if email is exists in post
+            // if (empty($data['reservation_passenger_email'][$entry])) {
+            //     $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
+            // }
 
             //check if email is valid
-            if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+            if (!empty($data['reservation_passenger_email'][$entry]) && !filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
                 $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
             }
 

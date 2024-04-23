@@ -533,8 +533,8 @@ h3.warrant {
 }
 
 .QR-container {
-  width: 100%;
-  max-width: 500px;
+  /* width: 100%; */
+  /* max-width: 500px; */
   margin: 5px;
 }
 

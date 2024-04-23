@@ -241,7 +241,9 @@ class Train extends Controller
             }
         }
 
-
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";  
 
 
 

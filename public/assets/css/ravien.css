@@ -4414,6 +4414,18 @@ table.price-table th {
   font-weight: 500;
 }
 
+#ticketSummary .draft-ticket {
+  position: relative;
+  top: 30%;
+  right: 60%;
+  width: 0;
+  height: 0;
+  font-size: 4em;
+  color: rgba(245, 1, 62, 0.2);
+  z-index: 0;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
   .ticket-summary {
     padding: 20px 20px;
@@ -4538,7 +4550,8 @@ div#reservations div#loader {
   z-index: 9999;
 }
 
-div#reservations img.ticket-icon-res, div#cancelledReservations img.ticket-icon-res {
+div#reservations img.ticket-icon-res,
+div#cancelledReservations img.ticket-icon-res {
   width: 1.5em;
   height: 1.5em;
 }
@@ -4795,4 +4808,22 @@ input.calendar-none::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.train-driver-qr img[alt="Info icon"] {
+  display: none;
+}
+.train-driver-qr img[alt="Camera based scan"] {
+  width: 100px !important;
+  height: 100px !important;
+}
+.train-driver-qr #html5-qrcode-anchor-scan-type-change {
+  text-decoration: none !important;
+  color: #1d9bf0;
+}
+.train-driver-qr video {
+  width: 100vw !important;
+  height: 100% !important;
+  border: 1px solid #b2b2b2 !important;
+  border-radius: 0.25em;
 }/*# sourceMappingURL=ravien.css.map */

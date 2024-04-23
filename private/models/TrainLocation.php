@@ -24,14 +24,14 @@ class TrainLocation extends Model
         $train_location = $this->query($query, ['train_id' => $data['train_id'], 'date' => $data['date']]);
 
 
-        if (count($train_location) == 0) {
+        if (is_array($train_location) && count($train_location) == 0) {
             
             $this->errors['errors']['station_id'] = 'Train is no in the table';
         }
 
         
 
-        if (count($this->errors) > 0) {
+        if (is_array($this->errors) && count($this->errors) > 0) {
             return $this->errors;
         }
 
