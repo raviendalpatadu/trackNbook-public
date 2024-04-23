@@ -25,12 +25,10 @@ class Passenger extends Controller
             $reservation = new Reservations();
 
             if ($reservation->validatePassenger($_POST)) {
-                // echo "<pre>";
-                // print_r($_SESSION);
-                // echo "</pre>";
-
-
                 $_SESSION['reservation']['passenger_data'] = $_POST;
+
+
+
 
                 if (!isset($_POST['warrant_booking'])) {
                     // echo "off";
@@ -65,7 +63,8 @@ class Passenger extends Controller
                             $warrant_temp_id = Auth::getTempReservationId();
                         }
 
-                        // loop thourugh from reservation id's
+
+                        //             // loop thourugh from reservation id's
                         foreach (Auth::reservation()['reservation_id']['from'] as $key => $reservation_id) {
                             $reservationPassengerData = array();
 
@@ -85,6 +84,7 @@ class Passenger extends Controller
                                 $reservationPassengerData['reservation_ticket_id'] = $warrant_temp_id;
                             }
 
+                        
 
                             //update passenger details to tbl_reservtion
                             $data = $reaservation->update($reservation_id, $reservationPassengerData, 'reservation_id');
@@ -106,56 +106,56 @@ class Passenger extends Controller
                             $count++;
                         }
 
-                        // to reservation details
-                        if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
-                            $count = 0;
-                            foreach (Auth::reservation()['reservation_id']['to'] as $key => $reaservation_id) {
-                                $reservationPassengerDataTo = array();
-                                $reservationPassengerDataTo['reservation_id'] = $reaservation_id;
-                                $reservationPassengerDataTo['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
-                                $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+                                    // to reservation details
+                                    if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                                        $count = 0;
+                                        foreach (Auth::reservation()['reservation_id']['to'] as $key => $reaservation_id) {
+                                            $reservationPassengerDataTo = array();
+                                            $reservationPassengerDataTo['reservation_id'] = $reaservation_id;
+                                            $reservationPassengerDataTo['reservation_passenger_nic'] = $_POST['reservation_passenger_nic'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_first_name'] = $_POST['reservation_passenger_first_name'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
+                                            $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 
-                                if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
-                                    $reservationPassengerDataTo['reservation_type'] = "Warrant";
+                                            if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                                $reservationPassengerDataTo['reservation_type'] = "Warrant";
 
                                     // tempory warrant id
-                                    $reservationPassengerData['reservation_ticket_id'] = $warrant_temp_id;
+                                    $reservationPassengerDataTo['reservation_ticket_id'] = $warrant_temp_id;
                                 }
 
-                                $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
+                                            $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
 
-                                // update warrant reservations table
-                                if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
-                                    // if warrant image is null throw an execption
-                                    if ($warrant_image_id == null) {
-                                        throw new Exception("Error in warrant image upload. Please try again.");
-                                    } else {
-                                        $warrant_reservation = new WarrantsReservations();
-                                        $warrant_reservation->update($reaservation_id, ['warrant_image_id' => $warrant_image_id, 'warrant_status' => 'Approval Pending'], 'warrant_reservation_id');
+                                            // update warrant reservations table
+                                            if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                                // if warrant image is null throw an execption
+                                                if ($warrant_image_id == null) {
+                                                    throw new Exception("Error in warrant image upload. Please try again.");
+                                                } else {
+                                                    $warrant_reservation = new WarrantsReservations();
+                                                    $warrant_reservation->update($reaservation_id, ['warrant_image_id' => $warrant_image_id, 'warrant_status' => 'Approval Pending'], 'warrant_reservation_id');
 
-                                        $_SESSION['reservation']['reservation_status'] = "Approval Pending";
+                                                    $_SESSION['reservation']['reservation_status'] = "Approval Pending";
+                                                }
+                                            }
+
+                                            $count++;
+                                        }
                                     }
-                                }
 
-                                $count++;
-                            }
-                        }
+                                    // if in waitnig list remove from waiting list
+                                    $waiting_list = new WaitingLists();
+                                    $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+                                    $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+                                    $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+                                    $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
 
-                        // if in waitnig list remove from waiting list
-                        $waiting_list = new WaitingLists();
-                        $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
-                        $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
-                        $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
-                        $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
-
-                        if ($waiting_list->inWaitingList($waiting_list_arr)) {
-                            $waiting_list->removeFromWaitingList($waiting_list_arr);
-                        }
+                                    if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                                        $waiting_list->removeFromWaitingList($waiting_list_arr);
+                                    }
                     } else {
                         $data['errors'][] = "Error in reservation id doesn't match with passenger count. Please try again.";
                     }
@@ -163,41 +163,42 @@ class Passenger extends Controller
                     die($e->getMessage());
                 }
 
-                // if redirect according to the reservation type
-                if (empty($data['errors'])) {
+                    // if redirect according to the reservation type
+                    if (empty($data['errors'])) {
 
-                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
-                        // send email to each email
-                        foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
-                            $to_email = $email;
-                            $subject = "Warrant Reservation Request";
-                            $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
+                        if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                            // send email to each email
+                            foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+                                $to_email = $email;
+                                $subject = "Warrant Reservation Request";
+                                $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
 
-                            $messege = "<p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#999999;font-size:18px\" class=\"p_description\"><p>We are pleased to inform you that your Warrant Reservation Request has been successfully submitted. Your booking details are now in our system.</p>
-                            <p>You can expect to receive a confirmation email within 2-3 business days, containing all the necessary information regarding your reservation.</p>
-                            <p>If you have any questions or need further assistance, feel free to <a href=\"mailto:" . EMAIL . "\">contact us</a>.</p>";
+                                $messege = "<p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:27px;color:#999999;font-size:18px\" class=\"p_description\"><p>We are pleased to inform you that your Warrant Reservation Request has been successfully submitted. Your booking details are now in our system.</p>
+                                <p>You can expect to receive a confirmation email within 2-3 business days, containing all the necessary information regarding your reservation.</p>
+                                <p>If you have any questions or need further assistance, feel free to <a href=\"mailto:" . EMAIL . "\">contact us</a>.</p>";
 
-                            $message = Auth::getEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key], $messege);
+                                $message = Auth::getEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key], $messege);
 
-                            $this->sendMail($to_email, $recipient, $subject, $message);
+                                $this->sendMail($to_email, $recipient, $subject, $message);
+                            }
+
+
+                            // if in waitnig list remove from waiting list
+                            $waiting_list = new WaitingLists();
+                            $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
+                            $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
+                            $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
+                            $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
+
+                            if ($waiting_list->inWaitingList($waiting_list_arr)) {
+                                $waiting_list->removeFromWaitingList($waiting_list_arr);
+                            }
+
+                            $this->view('passenger.warrant');
+                        } else {
+                            $this->redirect('passenger/billing');
                         }
-
-                        // if in waitnig list remove from waiting list
-                        $waiting_list = new WaitingLists();
-                        $waiting_list_arr['waiting_list_passenger_id'] = Auth::getUser_id();
-                        $waiting_list_arr['waiting_list_train_id'] = Auth::reservation()['from_train']->train_id;
-                        $waiting_list_arr['waiting_list_compartment_id'] = Auth::reservation()['from_compartment']->compartment_id;
-                        $waiting_list_arr['waiting_list_reservation_date'] = Auth::reservation()['from_date'];
-
-                        if ($waiting_list->inWaitingList($waiting_list_arr)) {
-                            $waiting_list->removeFromWaitingList($waiting_list_arr);
-                        }
-
-                        $this->view('passenger.warrant');
-                    } else {
-                        $this->redirect('passenger/billing');
                     }
-                }
             } else {
                 $data['errors'] = $reservation->__get('errors');
             }
@@ -361,11 +362,21 @@ class Passenger extends Controller
                             'image_type' => 'image/jpg'
                         ));
                     }
+
+                    // send email to verify email
+                    $to_email = $_POST['user_email'];
+                    $subject = "Email Verification";
+                    $recipient = $_POST['user_first_name'];
+                    $message ="Please verify your email address by clicking the link below.<br> <a href='" . ROOT . "/user/verifyEmail/" . $user_id . "'>Verify Email</a>";
+                    $message = Auth::getEmailBody($_POST['user_first_name'], $message);
+
+                    $this->sendMail($to_email, $recipient, $subject, $message);
+
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
 
-                $this->redirect('login');
+                $this->redirect('login?register=success');
             } else {
                 $errors['user_first_name'] = (array_key_exists('user_first_name', $data['errors'])) ? $data['errors']['user_first_name'] : '';
                 $errors['user_last_name'] = (array_key_exists('user_last_name', $data['errors'])) ? $data['errors']['user_last_name'] : '';

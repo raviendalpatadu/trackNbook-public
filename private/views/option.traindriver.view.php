@@ -1,5 +1,9 @@
 <?php $this->view("./includes/header"); ?>
-
+<?php
+echo "<pre>";
+print_r($_SESSION);
+echo "<pre/>";
+?>
 <body>
 
     <div class="column-left">
@@ -21,26 +25,15 @@
                         <div class="input-text-label lightgray-font">Train ID</div>
                         <div class="input-field">
                             <div class="">
-                                <input type="text" class="type-here" placeholder="Enter Your Train ID" name="" id="trainId">
+                                <input type="text" class="type-here" placeholder="Enter Your Train ID" name="train_driver_train_id" id="trainId">
                             </div>
                         </div>
                     </div>
 
-                    <!-- <div class="text-inputs">
-                            <div class="input-text-label text lightgray-font">Start Location</div>
-                            <div class="input-field">
-                                <div class="text">
-                                    <input type="text" class="type-here" placeholder="Staff ID" name="" >
-                                </div>
-                            </div>
-                        </div> -->
-
                     <button class="button btn mt-20 " id="loginBtn">
-                        <a href="<?= ROOT ?>dashboard/train_driver">
                             <div class="button-base btn bg-Border-blue ">
                                 <div class="text White">Start</div>
                             </div>
-                        </a>
                     </button>
 
                     
@@ -61,14 +54,16 @@
         $("#popup-box").addClass('mou-popup-box d-flex flex-column justify-content-center align-items-center');
 
 
-        $("#loginBtn").click(function() {
-
+        $("#loginBtn").click(function(e) {
+            e.preventDefault();
             var trainId = $('#trainId').val();
 
             if (trainId == '') {
-                alert('Please Enter Train ID');
+                var error = '<div class="assistive-text">Please Enter Train ID</div>';
+                $("#trainId").parent().parent().after(error);
             } else {
-                $("#popup-box").fadeOut(500);
+                window.location.href = "<?= ROOT ?>traindriver/index/" + trainId + "/" + "<?= Auth::getUser_id() ?>";
+                
             }
         });
     });

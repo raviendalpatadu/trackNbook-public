@@ -132,4 +132,34 @@ class Passengers extends Model
         // auto pgender validatiaon
         return $errors;
     }
+
+    public function getPassengerDataOfNextStation($train_id, $station_id){
+        $query = "WITH current_st AS ( 
+            SELECT tss.*
+            FROM tbl_train_stop_station tss 
+            WHERE tss.train_id = :train_id AND tss.station_id = :station_id
+            ),
+            next_st AS (
+            SELECT ts.*
+            FROM tbl_train_stop_station ts , current_st cs
+            WHERE ts.train_id = :train_id AND ts.stop_no BETWEEN cs.stop_no+1 AND cs.stop_no + 2
+            )
+            
+            SELECT r.* 
+            FROM tbl_reservation r , next_st ns
+            WHERE r.reservation_start_station = ns.station_id AND r.reservation_date = :date
+            AND r.reservation_status = 'Reserved'";
+
+        $result =  $this->query($query, [
+            'train_id' => $train_id,
+            'station_id' => $station_id,
+            'date' => date('Y-m-d')
+        ]);
+
+        if($result != null){
+            return $result;
+        } else {
+            return [];
+        }
+    }
 }

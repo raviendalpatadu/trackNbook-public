@@ -16,9 +16,9 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="container d-flex flex-column justify-content-center align-items-center">
-                <div class="ticket-summary d-flex flex-column align-items-center">
+                <div class="staff-ticket-summary d-flex flex-column ">
                     <h3 class="width-fill text-align-center">Booking Summary</h3>
-                    <div class="d-flex flex-column align-items-center g-20 p-10">
+                    <div class="d-flex flex-column g-20 p-10">
 
                         <div class="d-flex g-20 p-10 border-bottom">
                             <!-- train details and qr code -->
@@ -63,7 +63,7 @@
 
                             </div>
                         </div>
-                        <div class="d-flex flex-column align-items-start g-10 passenger-compartment-details">
+                        <div class="d-flex flex-column align-items-center g-10 passenger-compartment-details">
                             <p class="">Passenger and Compartment Details</p>
                             <table class="ticket-summary-passenger-compartment-details">
                                 <tr>
@@ -75,7 +75,7 @@
                                 </tr>
 
                                 <?php for ($i = 0; $i < count($data['reservations']); $i++) : ?>
-                                    <tr>
+                                    <tr class="align-items-center">
                                         <td data-label="Seat No(s)"><?= (isset($data['reservations'][$i]->reservation_seat)) ? str_pad($data['reservations'][$i]->reservation_seat, 2, "0", STR_PAD_LEFT) : "-" ?></td>
                                         <td data-label="Gender"><?= (isset($data['reservations'][$i]->reservation_passenger_gender)) ? ucfirst($data['reservations'][$i]->reservation_passenger_gender) : "-" ?></td>
                                         <td data-label="NIC"><?= (isset($data['reservations'][$i]->reservation_passenger_nic)) ? $data['reservations'][$i]->reservation_passenger_nic : "-" ?></td>
