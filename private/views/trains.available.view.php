@@ -2,10 +2,10 @@
 
 <?php
 
-// echo "<pre>";
-// // print_r($data);
-// // // print_r($_SESSION);
-// echo "</pre>";
+echo "<pre>";
+// print_r($data['trains_available']['from_trains']);
+// // print_r($_SESSION);
+echo "</pre>";
 
 ?>
 
@@ -64,7 +64,13 @@
                         </div>
 
                         <div class="col-6">
-                            <form action="<?= ROOT ?>train/available/modifysearch" method="post" id="modifyForm">
+                            <!-- modify btn -->
+                            <div class="d-flex justify-content-end">
+                                <div class="button-base" id="modifySearchBtn">
+                                    <div class="text" id="modifybtn">Do you want to modify your search?</div>
+                                </div>
+                            </div>
+                            <form action="<?= ROOT ?>train/available/modifysearch" method="post" id="modifyForm" class="display-none">
                                 <div class=" d-flex flex-column g-20">
                                     <div class="d-flex g-20">
                                         <div class="text-inputs">
@@ -185,13 +191,15 @@
                                     <button id="toTrainBtn" class="train-available-btn">To Train</button>
                                 <?php endif; ?>
                             </div>
+
                             <div id="fromTrains">
                                 <table class="">
                                     <thead>
-                                        <tr class="row">
-                                            <th class="col-5">Name</th>
-                                            <th class="col-2">Time</th>
-                                            <th class="col-5 mobile-col-12">Reservations</th>
+                                        <tr class="">
+                                            <th class="">Name</th>
+                                            <th class="mobile-display-none">Arrival Time</th>
+                                            <th class="mobile-display-none">Departure Time</th>
+                                            <th class="mobile-display-none">Reservations</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -210,18 +218,47 @@
                                                 }
                                                 if ($unique_trains) :
                                         ?>
-                                                    <tr class="row py-10">
-                                                        <td class="col-5 d-flex align-items-center mobile-pl-20"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                                        <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                    <tr class="">
+                                                        <td class="mobile-display-none">
+                                                            <div class="d-flex flex-column justify-content-start g-20">
+                                                                <span class="fs-18 fw-600">
+                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_id ?>
+                                                                </span>
+                                                                <!-- estimated duration  -->
+                                                                <span class="d-flex align-items-center g-10 fs-14">
+                                                                    <!-- get the time difference in php -->
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                                        <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                                        <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                                        <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                                    </svg>
+                                                                    
+                                                                    <?php
+                                                                    $datetime1 = new DateTime($value->estimated_start_time);
+                                                                    $datetime2 = new DateTime($value->estimated_end_time);
+                                                                    $interval = $datetime1->diff($datetime2);
+                                                                    echo $interval->format('%Hh %im');
+                                                                    ?>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="mobile-display-none">
                                                             <div class="badge-base bg-light-green">
                                                                 <div class="dot">
                                                                     <div class="dot2"></div>
                                                                 </div>
-                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
+                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_start_time)) ?></div>
                                                             </div>
                                                         </td>
-                                                        <td class="col-5 mobile-col-12">
-
+                                                        <td class="mobile-display-none">
+                                                            <div class="badge-base bg-light-green">
+                                                                <div class="dot">
+                                                                    <div class="dot2"></div>
+                                                                </div>
+                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_end_time)) ?></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="mobile-display-none">
                                                             <div class="availabity flex-auto">
                                                                 <?php foreach ($data['trains_available']['from_trains'] as $key_res => $value_res) : ?>
                                                                     <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
@@ -243,7 +280,7 @@
                                                                             <!-- show add to waiting list icon-->
 
                                                                         </div>
-                                                                        <!-- </a> -->
+
 
                                                                         <?php
                                                                         $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
@@ -262,77 +299,17 @@
                                                                     <?php endif; ?>
                                                                 <?php endforeach; ?>
                                                             </div>
-
                                                         </td>
                                                     </tr>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
-
                                         <?php else : ?>
                                             <tr>
                                                 <td class="col-12 Secondary-Gray d-flex align-items-center justify-content-center p-50">No Trains Available</td>
                                             </tr>
                                         <?php endif; ?>
-
-
                                     </tbody>
                                 </table>
-                                <div class="pagination">
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-
-                                            <div class="text">Previous</div>
-                                        </div>
-                                    </button>
-                                    <div class="pagination-numbers">
-                                        <div class="pagination-number-base-active">
-                                            <div class="content">
-                                                <div class="number">1</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">2</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">3</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">...</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">8</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">9</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">10</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <div class="text">Next</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </div>
                             </div>
 
 
@@ -424,62 +401,6 @@
 
                                     </tbody>
                                 </table>
-                                <div class="pagination">
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-
-                                            <div class="text">Previous</div>
-                                        </div>
-                                    </button>
-                                    <div class="pagination-numbers">
-                                        <div class="pagination-number-base-active">
-                                            <div class="content">
-                                                <div class="number">1</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">2</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">3</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">...</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">8</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">9</div>
-                                            </div>
-                                        </div>
-                                        <div class="pagination-number-base">
-                                            <div class="content">
-                                                <div class="number2">10</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <div class="text">Next</div>
-                                            <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </div>
                             </div>
                         </div>
 
@@ -515,6 +436,53 @@
 </body>
 
 <script>
+    var fromTrainsTable = $('#fromTrains table').DataTable({
+        "paging": true,
+        "info": false,
+        "searching": true,
+        "responsive": true,
+        //give  the same row height
+        "rowCallback": function(row, data, index) {
+            $('td', row).css({
+                'height': 'max-content',
+                'border-bottom': '1px solid #e0e0e0'
+            });
+
+            // adust the width of the table in mobile view
+            if ($(window).width() < 768) {
+                $('td', row).css({
+                    'display': 'block',
+                });
+            }
+        },
+
+
+        // give fixed width to the columns
+        "columnDefs": [{
+            "width": "40%",
+            "targets": 0
+        }, {
+            "width": "10%",
+            "targets": 1
+        }, {
+            "width": "10%",
+            "targets": 2
+        }, {
+            "width": "40%",
+            "targets": 3
+        }]
+    });
+
+    //modify search btn
+    $('#modifySearchBtn').click(function(e) {
+        console.log("clicked");
+        e.preventDefault();
+        // $('form#modifyForm').toggleClass('display-none');
+        // add a slide down effect
+        $('form#modifyForm').slideToggle();
+    });
+
+
     // make calendars
     makeCalendar('#fromDateAvailable');
 
@@ -646,9 +614,9 @@
                     "waiting_list_reservation_end_station": reservation_end_station,
                     "waiting_list_reservation_date": reservation_date
                 };
-                
+
                 console.log(data);
-                
+
                 $('.main-popup-box').remove();
                 $.ajax({
                     url: '<?= ROOT ?>train/addToWaitingList',
@@ -728,9 +696,9 @@
                     "waiting_list_reservation_end_station": reservation_end_station,
                     "waiting_list_reservation_date": reservation_date
                 };
-                
+
                 console.log(data);
-                
+
                 $('.main-popup-box').remove();
                 $.ajax({
                     url: '<?= ROOT ?>train/addToWaitingList',

@@ -4826,4 +4826,8 @@ input.calendar-none::-webkit-calendar-picker-indicator {
   height: 100% !important;
   border: 1px solid #b2b2b2 !important;
   border-radius: 0.25em;
+}
+
+.scale-08 {
+  transform: scale(0.8);
 }/*# sourceMappingURL=ravien.css.map */

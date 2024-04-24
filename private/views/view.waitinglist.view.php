@@ -63,7 +63,7 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data['waitinglist'] as $waitinglist): ?>
+                                <?php foreach ($data['waitinglist'] as $waitinglist) : ?>
                                     <tr class="row p-20">
                                         <td class="col-3 d-flex align-items-center">
                                             <?= $waitinglist->waiting_list_passenger_id ?>
@@ -95,14 +95,13 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let table = new DataTable("#userTable", {
                 ajax: {
                     url: "<?= ROOT ?>ajax/getWaitingList",
                     dataSrc: ""
                 },
-                columns: [
-                    {
+                columns: [{
                         title: 'Passenger Name',
                         data: 'waiting_list_passenger_id',
                         width: '20%' // Set the width for the first column
@@ -122,8 +121,7 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                         data: 'waiting_list_reservation_end_station',
                         width: '20%' // Set the width for the first column
 
-                    }
-                    ,
+                    },
                     {
                         title: 'Reservation Date',
                         data: 'waiting_list_reservation_date',
@@ -132,12 +130,10 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
 
 
                 ],
-                columnDefs: [
-                    {
-                        targets: 0, // Target the first column
-                        className: 'dt-body-left' // Left-align the content in the first column
-                    }
-                ]
+                columnDefs: [{
+                    targets: 0, // Target the first column
+                    className: 'dt-body-left' // Left-align the content in the first column
+                }]
             });
         });
     </script>

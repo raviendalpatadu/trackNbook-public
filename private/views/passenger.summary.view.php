@@ -302,22 +302,8 @@ echo "</pre>";
         });
     });
 
-    var fromQrcode = new QRCode("from_qr_code", {
-        text: "<?= Auth::getfrom_reservation_ticket_id() ?>",
-        width: 128,
-        height: 128,
-        colorDark: "#324054",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-    var toQrcode = new QRCode("to_qr_code", {
-        text: "<?= Auth::getto_reservation_ticket_id() ?>",
-        width: 128,
-        height: 128,
-        colorDark: "#324054",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
+    makeTicketQrCode(<?= Auth::getfrom_reservation_ticket_id() ?>, 'from_qr_code', );
+    makeTicketQrCode(<?= Auth::getto_reservation_ticket_id() ?>, 'to_qr_code');
 
     // issue with download ticket
     $("#downloadTicket").click(function() {

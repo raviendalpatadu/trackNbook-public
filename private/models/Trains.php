@@ -131,7 +131,6 @@ class Trains extends Model
                     'train_id' => $trainId
                 )
             );
-            
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -310,6 +309,8 @@ class Trains extends Model
                             train.train_end_time,
                             START.station_name AS train_start_station,
                             END.station_name AS train_end_station,
+                            TS1.train_stop_time AS estimated_start_time,
+                            TS2.train_stop_time AS estimated_end_time,
                             reservation.*,
                             compartment_type.compartment_class_type,
                             fare.fare_price
@@ -340,6 +341,15 @@ class Trains extends Model
                             AND fare.fare_route_id = train.train_route
                             AND fare.fare_start_station = :from_station
                             AND fare.fare_end_station = :to_station
+                            
+                            -- check if the train is not disabled
+                            AND train.train_id NOT IN (
+                                SELECT tbl_train_disable_period.disable_period_train_id
+                                FROM tbl_train_disable_period
+                                    JOIN tbl_disable_period ON tbl_train_disable_period.disable_period_id = tbl_disable_period.disable_period_id
+                                WHERE disable_period_start_date <= :from_date
+                                    AND disable_period_end_date >= :from_date
+                            )
                             
                             ORDER BY train.train_start_time, compartment_type.compartment_class_type_id ASC";
 
@@ -547,7 +557,6 @@ class Trains extends Model
                     'train_id' => $id
                 )
             );
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -558,7 +567,7 @@ class Trains extends Model
 
     public function updateTrain($id, $data)
     {
-        
+
         // Check if required fields are empty
         if (empty($data['train_name'])) {
             $this->errors['errors']['train_name'] = 'Train Name is required';
@@ -588,11 +597,11 @@ class Trains extends Model
             $this->errors['errors']['train_type'] = 'Train Type is required';
         }
 
-        if(empty($data['no_of_compartments']) || $data['no_of_compartments'] == 0){
+        if (empty($data['no_of_compartments']) || $data['no_of_compartments'] == 0) {
             $this->errors['errors']['no_of_compartments'] = 'No of compartments is required';
         }
 
-        if(isset($data['compartment']['class']) && count($data['compartment']['class']) == $data['no_of_compartments']){
+        if (isset($data['compartment']['class']) && count($data['compartment']['class']) == $data['no_of_compartments']) {
 
             foreach ($data['compartment']['class'] as $key => $value) {
                 if (empty($value)) {
@@ -624,11 +633,10 @@ class Trains extends Model
                     $this->errors['errors']['compartment_total_number'] = 'Compartment total number is required';
                 }
             }
-
         }
 
         if (isset($data['stopping_station']['id'])) {
-            
+
             foreach ($data['stopping_station']['id'] as $key => $value) {
                 if (empty($value)) {
                     // $this->errors['errors']['stopping_station'] = 'Stopping station is required';
@@ -644,32 +652,32 @@ class Trains extends Model
                 }
             }
 
-            if($data['stopping_station']['time_verified'][0] != $data['train_start_time']){
+            if ($data['stopping_station']['time_verified'][0] != $data['train_start_time']) {
                 $this->errors['errors']['train_start_time'] = 'First stopping station time should be same as start time';
             }
 
-            if($data['stopping_station']['time_verified'][count($data['stopping_station']['time_verified']) - 1] != $data['train_end_time']){
+            if ($data['stopping_station']['time_verified'][count($data['stopping_station']['time_verified']) - 1] != $data['train_end_time']) {
                 $this->errors['errors']['train_end_time'] = 'Last stopping station time should be same as end time';
             }
 
-            if(count($data['stopping_station']['id']) != count($data['stopping_station']['time_verified'])){
+            if (count($data['stopping_station']['id']) != count($data['stopping_station']['time_verified'])) {
                 $this->errors['errors']['stopping_station'] = 'Stopping station and time is required';
             }
 
-            if($data['train_start_station'] != $data['stopping_station']['id'][0]){
+            if ($data['train_start_station'] != $data['stopping_station']['id'][0]) {
                 $this->errors['errors']['train_start_station'] = 'First stopping station should be same as start station';
             }
 
-            if($data['train_end_station'] != $data['stopping_station']['id'][count($data['stopping_station']['id']) - 1]){
+            if ($data['train_end_station'] != $data['stopping_station']['id'][count($data['stopping_station']['id']) - 1]) {
                 $this->errors['errors']['train_end_station'] = 'Last stopping station should be same as end station';
             }
-        } 
-        
+        }
+
         if (!isset($data['stopping_station']['id']) || empty($data['stopping_station']['id'])) {
             $this->errors['errors']['stopping_station'] = 'Stopping station is required';
         }
 
-        
+
 
         if (empty($this->errors['errors'])) {
             try {
@@ -711,15 +719,14 @@ class Trains extends Model
                         'station_id' => $value,
                         'stop_no' => $key + 1,
                         'train_stop_time' => $data['stopping_station']['time_verified'][$key]
-                        
+
                     ));
-                    
                 }
 
                 return true; // Successful insertion
                 // die('update');
             } catch (PDOException $e) {
-                die ($e->getMessage());
+                die($e->getMessage());
             }
         }
         return $this->errors;
@@ -753,5 +760,4 @@ class Trains extends Model
             echo $e->getMessage();
         }
     }
-
 }

@@ -139,12 +139,12 @@ echo "</pre>";
 
                                 <div class="col-1">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Child</div>
-                                        <label class="switch">
+                                        <div class="input-text-label">Dependent</div>
+                                        <label class="switch scale-08">
                                             <input type="checkbox" id="isDependenedCheckbox"  name="is_depenent_checkbox[]">
                                             <span class="slider"></span>
                                         </label>
-                                        <input type="hidden" id="isDependened" name="is_depenent[]" value="0">
+                                        <input type="hidden" id="isDependened" name="reservation_is_dependent[]" value="0">
                                     </div>
                                 </div>
                                 <div class="col-4 d-flex align-items-end justify-items-end g-5">
@@ -274,7 +274,7 @@ echo "</pre>";
                         nicInput.css('pointer-events', 'none');
                         // disable keyboard input 
                         nicInput.val('Not Required');
-                        $(this).parent().parent().find('input[name*=is_depenent]').val('1');
+                        $(this).parent().parent().find('input[name*=reservation_is_dependent]').val('1');
                         // set palceholder to not required
                         nicInput.attr('placeholder', 'Not Required');
                     } else {

@@ -77,6 +77,7 @@ class Passenger extends Controller
                             $reservationPassengerData['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
                             $reservationPassengerData['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
                             $reservationPassengerData['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                            $reservationPassengerData['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 
@@ -120,6 +121,7 @@ class Passenger extends Controller
                                 $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                                $reservationPassengerDataTo['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
 

@@ -103,9 +103,6 @@ class Train extends Controller
         $data = array();
         $seatData = array();
 
-
-
-
         $seatData['from']['reservation_train_id'] = Auth::reservation()['from_compartment_and_train'][1];
         $seatData['from']['reservation_compartment_id'] = Auth::reservation()['from_compartment_and_train'][0];
         $seatData['from']['reservation_date'] = Auth::reservation()['from_date'];

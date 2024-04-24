@@ -568,7 +568,8 @@ echo "</pre>";
 
         //if route is changed, change select values of start and end stations
         var routeId = $('select[name="train_route"]');
-
+        makeSelectDropdown($('body'));
+        
         function changeSelect(routeId) {
             if (routeId != 0) {
                 $.ajax({
@@ -628,7 +629,6 @@ echo "</pre>";
                 });
             }
         }
-
         // Adding a change event handler
         routeId.on('change', function(e) {
             e.stopImmediatePropagation();
@@ -677,6 +677,8 @@ echo "</pre>";
                                             `;
                             routeDetails.append(newRow);
                         }
+
+                       
                     }
                 });
             }
@@ -686,7 +688,9 @@ echo "</pre>";
         selectElement.on('change', function(e) {
             e.stopImmediatePropagation();
             showStopStations();
+            makeSelectDropdown(selectElement)
         });
+
 
 
 

@@ -442,75 +442,75 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
                             <!-- data -->
                             <div class="bg-background-colour-nav d-flex flex-grow" id="reaservationData">
-                                
-                                    <div class="d-flex flex-grow mobile-flex-column" id="ticketSummary">
-                                        
-                                            <div class="d-flex flex-grow flex-column g-10 p-10" id="ticketDataDown">
-                                                <div class="border-bottom d-flex g-100 mobile-flex-column-reverse mobile-g-20 width-fill">
-                                                    <!-- train details and qr code -->
-                                                    <div class="d-flex flex-column flex-grow g-5 ticket-summary-train-data">
-                                                        <p class="fs-14 fw-500" id="refNo">Ref No: None</p>
-                                                        <div class="d-flex flex-column flex-grow fs-12 g-5 ticket-summary-train-data-details">
-                                                            <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Price</p>
-                                                                <p class="width-fill" id="price">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Train No</p>
-                                                                <p class="width-fill" id="trainNo">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Train Name</p>
-                                                                <p class="width-fill" id="trainName">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Reservation Date</p>
-                                                                <p class="width-fill" id="reservationDate">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Start Station</p>
-                                                                <p class="width-fill" id="startStation">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">End Station</p>
-                                                                <p class="width-fill" id="endStation">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">Arrival Time</p>
-                                                                <p class="width-fill" id="arraivalTime">None</p>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <p class="width-fill heading">No of Passengers</p>
-                                                                <p class="width-fill" id="noOfPassengers">None</p>
-                                                            </div>
-                                                            <!-- </div> -->
-                                                        </div>
+
+                                <div class="d-flex flex-grow mobile-flex-column" id="ticketSummary">
+
+                                    <div class="d-flex flex-grow flex-column g-10 p-10" id="ticketDataDown">
+                                        <div class="border-bottom d-flex g-100 mobile-flex-column-reverse mobile-g-20 width-fill">
+                                            <!-- train details and qr code -->
+                                            <div class="d-flex flex-column flex-grow g-5 ticket-summary-train-data">
+                                                <p class="fs-14 fw-500" id="refNo">Ref No: None</p>
+                                                <div class="d-flex flex-column flex-grow fs-12 g-5 ticket-summary-train-data-details">
+                                                    <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Price</p>
+                                                        <p class="width-fill" id="price">None</p>
                                                     </div>
-        
-                                                    <div class="d-flex flex-column g-10 justify-content-center align-items-center">
-                                                        <div id="qr_code"></div>
-                                                        <div class="fs-20 fw-500" id="resStatus">Cancelled</div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Train No</p>
+                                                        <p class="width-fill" id="trainNo">None</p>
                                                     </div>
-                                                </div> 
-                                                <div class="align-items-start d-flex flex-column g-10">
-                                                    <p class="fs-14">Passenger and Compartment Details</p>
-                                                    <table class="ticket-summary-passenger-compartment-details text-align-center" id="compartmentDetails">
-        
-                                                    </table>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Train Name</p>
+                                                        <p class="width-fill" id="trainName">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Reservation Date</p>
+                                                        <p class="width-fill" id="reservationDate">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Start Station</p>
+                                                        <p class="width-fill" id="startStation">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">End Station</p>
+                                                        <p class="width-fill" id="endStation">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">Arrival Time</p>
+                                                        <p class="width-fill" id="arraivalTime">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <p class="width-fill heading">No of Passengers</p>
+                                                        <p class="width-fill" id="noOfPassengers">None</p>
+                                                    </div>
+                                                    <!-- </div> -->
                                                 </div>
                                             </div>
-        
-                                            <div class="d-flex flex-column g-10 align-items-center justify-content-center px-10">
-                                                <!-- download ticket btn -->
-                                                <button id="downloadTicket" class=" width-fill btn btn-primary white bg-blue border-none border-radius-6 p-8 fw-300">Download Ticket</button>
-        
-                                                <!-- canel reservation btn -->
-                                                <button id='cancelReservation' class="width-fill btn btn-primary bg-red border-none border-radius-6 p-8 white fw-300">Cancel Reservation</button>
+
+                                            <div class="d-flex flex-column g-10 justify-content-center align-items-center">
+                                                <div id="qr_code"></div>
+                                                <div class="fs-20 fw-500" id="resStatus">Cancelled</div>
                                             </div>
-                                        
+                                        </div>
+                                        <div class="align-items-start d-flex flex-column g-10">
+                                            <p class="fs-14">Passenger and Compartment Details</p>
+                                            <table class="ticket-summary-passenger-compartment-details text-align-center" id="compartmentDetails">
+
+                                            </table>
+                                        </div>
                                     </div>
-                                
+
+                                    <div class="d-flex flex-column g-10 align-items-center justify-content-center px-10">
+                                        <!-- download ticket btn -->
+                                        <button id="downloadTicket" class=" width-fill btn btn-primary white bg-blue border-none border-radius-6 p-8 fw-300">Download Ticket</button>
+
+                                        <!-- canel reservation btn -->
+                                        <button id='cancelReservation' class="width-fill btn btn-primary bg-red border-none border-radius-6 p-8 white fw-300">Cancel Reservation</button>
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -838,15 +838,8 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         });
 
                         // add qr code
-                        $('#qr_code').empty();
-                        var qrcode = new QRCode("qr_code", {
-                            text: "http://localhost/trackNbook/public/ticketchecker/summary/" + data[0].reservation_ticket_id,
-                            width: 128,
-                            height: 128,
-                            colorDark: "#324054",
-                            colorLight: "#ffffff",
-                            correctLevel: QRCode.CorrectLevel.H
-                        });
+                        makeTicketQrCode(data[0].reservation_ticket_id , 'qr_code');
+
 
                         var reservation_status = $('<div></div>').text(data[0].reservation_status);
                         reservation_status.addClass('fs-18 fw-800');
@@ -883,7 +876,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                 $('#cancelReservation').show();
             }
 
-            if(regex.test(ticketId)){
+            if (regex.test(ticketId)) {
                 // show a draffted messege on to of #ticketSummary
                 $('#ticketSummary').append('<div class="draft-ticket">Draft</div>');
 

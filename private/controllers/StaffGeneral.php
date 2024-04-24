@@ -79,7 +79,8 @@ class StaffGeneral extends Controller
         $data['routes'] = $route->findAll();
 
         $compartment = new Compartments();
-        $data['compartments'] = $compartment->where('compartment_train_id', $data['train']->train_id, 'compartment_train_id');
+
+        $data['compartments'] = $compartment->whereOne('compartment_train_id', $data['train']->train_id);
 
         $compartment_type = new CompartmentTypes();
         $data['compartment_types'] = $compartment_type->findAll();
@@ -88,7 +89,7 @@ class StaffGeneral extends Controller
         $data['train_stop_stations'] = $train_stop_stations->getTrainStopStations($data['train']->train_id);
        
         $route = new Routes();
-        $data['route_stations'] = $route->getRouteStations( $data['train']->train_route);
+        $data['route_stations'] = $route->getRouteStations($data['train']->train_route);
         // echo "<pre>";
         // print_r($data['route_stations']);
         // print_r($data['train_stop_stations']);
