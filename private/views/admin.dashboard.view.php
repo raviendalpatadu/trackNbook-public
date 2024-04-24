@@ -136,7 +136,7 @@
 
             </div>
             <br>
-            <div>
+            <div class="chart-card">
                 <canvas id="myChart" width="auto" height="60%"></canvas>
             </div>
 
@@ -205,34 +205,4 @@
             }
         });
     });
-
-    // //setup Block
-    // const data = {
-    //     labels: ['1', '2', '3', '4', '5', '6'],
-    //     datasets: [{
-    //         label: '# of Votes',
-    //         data,
-    //         borderWidth: 1
-    //     }]
-    // };
-
-    // //config block
-    // const config = {
-    //     type: 'line',
-    //     data,
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // };
-
-    // //render block
-    // const myChart = new Chart(
-    //     document.getElementById('myChart'),
-    //     config
-
-    // );
 </script>

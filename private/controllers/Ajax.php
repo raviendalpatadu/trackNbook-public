@@ -120,4 +120,17 @@ class Ajax extends Controller
         echo json_encode($data);
     }
 
+    //need a function that get the reservation details from thr reservation table sorted by date and return the total count of the reserveration on that date and total amount
+    public function getReservationReport()
+    {
+        $startDate = isset($_POST['startDate']) ? $_POST['startDate'] : null;
+        $endDate = isset($_POST['endDate']) ? $_POST['endDate'] : null;
+    
+        $reservation = new Reservations();
+        $data = array();
+        $data['reservations'] = $reservation->getReservationDetails($startDate, $endDate);
+        echo json_encode($data);
+    }
+    
+
 }

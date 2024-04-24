@@ -97,8 +97,20 @@ class Admin extends Controller
 
     }
 
-    
+    function analysis(){
+        $this->view('admin.analysis');
+    }
 
+    function reportRequest(){
+        $mpdf = new \Mpdf\Mpdf();
+        $data = file_get_contents(ROOT.'admin/getreport');
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();;
+    }
+
+    function getreport(){
+        $this->view('admin.analysis');
+    }
 
     function addRoute(){
         

@@ -577,7 +577,7 @@
   padding: 12px 20px;
   border: var(--textdark);
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--textdark);
   background-color: rgb(231, 231, 231);
   -webkit-appearance: none;
@@ -607,4 +607,49 @@
   background-color: #ffffff;
   color: #333;
   margin-top: 2px;
+}
+
+.chart-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.chart-card:hover {
+  transform: scale(1.05);
+}
+
+.date-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#dateRange {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  width: 220px;
+}
+
+.fancy-button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fancy-button:hover {
+  background-color: #0056b3;
 }/*# sourceMappingURL=iflal.css.map */

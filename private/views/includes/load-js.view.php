@@ -13,10 +13,18 @@
 
 
 <!-- chart js library -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  -->
+<script src="<?= ASSETS?>/js/chartJS/chart.js"></script>
+
+<!-- Data Tables JS -->
 <script src="<?= ASSETS ?>/lib/datatables/dataTables.js"></script>
 <script src="<?= ASSETS ?>/js/main.js"></script>
+
 <script src="<?= ASSETS ?>/lib/toaster/build/toastr.min.js"></script>
+
+<!-- jsPDF  -->
+<script src="<?= ASSETS?>/js/jsPDF/jspdf.js"></script>
+
 
 
 
