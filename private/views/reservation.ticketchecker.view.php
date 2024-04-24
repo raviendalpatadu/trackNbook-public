@@ -110,7 +110,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <div class="pagination">
+                                <!-- <div class="pagination">
                                     <button class="button">
                                         <div class="button-base">
                                             <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +165,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             </svg>
                                         </div>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
