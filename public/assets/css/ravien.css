@@ -4830,4 +4830,8 @@ input.calendar-none::-webkit-calendar-picker-indicator {
 
 .scale-08 {
   transform: scale(0.8);
+}
+
+table.train-available {
+  border-collapse: collapse !important;
 }/*# sourceMappingURL=ravien.css.map */

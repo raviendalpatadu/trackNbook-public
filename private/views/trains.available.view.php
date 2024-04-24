@@ -168,71 +168,79 @@ echo "</pre>";
                         </div>
                     </div>
 
-                    <div class="row mb-20">
+                    <!-- div map -->
+                    <div class="row">
                         <div class="col-12">
-                            <div class="trains-available">
-                                <h2>Trains available</h2>
-                                <div class="badge">
-                                    <div class="badge-base bg-light-green">
-                                        <div class="text dark-green"><?= count($data['trains_available']['from_trains']) ?></div>
+                            <!-- map -->
+                            <div id="map" class="reservation-map-view mobile-display-none">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow px-40 py-20">
+
+                        <div class="row mb-20 g-10">
+                            <div class="col-12">
+                                <div class="trains-available">
+                                    <h2>Trains available</h2>
+                                    <div class="badge">
+                                        <div class="badge-base bg-light-green">
+                                            <div class="text dark-green"><?= count($data['trains_available']['from_trains']) ?></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
+                        <form action="<?= ROOT ?>train/available/seatsearch" method="post" id="trainForm">
+                            <div id="trainsAvailable">
+                                <div id="trainButtons" class="d-flex g-3">
+                                    <button id="fromTrainBtn" class="train-available-btn active">From Train</button>
 
-                    <form action="<?= ROOT ?>train/available/seatsearch" method="post" id="trainForm">
-                        <div id="trainsAvailable">
-                            <div id="trainButtons" class="d-flex g-3">
-                                <button id="fromTrainBtn" class="train-available-btn active">From Train</button>
+                                    <?php if (isset($data['to_date']) && $data['to_date'] != null) : ?>
+                                        <button id="toTrainBtn" class="train-available-btn">To Train</button>
+                                    <?php endif; ?>
+                                </div>
 
-                                <?php if (isset($data['to_date']) && $data['to_date'] != null) : ?>
-                                    <button id="toTrainBtn" class="train-available-btn">To Train</button>
-                                <?php endif; ?>
-                            </div>
+                                <div id="fromTrains">
+                                    <table class="train-available">
+                                        <thead>
+                                            <tr class="row g-10">
+                                                <th class="col-5">Name</th>
+                                                <th class="col-1">Departure Time</th>
+                                                <th class="col-1 text-align-center">Arrival Time</th>
+                                                <th class="col-5 mobile-col-12">Reservations</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                            <div id="fromTrains">
-                                <table class="">
-                                    <thead>
-                                        <tr class="">
-                                            <th class="">Name</th>
-                                            <th class="mobile-display-none">Arrival Time</th>
-                                            <th class="mobile-display-none">Departure Time</th>
-                                            <th class="mobile-display-none">Reservations</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <!-- print trains -->
-                                        <?php if ($data['trains_available']['from_trains']) :
-                                            // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
-                                            $unique_trains = true;
-                                            foreach ($data['trains_available']['from_trains'] as $key => $value) :
-                                                if ($key > 0) {
-                                                    if ($value->train_id == $data['trains_available']['from_trains'][$key - 1]->train_id) {
-                                                        $unique_trains = false;
-                                                    } else {
-                                                        $unique_trains = true;
+                                            <!-- print trains -->
+                                            <?php if ($data['trains_available']['from_trains']) :
+                                                // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
+                                                $unique_trains = true;
+                                                foreach ($data['trains_available']['from_trains'] as $key => $value) :
+                                                    if ($key > 0) {
+                                                        if ($value->train_id == $data['trains_available']['from_trains'][$key - 1]->train_id) {
+                                                            $unique_trains = false;
+                                                        } else {
+                                                            $unique_trains = true;
+                                                        }
                                                     }
-                                                }
-                                                if ($unique_trains) :
-                                        ?>
-                                                    <tr class="">
-                                                        <td class="mobile-display-none">
-                                                            <div class="d-flex flex-column justify-content-start g-20">
+                                                    if ($unique_trains) :
+                                            ?>
+                                                        <tr class="row py-10">
+                                                            <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
                                                                 <span class="fs-18 fw-600">
                                                                     <?= ucfirst($value->train_name) ?> - <?= $value->train_id ?>
                                                                 </span>
                                                                 <!-- estimated duration  -->
-                                                                <span class="d-flex align-items-center g-10 fs-14">
+                                                                <span class="d-flex align-items-center justify-content-center g-10 fs-14">
                                                                     <!-- get the time difference in php -->
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32">
                                                                         <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
                                                                         <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
                                                                         <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
                                                                     </svg>
-                                                                    
+
                                                                     <?php
                                                                     $datetime1 = new DateTime($value->estimated_start_time);
                                                                     $datetime2 = new DateTime($value->estimated_end_time);
@@ -240,411 +248,473 @@ echo "</pre>";
                                                                     echo $interval->format('%Hh %im');
                                                                     ?>
                                                                 </span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="mobile-display-none">
-                                                            <div class="badge-base bg-light-green">
-                                                                <div class="dot">
-                                                                    <div class="dot2"></div>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?></div>
                                                                 </div>
-                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_start_time)) ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="mobile-display-none">
-                                                            <div class="badge-base bg-light-green">
-                                                                <div class="dot">
-                                                                    <div class="dot2"></div>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_end_time)) ?></div>
                                                                 </div>
-                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_end_time)) ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="mobile-display-none">
-                                                            <div class="availabity flex-auto">
-                                                                <?php foreach ($data['trains_available']['from_trains'] as $key_res => $value_res) : ?>
-                                                                    <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
+                                                            </td>
+                                                            <td class="col-5 mobile-col-12">
 
-                                                                        <div class="d-flex justify-content-between train_and_compartment">
-                                                                            <input class="display-none" type="radio" name="from_compartment_and_train" <?= getRadioSelect($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train') ?> value="<?= $data['trains_available']['from_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
-                                                                            </div>
+                                                                <div class="availabity flex-auto">
+                                                                    <?php foreach ($data['trains_available']['from_trains'] as $key_res => $value_res) : ?>
+                                                                        <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
 
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
-                                                                            </div>
-
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
-                                                                            </div>
-
-                                                                            <!-- show add to waiting list icon-->
-
-                                                                        </div>
-
-
-                                                                        <?php
-                                                                        $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
-
-                                                                        if ($available_seats <= 0) :
-                                                                        ?>
-                                                                            <div id="waitingList" class="waiting-list-btn" data-trainid="<?= $value->train_id ?>" data-compartmentid="<?= $value->compartment_id ?>" data-reservationdate="<?= $data['from_date'] ?>">
-                                                                                <div class="align-items-center d-flex g-5 justify-content-end text">Add to waiting list
-                                                                                    <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                    </svg>
+                                                                            <div class="d-flex justify-content-between train_and_compartment">
+                                                                                <input class="display-none" type="radio" name="from_compartment_and_train" <?= getRadioSelect($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train') ?> value="<?= $data['trains_available']['from_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
                                                                                 </div>
+
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
+                                                                                </div>
+
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
+                                                                                </div>
+
+                                                                                <!-- show add to waiting list icon-->
+
                                                                             </div>
+                                                                            <!-- </a> -->
 
+                                                                            <?php
+                                                                            $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
+
+                                                                            if ($available_seats <= 0) :
+                                                                            ?>
+                                                                                <div id="waitingList" class="waiting-list-btn" data-trainid="<?= $value->train_id ?>" data-compartmentid="<?= $value->compartment_id ?>" data-reservationdate="<?= $data['from_date'] ?>">
+                                                                                    <div class="align-items-center d-flex g-5 justify-content-end text">Add to waiting list
+                                                                                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            <?php endif; ?>
                                                                         <?php endif; ?>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        <?php else : ?>
-                                            <tr>
-                                                <td class="col-12 Secondary-Gray d-flex align-items-center justify-content-center p-50">No Trains Available</td>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
+
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td class="col-12 Secondary-Gray d-flex align-items-center justify-content-center p-50">No Trains Available</td>
+                                                </tr>
+                                            <?php endif; ?>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                <div class="display-none" id="toTrains">
+                                    <table class="train-available">
+                                        <thead>
+                                            <tr class="row g-10">
+                                                <th class="col-5">Name</th>
+                                                <th class="col-1">Departure Time</th>
+                                                <th class="col-1 text-align-center">Arrival Time</th>
+                                                <th class="col-5 mobile-col-12">Reservations</th>
                                             </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
 
-
-                            <div class="display-none" id="toTrains">
-                                <table class="">
-                                    <thead>
-                                        <tr class="row">
-                                            <th class="col-5">Name</th>
-                                            <th class="col-2">Time</th>
-                                            <th class="col-5 mobile-col-12">Reservations</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <!-- print trains -->
-                                        <?php if ($data['trains_available']['to_trains']) :
-                                            // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
-                                            $unique_trains = true;
-                                            foreach ($data['trains_available']['to_trains'] as $key => $value) :
-                                                if ($key > 0) {
-                                                    if ($value->train_id == $data['trains_available']['to_trains'][$key - 1]->train_id) {
-                                                        $unique_trains = false;
-                                                    } else {
-                                                        $unique_trains = true;
+                                            <!-- print trains -->
+                                            <?php if ($data['trains_available']['to_trains']) :
+                                                // prints unique trains. meken trains wala classes okkogema reservations print karnawa. eka nawaththanna thama $unique_trains = true; kiyala dala thiyenne 
+                                                $unique_trains = true;
+                                                foreach ($data['trains_available']['to_trains'] as $key => $value) :
+                                                    if ($key > 0) {
+                                                        if ($value->train_id == $data['trains_available']['to_trains'][$key - 1]->train_id) {
+                                                            $unique_trains = false;
+                                                        } else {
+                                                            $unique_trains = true;
+                                                        }
                                                     }
-                                                }
-                                                if ($unique_trains) :
-                                        ?>
-                                                    <tr class="row py-10">
-                                                        <td class="col-5 d-flex align-items-center mobile-pl-20"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                                        <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
-                                                            <div class="badge-base bg-light-green">
-                                                                <div class="dot">
-                                                                    <div class="dot2"></div>
+                                                    if ($unique_trains) :
+                                            ?>
+                                                        <tr class="row py-10">
+                                                            <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
+                                                                <span class="fs-18 fw-600">
+                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_id ?>
+                                                                </span>
+                                                                <!-- estimated duration  -->
+                                                                <span class="d-flex align-items-center justify-items-center g-10 fs-14">
+                                                                    <!-- get the time difference in php -->
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32">
+                                                                        <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                                        <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                                        <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                                    </svg>
+
+                                                                    <?php
+                                                                    $datetime1 = new DateTime($value->estimated_start_time);
+                                                                    $datetime2 = new DateTime($value->estimated_end_time);
+                                                                    $interval = $datetime1->diff($datetime2);
+                                                                    echo $interval->format('%Hh %im');
+                                                                    ?>
+                                                                </span>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_start_time)) ?></div>
                                                                 </div>
-                                                                <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-5 mobile-col-12">
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_end_time)) ?></div>
+                                                                </div>
+                                                            </td>
 
-                                                            <div class="availabity flex-auto">
-                                                                <?php foreach ($data['trains_available']['to_trains'] as $key_res => $value_res) : ?>
-                                                                    <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
-                                                                        <div class="d-flex justify-content-between train_and_compartment">
-                                                                            <input class="display-none" type="radio" name="to_compartment_and_train" <?= getRadioSelect($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train') ?> value="<?= $data['trains_available']['to_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
-                                                                            </div>
+                                                            <td class="col-5 mobile-col-12">
 
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
-                                                                            </div>
+                                                                <div class="availabity flex-auto">
+                                                                    <?php foreach ($data['trains_available']['to_trains'] as $key_res => $value_res) : ?>
+                                                                        <?php if ($value->train_id == $value_res->compartment_train_id) : ?>
+                                                                            <div class="d-flex justify-content-between train_and_compartment">
+                                                                                <input class="display-none" type="radio" name="to_compartment_and_train" <?= getRadioSelect($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train') ?> value="<?= $data['trains_available']['to_trains'][$key_res]->compartment_id ?>-<?= $value->train_id ?>">
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= ucwords($value_res->compartment_class_type) ?> Reservations</div>
+                                                                                </div>
 
-                                                                            <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
-                                                                                <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
-                                                                            </div>
-                                                                        </div>
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
+                                                                                </div>
 
-
-                                                                        <?php
-                                                                        $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
-
-                                                                        if ($available_seats <= 0) :
-                                                                        ?>
-                                                                            <div id="waitingListTo" class="waiting-list-btn" data-trainid="<?= $value->train_id ?>" data-compartmentid="<?= $value->compartment_id ?>" data-reservationdate="<?= $data['to_date'] ?>">
-                                                                                <div class="align-items-center d-flex g-5 justify-content-end text">Add to waiting list
-                                                                                    <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                        <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                    </svg>
+                                                                                <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>">LKR.<?= $value_res->fare_price ?>.00</div>
                                                                                 </div>
                                                                             </div>
 
+
+                                                                            <?php
+                                                                            $available_seats = $value_res->compartment_total_seats - $value_res->no_of_reservations;
+
+                                                                            if ($available_seats <= 0) :
+                                                                            ?>
+                                                                                <div id="waitingListTo" class="waiting-list-btn" data-trainid="<?= $value->train_id ?>" data-compartmentid="<?= $value->compartment_id ?>" data-reservationdate="<?= $data['to_date'] ?>">
+                                                                                    <div class="align-items-center d-flex g-5 justify-content-end text">Add to waiting list
+                                                                                        <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path d="M3.125 17.7082H10.4167M15.625 16.6665H18.75M18.75 16.6665H21.875M18.75 16.6665V19.7915M18.75 16.6665V13.5415M3.125 12.4998H14.5833M3.125 7.2915H14.5833" stroke="black" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            <?php endif; ?>
                                                                         <?php endif; ?>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            </div>
+                                                                    <?php endforeach; ?>
+                                                                </div>
 
-                                                        </td>
-                                                    </tr>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
 
-                                        <?php else : ?>
-                                            <tr>
-                                                <td class="col-12 Secondary-Gray d-flex align-items-center justify-content-center p-50">No Trains Available</td>
-                                            </tr>
-                                        <?php endif; ?>
+                                            <?php else : ?>
+                                                <tr>
+                                                    <td class="col-12 Secondary-Gray d-flex align-items-center justify-content-center p-50">No Trains Available</td>
+                                                </tr>
+                                            <?php endif; ?>
 
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div class="col-12 d-flex justify-content-end g-10">
-                            <div class="button-base">
-                                <div class="text" id="trainsubmitbtn">Proceed</div>
-
-                                <!-- <input type="submit" name="submit" value="Proceed" id="proceed"> -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
-                            <div class="button-base">
-                                <a href="<?= ROOT ?>home">Back</a>
+                            <div class="col-12 d-flex justify-content-end g-10 mt-10">
+                                <div class="button-base">
+                                    <div class="text" id="trainsubmitbtn">Proceed</div>
+
+                                    <!-- <input type="submit" name="submit" value="Proceed" id="proceed"> -->
+                                </div>
+
+                                <div class="button-base">
+                                    <a href="<?= ROOT ?>home">Back</a>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="diplay-none">
-                            <input type="hidden" name="from_date" value="<?= Auth::getFrom_date() ?>">
-                            <input type="hidden" name="to_date" value="<?= Auth::getTo_date() ?>">
-                            <input type="hidden" name="no_of_passengers" value="<?= Auth::getNo_of_passengers() ?>">
-                            <input type="hidden" name="return" value="<?= Auth::getReturn() ?>">
-                            <input type="hidden" name="from_station" value="<?= Auth::getFrom_station()->station_id ?>">
-                            <input type="hidden" name="to_station" value="<?= Auth::getTo_station()->station_id ?>">
-                        </div>
-                    </form>
+                            <div class="diplay-none">
+                                <input type="hidden" name="from_date" value="<?= Auth::getFrom_date() ?>">
+                                <input type="hidden" name="to_date" value="<?= Auth::getTo_date() ?>">
+                                <input type="hidden" name="no_of_passengers" value="<?= Auth::getNo_of_passengers() ?>">
+                                <input type="hidden" name="return" value="<?= Auth::getReturn() ?>">
+                                <input type="hidden" name="from_station" value="<?= Auth::getFrom_station()->station_id ?>">
+                                <input type="hidden" name="to_station" value="<?= Auth::getTo_station()->station_id ?>">
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>
         <?php $this->view('includes/footer'); ?>
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCranEueyo_pnCvKoHJwegdlluPvTPjyhU&callback=initMap&v=weekly" defer></script>
     </div>
 
 
 </body>
 
 <script>
-    var fromTrainsTable = $('#fromTrains table').DataTable({
-        "paging": true,
-        "info": false,
-        "searching": true,
-        "responsive": true,
-        //give  the same row height
-        "rowCallback": function(row, data, index) {
-            $('td', row).css({
-                'height': 'max-content',
-                'border-bottom': '1px solid #e0e0e0'
+    function initMap() {
+        function calculateAndDisplayRoute(directionsService, directionsRenderer, originLatLng, destinationLatLng) {
+            directionsService
+                .route({
+                    origin: {
+                        lat: originLatLng.lat,
+                        lng: originLatLng.lng
+                    },
+                    destination: {
+                        lat: destinationLatLng.lat,
+                        lng: destinationLatLng.lng
+                    },
+                    travelMode: google.maps.TravelMode.TRANSIT,
+                    transitOptions: {
+                        modes: [google.maps.TransitMode.TRAIN]
+                    }
+                })
+                .then((response) => {
+                    // const route = response.routes[0].overview_polyline;
+                    directionsRenderer.setDirections(response);
+                })
+                .catch((e) => window.alert("Directions request failed due to " + status));
+        }
+
+
+        async function findPlaces(stationName, callback) {
+            const {
+                Place
+            } = await google.maps.importLibrary("places");
+            const {
+                AdvancedMarkerElement
+            } = await google.maps.importLibrary("marker");
+            const request = {
+                textQuery: stationName,
+                fields: ["displayName", "location"],
+                includedType: "train_station"
+            };
+            //@ts-ignore
+            const {
+                places
+            } = await Place.searchByText(request);
+
+            if (places.length) {
+                callback(places);
+            } else {
+                console.log("No results");
+            }
+        }
+
+        function drawMap(startStationMap, endStationMap) {
+
+            findPlaces(startStationMap + ' railway station', function(res) {
+                var startStation = res[0].Fg.location
+                findPlaces(endStationMap + ' railway station', function(resp) {
+                    var endStation = resp[0].Fg.location
+                    calculateAndDisplayRoute(directionsService, directionsRenderer, startStation, endStation);
+                });
             });
 
-            // adust the width of the table in mobile view
-            if ($(window).width() < 768) {
-                $('td', row).css({
-                    'display': 'block',
-                });
-            }
-        },
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 10,
+                center: {
+                    lat: 6.9337010999999995,
+                    lng: 79.85003019999999
+                }
+            });
 
-
-        // give fixed width to the columns
-        "columnDefs": [{
-            "width": "40%",
-            "targets": 0
-        }, {
-            "width": "10%",
-            "targets": 1
-        }, {
-            "width": "10%",
-            "targets": 2
-        }, {
-            "width": "40%",
-            "targets": 3
-        }]
-    });
-
-    //modify search btn
-    $('#modifySearchBtn').click(function(e) {
-        console.log("clicked");
-        e.preventDefault();
-        // $('form#modifyForm').toggleClass('display-none');
-        // add a slide down effect
-        $('form#modifyForm').slideToggle();
-    });
-
-
-    // make calendars
-    makeCalendar('#fromDateAvailable');
-
-    makeCalendar('#toDateAvailable');
-
-    // tab btns
-    $('#fromTrainBtn').click(function(e) {
-        e.preventDefault();
-        $('#fromTrains').removeClass('display-none');
-        $('#toTrains').addClass('display-none');
-
-        $('#toTrainBtn').removeClass('active');
-        $('#fromTrainBtn').addClass('active');
-
-    });
-    // tab btns
-    $('#toTrainBtn').click(function(e) {
-        e.preventDefault();
-        $('#toTrains').removeClass('display-none');
-        $('#fromTrains').addClass('display-none');
-
-        $('#fromTrainBtn').removeClass('active');
-        $('#toTrainBtn').addClass('active');
-    });
-
-
-    // when a compartment is selected on a from train
-    $('#fromTrains .train_and_compartment').click(function() {
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.prop('checked')) {
-            radio.prop('checked', false);
-        } else {
-            radio.prop('checked', true);
+            directionsRenderer.setMap(map);
         }
 
-        var base = $('#fromTrains').find('.badge-base');
+        drawMap('<?= Auth::getFrom_station()->station_name ?>', '<?= Auth::getTo_station()->station_name ?>');
 
-        if (base.hasClass('train-selected')) {
-            base.removeClass('train-selected');
-        } else {
-            base.removeClass('train-selected');
-            $(this).find('.badge-base').addClass('train-selected');
-        }
-        console.log("from : " + radio.val());
-    });
-
-    // when a compartment is selected on a to train
-    $('#toTrains .train_and_compartment').click(function() {
-        var radio = $(this).find('input[type=radio]');
-
-        if (radio.prop('checked')) {
-            radio.prop('checked', false);
-        } else {
-            radio.prop('checked', true);
-        }
-
-        var base = $('#toTrains').find('.badge-base');
-
-        if (base.hasClass('train-selected')) {
-            base.removeClass('train-selected');
-        } else {
-            base.removeClass('train-selected');
-            $(this).find('.badge-base').addClass('train-selected');
-        }
-        console.log("from : " + radio.val());
-    });
+        //modify search btn
+        $('#modifySearchBtn').click(function(e) {
+            console.log("clicked");
+            e.preventDefault();
+            $('form#modifyForm').slideToggle();
+        });
 
 
+        // make calendars
+        makeCalendar('#fromDateAvailable');
 
-    // when form is submitted
-    $('#modifysubmitbtn').click(function(e) {
+        makeCalendar('#toDateAvailable');
 
-        e.preventDefault();
+        // tab btns
+        $('#fromTrainBtn').click(function(e) {
+            e.preventDefault();
+            $('#fromTrains').removeClass('display-none');
+            $('#toTrains').addClass('display-none');
 
-        var formData = $('form#modifyForm').serialize();
-        // console.log(formData);
-        getErrors('<?= ROOT ?>home/validate', formData, function(res) {
-            if (res == true) {
-                console.log(res);
-                $('form#modifyForm').submit();
-            }
+            $('#toTrainBtn').removeClass('active');
+            $('#fromTrainBtn').addClass('active');
 
         });
-    });
+        // tab btns
+        $('#toTrainBtn').click(function(e) {
+            e.preventDefault();
+            $('#toTrains').removeClass('display-none');
+            $('#fromTrains').addClass('display-none');
 
+            // make a sliding 
 
-    $('#trainsubmitbtn').click(function(e) {
-        e.preventDefault();
-
-        var formData = $('form#trainForm').serialize();
-        // console.log(formData);
-        getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
-            if (res == true) {
-                $('form#trainForm').submit();
-            }
+            $('#fromTrainBtn').removeClass('active');
+            $('#toTrainBtn').addClass('active');
         });
-    });
 
 
-    $('#waitingList').click(function(e) {
-        e.preventDefault();
-        // makemodel box
-        var title = 'Add to waiting list';
-        var messege_confirm = 'When have been added to the waiting list. You will be notified when a seat becomes available.<br>';
-        messege_confirm += 'If a passenger cancels a reservation, you will be notified according to the priorty and you can proceed to make a reservation.';
+        // when a compartment is selected on a from train
+        $('#fromTrains .train_and_compartment').click(function() {
+            var radio = $(this).find('input[type=radio]');
 
-        messege_confirm += ' If staff reserved seats become available, Everyone in the list will be notified via an email. And the reservation will be made according to the first come first serve basis.';
+            if (radio.prop('checked')) {
+                radio.prop('checked', false);
+            } else {
+                radio.prop('checked', true);
+            }
 
-        messege_confirm += 'Do you want to proceed?';
-        var btn = "Proceed";
+            var base = $('#fromTrains').find('.badge-base');
 
-        var image = '<?= ASSETS ?>images/waiting-list.png';
+            if (base.hasClass('train-selected')) {
+                base.removeClass('train-selected');
+            } else {
+                base.removeClass('train-selected');
+                $(this).find('.badge-base').addClass('train-selected');
+            }
+            console.log("from : " + radio.val());
+        });
 
-        makePopupBox(title, messege_confirm, btn, image, function(res) {
-            if (res == true) {
-                var train_id = $('#waitingList').data('trainid');
-                var compartment_id = $('#waitingList').data('compartmentid');
-                var reservation_date = $('#waitingList').data('reservationdate');
-                var passenger_id = <?= Auth::getUser_id() ?>;
-                var reservation_start_station = <?= Auth::getFrom_station()->station_id ?>;
-                var reservation_end_station = <?= Auth::getTo_station()->station_id ?>;
+        // when a compartment is selected on a to train
+        $('#toTrains .train_and_compartment').click(function() {
+            var radio = $(this).find('input[type=radio]');
 
-                var data = {
-                    "waiting_list_passenger_id": passenger_id,
-                    "waiting_list_train_id": train_id,
-                    "waiting_list_compartment_id": compartment_id,
-                    "waiting_list_reservation_start_station": reservation_start_station,
-                    "waiting_list_reservation_end_station": reservation_end_station,
-                    "waiting_list_reservation_date": reservation_date
-                };
+            if (radio.prop('checked')) {
+                radio.prop('checked', false);
+            } else {
+                radio.prop('checked', true);
+            }
 
-                console.log(data);
+            var base = $('#toTrains').find('.badge-base');
 
-                $('.main-popup-box').remove();
-                $.ajax({
-                    url: '<?= ROOT ?>train/addToWaitingList',
-                    type: 'POST',
-                    data: data,
-                    success: function(res) {
-                        res = JSON.parse(res);
-                        console.log(res);
+            if (base.hasClass('train-selected')) {
+                base.removeClass('train-selected');
+            } else {
+                base.removeClass('train-selected');
+                $(this).find('.badge-base').addClass('train-selected');
+            }
+            console.log("from : " + radio.val());
+        });
 
-                        // check if errorInfo is set
-                        if (res.errorInfo == null || res == true) {
-                            var title = 'Added to waiting list';
-                            var message = 'You have been added to the waiting list. You will be notified if a seat becomes available.';
-                            var btnText = 'Go to home';
-                            var imgURL = '<?= ASSETS ?>images/waiting-list-sucess.png';
 
-                            makePopupBox(title, message, btnText, imgURL, function(res) {
-                                if (res == true) {
-                                    window.location.href = '<?= ROOT ?>home';
-                                }
-                            });
-                        } else {
-                            if (res.errorInfo[1] == 1062) {
 
-                                var title = 'Already added to waiting list';
-                                var message = 'You have been already been added to the waiting list.';
+        // when form is submitted
+        $('#modifysubmitbtn').click(function(e) {
+
+            e.preventDefault();
+
+            var formData = $('form#modifyForm').serialize();
+            // console.log(formData);
+            getErrors('<?= ROOT ?>home/validate', formData, function(res) {
+                if (res == true) {
+                    console.log(res);
+                    $('form#modifyForm').submit();
+                }
+
+            });
+        });
+
+
+        $('#trainsubmitbtn').click(function(e) {
+            e.preventDefault();
+
+            var formData = $('form#trainForm').serialize();
+            // console.log(formData);
+            getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
+                if (res == true) {
+                    $('form#trainForm').submit();
+                }
+            });
+        });
+
+
+        $('#waitingList').click(function(e) {
+            e.preventDefault();
+            // makemodel box
+            var title = 'Add to waiting list';
+            var messege_confirm = 'When have been added to the waiting list. You will be notified when a seat becomes available.<br>';
+            messege_confirm += 'If a passenger cancels a reservation, you will be notified according to the priorty and you can proceed to make a reservation.';
+
+            messege_confirm += ' If staff reserved seats become available, Everyone in the list will be notified via an email. And the reservation will be made according to the first come first serve basis.';
+
+            messege_confirm += 'Do you want to proceed?';
+            var btn = "Proceed";
+
+            var image = '<?= ASSETS ?>images/waiting-list.png';
+
+            makePopupBox(title, messege_confirm, btn, image, function(res) {
+                if (res == true) {
+                    var train_id = $('#waitingList').data('trainid');
+                    var compartment_id = $('#waitingList').data('compartmentid');
+                    var reservation_date = $('#waitingList').data('reservationdate');
+                    var passenger_id = <?= Auth::getUser_id() ?>;
+                    var reservation_start_station = <?= Auth::getFrom_station()->station_id ?>;
+                    var reservation_end_station = <?= Auth::getTo_station()->station_id ?>;
+
+                    var data = {
+                        "waiting_list_passenger_id": passenger_id,
+                        "waiting_list_train_id": train_id,
+                        "waiting_list_compartment_id": compartment_id,
+                        "waiting_list_reservation_start_station": reservation_start_station,
+                        "waiting_list_reservation_end_station": reservation_end_station,
+                        "waiting_list_reservation_date": reservation_date
+                    };
+
+                    console.log(data);
+
+                    $('.main-popup-box').remove();
+                    $.ajax({
+                        url: '<?= ROOT ?>train/addToWaitingList',
+                        type: 'POST',
+                        data: data,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            console.log(res);
+
+                            // check if errorInfo is set
+                            if (res.errorInfo == null || res == true) {
+                                var title = 'Added to waiting list';
+                                var message = 'You have been added to the waiting list. You will be notified if a seat becomes available.';
                                 var btnText = 'Go to home';
-                                var imgURL = '<?= ASSETS ?>images/waiting-list.png';
+                                var imgURL = '<?= ASSETS ?>images/waiting-list-sucess.png';
 
                                 makePopupBox(title, message, btnText, imgURL, function(res) {
                                     if (res == true) {
@@ -652,81 +722,81 @@ echo "</pre>";
                                     }
                                 });
                             } else {
-                                alert('Failed to add to waiting list ' + res.errorInfo[2]);
+                                if (res.errorInfo[1] == 1062) {
+
+                                    var title = 'Already added to waiting list';
+                                    var message = 'You have been already been added to the waiting list.';
+                                    var btnText = 'Go to home';
+                                    var imgURL = '<?= ASSETS ?>images/waiting-list.png';
+
+                                    makePopupBox(title, message, btnText, imgURL, function(res) {
+                                        if (res == true) {
+                                            window.location.href = '<?= ROOT ?>home';
+                                        }
+                                    });
+                                } else {
+                                    alert('Failed to add to waiting list ' + res.errorInfo[2]);
+                                }
+
                             }
 
                         }
+                    });
+                }
+            });
 
-                    }
-                });
-            }
         });
 
-    });
 
+        $('#waitingListTo').click(function(e) {
+            e.preventDefault();
+            // makemodel box
+            var title = 'Add to waiting list';
+            var messege_confirm = 'When have been added to the waiting list. You will be notified when a seat becomes available.<br>';
+            messege_confirm += 'If a passenger cancels a reservation, you will be notified according to the priorty and you can proceed to make a reservation.';
 
-    $('#waitingListTo').click(function(e) {
-        e.preventDefault();
-        // makemodel box
-        var title = 'Add to waiting list';
-        var messege_confirm = 'When have been added to the waiting list. You will be notified when a seat becomes available.<br>';
-        messege_confirm += 'If a passenger cancels a reservation, you will be notified according to the priorty and you can proceed to make a reservation.';
+            messege_confirm += ' If staff reserved seats become available, Everyone in the list will be notified via an email. And the reservation will be made according to the first come first serve basis.';
 
-        messege_confirm += ' If staff reserved seats become available, Everyone in the list will be notified via an email. And the reservation will be made according to the first come first serve basis.';
+            messege_confirm += 'Do you want to proceed?';
+            var btn = "Proceed";
 
-        messege_confirm += 'Do you want to proceed?';
-        var btn = "Proceed";
+            var image = '<?= ASSETS ?>images/waiting-list.png';
 
-        var image = '<?= ASSETS ?>images/waiting-list.png';
+            makePopupBox(title, messege_confirm, btn, image, function(res) {
+                if (res == true) {
+                    var train_id = $('#waitingListTo').data('trainid');
+                    var compartment_id = $('#waitingListTo').data('compartmentid');
+                    var reservation_date = $('#waitingListTo').data('reservationdate');
+                    var passenger_id = <?= Auth::getUser_id() ?>;
+                    var reservation_start_station = <?= Auth::getTo_station()->station_id ?>;
+                    var reservation_end_station = <?= Auth::getFrom_station()->station_id ?>;
 
-        makePopupBox(title, messege_confirm, btn, image, function(res) {
-            if (res == true) {
-                var train_id = $('#waitingListTo').data('trainid');
-                var compartment_id = $('#waitingListTo').data('compartmentid');
-                var reservation_date = $('#waitingListTo').data('reservationdate');
-                var passenger_id = <?= Auth::getUser_id() ?>;
-                var reservation_start_station = <?= Auth::getTo_station()->station_id ?>;
-                var reservation_end_station = <?= Auth::getFrom_station()->station_id ?>;
+                    var data = {
+                        "waiting_list_passenger_id": passenger_id,
+                        "waiting_list_train_id": train_id,
+                        "waiting_list_compartment_id": compartment_id,
+                        "waiting_list_reservation_start_station": reservation_start_station,
+                        "waiting_list_reservation_end_station": reservation_end_station,
+                        "waiting_list_reservation_date": reservation_date
+                    };
 
-                var data = {
-                    "waiting_list_passenger_id": passenger_id,
-                    "waiting_list_train_id": train_id,
-                    "waiting_list_compartment_id": compartment_id,
-                    "waiting_list_reservation_start_station": reservation_start_station,
-                    "waiting_list_reservation_end_station": reservation_end_station,
-                    "waiting_list_reservation_date": reservation_date
-                };
+                    console.log(data);
 
-                console.log(data);
+                    $('.main-popup-box').remove();
+                    $.ajax({
+                        url: '<?= ROOT ?>train/addToWaitingList',
+                        type: 'POST',
+                        data: data,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            console.log(res);
 
-                $('.main-popup-box').remove();
-                $.ajax({
-                    url: '<?= ROOT ?>train/addToWaitingList',
-                    type: 'POST',
-                    data: data,
-                    success: function(res) {
-                        res = JSON.parse(res);
-                        console.log(res);
-
-                        // check if errorInfo is set
-                        if (res.errorInfo == null || res == true) {
-                            var title = 'Added to waiting list';
-                            var message = 'You have been added to the waiting list. You will be notified if a seat becomes available.';
-                            var btnText = 'Go to home';
-                            var imgURL = '<?= ASSETS ?>images/waiting-list-sucess.png';
-
-                            makePopupBox(title, message, btnText, imgURL, function(res) {
-                                if (res == true) {
-                                    window.location.href = '<?= ROOT ?>home';
-                                }
-                            });
-                        } else {
-                            if (res.errorInfo[1] == 1062) {
-
-                                var title = 'Already added to waiting list';
-                                var message = 'You have been already been added to the waiting list.';
+                            // check if errorInfo is set
+                            if (res.errorInfo == null || res == true) {
+                                var title = 'Added to waiting list';
+                                var message = 'You have been added to the waiting list. You will be notified if a seat becomes available.';
                                 var btnText = 'Go to home';
-                                var imgURL = '<?= ASSETS ?>images/waiting-list.png';
+                                var imgURL = '<?= ASSETS ?>images/waiting-list-sucess.png';
 
                                 makePopupBox(title, message, btnText, imgURL, function(res) {
                                     if (res == true) {
@@ -734,17 +804,31 @@ echo "</pre>";
                                     }
                                 });
                             } else {
-                                alert('Failed to add to waiting list ' + res.errorInfo[2]);
+                                if (res.errorInfo[1] == 1062) {
+
+                                    var title = 'Already added to waiting list';
+                                    var message = 'You have been already been added to the waiting list.';
+                                    var btnText = 'Go to home';
+                                    var imgURL = '<?= ASSETS ?>images/waiting-list.png';
+
+                                    makePopupBox(title, message, btnText, imgURL, function(res) {
+                                        if (res == true) {
+                                            window.location.href = '<?= ROOT ?>home';
+                                        }
+                                    });
+                                } else {
+                                    alert('Failed to add to waiting list ' + res.errorInfo[2]);
+                                }
+
                             }
 
                         }
+                    });
+                }
+            });
 
-                    }
-                });
-            }
         });
-
-    });
+    }
 </script>
 
 </html>
