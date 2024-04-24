@@ -23,8 +23,8 @@ class Model extends Database
     public function where($column, $value)
     {
         $column = addslashes($column);
-        $query = "select * from $this->table where $column = $value";
-        echo 'where ::  '.$query .'<br>';
+        $query = "select * from $this->table where $column = :value";
+        // echo 'where ::  '.$query .'<br>';
         $data = $this->query($query, [
             'value' => $value
         ]);

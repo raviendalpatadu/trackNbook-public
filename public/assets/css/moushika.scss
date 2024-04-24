@@ -1270,6 +1270,44 @@ video {
   border: 1px solid rgb(219, 213, 213);
 }
 
+.mou-totalPrice{
+  display: none;
+}
+
+.mou-table-tab{
+  padding: 10px;
+  background-color: #cae1ff;
+// border-style: solid;
+}
+
+.mou-table-tab.pending{
+  padding: 10px;
+  background-color: #cae1ff;
+// border-style: solid;
+border-right: #0085e4 solid 2px;
+}
+
+.mou-table-tab.active{
+ // background-color: #89beff;
+ background-color: #1d9bf0;
+  border-bottom-color: #89beff;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  color: #FFF;
+  transition: all 0.3s ease-in-out;
+}
+
+.mou-warrant-text{
+  color: gray;
+    border-style: solid;
+    padding: 20px;
+}
+
+.mou-warrant-error-text{
+  color: red;
+  padding: 20px;
+}
+
 // #mou-rejectReason{
 //   display: none;
 // }

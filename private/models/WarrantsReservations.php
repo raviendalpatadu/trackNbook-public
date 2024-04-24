@@ -72,14 +72,12 @@ class WarrantsReservations extends Model
 
                 JOIN compartments c ON r.reservation_compartment_id = c.compartment_id
 
-                WHERE wr.warrant_status = :status 
+              
 
                 GROUP BY r.reservation_ticket_id;";
 
 
-            $result = $this->query($query, [
-                'status' => 'Approval Pending'
-            ]);
+            $result = $this->query($query);
             return $result;
         } catch (PDOException $e) {
             die($e->getMessage());

@@ -1,9 +1,9 @@
 <?php
 $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 echo "<pre>";
-//   // print_r($_POST);
-// print_r($_SESSION);
-// print_r($data);
+  print_r($_POST);
+print_r($_SESSION);
+print_r($data);
 echo "</pre>";
 
 ?>
@@ -136,41 +136,26 @@ echo "</pre>";
 
                         <?php } ?>
 
-
+<!-- check booking type -->
                         <div class="row mt-10">
-                            <div class="col-4 ">
-                                <div class="text-inputs g-10">
-                                    <div class="input-text-label">Payment Method</div>
-                                    <div class="width-fill">
-                                        <select class="dropdown" placeholder="Please choose" name="payment_method">
-                                            <option value="cash">Cash</option>
-                                            <option value="card">Card</option>
-                                            <option value="warrant">Warrant</option>
-                                        </select>
+                            <div class="col-12">
+                                <div class="text-inputs">
+                                    <div class="d-flex align-items-end justify-content-start flex-fill">
+                                        <div class="d-flex align-items-center g-20">
+                                            <div class="d-flex .flex-row g-5">
+                                                <label class="switch">
+                                                    <input type="checkbox" id="warrentBooking" name="warrant_booking" value="on" <?= getCheckBox('on', 'warrant_booking') ?>>
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                            <div>Warrent Booking</div>
+                                        </div>
                                     </div>
-                                    <?php if (isset($data['errors'])) : ?>
-                                        <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['payment_method'])) ? 'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['payment_method'])) ? $data['errors']['payment_method'] : "") : ''; ?></div>
-                                    <?php endif ?>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- 
-                    <div class="row">
-                        <div class="col-12 mt-20 border-top-Lightgray display-none" id="chooseImg">
-                            <div class="input-text-label mt-5">
-                                Please upload a clear photo of the warrent.
-                            </div>
-                            <div class="d-flex flex-column align-items-start mt-10 g-10">
-                                <div class="file-upload">
-                                    <input type="file" class="" name="warrant_image" id="file-upload-input">
-                                </div>
-                                <?php if (isset($data['errors'])) : ?>
-                                    <div class="assistive-text <?php echo (array_key_exists('errors', $data)) ? ((!isset($data['errors']['warrant_image'])) ?  'display-none' : '') : ''; ?>"> <?php echo (array_key_exists('errors', $data)) ? ((isset($data['errors']['warrant_image'])) ? $data['errors']['warrant_image'] : "") : ''; ?></div>
-                                <?php endif ?>
-                            </div>
-                        </div>
-                    </div> -->
+                        
+                   
 
                     <div class="row">
                         <div class="col-12 d-flex justify-content-end">
