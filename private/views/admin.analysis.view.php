@@ -105,7 +105,7 @@
                             {
                                 title: "No",
                                 style: {
-                                    width: 10,
+                                    width: 20,
                                     height: 40,
                                     backgroundColor: '#f2f2f2',
                                     textAlign: 'center',
@@ -116,7 +116,7 @@
                             {
                                 title: "Reservation Date",
                                 style: {
-                                    width: 40,
+                                    width: 50,
                                     height: 40,
                                     backgroundColor: '#f2f2f2',
                                     textAlign: 'center',
@@ -126,7 +126,7 @@
                             {
                                 title: "Reservation Type",
                                 style: {
-                                    width: 40,
+                                    width: 50,
                                     height: 40,
                                     backgroundColor: '#f2f2f2',
                                     textAlign: 'center',
@@ -137,7 +137,7 @@
                             {
                                 title: "Total Reservations",
                                 style: {
-                                    width: 40,
+                                    width: 45,
                                     height: 40,
                                     backgroundColor: '#f2f2f2',
                                     textAlign: 'center',
@@ -148,7 +148,7 @@
                             {
                                 title: "Total Amount",
                                 style: {
-                                    width: 50,
+                                    width: 10,
                                     height: 40,
                                     backgroundColor: '#f2f2f2',
                                     textAlign: 'center',
