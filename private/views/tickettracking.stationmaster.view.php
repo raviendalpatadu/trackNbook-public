@@ -240,7 +240,7 @@
 
                 <div class="row mt-20">
                     <div class="col-12 d-flex justify-content-center">
-                        <button class="button mx-10" onclick="window.location.href = 'stationmaster/index'">
+                        <button class="button mx-10" onclick="window.location.href = 'http://localhost/trackNbook/public/dashboard/station_master'">
                             <div class="button-base">
                                 <div class="text">Back</div>
                             </div>

@@ -8,17 +8,18 @@
             <div class="row">
                 <div class="col-12 p-20">
 
-                    <div class="d-flex flex-row justify-content-between g-50">
+                    <div class="d-flex flex-row justify-content-center g-50">
                         <div class="col-4">
                             <div class="dashboard-card-sm  d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/reservationList">
+                                
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4 align-items-start ">Number of
-                                            <br>Trains onboard
-                                        </p1> <br>
-                                        <p2>230</p2>
+                                        <p1 class="dashboard-card-sm-font1 ">
+                                            Number of
+                                            Trains <br>by today
+                                        </p1>
+                                        <p2 class="dashboard-card-sm-font2 ">230</p2>
                                     </div>
-                                </a>
+                              
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         height="80" width="80" version="1.1" id="_x32_" viewBox="0 0 512 512"
@@ -44,13 +45,13 @@
                         </div>
 
                         <div class="col-4">
-                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/refundList">
+                            <div class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                               
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Previous trains</p1> <br>
-                                        <p2>23</p2>
+                                        <p1 class="dashboard-card-sm-font1">Previous trains</p1>
+                                        <p2 class="dashboard-card-sm-font2">23</p2>
                                     </div>
-                                </a>
+                               
                                 <div class="d-flex  ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
                                         viewBox="-2 -2 24.00 24.00" fill="#000000"
@@ -77,13 +78,13 @@
                             </div>
                         </div>
                         <div class="col-4">
-                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
+                            <div class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Upcoming trains</p1>
-                                        <p2>28</p2>
+                                        <p1 class="dashboard-card-sm-font1">Upcoming trains</p1>
+                                        <p2 class="dashboard-card-sm-font2">28</p2>
                                     </div>
-                                </a>
+                               
                                 <div class="d-flex  ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
                                         viewBox="-2 -2 24.00 24.00" fill="#000000">
@@ -108,40 +109,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <div class="d-flex flex-column g-10">
-                                    <p1 class="mb-4">Next train Details</p1>
-                                    <p2 class="blue">10</p2>
-                                </div>
-                                <div class="d-flex">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
-                                        style="fill: rgba(89, 169, 224, 1);">
-                                        <path
-                                            d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V7h16l.001 12H4z">
-                                        </path>
-                                        <path
-                                            d="m15.707 10.707-1.414-1.414L12 11.586 9.707 9.293l-1.414 1.414L10.586 13l-2.293 2.293 1.414 1.414L12 14.414l2.293 2.293 1.414-1.414L13.414 13z">
-                                        </path>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
                     </div>
                     <!-- charts -->
-                    <div class="row g-20 py-20 graphbox">
-                        <!-- graph left -->
-                        <div class="col-12 box bg-light-blue p-20">
-                            <!-- graph head -->
+                    
+                    <div class="row ml-20">
+                        <div class="col-10-d-flex-flex-column">
                             
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 d-flex  flex-column">
-                            <div class="col-12 d-flex  flex-column">
 
-                            <div class="d-flex flex-column width-fill bg-white g-5 p-20 mb-10 align-items-start">
-                            <div class="row">
+                            <div class="d-flex flex-column  bg-white g-5 p-10 mb-10 align-items-start mt-50">
+                            <div class="row mt-10">
 
                               <div class="col-3" >
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

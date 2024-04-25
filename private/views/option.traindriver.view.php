@@ -1,8 +1,5 @@
 <?php $this->view("./includes/header"); ?>
 <?php
-// echo "<pre>";
-// print_r($_SESSION);
-// echo "<pre/>";
 ?>
 <body>
 
@@ -36,7 +33,13 @@
                             </div>
                     </button>
 
-                    
+                    <button class="button btn mt-20 " id="loginBtn">
+                        <a href="<?= ROOT ?>traindriver/qr">
+                            <div class="button-base btn bg-Border-blue ">
+                                <div class="text White">Scan QR</div>
+                            </div>
+                        </a>
+                    </button>
                 </div>
             </div>
         </main>

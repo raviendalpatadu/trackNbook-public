@@ -1,18 +1,9 @@
 <?php $this->view("./includes/header") ?>
 <?php $this->view("./includes/load-js") ?>
 
-<?php
-
-if (isset($data['trains']) && !empty($data['trains'])) {
-    $count = count($data['trains']);
-} else {
-    $count = 0;
-}
-
-?>
 
 <head>
-
+    <!-- Add any necessary headers -->
 </head>
 
 <body>
@@ -43,13 +34,10 @@ if (isset($data['trains']) && !empty($data['trains'])) {
 
                     <div class="row">
                         <div class="col-12">
-
                             <div class="row">
                                 <div class="col-12">
-
                                     <div class="row">
                                         <div class="col-12">
-
                                             <table class="if-table stripe hover" id="userTable" style="width:100%">
                                                 <thead>
                                                     <tr>
@@ -66,7 +54,6 @@ if (isset($data['trains']) && !empty($data['trains'])) {
                                                             <td class="col-3 d-flex align-items-center">
                                                                 <?= $train->train_name ?>
                                                             </td>
-
                                                             <td class="col-1">
                                                                 <?= $train->train_type ?>
                                                             </td>
@@ -76,26 +63,33 @@ if (isset($data['trains']) && !empty($data['trains'])) {
                                                             <td class="col-2 ">
                                                                 <?= date("H:i", strtotime($train->train_start_time)) . " " . date("H:i", strtotime($train->train_end_time)) ?>
                                                             </td>
-
                                                             <td class="col-3 d-flex align-items-center g-10">
-
-                                                                <a class="blue" href="<?= ROOT ?>stationmaster/updateArrival/<?= $train->train_id ?>">Check</a>
+                                                                <form method="post" action="<?= ROOT ?>stationmaster/checkArrival">
+                                                                    <input type="hidden" name="train_id" value="<?= $train->train_id ?>">
+                                                                    <button type="submit" name="check" class="blue">Check</button>
+                                                                </form>
                                                             </td>
-
-
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>
-
-
+                                            <?php if (isset($_GET['success'])): ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    Location updated successfully!
+                                                </div>
+                                            <?php elseif (isset($_GET['error'])): ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    Location already updated for this train.
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
         </main>
     </div>
 

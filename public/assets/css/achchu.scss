@@ -101,20 +101,35 @@
 }
 
 /* Station Master Dashboard */
+
+.col-10-d-flex-flex-column
+{
+  width: 1088px
+}
 .dashboard-card-sm {
-  height: 100%;
+  height: 130%;
   padding: 24px 19px;
   border-radius: 5px;
   box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1),
     0 3px 6px 0 rgba(0, 0, 0, 0.07);
+    width: 302px
 }
 
-.dashboard-card-sm :hover {
-  cursor: pointer;
-  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1),
-    0 3px 6px 0 rgba(0, 0, 0, 0.07);
-  transition: 0.3s ease-in-out;
+.dashboard-card-sm-font1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #171717;
+  align-items: start !important; /* Assuming this is applied to a flex container */
 }
+.dashboard-card-sm-font2 {
+  font-size: 26px;
+    font-weight: 300;
+  color: #0f8eea;
+  align-items: start !important; /* Assuming this is applied to a flex container */
+}
+
+
+
 /* Staff General Dashboard */
 .ach-widgets-s .number {
   position: relative;
