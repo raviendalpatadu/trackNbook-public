@@ -110,9 +110,9 @@ class Admin extends Controller
         $this->view('admin.analysis');
     }
 
-    function addRoute(){
+    // function addRoute(){
         
-    }
+    // }
 
     
 
@@ -128,9 +128,9 @@ class Admin extends Controller
     }
 
 
-    function addRoute()
-    {
-    }
+    // function addRoute()
+    // {
+    // }
 
     function addDisableTrain()
     {
