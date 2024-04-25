@@ -146,6 +146,14 @@ function get_data_view($data, $key)
     return '';
 }
 
+function get_data_select($data, $value)
+{
+    // check if $data is array
+    if ($data == $value) {
+        return 'selected';
+    }
+    return '';
+}
 
 function hms_date_diff(DateInterval $date_diff)
 {

@@ -32,7 +32,7 @@ class TrainLocation extends Model
         
 
         if (is_array($this->errors) && count($this->errors) > 0) {
-            return $this->errors;
+            return false;
         }
 
         return true;

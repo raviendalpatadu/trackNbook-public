@@ -109,7 +109,6 @@ class TrainDriver extends Controller
 
                 // get passenger data in the next station
                 $passenger = new Passengers();
-
                 $passenger_data = $passenger->getPassengerDataOfNextStation($train_id, $_POST['station_id']);
 
                 // send a mail to the passengers
