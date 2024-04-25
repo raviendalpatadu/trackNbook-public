@@ -54,7 +54,8 @@ if (isset($data) && !empty($data)) {
                             <tr class="row">
                                 <td class="col-2"><?= $trainData['train']->train_name ?></td>
                                 <td class="col-3">
-                                    <?= $trainData['train']->start_station . "-" . $trainData['train']->end_station ?></td>
+                                    <?= $trainData['train']->start_station . "-" . $trainData['train']->end_station ?>
+                                </td>
                                 <td class="col-2">
                                     <?= date("H:i", strtotime($trainData['train']->train_start_time)) . " " . date("H:i", strtotime($trainData['train']->train_end_time)) ?>
                                 </td>
@@ -112,11 +113,22 @@ if (isset($data) && !empty($data)) {
                             {
                                 title: 'Compartment Class Types',
                                 data: function (row) {
-                                    let compartmentClassTypes = row.compartment_class_types.join(", ");
-                                    return compartmentClassTypes;
+                                    let compartmentClassTypesHTML = '';
+                                    row.compartment_class_types.forEach(function (compartmentType) {
+                                        // Append HTML for each compartment class type with the same base color and text color
+                                        compartmentClassTypesHTML += `
+                <div class="badge-base flex-auto flex-grow bg-selected-blue mb-3">
+                    <div class="text primary-blue ">
+                        ${compartmentType} Reservations
+                    </div>
+                </div>
+            `;
+                                    });
+                                    return compartmentClassTypesHTML;
                                 }
                             },
-                            {
+
+                {
                                 title: 'Seats',
                                 data: null,
                                 render: function (data, type, row) {
@@ -134,6 +146,7 @@ if (isset($data) && !empty($data)) {
                     });
                 });
             </script>
+
 
         </main>
     </div>

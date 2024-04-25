@@ -10,7 +10,7 @@
 
                     <div class="d-flex flex-row justify-content-between g-50">
                         <div class="col-4">
-                            <div class="dashboard-card  d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                            <div class="dashboard-card-sm  d-flex align-items-center bg-light-blue Primary-Gray g-50">
                                 <a class="blue" href="<?= ROOT ?>staffticketing/reservationList">
                                     <div class="d-flex flex-column g-10">
                                         <p1 class="mb-4 align-items-start ">Number of

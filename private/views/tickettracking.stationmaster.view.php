@@ -228,10 +228,10 @@
                                     <div class="d-flex "><?= number_format(floatval($data['fares'][0]->fare_price), 2) ?></div>
                                 </div>
 
-                                <div class="d-flex justify-content-between">
+                                <!-- <div class="d-flex justify-content-between">
                                     <div class="d-flex">Refund Amount</div>
                                     <div class="d-flex"><?= number_format(floatval($refund), 2) ?></div>
-                                </div>
+                                </div> -->
                             </div>
 
                         <?php endif; ?>
@@ -240,17 +240,11 @@
 
                 <div class="row mt-20">
                     <div class="col-12 d-flex justify-content-center">
-                        <button class="button mx-10">
+                        <button class="button mx-10" onclick="window.location.href = 'stationmaster/index'">
                             <div class="button-base">
                                 <div class="text">Back</div>
                             </div>
                         </button>
-
-    
-                        <div class="" id="popoupError">
-
-                        </div>
-
                     </div>
                 </div>
 
@@ -262,64 +256,3 @@
 </body>
 
 </html>
-<script>
-    $(document).ready(function() {
-        $('#cancelReservationBtn').click(function(event) {
-            event.preventDefault();
-            var div = $('body');
-            var imgURL = '<?= ASSETS . 'images/error.jpg' ?>';
-            var description1 = "By cancelling this booking, you will lose the opportunity to travel on the selected train. ";
-            var description2 = "<br><br>Are you sure you want to cancel?";
-
-
-            var description = description1 + description2;
-
-
-            div.append(makePopupBox('Are you sure you want to cancel?', description, 'Yes', imgURL, function(res) {
-
-                var ticket_id_input = $('input#ticket_id_input').val()
-
-                if (res) {
-                    $.ajax({
-                        url: '<?= ROOT . 'Ajax/cancelReservation/' ?>' + ticket_id_input,
-                        type: 'POST',
-
-                        success: function(data, response) {
-                            console.log(data);
-                            var data = JSON.parse(data);
-                            console.log(data);
-                            var refundedAmount = <?= $refund ?>;
-                            $('.main-popup-box').remove();
-
-                            if (data.length == 0) {
-                                var desc1 = "Reservation has been canceled <br><br>";
-                                var desc2 = "Rs." + refundedAmount + ".00" + " will be refunded to your bank account";
-
-                                if (refundedAmount > 0) {
-                                    var desc = desc1 + desc2;
-                                } else {
-                                    var desc = desc1;
-                                }
-
-                                makePopupBox('Reservation Canceled', desc, 'OK', '<?= ASSETS . 'images/staff-success.gif' ?>', function(res) {
-                                    if (res) {
-                                        location.reload();
-                                    }
-                                });
-
-                                // location.reload();
-
-                            } else {
-                                alert('Failed to cancel reservation');
-                            }
-
-                        }
-
-                    })
-                }
-            }))
-        });
-
-
-    });
-</script>
