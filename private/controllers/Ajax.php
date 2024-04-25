@@ -84,12 +84,25 @@ class Ajax extends Controller
     public function getTrainList()
     {
         $train = new Trains();
-        $data = array();
-        
-        $data = $train->findAllTrains();// Wrap the output array inside a "data" key
-        
-        echo json_encode($data);
+        $trains = $train->findAllTrains();
+    
+        // Organize data by train ID
+        $organizedData = [];
+        foreach ($trains as $train) {
+            $trainId = $train->train_id;
+            if (!isset($organizedData[$trainId])) {
+                $organizedData[$trainId] = [
+                    'train' => $train,
+                    'compartment_class_types' => []
+                ];
+            }
+            $organizedData[$trainId]['compartment_class_types'][] = $train->compartment_class_type;
+        }
+    
+        echo json_encode(array_values($organizedData));
     }
+    
+
 
 
     public function getTrains()

@@ -56,6 +56,7 @@ class Trains extends Model
 
 
 
+    
     public function findAllTrains()
     {
         $data = array();
@@ -69,7 +70,8 @@ class Trains extends Model
                             tbl_train.*,
                             start.station_name AS start_station,
                             end.station_name AS end_station,
-                            tbl_compartment_class_type.compartment_class_type
+                            tbl_compartment_class_type.compartment_class_type,
+                            tbl_train_type.train_type
                         FROM
                             tbl_train
                         JOIN
@@ -79,7 +81,9 @@ class Trains extends Model
                         JOIN
                             tbl_compartment ON tbl_train.train_id = tbl_compartment.compartment_train_id
                         JOIN
-                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id";
+                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id
+                        JOIN
+                            tbl_train_type ON tbl_train.train_type = tbl_train_type.train_type_id";
 
             $stm = $con->prepare($query);
             $stm->execute();
@@ -91,7 +95,8 @@ class Trains extends Model
         if ($data > 0) {
             return $data;
         }
-    }
+    } 
+    
     public function findTrain($trainId)
     {
 

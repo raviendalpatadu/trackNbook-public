@@ -9,7 +9,7 @@ class StationMaster extends Controller
     function index($id = '')
     {
 
-        $this->view('check.train.arrival');
+        $this->view('dashboard.stationmaster');
     }
     function trackTicket($id = '')
     {
@@ -45,6 +45,9 @@ class StationMaster extends Controller
 
         $data['trains'] = $train->findAllTrains();
 
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
 
         $this->view('check.train.arrival', $data);
     }
