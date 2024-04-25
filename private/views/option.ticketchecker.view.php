@@ -1,4 +1,26 @@
 <?php $this->view("./includes/header"); ?>
+<?php
+echo "<pre>";
+print_r($_SESSION);
+// print_r($_POST);
+echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
+
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $train_id = $_POST['train_id'];
+
+//     // if($train_id == ''){
+//     //     echo "<script>alert('Please Enter Train ID')</script>";
+//     // }elseif (!is_numeric($train_id)) {
+//     //     echo "<script>alert('Please Enter Numeric Value')</script>";
+        
+//     // }
+// }
+
+
+?>
 
 <body>
 
@@ -17,31 +39,24 @@
                     </div>
 
 
-                    <div class="text-inputs d-flex mt-20">
-                        <div class="input-text-label lightgray-font">Train ID</div>
-                        <div class="input-field">
-                            <div class="">
-                                <input type="text" class="type-here" placeholder="Enter Your Train ID" name="" id="trainId">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="text-inputs">
-                            <div class="input-text-label text lightgray-font">Start Location</div>
+                    <form action="" method="post">
+                        <div class="text-inputs d-flex mt-20">
+                            <div class="input-text-label lightgray-font">Train ID</div>
                             <div class="input-field">
-                                <div class="text">
-                                    <input type="text" class="type-here" placeholder="Staff ID" name="" >
+                                <div class="">
+                                    <input type="number" class="type-here" placeholder="Enter Your Train ID" name="train_id" id="trainId" value="">
                                 </div>
                             </div>
-                        </div> -->
+                            <?= printError($data['errors'], 'train_id')?>
+                        </div>
 
-                    <button class="button btn mt-20 " id="loginBtn">
-                        <a href="<?= ROOT ?>ticketchecker/dashboard">
-                            <div class="button-base btn bg-Border-blue ">
-                                <div class="text White">Start</div>
+                        <button class="button">
+                            <div class="button-base">
+                                <input type="submit" value="Submit" name="submit">
                             </div>
-                        </a>
-                    </button>
+                        </button>
+                    </form>
+
 
                 </div>
             </div>

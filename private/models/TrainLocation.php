@@ -32,7 +32,7 @@ class TrainLocation extends Model
         
 
         if (count($this->errors) > 0) {
-            return $this->errors;
+            return false;
         }
 
         return true;
