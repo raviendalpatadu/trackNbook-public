@@ -23,16 +23,16 @@ class Ajax extends Controller
         $waitingList = new WaitingLists();
         $waiting_passenger_list = $waitingList->notifyWaitingList($id);
 
-        
 
-        if($waiting_passenger_list != false){
+
+        if ($waiting_passenger_list != false) {
             foreach ($waiting_passenger_list as $waiting_passenger) {
                 // send email to the waiting list
-    
+
                 $user = new Users();
-                try{
-                    $user_data = $user->whereOne('user_id',$waiting_passenger->waiting_list_passenger_id);
-                    
+                try {
+                    $user_data = $user->whereOne('user_id', $waiting_passenger->waiting_list_passenger_id);
+
                     $email = $user_data->user_email;
                     $subject = "Train Reservation Notification";
                     $message = "<h3>Some seats are available on the train.</h3>
@@ -44,13 +44,12 @@ class Ajax extends Controller
                         <p style='font-size: 14px; font-weight: 500'>Arrival Time: $waiting_passenger->estimated_end_time</p>
                     </div>
                     Please login to your account to make a reservation.";
-        
+
                     $message = Auth::getEmailBody($user_data->user_first_name, $message);
-                }
-                catch(Exception $e){
+                } catch (Exception $e) {
                     die($e->getMessage());
                 }
-    
+
                 $this->sendMail($email, $user_data->user_first_name, $subject, $message);
             }
         }
@@ -85,9 +84,9 @@ class Ajax extends Controller
     {
         $train = new Trains();
         $data = array();
-        
+
         $data = $train->findAllTrains();// Wrap the output array inside a "data" key
-        
+
         echo json_encode($data);
     }
 
@@ -98,10 +97,11 @@ class Ajax extends Controller
         $data = array();
         $data = $train->findAllTrains();
 
-        echo json_encode($data); 
+        echo json_encode($data);
     }
 
-    public function getWaitingList(){
+    public function getWaitingList()
+    {
         $waitinglist = new WaitingLists();
         $data = array();
         $data = $waitinglist->findAll();
@@ -125,12 +125,14 @@ class Ajax extends Controller
     {
         $startDate = isset($_POST['startDate']) ? $_POST['startDate'] : null;
         $endDate = isset($_POST['endDate']) ? $_POST['endDate'] : null;
-    
+        $reservationType = isset($_POST['reservationType']) ? $_POST['reservationType'] : 'all'; // Added reservationType
+
         $reservation = new Reservations();
         $data = array();
-        $data['reservations'] = $reservation->getReservationDetails($startDate, $endDate);
+        $data['reservations'] = $reservation->getReservationDetails($startDate, $endDate, $reservationType); // Updated function call
         echo json_encode($data);
     }
-    
+
+
 
 }

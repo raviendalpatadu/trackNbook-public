@@ -640,7 +640,7 @@
 }
 
 .fancy-button {
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   padding: 12px 24px;
@@ -652,4 +652,27 @@
 
 .fancy-button:hover {
   background-color: #0056b3;
+}
+
+.custom-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 150px;
+  font-size: 16px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon points="6 9 1 1 11 1 6 9"/></svg>');
+  background-repeat: no-repeat;
+  background-position-x: 130px;
+  background-position-y: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }/*# sourceMappingURL=iflal.css.map */

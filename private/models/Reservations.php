@@ -295,12 +295,12 @@ class Reservations extends Model
 
     // return 
 
-    //need a function that get the reservation details from the reservation table sorted by date and return the total count of the reserveration on that date and total amount of the reservation on that date
-    public function getReservationDetails($startDate = null, $endDate = null)
+    public function getReservationDetails($startDate = null, $endDate = null, $reservationType = 'all')
     {
         try {
             $query = "SELECT
                         reservation_date,
+                        reservation_type,
                         COUNT(reservation_id) AS total_reservations,
                         SUM(reservation_amount) AS total_amount
                       FROM
@@ -313,7 +313,16 @@ class Reservations extends Model
                 $params = [':startDate' => $startDate, ':endDate' => $endDate];
             }
 
-            $query .= " GROUP BY reservation_date ORDER BY reservation_date ASC";
+            if ($reservationType !== 'all') {
+                if ($startDate && $endDate) {
+                    $query .= " AND reservation_type = :reservationType";
+                } else {
+                    $query .= " WHERE reservation_type = :reservationType";
+                }
+                $params[':reservationType'] = $reservationType;
+            }
+
+            $query .= " GROUP BY reservation_date, reservation_type ORDER BY reservation_date ASC";
 
             $result = $this->query($query, $params);
 
@@ -326,6 +335,7 @@ class Reservations extends Model
             echo $e->getMessage();
         }
     }
+
 
 
 }
