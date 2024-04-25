@@ -4,6 +4,7 @@
  * home controller
  */
 
+
 class Admin extends Controller
 {
     function index($id = '')
@@ -101,12 +102,12 @@ class Admin extends Controller
         $this->view('admin.analysis');
     }
 
-    function reportRequest(){
-        $mpdf = new \Mpdf\Mpdf();
-        $data = file_get_contents(ROOT.'admin/getreport');
-        $mpdf->WriteHTML($data);
-        $mpdf->Output();;
-    }
+    // function reportRequest(){
+    //     $mpdf = new \Mpdf\Mpdf();
+    //     $data = file_get_contents(ROOT.'admin/getreport');
+    //     $mpdf->WriteHTML($data);
+    //     $mpdf->Output();;
+    // }
 
     function getreport(){
         $this->view('admin.analysis');
