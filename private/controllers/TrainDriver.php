@@ -73,7 +73,7 @@ class TrainDriver extends Controller
         $train = new Trains();
         $data = array();
         $data['train'] = $train->findTrain($id)[0];
-        
+
 
         $train_stop_station = new TrainStopStations();
         $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($id);
@@ -161,12 +161,6 @@ class TrainDriver extends Controller
         $this->view('add.location', $data);
     }
 
-    function scanLocation($id = '')
-    {
-
-        $this->view('scan.train.location');
-    }
-
     function qr()
     {
         $this->view('QRSearch.traindriver');
@@ -191,7 +185,7 @@ class TrainDriver extends Controller
                 $this->redirect('traindriver/index/' . $data['train_id'] . '/' . Auth::getUser_id());
             }
         }
-        
+
 
         $this->view('option.traindriver');
     }

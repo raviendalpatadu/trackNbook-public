@@ -1,5 +1,3 @@
-
-
 <?php $this->view("./includes/header") ?>
 <?php $this->view("./includes/load-js") ?>
 
@@ -15,9 +13,9 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 // print_r($data);
 // echo "</pre>";
 ?>
+<html>
 
 <head>
-
 </head>
 
 <body>
@@ -136,16 +134,13 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     </tbody>
                 </table>
                 <center>
-    <button class="button mx-10 px-10">
-        <div class="button-base">
-            <a href="<?= ROOT ?>train/add" class="blue">Add Train</a>
-        </div>
-    </button>
-</center>
-
-
+                    <button class="button mx-10 px-10">
+                        <div class="button-base">
+                            <a href="<?= ROOT ?>train/add" class="blue">Add Train</a>
+                        </div>
+                    </button>
+                </center>
             </div>
-
             <script>
                 $(document).ready(function () {
                     let table = new DataTable("#userTable", {
@@ -225,6 +220,8 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     });
                 });
             </script>
-
         </main>
     </div>
+</body>
+
+</html>

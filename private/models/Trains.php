@@ -58,43 +58,31 @@ class Trains extends Model
 
     public function findAllTrains()
     {
-
-
         $data = array();
-
 
         try {
             $con = $this->connect();
             $con->beginTransaction();
 
             //insert query to search train must come form route
-            $query = "SELECT\n"
+            $query = "SELECT
+                            tbl_train.*,
+                            start.station_name AS start_station,
+                            end.station_name AS end_station,
+                            tbl_compartment_class_type.compartment_class_type
+                        FROM
+                            tbl_train
+                        JOIN
+                            tbl_station AS start ON tbl_train.train_start_station = start.station_id
+                        JOIN
+                            tbl_station AS end ON tbl_train.train_end_station = end.station_id
+                        JOIN
+                            tbl_compartment ON tbl_train.train_id = tbl_compartment.compartment_train_id
+                        JOIN
+                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id";
 
-                . "tbl_train.*,\n"
-
-                . "start.station_name AS start_station,\n"
-
-                . "end.station_name AS end_station\n"
-
-
-
-                . "\n"
-
-                . "FROM\n"
-
-                . "	tbl_train\n"
-
-                . "JOIN\n"
-
-                . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
-
-                . " JOIN\n"
-
-                . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id ";
             $stm = $con->prepare($query);
-
             $stm->execute();
-
             $data = $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -104,7 +92,6 @@ class Trains extends Model
             return $data;
         }
     }
-
     public function findTrain($trainId)
     {
 
@@ -141,7 +128,7 @@ class Trains extends Model
         }
     }
 
-    public function validate($values = array())
+        public function validate($values = array())
     {
 
 

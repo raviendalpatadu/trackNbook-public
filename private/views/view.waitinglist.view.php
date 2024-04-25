@@ -40,26 +40,11 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                         <table class="if-table stripe hover" id="userTable" style:width=100%>
                             <thead>
                                 <tr>
-                                    <th class="col-3 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Passenger Name
-                                    </th>
-                                    <th class="col-3 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Train No
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Train Type
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Start & End Station
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Start & End Time
-                                    </th>
+                                    <th class="col-3 ">Passenger Name</th>
+                                    <th class="col-3 ">Train No</th>
+                                    <th class="col-2 ">Train Type</th>
+                                    <th class="col-2 ">Start & End Station</th>
+                                    <th class="col-2 ">Start & End Time </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,7 +67,7 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                                         </td>
                                         <td class="col-2 ">
                                             <?= $waitinglist->priority_number ?>
-                                        </td> 
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -90,11 +75,7 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                     </div>
                 </div>
             </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </main>
+        </main>
     </div>
 
     <script>
@@ -108,37 +89,33 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                     {
                         title: 'Passenger NIC',
                         data: 'user_nic',
-                        width: '20%' // Set the width for the first column
+                        width: '15%'
                     },
                     {
                         title: 'Train Name',
                         data: 'train_name',
-                        width: '20%' // Set the width for the first column
+                        width: '20%'
                     },
                     {
-                        title: 'Reservertion Start Station',
+                        title: 'Reservertion <br> Start Station',
                         data: 'start_station_name',
-                        width: '20%' // Set the width for the first column
+                        width: '20%'
                     },
                     {
-                        title: 'Reservertion End Station',
+                        title: 'Reservertion <br> End Station',
                         data: 'end_station_name',
-                        width: '20%' // Set the width for the first column
-
-                    }
-                    ,
+                        width: '20%'
+                    },
                     {
                         title: 'Reservation Date',
                         data: 'waiting_list_reservation_date',
-                        width: '20%' // Set the width for the first column
+                        width: '20%'
                     },
                     {
-                        title: 'Priority NO',
+                        title: 'Priority No',
                         data: 'priority_number',
-                        width: '20%'
+                        width: '10%'
                     }
-
-
                 ],
                 columnDefs: [
                     {

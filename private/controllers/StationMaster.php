@@ -11,9 +11,15 @@ class StationMaster extends Controller
 
         $this->view('check.train.arrival');
     }
+    function trackTicket($id = '')
+    {
+
+        $this->view('tickettracking.stationmaster');
+    }
     function updateArrival($id = '')
     {
-       /** */ $train = new Trains();
+        /** */
+        $train = new Trains();
         $data = array();
         $data['train'] = $train->whereOne('train_id', $id);
 
@@ -31,11 +37,6 @@ class StationMaster extends Controller
 
         $this->view('update.train.arrival');
     }
-    function updateTrainLocation($id = '')
-    {
-
-        $this->view('update.train.location');
-    }
 
     function checkarrival($id = '')
     {
@@ -47,21 +48,36 @@ class StationMaster extends Controller
 
         $this->view('check.train.arrival', $data);
     }
-    function checkarrivalcopy($id = '')
+
+    function updateTrainStatus($id = '')
+    {
+        $train = new Trains();
+        $train->updateStatus();
+    }
+
+    function waitList()
+    {   
+        
+        $waitinglist = new WaitingLists();
+        $data = array();
+        $data['waitinglist'] = $waitinglist->getWaitingList();
+
+        $this->view('view.waitinglist', $data);
+    }
+
+    function manageSchedule($id = '')
+
     {
         $train = new Trains();
         $data = array();
 
         $data['trains'] = $train->findAllTrains();
 
+        //echo "<pre>";
+        //print_r($data);
+        //echo "</pre>"; 
 
-        $this->view('check.train.arrival.copy', $data);
-    }
-
-    function updateTrainStatus($id = '')
-    {
-        $train = new Trains();
-        $train->updateStatus();
+        $this->view('manage.schedule', $data);
     }
 
 
