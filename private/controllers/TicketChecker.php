@@ -42,7 +42,17 @@ class TicketChecker extends Controller
     {
         if(!Auth::is_logged_in() || !Auth::isUserType('ticket_checker')){
             $this->redirect('login');
+        }if{(Auth::is_logged_in() && Auth::isUserType('ticket_checker')) and is set session ticket checker {
+redirect option; 
         }
+
+        
+
+        }if server request method - post{
+            post (trainid);
+            create session ticket checker;
+        }
+
 
         // if(!Auth::isPinChanged(Auth::getuser_data(), 'ticket_checker')){
         //     // get user id
