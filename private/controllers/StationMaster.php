@@ -16,7 +16,7 @@ class StationMaster extends Controller
 
         $this->view('tickettracking.stationmaster');
     }
-    function updateArrival($id = '')
+    function updateArrival($id)
     {
         /** */
         $train = new Trains();
@@ -43,7 +43,7 @@ class StationMaster extends Controller
         $train = new Trains();
         $data = array();
 
-        $data['trains'] = $train->findAllTrains();
+        $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
 
         // echo "<pre>";
         // print_r($data);
@@ -82,6 +82,8 @@ class StationMaster extends Controller
 
         $this->view('manage.schedule', $data);
     }
+
+    
 
 
 

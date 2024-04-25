@@ -96,6 +96,51 @@ class Trains extends Model
             return $data;
         }
     } 
+
+    function getAllTrainsByStation($station_id)
+    {
+        $query = "SELECT
+                            tbl_train.*,
+                            start.station_name AS start_station,
+                            end.station_name AS end_station,
+                            tbl_compartment_class_type.compartment_class_type,
+                            tbl_train_type.train_type
+                        FROM
+                            tbl_train
+                        JOIN
+                            tbl_station AS start ON tbl_train.train_start_station = start.station_id
+                        JOIN
+                            tbl_station AS end ON tbl_train.train_end_station = end.station_id
+                        JOIN
+                            tbl_compartment ON tbl_train.train_id = tbl_compartment.compartment_train_id
+                        JOIN
+                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id
+                        JOIN
+                            tbl_train_type ON tbl_train.train_type = tbl_train_type.train_type_id
+
+                        -- get all trains where it stops in the given station
+                        WHERE
+                            tbl_train.train_id IN (
+                                SELECT
+                                    train_id
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    station_id = :station_id
+                            )
+                        GROUP BY
+                            tbl_train.train_id";  
+                            
+        $result = $this->query($query, [
+            'station_id' => $station_id
+        ]);
+
+        if (is_array($result) && count($result) > 0) {
+            return $result;
+        }
+
+        return [];
+    }
     
     public function findTrain($trainId)
     {

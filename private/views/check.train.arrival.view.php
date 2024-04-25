@@ -62,7 +62,7 @@ if (isset($data['trains']) && !empty($data['trains'])) {
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($data['trains'] as $train): ?>
-                                                        <tr class="row p-20">
+                                                        <tr class="p-20">
                                                             <td class="col-3 d-flex align-items-center">
                                                                 <?= $train->train_name ?>
                                                             </td>
@@ -79,8 +79,7 @@ if (isset($data['trains']) && !empty($data['trains'])) {
 
                                                             <td class="col-3 d-flex align-items-center g-10">
 
-                                                                <a class="blue"
-                                                                    href="<?= ROOT ?>stationmaster/updateArrival/<?= $train->train_id ?>">Check</a>
+                                                                <a class="blue" href="<?= ROOT ?>stationmaster/updateArrival/<?= $train->train_id ?>">Check</a>
                                                             </td>
 
 
@@ -103,45 +102,7 @@ if (isset($data['trains']) && !empty($data['trains'])) {
     <script>
         $(document).ready(function () {
             let table = new DataTable("#userTable", {
-                ajax: {
-                    url: "<?= ROOT ?>ajax/getTrainList",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        title: 'Train Name',
-                        data: 'train.train_name'
-                    },
-                    {
-                        title: 'Train Type',
-                        data: 'train.train_type'
-                    },
-                    {
-                        title: 'Start & End Station',
-                        data: function (row) {
-                            return row.train.start_station + " - " + row.train.end_station;
-                        }
-                    },
-                    {
-                        title: 'Start & End Time',
-                        data: function (row) {
-                            return row.train.train_start_time + " - " + row.train.train_end_time;
-                        }
-                    },
-                    {
-                        title: 'Action',
-                        data: null,
-                        render: function (data, type, row) {
-                            return '<a class="blue" href="<?= ROOT ?>stationmaster/updateArrival/' + row.train_id + '">Check</a>';
-                        }
-                    }
-                ],
-                columnDefs: [
-                    {
-                        targets: 0, // Target the first column
-                        className: 'dt-body-left' // Left-align the content in the first column
-                    }
-                ]
+               search : true
             });
         });
     </script>
