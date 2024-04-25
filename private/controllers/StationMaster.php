@@ -64,6 +64,16 @@ class StationMaster extends Controller
         $train->updateStatus();
     }
 
+    function waitList($id = '')
+    {   
+        
+        $waitinglist = new WaitingLists();
+        $data = array();
+        $data['waitinglist'] = $waitinglist->findAll();
+
+
+        $this->view('view.waitinglist', $data);
+    }
 
 
 }

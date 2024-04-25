@@ -668,3 +668,15 @@ function makeSuccessToast(title, description) {
     hideMethod: "fadeOut",
   };
 }
+
+function makeTicketQrCode(ticketId, QrContainer){
+  $('#'+QrContainer).empty();
+  var qrcode = new QRCode(QrContainer, {
+      text: "http://localhost/trackNbook/public/ticketchecker/summary/" + ticketId,
+      width: 128,
+      height: 128,
+      colorDark: "#324054",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+  });
+}

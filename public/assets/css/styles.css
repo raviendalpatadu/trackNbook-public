@@ -1188,7 +1188,7 @@ input:focus {
   flex-direction: column;
   gap: 2px;
   align-items: flex-start;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   width: -webkit-fill-available;
   /* max-width: 300px; */
   position: relative;

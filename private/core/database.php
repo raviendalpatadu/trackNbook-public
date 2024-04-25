@@ -34,7 +34,7 @@ class Database
                     if (preg_match("/^CALL/i", $query)) {
                         $data = $stm->fetchAll(PDO::FETCH_OBJ);
                         $con = null;
-                        return $data;
+                        // return $data;
                     }
 
                     if ($data_type == "object") {

@@ -83,14 +83,11 @@ class Admin extends Controller
 
         $data['trains'] = $train->findAllTrains();
         $this->view('admin.trainList', $data);
-        
-
     }
- 
+
     function trainRequest()
     {
         $this->view('admin.trainRequest');
-
     }
     function inquiry()
     {
@@ -117,4 +114,149 @@ class Admin extends Controller
         
     }
 
+    
+
+    function disableTrain()
+    {
+
+        $data = array();
+
+        $train_disable = new TrainDisablePeriods();
+        $data['trains'] = $train_disable->getAllDisableTrains();
+
+        $this->view('admin.trainDisable', $data);
+    }
+
+
+    function addRoute()
+    {
+    }
+
+    function addDisableTrain()
+    {
+        $train = new Trains();
+        $data = array();
+
+        $data['trains'] = $train->findAllTrains();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+            $train_disable = new TrainDisablePeriods();
+            if ($train_disable->validate($_POST)) {
+                // add disable period
+                $disable_period = new DisablePeriods();
+                $disable_period_id = $disable_period->insert($_POST);
+
+                // add train disable period
+                $disable_period_train_id = $train_disable->insert([
+                    'disable_period_train_id' => $_POST['train_id'],
+                    'disable_period_id' => $disable_period_id
+                ]);
+
+                // cancel all reservations with in the disable period
+                $reservations = $train_disable->getDisablePeriodReservations([
+                    'train_id' => $_POST['train_id'],
+                    'disable_period_start_date' => $_POST['disable_period_start_date'],
+                    'disable_period_end_date' => $_POST['disable_period_end_date']
+                ]);
+
+                echo "<pre>";
+                print_r($reservations);
+                echo "</pre>";
+
+                foreach ($reservations as $reservation) {
+                    $reservationData = [
+                        $reservation->reservation_ticket_id,
+                        'Train Disabled'
+                    ];
+                    $disable_period->callProcedure('cancel_reservation_train_disable', $reservationData);
+
+                    // send email to user
+                    $user = new Users();
+                    $user_data = $user->whereOne('user_id', $reservation->reservation_passenger_id);
+
+                    // get train data
+                    $train_data = $train->whereOne('train_id', $reservation->reservation_train_id);
+
+                    $to = $user_data->user_email;
+                    $recipient = $user_data->user_first_name . ' ' . $user_data->user_last_name;
+                    $subject = 'Train Disabled';
+                    $message = "The train " . $train_data->train_name . " you have reserved on " . $reservation->reservation_date . " has been disabled. <br>
+                    You will be able to get your full refund within 7 working days. <br>
+                    We apologize for any inconvenience caused.";
+
+                    $body = Auth::getEmailBody($recipient, $message);
+                    if ($this->sendMail($to, $recipient, $subject, $body)) {
+                        $this->redirect('admin/disableTrain?success=1');
+                    }
+                }
+                // // redirect to disable train page if no reservations
+                $this->redirect('admin/disableTrain?success=1');
+            } else {
+                $data['errors'] = $train_disable->errors;
+            }
+        }
+        $this->view('add.disable.train.admin', $data);
+    }
+
+    function updateDisablePeriod($id)
+    {
+
+        $data = array();
+        $train_disable = new TrainDisablePeriods();
+        $data['train_disable'] = $train_disable->whereOne('disable_period_id', $id);
+
+        $disable_period = new DisablePeriods();
+        $data['disable_period'] = $disable_period->whereOne('disable_period_id', $id);
+
+        $train = new Trains();
+        $data['trains'] = $train->findAllTrains();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $train_disable = new TrainDisablePeriods();
+
+            if ($train_disable->validate($_POST)) {
+
+                $train_disable->update($_POST['train_disable_period_id'], [
+                    'disable_period_train_id' => $_POST['train_id']
+                
+                ], 'train_disable_period_id'); 
+                
+                $disable_period = new DisablePeriods();
+                $disable_period->update($_POST['disable_period_id'], $_POST, 'disable_period_id');
+
+                $this->redirect('admin/disableTrain?update=1');
+            } else {
+                $data['errors'] = $train_disable->errors;
+            }
+        }
+
+        $this->view('update.disable.train.admin', $data);
+    }
+
+    function deleteDisablePeriod($id)
+    {
+
+        $data = array();
+    
+
+        $disable_period = new DisablePeriods();
+        try{
+
+            $disable_period->delete($id, 'disable_period_id');
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+        
+        $this->redirect('admin/disableTrain?delete=1');
+
+
+        
+
+        
+    }
 }

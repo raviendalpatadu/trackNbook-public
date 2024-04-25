@@ -1,7 +1,4 @@
 <?php
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
 
 ?>
 
@@ -75,7 +72,7 @@
                                                         <select class="dropdown" name="station_id" placeholder="Please choose">
 
                                                             <?php foreach ($data['train_stop_stations'] as $key => $value) : ?>
-                                                                <option value="<?= $value->station_id ?>" <?= ($data['location']->station_id ==  $value->station_id) ? "selected" : "" ?>>
+                                                                <option value="<?= $value->station_id ?>" <?= (strtolower($data['location']->station_name) != "no station" && $data['location']->station_id ==  $value->station_id) ? "selected" : "" ?>>
                                                                     <?= $value->station_name ?>
                                                                 </option>
                                                             <?php endforeach; ?>
