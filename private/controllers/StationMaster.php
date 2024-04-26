@@ -121,9 +121,7 @@ class StationMaster extends Controller
                 $this->redirect('stationmaster/checkArrival?error=1');
             }
         }
-         echo "<pre>";
-        print_r($data);
-        echo "</pre>"; 
+         
     
         $this->view('check.train.arrival', $data);
     }
@@ -159,6 +157,7 @@ class StationMaster extends Controller
 
         $this->view('manage.schedule', $data);
     }
+    
 
 
 
