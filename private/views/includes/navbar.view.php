@@ -18,7 +18,7 @@
           <li class="navbar-item"><a href="<?= ROOT ?>passenger/reservation/<?= Auth::getuser_id() ?>">Reservations</a></li>
         <?php endif; ?>
         <?php if (Auth::is_logged_in()) : ?>
-          <li class="navbar-item"><a href="<?= ROOT ?>services/inquires">Inquries</a></li>
+          <li class="navbar-item"><a href="<?= ROOT ?>passenger/inquries">Inquries</a></li>
         <?php endif; ?>
         <!-- check user login -->
         <?php if (!Auth::is_logged_in()) : ?>

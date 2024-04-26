@@ -454,6 +454,49 @@ class Passenger extends Controller
 
 
     // show reservation
+    
+    // inquries
+    function inquries($id = '')
+    {
+        $data = array();
 
+        if(isset($_POST['submit'])) {
+
+            $inquiry = new Inquiries();
+            if($inquiry->validateInquiry($_POST)) {
+                $station = new Stations();
+                $station_data = $station->whereOne('station_name', $_POST['inquiry_station']);
+                echo "<pre>";
+                print_r($station_data);
+                $inquiry_id = $inquiry->insert([
+                    'inquiry_passenger_id' => Auth::getUser_id(),
+                    'inquiry_ticket_id' => $_POST['inquiry_ticket_id'],
+                    'inquiry_station' => $station_data->station_id,
+                    'inquiry_reason' => $_POST['inquiry_reason'],
+                    'inquiry_status' => 'Pending'
+                ]);
+
+                if($inquiry_id) {
+                    // send email to passenger 
+                    $to_email = Auth::getUser_email();
+                    $subject = "Inquiry Confirmation";
+                    $recipient = Auth::getUser_first_name();
+                    $message = "Your inquiry has been successfully submitted. We will get back to you soon. <br> Your inquiry id is<b> {$inquiry_id} </b><br>Thank you for contacting us.";
+                    $body = Auth::getEmailBody(Auth::getUser_first_name(), $message);
+
+                    $this->sendMail($to_email, $recipient, $subject, $body);
+
+                   $this->redirect('passenger/inquries?success=1');
+                } else {
+                    $data['errors'] = "Error in submitting inquiry. Please try again.";
+                }
+            } else {
+                $data['errors'] = $inquiry->errors;
+            }
+        }
+
+
+        $this->view('passenger.inquiry', $data);
+    }
 
 }

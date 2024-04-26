@@ -145,6 +145,14 @@ class Ajax extends Controller
         echo json_encode($data);
     }
 
+    public function getTrainLocation()
+    {
+        $data = array();
+        $train_location = new TrainLocation();
+        $data['train'] = $train_location->getTrainLocation($_POST['train_id']);
+        echo json_encode($data);
+    }
+
 
 
 }

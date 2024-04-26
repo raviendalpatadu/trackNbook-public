@@ -250,6 +250,8 @@ class Train extends Controller
 
     function track($id = '')
     {
+
+        
         $this->view('track');
     }
 
