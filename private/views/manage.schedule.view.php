@@ -27,11 +27,7 @@ if (isset($data) && !empty($data)) {
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
                                     <h3>Trains Available</h3>
-                                    <div class="badge">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="text dark-green"><?php echo $count; ?></div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -78,13 +74,7 @@ if (isset($data) && !empty($data)) {
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <center>
-                    <button class="button mx-10 px-10">
-                        <div class="button-base">
-                            <a href="<?= ROOT ?>train/add" class="blue">Add Train</a>
-                        </div>
-                    </button>
-                </center>
+                
             </div>
             <script>
                 $(document).ready(function () {
@@ -119,7 +109,7 @@ if (isset($data) && !empty($data)) {
                                         compartmentClassTypesHTML += `
                 <div class="badge-base flex-auto flex-grow bg-selected-blue mb-3">
                     <div class="text primary-blue ">
-                        ${compartmentType} Reservations
+                        ${compartmentType} 
                     </div>
                 </div>
             `;
