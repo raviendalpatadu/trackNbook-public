@@ -178,9 +178,9 @@ class Model extends Database
          
         try {
             $query = "call $procedure($str)";
-            echo "<pre>";
-            print_r(array_values($data));
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r(array_values($data));
+            // echo "</pre>";
             return $this->query($query, array_values($data));
         } catch (PDOException $e) {
             die($e->getMessage());

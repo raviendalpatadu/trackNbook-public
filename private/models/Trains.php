@@ -56,45 +56,37 @@ class Trains extends Model
 
 
 
+    
     public function findAllTrains()
     {
-
-
         $data = array();
-
 
         try {
             $con = $this->connect();
             $con->beginTransaction();
 
             //insert query to search train must come form route
-            $query = "SELECT\n"
+            $query = "SELECT
+                            tbl_train.*,
+                            start.station_name AS start_station,
+                            end.station_name AS end_station,
+                            tbl_compartment_class_type.compartment_class_type,
+                            tbl_train_type.train_type
+                        FROM
+                            tbl_train
+                        JOIN
+                            tbl_station AS start ON tbl_train.train_start_station = start.station_id
+                        JOIN
+                            tbl_station AS end ON tbl_train.train_end_station = end.station_id
+                        JOIN
+                            tbl_compartment ON tbl_train.train_id = tbl_compartment.compartment_train_id
+                        JOIN
+                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id
+                        JOIN
+                            tbl_train_type ON tbl_train.train_type = tbl_train_type.train_type_id";
 
-                . "tbl_train.*,\n"
-
-                . "start.station_name AS start_station,\n"
-
-                . "end.station_name AS end_station\n"
-
-
-
-                . "\n"
-
-                . "FROM\n"
-
-                . "	tbl_train\n"
-
-                . "JOIN\n"
-
-                . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
-
-                . " JOIN\n"
-
-                . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id ";
             $stm = $con->prepare($query);
-
             $stm->execute();
-
             $data = $stm->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -103,8 +95,75 @@ class Trains extends Model
         if ($data > 0) {
             return $data;
         }
-    }
+    } 
 
+    function getAllTrainsByStation($station_id)
+    {
+        $query = "SELECT
+                            tbl_train.*,
+                            start.station_name AS start_station,
+                            end.station_name AS end_station,
+                            tbl_compartment_class_type.compartment_class_type,
+                            tbl_train_type.train_type,
+                            tbl_train_stop_station.train_stop_time AS estimated_arraival_time
+                        FROM
+                            tbl_train
+                        JOIN
+                            tbl_station AS start ON tbl_train.train_start_station = start.station_id
+                        JOIN
+                            tbl_station AS end ON tbl_train.train_end_station = end.station_id
+                        JOIN
+                            tbl_compartment ON tbl_train.train_id = tbl_compartment.compartment_train_id
+                        JOIN
+                            tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id
+                        JOIN
+                            tbl_train_type ON tbl_train.train_type = tbl_train_type.train_type_id
+                        JOIN
+                            tbl_train_stop_station ON tbl_train.train_id = tbl_train_stop_station.train_id AND tbl_train_stop_station.station_id = :station_id
+
+                        -- get all trains where it stops in the given station
+                        WHERE
+                            tbl_train.train_id IN (
+                                SELECT
+                                    train_id
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    station_id = :station_id
+                            )
+                            -- and where the train's current location's stop number is less than or eqaul to the station's stop number
+                            AND tbl_train.train_id IN (
+                                SELECT
+                                    train_id
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    station_id = :station_id
+                                    AND stop_no <= (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = tbl_train.train_id
+                                            AND station_id = :station_id
+                                    )
+                            )
+                        GROUP BY
+                            tbl_train.train_id";  
+                            
+        $result = $this->query($query, [
+            'station_id' => $station_id
+        ]);
+
+        if (is_array($result) && count($result) > 0) {
+            return $result;
+        }
+
+        return [];
+    }
+    
+    
     public function findTrain($trainId)
     {
 
@@ -140,7 +199,7 @@ class Trains extends Model
         }
     }
 
-    public function validate($values = array())
+        public function validate($values = array())
     {
 
 

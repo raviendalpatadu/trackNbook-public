@@ -14,7 +14,7 @@ class StaffGeneral extends Controller
         $this->view('staff_general.dashboard');
     }
 
-    function manageSchedule($id = '')
+    /*function manageSchedule($id = '')
 
     {
         $train = new Trains();
@@ -22,7 +22,11 @@ class StaffGeneral extends Controller
 
         $data['trains'] = $train->findAllTrains();
 
-        $this->view('manage.schedule', $data);
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>"; 
+
+        // $this->view('manage.schedule', $data);
     }
 
    /* function updateSchedule($id = '')
@@ -31,27 +35,21 @@ class StaffGeneral extends Controller
         $this->view('update.schedule');
     }
 */
-    function addSchedule($id = '')
-    {
-
-        $this->view('add.schedule');
-    }
-    function waitList($id = '')
+   /* function waitList()
     {   
         
         $waitinglist = new WaitingLists();
         $data = array();
-        $data['waitinglist'] = $waitinglist->findAll();
-
+        $data['waitinglist'] = $waitinglist->getWaitingList();
 
         $this->view('view.waitinglist', $data);
     }
-    function manageSchedule2($id = '')
+    /*function manageSchedule2($id = '')
     {
 
         $this->view('manage.schedule2');
     }
-
+*/
     function getTrainList($id = '')
     {
         $train = new Trains();
