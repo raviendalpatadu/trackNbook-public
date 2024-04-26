@@ -303,7 +303,7 @@
                     <div class="col-4">
                         <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
                                 <div class="button-base bg-light-green">
-                                    <div class="text dark-green ">palayan yanna</div>
+                                    <div class="text dark-green ">Handed Over</div>
                                 </div>
                             </a>
                         </button>
@@ -360,5 +360,6 @@
         });
     });
 
+ 
     // Remove the closing 
 </script>

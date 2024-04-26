@@ -911,6 +911,7 @@ video {
 .mou-table-tab {
   padding: 10px;
   background-color: #cae1ff;
+  cursor: pointer;
 }
 
 .mou-table-tab.pending {
@@ -926,6 +927,7 @@ video {
   border-bottom-style: solid;
   color: #FFF;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .mou-warrant-text {

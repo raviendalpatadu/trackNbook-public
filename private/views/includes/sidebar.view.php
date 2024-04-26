@@ -368,7 +368,7 @@ if (Auth::getuser_type() == "admin") {
 
 ?>
 
-<div class="sidebar ">
+<div class="sidebar shadow">
   <div class="sidebar-top g-10">
     <div class="brand">
       <img src="<?= ASSETS ?>images/track-n-book-logo-1.svg" alt="TrackNBook">

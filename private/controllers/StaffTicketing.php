@@ -300,7 +300,7 @@ class StaffTicketing extends Controller
                                 $reaservation->update($reservation_id, $reaservationPassengerArr, 'reservation_id');
                                 // if warrant image is null throw an execption
                                 $warrant_reservation = new WarrantsReservations();
-                                $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Manually Verified'], 'warrant_reservation_id');
+                                $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Completed'], 'warrant_reservation_id');
 
                                 $_SESSION['reservation']['reservation_status'] = "Reserved";
                             } 
@@ -703,7 +703,7 @@ class StaffTicketing extends Controller
             echo $e->getMessage();
         }
 
-        $this->redirect('staffticketing/Warrant');
+        $this->redirect('staffticketing/Warrant?success=1');
     }
 
     function pendingWarrent($id = '')
@@ -777,7 +777,7 @@ class StaffTicketing extends Controller
 
 
 
-        $this->redirect('staffticketing/warrant');
+        $this->redirect('staffticketing/warrant?successreject=1');
     }
 
     function refectReason($id = '')
