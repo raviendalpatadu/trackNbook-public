@@ -5,15 +5,18 @@
  */
 
 class StationMaster extends Controller
-{
 
-    function index($id = '')
-    {
+
+   {
+    public function station_master($station_id = '') {
         if (!Auth::is_logged_in() || !Auth::isUserType('station_master')) {
             $this->redirect('login');
         }
 
-        $this->view('dashboard.stationmaster');
+        $trainModel = new TrainModel();
+        $trains = $trainModel->getAllTrainsWithEstimatedArrival($station_id);
+
+        $this->view('dashboard.stationmaster', ['trains' => $trains]);
     }
     function trackTicket($id = '')
     {

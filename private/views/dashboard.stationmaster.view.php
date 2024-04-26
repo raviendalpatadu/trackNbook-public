@@ -1,11 +1,12 @@
 <?php $this->view("./includes/header") ?>
 
 <?php
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
 ?>
+
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
@@ -13,16 +14,12 @@
         <main class="bg">
             <div class="row">
                 <div class="col-12 p-20">
-                <div class="ach-txt-wrapper mb-30">
-    Welcome to Colombo Fort
-</div>
-
-
-
+                    <div class="ach-txt-wrapper mb-30">
+                        Welcome to Colombo Fort
+                    </div>
                     <div class="d-flex flex-row justify-content-center g-50">
                         <div class="col-4">
                             <div class="dashboard-card-sm  d-flex align-items-center bg-light-blue Primary-Gray g-50">
-
                                 <div class="d-flex flex-column g-10">
                                     <p1 class="dashboard-card-sm-font1 ">
                                         Number of
@@ -30,7 +27,6 @@
                                     </p1>
                                     <p2 class="dashboard-card-sm-font2 ">35</p2>
                                 </div>
-
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         height="80" width="80" version="1.1" id="_x32_" viewBox="0 0 512 512"
@@ -54,15 +50,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-4">
                             <div class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
-
                                 <div class="d-flex flex-column g-10">
                                     <p1 class="dashboard-card-sm-font1">Trains Arrived</p1>
                                     <p2 class="dashboard-card-sm-font2">21</p2>
                                 </div>
-
                                 <div class="d-flex  ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
                                         viewBox="-2 -2 24.00 24.00" fill="#000000"
@@ -90,12 +83,10 @@
                         </div>
                         <div class="col-4">
                             <div class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
-
                                 <div class="d-flex flex-column g-10">
                                     <p1 class="dashboard-card-sm-font1">Trains to be Arrived</p1>
                                     <p2 class="dashboard-card-sm-font2">14</p2>
                                 </div>
-
                                 <div class="d-flex  ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
                                         viewBox="-2 -2 24.00 24.00" fill="#000000">
@@ -122,15 +113,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- charts -->
-
                 <div class="row ml-20">
                     <div class="col-10-d-flex-flex-column">
-
-
                         <div class="d-flex flex-column  bg-white g-5 p-10 mb-10 align-items-start mt-50">
                             <div class="row mt-10">
-
                                 <div class="col-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         height="80" width="80" version="1.1" id="Capa_1" viewBox="0 0 512 512"
@@ -210,13 +196,8 @@
                                                 </g>
                                             </g>
                                         </g>
-
                                     </svg>
-
-                                    
                                 </div>
-                                
-                                
                                 <div class="col-3">
                                     <h2> <br>Staff Details</h2>
                                 </div>
@@ -224,162 +205,60 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-7  d-flex  flex-column">
-                        <div class="d-flex flex-column align-items-start p-20">
-                            <div class="d-flex align-items-center graphbox bg-light-blue">
-                                <table class="mou-dashboard-table">
-                                    <thead>
-                                        <tr class="row p-20">
-                                            <th class="col-3 d-flex align-items-center">
-                                                <div class="col-4">
-                                                    <div class="d-flex .flex-row g-5 mr-5">
-                                                    </div>
-                                                </div>
-                                                Name
-                                            </th>
-                                            <th class="col-3">Type</th>
-                                            <th class="col-3">Mobile No</th>
-                                            <th class="col-3 d-flex align-items-center">Email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center"> Jaffna SM</td>
-                                            <td class="col-3 d-flex align-items-center">Station Master</td>
-                                            <td class="col-3 d-flex align-items-center">0762200087</td>
-                                            <td class="col-3 d-flex align-items-center">achc@gmail.com</td>
-
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center"> Yarl SM</td>
-                                            <td class="col-3 d-flex align-items-center">Station Master</td>
-                                            <td class="col-3 d-flex align-items-center">0762865082</td>
-                                            <td class="col-3 d-flex align-items-center">smcol@gmail.com</td>
-
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center"> Jaffna ST</td>
-                                            <td class="col-3 d-flex align-items-center">Staff Ticketing</td>
-                                            <td class="col-3 d-flex align-items-center">0762867845</td>
-                                            <td class="col-3 d-flex align-items-center">stcol@gmail.com</td>
-
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center">Yarl ST</td>
-                                            <td class="col-3 d-flex align-items-center">Station Master </td>
-                                            <td class="col-3 d-flex align-items-center">0712345678</td>
-                                            <td class="col-3 d-flex align-items-center">stkandy@gmail.com</td>
-                                        </tr>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center">North ST</td>
-                                            <td class="col-3 d-flex align-items-center">Staff Ticketing</td>
-                                            <td class="col-3 d-flex align-items-center">0756789012</td>
-                                            <td class="col-3 d-flex align-items-center">stgalle@gmail.com</td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center">Jaffna ST</td>
-                                            <td class="col-3 d-flex align-items-center">Station Master</td>
-                                            <td class="col-3 d-flex align-items-center">0778901234</td>
-                                            <td class="col-3 d-flex align-items-center">stjaffna@gmail.com</td>
-                                        </tr>
-                                        <tr class="row p-20">
-                                            <td class="col-3 d-flex align-items-center">Anu ST</td>
-                                            <td class="col-3 d-flex align-items-center">Staff Ticketing</td>
-                                            <td class="col-3 d-flex align-items-center">0723456789</td>
-                                            <td class="col-3 d-flex align-items-center">stanuradhapura@gmail.com</td>
-                                        </tr>
-                                    </tbody>
-
-
-
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-5 p-20 ">
-                        <div class="container">
+                        <div class="col-12">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="mychart">
-                                        <div>
-                                            <canvas id="staffOverviewChart" width="6" height="2"></canvas>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="if-table stripe hover" id="userTable" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-4">Train Name</th>
+                                                        <th class="col-1">Train Type</th>
+                                                        <th class="col-2">Start & End Station</th>
+                                                        <th class="col-2">Estimated Arival Time</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($data['trains'] as $train) : ?>
+                                                        <tr class="p-20">
+                                                            <td class="col-3 d-flex align-items-center">
+                                                                <?= $train->train_name . " - " . $train->train_id  ?>
+                                                            </td>
+                                                            <td class="col-1">
+                                                                <?= $train->train_type ?>
+                                                            </td>
+                                                            <td class="col-2">
+                                                                <?= $train->start_station . " - " . $train->end_station ?>
+                                                            </td>
+                                                            <td class="col-2 ">
+                                                                <?= date("H:i", strtotime($train->estimated_arraival_time)) ?>
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                        <script>
-                                            const ctx = document.getElementById('staffOverviewChart');
-
-                                            new Chart(ctx, {
-                                                type: 'doughnut',
-                                                data: {
-                                                    labels: ['Station Master', 'Ticketing Staff'],
-                                                    datasets: [{
-                                                        label: 'Staff Overview',
-                                                        data: [5, 2], // Example data: 1 station master and 4 ticketing staff
-                                                        backgroundColor: [
-                                                            'rgba(255, 99, 132, 0.2)',
-                                                            'rgba(54, 162, 235, 0.2)',
-                                                            'rgba(255, 206, 86, 0.2)',
-                                                        ],
-                                                        borderColor: [
-                                                            'rgba(255, 99, 132, 1)',
-                                                            'rgba(54, 162, 235, 1)',
-                                                            'rgba(255, 206, 86, 1)',
-                                                        ],
-                                                        borderWidth: 1
-                                                    }]
-                                                },
-                                                options: {
-                                                    plugins: {
-                                                        title: {
-                                                            display: true,
-                                                            text: 'Staff Overview',
-                                                            font: {
-                                                                size: 20,
-                                                                weight: 'bold'
-                                                            }
-                                                        },
-                                                        legend: {
-                                                            position: 'right',
-                                                            align: 'centre',
-                                                            labels: {
-                                                                font: {
-                                                                    size: 18,
-                                                                    weight: 'normal'
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    layout: {
-                                                        padding: {
-                                                            right: 5
-                                                        }
-                                                    }
-                                                }
-                                            });
-                                        </script>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- graph right -->
                     </div>
-                </div>
             </div>
-    </div>
-    </main>
+        </main>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="<?= ASSETS ?>/js/mou_chart.js"></script>
+<script>
+        $(document).ready(function() {
+            let table = new DataTable("#userTable", {
+                search: true
+            });
+        });
+    </script>
+
 
 </html>
