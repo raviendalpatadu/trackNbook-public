@@ -21,7 +21,7 @@
                                     <div class="col-12 d-flex align-items-start flex-column line">
                                         <h1>Update Train Delay</h1>
                                     </div>
-                                    <form method="POST" action="<?= ROOT ?>/traindriver/traindelay/">
+                                    <form method="POST" action="<?= ROOT ?>/traindriver/traindelay">
                                         <div class="text-inputs mb-10">
                                             <div class="input-text-label">Train Name:
                                                 <?php echo (array_key_exists('train', $data)) ? ucfirst($data['train']->train_name) : ''; ?>
@@ -88,6 +88,11 @@
         <?php $this->view('includes/footer'); ?>
     </div>
 </body>
-
+<script>
+            // show user regiserted sucessfully if exists in get method 
+            if (checkNotification('success=1') > -1) {
+            makeSuccessToast('Delay request send successfully!', '');
+        }
+</script>
 
 </html>
