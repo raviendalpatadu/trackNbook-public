@@ -104,7 +104,8 @@ class Trains extends Model
                             start.station_name AS start_station,
                             end.station_name AS end_station,
                             tbl_compartment_class_type.compartment_class_type,
-                            tbl_train_type.train_type
+                            tbl_train_type.train_type,
+                            tbl_train_stop_station.train_stop_time AS estimated_arraival_time
                         FROM
                             tbl_train
                         JOIN
@@ -117,6 +118,8 @@ class Trains extends Model
                             tbl_compartment_class_type ON tbl_compartment.compartment_class_type = tbl_compartment_class_type.compartment_class_type_id
                         JOIN
                             tbl_train_type ON tbl_train.train_type = tbl_train_type.train_type_id
+                        JOIN
+                            tbl_train_stop_station ON tbl_train.train_id = tbl_train_stop_station.train_id AND tbl_train_stop_station.station_id = :station_id
 
                         -- get all trains where it stops in the given station
                         WHERE
@@ -127,6 +130,24 @@ class Trains extends Model
                                     tbl_train_stop_station
                                 WHERE
                                     station_id = :station_id
+                            )
+                            -- and where the train's current location's stop number is less than or eqaul to the station's stop number
+                            AND tbl_train.train_id IN (
+                                SELECT
+                                    train_id
+                                FROM
+                                    tbl_train_stop_station
+                                WHERE
+                                    station_id = :station_id
+                                    AND stop_no <= (
+                                        SELECT
+                                            stop_no
+                                        FROM
+                                            tbl_train_stop_station
+                                        WHERE
+                                            train_id = tbl_train.train_id
+                                            AND station_id = :station_id
+                                    )
                             )
                         GROUP BY
                             tbl_train.train_id";  

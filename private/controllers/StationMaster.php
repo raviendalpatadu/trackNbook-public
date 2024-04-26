@@ -13,22 +13,6 @@ class StationMaster extends Controller
             $this->redirect('login');
         }
 
-
-
-        $train = new Trains();
-        $data = array();
-
-        if ($id != '' && $station_master_id != '') {
-            $data = array(
-                'station_id' => $id,
-                'station_master_id' => Auth::getUser_id()
-            );
-
-            $_SESSION['station_master'] = $data;
-        }
-
-
-
         $this->view('dashboard.stationmaster');
     }
     function trackTicket($id = '')
@@ -60,7 +44,7 @@ class StationMaster extends Controller
         $this->view('tickettracking.stationmaster', $data);
     }
 
-  
+
     function updateArrival($id = '')
     {
         /** */
@@ -71,10 +55,6 @@ class StationMaster extends Controller
         if (isset($_POST['update'])) {
             try {
                 $result = $train->updateStatus($id, $_POST);
-
-                if ($result != 1 && array_key_exists('errors', $result)) {
-                    $data['errors'] = $result['errors'];
-                }
             } catch (Exception $e) {
                 die($e->getMessage());
             }
@@ -86,55 +66,55 @@ class StationMaster extends Controller
     function checkArrival($id = '')
     {
 
-        
+
         $train = new Trains();
         $data = array();
-    
+
         $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
-    
+
         if (isset($_POST['check'])) {
-            $train_id = $_POST['train_id'];
-    
-            // Check if location for this train is already updated
-            $trainLocation = new TrainLocation();
-            $location = $trainLocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
-    
-            if (empty($location)) {
-                // If location not updated, update it
-                $station_id = $_SESSION['USER']->working_station_id; // Assuming you have stored the working station id in session
-                $location_data = array(
-                    'train_id' => $train_id,
-                    'train_location' => $station_id,
-                    'date' => date('Y-m-d')
-                );
-    
-                $trainLocation->callProcedure('update_train_location', $location_data);
-    
-                // Notify passengers
+
+            $train_id =  $_POST['train_id'];
+            $location_data = array(
+                'train_id' => $train_id,
+                'train_location' => Auth::getuser_data(),
+                'date' => date('Y-m-d')
+            );
+
+            $trainlocation = new TrainLocation();
+            if ($trainlocation->validate($location_data) === true) {
+                // update the location
+                echo "<pre>";
+                print_r($location_data);
+                echo "</pre>";
+                $trainlocation->callProcedure('update_train_location', $location_data);
+
+                // get passenger data in the next station
                 $passenger = new Passengers();
-                $passenger_data = $passenger->getPassengerDataOfNextStation($train_id, $station_id);
-                $this->notifyPassengers($train_id, $passenger_data, $station_id);
-    
+                $passenger_data = $passenger->getPassengerDataOfNextStation($train_id, Auth::getuser_data());
+                
+                //get train data
+                $train_data = $train->whereOne('train_id', $train_id);
+
+
+                // send a mail to the passengers
+                $this->notifyPassengers($train_data, $passenger_data, Auth::getuser_data());
                 $this->redirect('stationmaster/checkArrival?success=1');
             } else {
-                // Location already updated
-                $this->redirect('stationmaster/checkArrival?error=1');
+                $data = array_merge($data, $trainlocation->errors);
             }
         }
-         echo "<pre>";
-        print_r($data);
-        echo "</pre>"; 
-    
+
         $this->view('check.train.arrival', $data);
     }
-    
 
-    
-    function updateTrainStatus($id = '')
-    {
-        $train = new Trains();
-        $train->updateStatus();
-    }
+
+
+    // function updateTrainStatus($id = '')
+    // {
+    //     $train = new Trains();
+    //     $train->updateStatus();
+    // }
 
     function waitList()
     {
@@ -159,7 +139,28 @@ class StationMaster extends Controller
 
         $this->view('manage.schedule', $data);
     }
+    private function notifyPassengers($train, $passenger_data, $station_id)
+    {
+        // send a mail to the passengers
+        if ($passenger_data) {
+            $station = new Stations();
+            $station_data = $station->whereOne('station_id', $station_id);
 
+            foreach ($passenger_data as $passenger) {
+                $to = $passenger->reservation_passenger_email;
+                $subject = 'Train Location Update';
 
+                // add the train data and the station data to make the message
+                $message = "The {$train->train_name} train has arrived at the station " . $station_data->station_name . " at " . date('Y-m-d H:i:s') . ".
+                 <br>The train is now at the station " . $station_data->station_name . " and will be leaving soon.
+                 Thank you for choosing our service.";
 
+                $body = Auth::getEmailBody($passenger->reservation_passenger_first_name, $message);
+
+                $this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body);
+            }
+            return true;
+        }
+        return false;
+    }
 }

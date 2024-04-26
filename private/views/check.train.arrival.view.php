@@ -44,24 +44,24 @@
                                                         <th class="col-4">Train Name</th>
                                                         <th class="col-1">Train Type</th>
                                                         <th class="col-2">Start & End Station</th>
-                                                        <th class="col-2">Start & End Time</th>
+                                                        <th class="col-2">Estimated Arival Time</th>
                                                         <th class="col-2">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($data['trains'] as $train): ?>
+                                                    <?php foreach ($data['trains'] as $train) : ?>
                                                         <tr class="p-20">
                                                             <td class="col-3 d-flex align-items-center">
-                                                                <?= $train->train_name ?>
+                                                                <?= $train->train_name . " - " . $train->train_id  ?>
                                                             </td>
                                                             <td class="col-1">
                                                                 <?= $train->train_type ?>
                                                             </td>
                                                             <td class="col-2">
-                                                                <?= $train->start_station . "-" . $train->end_station ?>
+                                                                <?= $train->start_station . " - " . $train->end_station ?>
                                                             </td>
                                                             <td class="col-2 ">
-                                                                <?= date("H:i", strtotime($train->train_start_time)) . " " . date("H:i", strtotime($train->train_end_time)) ?>
+                                                                <?= date("H:i", strtotime($train->estimated_arraival_time)) ?>
                                                             </td>
                                                             <td class="col-3 d-flex align-items-center g-10">
                                                                 <form method="post" action="<?= ROOT ?>stationmaster/checkArrival">
@@ -73,15 +73,6 @@
                                                     <?php endforeach; ?>
                                                 </tbody>
                                             </table>
-                                            <?php if (isset($_GET['success'])): ?>
-                                                <div class="alert alert-success" role="alert">
-                                                    Location updated successfully!
-                                                </div>
-                                            <?php elseif (isset($_GET['error'])): ?>
-                                                <div class="alert alert-danger" role="alert">
-                                                    Location already updated for this train.
-                                                </div>
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -94,11 +85,16 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let table = new DataTable("#userTable", {
-               search : true
+                search: true
             });
         });
+
+        // show user regiserted sucessfully if exists in get method 
+        if (checkNotification('success=1') > -1) {
+            makeSuccessToast('Location updated successfully!', '');
+        }
     </script>
 
 </body>
