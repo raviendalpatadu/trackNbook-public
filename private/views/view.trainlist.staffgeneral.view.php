@@ -1,5 +1,4 @@
 <?php $this->view("./includes/header") ?>
-<?php $this->view("./includes/load-js") ?>
 
 <?php
 
@@ -9,9 +8,6 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     $count = 0;
 }
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
 ?>
 
 <head>
@@ -125,6 +121,8 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     </div>
     </main>
     </div>
+    <?php $this->view("./includes/load-js") ?>
+
 
     <script>
         $(document).ready(function () {
@@ -196,6 +194,8 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                     }
                 ]
             });
+
+            makeSelectDropdown('body');
         });
     </script>
 </body>
