@@ -7,10 +7,10 @@ class Model extends Database
 {
 
     public $errors = array();
-    // public $table;
-    // public $allowedColumns;
-    // public $beforeInsert;
-    // public $afterSelect;
+    // protected $table;
+    // protected $allowedColumns;
+    // protected $beforeInsert;
+    // protected $afterSelect;
 
     public function __construct()
     {

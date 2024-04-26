@@ -58,12 +58,6 @@
 
       </div>
     </div>
-    <!-- menu items -->
-    <!-- <div class="menu">
-      <ul class="nav-menu-items">
-        <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
-        <li class="navbar-item"><a href="<?= ROOT ?>home">Home</a></li>
-      </ul>
-    </div> -->
+    
   </nav>
 </header>

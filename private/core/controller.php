@@ -21,7 +21,8 @@ class Controller
 
         if (file_exists("../private/views/" . $view . ".view.php")) {
             require("../private/views/" . $view . ".view.php");
-        } else {
+        } 
+        else {
             require("../private/views/error404.view.php");
         }
     }

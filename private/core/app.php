@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 /**
  * main app
  */
@@ -11,28 +13,37 @@ class App
 
     public function __construct()
     {
-        $URL = $this->getURL();
+        try{
 
-        if (file_exists("../private/controllers/" . $URL[0] . ".php" )) {
-            $this->controller = ucfirst($URL[0]);
-            unset( $URL[0]);
-        } /**else {
-            require("../private/views/error404.view.php");
-        }*/
-
-        require ("../private/controllers/" . $this->controller . ".php" );
-        $this->controller = new $this->controller();
-
-        if (isset($URL[1]) && method_exists($this->controller, $URL[1])) 
-        {
-            $this->method = ucfirst($URL[1]);
-            unset( $URL[1]);
+            $URL = $this->getURL();
+    
+            if (file_exists("../private/controllers/" . $URL[0] . ".php" )) {
+                $this->controller = ucfirst($URL[0]);
+                unset( $URL[0]);
+            } 
+            else {
+                echo "Controller not found!";
+                require("../private/views/error404.view.php");
+            }
+    
+            require ("../private/controllers/" . $this->controller . ".php" );
+            $this->controller = new $this->controller();
+    
+            if (isset($URL[1]) && method_exists($this->controller, $URL[1])) 
+            {
+                $this->method = ucfirst($URL[1]);
+                unset( $URL[1]);
+            }
+    
+            $URL = array_values($URL);
+            $this->params = $URL;
+            
+            call_user_func_array(array($this->controller,$this->method), $this->params);
         }
-
-        $URL = array_values($URL);
-        $this->params = $URL;
-        
-        call_user_func_array(array($this->controller,$this->method), $this->params);
+        catch(Exception $e)
+        {
+            die($e->getMessage());
+        }
     }
     private function getURL()
     {
