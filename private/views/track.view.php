@@ -30,37 +30,47 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                         </div>
 
                         <div class="col-6 d-flex flex-column justify-content-center align-items-center p-20 g-20">
-                            <form action="" method="post" class="width-fill">
-                                <div class="text-inputs">
-                                    <div class="input-text-label">Enter Train No</div>
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" class="type-here" placeholder="Type here" name="train_id" id="trainId" value="<?= get_var('train_id') ?>">
+                            <div class="d-flex justify-content-start flex-column g-20 track-content">
+                                <form action="" method="post" class="d-flex flex-row g-10 width-fill">
+                                    <div class="text-inputs">
+                                        <div class="input-text-label">Enter Train No</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" name="train_id" id="trainId" value="<?= get_var('train_id') ?>">
+                                            </div>
                                         </div>
                                     </div>
-                                    <?= printError($data, 'train_id') ?>
-                                </div>
-                            </form>
-                            <div class="d-flex justify-content-start flex-column g-20 track-content">
+    
+                                    <!-- search btn -->
+                                    <div class="d-flex flex-column align-self-end">
+                                        <button type="submit" class="btn btn-primary p-8 bg-blue border-none border-radius-6" id="searchLocation">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 512 512" style="width: 15px; height: 15px;">
+                                                <title>ionicons-v5-f</title>
+                                                <path d="M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z" style="fill:none;stroke: #fff;stroke-miterlimit:10;stroke-width:32px"></path>
+                                                <line x1="338.29" y1="338.29" x2="448" y2="448" style="fill:none;stroke: #fff;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
                                 <div class="d-flex flex-row align-items-center g-10">
                                     <h2 class="topic black">Current Station</h2>
-                                    <p class="track-text d-flex align-self-end flex-grow">Colombo Fort</p>
+                                    <p class="track-text d-flex align-self-end flex-grow"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center g-10">
                                     <h2 class="topic black">Arrived at</h2>
-                                    <p class="track-text d-flex align-self-end flex-grow">06.00</p>
+                                    <p class="track-text d-flex align-self-end flex-grow"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center g-10">
                                     <h3 class="topic black">Next Station</h3>
-                                    <p class="track-text d-flex align-self-end flex-grow">Maradana</p>
+                                    <p class="track-text d-flex align-self-end flex-grow"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center g-10">
                                     <h4 class="topic black">Train Name</h4>
-                                    <p class="track-text d-flex align-self-end flex-grow">Udarata Menike Express Train</p>
+                                    <p class="track-text d-flex align-self-end flex-grow"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center g-10">
                                     <h4 class="topic black">Train No</h4>
-                                    <p class="track-text d-flex align-self-end flex-grow">1106</p>
+                                    <p class="track-text d-flex align-self-end flex-grow"></p>
                                 </div>
                                 <div class="d-flex flex-row align-items-center justify-content-end g-10">
                                     <button class="button"><a href="<?= ROOT ?>home">
@@ -173,10 +183,18 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
             }
         };
 
-        drawMap('colombo', 'kandy', markerOptions);
+        
 
 
-        $('#trainId').on('change', function() {
+        // $('#trainId').on('change', getTrainLocation())
+
+        $('#searchLocation').on('click', function(e) {
+            e.preventDefault();
+            getTrainLocation();
+        });
+
+
+        function getTrainLocation(){
             $.ajax({
                 url: '<?= ROOT ?>ajax/getTrainLocation',
                 type: 'POST',
@@ -186,20 +204,41 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                 success: function(res) {
                     var data = JSON.parse(res);
                     // data = data.train;
-                    console.log(data);
-                    if (data != false) {
+                    // console.log(data);
+                    if (data.train != false) {
                         $('.track-content .track-text').eq(0).text(data.train[0].current_station);
-                        $('.track-content .track-text').eq(1).text(data.train[0].train_location_updated_time);
-                        $('.track-content .track-text').eq(2).text(data.train[0].next_station);
+                        var time = new Date(data.train[0].train_location_updated_time);
+                        time = time.toLocaleString();
+                        // fomrat the time to hours and minutes
+                        time = moment(time).format('hh:mm A');
+
+                        $('.track-content .track-text').eq(1).text(time);
+
+                        var nextStation = (data.train[0].next_station == data.train[0].endStation) ? data.train[0].end_station  : data.train[0].next_station;
+                        $('.track-content .track-text').eq(2).text(nextStation);
                         $('.track-content .track-text').eq(3).text(data.train[0].train_name);
                         $('.track-content .track-text').eq(4).text(data.train[0].train_id);
                     } else {
-                        alert('Invalid Train No')
+                        var title = 'No train';
+                        var des = 'The train id you entered was not found.'
+                        var btntext = 'Ok';
+                        var img = '<?= ROOT ?>assets/images/error.jpg';
+
+                        makePopupBox(title, des, btntext, img);
+
+                        $('.track-content .track-text').eq(0).text('NONE');
+                        $('.track-content .track-text').eq(1).text('NONE');
+                        $('.track-content .track-text').eq(2).text('NONE');
+                        $('.track-content .track-text').eq(3).text('NONE');
+                        $('.track-content .track-text').eq(4).text('NONE');
                     }
                 }
-            })
-        })
-
+            }).done(function(res) {
+                var data = JSON.parse(res);
+                console.log(data);
+                drawMap(data.train[0].start_station, data.train[0].end_station, markerOptions);
+            });
+        }
 
     }
 </script>

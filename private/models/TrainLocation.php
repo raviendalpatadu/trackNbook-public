@@ -93,22 +93,32 @@ class TrainLocation extends Model
     public function getTrainLocation($train_id)
     {
         $query = "SELECT tl.*,
+        t.*,
         start_station.station_name AS start_station,
         end_station.station_name AS end_station,
         current_station.station_name AS current_station
-        -- get the mext station
-        ,(
-            SELECT station_name
-            FROM tbl_station
-            WHERE station_id = (
-                SELECT station_id
-                FROM tbl_train_stop_station
-                WHERE train_id = tl.train_id
-                    AND station_id > tl.train_location
-                ORDER BY station_id
-                LIMIT 1
+     -- get the mext station
+,(
+    SELECT station_name
+    FROM tbl_station
+    WHERE station_id = (
+       -- consider get the stop no. from the train_stop_station table
+         SELECT station_id
+            FROM tbl_train_stop_station tss
+            WHERE tss.train_id = tl.train_id
+            AND tss.stop_no = (
+                SELECT MIN(tss.stop_no)
+                FROM tbl_train_stop_station tss
+                WHERE tss.train_id = tl.train_id
+                AND tss.stop_no > (
+                    SELECT tss.stop_no
+                    FROM tbl_train_stop_station tss
+                    WHERE tss.train_id = tl.train_id
+                    AND tss.station_id = tl.train_location
+                )
             )
-        ) AS next_station
+    )
+) AS next_station
         
         FROM tbl_train_location tl
             JOIN tbl_train t ON t.train_id = tl.train_id
@@ -117,11 +127,14 @@ class TrainLocation extends Model
             JOIN tbl_station end_station ON end_station.station_id = t.train_end_station
             JOIN tbl_station current_station ON current_station.station_id = tl.train_location
         WHERE tl.train_id = :train_id
-            AND date = '2024-04-24'
+            AND date = :date
         GROUP BY t.train_id,
             tl.date
         
         ";
-        return $this->query($query, ['train_id' => $train_id]);
+        return $this->query($query, [
+            'train_id' => $train_id,
+            'date' => date('Y-m-d')
+        ]);
     }
 }
