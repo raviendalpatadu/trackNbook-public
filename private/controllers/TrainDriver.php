@@ -35,28 +35,57 @@ class TrainDriver extends Controller
     }
     function trainDelay($id = '')
     {
+        if (!Auth::is_logged_in() || !Auth::isUserType('train_driver')) {
+            $this->redirect('login');
+        }
+
+        if (!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')) {
+            // get user id
+            $user_id = Auth::getUser_id();
+            $this->redirect('login/changepin/' . $user_id);
+        }
+
         $train = new Trains();
         $data = array();
-        $data['train'] = $train->findTrain($id)[0];
+        $train_id = $_SESSION['train_driver']['train_id'];
 
+        $data['train'] = $train->findTrain($train_id)[0];
 
         $train_stop_station = new TrainStopStations();
-        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($id);
+        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($train_id);
 
+        $trainlocation = new TrainLocation();
+        $data['location'] = $trainlocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
+
+        $station = new Stations();
+
+
+        if (isset($data['location']) && empty($data['location'])) {
+            $data['location'] = new stdClass();
+            $data['location']->station_name = 'No Station';
+        } else {
+            $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
+        }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $train_delay = new TrainDelay();
+            $delay_data = array(
+                'delay_train' => $train_id,
+                'delay_station' => $_POST['station_id'],
+                'delay_date' => date('Y-m-d'),
+                'delay_reason' => $_POST['reason']
+            );
+            
+            if($train_delay->validate($train_id) === true){
+                $train_delay->insert($delay_data);
+                $this->redirect('traindriver/traindelay?success=1');
+            }else{
+                $data = array_merge($data, $train_delay->errors);
+            }
+        }
+            
         $this->view('update.train.delay', $data);
     }
-    // function updateLocation($id = '')
-    // {
-    //     $train = new Trains();
-    //     $data = array();
-    //     $data['train'] = $train->whereOne('train_id', $id);
-
-    //     $trainlocation = new TrainLocation();
-
-
-    //     $this->view('update.location');
-    // }
-
 
 
     function addLocation()
