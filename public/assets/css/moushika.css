@@ -941,4 +941,24 @@ video {
 
 .mou-compartment {
   width: 60vw;
+}
+
+.mou-reservationList p {
+  color: #0085e4;
+  text-decoration-line: underline;
+}
+
+.mou-reservationList img {
+  width: 20px;
+}
+
+.mou-checkingStatus-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mou-ticket-summary {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }/*# sourceMappingURL=moushika.css.map */

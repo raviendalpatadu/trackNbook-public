@@ -20,6 +20,22 @@ class TicketCheckers extends Model
             $this->errors['errors']['train_id'] = 'Train ID is required';
         }
 
+        // want to check if the train is valid
+
+            // check if the train_id exists in the tbl_train table
+            $query = "SELECT t.* FROM tbl_train t WHERE t.train_id = :train_id;";
+
+          $result = $this->query($query, [
+            'train_id' => $data['train_id'] 
+            ]);
+
+            $exists = is_array($result) && count($result) > 0;
+            
+            if (!$exists) {
+                $this->errors['errors']['train_id'] = 'Train ID does not exist';
+            }
+       
+
         // // check if id is a number
         // if (is_numeric(intval($data['train_id']))) {
         //     $this->errors['errors']['train_id'] = 'Train ID must be a number';
@@ -44,6 +60,8 @@ class TicketCheckers extends Model
         if (is_array($result) && count($result) > 0) {
             $this->errors['errors']['train_id'] = 'Train is not working at now.';
         }
+
+ 
 
         // check error count
         if (count($this->errors) > 0) {

@@ -665,9 +665,9 @@ class StaffTicketing extends Controller
         try {
             $warrant_data = $warrant_resevation->getReservations($id);
 
-            echo "<pre>";
-            print_r($warrant_data);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($warrant_data);
+            // echo "</pre>";
 
             $warrant_resevation->update($id, array(
                 'warrant_status' => 'verified'

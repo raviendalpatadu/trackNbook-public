@@ -1,24 +1,19 @@
 <?php $this->view("./includes/header") ?>
 <?php
 
-// echo "<pre>";
-// print_r($_SESSION);
-
-// echo "</pre>";
-
-// if (isset($data['reservations']) && $data['reservations'] != 0) {
-//     $count = count($data['reservations']);
-// } else {
-//     $count = 0;
-// }
+if (isset($data['reservations']) && $data['reservations'] != 0) {
+    $count = count($data['reservations']);
+} else {
+    $count = 0;
+}
 ?>
 <?php
 
-// if (isset($data['reservations']) && $data['reservations'] != 0) {
-//     $count = count($data['reservations']);
-// } else {
-//     $count = 0;
-// }
+if (isset($data['reservations']) && $data['reservations'] != 0) {
+    $count = count($data['reservations']);
+} else {
+    $count = 0;
+}
 
 // echo "<pre>";
 // print_r($data);
@@ -42,32 +37,25 @@
                         </div>
 
 
-                        <div class="mt-30 d-flex g-20 mb-30">
-                            <form action="" method="post">
-                                <div class="d-flex ">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label">From</div>
-
-                                        <div class="width-fill">
-                                            <select class="dropdown" name="from_station" placeholder="Please choose">
-                                                <!-- print data of $data -->
-                                                <option value="0">Please choose</option>
-                                                <?php foreach ($data['compartment_types'] as $key => $value) : ?>
-                                                    <option value="<?= $value->station_id ?>" <?= get_select('from_station', $value->compartment_types) ?>><?= $value->station_name ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
+                        <div class="mt-30 d-flex g-20">
+                            <div class="d-flex ">
+                                <div class="text-inputs">
+                                    <div class="input-text-label text lightgray-font">NIC</div>
+                                    <div class="input-field">
+                                        <div class="text">
+                                            <input type="text" class="type-here" placeholder="Type here" name="">
                                         </div>
                                     </div>
-                                    <div class="assistive-text display-none">Assistive Text</div>
                                 </div>
-                                <div class="col-3 d-flex align-self-end">
-                                    <button class="button">
-                                        <div class="button-base">
-                                            <input type="submit" value="Search" name="submit">
-                                        </div>
-                                    </button>
-                                </div>
-                            </form>
+                                <div class="assistive-text display-none">Assistive Text</div>
+                            </div>
+                            <div class="col-3 d-flex align-self-end">
+                                <button class="button">
+                                    <div class="button-base">
+                                        <input type="submit" value="Search" name="submit">
+                                    </div>
+                                </button>
+                            </div>
 
                         </div>
 
@@ -76,7 +64,7 @@
             </div>
 
             <div class="container mou-bg-mobile">
-                <div class="row  mr-20 mt-20">
+                <div class="row  mr-20">
                     <div class="col-12 ">
 
                         <div class="row">
@@ -122,7 +110,7 @@
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <!-- <div class="pagination">
+                                <div class="pagination">
                                     <button class="button">
                                         <div class="button-base">
                                             <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +165,7 @@
                                             </svg>
                                         </div>
                                     </button>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
 

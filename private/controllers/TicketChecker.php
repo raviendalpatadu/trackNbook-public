@@ -15,7 +15,7 @@ class TicketChecker extends Controller
         $seatData = array();
         $data['errors'] = array();
 
-        
+
         $compartment = new Compartments();
         $ticketcheker = new TicketCheckers();
 
@@ -23,35 +23,31 @@ class TicketChecker extends Controller
         // if ($_POST['compartment'] == "0" &&  isset($_POST['submit']) ){
         //     $data['compartment'] =  $ticketcheker->errors['errors']['compartment'] = 'Compartment is required';
         // }
-       
-         
+
+
 
 
         // $compartment_types = new CompartmentTypes();
         $data['compartment'] = $compartment->getCompartment($_SESSION['work_train']);
 
-        
+
         $train = new Trains();
         $data['from_train'] = $train->whereOne('train_id', $_SESSION['work_train']);
 
         $seatData['from']['reservation_train_id'] = $_SESSION['work_train'];
         $seatData['from']['reservation_compartment_id'] = $data['compartment'][0]->compartment_id;
-        $seatData['from']['reservation_date'] = '2024-04-30';
+        $seatData['from']['reservation_date'] = '2024-04-23';
         $seatData['from']['reservation_start_station'] = $data['from_train']->train_start_station;
         $seatData['from']['reservation_end_station'] = $data['from_train']->train_end_station;
-        
-        echo "<pre>";
-        print_r($seatData['from']);
-        echo "</pre>";
 
-        
+
 
         if (isset($_POST['submit']) && $_POST['submit'] == 'Search') {
-        
-                $seatData['from']['reservation_compartment_id'] = $_POST['compartment'] ;  
+
+            $seatData['from']['reservation_compartment_id'] = $_POST['compartment'];
         }
 
-        
+
 
         $seat = new Seats();
         $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
@@ -69,11 +65,21 @@ class TicketChecker extends Controller
     {
         $resevation = new Reservations();
 
+        $train = new Trains();
+
         $data = array();
-        $data['errors'] = array();
 
-        $data['reservations'] = $resevation->getReservationDataTicket($id);
-
+        $data['trains'] = $train->findAll();
+        $data['reservations'] = $resevation->getReservation();
+        if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
+            $data['reservations'] = $resevation->getReservations('reservation_date', $_POST['reservation_date']);
+        }
+        if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
+            $data['reservations'] = $resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
+        }
+        if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
+            $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
+        }
         $this->view('reservation.ticketchecker', $data);
     }
 
@@ -174,8 +180,24 @@ class TicketChecker extends Controller
         $resevation = new Reservations();
         $data = array();
         $data['reservations'] = $resevation->getReservationDataTicket($id);
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+
 
         $this->view('QRSearch.ticketchecker');
+    }
+
+    function checkTicket($id = '')
+    {
+
+        $reservation = new Reservations();
+
+        $reservation->update($id, array(
+            // 'reservation_ticket_id' => $reservation_ticket_id,
+            'reservation_is_travelled' => '1'
+        ), "reservation_ticket_id");
+        $this->redirect('ticketchecker/reservationList');
     }
 
     function ScanDetails($id = '')

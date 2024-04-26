@@ -75,6 +75,7 @@ class Seats extends Model
                             r.reservation_compartment_id,
                             r.reservation_date,
                             r.reservation_seat,
+                            r.reservation_is_travelled,
                             s.station_name AS reservation_start_station,
                             reservation_start_st.stop_no AS reservation_start_stop_no,
                             e.station_name AS reservation_end_station,

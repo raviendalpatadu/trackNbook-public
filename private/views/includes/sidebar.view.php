@@ -433,7 +433,7 @@ if (Auth::getuser_type() == "admin") {
       <ul>
 
 
-        <li class="sidebar-item"><a href="<?= ROOT ?>settings">
+        <li class="sidebar-item "><a href="<?= ROOT ?>settings">
             <div class="sidebar-content">
               <div class="sidebar-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

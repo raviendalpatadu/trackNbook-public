@@ -22,13 +22,13 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 // }
 
 
-echo "<pre>";
-echo "post <br>";
- print_r($_POST);
-// print_r($_SESSION);
-echo "data <br> ";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// // echo "post <br>";
+// // print_r($_POST);
+// // // print_r($_SESSION);
+// echo "data <br> ";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 <?php
@@ -61,6 +61,7 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
         $from_reserved_seat =  new stdClass();
         $from_reserved_seat->seat_no = $value->reservation_seat;
         $from_reserved_seat->ticket_id = $value->reservation_ticket_id;
+        $from_reserved_seat->is_travelled = $value->reservation_is_travelled;
 
         array_push($from_reserved_seats_obj, $from_reserved_seat);
     }
@@ -77,22 +78,18 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
     <div class="column-left">
         <main class="bg">
             <div class="home-container d-flex flex-column ">
-                <div class="d-flex mt-20 justify-contents-start">
-                    <div class="">
-
-
+                <div class="d-flex flex-column mt-20 justify-contents-start">
                         <div class="d-flex g-10">
                             <div class="trains-available mt-10 mb-30 d-flex g-20">
                                 <h3 class="line">Reservation List - Udarata Manike</h3>
                             </div>
-
                         </div>
 
                         <div class="mt-30 d-flex g-20 mb-30">
                             <form action="" method="post" class="d-flex g-10 ">
                                 <div class="d-flex ">
                                     <div class="text-inputs">
-                                        <div class="input-text-label">Compartment Type</div>
+                                        <div class="input-text-label text">Compartment Type</div>
 
                                         <div class="width-fill mou-compartment">
                                             <select class="dropdown" name="compartment" placeholder="Please choose">
@@ -104,7 +101,7 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
 
                                             </select>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="col-3 d-flex align-self-end">
@@ -115,20 +112,17 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
                                     </button>
                                 </div>
                             </form>
-
                         </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex">
-                <a href="<?=ROOT?>/staffticketing/reservationTable">
-                    <p>Reservation List</p>
+         
+
+            <div class="d-flex justify-content-end mou-reservationList g-10 px-40 ">
+                <img src="<?=ASSETS?>/images/list-text.png" alt="">
+                <a href="http://localhost/trackNbook/public//ticketchecker/reservationTable">
+                    <p class="text">View as List</p>
                     </a>
                 </div>
-
-            <div class="col-12 d-flex align-items-center flex-column bg-white shadow p-20 m-30 g-20">
-               
+            <div class="col-12 d-flex align-items-center flex-column bg-white shadow p-20 mt-10 g-20">
                 <form action="" method="post" class="d-flex align-items-center flex-column g-20" id="formFromSelectedSeats">
 
                     <!-- from selected seats -->
@@ -146,15 +140,17 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
                                                 // $from_seat_no++;
                                                 $from_reserved = false;
                                                 $from_ticket_no = "";
+                                                $is_travelled = 0;
                                                 foreach ($from_reserved_seats_obj as $key => $value) {
                                                     if ($value->seat_no == $from_seat) {
                                                         $from_reserved = true;
                                                         $from_ticket_no = $value->ticket_id;
+                                                        $is_travelled = $value->is_travelled;
                                                         break;
                                                     }
                                                 }
                                                 ?>
-                                                <div id="SeatNo-<?= $from_seat_no ?>" data-ticketno="<?= $from_ticket_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($from_seat_no, $from_reserved_seats)) ? "selected" : "" ?>">
+                                                <div id="SeatNo-<?= $from_seat_no ?>" data-ticketno="<?= $from_ticket_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo (in_array($from_seat_no, $from_reserved_seats)) ? "selected" : "" ?> <?php echo ($is_travelled == 1) ? "selected-complete" : "" ?>">
                                                     <?= $from_seat_no++ ?>
                                                 </div>
                                             <?php } ?>
@@ -167,15 +163,17 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
                                                 // $from_seat_no++;
                                                 $from_reserved = false;
                                                 $from_ticket_no = "";
+                                                $is_travelled = 0;
                                                 foreach ($from_reserved_seats_obj as $key => $value) {
                                                     if ($value->seat_no == $from_seat) {
                                                         $from_reserved = true;
                                                         $from_ticket_no = $value->ticket_id;
+                                                        $is_travelled = $value->is_travelled;
                                                         break;
                                                     }
                                                 }
                                                 ?>
-                                                <div id="SeatNo-<?= $from_seat_no ?>" data-ticketno="<?= $from_ticket_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($from_seat_no, $from_reserved_seats) ? "selected" : "" ?>">
+                                                <div id="SeatNo-<?= $from_seat_no ?>" data-ticketno="<?= $from_ticket_no ?>" class="seat d-flex flex-column align-items-center justify-content-center <?php echo in_array($from_seat_no, $from_reserved_seats) ? "selected" : "" ?>  <?php echo ($is_travelled == 1) ? "selected-complete" : "" ?>">
                                                     <?= $from_seat_no++ ?>
                                                 </div>
                                             <?php } ?>
@@ -192,6 +190,9 @@ if (isset($data['from_reservation_seats']) && $data['from_reservation_seats'] !=
                     </div>
 
                 </form>
+            </div>
+
+            </div>
             </div>
         </main>
         <?php $this->view('includes/footer'); ?>
