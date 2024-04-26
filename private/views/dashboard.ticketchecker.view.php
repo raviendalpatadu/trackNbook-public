@@ -18,7 +18,7 @@
                             </a>
                         </button>
 
-                        <button class="mou-staff-card">
+                        <button class="mou-staff-card" id="reservationList">
                             <a href="<?= ROOT ?>ticketchecker/reservationList">
                                 <div class="mou-staff-card-text">Reservation <br>List</div>
                             </a>
@@ -28,22 +28,7 @@
                 </div>
             </div>
 
-            <!-- <div class="home-container width-fill justify-content-center">
-                            <div class="ticketchecker-container d-flex justify-content-center">
-                                <div class="d-flex g-50 flex-column  "> -->
 
-
-
-
-
-
-
-            <!-- <form class=" mou-form" action="">
-                            <input placeholder="E-mail" id="email" name="email" type="email" class="input" required="" />
-                            <input placeholder="Password" id="password" name="password" type="password" class="input" required="" />
-                            <span class="forgot-password"><a href="#">Forgot Password ?</a></span>
-                            <input value="Sign In" type="submit" class="login-button" />
-                            </form> -->
 
 
         </main>
@@ -51,12 +36,14 @@
     </div>
 </body>
 
-<!-- <script>
-    $(document).ready(function() {
-        $("#qr").click(function() {
-
-            console.log("clicked");
-            // window.location.href = "<?= ROOT ?>staffticketing/refundDetails";
-        });
-    });
-</script> -->
+<script>
+    // $(document).ready(function() {
+    //     $("#reservationList").click(function() {
+    //         var compartment_id = prompt("Please enter compartment id", "1");
+    //         // make popup modal with input to asking compartment id
+    //         // get the compartment id
+    //         // redirect to ticketchecker/reservationList/compartment_id
+    //         window.location.href = "<?= ROOT ?>ticketchecker/reservationList/"+ compartment_id;
+    //     });
+    // });
+</script>

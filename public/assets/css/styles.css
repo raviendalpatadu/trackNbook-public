@@ -28,7 +28,11 @@ main {
   --blue: #0f8eea;
   --lightgray-font: #646464;
   --light-red: #ff9f9f;
+  --Background-lightGray : #F3F9FB;
+  --Sidebar-Blue: #91C8E4;
+
 }
+
 
 body {
   display: flex;
@@ -448,7 +452,7 @@ div.sidebar {
   justify-content: space-between;
   align-items: flex-start;
   flex-shrink: 0;
-  background-color: var(--Background-colour-nav);
+  background-color: var(--Sidebar-Blue);
 }
 
 .sidebar .active {
@@ -1829,3 +1833,7 @@ ul {
 
     
   
+
+.staff-bg{
+  background-color: var(--Background-lightGray);
+}

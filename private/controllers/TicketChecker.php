@@ -11,23 +11,31 @@ class TicketChecker extends Controller
     {
         $resevation = new Reservations();
 
-        $train = new Trains();
-
         $data = array();
+        $seatData = array();
 
-        $data['trains'] = $train->findAll();
-        $data['reservations'] = $resevation->getReservation();
-        if (isset($_POST['submit']) && !empty($_POST['reservation_date'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_date', $_POST['reservation_date']);
-        }
-        if (isset($_POST['submit']) && !empty($_POST['reservation_passenger_nic'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
-        }
-        if (isset($_POST['submit']) && !empty($_POST['reservation_train_id'])) {
-            $data['reservations'] = $resevation->getReservations('reservation_train_id', $_POST['reservation_train_id']);
-        }
+
+
+
+        $seatData['from']['reservation_train_id'] = 2;
+        $seatData['from']['reservation_compartment_id'] = 22;
+        $seatData['from']['reservation_date'] = '2024-05-11';//date('Y-m-d');
+        $seatData['from']['reservation_start_station'] = 1;
+        $seatData['from']['reservation_end_station'] = 14;
+
+        $train = new Trains();
+        $data['from_train'] = $train->whereOne('train_id', 1);
+
+        $seat = new Seats();
+        $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
+
+        $compartment = new Compartments();
+        $data['from_compartment'] = $compartment->whereOne('compartment_id', 22);
+
+        $compartment_types = new CompartmentTypes();
+        $data['from_compartment_type'] = $compartment_types->whereOne('compartment_class_type_id', $data['from_compartment']->compartment_class_type);
         
-        $this->view('reservation.ticketchecker', $data);
+        $this->view('reservation.ticketchecker.new', $data);
     }
 
     function option($id = '')

@@ -33,7 +33,7 @@ echo "</pre>";
                                             <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Price</p>
-                                                <p class="width-fill">1500</p>
+                                                <p class="width-fill"><?=$data['reservations'][0]->reservation_amount ?></p>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Train No</p>

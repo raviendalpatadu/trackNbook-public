@@ -14,7 +14,7 @@
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
-        <main class="bg">
+        <main class="staff-bg">
             <div class="container d-flex flex-column justify-content-center align-items-center">
                 <div class="staff-ticket-summary d-flex flex-column ">
                     <h3 class="width-fill text-align-center">Booking Summary</h3>
