@@ -297,17 +297,17 @@
 
                             if (data.length == 0) {
                                 var desc1 = "Reservation has been canceled <br><br>";
-                                var desc2 = "Rs." + refundedAmount + ".00" + " will be refunded to your bank account";
+                                // var desc2 = "Rs." + refundedAmount + ".00" + " will be refunded to your bank account";
 
-                                if (refundedAmount > 0) {
-                                    var desc = desc1 + desc2;
-                                } else {
-                                    var desc = desc1;
-                                }
+                                // if (refundedAmount > 0) {
+                                //     var desc = desc1 + desc2;
+                                // } else {
+                                //     var desc = desc1;
+                                // }
 
-                                makePopupBox('Reservation Canceled', desc, 'OK', '<?= ASSETS . 'images/staff-success.gif' ?>', function(res) {
+                                makePopupBox('Reservation Canceled', desc1, 'OK', '<?= ASSETS . 'images/staff-success.gif' ?>', function(res) {
                                     if (res) {
-                                        location.reload();
+                                        window.location.href = '<?= ROOT . 'staffticketing/cancel' ?>'
                                     }
                                 });
 

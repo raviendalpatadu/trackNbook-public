@@ -1,8 +1,8 @@
 <?php
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 
@@ -21,10 +21,16 @@ echo "</pre>";
 
 
                         <div class="ticket-summary d-flex flex-column" id="fromTicketSummary">
-                            <h3 class="width-fill text-align-center">Booking Summary</h3>
-                            <div class="d-flex flex-column g-20">
+                            <div class="d-flex flex-column g-5 ">
+                            <div class="mou-ticket-summary width-fill text-align-center">Booking Summary</div>
+                                    
+                                    <div class="d-flex mou-checkingStatus-text justify-content-center red" id="mou-checkingStatus"></div>
+                                </div>
+                            <div class="d-flex flex-column g-12">
+                                <!-- status -->
+                                
 
-                                <div class="d-flex mobile-flex-column-reverse pb-20 width-fill border-bottom g-100 mobile-g-20">
+                                <div class="border-bottom d-flex pb-20 width-fill">
                                     <!-- train details and qr code -->
                                     <div class="d-flex g-20 flex-column ticket-summary-train-data flex-grow">
 
@@ -33,7 +39,7 @@ echo "</pre>";
                                             <!-- <div class="ticket-summary-train-data-details flex-grow"> -->
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Price</p>
-                                                <p class="width-fill"><?=$data['reservations'][0]->reservation_amount ?></p>
+                                                <p class="width-fill"><?= number_format(floatval($data['fares'][0]->fare_price), 2) ?></p>
                                             </div>
                                             <div class="d-flex">
                                                 <p class="width-fill heading">Train No</p>
@@ -120,19 +126,21 @@ echo "</pre>";
 
 
                         <div class="d-flex g-20 justify-content-center">
+                            <!-- <form action="ticketchecker/checkTicket" method="POST"> -->
                             <!-- home btn and print btn -->
                             <button class="button mx-10">
                                 <div class="button-base"><a href="<?= ROOT ?>ticketchecker/reservationList">
-                                        <div class="text">Done</div>
+                                        <div class="text">Back</div>
                                 </div></a>
                             </button>
-                            <!-- <button class="button mx-10" id="downloadTicket">
-                                <div class=""><a href="<?= ROOT ?>ticketchecker/QR">
-                                        <div class="button-base">
-                                            <div class="text">Scan</div>
-                                        </div>
-                                    </a>
-                            </button> -->
+                            <button class="button mx-10" id="mou-updateBtn">
+                                <div class="button-base"><a href="<?= ROOT ?>ticketchecker/checkTicket/<?= $data['reservations'][0]->reservation_ticket_id ?>">
+                                        <div class="text">Update</div>
+                                </div></a>
+                            </button>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -143,13 +151,22 @@ echo "</pre>";
 
 </html>
 <script>
-     $('#qr_code').empty();
-                        var qrcode = new QRCode("qr_code", {
-                            text: 'localhost/trackNbook/public/ticketchecker/summary/'+ data[0].reservation_ticket_id,
-                            width: 128,
-                            height: 128,
-                            colorDark: "#324054",
-                            colorLight: "#ffffff",
-                            correctLevel: QRCode.CorrectLevel.H
-                        });
+    // $('#qr_code').empty();
+    // var qrcode = new QRCode("qr_code", {
+    //     text: 'localhost/trackNbook/public/ticketchecker/summary/',
+    //     width: 128,
+    //     height: 128,
+    //     colorDark: "#324054",
+    //     colorLight: "#ffffff",
+    //     correctLevel: QRCode.CorrectLevel.H
+    // });
+
+    var is_travelled = <?= $data['reservations'][0]->reservation_is_travelled ?>;
+    console.log(is_travelled);
+    if (is_travelled == 1) {
+        $('#mou-checkingStatus').text('Already Checked');
+        $('#mou-updateBtn').css('display', 'none');
+    } else {
+        $('#mou-checkingStatus').text('Not Checked');
+    }
 </script>

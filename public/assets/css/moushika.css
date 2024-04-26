@@ -883,4 +883,65 @@ video {
   outline: 0;
   padding: 8px 14px;
   border: 1px solid rgb(219, 213, 213);
+}
+
+.mou-totalPrice {
+  display: none;
+}
+
+.mou-table-tab {
+  padding: 10px;
+  background-color: #cae1ff;
+  cursor: pointer;
+}
+
+.mou-table-tab.pending {
+  padding: 10px;
+  background-color: #cae1ff;
+  border-right: #0085e4 solid 2px;
+}
+
+.mou-table-tab.active {
+  background-color: #1d9bf0;
+  border-bottom-color: #89beff;
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  color: #FFF;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.mou-warrant-text {
+  color: gray;
+  border-style: solid;
+  padding: 20px;
+}
+
+.mou-warrant-error-text {
+  color: red;
+  padding: 20px;
+}
+
+.mou-compartment {
+  width: 60vw;
+}
+
+.mou-reservationList p {
+  color: #0085e4;
+  text-decoration-line: underline;
+}
+
+.mou-reservationList img {
+  width: 20px;
+}
+
+.mou-checkingStatus-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mou-ticket-summary {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
 }/*# sourceMappingURL=moushika.css.map */

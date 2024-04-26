@@ -95,6 +95,80 @@ class Reservations extends Model
         return true;
     }
 
+    public function validateStaffTicketing($data)
+    {
+        $errors = array();
+
+        for ($entry = 0; $entry < count($data['reservation_passenger_title']); $entry++) {
+
+            //check if title exists in post
+            if (empty($data['reservation_passenger_title'][$entry])) {
+                $this->errors['reservation_passenger_title'][$entry] = 'Title is required';
+            }
+
+            //check if first name is exists in post
+            if (empty($data['reservation_passenger_first_name'][$entry])) {
+                $this->errors['reservation_passenger_first_name'][$entry] = 'First Name is required';
+            }
+
+            //check if last name is exists in post
+            if (empty($data['reservation_passenger_last_name'][$entry])) {
+                $this->errors['reservation_passenger_last_name'][$entry] = 'Last Name is required';
+            }
+
+            //check if phone number is exists in post
+            if (empty($data['reservation_passenger_phone_number'][$entry])) {
+                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
+            }
+
+            // 10 number validation
+            if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
+                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
+            }
+
+            //check nic is exists in post
+            if (empty($data['reservation_passenger_nic'][$entry])) {
+                $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
+            } else {
+                // 10 number validation o rGroup13 - SRS-TrackNBookm in it
+                if (strlen($data['reservation_passenger_nic'][$entry]) != 12) {
+                    if (strlen($data['reservation_passenger_nic'][$entry]) == 10) {
+                        $last_char = strtolower(substr($data['reservation_passenger_nic'][$entry], -1));
+                        if ($last_char != 'v') {
+                            $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid last char is not V or v';
+                        }
+                    } else {
+                        $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid';
+                    }
+                }
+            }
+
+
+
+            //check if email is exists in post
+            if (empty($data['reservation_passenger_email'][$entry])) {
+                $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
+            }
+
+            //check if email is valid
+            if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+                $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
+            }
+
+            // check gender
+            if (empty($data['reservation_passenger_gender'][$entry])) {
+                $this->errors['reservation_passenger_gender'][$entry] = 'Gender Required';
+            }
+
+            
+        }
+
+        if (count($this->errors) > 0) {
+            return false;
+        }
+        return true;
+    }
+
     public function getReservation()
     {
         try {

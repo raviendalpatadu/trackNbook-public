@@ -37,7 +37,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                         </div>
 
 
-                        <div class="mt-30 d-flex g-20 mb-30">
+                        <div class="mt-30 d-flex g-20">
                             <div class="d-flex ">
                                 <div class="text-inputs">
                                     <div class="input-text-label text lightgray-font">NIC</div>
@@ -64,7 +64,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
             </div>
 
             <div class="container mou-bg-mobile">
-                <div class="row  mr-20 mt-20">
+                <div class="row  mr-20">
                     <div class="col-12 ">
 
                         <div class="row">
@@ -110,7 +110,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                <!-- <div class="pagination">
+                                <div class="pagination">
                                     <button class="button">
                                         <div class="button-base">
                                             <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +165,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             </svg>
                                         </div>
                                     </button>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
 

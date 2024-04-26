@@ -1,7 +1,7 @@
 <?php
-//  echo "<pre>";
-//  print_r($data);
-//  echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 
 ?>
@@ -16,18 +16,30 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="d-flex flex-column m-30 g-20">
+
+                <!-- img and train -->
                 <div class="d-flex  flex-row g-20">
 
+                    <!-- warrant img-->
                     <div class="d-flex mou-warrant_imgCard bg-white flex-column flex-auto align-items-center justify-content-center">
                         <div class="">
+                            <!-- check if the warrant booking done by the counter -->
+                            <?php if (empty($data['warrant_img']) && strtolower($data['warrant_reservations'][0]->warrant_status) == 'completed') : ?>
+                                <p class="mou-warrant-text">Reservation Done by Manually</p>
 
-                            <!-- warrant img-->
-                            <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
-                            <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['warrant_img']->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
+                                <!-- check if the warant booking done by the user but image not uploaded succefully -->
+                            <?php elseif (empty($data['warrant_img']) && strtolower($data['warrant_reservations'][0]->warrant_status) == 'approval pending') : ?>
+                                <p class="mou-warrant-error-text">Image Not Found</p>
+
+                            <?php else : ?>
+                                <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                                <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['warrant_img']->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
+                            <?php endif; ?>
 
                         </div>
                     </div>
 
+                    <!-- train details -->
                     <div class="d-flex flex-column mou-warrant_Card bg-white g-30">
                         <div class="d-flex justify-content-center border-bottom-Lightgray">
                             <h2>Ticket Details</h2>
@@ -112,39 +124,13 @@
                                     <div class="assistive-text"></div>
                                 </div>
 
-                                <!-- <div class="text-inputs">
-                                    <div class="input-field">
-                                        <div class="text">
-                                            <input type="text" class="type-here" placeholder="Type here" value=" " name="reservation_seat">
-                                        </div>
-                                    </div>
-                                    <div class="assistive-text"></div>
-                                </div>
-                                <button class="button btn mt-20 ">
-                                    <div class="button-base btn  ">
-
-                                        <input type="submit" name="enterBtn" value="Enter" class="blue">
-                                    </div>
-
-                                </button> -->
-
-
 
                             </div>
-
                         </div>
-
-
                     </div>
-
-
-
-
-
-
-
                 </div>
 
+                <!-- passenger details -->
                 <div class="d-flex flex-column bg-white g-20 p-20">
 
                     <?php for ($i = 0; $i < count($data['reservations']); $i++) : ?>
@@ -254,6 +240,21 @@
 
                 </div>
 
+
+                <!-- action btns -->
+                <?php if (strtolower($data['warrant_reservations'][0]->warrant_status) == 'completed') : ?>
+
+                    <div class="d-flex justify-content-center">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
+                                <div class="button-base bg-Selected-Blue">
+                                    <div class="text Blue">Back</div>
+                                </div>
+                            </a>
+                        </button>
+                    </div>
+
+                <?php elseif (strtolower($data['warrant_reservations'][0]->warrant_status) == 'approval pending') : ?>
+                
                 <div class="row d-flex g-8 justify-content-center">
                     <div class="col-4">
                         <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
@@ -280,6 +281,35 @@
                         </button>
                     </div>
                 </div>
+         
+                <?php elseif (strtolower($data['warrant_reservations'][0]->warrant_status) == 'verified') :?>
+                <div class="row d-flex g-8 justify-content-center">
+                    <div class="col-4">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
+                                <div class="button-base bg-Selected-Blue">
+                                    <div class="text Blue">Back</div>
+                                </div>
+                            </a>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <button class="button mt-20 " id="reject">
+                            <div class="button-base bg-Selected-red">
+                                <div class="text Banner-red">Rejected</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-4">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
+                                <div class="button-base bg-light-green">
+                                    <div class="text dark-green ">Handed Over</div>
+                                </div>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <?php endif;?>
 
                 <div id="mou-rejectReason">
                     <form action="<?= ROOT ?>staffticketing/rejectWarrent/<?= (array_key_exists('reservations', $data)) ? $data['reservations'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
@@ -292,9 +322,9 @@
                         <div class="assistive-text" id="rejectError">* Enter the Reject Reason Before Submit</div>
 
                         <button class="button btn" id="submitBtn">
-                                <div class="button-base btn bg-Border-blue white">
-                                    Submit
-                                </div>
+                            <div class="button-base btn bg-Border-blue white">
+                                Submit
+                            </div>
                         </button>
                     </form>
                 </div>
@@ -321,13 +351,15 @@
 
         $('#submitBtn').click(function(e) {
             e.preventDefault();
-                var reason = $('#reason').val();
-                if (reason == '') {
-                    $('#rejectError').show();
-                } else {
-                    $('#mou-rejectReasonForm').submit();
-                }
-            });
+            var reason = $('#reason').val();
+            if (reason == '') {
+                $('#rejectError').show();
+            } else {
+                $('#mou-rejectReasonForm').submit();
+            }
+        });
     });
 
+ 
+    // Remove the closing 
 </script>

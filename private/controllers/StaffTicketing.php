@@ -110,9 +110,7 @@ class StaffTicketing extends Controller
         $data = array();
         $seatData = array();
 
-
-
-
+        // from
         $seatData['from']['reservation_train_id'] = Auth::reservation()['from_compartment_and_train'][1];
         $seatData['from']['reservation_compartment_id'] = Auth::reservation()['from_compartment_and_train'][0];
         $seatData['from']['reservation_date'] = Auth::reservation()['from_date'];
@@ -133,7 +131,7 @@ class StaffTicketing extends Controller
 
         $fare =  new Fares();
         $data['from_fare'] = $fare->getFareData($data['from_train']->train_type, $data['from_compartment']->compartment_class_type, Auth::reservation()['from_station']->station_id, Auth::reservation()['to_station']->station_id)[0]; //get from db must be changed
-
+// to
         if (Auth::reservation()['return'] == 'on') {
             $seatData['to']['reservation_train_id'] = Auth::reservation()['to_compartment_and_train'][1];
             $seatData['to']['reservation_compartment_id'] = Auth::reservation()['to_compartment_and_train'][0];
@@ -260,7 +258,7 @@ class StaffTicketing extends Controller
 
             $reservation = new Reservations();
 
-            if ($reservation->validatePassenger($_POST)) {
+            if ($reservation->validateStaffTicketing($_POST)) {
                 echo "<pre>";
                 // print_r($_SESSION);
                 echo "</pre>";
@@ -296,13 +294,16 @@ class StaffTicketing extends Controller
                             $data = $reaservation->update($reservation_id, $reservationPassengerData, 'reservation_id');
 
                             // update warrant reservations table
-                            if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant') {
+                            if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                $reaservationPassengerArr = [];
+                                $reaservationPassengerArr['reservation_type'] = 'Warrant';
+                                $reaservation->update($reservation_id, $reaservationPassengerArr, 'reservation_id');
                                 // if warrant image is null throw an execption
                                 $warrant_reservation = new WarrantsReservations();
-                                $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Manually_Verified'], 'warrant_reservation_id');
+                                $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Completed'], 'warrant_reservation_id');
 
                                 $_SESSION['reservation']['reservation_status'] = "Reserved";
-                            }
+                            } 
 
 
                             $count++;
@@ -325,10 +326,10 @@ class StaffTicketing extends Controller
 
                                 $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
 
-                                if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant') {
+                                if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
                                     // if warrant image is null throw an execption
                                     $warrant_reservation = new WarrantsReservations();
-                                    $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Manually_Verified'], 'warrant_reservation_id');
+                                    $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Completed'], 'warrant_reservation_id');
 
                                     $_SESSION['reservation']['reservation_status'] = "Reserved";
                                 }
@@ -346,9 +347,11 @@ class StaffTicketing extends Controller
                 // if redirect according to the reservation type
                 if (empty($data['errors'])) {
 
-                    if (Auth::reservation()['passenger_data']['payment_method'] == 'warrant' || Auth::reservation()['passenger_data']['payment_method'] == 'cash'){
+                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on'){
                         // send email to each email
                         foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
+                            // check wheather the email is not empty
+                    
                             $to_email = $email;
                             $subject = "Reservation Successfull - Warrant";
                             $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
@@ -361,10 +364,12 @@ class StaffTicketing extends Controller
 
                         $this->redirect('staffticketing/addreservation');
 
-                    } else if(Auth::reservation()['passenger_data']['payment_method'] == 'card') {
-
-                        $this->redirect('staffticketing/payment');
                     }
+
+                    $this->redirect('staffticketing/pay');
+
+                    
+                    
                 }
             } else {
                 $data['errors'] = $reservation->__get('errors');
@@ -374,11 +379,12 @@ class StaffTicketing extends Controller
         $this->view('details.staffticketing', $data);
     }
 
-    function payment($id = '')
-    {
-        $data = array();
-        $this->view('staffticketing.payment', $data);
-    }
+    // function payment($id = '')
+    // {
+    //     $data = array();
+    //     $data = $_SESSION['reservation'];
+    //     $this->view('staffticketing.payment', $data);
+    // }
 
 
     function addReservation(){
@@ -457,11 +463,9 @@ class StaffTicketing extends Controller
 
         $train_type = $train->whereOne('train_id', $data['reservations'][0]->reservation_train_id);
 
-
         $data['train'] = $train->getTrain($data['reservations'][0]->reservation_train_id);
 
         $compartment_type = $compartment->whereOne('compartment_id', $data['reservations'][0]->reservation_compartment_id);
-
 
         $data['compartment'] = $compartment_type->compartment_class_type;
 
@@ -469,11 +473,7 @@ class StaffTicketing extends Controller
         $start_station = $station->whereOne('station_name', $data['reservations'][0]->reservation_start_station);
         $end_station = $station->whereOne('station_name', $data['reservations'][0]->reservation_end_station);
 
-
-
         $data['fares'] = $fare->getFareData($train_type->train_type, $compartment_type->compartment_class_type, $start_station->station_id, $end_station->station_id);
-
-
 
         $this->view('summary.staffticketing', $data);
     }
@@ -519,6 +519,7 @@ class StaffTicketing extends Controller
             $data['reservations'] = $resevation->where('reservation_passenger_nic', $_POST['reservation_passenger_nic']);
         }
         if (isset($_POST['submit']) && !empty($_POST['reservation_ticket_id'])) {
+
             $data['reservations'] = $resevation->where('reservation_ticket_id', $_POST['reservation_ticket_id']);
         }
 
@@ -664,19 +665,19 @@ class StaffTicketing extends Controller
         try {
             $warrant_data = $warrant_resevation->getReservations($id);
 
-            echo "<pre>";
-            print_r($warrant_data);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($warrant_data);
+            // echo "</pre>";
 
             $warrant_resevation->update($id, array(
                 'warrant_status' => 'verified'
             ), "warrant_id");
 
-            $new_ticket_id = Auth::getTicketId();
+            // $new_ticket_id = Auth::getTicketId();
 
             $reservation = new Reservations();
             $reservation->update($warrant_data[0]->reservation_ticket_id, array(
-                'reservation_ticket_id' => $new_ticket_id,
+                // 'reservation_ticket_id' => $reservation_ticket_id,
                 'reservation_status' => 'Reserved'
             ), "reservation_ticket_id");
 
@@ -685,7 +686,8 @@ class StaffTicketing extends Controller
                 try {
                     $name = ucfirst($warrant->reservation_passenger_first_name);
                     $subject = "Warrant Reservation has been Approved";
-                    $message = "Your warrant has been approved. Your new ticket id is " . $new_ticket_id;
+                    $message = "Your warrant has been Verified. In order to get the ticket please provide your warrant document to your depature station on or before the day of travel. <br><br> *Please note that if the submitted warrant document is not correct or if there is any defect it will be
+                    rejected and Department of Railways shall not be responsible for any inconvenience caused by the rejection of the reservation";
                     $body = Auth::getEmailBody($name, $message);
                     $to = $warrant->reservation_passenger_email;
 
@@ -701,7 +703,7 @@ class StaffTicketing extends Controller
             echo $e->getMessage();
         }
 
-        $this->redirect('staffticketing/Warrant');
+        $this->redirect('staffticketing/Warrant?success=1');
     }
 
     function pendingWarrent($id = '')
@@ -775,7 +777,7 @@ class StaffTicketing extends Controller
 
 
 
-        $this->redirect('staffticketing/warrant');
+        $this->redirect('staffticketing/warrant?successreject=1');
     }
 
     function refectReason($id = '')
@@ -784,6 +786,10 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
+    function staffTicketingInquiry($id = '')
+    {
+        $this->view('inquiry.staffticketing');
+    }
 
 
 

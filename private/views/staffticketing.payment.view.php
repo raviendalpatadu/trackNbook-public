@@ -1,8 +1,9 @@
 <?php
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($_SESSION);
+
+echo "</pre>";
 
 ?>
 
@@ -15,82 +16,85 @@
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main>
+
             <div class="container d-flex justify-content-center">
-                <div class="ticket-container mt-80">
-                    
-                    <div class="row mb-20 mt-20">
-                        <div class="col-12 mb-20 d-flex align-items-center flex-column line">
-                            <h1>Enter Card Details</h1>
-                        </div>                    
-                        <form action="" method="post" class="col-12 d-flex align-items-center flex-column">
-                            <div class="row mt-10">
-                                <div class="col-12 d-flex flex-column align-items-center justify-content-start">
-                                    <div class="login-text-inputs">
-                                        <div class="input-text-label">Card Holder Name </div>
+                
+                    <div class="ticket-container mt-80">
+
+                        <div class="row mb-20 mt-20">
+                            <div class="col-12 mb-20 d-flex align-items-center flex-column line">
+                                <h1>Enter Card Details</h1>
+                            </div>
+                            <form action="" method="post" class="col-12 d-flex align-items-center flex-column">
+                                <div class="row mt-10">
+                                    <div class="col-12 d-flex flex-column align-items-center justify-content-start">
+                                        <div class="login-text-inputs">
+                                            <div class="input-text-label">Card Holder Name </div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="text" class="type-here" placeholder="Type here" name="card_holder_name">
-                                                </div>                                           
+                                                </div>
                                             </div>
-                                                    
-                                                <?php if (isset($data['errors'])) : ?>
-                                                    <div class="assistive-text <?php echo (!array_key_exists('card_holder_name', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_holder_name', $data['errors'])) ? $data['errors']['card_holder_name'] : ''; ?></div>
-                                                <?php endif ?>
-                                    </div>
-                                                
-                                    <div class="login-text-inputs mt-10">
-                                        <div class="input-text-label">Card No </div>
+
+                                            <?php if (isset($data['errors'])) : ?>
+                                                <div class="assistive-text <?php echo (!array_key_exists('card_holder_name', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_holder_name', $data['errors'])) ? $data['errors']['card_holder_name'] : ''; ?></div>
+                                            <?php endif ?>
+                                        </div>
+
+                                        <div class="login-text-inputs mt-10">
+                                            <div class="input-text-label">Card No </div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="text" class="type-here" placeholder="Type here" name="card_no">
-                                                </div>                                            
+                                                </div>
                                             </div>
-                                                    <?php if (isset($data['errors'])) : ?>
-                                                        <div class="assistive-text <?php echo (!array_key_exists('card_no', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_no', $data['errors'])) ? $data['errors']['card_no'] : ''; ?></div>
-                                                    <?php endif ?>
+                                            <?php if (isset($data['errors'])) : ?>
+                                                <div class="assistive-text <?php echo (!array_key_exists('card_no', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_no', $data['errors'])) ? $data['errors']['card_no'] : ''; ?></div>
+                                            <?php endif ?>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div class="col-12 d-flex g-10 mt-10">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label">Card Exp </div>
+
+                                    <div class="col-12 d-flex g-10 mt-10">
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">Card Exp </div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="text" class="type-here" placeholder="Type here" name="card_exp">
                                                 </div>
                                             </div>
-                                                    <?php if (isset($data['errors'])) : ?>
-                                                        <div class="assistive-text <?php echo (!array_key_exists('card_exp', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_exp', $data['errors'])) ? $data['errors']['card_exp'] : ''; ?></div>
-                                                    <?php endif ?>
-                                    </div>
+                                            <?php if (isset($data['errors'])) : ?>
+                                                <div class="assistive-text <?php echo (!array_key_exists('card_exp', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_exp', $data['errors'])) ? $data['errors']['card_exp'] : ''; ?></div>
+                                            <?php endif ?>
+                                        </div>
 
-                                    <div class="text-inputs">
-                                        <div class="input-text-label">Card CVV </div>
+                                        <div class="text-inputs">
+                                            <div class="input-text-label">Card CVV </div>
                                             <div class="input-field">
                                                 <div class="text">
                                                     <input type="text" class="type-here" placeholder="Type here" name="card_cvv">
-                                                </div>                                     
+                                                </div>
+                                            </div>
+                                            <?php if (isset($data['errors'])) : ?>
+                                                <div class="assistive-text <?php echo (!array_key_exists('card_cvv', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_cvv', $data['errors'])) ? $data['errors']['card_cvv'] : ''; ?></div>
+                                            <?php endif ?>
                                         </div>
-                                                    <?php if (isset($data['errors'])) : ?>
-                                                        <div class="assistive-text <?php echo (!array_key_exists('card_cvv', $data['errors'])) ? 'display-none' : ''; ?>"> <?php echo (array_key_exists('card_cvv', $data['errors'])) ? $data['errors']['card_cvv'] : ''; ?></div>
-                                                    <?php endif ?>
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-12 mt-10 d-flex align-items-center flex-column">
-                                    <div class="button-base">
-                                        <input class="text" type="submit" value="Make payment" name="submit">
+
+                                <div class="row">
+                                    <div class="col-12 mt-10 d-flex align-items-center flex-column">
+                                        <div class="button-base">
+                                            <input class="text" type="submit" value="Make payment" name="submit">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
             </div>
-                                
-        </main> 
+ 
+
+        </main>
         <?php $this->view('includes/footer'); ?>
     </div>
 </body>

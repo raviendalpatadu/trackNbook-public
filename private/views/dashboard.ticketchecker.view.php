@@ -1,6 +1,7 @@
 <?php $this->view("./includes/header"); ?>
 
 
+
 <body class="mobile-d-flex mobile-min-height-80">
     <div class="flex-grow">
         <?php $this->view("./includes/mobile-navbar") ?>

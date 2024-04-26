@@ -402,7 +402,7 @@ if (Auth::getuser_type() == "admin") {
 
 ?>
 
-<div class="sidebar ">
+<div class="sidebar shadow">
   <div class="sidebar-top g-10">
     <div class="brand">
       <img src="<?= ASSETS ?>images/track-n-book-logo-1.svg" alt="TrackNBook">
@@ -467,7 +467,7 @@ if (Auth::getuser_type() == "admin") {
       <ul>
 
 
-        <li class="sidebar-item"><a href="<?= ROOT ?>settings">
+        <li class="sidebar-item "><a href="<?= ROOT ?>settings">
             <div class="sidebar-content">
               <div class="sidebar-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
