@@ -11,6 +11,60 @@ class TicketChecker extends Controller
     {
         $resevation = new Reservations();
 
+        $data = array();
+        $seatData = array();
+        $data['errors'] = array();
+
+
+        $compartment = new Compartments();
+        $ticketcheker = new TicketCheckers();
+
+        // compartment is required
+        // if ($_POST['compartment'] == "0" &&  isset($_POST['submit']) ){
+        //     $data['compartment'] =  $ticketcheker->errors['errors']['compartment'] = 'Compartment is required';
+        // }
+
+
+
+
+        // $compartment_types = new CompartmentTypes();
+        $data['compartment'] = $compartment->getCompartment($_SESSION['work_train']);
+
+
+        $train = new Trains();
+        $data['from_train'] = $train->whereOne('train_id', $_SESSION['work_train']);
+
+        $seatData['from']['reservation_train_id'] = $_SESSION['work_train'];
+        $seatData['from']['reservation_compartment_id'] = $data['compartment'][0]->compartment_id;
+        $seatData['from']['reservation_date'] = '2024-04-30';
+        $seatData['from']['reservation_start_station'] = $data['from_train']->train_start_station;
+        $seatData['from']['reservation_end_station'] = $data['from_train']->train_end_station;
+
+
+
+        if (isset($_POST['submit']) && $_POST['submit'] == 'Search') {
+
+            $seatData['from']['reservation_compartment_id'] = $_POST['compartment'];
+        }
+
+
+
+        $seat = new Seats();
+        $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
+
+        $compartment = new Compartments();
+        $data['from_compartment'] = $compartment->whereOne('compartment_id', $seatData['from']['reservation_compartment_id']);
+
+        $compartment_types = new CompartmentTypes();
+        $data['from_compartment_type'] = $compartment_types->whereOne('compartment_class_type_id', $data['from_compartment']->compartment_class_type);
+
+        $this->view('reservation.ticketchecker.new', $data);
+    }
+
+    function reservationTable($id = '')
+    {
+        $resevation = new Reservations();
+
         $train = new Trains();
 
         $data = array();
