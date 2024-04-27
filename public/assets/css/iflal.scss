@@ -11,6 +11,24 @@ $color-four: #f6b352;
 *:after {
   box-sizing: border-box;
 }
+.dashboard-card-admin {
+  height: 100%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+    width: 270px
+}
+
+.dashboard-card-admin p1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #171717;
+  align-items: start !important;
+}
+.dashboard-card-admin p2 {
+  font-size: 26px;
+  font-weight: 300;
+}
 
 .card {
   background: #fff;

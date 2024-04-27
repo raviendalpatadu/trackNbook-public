@@ -85,16 +85,20 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            let table = new DataTable("#userTable", {
-                search: true
-            });
-        });
+       $(document).ready(function () {
+    let table = new DataTable("#userTable", {
+        search: true
+    });
 
-        // show user regiserted sucessfully if exists in get method 
-        if (checkNotification('success=1') > -1) {
-            makeSuccessToast('Location updated successfully!', '');
-        }
+    // show success or failure toast based on URL parameter
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        makeSuccessToast('Location updated successfully!', '');
+    } else if (urlParams.get('success') === '0') {
+        makeFailureToast('Location already added!', '');
+    }
+});
+
     </script>
 
 </body>
