@@ -42,28 +42,28 @@
                                                 <thead>
                                                     <tr>
                                                         <th class="col-4">Train Name</th>
-                                                        <th class="col-1">Train Type</th>
-                                                        <th class="col-2">Start & End Station</th>
+                                                        <th class="col-2">Train Type</th>
+                                                        <th class="col-3">Start & End Station</th>
                                                         <th class="col-2">Estimated Arival Time</th>
-                                                        <th class="col-2">Action</th>
+                                                        <th class="col-1">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php foreach ($data['trains'] as $train) : ?>
                                                         <tr class="p-20">
-                                                            <td class="col-3 d-flex align-items-center">
+                                                            <td class="col-4 d-flex align-items-center">
                                                                 <?= $train->train_name . " - " . $train->train_id  ?>
                                                             </td>
-                                                            <td class="col-1">
+                                                            <td class="col-2">
                                                                 <?= $train->train_type ?>
                                                             </td>
-                                                            <td class="col-2">
+                                                            <td class="col-3">
                                                                 <?= $train->start_station . " - " . $train->end_station ?>
                                                             </td>
                                                             <td class="col-2 ">
                                                                 <?= date("H:i", strtotime($train->estimated_arraival_time)) ?>
                                                             </td>
-                                                            <td class="col-3 d-flex align-items-center g-10">
+                                                            <td class="col-1 d-flex align-items-center g-10">
                                                                 <form method="post" action="<?= ROOT ?>stationmaster/checkArrival">
                                                                     <input type="hidden" name="train_id" value="<?= $train->train_id ?>">
                                                                     <button type="submit" name="check" class="blue">Check</button>
@@ -85,16 +85,20 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            let table = new DataTable("#userTable", {
-                search: true
-            });
-        });
+       $(document).ready(function() {
+    let table = new DataTable("#userTable", {
+        search: true
+    });
 
-        // show user regiserted sucessfully if exists in get method 
-        if (checkNotification('success=1') > -1) {
-            makeSuccessToast('Location updated successfully!', '');
-        }
+    // show success or failure toast based on URL parameter
+    let urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === '1') {
+        makeSuccessToast('Location updated successfully!', '');
+    } else if (urlParams.get('success') === '0') {
+        makeFailureToast('Location already added!', '');
+    }
+});
+
     </script>
 
 </body>

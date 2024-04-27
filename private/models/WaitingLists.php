@@ -77,8 +77,11 @@ class WaitingLists extends Model
         ORDER BY
             waiting_list_train_id, waiting_list_compartment_id, waiting_list_reservation_date, waiting_list_time_created;";
         $result = $this->query($query, array(':passenger_id' => $id));
-
-        return $result;
+        
+        if(is_array($result) && count($result) > 0){
+            return $result;
+        }
+        return [];
     }
 
     public function notifyWaitingList($id)

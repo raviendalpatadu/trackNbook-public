@@ -13,7 +13,6 @@ class Inquiries extends Model
     public function validateInquiry($data)
     {
         
-
         if (empty($data['inquiry_ticket_id'])) {
             $this->errors['inquiry_ticket_id'] = 'Ticket ID is required';
         }
@@ -32,4 +31,16 @@ class Inquiries extends Model
 
         return true;
     }
+
+    //meed function to get the inquiries based on the inquiry_station
+    public function getStationInquiry(){
+        $query = "SELECT * FROM tbl_inquiry WHERE inquiry_station = :station";
+        $data = $this->query($query, array('station' => $_SESSION['USER']->user_data));
+        if(is_array($data)){
+            return $data;
+        }
+        return [];
+    }
+
 }
+
