@@ -788,7 +788,14 @@ class StaffTicketing extends Controller
 
     function staffTicketingInquiry($id = '')
     {
-        $this->view('inquiry.staffticketing');
+        $Inquiry = new Inquiries();
+       
+        $data = array();
+
+        $data['inquiry'] = $Inquiry->getInquiry(1);
+     
+
+        $this->view('inquiry.staffticketing',$data);
     }
 
 
