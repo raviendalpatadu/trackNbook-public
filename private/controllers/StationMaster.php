@@ -105,6 +105,9 @@ class StationMaster extends Controller
             }
         }
 
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
         $this->view('check.train.arrival', $data);
     }
 

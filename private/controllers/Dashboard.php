@@ -63,7 +63,10 @@ class Dashboard extends Controller
         $train = new Trains();
 
 
-        $data['trains'] = $train->findAllTrains();
+        $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
         $this->view('dashboard.stationmaster', $data);
 
     }
