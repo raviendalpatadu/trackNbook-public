@@ -109,7 +109,7 @@ echo "</pre>";
                                                         <input type="time" name="train_start_time" class="type-here" placeholder="Type here" value="<?= $data['train']->train_start_time ?>">
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                             <?= printError($data['errors'], 'train_start_time') ?>
                                         </div>
@@ -131,7 +131,7 @@ echo "</pre>";
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
-                                               
+
                                             </div>
                                             <?= printError($data['errors'], 'train_end_station') ?>
                                         </div>
@@ -151,44 +151,42 @@ echo "</pre>";
 
                                     <div class="row g-30 mb-20">
                                         <div class="row g-20 mt-10 mb-10 ">
-                                            
+
                                             <div class="col-6">
                                                 <div class="text-inputs ">
                                                     <div class="input-text-label">Train Type</div>
                                                     <div class="width-fill">
                                                         <select class="input-field dropdown" name="train_type" placeholder="Please choose" id="startStation">
                                                             <option value="0">Please choose</option>
-                                                            
+
                                                             <?php foreach ($data['train_type'] as $key => $value) : ?>
                                                                 <option value="<?= $value->train_type_id ?>" <?php echo ($data['train']->train_type == $value->train_type_id) ? "selected" : ""; ?>>
                                                                     <?= $value->train_type ?>
                                                                 </option>
-                                                                <?php endforeach; ?>
-                                                            </select>
-                                                        </div>
+                                                            <?php endforeach; ?>
+                                                        </select>
                                                     </div>
-                                                    
-                                                    <?= printError($data['errors'], 'train_type') ?>
                                                 </div>
-                                                
-                                                <div class="col-6">
-                                                    <div class="text-inputs">
-                                                        <div class="input-text-label">No of Compartments</div>
-                                                        <div class="input-field">
-                                                            <div class="text">
-                                                                <input type="number" id="noOfCompartments" name="no_of_compartments" class="type-here" placeholder="Type here" value="<?= count($data['compartments']) ?>">
-                                                            </div>
+
+                                                <?= printError($data['errors'], 'train_type') ?>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div class="text-inputs">
+                                                    <div class="input-text-label">No of Compartments</div>
+                                                    <div class="input-field">
+                                                        <div class="text">
+                                                            <input type="number" id="noOfCompartments" name="no_of_compartments" class="type-here" placeholder="Type here" value="<?= count($data['compartments']) ?>">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                        </div>
-                                        <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>">
-                                            <?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?>
-                                        </div>
                                     </div>
-
+                                    <div class="assistive-text <?php echo (!array_key_exists('no_of_compartments', $data['errors'])) ? 'display-none' : ''; ?>">
+                                        <?php echo (isset($data['errors']) && array_key_exists('no_of_compartments', $data['errors'])) ? $data['errors']['no_of_compartments'] : ''; ?>
+                                    </div>
                                     <div class="row border-bottom-Lightgray">
                                         <div class="col-12">
                                             <h7 class="text">Train Stoping stations</h7>
@@ -221,14 +219,14 @@ echo "</pre>";
 
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row  border-bottom-Lightgray mb-10">
                                         <div class="col-12">
                                             <h7 class="text">Compartment Details</h7>
-                                            <?= printError($data['errors'], 'compartment_class')?>
+                                            <?= printError($data['errors'], 'compartment_class') ?>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="compartmentDetails mt-20">
                                         <?php foreach ($data['compartments'] as $key => $comparment) : ?>
                                             <div class="row g-20 mt-20 mb-20 ">
@@ -247,14 +245,14 @@ echo "</pre>";
                                                     <div class="text-inputs">
                                                         <div class="input-text-label">Compartment Class Type</div>
                                                         <div class="width-fill">
-                                                                <select class="input-field width-fill p-10" name="compartment[type][]" placeholder="Please choose">
-                                                                    <option value="0">Please choose</option> --
-                                                                    <!-- Options populated dynamically-->`
-                                                                    <?php foreach ($data['compartment_types'] as $comparment_type) : ?>
-                                                                        <option value="<?php echo $comparment_type->compartment_class_type_id ?>" <?php echo ($comparment_type->compartment_class_type_id ==  $comparment->compartment_class_type) ? "selected" : "" ?>><?php echo $comparment_type->compartment_class_type ?></option>
-                                                                    <?php endforeach; ?> 
-                                                                </select>
-                                                                <!-- <input type="text" name="compartment[type][]" class="type-here" placeholder="eg: 1st class" value="<?= $comparment->compartment_class_type ?>"> -->
+                                                            <select class="input-field width-fill p-10" name="compartment[type][]" placeholder="Please choose">
+                                                                <option value="0">Please choose</option> --
+                                                                <!-- Options populated dynamically-->`
+                                                                <?php foreach ($data['compartment_types'] as $comparment_type) : ?>
+                                                                    <option value="<?php echo $comparment_type->compartment_class_type_id ?>" <?php echo ($comparment_type->compartment_class_type_id ==  $comparment->compartment_class_type) ? "selected" : "" ?>><?php echo $comparment_type->compartment_class_type ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                            <!-- <input type="text" name="compartment[type][]" class="type-here" placeholder="eg: 1st class" value="<?= $comparment->compartment_class_type ?>"> -->
                                                         </div>
                                                         <div class="assistive-text display-none"></div>
                                                     </div>
@@ -297,12 +295,12 @@ echo "</pre>";
                                     </div>
 
                                     <div class="row mt-20 mb-20 g-0 d-flex justify-content-center">
-                                        <button class="button mx-10 px-10">
+                                        <div class="button mx-10 px-10">
                                             <div class="button-base">
                                                 <input type="hidden" name="train_id" value="<?= $data['train']->train_id ?>">
                                                 <input type="submit" value="Update" name="update">
                                             </div>
-                                        </button>
+                                        </div>
 
                                         <button class="button mx-10" id="cancelReservationBtn">
                                             <div class="button-base">
@@ -313,16 +311,17 @@ echo "</pre>";
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </main>
     </div>
-
-
 </body>
 
-<?php $this->view('./includes/load-js')?>
+<?php $this->view('./includes/load-js') ?>
+
 </html>
 
 <script>
@@ -476,9 +475,9 @@ echo "</pre>";
         });
 
 
-         // add compartment details
-         var noOfCompartments = $('#noOfCompartments').val();
-        
+        // add compartment details
+        var noOfCompartments = $('#noOfCompartments').val();
+
 
 
 
@@ -492,13 +491,23 @@ echo "</pre>";
 
 
         function generateTags(outputContainer) {
+            // get the number of compartments 
+            const currentCompartments = $('.compartmentDetails').children('.row').length;
+            
+
+
             const inputValue = $('#noOfCompartments').val();
 
-            // Clear previous content
-            outputContainer.empty();
 
+            // if the input value is less than the current compartments, remove the extra compartments
+            if (inputValue < currentCompartments) {
+                for (let i = 0; i < currentCompartments - inputValue; i++) {
+                    outputContainer.children('.row').last().remove();
+                }
+                return;
+            }
             // Generate tags based on the input value
-            for (let i = 0; i < inputValue; i++) {
+            for (let i = 0; i < inputValue - currentCompartments; i++) {
                 const newRow = `
                     <div class="row g-20 mt-20 mb-20 ">
                         <div class="col-2">
@@ -553,7 +562,7 @@ echo "</pre>";
                                 <div class="input-text-label">No of Compartments</div>
                                 <div class="input-field">
                                     <div class="text">
-                                    <input type="text" name="compartment[total_no][]" class="type-here" placeholder="eg: no of compartments">
+                                    <input type="text" name="compartment[total_number][]" class="type-here" placeholder="eg: no of compartments">
                                     </div>
                                 </div>
                             </div>

@@ -77,7 +77,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                             <?= $train->train_type ?>
                                         </td>
                                         <td class="col-2">
-                                            <?= $train->start_station . "-" . $train->end_station ?>
+                                            <?= $train->start_station . " - " . $train->end_station ?>
                                         </td>
                                         <td class="col-2 ">
                                             <?= date("H:i", strtotime($train->train_start_time)) . " " . date("H:i", strtotime($train->train_end_time)) ?>
@@ -92,14 +92,15 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            <a class="blue" href="<?= ROOT ?>staffgeneral/deleteTrain/<?= $train->train_id ?>" onclick="alert('are you sure want to delete the train?')">
+                                           
+                                            <div class="blue deleteBtn">
                                                 <div class="badge-base bg-Selected-red">
                                                     <div class="dot">
                                                         <div class="dot4  bg-Banner-red"></div>
                                                     </div>
                                                     <div class="text red">Delete</div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </td>
 
                                     </tr>
@@ -114,17 +115,38 @@ if (isset($data['trains']) && $data['trains'] != 0) {
             </div>
         </main>
     </div>
-    
+
     <?php $this->view("./includes/load-js") ?>
 
     <script>
         $(document).ready(function() {
             let table = new DataTable("#userTable", {
                 searchable: true,
-                sortable: true
+                fixedHeight: true,
+                // sortable: true
+            });
+
+            $('.deleteBtn').on('click', function(e) {
+                e.preventDefault();
+
+                console.log('delete clicked');
+
+                var title = "Are you sure you want to delete the train?";
+                var text = "Once deleted, you will not be able to recover this train! And this train will be removed from all the reservations and waiting lists.";
+                var confirmButtonText = "Yes, delete it!";
+                var img = "<?= ROOT ?>assets/images/delete.svg"
+
+                makePopupBox(title, text, confirmButtonText, img , function(result) {
+                    if (result == true) {
+                        window.location.href = "<?= ROOT ?>staffgeneral/deleteTrain/<?= $train->train_id ?>";
+                    }
+                });
             });
 
             // makeSelectDropdown('body');
+            if (checkNotification('update=1') > -1) {
+                makeSuccessToast('Train Updated Successfully', '');
+            }
         });
     </script>
 </body>

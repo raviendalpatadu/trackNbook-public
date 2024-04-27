@@ -166,3 +166,9 @@ function hms_date_diff(DateInterval $date_diff)
     $seconds    = $date_diff->s;
     return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
 }
+
+
+function get_time($time, $format = 'h:i A')
+{
+    return date($format, strtotime($time));
+}

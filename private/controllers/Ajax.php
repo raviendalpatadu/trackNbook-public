@@ -163,16 +163,16 @@ class Ajax extends Controller
         }
     }
 
-    public function validateUpdateTrain(){
-        $train = new Trains();
+    // public function validateUpdateTrain(){
+    //     $train = new Trains();
 
-        if($train->validateUpdateTrain($_POST)){
-            echo json_encode(true);
-        }
-        else{
-            echo json_encode($train->errors);
-        }
-    }
+    //     if($train->validateUpdateTrain($_POST)){
+    //         echo json_encode(true);
+    //     }
+    //     else{
+    //         echo json_encode($train->errors);
+    //     }
+    // }
 
 
 }

@@ -405,6 +405,7 @@ class Trains extends Model
                         )
                         SELECT
                             DISTINCT train.train_id,
+                            train.train_no,
                             train.train_name,
                             train_type.train_type,
                             train.train_start_time,
@@ -893,15 +894,16 @@ class Trains extends Model
                 }
             }
 
-            if ($data['stopping_station']['time_verified'][0] != $data['train_start_time']) {
-                $this->errors['errors']['train_start_time'] = 'First stopping station time should be same as start time';
-            }
-
             // fromat time into 24 hours format and with seconds
             $data['train_start_time'] = date("H:i:s", strtotime($data['train_start_time']));
             $data['train_end_time'] = date("H:i:s", strtotime($data['train_end_time']));
 
-            if ($data['stopping_station']['time_verified'][count($data['stopping_station']['time_verified']) - 1] != $data['train_end_time']) {
+            if (get_time($data['stopping_station']['time_verified'][0], 'H:i:s') != get_time($data['train_start_time'], 'H:i:s')) {
+                $this->errors['errors']['train_start_time'] = 'First stopping station time should be same as start time';
+            }
+
+
+            if (get_time($data['stopping_station']['time_verified'][count($data['stopping_station']['time_verified']) - 1], 'H:i:s') != get_time($data['train_end_time'], 'H:i:s')) {
                 $this->errors['errors']['train_end_time'] = 'Last stopping station time should be same as end time';
             }
 
@@ -932,12 +934,34 @@ class Trains extends Model
     {
 
         try {
+            if (isset($data['stopping_station']['id'])) {
+
+                foreach ($data['stopping_station']['id'] as $key => $value) {
+                    if (empty($value)) {
+                        // $this->errors['errors']['stopping_station'] = 'Stopping station is required';
+                        unset($data['stopping_station']['id'][$key]);
+                    }
+                }
+                $data['stopping_station']['time_verified'] = $data['stopping_station']['time'];
+                foreach ($data['stopping_station']['time'] as $key => $value) {
+                    if (empty($value)) {
+                        // unset and reindex the array
+                        unset($data['stopping_station']['time'][$key]);
+                        $data['stopping_station']['time_verified'] = array_values($data['stopping_station']['time']);
+                    }
+                }
+    
+                // fromat time into 24 hours format and with seconds
+                $data['train_start_time'] = date("H:i:s", strtotime($data['train_start_time']));
+                $data['train_end_time'] = date("H:i:s", strtotime($data['train_end_time']));
+            }
+
             // tbl_tain
             $this->update($id, [
                 'train_name' => $data['train_name'],
                 'train_type' => $data['train_type'],
-                'train_start_time' => $data['train_start_time'],
-                'train_end_time' => $data['train_end_time'],
+                'train_start_time' => get_time($data['train_start_time'], 'H:i:s'),
+                'train_end_time' => get_time($data['train_end_time'], 'H:i:s'),
                 'train_start_station' => $data['train_start_station'],
                 'train_end_station' => $data['train_end_station'],
                 'train_route' => $data['train_route']
@@ -969,12 +993,11 @@ class Trains extends Model
                     'train_id' => $id,
                     'station_id' => $value,
                     'stop_no' => $key + 1,
-                    'train_stop_time' => $data['stopping_station']['time_verified'][$key]
-
+                    'train_stop_time' => get_time($data['stopping_station']['time_verified'][$key], 'H:i:s')
                 ));
             }
 
-            // return true; // Successful insertion
+            return true; // Successful insertion
             // die('update');
         } catch (PDOException $e) {
             die($e->getMessage());

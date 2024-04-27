@@ -107,10 +107,15 @@ class StaffGeneral extends Controller
 
                 if ( $train->validateUpdatetrain($_POST)) {
 
-                    echo "validates";
-                    // $train->updateTrain($id, $_POST);
                     
-                    // $this->redirect('StaffGeneral/getTrainList?success=1');
+                    if($train->updateTrain($id, $_POST)){
+                        $this->redirect('StaffGeneral/getTrainList?update=1');
+                    }else{
+                        $_SESSION['errors'] = "Failed to update train";
+                        $data['errors'] = $train->errors;
+                        $this->view('update.train.staffgeneral', $data);
+                    }
+                    
                 }
                 else{
                     $data['errors'] = $train->errors;
