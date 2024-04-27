@@ -17,9 +17,6 @@
                     <div class="ach-txt-wrapper mb-30">
                         Welcome to <?= ucfirst(Auth::smStation()->station_name) ?>
                     </div>
-
-
-
                     <div class="d-flex flex-row justify-content-center g-50">
                         <div class="col-4">
                             <div class="dashboard-card-sm  d-flex align-items-center bg-light-blue Primary-Gray g-50">
@@ -34,7 +31,7 @@
 
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        height="80" width="80" version="1.1" id="_x32_" viewBox="0 0 512 512"
+                                        height="70" width="70" version="1.1" id="_x32_" viewBox="0 0 512 512"
                                         xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="15.36">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0" />
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
