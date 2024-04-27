@@ -71,7 +71,7 @@ class TrainDriver extends Controller
             $train_delay = new TrainDelay();
             $delay_data = array(
                 'delay_train' => $train_id,
-                'delay_station' => $_POST['station_id'],
+                'delay_station' => $data['location']->station_id,
                 'delay_date' => date('Y-m-d'),
                 'delay_reason' => $_POST['reason']
             );
@@ -84,7 +84,8 @@ class TrainDriver extends Controller
             }
         }
 
-        $this->view('update.train.delay', $data);
+        
+         $this->view('update.train.delay', $data);
     }
 
 
