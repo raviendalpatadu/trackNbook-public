@@ -147,6 +147,10 @@ if (isset($data['trains']) && $data['trains'] != 0) {
             if (checkNotification('update=1') > -1) {
                 makeSuccessToast('Train Updated Successfully', '');
             }
+
+            if (checkNotification('delete=1') > -1) {
+                makeSuccessToast('Train Deleted Successfully', '');
+            }
         });
     </script>
 </body>

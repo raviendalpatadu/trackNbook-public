@@ -138,7 +138,7 @@ class StaffGeneral extends Controller
         // if(isset($_POST['delete'])){
         try {
             $result = $train->delete($id, "train_id");
-            $this->redirect('StaffGeneral/getTrainList');
+            $this->redirect('StaffGeneral/getTrainList?delete=1');
         } catch (Exception $e) {
             die($e->getMessage());
         }
