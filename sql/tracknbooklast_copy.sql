@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 07:12 PM
+-- Generation Time: Apr 25, 2024 at 09:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -331,13 +331,18 @@ CREATE TABLE `tbl_compartment` (
 --
 
 INSERT INTO `tbl_compartment` (`compartment_id`, `compartment_train_id`, `compartment_class`, `compartment_class_type`, `compartment_seat_layout`, `compartment_total_seats`, `compartment_total_number`) VALUES
-(222, 26, '1', 1, '2x2', 48, 1),
-(223, 27, '1', 1, '2x2', 48, 1),
-(224, 27, '2', 3, '2x2', 48, 2),
-(225, 27, '3', 4, '2x2', 48, 1),
-(226, 28, '1', 1, '2x2', 48, 1),
-(227, 28, '1002', 3, '2x2', 48, 2),
-(228, 28, '1', 4, '2x2', 48, 2);
+(1, 1, '1', 1, '2x2', 4, 1),
+(2, 1, '2', 4, '2x2', 48, 1),
+(3, 1, '3', 3, '2x3', 50, 1),
+(22, 2, '1', 1, '2x2', 48, 1),
+(23, 2, '2', 4, '2x2', 48, 1),
+(24, 2, '3', 3, '2x3', 48, 1),
+(163, 4, '1', 1, '2x2', 48, 1),
+(164, 4, '2', 4, '2x2', 48, 1),
+(165, 4, '3', 3, '2x2', 48, 1),
+(175, 8, '1', 1, '2x2', 48, 2),
+(176, 8, '1', 3, '2x2', 48, 1),
+(177, 8, '1', 4, '2x3', 48, 1);
 
 -- --------------------------------------------------------
 
@@ -379,8 +384,7 @@ CREATE TABLE `tbl_disable_period` (
 --
 
 INSERT INTO `tbl_disable_period` (`disable_period_id`, `disable_period_start_date`, `disable_period_end_date`) VALUES
-(33, '2024-05-10', '2024-05-30'),
-(34, '2024-04-26', '2024-04-28');
+(33, '2024-05-10', '2024-05-10');
 
 -- --------------------------------------------------------
 
@@ -518,7 +522,7 @@ CREATE TABLE `tbl_image` (
 --
 
 INSERT INTO `tbl_image` (`user_id`, `image_name`, `image_path`, `image_type`) VALUES
-(2, '662bd005d80d29.23448229.png', 'userImg/662bd005d80d29.23448229.png', 'image/png'),
+(2, '6623f411f377a9.81664244.jpg', 'userImg/6623f411f377a9.81664244.jpg', 'image/jpeg'),
 (18, '662268f458dde6.00188545.jpg', 'userImg/662268f458dde6.00188545.jpg', 'image/jpeg'),
 (19, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (21, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
@@ -528,7 +532,7 @@ INSERT INTO `tbl_image` (`user_id`, `image_name`, `image_path`, `image_type`) VA
 (25, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (26, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (27, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(2, '662bd005d80d29.23448229.png', 'userImg/662bd005d80d29.23448229.png', 'image/png'),
+(2, '6623f411f377a9.81664244.jpg', 'userImg/6623f411f377a9.81664244.jpg', 'image/jpeg'),
 (18, '662268f458dde6.00188545.jpg', 'userImg/662268f458dde6.00188545.jpg', 'image/jpeg'),
 (19, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (21, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
@@ -559,7 +563,7 @@ INSERT INTO `tbl_image` (`user_id`, `image_name`, `image_path`, `image_type`) VA
 (61, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (62, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (63, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(2, '662bd005d80d29.23448229.png', 'userImg/662bd005d80d29.23448229.png', 'image/png'),
+(2, '6623f411f377a9.81664244.jpg', 'userImg/6623f411f377a9.81664244.jpg', 'image/jpeg'),
 (18, '662268f458dde6.00188545.jpg', 'userImg/662268f458dde6.00188545.jpg', 'image/jpeg'),
 (19, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (21, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
@@ -569,7 +573,7 @@ INSERT INTO `tbl_image` (`user_id`, `image_name`, `image_path`, `image_type`) VA
 (25, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (26, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (27, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(2, '662bd005d80d29.23448229.png', 'userImg/662bd005d80d29.23448229.png', 'image/png'),
+(2, '6623f411f377a9.81664244.jpg', 'userImg/6623f411f377a9.81664244.jpg', 'image/jpeg'),
 (18, '662268f458dde6.00188545.jpg', 'userImg/662268f458dde6.00188545.jpg', 'image/jpeg'),
 (19, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (21, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
@@ -598,9 +602,7 @@ INSERT INTO `tbl_image` (`user_id`, `image_name`, `image_path`, `image_type`) VA
 (59, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (60, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
 (61, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(64, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(65, 'default.jpg', 'userImg/default.jpg', 'image/jpg'),
-(67, 'default.jpg', 'userImg/default.jpg', 'image/jpg');
+(64, 'default.jpg', 'userImg/default.jpg', 'image/jpg');
 
 -- --------------------------------------------------------
 
@@ -614,21 +616,15 @@ CREATE TABLE `tbl_inquiry` (
   `inquiry_ticket_id` varchar(20) NOT NULL,
   `inquiry_station` int(11) NOT NULL,
   `inquiry_reason` longtext NOT NULL,
-  `inquiry_status` varchar(50) NOT NULL,
-  `inquiry_created_time` datetime NOT NULL DEFAULT current_timestamp(),
-  `inquiry_to_station_master` tinyint(1) NOT NULL
+  `inquiry_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_inquiry`
 --
 
-INSERT INTO `tbl_inquiry` (`inquiry_id`, `inquiry_passenger_id`, `inquiry_ticket_id`, `inquiry_station`, `inquiry_reason`, `inquiry_status`, `inquiry_created_time`, `inquiry_to_station_master`) VALUES
-(1, 18, '20240421192649-8747', 1, 'Refund not given', 'pending', '2024-04-27 22:42:03', 0),
-(6, 18, '20240414175025-9746', 1, 'fdsfsfs', 'Pending', '2024-04-27 22:42:03', 0),
-(7, 18, '20240414175025-9746', 1, 'need to get refund for one child is it posible', 'Pending', '2024-04-27 22:42:03', 0),
-(8, 18, '20240421205510-2450', 12, 'Can I cancel this reservation', 'Pending', '2024-04-27 22:42:03', 0),
-(9, 18, '20240422014255-3022', 12, 'dhsajkhdska', 'Pending', '2024-04-27 22:42:03', 0);
+INSERT INTO `tbl_inquiry` (`inquiry_id`, `inquiry_passenger_id`, `inquiry_ticket_id`, `inquiry_station`, `inquiry_reason`, `inquiry_status`) VALUES
+(1, 18, '20240421192649-8747', 1, 'Refund not given', 'pending');
 
 -- --------------------------------------------------------
 
@@ -681,10 +677,7 @@ INSERT INTO `tbl_login` (`login_id`, `login_username`, `login_password`, `user_i
 (61, 'tes', '28b662d883b6d76fd96e4ddc5e9ba780', 61),
 (62, 'train_driver5', 'c5f75be4589805a83bd53464c713d47e', 62),
 (63, 'ee', '08a4415e9d594ff960030b921d42b91e', 63),
-(64, 'sm_jaffna', 'e5bad6306ff1668b297944bab3b1b4c1', 64),
-(65, 'sm_bandarawela', 'a29d338f58bfcb03fe201bf20f8e877f', 65),
-(66, 'cmb_sm', 'b40400833c27ae0658bcef122e5d7519', 66),
-(67, 'qwe', '76d80224611fc919a5d54f0ff9fba446', 67);
+(64, 'sm_jaffna', 'e5bad6306ff1668b297944bab3b1b4c1', 64);
 
 -- --------------------------------------------------------
 
@@ -715,8 +708,7 @@ INSERT INTO `tbl_passengers` (`passenger_i`, `passenger_id`, `passenger_email`, 
 (14, 59, 'dalpataduravien@gmail.com', '200123602078', 0),
 (15, 60, 'dalpataduravien@gmail.com', '200123602078', 0),
 (16, 61, 'dalpataduravien@gmail.com', '200123602078', 0),
-(17, 63, 'dalpataduravien@gmail.com', '200123602078', 0),
-(18, 67, 'dalpataduravien@gmail.com', '200123602078', 0);
+(17, 63, 'dalpataduravien@gmail.com', '200123602078', 0);
 
 -- --------------------------------------------------------
 
@@ -754,8 +746,24 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`reservation_id`, `reservation_ticket_id`, `reservation_passenger_id`, `reservation_start_station`, `reservation_end_station`, `reservation_train_id`, `reservation_compartment_id`, `reservation_date`, `reservation_seat`, `reservation_passenger_title`, `reservation_passenger_first_name`, `reservation_passenger_last_name`, `reservation_passenger_nic`, `reservation_passenger_phone_number`, `reservation_is_dependent`, `reservation_passenger_email`, `reservation_passenger_gender`, `reservation_created_time`, `reservation_status`, `reservation_type`, `reservation_amount`, `reservation_is_travelled`) VALUES
-(255, 'TMP20240427202516-87', 18, 2, 12, 26, 222, '2024-04-29', 1, 'Mr.', 'iflal', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-27 08:24:28', 'Reserved', 'Warrant', 0, 0),
-(256, 'TMP20240427202516-87', 18, 2, 12, 26, 222, '2024-04-29', 2, 'Mr.', 'achcu', 'liyanage', 0, '0718118969', 1, 'dalpataduravien@gmail.com', 'male', '2024-04-27 08:24:28', 'Reserved', 'Warrant', 0, 0);
+(88, 'TMP20240414053015-73', 18, 1, 12, 1, 3, '2024-04-23', 1, 'Mr.', 'Ravien', 'Dalpatadu', 200123602078, '0701949400', 0, 'dalpataduravien@gmail.com', 'male', '0000-00-00 00:00:00', 'Approval Pending', 'Warrant', 0, 0),
+(90, 'TMP20240414053434-91', 18, 1, 2, 1, 3, '2024-04-16', 1, 'Mr.', 'Prabhath', 'sangeewa', 530673880, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '0000-00-00 00:00:00', 'Approval Pending', 'Warrant', 0, 0),
+(147, 'TMP20240414174551-32', 18, 1, 2, 1, 1, '2024-04-15', 1, 'Mr.', 'Prabhath', 'liyanage', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '0000-00-00 00:00:00', 'Approval Pending', 'Warrant', 0, 0),
+(148, 'TMP20240414174551-32', 18, 1, 2, 1, 1, '2024-04-15', 2, 'Mr.', 'Prabhath', 'henn', 200123569878, '0718118969', 0, 'sanath_dalpatadu@yahoo.com', 'female', '0000-00-00 00:00:00', 'Approval Pending', 'Warrant', 0, 0),
+(149, '20240414175025-9746', 18, 1, 2, 1, 1, '2024-04-15', 3, 'Mr.', 'moushika', 'dalpe', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '0000-00-00 00:00:00', 'Reserved', 'Normal', 0, 0),
+(167, 'TMP20240421093732-51', 18, 2, 1, 2, 22, '2024-04-24', 6, 'Mr.', 'Prabhath', 'liyanage', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-21 01:05:46', 'Pending', 'Normal', 0, 0),
+(174, '20240421192346-9882', 19, 2, 12, 1, 2, '2024-04-23', 2, 'Mr.', 'csfdsf', 'sangeewa', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-21 10:04:36', 'Reserved', 'Normal', 0, 0),
+(175, '20240421192649-8747', 19, 1, 12, 4, 165, '2024-04-30', 10, 'Mr.', 'fdsfdsf', 'fdsfs', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-21 10:56:23', 'Reserved', 'Normal', 0, 0),
+(177, '20240421205510-2450', 18, 12, 14, 1, 3, '2024-04-22', 1, 'Mr.', 'Prabhathopo', 'sangeewa', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 12:24:25', 'Reserved', 'Normal', 0, 0),
+(178, 'TMP20240421205639-37', 18, 2, 12, 1, 3, '2024-04-22', 2, 'Mr.', 'Prabhath', 'sangeewa', 200223405078, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 12:26:11', 'Pending', 'Normal', 0, 0),
+(180, 'TMP20240421210106-61', 18, 2, 12, 1, 2, '2024-04-23', 11, 'Mr.', 'Prabhath', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'female', '2024-04-22 12:29:28', 'Pending', 'Normal', 0, 0),
+(181, 'TMP20240421210106-61', 18, 12, 1, 2, 24, '2024-04-29', 6, 'Mr.', 'Prabhath', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'female', '2024-04-22 12:29:28', 'Pending', 'Normal', 0, 0),
+(182, '20240422014106-2666', 18, 2, 14, 4, 165, '2024-04-22', 1, 'Mr.', 'kan to bad', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 01:40:23', 'Reserved', 'Normal', 0, 0),
+(183, '20240422014255-3022', 18, 12, 14, 4, 164, '2024-04-22', 1, 'Mr.', 'ban to bad', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 01:42:08', 'Reserved', 'Normal', 0, 0),
+(184, 'TMP20240422014417-18', 18, 2, 14, 4, 164, '2024-04-22', 3, 'Mr.', 'warrant kan to bad', 'liyanage', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 01:43:41', 'Pending', 'Normal', 0, 0),
+(185, '20240422032535-1178', 19, 12, 1, 2, 24, '2024-04-29', 30, 'Mr.', 'shika', 'nmn', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 03:24:50', 'Reserved', 'Normal', 0, 0),
+(187, '20240422130644-5969', 63, 12, 14, 1, 1, '2024-04-23', 1, 'Mr.', 'dsf', 'fds', 256523651547, '0718118969', 0, 'dalpataduravien@gmail.com', 'male', '2024-04-22 01:05:15', 'Reserved', 'Normal', 0, 0),
+(205, '20240423222946-4788', 18, 2, 1, 2, 22, '2024-04-29', 6, 'Mr.', 'lakidu', 'sangeewa', 0, '', 0, '', 'male', '2024-04-23 10:28:12', 'Reserved', 'Normal', 2000, 0);
 
 --
 -- Triggers `tbl_reservation`
@@ -936,10 +944,7 @@ INSERT INTO `tbl_reservation_cancelled` (`reservation_id`, `reservation_ticket_i
 (204, '20240423222946-3260', 18, 6, 2, 1, 1, '2024-04-28', 3, 'Mr.', 'lakidu', 'sangeewa', 0, '', '', 'male', '2024-04-23 10:28:12', 'Cancelled', 'Normal', 'Not Refunded', 2000, 'Train Disabled'),
 (208, '20240424073947-8652', 18, 1, 12, 1, 1, '2024-05-10', 1, 'Mr.', 'Prabhath', 'liyanage', 0, '', '', 'male', '2024-04-24 07:36:45', 'Cancelled', 'Normal', 'Not Refunded', 2800, 'Train Disabled'),
 (209, '20240424073947-8652', 18, 1, 12, 1, 1, '2024-05-10', 2, 'Mr.', 'moushika', 'sangeewa', 0, '', '', 'male', '2024-04-24 07:36:45', 'Cancelled', 'Normal', 'Not Refunded', 2800, 'Train Disabled'),
-(210, '20240424073947-8652', 18, 1, 12, 1, 1, '2024-05-10', 3, 'Mr.', 'menu', 'liyanage', 0, '', '', 'male', '2024-04-24 07:36:45', 'Cancelled', 'Normal', 'Not Refunded', 2800, 'Train Disabled'),
-(187, '20240422130644-5969', 63, 12, 14, 1, 1, '2024-04-26', 1, 'Mr.', 'dsf', 'fds', 256523651547, '0718118969', 'dalpataduravien@gmail.com', 'male', '2024-04-22 01:05:15', 'Cancelled', 'Normal', 'Not Refunded', 0, 'Train Disabled'),
-(149, '20240414175025-9746', 18, 1, 2, 1, 1, '2024-04-15', 3, 'Mr.', 'moushika', 'dalpe', 200223405078, '0718118969', 'dalpataduravien@gmail.com', 'male', '0000-00-00 00:00:00', 'Cancelled', 'Normal', 'No Refund', 0, 'Passenger Cancelled'),
-(254, '20240427201959-4327', 18, 2, 12, 26, 222, '2024-04-29', 10, 'Mr.', 'Prabhath', 'sangeewa', 0, '0718118969', 'dalpataduravien@gmail.com', 'male', '2024-04-27 08:18:33', 'Cancelled', 'Normal', 'Not Refunded', 2500, 'Train Disabled');
+(210, '20240424073947-8652', 18, 1, 12, 1, 1, '2024-05-10', 3, 'Mr.', 'menu', 'liyanage', 0, '', '', 'male', '2024-04-24 07:36:45', 'Cancelled', 'Normal', 'Not Refunded', 2800, 'Train Disabled');
 
 -- --------------------------------------------------------
 
@@ -1068,37 +1073,7 @@ INSERT INTO `tbl_reservation_expired` (`reservation_id`, `reservation_ticket_id`
 (195, '', 18, 1, 14, 1, 3, '2024-04-30', 34, 'Mr.', 'Prabhath', 'dalpe', 0, '', '', 'female', '2024-04-23 04:58:38', 'Expired'),
 (196, '', 18, 1, 14, 1, 3, '2024-04-30', 39, 'Mr.', 'Prabhath', 'liyanage', 256523651547, '', '', 'female', '2024-04-23 04:58:38', 'Expired'),
 (197, '', 40, 1, 12, 1, 1, '2024-03-31', 2, 'Mr.', 'Prabhath', 'dalpe', 200023568978, '0718118969', 'sanath_dalpatadu@yahoo.com', 'female', '0000-00-00 00:00:00', 'Expired'),
-(203, '', 18, 1, 2, 1, 3, '2024-04-30', 12, '', '', '', 0, '', '', '', '2024-04-23 10:20:51', 'Expired'),
-(218, '', 18, 1, 2, 1, 1, '2024-04-30', 2, '', '', '', 0, '', '', '', '2024-04-26 05:39:56', 'Expired'),
-(219, '', 18, 2, 1, 2, 24, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 05:42:47', 'Expired'),
-(220, '', 18, 2, 1, 2, 24, '2024-04-30', 2, '', '', '', 0, '', '', '', '2024-04-26 05:42:47', 'Expired'),
-(221, '', 18, 1, 2, 4, 164, '2024-05-10', 3, '', '', '', 0, '', '', '', '2024-04-26 05:42:47', 'Expired'),
-(222, '', 18, 1, 2, 4, 164, '2024-05-10', 4, '', '', '', 0, '', '', '', '2024-04-26 05:42:47', 'Expired'),
-(223, '', 18, 1, 2, 1, 2, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 05:47:41', 'Expired'),
-(224, '', 18, 1, 2, 1, 3, '2024-04-30', 2, '', '', '', 0, '', '', '', '2024-04-26 05:54:23', 'Expired'),
-(225, '', 18, 1, 2, 1, 3, '2024-04-30', 10, '', '', '', 0, '', '', '', '2024-04-26 05:55:23', 'Expired'),
-(226, '', 18, 1, 2, 1, 3, '2024-04-30', 9, '', '', '', 0, '', '', '', '2024-04-26 05:56:58', 'Expired'),
-(227, '', 18, 1, 2, 1, 3, '2024-04-30', 9, '', '', '', 0, '', '', '', '2024-04-26 05:57:21', 'Expired'),
-(228, '', 18, 1, 2, 1, 3, '2024-04-30', 9, '', '', '', 0, '', '', '', '2024-04-26 06:00:23', 'Expired'),
-(229, '', 18, 1, 2, 1, 3, '2024-04-30', 8, '', '', '', 0, '', '', '', '2024-04-26 06:00:28', 'Expired'),
-(231, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:04:18', 'Expired'),
-(232, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:05:21', 'Expired'),
-(233, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:05:38', 'Expired'),
-(234, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:05:55', 'Expired'),
-(235, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:06:02', 'Expired'),
-(236, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:06:28', 'Expired'),
-(237, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:07:08', 'Expired'),
-(238, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:07:20', 'Expired'),
-(239, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:11:38', 'Expired'),
-(240, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:13:16', 'Expired'),
-(241, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:26:45', 'Expired'),
-(242, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:32:19', 'Expired'),
-(243, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:34:44', 'Expired'),
-(244, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:36:40', 'Expired'),
-(245, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:36:42', 'Expired'),
-(246, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:36:53', 'Expired'),
-(247, '', 18, 1, 2, 1, 1, '2024-04-30', 1, '', '', '', 0, '', '', '', '2024-04-26 06:37:03', 'Expired'),
-(249, '', 18, 1, 2, 1, 1, '2024-04-30', 3, '', '', '', 0, '', '', '', '2024-04-26 06:51:12', 'Expired');
+(203, '', 18, 1, 2, 1, 3, '2024-04-30', 12, '', '', '', 0, '', '', '', '2024-04-23 10:20:51', 'Expired');
 
 -- --------------------------------------------------------
 
@@ -1249,8 +1224,7 @@ INSERT INTO `tbl_station_master` (`station_master_id`, `station_master_station`)
 (35, 1),
 (36, 7),
 (55, 1),
-(64, 19),
-(65, 12);
+(64, 19);
 
 -- --------------------------------------------------------
 
@@ -1286,7 +1260,6 @@ INSERT INTO `tbl_ticket_checker` (`ticket_checker_id`, `ticket_checker_pin_code`
 
 CREATE TABLE `tbl_train` (
   `train_id` int(11) NOT NULL,
-  `train_no` int(11) NOT NULL,
   `train_name` varchar(200) NOT NULL,
   `train_type` int(5) NOT NULL,
   `train_start_time` time NOT NULL,
@@ -1301,10 +1274,11 @@ CREATE TABLE `tbl_train` (
 -- Dumping data for table `tbl_train`
 --
 
-INSERT INTO `tbl_train` (`train_id`, `train_no`, `train_name`, `train_type`, `train_start_time`, `train_end_time`, `train_start_station`, `train_end_station`, `train_route`, `train_status`) VALUES
-(26, 1005, 'Udarata Menike', 1, '01:00:00', '13:00:00', 2, 12, 1, 'Enabled'),
-(27, 1006, 'Udarata Menike', 1, '01:00:00', '13:00:00', 14, 1, 1, 'Enabled'),
-(28, 10010, 'yaldevi', 1, '01:00:00', '13:00:00', 1, 19, 2, 'Enabled');
+INSERT INTO `tbl_train` (`train_id`, `train_name`, `train_type`, `train_start_time`, `train_end_time`, `train_start_station`, `train_end_station`, `train_route`, `train_status`) VALUES
+(1, 'Udarata Menike', 1, '05:00:00', '19:00:00', 1, 14, 1, 'Enabled'),
+(2, 'Udarata Menike', 1, '05:00:00', '19:00:00', 14, 1, 1, 'Enabled'),
+(4, 'podi menike', 1, '07:00:00', '21:00:00', 1, 14, 1, 'Enabled'),
+(8, 'yal deewee', 1, '01:00:00', '13:00:00', 1, 19, 11, 'Enabled');
 
 -- --------------------------------------------------------
 
@@ -1320,6 +1294,14 @@ CREATE TABLE `tbl_train_delay` (
   `delay_reason` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_train_delay`
+--
+
+INSERT INTO `tbl_train_delay` (`delay_id`, `delay_train`, `delay_station`, `delay_date`, `delay_reason`) VALUES
+(1, 1, 2, '2024-04-26 00:58:12', 'brakdown in track'),
+(2, 2, 12, '2024-04-26 00:58:12', 'track break down due to a land slide');
+
 -- --------------------------------------------------------
 
 --
@@ -1331,6 +1313,13 @@ CREATE TABLE `tbl_train_disable_period` (
   `disable_period_id` int(11) NOT NULL,
   `disable_period_train_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_train_disable_period`
+--
+
+INSERT INTO `tbl_train_disable_period` (`train_disable_period_id`, `disable_period_id`, `disable_period_train_id`) VALUES
+(15, 33, 1);
 
 -- --------------------------------------------------------
 
@@ -1368,6 +1357,17 @@ CREATE TABLE `tbl_train_location` (
   `train_location_updated_time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tbl_train_location`
+--
+
+INSERT INTO `tbl_train_location` (`train_location_id`, `train_id`, `date`, `train_location`, `train_location_updated_time`) VALUES
+(26, 4, '2024-04-22', 2, '2024-04-22 03:15:56'),
+(27, 2, '2024-04-22', 14, '2024-04-22 09:26:18'),
+(29, 4, '2024-04-23', 14, '2024-04-23 10:09:44'),
+(31, 2, '2024-04-23', 14, '2024-04-23 07:55:36'),
+(35, 1, '2024-04-24', 1, '2024-04-24 08:05:32');
+
 -- --------------------------------------------------------
 
 --
@@ -1378,7 +1378,7 @@ CREATE TABLE `tbl_train_stop_station` (
   `train_id` int(11) NOT NULL,
   `station_id` int(11) NOT NULL,
   `stop_no` int(11) NOT NULL,
-  `train_stop_time` time NOT NULL
+  `train_stop_time` time NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
@@ -1386,15 +1386,22 @@ CREATE TABLE `tbl_train_stop_station` (
 --
 
 INSERT INTO `tbl_train_stop_station` (`train_id`, `station_id`, `stop_no`, `train_stop_time`) VALUES
-(26, 2, 1, '01:00:00'),
-(26, 12, 2, '13:00:00'),
-(27, 1, 3, '13:00:00'),
-(27, 2, 2, '09:00:00'),
-(27, 14, 1, '01:00:00'),
-(28, 1, 1, '01:00:00'),
-(28, 6, 3, '21:00:00'),
-(28, 18, 2, '05:00:00'),
-(28, 19, 4, '13:00:00');
+(1, 1, 1, '05:00:00'),
+(1, 2, 2, '09:00:00'),
+(1, 12, 3, '11:06:31'),
+(1, 14, 4, '19:00:00'),
+(2, 1, 4, '05:00:00'),
+(2, 2, 3, '11:00:00'),
+(2, 12, 2, '11:06:31'),
+(2, 14, 1, '19:00:00'),
+(4, 1, 1, '07:00:00'),
+(4, 2, 2, '11:06:31'),
+(4, 12, 3, '16:00:00'),
+(4, 14, 4, '21:00:00'),
+(8, 1, 1, '22:45:27'),
+(8, 6, 3, '22:45:27'),
+(8, 18, 2, '22:45:27'),
+(8, 19, 4, '22:45:27');
 
 -- --------------------------------------------------------
 
@@ -1442,7 +1449,7 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_name`, `user_phone_number`, `user_type`, `user_gender`, `user_email`, `user_nic`, `user_is_email_verified`) VALUES
-(2, 'Mr.', 'Admin', 'Admin    ', '0718118969', 'admin', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
+(2, 'Mr.', 'Admin', 'Admin   ', '0718118969', 'admin', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
 (18, 'Mr.', 'Ravien', 'hj  ', '0718118969', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
 (19, 'Mr.', 'sdad', 'sdasda', '0718118969', 'staff_ticketing', 'female', 'dalpataduravien@gmail.com', 200123602078, 1),
 (21, 'Mr.', 'dfa', 'jkkj', '0718118969', 'staff_general', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
@@ -1475,10 +1482,7 @@ INSERT INTO `tbl_user` (`user_id`, `user_title`, `user_first_name`, `user_last_n
 (61, 'Mr.', 'test', 'msna', '0718118969', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
 (62, '', 'train', 'driver', '0718118969', 'train_driver', 'male', 'dalpataduravien@gmail.com', 123123602078, 0),
 (63, 'Mr.', 'Prabhath', 'dalpatadu', '0718118969', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
-(64, '', 'jaffna', 'sm', '0718118969', 'station_master', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
-(65, '', 'Bandarawela', 'Station master', '0718118969', 'station_master', 'male', 'dalpataduravien@gmail.com', 200123602078, 1),
-(66, '', 'Prabhath', 'dalpatadu', '0718118969', 'station_master', 'male', 'dalpataduravien@gmail.com', 123123602078, 0),
-(67, 'Mr.', 'weq', 'ewqweq', '0718118969', 'passenger', 'male', 'dalpataduravien@gmail.com', 200123602078, 1);
+(64, '', 'jaffna', 'sm', '0718118969', 'station_master', 'male', 'dalpataduravien@gmail.com', 200123602078, 1);
 
 -- --------------------------------------------------------
 
@@ -1497,6 +1501,18 @@ CREATE TABLE `tbl_waiting_list` (
   `waiting_list_status` varchar(35) NOT NULL DEFAULT 'Waiting',
   `waiting_list_time_created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_waiting_list`
+--
+
+INSERT INTO `tbl_waiting_list` (`waiting_list_id`, `waiting_list_passenger_id`, `waiting_list_train_id`, `waiting_list_compartment_id`, `waiting_list_reservation_start_station`, `waiting_list_reservation_end_station`, `waiting_list_reservation_date`, `waiting_list_status`, `waiting_list_time_created`) VALUES
+(30, 18, 1, 1, 1, 2, '2024-04-15', 'Waiting', '2024-04-15 20:40:01'),
+(32, 25, 1, 1, 1, 2, '2024-04-15', 'Waiting', '2024-04-15 21:15:06'),
+(38, 26, 1, 1, 1, 14, '2024-04-15', 'Waiting', '2024-04-15 21:22:30'),
+(40, 25, 1, 1, 1, 2, '2024-04-16', 'Waiting', '2024-04-15 22:00:51'),
+(44, 63, 1, 1, 1, 14, '2024-04-30', 'Waiting', '2024-04-22 13:03:33'),
+(45, 30, 1, 1, 1, 2, '2024-04-30', 'Waiting', '2024-04-22 16:57:44');
 
 -- --------------------------------------------------------
 
@@ -1605,9 +1621,7 @@ INSERT INTO `tbl_warrant_image` (`warrant_image_id`, `warrant_image_name`, `warr
 (88, '6627e4291f9457.75211602.png', 'warrants/6627e4291f9457.75211602.png', 'image/png'),
 (89, '66286463668f94.53439122.png', 'warrants/66286463668f94.53439122.png', 'image/png'),
 (90, '662867b47b2d44.76991775.png', 'warrants/662867b47b2d44.76991775.png', 'image/png'),
-(91, '662868493b91f1.31607761.png', 'warrants/662868493b91f1.31607761.png', 'image/png'),
-(92, '662b99c8975b59.25675997.png', 'warrants/662b99c8975b59.25675997.png', 'image/png'),
-(93, '662d11d4a6a118.75349527.png', 'warrants/662d11d4a6a118.75349527.png', 'image/png');
+(91, '662868493b91f1.31607761.png', 'warrants/662868493b91f1.31607761.png', 'image/png');
 
 -- --------------------------------------------------------
 
@@ -1627,8 +1641,10 @@ CREATE TABLE `tbl_warrant_reservation` (
 --
 
 INSERT INTO `tbl_warrant_reservation` (`warrant_id`, `warrant_status`, `warrant_reservation_id`, `warrant_image_id`) VALUES
-(63, 'verified', 255, 93),
-(64, 'Approval Pending', 256, 93);
+(39, 'Approval Pending', 88, 52),
+(41, 'Approval Pending', 90, 53),
+(42, 'Approval Pending', 147, 54),
+(43, 'Approval Pending', 148, 54);
 
 --
 -- Triggers `tbl_warrant_reservation`
@@ -1818,7 +1834,6 @@ ALTER TABLE `tbl_ticket_checker`
 --
 ALTER TABLE `tbl_train`
   ADD PRIMARY KEY (`train_id`),
-  ADD UNIQUE KEY `train_no` (`train_no`),
   ADD KEY `starstation_fk` (`train_start_station`),
   ADD KEY `endstation_fk` (`train_end_station`),
   ADD KEY `route_fk` (`train_route`),
@@ -1918,7 +1933,7 @@ ALTER TABLE `tbl_warrant_reservation_rejected`
 -- AUTO_INCREMENT for table `tbl_compartment`
 --
 ALTER TABLE `tbl_compartment`
-  MODIFY `compartment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `compartment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `tbl_compartment_class_type`
@@ -1930,7 +1945,7 @@ ALTER TABLE `tbl_compartment_class_type`
 -- AUTO_INCREMENT for table `tbl_disable_period`
 --
 ALTER TABLE `tbl_disable_period`
-  MODIFY `disable_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `disable_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `tbl_fare`
@@ -1942,31 +1957,31 @@ ALTER TABLE `tbl_fare`
 -- AUTO_INCREMENT for table `tbl_inquiry`
 --
 ALTER TABLE `tbl_inquiry`
-  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `inquiry_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `tbl_passengers`
 --
 ALTER TABLE `tbl_passengers`
-  MODIFY `passenger_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `passenger_i` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `tbl_reservation_expired`
 --
 ALTER TABLE `tbl_reservation_expired`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT for table `tbl_route`
@@ -1984,25 +1999,25 @@ ALTER TABLE `tbl_station`
 -- AUTO_INCREMENT for table `tbl_train`
 --
 ALTER TABLE `tbl_train`
-  MODIFY `train_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `train_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_train_delay`
 --
 ALTER TABLE `tbl_train_delay`
-  MODIFY `delay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `delay_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_train_disable_period`
 --
 ALTER TABLE `tbl_train_disable_period`
-  MODIFY `train_disable_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `train_disable_period_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_train_location`
 --
 ALTER TABLE `tbl_train_location`
-  MODIFY `train_location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `train_location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_train_type`
@@ -2014,7 +2029,7 @@ ALTER TABLE `tbl_train_type`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `tbl_waiting_list`
@@ -2026,13 +2041,13 @@ ALTER TABLE `tbl_waiting_list`
 -- AUTO_INCREMENT for table `tbl_warrant_image`
 --
 ALTER TABLE `tbl_warrant_image`
-  MODIFY `warrant_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `warrant_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `tbl_warrant_reservation`
 --
 ALTER TABLE `tbl_warrant_reservation`
-  MODIFY `warrant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `warrant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `tbl_warrant_reservation_rejected`
@@ -2162,7 +2177,7 @@ ALTER TABLE `tbl_train_driver`
 -- Constraints for table `tbl_train_location`
 --
 ALTER TABLE `tbl_train_location`
-  ADD CONSTRAINT `train_id_fk` FOREIGN KEY (`train_id`) REFERENCES `tbl_train` (`train_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `train_id_fk` FOREIGN KEY (`train_id`) REFERENCES `tbl_train` (`train_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `train_location_fk` FOREIGN KEY (`train_location`) REFERENCES `tbl_station` (`station_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

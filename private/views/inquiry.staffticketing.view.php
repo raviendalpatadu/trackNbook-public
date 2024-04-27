@@ -2,20 +2,20 @@
 <?php
 // echo "<pre>";
 // // print_r($data);
-// // print_r($_SESSION);
 
 
 // echo "</pre>";
 
 echo "<pre>";
 print_r($data);
+print_r($_SESSION);
 // print_r($_POST);
 echo "</pre>";
 
 
 
-if (isset($data['reservations']) && $data['reservations'] != 0) {
-    $count =  count($data['reservations']);
+if (isset($data['inquiry']) && $data['inquiry'] != 0) {
+    $count =  count($data['inquiry']);
 } else {
     $count = 0;
 }
@@ -108,19 +108,19 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                 </thead>
                                 <tbody>
                                     <?php if (!empty($data['inquiry'])) : ?>
-                                        <?php for ($i = 0; count($data['inquiry']) > $i; $i++) : ?>
+                                        <?php for ($i = 0; $count > $i; $i++) : ?>
                                             <tr class=" row p-20">
-                                                <td data-label="Inquiry ID" class="col-1 d-flex align-items-center lightgray-font"><?= $data['inquiry'][0]->inquiry_id ?></td>
-                                                <td data-label="Ticket ID" class="col-2 d-flex align-items-center lightgray-font"><?= $data['inquiry'][0]->inquiry_ticket_id ?></td>
-                                                <td data-label="NIC" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][0]->user_nic : ''; ?></td>
-                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][0]->user_first_name) . ' ' . ucfirst($data['inquiry'][0]->user_last_name)  : ''; ?></td>
-                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][0]->inquiry_created_time : ''; ?></td>
+                                                <td data-label="Inquiry ID" class="col-1 d-flex align-items-center lightgray-font"><?= $data['inquiry'][$i]->inquiry_id ?></td>
+                                                <td data-label="Ticket ID" class="col-2 d-flex align-items-center lightgray-font"><?= $data['inquiry'][$i]->inquiry_ticket_id ?></td>
+                                                <td data-label="NIC" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][$i]->user_nic : ''; ?></td>
+                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][$i]->user_first_name) . ' ' . ucfirst($data['inquiry'][0]->user_last_name)  : ''; ?></td>
+                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][$i]->inquiry_created_time : ''; ?></td>
                                                 <td data-label="status" class="col-1 d-flex align-items-center">
                                                     <div class="badge-base bg-Selected-green">
                                                         <div class="dot">
                                                             <div class="dot4"></div>
                                                         </div>
-                                                        <div class="text green"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][0]->inquiry_status) : ''; ?></div>
+                                                        <div class="text green"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][$i]->inquiry_status) : ''; ?></div>
                                                     </div>
                                                 </td>
 

@@ -3,7 +3,7 @@
 class Inquiries extends Model
 {
     protected $table = 'tbl_inquiry';
-    protected $allowedColumns = ['inquiry_passenger_id', 'inquiry_ticket_id', 'inquiry_station', 'inquiry_reason', 'inquiry_status'];
+    protected $allowedColumns = ['inquiry_passenger_id', 'inquiry_ticket_id', 'inquiry_station', 'inquiry_reason', 'inquiry_status', 'inquiry_created_time','inquiry_to_station_master'];
 
     public function __construct()
     {
