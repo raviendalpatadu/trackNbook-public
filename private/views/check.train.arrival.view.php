@@ -85,7 +85,7 @@
     </div>
 
     <script>
-       $(document).ready(function () {
+       $(document).ready(function() {
     let table = new DataTable("#userTable", {
         search: true
     });
