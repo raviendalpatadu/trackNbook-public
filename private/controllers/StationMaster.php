@@ -163,4 +163,12 @@ class StationMaster extends Controller
         }
         return false;
     }
+
+    function getInquiry(){
+        $inquiry = new Inquiries();
+        $data = array();
+        $data['inquiries'] = $inquiry->getStationInquiry();
+         $this->view('view.inquiry', $data);
+        // echo json_encode($data);
+    }
 }
