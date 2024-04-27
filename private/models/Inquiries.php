@@ -12,7 +12,10 @@ class Inquiries extends Model{
     public function getStationInquiry(){
         $query = "SELECT * FROM tbl_inquiry WHERE inquiry_station = :station";
         $data = $this->query($query, array('station' => $_SESSION['USER']->user_data));
-        return $data;
+        if(is_array($data)){
+            return $data;
+        }
+        return [];
     }
 
 

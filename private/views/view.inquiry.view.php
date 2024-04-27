@@ -9,9 +9,6 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
     $count = 0;
 }
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
 ?>
 
 <head>
