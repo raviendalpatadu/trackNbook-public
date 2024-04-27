@@ -124,16 +124,9 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     </div>
                                                 </td>
 
-                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"></td> -->
+                                                
                                                 <td class="col-1 d-flex align-items-center g-20">
-                                                    <!-- <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div> -->
-
-                                                    <a class="blue" href="<?= ROOT ?>staffticketing/inquirySummary/<?= $data['inquiry'][0]->inquiry_id  ?>">
+                                                    <a class="blue" href="<?= ROOT ?>staffticketing/inquirySummary/<?= $data['inquiry'][$i]->inquiry_id  ?>">
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
                                                                 <div class="dot4"></div>

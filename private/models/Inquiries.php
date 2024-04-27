@@ -39,6 +39,8 @@ class Inquiries extends Model
             $query = "SELECT i.*,
             r.*,
             u.*,
+            t.train_start_station,
+            t.train_end_station,
             t.train_name,
             t.train_start_time,
             t.train_end_time,
@@ -49,14 +51,15 @@ class Inquiries extends Model
             end_st.station_name AS end_station_name
         FROM tbl_inquiry i
             INNER JOIN tbl_user u ON i.inquiry_passenger_id = u.user_id
+            INNER JOIN tbl_staff_ticketing st ON i.inquiry_station = st.staff_ticketing_station
             INNER JOIN tbl_reservation r ON i.inquiry_ticket_id = r.reservation_ticket_id
             INNER JOIN tbl_train t ON r.reservation_train_id = t.train_id
             JOIN tbl_compartment c ON r.reservation_compartment_id = c.compartment_id
             JOIN tbl_compartment_class_type ctt ON c.compartment_class_type = ctt.compartment_class_type_id
             JOIN tbl_train_type tt ON t.train_type = tt.train_type_id
-            JOIN tbl_station start_st ON r.reservation_start_station = start_st.station_id
-            JOIN tbl_station end_st ON r.reservation_end_station = end_st.station_id
-        WHERE i.inquiry_id = :id;";
+            JOIN tbl_station start_st ON t.train_start_station = start_st.station_id
+            JOIN tbl_station end_st ON t.train_end_station = end_st.station_id
+        WHERE i.inquiry_id = :id AND i.inquiry_station =  st.staff_ticketing_station;";
 
             $result = $this->query($query, ['id' => $id]);
         } catch (PDOException $e) {
