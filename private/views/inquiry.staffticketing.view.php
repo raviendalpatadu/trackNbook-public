@@ -7,10 +7,10 @@
 
 // echo "</pre>";
 
-// echo "<pre>";
-// print_r($data);
+echo "<pre>";
+print_r($data);
 // print_r($_POST);
-// echo "</pre>";
+echo "</pre>";
 
 
 
@@ -60,23 +60,6 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                             </div>
                                         </div>
                                         <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="text-inputs">
-                                        <div class="input-text-label">To</div>
-                                        <div class="width-fill">
-                                            <!-- show max of 5 items in select tag -->
-                                            <select class="input-field dropdown" name="to_station" placeholder="Please choose">
-                                                <option value="0">Please choose</option>
-                                                <option value="1"> Reservation</option>
-                                                <option value="2"> Refund</option>
-                                                <option value="3"> item 3</option>
-
-
-                                            </select>
-                                        </div>
-
                                     </div>
                                 </div>
                                 <div class="col-3 d-flex align-self-end">
@@ -222,7 +205,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
         if (resCount == 0) {
             var div = $('#popoupError');
             var imgURL = '<?= ASSETS . 'images/error.jpg' ?>';
-            var description = "Sorry! No Such reservation";
+            var description = "Sorry! No such Results Found.";
             div.append(makePopupBox('ERROR!!', description, 'OK', imgURL, function(res) {
                 // console.log(res);
                 if (res) {
