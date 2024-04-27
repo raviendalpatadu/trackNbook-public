@@ -12,8 +12,8 @@
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
             <div class="row">
-                <div class="col-12 p-20">
-                <div class="ach-txt-wrapper mb-30">
+                <div class="col-12 p-30">
+                <div class="ach-txt-wrapper mb-40">
     Welcome to Colombo Fort
 </div>
 
@@ -33,7 +33,7 @@
 
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        height="80" width="80" version="1.1" id="_x32_" viewBox="0 0 512 512"
+                                        height="70" width="70" version="1.1" id="_x32_" viewBox="0 0 512 512"
                                         xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="15.36">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0" />
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
