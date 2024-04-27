@@ -786,29 +786,29 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
-    function staffTicketingInquiry($id ='')
-    {
-        $Inquiry = new Inquiries();
-        $data = array();
-
-        // if (isset($id) && !empty($id)) {
-            $data['inquiry'] = $Inquiry->getInquiry($id);
     
-        
-            if (isset($_POST['submit']) && !empty($_POST['reservation_ticket_id'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
-            }
-            if (isset($_POST['submit']) && !empty($_POST['inquiry_ticket_id'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
-            }
-            if (isset($_POST['submit']) && !empty($_POST['user_nic'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
-            }
-        
-     
+function staffTicketingInquiry($id ='')
+{
+    $Inquiry = new Inquiries();
+    $data = array();
 
-        $this->view('inquiry.staffticketing',$data);
+    $data['inquiry'] = $Inquiry->getInquiry();
+
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['reservation_ticket_id'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
+        }
+        if (!empty($_POST['inquiry_ticket_id'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
+        }
+        if (!empty($_POST['user_nic'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
+        }
     }
+
+
+    $this->view('inquiry.staffticketing',$data);
+}
 
     function inquirySummary($id = '')
     {
