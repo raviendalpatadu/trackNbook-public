@@ -249,8 +249,10 @@ if (!isset($data['errors'])) {
         if (arr.hasOwnProperty('errors')) {
             printErrors(arr.errors);
         }
+
         // works only for staions nameAttr mus have the valuse on the name attribute in select box
         function addNewDataToUserTypeData(nameAttr) {
+
             // split the name attr by _ and drop the last element and make the first letter capital
             var nametext = nameAttr.split('_').slice(0, -1).join(' ');
             nametext = nametext.charAt(0).toUpperCase() + nametext.slice(1);
@@ -291,6 +293,7 @@ if (!isset($data['errors'])) {
                      
         
         var outputContainer = $('.userTypeData');
+        
         // if the user type is already selected, show the relevant input field
         if ($('input[type=radio][name=user_type]:checked').val() == 'station_master') {
             console.log($('input[type=radio][name=user_type]:checked').val());
