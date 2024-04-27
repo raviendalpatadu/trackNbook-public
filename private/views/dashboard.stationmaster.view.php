@@ -6,6 +6,7 @@
 // echo "</pre>";
 
 ?>
+
 <body>
     <?php $this->view("./includes/sidebar") ?>
     <div class="column-left">
@@ -13,9 +14,9 @@
         <main class="bg">
             <div class="row">
                 <div class="col-12 p-20">
-                <div class="ach-txt-wrapper mb-30">
-    Welcome to Colombo Fort
-</div>
+                    <div class="ach-txt-wrapper mb-30">
+                        Welcome to <?= ucfirst(Auth::smStation()->station_name) ?>
+                    </div>
 
 
 
@@ -213,10 +214,10 @@
 
                                     </svg>
 
-                                    
+
                                 </div>
-                                
-                                
+
+
                                 <div class="col-3">
                                     <h2> <br>Staff Details</h2>
                                 </div>
