@@ -40,9 +40,8 @@ if (isset($data) && !empty($data)) {
                             <th class="col-2">Name</th>
                             <th class="col-3">Start & End Station</th>
                             <th class="col-2">Time</th>
-                            <th class="col-2">Compartment Class Types</th>
-                            <th class="col-1">Seats</th>
-                            <th class="col-2">Ticket Price</th>
+                            <th class="col-5">Reservation</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,7 @@ if (isset($data) && !empty($data)) {
                                 <td class="col-2">
                                     <?= date("H:i", strtotime($trainData['train']->train_start_time)) . " " . date("H:i", strtotime($trainData['train']->train_end_time)) ?>
                                 </td>
-                                <td class="col-2">
+                                <td class="col-5">
                                     <?php foreach ($trainData['compartment_class_types'] as $compartment_class_type): ?>
                                         <div class="badge-base bg-selected-blue mb-5">
                                             <div class="text">
@@ -64,12 +63,7 @@ if (isset($data) && !empty($data)) {
                                         </div>
                                     <?php endforeach; ?>
                                 </td>
-                                <td class="col-1">
-                                    <!-- Fill with appropriate seat data -->
-                                </td>
-                                <td class="col-2">
-                                    <!-- Fill with appropriate ticket price data -->
-                                </td>
+                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -101,7 +95,7 @@ if (isset($data) && !empty($data)) {
                                 }
                             },
                             {
-                                title: 'Compartment Class Types',
+                                title: 'Reservation',
                                 data: function (row) {
                                     let compartmentClassTypesHTML = '';
                                     row.compartment_class_types.forEach(function (compartmentType) {
@@ -115,21 +109,6 @@ if (isset($data) && !empty($data)) {
             `;
                                     });
                                     return compartmentClassTypesHTML;
-                                }
-                            },
-
-                {
-                                title: 'Seats',
-                                data: null,
-                                render: function (data, type, row) {
-                                    return ``; // Fill this with appropriate data
-                                }
-                            },
-                            {
-                                title: 'Ticket Price',
-                                data: null,
-                                render: function (data, type, row) {
-                                    return ``; // Fill this with appropriate data
                                 }
                             }
                         ]
