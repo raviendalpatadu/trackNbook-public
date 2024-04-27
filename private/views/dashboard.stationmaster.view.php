@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-12 p-20">
                         <div class="ach-txt-wrapper mb-30">
-                            Welcome to <?= ucfirst(Auth::smStation()->station_name) ?>
+                            Welcome to <?= ucfirst(Auth::smStation()->station_name) ?> Railway Station!
                         </div>
                         <div class="d-flex flex-row justify-content-center g-50">
                             <div class="col-4">
@@ -260,9 +260,17 @@
     </div>
 </body>
 <script>
-    $(document).ready(function () {
-        $('#userTable').DataTable();
+   $(document).ready(function () {
+    $('#userTable').DataTable({
+        "columnDefs": [
+            { "width": "30%", "targets": 0 }, // Train Name
+            { "width": "20%", "targets": 1 }, // Train Type
+            { "width": "30%", "targets": 2 }, // Start & End Station
+            { "width": "20%", "targets": 3 }  // Estimated Arival Time
+        ]
     });
+});
+
 </script>
 
 </html>

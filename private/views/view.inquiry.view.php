@@ -2,13 +2,11 @@
 <?php $this->view("./includes/load-js") ?>
 
 <?php
-
 if (isset($data['inquiries']) && $data['inquiries'] != 0) {
     $count = count($data['inquiries']);
 } else {
     $count = 0;
 }
-
 ?>
 
 <head>
@@ -37,19 +35,33 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
                         <table class="if-table stripe hover" id="userTable" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th class="col-3">Passenger Name</th>
-                                    <th class="col-3">Ticket No</th>
-                                    <th class="col-3">Reason</th>
-                                    <th class="col-3">Inquiry Status</th>
+                                    <th class="col-2">Inquiry ID</th>
+                                    <th class="col-2">Passenger Name</th>
+                                    <th class="col-2">Ticket No</th>
+                                    <th class="col-2">Reason</th>
+                                    <th class="col-2">Status</th>
+                                    <th class="col-2">Action</th> <!-- New column -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($data['inquiries'] as $inquiry): ?>
                                     <tr class="p-20">
-                                        <td class="col-3"><?= $inquiry->inquiry_passenger_id ?></td>
-                                        <td class="col-3"><?= $inquiry->inquiry_ticket_id ?></td>
-                                        <td class="col-3"><?= $inquiry->inquiry_reason ?></td>
-                                        <td class="col-3"><?= $inquiry->inquiry_status ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_id ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_passenger_id ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_ticket_id ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_reason ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_status ?></td>
+                                        <td class="col-2">
+                                            <!-- Add action buttons or links here -->
+                                            <a class="blue" href="<?= ROOT ?>staffgeneral/updateTrain/<?= $inquiry->inquiry_id ?>">
+                                                <div class="badge-base bg-Selected-Blue">
+                                                    <div class="dot">
+                                                        <div class="dot4"></div>
+                                                    </div>
+                                                    <div class="text blue">View</div>
+                                                </div>
+                                            </a>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -62,8 +74,18 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
     </div>
 
     <script>
-        $(document).ready(function () {
-            let table = new DataTable("#userTable");
+       $(document).ready(function () {
+            // Initialize DataTable and specify column widths
+            let table = new DataTable("#userTable", {
+                columnDefs: [
+                    { width: '10%', targets: 0 }, // Inquiry ID
+                    { width: '20%', targets: 1 }, // Passenger Name
+                    { width: '20%', targets: 2 }, // Ticket No
+                    { width: '30%', targets: 3 }, // Reason
+                    { width: '10%', targets: 4 }, // Status
+                    { width: '10%', targets: 5 }  // Action
+                ]
+            });
         });
     </script>
 </body>
