@@ -45,7 +45,18 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <div class="input-text-label text lightgray-font">Ticket ID</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('reservation_ticket_id', '') ?>" name="reservation_ticket_id">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('inquiry_ticket_id', '') ?>" name="inquiry_ticket_id">
+                                            </div>
+                                        </div>
+                                        <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-inputs">
+                                        <div class="input-text-label text lightgray-font">Inquiry ID</div>
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('inquiry_id', '') ?>" name="inquiry_id">
                                             </div>
                                         </div>
                                         <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
@@ -56,7 +67,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <div class="input-text-label text lightgray-font">NIC</div>
                                         <div class="input-field">
                                             <div class="text">
-                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('reservation_passenger_nic', '') ?>" name="reservation_passenger_nic">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?php echo get_var('user_nic', '') ?>" name="user_nic">
                                             </div>
                                         </div>
                                         <div class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>"><?php echo (array_key_exists('errors', $data)) ? $data['errors']['from_date'] : ''; ?></div>
@@ -82,10 +93,13 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                             <table class="table bg-white">
                                 <thead>
                                     <tr class="row p-20 align-items-center justify-content-center">
-                                        <th class="col-3">Ticket ID</th>
-                                        <th class="col-3 ">NIC</th>
-                                        <th class="col-3">Passenger</th>
-                                        <th class="col-3">Inquiry Type</th>
+                                        <th class="col-1">Inquiry ID</th>
+                                        <th class="col-2">Ticket ID</th>
+                                        <th class="col-2 ">Passenger NIC</th>
+                                        <th class="col-3">Passenger Name</th>
+                                        <th class="col-2">Inquiry Created Time</th>
+                                        <th class="col-1">Status</th>
+
                                         <!-- <th class="col-1">Action</th> -->
                                         <!-- <th class="col-2">Date</th> -->
                                         <!-- <th class="col-2">Class</th> -->
@@ -93,14 +107,24 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($data['reservations'])) : ?>
-                                        <?php foreach ($data['reservations'] as $key => $reservation) : ?>
+                                    <?php if (!empty($data['inquiry'])) : ?>
+                                        <?php for ($i = 0; count($data['inquiry']) > $i; $i++) : ?>
                                             <tr class=" row p-20">
-                                                <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
-                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
-                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
-                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
-                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->
+                                                <td data-label="Inquiry ID" class="col-1 d-flex align-items-center lightgray-font"><?= $data['inquiry'][0]->inquiry_id ?></td>
+                                                <td data-label="Ticket ID" class="col-2 d-flex align-items-center lightgray-font"><?= $data['inquiry'][0]->inquiry_ticket_id ?></td>
+                                                <td data-label="NIC" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][0]->user_nic : ''; ?></td>
+                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][0]->user_first_name) . ' ' . ucfirst($data['inquiry'][0]->user_last_name)  : ''; ?></td>
+                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= array_key_exists('inquiry', $data) ? $data['inquiry'][0]->inquiry_created_time : ''; ?></td>
+                                                <td data-label="status" class="col-1 d-flex align-items-center">
+                                                    <div class="badge-base bg-Selected-green">
+                                                        <div class="dot">
+                                                            <div class="dot4"></div>
+                                                        </div>
+                                                        <div class="text green"><?= array_key_exists('inquiry', $data) ? ucfirst($data['inquiry'][0]->inquiry_status) : ''; ?></div>
+                                                    </div>
+                                                </td>
+
+                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"></td> -->
                                                 <td class="col-1 d-flex align-items-center g-20">
                                                     <!-- <div class="badge-base bg-light-green">
                                                     <div class="dot">
@@ -109,7 +133,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     <div class="text dark-green">Pending</div>
                                                 </div> -->
 
-                                                    <a class="blue" href="<?= ROOT ?>staffticketing/summary/<?= $reservation->reservation_ticket_id  ?>">
+                                                    <a class="blue" href="<?= ROOT ?>staffticketing/inquirySummary/<?= $data['inquiry'][0]->inquiry_id  ?>">
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
                                                                 <div class="dot4"></div>
@@ -119,7 +143,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                                     </a>
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endfor; ?>
                                     <?php else : ?>
                                         <div id="popoupError">
 
@@ -198,20 +222,5 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 </html>
 
 <script>
-    $(document).ready(function() {
-        var resCount = <?php echo (!empty($data['reservations'])) ? count($data['reservations']) : "0"; ?>;
-        console.log(resCount);
 
-        if (resCount == 0) {
-            var div = $('#popoupError');
-            var imgURL = '<?= ASSETS . 'images/error.jpg' ?>';
-            var description = "Sorry! No such Results Found.";
-            div.append(makePopupBox('ERROR!!', description, 'OK', imgURL, function(res) {
-                // console.log(res);
-                if (res) {
-                    // ajax
-                }
-            }))
-        }
-    });
 </script>

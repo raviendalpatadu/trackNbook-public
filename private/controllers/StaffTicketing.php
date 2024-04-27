@@ -786,16 +786,38 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
-    function staffTicketingInquiry($id = '')
+    function staffTicketingInquiry($id ='')
     {
         $Inquiry = new Inquiries();
-       
         $data = array();
 
-        $data['inquiry'] = $Inquiry->getInquiry(1);
+        // if (isset($id) && !empty($id)) {
+            $data['inquiry'] = $Inquiry->getInquiry(1);
+    
+        
+            if (isset($_POST['submit']) && !empty($_POST['reservation_ticket_id'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
+            }
+            if (isset($_POST['submit']) && !empty($_POST['inquiry_ticket_id'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
+            }
+            if (isset($_POST['submit']) && !empty($_POST['user_nic'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
+            }
+        
      
 
         $this->view('inquiry.staffticketing',$data);
+    }
+
+    function inquirySummary($id = '')
+    {
+        $Inquiry = new Inquiries();
+        $data = array();
+
+        $data['inquiry'] = $Inquiry->getInquiry($id);
+
+        $this->view('inquiry.summary.staffticketing', $data);
     }
 
 
