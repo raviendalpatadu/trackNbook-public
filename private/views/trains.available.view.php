@@ -675,7 +675,7 @@ echo "</pre>";
             e.preventDefault();
 
             var formData = $('form#trainForm').serialize();
-            // console.log(formData);
+            console.log(formData);
             getErrors('<?= ROOT ?>train/trainsAvailableValidate', formData, function(res) {
                 if (res == true) {
                     $('form#trainForm').submit();
