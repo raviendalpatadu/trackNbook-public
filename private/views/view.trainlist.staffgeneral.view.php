@@ -38,7 +38,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                 <div class="row">
                     <div class="col-12">
 
-                        <table class="if-table stripe hover" id="userTable" style:width=100%>
+                        <table class="" id="userTable">
                             <thead>
                                 <tr>
                                     <th class="col-4 ">
@@ -65,13 +65,13 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data['trains'] as $train): ?>
-                                    <tr class="row p-20">
+                                <?php foreach ($data['trains'] as $train) : ?>
+                                    <tr class="p-30">
                                         <td class="col-3 d-flex align-items-center">
                                             <?= $train->train_name ?>
                                         </td>
                                         <td class="col-1">
-                                            <?= $train->train_id ?>
+                                            <?= $train->train_no ?>
                                         </td>
                                         <td class="col-1">
                                             <?= $train->train_type ?>
@@ -84,8 +84,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                         </td>
 
                                         <td class="col-3 d-flex align-items-center g-10">
-                                            <a class="blue"
-                                                href="<?= ROOT ?>staffgeneral/updateTrain/<?= $train->train_id ?>">
+                                            <a class="blue" href="<?= ROOT ?>staffgeneral/updateTrain/<?= $train->train_id ?>">
                                                 <div class="badge-base bg-Selected-Blue">
                                                     <div class="dot">
                                                         <div class="dot4"></div>
@@ -93,9 +92,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                     <div class="text blue">View</div>
                                                 </div>
                                             </a>
-                                            <a class="blue"
-                                                href="<?= ROOT ?>staffgeneral/deleteTrain/<?= $train->train_id ?>"
-                                                onclick="alert('are you sure want to delete the train?')">
+                                            <a class="blue" href="<?= ROOT ?>staffgeneral/deleteTrain/<?= $train->train_id ?>" onclick="alert('are you sure want to delete the train?')">
                                                 <div class="badge-base bg-Selected-red">
                                                     <div class="dot">
                                                         <div class="dot4  bg-Banner-red"></div>
@@ -115,87 +112,19 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                 </div>
             </div>
+        </main>
     </div>
-    </div>
-    </div>
-    </div>
-    </main>
-    </div>
+    
     <?php $this->view("./includes/load-js") ?>
 
-
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let table = new DataTable("#userTable", {
-                ajax: {
-                    url: "<?= ROOT ?>ajax/getTrainList",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        title: 'Train Name',
-                        data: 'train_name',
-                        width: '25%' // Set the width for the first column
-                    },
-                    {
-                        title: 'Train No',
-                        data: 'train_id'
-                    },
-                    {
-                        title: 'Train Type',
-                        data: 'train_type'
-                    },
-                    {
-                        title: 'Start & End Station',
-                        data: function (row) {
-                            return row.start_station + " - " + row.end_station;
-                        }
-                    },
-                    {
-                        title: 'Start & End Time',
-                        data: function (row) {
-                            return row.train_start_time + " - " + row.train_end_time;
-                        }
-                    },
-                    {
-                        title: 'Actions',
-                        data: null,
-                        width: '15%',
-                        render: function (data, type, row) {
-                            return `
-        <div class="row">
-            <a class="blue" href="<?= ROOT ?>staffgeneral/updateTrain/${data.train_id}">
-                <div class="badge-base bg-Selected-Blue">
-                    <div class="dot">
-                        <div class="dot4"></div>
-                    </div>
-                    <div class="text blue">View</div>
-                </div>
-            </a>
-            <div class="g-2"></div> <!-- Add a small gap -->
-            <div class="badge-base bg-Selected-red" onclick="alert('Are you sure you want to delete the train')">
-                <a class="blue d-flex flex-row g-2 align-items-center" href="<?= ROOT ?>staffgeneral/deleteTrain/${data.train_id}">
-                    <div class="dot">
-                        <div class="dot4 bg-Banner-red"></div>
-                    </div>
-                    <div class="text red">Delete</div>
-                </a>
-            </div>
-        </div>
-        `;
-                        }
-                    }
-
-                ],
-                columnDefs: [
-                    {
-                        targets: 0, // Target the first column
-                        className: 'dt-body-left' // Left-align the content in the first column
-                    }
-                ]
+                searchable: true,
+                sortable: true
             });
 
-            makeSelectDropdown('body');
+            // makeSelectDropdown('body');
         });
     </script>
 </body>

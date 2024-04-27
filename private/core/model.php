@@ -7,7 +7,7 @@ class Model extends Database
 {
 
     public $errors = array();
-    // protected $table;
+    protected $table;
     // protected $allowedColumns;
     // protected $beforeInsert;
     // protected $afterSelect;

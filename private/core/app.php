@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+error_reporting(E_ALL);
 /**
  * main app
  */
@@ -22,7 +22,9 @@ class App
                 unset( $URL[0]);
             } 
             else {
-                echo "Controller not found!";
+               echo "<pre>";
+                print_r($URL);
+                echo "</pre>";
                 require("../private/views/error404.view.php");
             }
     
@@ -48,6 +50,7 @@ class App
     private function getURL()
     {
         $url = isset($_GET['url']) ? $_GET['url'] : "home";
+
         return explode("/",  filter_var(trim($url, "/"), FILTER_SANITIZE_URL));
         
     }

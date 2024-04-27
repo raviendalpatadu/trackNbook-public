@@ -153,6 +153,26 @@ class Ajax extends Controller
         echo json_encode($data);
     }
 
+    public function getErrors()
+    {
+        if (isset($_SESSION['error'])) {
+            echo json_encode($_SESSION['error']);
+            unset($_SESSION['error']);
+        } else {
+            echo json_encode(false);
+        }
+    }
+
+    public function validateUpdateTrain(){
+        $train = new Trains();
+
+        if($train->validateUpdateTrain($_POST)){
+            echo json_encode(true);
+        }
+        else{
+            echo json_encode($train->errors);
+        }
+    }
 
 
 }
