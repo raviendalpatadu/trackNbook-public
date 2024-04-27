@@ -67,24 +67,25 @@ class TrainDriver extends Controller
             $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
         }
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $train_delay = new TrainDelay();
             $delay_data = array(
                 'delay_train' => $train_id,
-                'delay_station' => $_POST['station_id'],
+                'delay_station' => $data['location']->station_id,
                 'delay_date' => date('Y-m-d'),
                 'delay_reason' => $_POST['reason']
             );
-            
-            if($train_delay->validate($train_id) === true){
+
+            if ($train_delay->validate($train_id) === true) {
                 $train_delay->insert($delay_data);
                 $this->redirect('traindriver/traindelay?success=1');
-            }else{
+            } else {
                 $data = array_merge($data, $train_delay->errors);
             }
         }
-            
-        $this->view('update.train.delay', $data);
+
+        
+         $this->view('update.train.delay', $data);
     }
 
 

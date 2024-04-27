@@ -33,21 +33,10 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                             </div>
                                         </div>
                                         <div class="input-text-label text lightgray-font mb-10">
-                                            <label for="station">Current Station</label>
-                                            <select class="dropdown" name="station_id" placeholder="Please choose">
+                                            <label for="station">Current Station: 
+                                                <?php echo (array_key_exists('location', $data)) ? ucfirst($data['location']->station_name) : ''; ?></label>
+                                        </div>
 
-                                                <?php foreach ($data['train_stop_stations'] as $key => $value): ?>
-                                                    <option value="<?= $value->station_id ?>"
-                                                        <?= (strtolower($data['location']->station_name) != "no station" && $data['location']->station_id == $value->station_id) ? "selected" : "" ?>>
-                                                        <?= $value->station_name ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div
-                                            class="assistive-text <?php echo (!array_key_exists('errors', $data)) ? 'display-none' : ''; ?>">
-                                            <?php echo (isset($data['errors']) && array_key_exists('from_station', $data['errors']['errors'])) ? $data['errors']['errors']['from_station'] : ''; ?>
-                                        </div>
                                         <div class="text-inputs mb-10 ">
                                             <div class="input-text-label">Reason</div>
                                             <div class="input-field">
@@ -60,13 +49,13 @@ if (isset($data['trains']) && $data['trains'] != 0) {
 
                                         <div class="row d-flex delay-g-8 justify-content-center">
                                             <div class="col-4">
-                                                <button type="submit" class="button mt-20">
+                                                <button type="button" class="button mt-20" onclick="goBack()">
                                                     <div class="button-base bg-Selected-Blue">
                                                         <div class="text Blue">Back</div>
                                                     </div>
                                                 </button>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-4"> 
                                                 <button type="button" class="button mt-20" id="reject"
                                                     onclick="clearForm()">
                                                     <div class="button-base bg-Selected-red">
@@ -94,10 +83,19 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     </div>
 </body>
 <script>
-            // show user regiserted sucessfully if exists in get method 
-            if (checkNotification('success=1') > -1) {
-            makeSuccessToast('Delay request send successfully!', '');
-        }
+    // show user regiserted sucessfully if exists in get method 
+    if (checkNotification('success=1') > -1) {
+        makeSuccessToast('Delay request send successfully!', '');
+    }
+
+    //goBack fucntion
+    function goBack() {
+        window.history.back();
+    }
+    // clear form data on click of
+    function clearForm() {
+        document.querySelector('form').reset();
+    }
 </script>
 
 </html>
