@@ -40,45 +40,33 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                         <table class="if-table stripe hover" id="userTable" style:width=100%>
                             <thead>
                                 <tr>
-                                    <th class="col-3 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Passenger Name
-                                    </th>
-                                    <th class="col-3 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Train No
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Train Type
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Start & End Station
-                                    </th>
-                                    <th class="col-2 ">
-                                        <!-- Add 'text-left' class for left alignment -->
-                                        Start & End Time
-                                    </th>
+                                    <th class="col-3 ">Passenger Name</th>
+                                    <th class="col-3 ">Train No</th>
+                                    <th class="col-2 ">Train Type</th>
+                                    <th class="col-2 ">Start & End Station</th>
+                                    <th class="col-2 ">Start & End Time </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data['waitinglist'] as $waitinglist): ?>
+                                <?php foreach ($data['waitinglist'] as $waitinglist) : ?>
                                     <tr class="row p-20">
                                         <td class="col-3 d-flex align-items-center">
-                                            <?= $waitinglist->waiting_list_passenger_id ?>
+                                            <?= $waitinglist->user_nic ?>
                                         </td>
                                         <td class="col-3">
-                                            <?= $waitinglist->waiting_list_train_id ?>
+                                            <?= $waitinglist->train_name ?>
                                         </td>
                                         <td class="col-2">
-                                            <?= $waitinglist->waiting_list_reservation_start_station ?>
+                                            <?= $waitinglist->start_station_name ?>
                                         </td>
                                         <td class="col-2">
-                                            <?= $waitinglist->waiting_list_reservation_end_station ?>
+                                            <?= $waitinglist->end_station_name ?>
                                         </td>
                                         <td class="col-2 ">
                                             <?= $waitinglist->waiting_list_reservation_date ?>
+                                        </td>
+                                        <td class="col-2 ">
+                                            <?= $waitinglist->priority_number ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -87,15 +75,11 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                     </div>
                 </div>
             </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </main>
+        </main>
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let table = new DataTable("#userTable", {
                 ajax: {
                     url: "<?= ROOT ?>ajax/getWaitingList",
@@ -103,32 +87,35 @@ if (isset($data['waitinglist']) && $data['waitinglist'] != 0) {
                 },
                 columns: [
                     {
-                        title: 'Passenger Name',
-                        data: 'waiting_list_passenger_id',
-                        width: '20%' // Set the width for the first column
+                        title: 'Passenger NIC',
+                        data: 'user_nic',
+                        width: '15%'
                     },
                     {
                         title: 'Train Name',
-                        data: 'waiting_list_train_id',
-                        width: '20%' // Set the width for the first column
+                        data: 'train_name',
+                        width: '20%'
                     },
                     {
-                        title: 'Start Station',
-                        data: 'waiting_list_reservation_start_station',
-                        width: '20%' // Set the width for the first column
+                        title: 'Reservertion <br> Start Station',
+                        data: 'start_station_name',
+                        width: '20%'
                     },
                     {
-                        title: 'End Station',
-                        data: 'waiting_list_reservation_end_station',
-                        width: '20%' // Set the width for the first column
-
-                    }
-                    ,
+                        title: 'Reservertion <br> End Station',
+                        data: 'end_station_name',
+                        width: '20%'
+                    },
                     {
                         title: 'Reservation Date',
                         data: 'waiting_list_reservation_date',
                         width: '20%' // Set the width for the first column
                     },
+                    {
+                        title: 'Priority No',
+                        data: 'priority_number',
+                        width: '10%'
+                    }
 
 
                 ],

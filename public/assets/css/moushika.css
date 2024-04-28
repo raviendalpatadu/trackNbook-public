@@ -169,25 +169,6 @@
   cursor: pointer;
 }
 
-.trains-available h3 {
-  color: var(--lightgray-font);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: "DM sans";
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.trains-available h2 {
-  color: #000;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: "DM sans";
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 19.444px;
-}
-
 .comparment {
   border-radius: 25px;
   border: 2px solid #ccc;

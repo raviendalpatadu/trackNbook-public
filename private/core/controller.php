@@ -1,7 +1,9 @@
 <?php
 // use function Amp\delay;
 // use function Amp\sync;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -21,7 +23,8 @@ class Controller
 
         if (file_exists("../private/views/" . $view . ".view.php")) {
             require("../private/views/" . $view . ".view.php");
-        } else {
+        } 
+        else {
             require("../private/views/error404.view.php");
         }
     }

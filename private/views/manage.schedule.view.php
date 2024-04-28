@@ -1,23 +1,18 @@
-
-
 <?php $this->view("./includes/header") ?>
 <?php $this->view("./includes/load-js") ?>
 
 <?php
 
-if (isset($data['trains']) && $data['trains'] != 0) {
-    $count = count($data['trains']);
+if (isset($data) && !empty($data)) {
+    $count = count($data);
 } else {
     $count = 0;
 }
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
 ?>
+<html>
 
 <head>
-
 </head>
 
 <body>
@@ -32,11 +27,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
                                     <h3>Trains Available</h3>
-                                    <div class="badge">
-                                        <div class="badge-base bg-light-green">
-                                            <div class="text dark-green"><?php echo $count; ?></div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -49,103 +40,36 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                             <th class="col-2">Name</th>
                             <th class="col-3">Start & End Station</th>
                             <th class="col-2">Time</th>
-                            <th class="col-2">Reservation</th>
-                            <th class="col-1">Seats</th>
-                            <th class="col-2">Ticket Price</th>
+                            <th class="col-5">Reservation</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($data['trains'] as $train): ?>
+                        <?php foreach ($data as $trainData): ?>
                             <tr class="row">
-                                <td class="col-2"><?= $train->train_name ?></td>
-                                <td class="col-3"><?= $train->start_station . "-" . $train->end_station ?></td>
-                                <td class="col-2">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="badge-base bg-light-green">
-                                                <div class="dot">
-                                                    <div class="dot2"></div>
-                                                </div>
-                                                <div class="text dark-green">
-                                                    <?= date("H:i", strtotime($train->train_start_time)) . " " . date("H:i", strtotime($train->train_end_time)) ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <td class="col-2"><?= $trainData['train']->train_name ?></td>
+                                <td class="col-3">
+                                    <?= $trainData['train']->start_station . "-" . $trainData['train']->end_station ?>
                                 </td>
                                 <td class="col-2">
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="badge-base bg-selected-blue">
-                                                <div class="text">1st Class Reservation</div>
+                                    <?= date("H:i", strtotime($trainData['train']->train_start_time)) . " " . date("H:i", strtotime($trainData['train']->train_end_time)) ?>
+                                </td>
+                                <td class="col-5">
+                                    <?php foreach ($trainData['compartment_class_types'] as $compartment_class_type): ?>
+                                        <div class="badge-base bg-selected-blue mb-5">
+                                            <div class="text">
+                                                <?php echo $compartment_class_type; ?>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="badge-base bg-selected-blue">
-                                                <div class="text primary-blue">2nd Class Reservation</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-10">
-                                            <div class="badge-base bg-selected-blue">
-                                                <div class="text blue">3rd Class Reservation</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php endforeach; ?>
                                 </td>
-                                <td class="col-1">
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text">20</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text primary-blue">230</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text blue">60</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="col-2">
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text">LKR.2500.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text primary-blue">LKR.2000.00</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="badge-base bg-selected-blue">
-                                            <div class="text blue">LKR.2000.00</div>
-                                        </div>
-                                    </div>
-                                </td>
+                                
                             </tr>
                         <?php endforeach; ?>
-
                     </tbody>
                 </table>
-                <center>
-    <button class="button mx-10 px-10">
-        <div class="button-base">
-            <a href="<?= ROOT ?>train/add" class="blue">Add Train</a>
-        </div>
-    </button>
-</center>
-
-
+                
             </div>
-
             <script>
                 $(document).ready(function () {
                     let table = new DataTable("#userTable", {
@@ -156,69 +80,35 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                         columns: [
                             {
                                 title: 'Name',
-                                data: 'train_name'
+                                data: 'train.train_name'
                             },
                             {
                                 title: 'Start & End Station',
                                 data: function (row) {
-                                    return row.start_station + " - " + row.end_station;
+                                    return row.train.start_station + " - " + row.train.end_station;
                                 }
                             },
                             {
                                 title: 'Time',
                                 data: function (row) {
-                                    return row.train_start_time + " - " + row.train_end_time;
+                                    return row.train.train_start_time + " - " + row.train.train_end_time;
                                 }
                             },
                             {
                                 title: 'Reservation',
-                                data: null,
-                                render: function (data, type, row) {
-                                    return `
-                            <div class="badge-base bg-selected-blue mb-5">
-                                <div class="text">1st Class Reservation</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue mb-5 ">
-                                <div class="text primary-blue">2nd Class Reservation</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue">
-                                <div class="text blue">3rd Class Reservation</div>
-                            </div>
-                        `;
-                                }
-                            },
-                            {
-                                title: 'Seats',
-                                data: null,
-                                render: function (data, type, row) {
-                                    return `
-                            <div class="badge-base bg-selected-blue mb-5">
-                                <div class="text">20</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue mb-5">
-                                <div class="text primary-blue">230</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue">
-                                <div class="text blue">60</div>
-                            </div>
-                        `;
-                                }
-                            },
-                            {
-                                title: 'Ticket Price',
-                                data: null,
-                                render: function (data, type, row) {
-                                    return `
-                            <div class="badge-base bg-selected-blue mb-5">
-                                <div class="text">LKR.2500.00</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue mb-5">
-                                <div class="text primary-blue">LKR.2000.00</div>
-                            </div>
-                            <div class="badge-base bg-selected-blue">
-                                <div class="text blue">LKR.2000.00</div>
-                            </div>
-                        `;
+                                data: function (row) {
+                                    let compartmentClassTypesHTML = '';
+                                    row.compartment_class_types.forEach(function (compartmentType) {
+                                        // Append HTML for each compartment class type with the same base color and text color
+                                        compartmentClassTypesHTML += `
+                <div class="badge-base flex-auto flex-grow bg-selected-blue mb-3">
+                    <div class="text primary-blue ">
+                        ${compartmentType} 
+                    </div>
+                </div>
+            `;
+                                    });
+                                    return compartmentClassTypesHTML;
                                 }
                             }
                         ]
@@ -226,5 +116,9 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                 });
             </script>
 
+
         </main>
     </div>
+</body>
+
+</html>

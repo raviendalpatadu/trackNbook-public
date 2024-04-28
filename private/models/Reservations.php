@@ -3,7 +3,7 @@
 class Reservations extends Model
 {
     protected $table = 'tbl_reservation';
-    protected $allowedColumns = array('reservation_id', 'reservation_ticket_id', 'reservation_passenger_id', 'reservation_start_station', 'reservation_end_station', 'reservation_train_id', 'reservation_compartment_id', 'reservation_date', 'reservation_seat', 'reservation_passenger_title', 'reservation_passenger_first_name', 'reservation_passenger_last_name', 'reservation_passenger_nic', 'reservation_passenger_phone_number', 'reservation_passenger_email', 'reservation_passenger_gender', 'reservation_created_time', 'reservation_status', 'reservation_type', 'reservation_is_travelled');
+    protected $allowedColumns = array('reservation_id', 'reservation_ticket_id', 'reservation_passenger_id', 'reservation_start_station', 'reservation_is_dependent', 'reservation_end_station', 'reservation_train_id', 'reservation_compartment_id', 'reservation_date', 'reservation_seat', 'reservation_passenger_title', 'reservation_passenger_first_name', 'reservation_passenger_last_name', 'reservation_passenger_nic', 'reservation_passenger_phone_number', 'reservation_passenger_email', 'reservation_passenger_gender', 'reservation_created_time', 'reservation_status', 'reservation_type', 'reservation_amount', 'reservation_is_travelled');
 
 
 
@@ -38,17 +38,18 @@ class Reservations extends Model
                 $this->errors['reservation_passenger_last_name'][$entry] = 'Last Name is required';
             }
 
-            //check if phone number is exists in post
-            if (empty($data['reservation_passenger_phone_number'][$entry])) {
-                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
-            }
+            // //check if phone number is exists in post
+            // if (empty($data['reservation_passenger_phone_number'][$entry]) || !is_numeric($data['reservation_passenger_phone_number'][$entry])) {
+            //     $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
+            // }
 
             // 10 number validation
-            if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
+            if (!empty($data['reservation_passenger_phone_number'][$entry]) && strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
                 $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
             }
 
             //check nic is exists in post
+            
             if (empty($data['reservation_passenger_nic'][$entry])) {
                 $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
             } else {
@@ -67,13 +68,13 @@ class Reservations extends Model
 
 
 
-            //check if email is exists in post
-            if (empty($data['reservation_passenger_email'][$entry])) {
-                $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
-            }
+            // //check if email is exists in post
+            // if (empty($data['reservation_passenger_email'][$entry])) {
+            //     $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
+            // }
 
             //check if email is valid
-            if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+            if (!empty($data['reservation_passenger_email'][$entry]) && !filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
                 $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
             }
 
@@ -208,9 +209,12 @@ class Reservations extends Model
                             r.reservation_seat,
 	                        r.reservation_ticket_id";
 
-            $result = $this->query($query, array(
-                'reservation_passenger_id' => $id
-            ));
+            $result = $this->query(
+                $query,
+                array(
+                    'reservation_passenger_id' => $id
+                )
+            );
             //sort an array in assending order
             if ($result > 0) {
                 return $result;
@@ -256,9 +260,12 @@ class Reservations extends Model
                             r.reservation_seat,
 	                        r.reservation_ticket_id";
 
-            $result = $this->query($query, array(
-                'reservation_ticket_id' => $id
-            ));
+            $result = $this->query(
+                $query,
+                array(
+                    'reservation_ticket_id' => $id
+                )
+            );
             //sort an array in assending order
             if ($result > 0) {
                 return $result;
@@ -278,14 +285,17 @@ class Reservations extends Model
             // echo "</pre>";
 
             $query = "SELECT * FROM tbl_reservation WHERE reservation_train_id = :train_id AND reservation_compartment_id = :class_id AND reservation_start_station = :from_station AND reservation_end_station = :to_station AND reservation_date = :from_date";
-            $result = $this->query($query, array(
-                'train_id' => $value['train_id'],
-                'class_id' => $value['class_id'],
-                'from_station' => $value['from_station'],
-                'to_station' => $value['to_station'],
-                'from_date' => "2024-01-29"
-                // 'selected_seats' => $value['selected_seats']
-            ));
+            $result = $this->query(
+                $query,
+                array(
+                    'train_id' => $value['train_id'],
+                    'class_id' => $value['class_id'],
+                    'from_station' => $value['from_station'],
+                    'to_station' => $value['to_station'],
+                    'from_date' => "2024-01-29"
+                    // 'selected_seats' => $value['selected_seats']
+                )
+            );
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -300,7 +310,7 @@ class Reservations extends Model
 
         try {
             $data = $this->getReservationDataTicket($reservation_id);
-            
+
 
             $refundedAmount = 0;
             // $remainTime= $data[0]->estimated_departure_time - $data[0]->reservation_created_time;
@@ -322,32 +332,32 @@ class Reservations extends Model
             // print_r($reservation_created_time);
             // echo "</pre>";
 
-            
+
             // get the differencr in total hours
             $remainTime = $reservation_depature_date->diff($reservation_created_time);
 
-            
 
-             $remainTime = hms_date_diff($remainTime);
+
+            $remainTime = hms_date_diff($remainTime);
 
             // $remainTime = $remainTime->format('%h');
             // echo "remainging time : " . $remainTime;
-        //    echo "<pre>";
-        //     var_dump($remainTime);
-        //     echo "</pre>";
+            //    echo "<pre>";
+            //     var_dump($remainTime);
+            //     echo "</pre>";
 
             if ($remainTime > 168) {
-                $refundedAmount =  $total_fare_amount * 0.75;
+                $refundedAmount = $total_fare_amount * 0.75;
             } elseif ($remainTime > 48) {
                 $refundedAmount = $total_fare_amount * 0.50;
             } else {
                 $refundedAmount = 0;
             }
 
-           return $refundedAmount;
-           
-          
-         
+            return $refundedAmount;
+
+
+
 
 
         } catch (PDOException $e) {
@@ -359,5 +369,48 @@ class Reservations extends Model
     // eya reservation id eka, total_fare_amount
 
     // return 
+
+    public function getReservationDetails($startDate = null, $endDate = null, $reservationType = 'all')
+    {
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        reservation_type,
+                        COUNT(reservation_id) AS total_reservations,
+                        SUM(reservation_amount) AS total_amount
+                      FROM
+                        tbl_reservation";
+
+            $params = [];
+
+            if ($startDate && $endDate) {
+                $query .= " WHERE reservation_date BETWEEN :startDate AND :endDate";
+                $params = [':startDate' => $startDate, ':endDate' => $endDate];
+            }
+
+            if ($reservationType !== 'all') {
+                if ($startDate && $endDate) {
+                    $query .= " AND reservation_type = :reservationType";
+                } else {
+                    $query .= " WHERE reservation_type = :reservationType";
+                }
+                $params[':reservationType'] = $reservationType;
+            }
+
+            $query .= " GROUP BY reservation_date, reservation_type ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, $params);
+
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
 
 }

@@ -14,6 +14,10 @@ class Stations extends Model
         if (empty($values['station_name'])) {
             $this->errors['station_name'] =  "Station name is required.";
         }
+        //check if the station name is already in the database
+        if ($this->whereOne('station_name', $values['station_name'])) {
+            $this->errors['station_name'] = "Station name already exists.";
+        }
 
         if (count($this->errors) ==  0 ) {
             return true;

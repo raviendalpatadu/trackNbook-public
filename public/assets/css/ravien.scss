@@ -69,7 +69,7 @@ $colors: (
   "blue": #2185d5,
   "lightgray-font": #646464,
   "box-gray": #cccccc,
-  "yellow" : #f7b500,
+  "yellow": #f7b500,
 );
 
 @each $key, $val in $sizes {
@@ -291,8 +291,6 @@ $colors: (
   }
 }
 
-
-
 .profile .profile-img img {
   width: 150px !important;
   object-fit: cover;
@@ -419,7 +417,7 @@ $colors: (
       width: $val !important;
     }
 
-    .mobile-d-flex{
+    .mobile-d-flex {
       display: flex !important;
     }
   }
@@ -485,11 +483,9 @@ $colors: (
   color: var(--White) !important;
 }
 
-.home-text .mou-home-text{
+.home-text .mou-home-text {
   color: var(--blue);
-
 }
-
 
 @media screen and (max-width: 768px) {
   .bg-home-desktop {
@@ -990,6 +986,18 @@ table.price-table th {
   font-weight: 500;
 }
 
+#ticketSummary .draft-ticket {
+  position: relative;
+  top: 30%;
+  right: 60%;
+  width: 0;
+  height: 0;
+  font-size: 4em;
+  color: rgb(245 1 62 / 20%);
+  z-index: 0;
+  font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
   .ticket-summary {
     padding: 20px 20px;
@@ -1132,29 +1140,28 @@ div#reservations div#loader {
   z-index: 9999;
 }
 
-div#reservations img.ticket-icon-res , div#cancelledReservations img.ticket-icon-res{
+div#reservations img.ticket-icon-res,
+div#cancelledReservations img.ticket-icon-res {
   width: 1.5em;
   height: 1.5em;
 }
 
-div#reservation_type_tab{
+div#reservation_type_tab {
   font-size: 14px;
   background-color: var(--Lightgray);
   cursor: pointer;
 
-  div.active{
+  div.active {
     font-weight: 600;
-      color: var(--Border-blue);
+    color: var(--Border-blue);
   }
 }
-
 
 @media screen and (max-width: 768px) {
   div.reservations {
     height: auto;
     overflow: hidden;
   }
-  
 }
 
 .confirm-box {
@@ -1255,8 +1262,6 @@ div#reservation_type_tab{
   width: 100vw;
   height: 100vh;
   transform: translate(-50%, -50%);
-
- 
 }
 
 .main-popup-box .box {
@@ -1309,7 +1314,6 @@ div#reservation_type_tab{
 .main-popup-box .box .footer button {
   border: none;
   float: right;
-
 }
 .main-popup-box .box .footer button div {
   padding: 10px 15px;
@@ -1330,7 +1334,7 @@ div#reservation_type_tab{
   }
 }
 
-.loader__main{
+.loader__main {
   position: fixed;
   display: flex;
   justify-content: center;
@@ -1339,10 +1343,9 @@ div#reservation_type_tab{
   width: 100vw;
   height: 100vh;
   background-color: #fff;
-
 }
 
-.loader__main .loader__text{
+.loader__main .loader__text {
   font-size: 28px;
   font-weight: 700;
   color: #000;
@@ -1358,28 +1361,26 @@ div#reservation_type_tab{
   }
 }
 
-
-input.calendar-none::-webkit-calendar-picker-indicator{
-    display: none;
+input.calendar-none::-webkit-calendar-picker-indicator {
+  display: none;
 }
 
-.waiting-list-btn:hover{
-  .text{
+.waiting-list-btn:hover {
+  .text {
     cursor: pointer;
     color: var(--Border-blue);
 
-    svg path{
+    svg path {
       stroke: var(--Border-blue);
     }
   }
 }
 
-
 .reservation-map-view {
   height: 40vh !important;
 }
 
-.change-pin{
+.change-pin {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -1391,7 +1392,7 @@ input.calendar-none::-webkit-calendar-picker-indicator{
   height: 100vh;
   background-color: #fff;
 
-  .change-pin__header{
+  .change-pin__header {
     font-size: 24px;
     font-weight: 500;
     color: var(--Border-blue);
@@ -1399,7 +1400,7 @@ input.calendar-none::-webkit-calendar-picker-indicator{
     border-bottom: 1px solid var(--Border-blue);
   }
 
-  .change-pin__form{
+  .change-pin__form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1408,11 +1409,48 @@ input.calendar-none::-webkit-calendar-picker-indicator{
     width: 40vw;
     border-radius: 10px;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
-  
-    .form-group{
+
+    .form-group {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
   }
 }
+
+//QR code scanner
+
+.train-driver-qr {
+  img[alt="Info icon"] {
+    display: none;
+  }
+
+  img[alt="Camera based scan"] {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  #html5-qrcode-anchor-scan-type-change {
+    text-decoration: none !important;
+    color: #1d9bf0;
+  }
+
+  video {
+    width: 100vw !important;
+    height: 100% !important;
+    border: 1px solid #b2b2b2 !important;
+    border-radius: 0.25em;
+  }
+}
+
+.scale-08 {
+  transform: scale(0.8);
+}
+
+table.train-available{
+  border-collapse: collapse !important;
+  
+}
+
+// add a backgroud color to the siblingd in  the table when inout tyoe radio is selected to the 
+

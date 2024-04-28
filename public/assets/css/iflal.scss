@@ -11,6 +11,24 @@ $color-four: #f6b352;
 *:after {
   box-sizing: border-box;
 }
+.dashboard-card-admin {
+  height: 100%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+    width: 270px
+}
+
+.dashboard-card-admin p1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #171717;
+  align-items: start !important;
+}
+.dashboard-card-admin p2 {
+  font-size: 26px;
+  font-weight: 300;
+}
 
 .card {
   background: #fff;
@@ -562,21 +580,20 @@ $color-four: #f6b352;
 }
 
 .if-table {
-    font-family: "Open Sans", sans-serif;
-    font-weight: 500;
-   
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
 }
 
 .if-table thead th {
-    font-weight: bolder;
-    font-size: 18px;
+  font-weight: bolder;
+  font-size: 18px;
 }
 
 .if-table tbody td {
-    font-weight: normal;
-    font-weight: 500;
-    font-size: 16px;
-    padding-bottom: 5px;
+  font-weight: normal;
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 5px;
 }
 
 .filter-container {
@@ -623,4 +640,71 @@ $color-four: #f6b352;
   background-color: #ffffff;
   color: #333;
   margin-top: 2px;
+}
+
+// Fancy CSS for the chart card
+
+.chart-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.chart-card:hover {
+  transform: scale(1.05);
+}
+.date-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#dateRange {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  width: 220px;
+}
+
+.fancy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fancy-button:hover {
+  background-color: #0056b3;
+}
+
+.custom-select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 150px;
+  font-size: 16px;
+  appearance: none;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon points="6 9 1 1 11 1 6 9"/></svg>');
+  background-repeat: no-repeat;
+  background-position-x: 130px;
+  background-position-y: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }

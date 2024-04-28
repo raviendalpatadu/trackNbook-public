@@ -14,7 +14,7 @@ class StaffGeneral extends Controller
         $this->view('staff_general.dashboard');
     }
 
-    function manageSchedule($id = '')
+    /*function manageSchedule($id = '')
 
     {
         $train = new Trains();
@@ -22,7 +22,11 @@ class StaffGeneral extends Controller
 
         $data['trains'] = $train->findAllTrains();
 
-        $this->view('manage.schedule', $data);
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>"; 
+
+        // $this->view('manage.schedule', $data);
     }
 
    /* function updateSchedule($id = '')
@@ -31,31 +35,26 @@ class StaffGeneral extends Controller
         $this->view('update.schedule');
     }
 */
-    function addSchedule($id = '')
-    {
-
-        $this->view('add.schedule');
-    }
-    function waitList($id = '')
+   /* function waitList()
     {   
         
         $waitinglist = new WaitingLists();
         $data = array();
-        $data['waitinglist'] = $waitinglist->findAll();
-
+        $data['waitinglist'] = $waitinglist->getWaitingList();
 
         $this->view('view.waitinglist', $data);
     }
-    function manageSchedule2($id = '')
+    /*function manageSchedule2($id = '')
     {
 
         $this->view('manage.schedule2');
     }
-
+*/
     function getTrainList($id = '')
     {
         $train = new Trains();
         $data = array();
+        
 
         $data['trains'] = $train->findAllTrains();
 
@@ -69,6 +68,7 @@ class StaffGeneral extends Controller
     {
         $train = new Trains();
         $data = array();
+        $data['errors'] = array();
 
         $data['train'] = $train->whereOne('train_id', $id);
 
@@ -79,7 +79,8 @@ class StaffGeneral extends Controller
         $data['routes'] = $route->findAll();
 
         $compartment = new Compartments();
-        $data['compartments'] = $compartment->where('compartment_train_id', $data['train']->train_id, 'compartment_train_id');
+
+        $data['compartments'] = $compartment->where('compartment_train_id', $data['train']->train_id);
 
         $compartment_type = new CompartmentTypes();
         $data['compartment_types'] = $compartment_type->findAll();
@@ -88,41 +89,37 @@ class StaffGeneral extends Controller
         $data['train_stop_stations'] = $train_stop_stations->getTrainStopStations($data['train']->train_id);
        
         $route = new Routes();
-        $data['route_stations'] = $route->getRouteStations( $data['train']->train_route);
-        // echo "<pre>";
-        // print_r($data['route_stations']);
-        // print_r($data['train_stop_stations']);
-        // echo "</pre>";
+        $data['route_stations'] = $route->getRouteStations($data['train']->train_route);
         
 
         // get the route_station_order of the train's start station
         $start_station = $data['train_stop_stations'][0]->station_id;
         $end_station = $data['train_stop_stations'][count($data['train_stop_stations']) - 1]->station_id;
         $data['route_stations'] = $route->getRouteStationsWithStartAndEndStaions($data['train']->train_route, $start_station, $end_station);
-        // echo "<pre>";
-        // print_r($data['route_stations']);
-        // echo "</pre>";
-        
+
 
         $train_type = new TrainTypes();
         $data['train_type'] = $train_type->findAll();
 
 
-        if (isset($_POST['update'])) {
-            // echo "<pre>";
-            // print_r($_POST);
-            // echo "</pre>";  
+        if (isset($_POST['update'])) {  
             try {
-                $result = $train->updatetrain($id, $_POST);
 
-                if (isset($train->errors['errors'])) {
+                if ( $train->validateUpdatetrain($_POST)) {
 
-                    $data['errors'] = $train->errors['errors'];
-
+                    
+                    if($train->updateTrain($id, $_POST)){
+                        $this->redirect('StaffGeneral/getTrainList?update=1');
+                    }else{
+                        $_SESSION['errors'] = "Failed to update train";
+                        $data['errors'] = $train->errors;
+                        $this->view('update.train.staffgeneral', $data);
+                    }
+                    
+                }
+                else{
+                    $data['errors'] = $train->errors;
                     $this->view('update.train.staffgeneral', $data);
-                } else {
-                    // echo "weda bosa";///////
-                    $this->redirect('StaffGeneral/getTrainList');
                 }
 
             } catch (Exception $e) {
@@ -141,7 +138,7 @@ class StaffGeneral extends Controller
         // if(isset($_POST['delete'])){
         try {
             $result = $train->delete($id, "train_id");
-            $this->redirect('StaffGeneral/getTrainList');
+            $this->redirect('StaffGeneral/getTrainList?delete=1');
         } catch (Exception $e) {
             die($e->getMessage());
         }

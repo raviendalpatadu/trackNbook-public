@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 /**
  * home controller
  */
@@ -102,9 +100,6 @@ class Train extends Controller
 
         $data = array();
         $seatData = array();
-
-
-
 
         $seatData['from']['reservation_train_id'] = Auth::reservation()['from_compartment_and_train'][1];
         $seatData['from']['reservation_compartment_id'] = Auth::reservation()['from_compartment_and_train'][0];
@@ -241,7 +236,9 @@ class Train extends Controller
             }
         }
 
-
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";  
 
 
 
@@ -251,6 +248,8 @@ class Train extends Controller
 
     function track($id = '')
     {
+
+        
         $this->view('track');
     }
 
@@ -259,12 +258,10 @@ class Train extends Controller
 
         $data = array();
 
+        //get route stations
         $route = new Routes();
         $data['routes'] = $route->findAll();
-        //get route stations
 
-        // $station = new Stations();
-        // $data['stations'] = $station->findAll();
 
         $compartment_types = new CompartmentTypes();
         $data['compartment_types'] = $compartment_types->findAll();
@@ -272,17 +269,19 @@ class Train extends Controller
         $train_type = new TrainTypes();
         $data['train_types'] = $train_type->findAll();
 
+        $station = new Stations();
+        $data['stations'] = $station->findAll();
+
         if (isset($_POST['submit'])) {
 
-            $train = new Trains(); // You may need to adjust this part to properly initialize the Train model.
-            $result = $train->addTrain();
+            $train = new Trains(); 
 
+            if ($train->addTrainValidate()) {
+                $train->addTrain();
 
-            if ($result) {
-                $this->redirect('train/add');
-                // echo 'Data received and added successfully';
+                $this->redirect('train/add?success=1');
             } else {
-                $data['errors'] = $result;
+                $data['errors'] = $train->errors;
             }
         }
 

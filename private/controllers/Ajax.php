@@ -23,16 +23,16 @@ class Ajax extends Controller
         $waitingList = new WaitingLists();
         $waiting_passenger_list = $waitingList->notifyWaitingList($id);
 
-        
 
-        if($waiting_passenger_list != false){
+
+        if ($waiting_passenger_list != false) {
             foreach ($waiting_passenger_list as $waiting_passenger) {
                 // send email to the waiting list
-    
+
                 $user = new Users();
-                try{
-                    $user_data = $user->whereOne('user_id',$waiting_passenger->waiting_list_passenger_id);
-                    
+                try {
+                    $user_data = $user->whereOne('user_id', $waiting_passenger->waiting_list_passenger_id);
+
                     $email = $user_data->user_email;
                     $subject = "Train Reservation Notification";
                     $message = "<h3>Some seats are available on the train.</h3>
@@ -44,13 +44,12 @@ class Ajax extends Controller
                         <p style='font-size: 14px; font-weight: 500'>Arrival Time: $waiting_passenger->estimated_end_time</p>
                     </div>
                     Please login to your account to make a reservation.";
-        
+
                     $message = Auth::getEmailBody($user_data->user_first_name, $message);
-                }
-                catch(Exception $e){
+                } catch (Exception $e) {
                     die($e->getMessage());
                 }
-    
+
                 $this->sendMail($email, $user_data->user_first_name, $subject, $message);
             }
         }
@@ -84,12 +83,25 @@ class Ajax extends Controller
     public function getTrainList()
     {
         $train = new Trains();
-        $data = array();
-        
-        $data = $train->findAllTrains();// Wrap the output array inside a "data" key
-        
-        echo json_encode($data);
+        $trains = $train->findAllTrains();
+    
+        // Organize data by train ID
+        $organizedData = [];
+        foreach ($trains as $train) {
+            $trainId = $train->train_id;
+            if (!isset($organizedData[$trainId])) {
+                $organizedData[$trainId] = [
+                    'train' => $train,
+                    'compartment_class_types' => []
+                ];
+            }
+            $organizedData[$trainId]['compartment_class_types'][] = $train->compartment_class_type;
+        }
+    
+        echo json_encode(array_values($organizedData));
     }
+    
+
 
 
     public function getTrains()
@@ -98,13 +110,13 @@ class Ajax extends Controller
         $data = array();
         $data = $train->findAllTrains();
 
-        echo json_encode($data); 
+        echo json_encode($data);
     }
 
-    public function getWaitingList(){
+    public function getWaitingList()
+    {
         $waitinglist = new WaitingLists();
-        $data = array();
-        $data = $waitinglist->findAll();
+        $data = $waitinglist->getWaitingList();
 
         echo json_encode($data);
 
@@ -119,5 +131,48 @@ class Ajax extends Controller
         $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($_POST['train_id']);
         echo json_encode($data);
     }
+
+    //need a function that get the reservation details from thr reservation table sorted by date and return the total count of the reserveration on that date and total amount
+    public function getReservationReport()
+    {
+        $startDate = isset($_POST['startDate']) ? $_POST['startDate'] : null;
+        $endDate = isset($_POST['endDate']) ? $_POST['endDate'] : null;
+        $reservationType = isset($_POST['reservationType']) ? $_POST['reservationType'] : 'all'; // Added reservationType
+
+        $reservation = new Reservations();
+        $data = array();
+        $data['reservations'] = $reservation->getReservationDetails($startDate, $endDate, $reservationType); // Updated function call
+        echo json_encode($data);
+    }
+
+    public function getTrainLocation()
+    {
+        $data = array();
+        $train_location = new TrainLocation();
+        $data['train'] = $train_location->getTrainLocation($_POST['train_id']);
+        echo json_encode($data);
+    }
+
+    public function getErrors()
+    {
+        if (isset($_SESSION['error'])) {
+            echo json_encode($_SESSION['error']);
+            unset($_SESSION['error']);
+        } else {
+            echo json_encode(false);
+        }
+    }
+
+    // public function validateUpdateTrain(){
+    //     $train = new Trains();
+
+    //     if($train->validateUpdateTrain($_POST)){
+    //         echo json_encode(true);
+    //     }
+    //     else{
+    //         echo json_encode($train->errors);
+    //     }
+    // }
+
 
 }

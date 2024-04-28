@@ -31,60 +31,62 @@ class TrainDriver extends Controller
         }
 
 
-        // create a session to store the train id and driver id
-        $train_data = $train->whereOne('train_id', $id);
-
-        echo "sesseion created";
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
-
-        // if ($train_data) {
-        //     // set the session of duration + 2 hours
-
-
-        //     // insert in train location at the start station
-        //     $trainlocation = new TrainLocation();
-
-        //     // if record is not in the table
-        //     if (!$trainlocation->istrainExists($id, date('Y-m-d'))) {
-
-        //         $location_data = array(
-        //             'train_id' => $id,
-        //             'date' => date('Y-m-d'),
-        //             'train_location' => $train_data->train_start_station,
-        //             'train_location_updated_time' => date('Y-m-d H:i:s')
-        //         );
-        //         $trainlocation->insert($location_data);
-        //         // notify passenger who are at the start station
-        //         $passenger = new Passengers();
-        //         $passenger_data = $passenger->getPassengerDataOfNextStation($id, $train_data->train_start_station);
-
-        //         // send a mail to the passengers    
-        //         $this->notifyPassengers($train_data, $passenger_data, $train_data->train_start_station);
-        //     }
-        // }
-
-
         $this->view('dashboard.traindriver');
     }
     function trainDelay($id = '')
     {
+        if (!Auth::is_logged_in() || !Auth::isUserType('train_driver')) {
+            $this->redirect('login');
+        }
 
-        $this->view('update.train.delay');
+        if (!Auth::isPinChanged(Auth::getuser_data(), 'train_driver')) {
+            // get user id
+            $user_id = Auth::getUser_id();
+            $this->redirect('login/changepin/' . $user_id);
+        }
+
+        $train = new Trains();
+        $data = array();
+        $train_id = $_SESSION['train_driver']['train_id'];
+
+        $data['train'] = $train->findTrain($train_id)[0];
+
+        $train_stop_station = new TrainStopStations();
+        $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($train_id);
+
+        $trainlocation = new TrainLocation();
+        $data['location'] = $trainlocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
+
+        $station = new Stations();
+
+
+        if (isset($data['location']) && empty($data['location'])) {
+            $data['location'] = new stdClass();
+            $data['location']->station_name = 'No Station';
+        } else {
+            $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $train_delay = new TrainDelay();
+            $delay_data = array(
+                'delay_train' => $train_id,
+                'delay_station' => $data['location']->station_id,
+                'delay_date' => date('Y-m-d'),
+                'delay_reason' => $_POST['reason']
+            );
+
+            if ($train_delay->validate($train_id) === true) {
+                $train_delay->insert($delay_data);
+                $this->redirect('traindriver/traindelay?success=1');
+            } else {
+                $data = array_merge($data, $train_delay->errors);
+            }
+        }
+
+        
+         $this->view('update.train.delay', $data);
     }
-    // function updateLocation($id = '')
-    // {
-    //     $train = new Trains();
-    //     $data = array();
-    //     $data['train'] = $train->whereOne('train_id', $id);
-
-    //     $trainlocation = new TrainLocation();
-
-
-    //     $this->view('update.location');
-    // }
-
 
 
     function addLocation()
@@ -119,7 +121,14 @@ class TrainDriver extends Controller
         $data['location'] = $trainlocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
 
         $station = new Stations();
-        $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
+
+
+        if (isset($data['location']) && empty($data['location'])) {
+            $data['location'] = new stdClass();
+            $data['location']->station_name = 'No Station';
+        } else {
+            $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
+        }
 
 
 
@@ -127,14 +136,13 @@ class TrainDriver extends Controller
 
             $location_data = array(
                 'train_id' => $train_id,
-                'date' => date('Y-m-d'),
                 'train_location' => $_POST['station_id'],
-                'train_location_updated_time' => date('Y-m-d H:i:s')
+                'date' => date('Y-m-d')
             );
 
             if ($trainlocation->validate($location_data) === true) {
                 // update the location
-                $trainlocation->updateLocation($location_data);
+                $trainlocation->callProcedure('update_train_location', $location_data);
 
                 // get passenger data in the next station
                 $passenger = new Passengers();
@@ -142,8 +150,6 @@ class TrainDriver extends Controller
 
                 // send a mail to the passengers
                 $this->notifyPassengers($data['train'], $passenger_data, $_POST['station_id']);
-
-
                 $this->redirect('traindriver/addlocation?success=1');
             } else {
                 $data = array_merge($data, $trainlocation->errors);
@@ -154,17 +160,12 @@ class TrainDriver extends Controller
         $this->view('add.location', $data);
     }
 
-    function scanLocation($id = '')
-    {
-
-        $this->view('scan.train.location');
-    }
-
     function qr()
     {
         $this->view('QRSearch.traindriver');
     }
 
+    // welcom sceen for the train driver where need to scan the qr code
     function idoption($id = '')
     {
         if (!Auth::is_logged_in() || !Auth::isUserType('train_driver')) {
@@ -184,7 +185,7 @@ class TrainDriver extends Controller
                 $this->redirect('traindriver/index/' . $data['train_id'] . '/' . Auth::getUser_id());
             }
         }
-        
+
 
         $this->view('option.traindriver');
     }

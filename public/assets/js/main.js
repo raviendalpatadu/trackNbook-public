@@ -227,11 +227,15 @@ $(document).on("click touch", ".selectDropdown ul li a", function (e) {
   dropdown.toggleClass("filled", !active);
   dropdown.children("span").text(label);
   if (!active) {
-    dropdown
+    var selectedOption = dropdown
       .find("option:contains(" + $(this).text() + ")")
       .prop("selected", true);
 
     $(this).parent().addClass("active");
+
+    // Make sure the selected option's value is set in the original select
+    dropdown.find("select").val(selectedOption.val());
+    
   }
 
   dropdown.removeClass("open");
@@ -597,6 +601,8 @@ function makeSelectDropdown(outputContainer) {
           .addClass("active");
         $(this).parent().addClass("filled");
       }
+        //trigger change event
+  // dropdown.find("select").trigger("change");
     });
 
   $(outputContainer).on("click touch", ".selectDropdown ul li a", function (e) {
@@ -667,4 +673,74 @@ function makeSuccessToast(title, description) {
     showMethod: "fadeIn",
     hideMethod: "fadeOut",
   };
+
+  function makeFailureToast(title, description) {
+    toastr["error"](title, description);
+  
+    toastr.options = {
+      closeButton: true,
+      debug: false,
+      newestOnTop: false,
+      progressBar: false,
+      positionClass: "toast-top-right",
+      preventDuplicates: false,
+      onclick: null,
+      showDuration: "300",
+      hideDuration: "1000",
+      timeOut: "5000",
+      extendedTimeOut: "1000",
+      showEasing: "swing",
+      hideEasing: "linear",
+      showMethod: "fadeIn",
+      hideMethod: "fadeOut",
+    };
+  }
+  
 }
+
+function makeTicketQrCode(ticketId, QrContainer){
+  $('#'+QrContainer).empty();
+  var qrcode = new QRCode(QrContainer, {
+      text: "http://localhost/trackNbook/public/ticketchecker/summary/" + ticketId,
+      width: 128,
+      height: 128,
+      colorDark: "#324054",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+  });
+}
+
+function makeErrorToast(title, description) {
+  toastr["error"](title, description);
+
+  toastr.options = {
+    closeButton: true,
+    debug: false,
+    newestOnTop: false,
+    progressBar: false,
+    positionClass: "toast-top-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "300",
+    hideDuration: "1000",
+    timeOut: "5000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+  };
+}
+
+$(document).ready(function () {
+    $.ajax({
+      url: "http://localhost/trackNbook/public/ajax/getErrors",
+      type: "post",
+      success: function (data) {
+        var err = JSON.parse(data);
+        if (err != false) {
+          makeErrorToast(err,'');
+        }
+      },
+    });
+});

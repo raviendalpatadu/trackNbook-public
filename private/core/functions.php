@@ -146,6 +146,14 @@ function get_data_view($data, $key)
     return '';
 }
 
+function get_data_select($data, $value)
+{
+    // check if $data is array
+    if ($data == $value) {
+        return 'selected';
+    }
+    return '';
+}
 
 function hms_date_diff(DateInterval $date_diff)
 {
@@ -157,4 +165,10 @@ function hms_date_diff(DateInterval $date_diff)
     $minutes    = $date_diff->i;
     $seconds    = $date_diff->s;
     return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+}
+
+
+function get_time($time, $format = 'h:i A')
+{
+    return date($format, strtotime($time));
 }

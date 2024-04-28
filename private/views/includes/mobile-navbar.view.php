@@ -41,7 +41,7 @@
       ],
       [
         "name" => "Update Location",
-        "link" => "traindriver/addlocation",
+        "link" => "traindriver/qr",
         "icon" => "qr.svg"
       ],
       [

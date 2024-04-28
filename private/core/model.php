@@ -7,10 +7,10 @@ class Model extends Database
 {
 
     public $errors = array();
-    // public $table;
-    // public $allowedColumns;
-    // public $beforeInsert;
-    // public $afterSelect;
+    protected $table;
+    // protected $allowedColumns;
+    // protected $beforeInsert;
+    // protected $afterSelect;
 
     public function __construct()
     {
@@ -175,9 +175,13 @@ class Model extends Database
             $str .= '?,';
         }
         $str = trim($str, ',');
+         
         try {
             $query = "call $procedure($str)";
-            return $this->query($query, $data);
+            // echo "<pre>";
+            // print_r(array_values($data));
+            // echo "</pre>";
+            return $this->query($query, array_values($data));
         } catch (PDOException $e) {
             die($e->getMessage());
         }
