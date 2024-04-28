@@ -128,11 +128,13 @@ class StationMaster extends Controller
         $train = new Trains();
         $data = array();
 
-        $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
+        $date  = date('Y-m-d');
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>"; 
+        $data['trains'] = $train->getTrainScheduleForStationMaster($_SESSION['USER']->user_data, $date);
+
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>"; 
 
         $this->view('manage.schedule', $data);
     }
@@ -164,8 +166,54 @@ class StationMaster extends Controller
     function getInquiry(){
         $inquiry = new Inquiries();
         $data = array();
-        $data['inquiries'] = $inquiry->getStationInquiry();
-         $this->view('view.inquiry', $data);
+        $data['inquiries'] = $inquiry->getInquiry();
+
+        
+         $this->view('inquiry.stationmaster', $data);
         // echo json_encode($data);
+    }
+
+    function inquirySummary($id = '')
+    {
+        $Inquiry = new Inquiries();
+        $warrant_resevation = new WarrantsReservations();
+
+        $data = array();
+        $data['inquiry'] = $Inquiry->getInquirySummary($id);
+
+        $this->view('inquiry.summary.stationmaster', $data);
+    }
+
+    function inquiryResponse($id)
+    {
+
+        $Inquiry = new Inquiries();
+
+        try {
+            $inquiry_data = $Inquiry->getInquirySummary($id);
+
+            $Inquiry->update($id, array(
+                'inquiry_status' => 'Responded',
+            ), "inquiry_ticket_id");
+
+
+            try {
+                $name = ucfirst($inquiry_data[0]->user_first_name);
+                $subject = "Inquiry Response";
+                $message = $_POST['inquiry_response'];
+                $body = Auth::getEmailBody($name, $message);
+                $to = $inquiry_data[0]->user_email;
+
+                if (!$this->sendMail($to, $name, $subject, $body)) {
+                    die('failed to send mail');
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $this->redirect('stationmaster/getInquiry');
     }
 }
