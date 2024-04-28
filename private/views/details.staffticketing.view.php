@@ -136,7 +136,7 @@ echo "</pre>";
 
                         <?php } ?>
 
-<!-- check booking type -->
+
                         <div class="row mt-10">
                             <div class="col-12">
                                 <div class="text-inputs">

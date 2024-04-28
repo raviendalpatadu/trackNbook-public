@@ -201,6 +201,7 @@ echo "</pre>";
                                     <div class="row  border-bottom-Lightgray mb-10">
                                         <div class="col-12">
                                             <h7 class="text">Compartment Details</h7>
+                                            <?= printError($data['errors'], 'compartment_class')?>
                                         </div>
                                     </div>
                                     <div class="compartmentDetails mt-20">

@@ -23,15 +23,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="col-3">
-                            <div class="row g-5">
-                                <div class="col-4">
-
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
@@ -49,10 +41,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($data['trains'] as $train) : ?>
+                                                    <?php foreach ($data['trains'] as $train): ?>
                                                         <tr class="p-20">
                                                             <td class="col-4 d-flex align-items-center">
-                                                                <?= $train->train_name . " - " . $train->train_id  ?>
+                                                                <?= $train->train_name . " - " . $train->train_id ?>
                                                             </td>
                                                             <td class="col-2">
                                                                 <?= $train->train_type ?>
@@ -64,9 +56,12 @@
                                                                 <?= date("H:i", strtotime($train->estimated_arraival_time)) ?>
                                                             </td>
                                                             <td class="col-1 d-flex align-items-center g-10">
-                                                                <form method="post" action="<?= ROOT ?>stationmaster/checkArrival">
-                                                                    <input type="hidden" name="train_id" value="<?= $train->train_id ?>">
-                                                                    <button type="submit" name="check" class="blue">Check</button>
+                                                                <form method="post"
+                                                                    action="<?= ROOT ?>stationmaster/checkArrival">
+                                                                    <input type="hidden" name="train_id"
+                                                                        value="<?= $train->train_id ?>">
+                                                                    <button type="submit" name="check"
+                                                                        class="badge-base bg-Selected-Blue">Check</button>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -85,19 +80,19 @@
     </div>
 
     <script>
-       $(document).ready(function() {
-    let table = new DataTable("#userTable", {
-        search: true
-    });
+        $(document).ready(function () {
+            let table = new DataTable("#userTable", {
+                search: true
+            });
 
-    // show success or failure toast based on URL parameter
-    let urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === '1') {
-        makeSuccessToast('Location updated successfully!', '');
-    } else if (urlParams.get('success') === '0') {
-        makeFailureToast('Location already added!', '');
-    }
-});
+            // show success or failure toast based on URL parameter
+            let urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === '1') {
+                makeSuccessToast('Location updated successfully!', '');
+            } else if (urlParams.get('success') === '0') {
+                makeErrorToast('Location already added!', '');
+            }
+        });
 
     </script>
 

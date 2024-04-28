@@ -388,7 +388,7 @@
 
                 <div class="row d-flex g-8 justify-content-center">
                     <div class="col-4" id="mou-backBtn">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/staffTicketingInquiry">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>stationmaster/getInquiry">
                                 <div class="button-base bg-Selected-Blue">
                                     <div class="text Blue">Back</div>
                                 </div>
@@ -405,14 +405,7 @@
                         </button>
                     </div>
 
-                    <div class="col-4" id="mou-handoverBtn">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/inquirySM/<?php echo (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>">
-                                <div class="button-base bg-light-green">
-                                    <div class="text dark-green ">HandOver to Station Master</div>
-                                </div>
-                            </a>
-                        </button>
-                    </div>
+                    
 
                 </div>
 
@@ -420,7 +413,7 @@
 
 
                 <div id="mou-rejectReason">
-                    <form action="<?= ROOT ?>staffticketing/inquiryResponse/<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
+                    <form action="<?= ROOT ?>stationmaster/inquiryResponse/<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
 
                         <div class="title">Inquiry Response</div>
 

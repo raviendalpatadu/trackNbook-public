@@ -226,6 +226,23 @@ class Reservations extends Model
         }
     }
 
+    public function getCancelReservations(){
+        try{
+           $query = "SELECT c.*, start_st.station_name
+                    FROM tbl_reservation_cancelled c
+                    JOIN tbl_station start_st ON c.reservation_start_station = start_st.station_id;";
+        
+            $result = $this->query($query);
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
     public function getReservationDataTicket($id, $type = '')
     {
@@ -399,6 +416,56 @@ class Reservations extends Model
                 return $result;
             } else {
                 return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function countReservationFromAndTo($startDate,  $endDate){
+        // this should rerturn the total number of reservations from start and end date if there a no reservations it should return 0
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_date
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function reservationCountByReservationType($startDate,  $endDate){
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        reservation_type,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_type
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

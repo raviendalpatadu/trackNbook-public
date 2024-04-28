@@ -75,11 +75,15 @@
                     <!-- charts -->
                     <div class="row g-20 py-20 graphbox">
                         <!-- graph left -->
-                        <div class="col-12 box bg-light-blue p-20">
+                        <div class="col-12 box bg-light-blue p-20 d-flex flex-column">
                             <!-- graph head -->
-                            <h4 class="Primary-Gray">Reservation Analysis</h4>
-                            <h5 class="Primary-Gray">Overview of Latest Week</h5>
-                            <canvas id="bookingChart" height="100%" width="500px"></canvas>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-column g-5">
+                                    <h4 class="Primary-Gray">Booking Analysis</h4>
+                                    <h5 class="Primary-Gray">Overview of Latest Week</h5>
+                                </div>
+                            </div>
+                            <canvas id="lineChart" height="100%" width="500px"></canvas>
                         </div>
 
 
@@ -262,7 +266,8 @@
 
 
 </body>
+<?php $this->view('includes/load-js') ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="<?= ASSETS ?>/js/mou_chart.js"></script>
+<script src="<?= ASSETS ?>js/mou_chart.js"></script>
 
 </html>
