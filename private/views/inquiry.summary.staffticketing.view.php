@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 
 ?>
@@ -263,28 +263,29 @@ echo "</pre>";
                                     </div>
                                 <?php endif; ?>
 
-                                <div class="display-none" id="mou-warrant-img">
-                                    <!-- check if the warrant booking done by the counter -->
-                                    <?php if (empty($data['inquiry'][0]->warrant_image_path)) : ?>
-                                        <p class="mou-warrant-text">Image Not Found</p>
 
-                                    <?php else : ?>
-                                        <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
-                                        <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['inquiry'][0]->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
-                                    <?php endif; ?>
-
-                                </div>
 
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!-- img -->
+                <div class="bg-white display-none d-flex justify-content-center p-20" id="mou-warrant-img">
+                    <div class=>
+                        <!-- check if the warrant booking done by the counter -->
+                        <?php if (empty($data['inquiry'][0]->warrant_image_path)) : ?>
+                            <p class="mou-warrant-text">Image Not Found</p>
 
-
-
+                        <?php else : ?>
+                            <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                            <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['inquiry'][0]->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
+                        <?php endif; ?>
 
                     </div>
-
                 </div>
+
+                <!-- passenger details -->
                 <div class="d-flex flex-column bg-white g-20 p-20">
 
                     <?php for ($i = 0; count($data['inquiry']) > $i; $i++) : ?>
@@ -394,6 +395,7 @@ echo "</pre>";
                             </a>
                         </button>
                     </div>
+
                     <div class="col-4" id="mou-responseBtn">
                         <button class="button mt-20 " id="reject">
                             <div class="button-base bg-Selected-red">
@@ -411,6 +413,7 @@ echo "</pre>";
                             </a>
                         </button>
                     </div>
+
                 </div>
 
 
@@ -468,7 +471,7 @@ echo "</pre>";
     document.getElementById('displayWarrantImg').addEventListener('click', function() {
         document.getElementById('mou-warrant-img').classList.toggle('display-none');
 
-        
+
         var Btn = <?= strtolower($data['inquiry'][0]->inquiry_status) ?>
 
         if (Btn == 'forwarded' || Btn == 'rejected') {
@@ -476,7 +479,7 @@ echo "</pre>";
             document.getElementById('mou-responseBtn').css('display', 'none');
         }
 
-       
+
     });
 
 
