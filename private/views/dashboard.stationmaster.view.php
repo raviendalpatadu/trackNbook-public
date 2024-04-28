@@ -5,7 +5,7 @@
 // echo "<pre>";
 // print_r($data);
 // echo "</pre>";
-
+$trainCount = count($data['trains']);
 ?>
 
 <body>
@@ -29,7 +29,7 @@
                                             Number of
                                             Trains <br>by today
                                         </p1>
-                                        <p2 class="dashboard-card-sm-font2 ">35</p2>
+                                        <p2 class="dashboard-card-sm-font2 "><?= $trainCount ?></p2>
                                     </div>
 
                                     <div class="d-flex">
@@ -62,8 +62,8 @@
                                     class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
 
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="dashboard-card-sm-font1">Trains Arrived</p1>
-                                        <p2 class="dashboard-card-sm-font2">21</p2>
+                                        <p1 class="dashboard-card-sm-font1">Inquiries</p1>
+                                        <p2 class="dashboard-card-sm-font2"><?= $data['inquiryCount'] ?></p2>
                                     </div>
 
                                     <div class="d-flex  ">
@@ -96,8 +96,8 @@
                                     class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
 
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="dashboard-card-sm-font1">Trains to be Arrived</p1>
-                                        <p2 class="dashboard-card-sm-font2">14</p2>
+                                        <p1 class="dashboard-card-sm-font1">Waiting List</p1>
+                                        <p2 class="dashboard-card-sm-font2"><?= $data['waitinglistCount'] ?></p2>
                                     </div>
 
                                     <div class="d-flex  ">
