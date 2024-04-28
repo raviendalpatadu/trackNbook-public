@@ -126,7 +126,7 @@ if (isset($data['inquiry']) && $data['inquiry'] != 0) {
 
                                                 
                                                 <td class="col-1 d-flex align-items-center g-20">
-                                                    <a class="blue" href="<?= ROOT ?>staffticketing/inquirySummary/<?= $data['inquiry'][$i]->inquiry_id  ?>">
+                                                    <a class="blue" href="<?= ROOT ?>staffticketing/inquirySummary/<?= $data['inquiry'][$i]->inquiry_ticket_id  ?>">
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
                                                                 <div class="dot4"></div>

@@ -131,7 +131,7 @@ class StaffTicketing extends Controller
 
         $fare =  new Fares();
         $data['from_fare'] = $fare->getFareData($data['from_train']->train_type, $data['from_compartment']->compartment_class_type, Auth::reservation()['from_station']->station_id, Auth::reservation()['to_station']->station_id)[0]; //get from db must be changed
-// to
+        // to
         if (Auth::reservation()['return'] == 'on') {
             $seatData['to']['reservation_train_id'] = Auth::reservation()['to_compartment_and_train'][1];
             $seatData['to']['reservation_compartment_id'] = Auth::reservation()['to_compartment_and_train'][0];
@@ -303,7 +303,7 @@ class StaffTicketing extends Controller
                                 $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Completed'], 'warrant_reservation_id');
 
                                 $_SESSION['reservation']['reservation_status'] = "Reserved";
-                            } 
+                            }
 
 
                             $count++;
@@ -347,29 +347,25 @@ class StaffTicketing extends Controller
                 // if redirect according to the reservation type
                 if (empty($data['errors'])) {
 
-                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on'){
+                    if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
                         // send email to each email
                         foreach (Auth::reservation()['passenger_data']['reservation_passenger_email'] as $key => $email) {
                             // check wheather the email is not empty
-                    
+
                             $to_email = $email;
                             $subject = "Reservation Successfull - Warrant";
                             $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
 
-                        
+
                             $message = Auth::getReservationConfirmationEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key]);
 
                             $this->sendMail($to_email, $recipient, $subject, $message);
                         }
 
                         $this->redirect('staffticketing/addreservation');
-
                     }
 
                     $this->redirect('staffticketing/pay');
-
-                    
-                    
                 }
             } else {
                 $data['errors'] = $reservation->__get('errors');
@@ -387,7 +383,8 @@ class StaffTicketing extends Controller
     // }
 
 
-    function addReservation(){
+    function addReservation()
+    {
         if (!Auth::is_logged_in()) {
             $this->redirect('/home');
         }
@@ -498,7 +495,7 @@ class StaffTicketing extends Controller
     //     $this->view('summary.staffticketing', $data);
     // }
 
-   
+
 
     function reservationList($id = '')
     {
@@ -747,9 +744,9 @@ class StaffTicketing extends Controller
                 $warrant_resevation = new Reservations();
                 $warrant_data = $warrant_resevation->where('reservation_ticket_id', $id);
 
-                echo "<pre>";
-                print_r($warrant_data);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($warrant_data);
+                // echo "</pre>";
 
                 foreach ($warrant_data as $warrant) {
                     try {
@@ -786,41 +783,106 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
-    
-function staffTicketingInquiry($id ='')
-{
-    $Inquiry = new Inquiries();
-    $data = array();
 
-    $data['inquiry'] = $Inquiry->getInquiry();
-
-    if (isset($_POST['submit'])) {
-        if (!empty($_POST['reservation_ticket_id'])) {
-            $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
-        }
-        if (!empty($_POST['inquiry_ticket_id'])) {
-            $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
-        }
-        if (!empty($_POST['user_nic'])) {
-            $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
-        }
-    }
-
-
-    $this->view('inquiry.staffticketing',$data);
-}
-
-    function inquirySummary($id = '')
+    function staffTicketingInquiry($id = '')
     {
         $Inquiry = new Inquiries();
         $data = array();
 
-        $data['inquiry'] = $Inquiry->getInquiry($id);
+        $data['inquiry'] = $Inquiry->getInquiry();
+
+        if (isset($_POST['submit'])) {
+            if (!empty($_POST['reservation_ticket_id'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
+            }
+            if (!empty($_POST['inquiry_ticket_id'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
+            }
+            if (!empty($_POST['user_nic'])) {
+                $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
+            }
+        }
+
+
+        $this->view('inquiry.staffticketing', $data);
+    }
+
+    function inquirySummary($id = '')
+    {
+        $Inquiry = new Inquiries();
+        $warrant_resevation = new WarrantsReservations();
+
+        $data = array();
+        $data['inquiry'] = $Inquiry->getInquirySummary($id);
 
         $this->view('inquiry.summary.staffticketing', $data);
     }
 
+    function inquiryResponse($id)
+    {
 
+        $Inquiry = new Inquiries();
+
+        try {
+            $inquiry_data = $Inquiry->getInquirySummary($id);
+
+            $Inquiry->update($id, array(
+                'inquiry_status' => 'Responded',
+            ), "inquiry_ticket_id");
+
+
+            try {
+                $name = ucfirst($inquiry_data[0]->user_first_name);
+                $subject = "Inquiry Response";
+                $message = $_POST['inquiry_response'];
+                $body = Auth::getEmailBody($name, $message);
+                $to = $inquiry_data[0]->user_email;
+
+                if (!$this->sendMail($to, $name, $subject, $body)) {
+                    die('failed to send mail');
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $this->redirect('staffticketing/staffTicketingInquiry');
+    }
+
+    function inquirySM($id)
+    {
+        $Inquiry = new Inquiries();
+
+        try {
+            $inquiry_data = $Inquiry->getInquirySummary($id);
+
+            $Inquiry->update($id, array(
+                'inquiry_to_station_master' => '1',
+                'inquiry_status' => 'Forwarded'
+            ), "inquiry_ticket_id");
+        
+        try {
+            $name = ucfirst($inquiry_data[0]->user_first_name);
+            $subject = "Inquiry Response";
+            $message = "Your inquiry has been forwarded to the station master. Please wait for the response.";
+            $body = Auth::getEmailBody($name, $message);
+            $to = $inquiry_data[0]->user_email;
+
+            if (!$this->sendMail($to, $name, $subject, $body)) {
+                die('failed to send mail');
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $this->redirect('staffticketing/staffTicketingInquiry');
+
+}
 
 
 

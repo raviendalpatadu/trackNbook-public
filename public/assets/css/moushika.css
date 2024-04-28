@@ -996,4 +996,8 @@ video {
   padding: 10px;
   resize: none;
   background-color: white;
+}
+
+.mou-view-img {
+  cursor: pointer;
 }/*# sourceMappingURL=moushika.css.map */
