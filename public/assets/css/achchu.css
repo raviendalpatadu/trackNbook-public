@@ -47,7 +47,7 @@
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 106%;
+  height: 109%;
   flex-shrink: 0;
   background: url("../images/checker-mobile.jpg"), lightgray -3.491px -930.014px/100.77% 290.365% no-repeat;
   background-position-y: 100% !important;
@@ -516,15 +516,33 @@ thead tr {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 67px 20px 75px 142px;
-  width: 350px;
+  width: 121%;
   padding-top: 30px;
-  padding-bottom: 20px;
-  padding-left: 19px;
+  padding-bottom: 30px;
+  padding-left: 39px;
   padding-right: 25px;
-  text-align: center;
+  text-align: left;
   color: #1f2124;
   float: left;
+  margin-left: 150px;
+  margin-top: 18px;
+}
+
+.input-field-update-delay textarea {
+  background: var(--w-background, #ffffff);
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  resize: none; /* Prevent resizing of textarea */
+  width: 197%; /* Make the textarea fill its container */
 }
 
 .ad-width-70 {
