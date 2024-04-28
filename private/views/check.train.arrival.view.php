@@ -61,7 +61,7 @@
                                                                     <input type="hidden" name="train_id"
                                                                         value="<?= $train->train_id ?>">
                                                                     <button type="submit" name="check"
-                                                                        class="blue">Check</button>
+                                                                        class="badge-base bg-Selected-Blue">Check</button>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -90,7 +90,7 @@
             if (urlParams.get('success') === '1') {
                 makeSuccessToast('Location updated successfully!', '');
             } else if (urlParams.get('success') === '0') {
-                makeFailureToast('Location already added!', '');
+                makeErrorToast('Location already added!', '');
             }
         });
 

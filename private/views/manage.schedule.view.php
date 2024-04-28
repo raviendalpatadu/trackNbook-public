@@ -166,10 +166,18 @@ if (isset($data) && !empty($data)) {
                 </div>
             </div>
             <script>
-                $(document).ready(function () {
-                    let table = new DataTable("#to-trains");
-                });
-            </script>
+    $(document).ready(function () {
+        let table = new DataTable("#to-trains", {
+            "columnDefs": [
+                { "width": "35%", "targets": 0 }, // Set width for the first column
+                { "width": "10%", "targets": 1 }, // Set width for the second column
+                { "width": "10%", "targets": 2 }, // Set width for the third column
+                { "width": "45%", "targets": 3 }, // Set width for the fourth column
+            ]
+        });
+    });
+</script>
+
 
         </main>
     </div>
