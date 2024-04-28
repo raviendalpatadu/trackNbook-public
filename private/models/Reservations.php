@@ -177,7 +177,10 @@ class Reservations extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        return $result;
+        if(is_array($result) && count($result) > 0){
+            return $result;
+        }
+        return [];
     }
     public function getReservations($id, $type = '')
     {
@@ -225,6 +228,8 @@ class Reservations extends Model
             echo $e->getMessage();
         }
     }
+
+   
 
     public function getCancelReservations(){
         try{
