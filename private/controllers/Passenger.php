@@ -10,9 +10,9 @@ class Passenger extends Controller
 
     function details($id = '')
     {
-        // echo "<pre>";
-        // print_r($_SESSION);
-        // echo "</pre>";
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
 
         if (!Auth::reservation()) {
             $this->redirect('/home');
@@ -30,8 +30,6 @@ class Passenger extends Controller
 
             if ($reservation->validatePassenger($_POST)) {
                 $_SESSION['reservation']['passenger_data'] = $_POST;
-
-
 
 
                 if (!isset($_POST['warrant_booking'])) {
@@ -64,6 +62,11 @@ class Passenger extends Controller
 
                             // get warrant tempory warrant id
                             $warrant_temp_id = Auth::getTempReservationId();
+
+                            // if to reservation is set
+                            if (Auth::getReturn() == 'on' && isset(Auth::reservation()['reservation_id']['to'])) {
+                                $warrant_temp_id_to = Auth::getTempReservationId();
+                            }
                         }
 
 
@@ -80,6 +83,8 @@ class Passenger extends Controller
                             $reservationPassengerData['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+
+                            $reservationPassengerData['reservation_amount'] = Auth::reservation()['from_fare']->fare_price; 
 
                             if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
                                 $reservationPassengerData['reservation_type'] = "Warrant";
@@ -124,12 +129,13 @@ class Passenger extends Controller
                                 $reservationPassengerDataTo['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+                                $reservationPassengerDataTo['reservation_amount'] = Auth::reservation()['to_fare']->fare_price;
 
                                 if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
                                     $reservationPassengerDataTo['reservation_type'] = "Warrant";
 
                                     // tempory warrant id
-                                    $reservationPassengerDataTo['reservation_ticket_id'] = $warrant_temp_id;
+                                    $reservationPassengerDataTo['reservation_ticket_id'] = $warrant_temp_id_to;
                                 }
 
                                 $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');

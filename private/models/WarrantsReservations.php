@@ -24,6 +24,7 @@ class WarrantsReservations extends Model
     }
     public function getReservations($id)
     {
+        $result = [];
 
         try {
             $query = "WITH compartments AS (
@@ -45,6 +46,42 @@ class WarrantsReservations extends Model
             $result = $this->query($query, [
                 'id' => $id
             ]);
+            if(is_array($result) && count($result) > 0){
+                return $result;
+            }
+            return $result;
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getReservationsByTicketNo($id)
+    {
+        $result = [];
+
+        try {
+            $query = "WITH compartments AS (
+                        SELECT c.compartment_id, ct.* 
+                        FROM tbl_compartment c
+                        JOIN tbl_compartment_class_type ct on c.compartment_class_type = ct.compartment_class_type_id
+                        )
+
+                        SELECT r.*, wr.* , c.compartment_class_type, t.*
+                        FROM tbl_reservation r
+                        JOIN tbl_warrant_reservation wr ON wr.warrant_reservation_id = r.reservation_id 
+                        JOIN tbl_train t ON r.reservation_train_id = t.train_id
+                        JOIN compartments c ON r.reservation_compartment_id = c.compartment_id
+
+                        WHERE r.reservation_ticket_id = :id
+
+                        GROUP BY r.reservation_id;";
+
+            $result = $this->query($query, [
+                'id' => $id
+            ]);
+            if(is_array($result) && count($result) > 0){
+                return $result;
+            }
             return $result;
         } catch (PDOException $e) {
             die($e->getMessage());

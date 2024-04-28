@@ -83,6 +83,12 @@ class Users extends Model
 
 
             if ($data_pass > 0) {
+                // check if user type is passenger
+                if ($data_pass[0]->user_type == 'passenger') {
+                    $errors['error']['invalid_uname'] = 'Invalid Username';
+                    return $errors;
+                } 
+
                 return $data_pass;
             } elseif (!$data_pass) {
                 $errors['error']['invalid_password'] = 'Invalid Password';

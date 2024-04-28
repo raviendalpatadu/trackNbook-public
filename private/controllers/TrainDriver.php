@@ -22,8 +22,12 @@ class TrainDriver extends Controller
         $data = array();
 
         if ($id != '' && $driver_id != '') {
+            $train = new Trains();
+            $train_data = $train->whereOne('train_no', $id);
+            
+
             $data = array(
-                'train_id' => $id,
+                'train_id' => $train_data->train_id,
                 'driver_id' => Auth::getUser_id()
             );
 
@@ -198,7 +202,12 @@ class TrainDriver extends Controller
             $station_data = $station->whereOne('station_id', $station_id);
 
             foreach ($passenger_data as $passenger) {
-                $to = $passenger->reservation_passenger_email;
+                if ($passenger->reservation_passenger_email == '' || $passenger->reservation_passenger_email == null || empty($passenger->reservation_passenger_email)) {
+                    continue;
+                }
+
+                $to = $passenger->reservation_passenger_email;               
+                
                 $subject = 'Train Location Update';
 
                 // add the train data and the station data to make the message
@@ -208,9 +217,14 @@ class TrainDriver extends Controller
 
                 $body = Auth::getEmailBody($passenger->reservation_passenger_first_name, $message);
 
-                $this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body);
+                if($this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body)){
+                    return true;
+                } else{
+                    echo "fail to send mail";
+                }
+
+
             }
-            return true;
         }
         return false;
     }

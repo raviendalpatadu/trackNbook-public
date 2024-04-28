@@ -723,7 +723,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
 
                         // add data to the ticket summary
                         ticketDataDown.find('#refNo').text('Ref No: ' + data[0].reservation_ticket_id);
-                        ticketDataDown.find('#price').text(data[0].reservation_price);
+                        ticketDataDown.find('#price').text(data[0].reservation_amount);
                         ticketDataDown.find('#trainNo').text(data[0].reservation_train_id);
                         ticketDataDown.find('#trainName').text(data[0].reservation_train_name);
                         ticketDataDown.find('#reservationDate').text(data[0].reservation_date);
