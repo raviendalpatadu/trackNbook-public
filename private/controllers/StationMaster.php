@@ -166,8 +166,21 @@ class StationMaster extends Controller
     function getInquiry(){
         $inquiry = new Inquiries();
         $data = array();
-        $data['inquiries'] = $inquiry->getStationInquiry();
-         $this->view('view.inquiry', $data);
+        $data['inquiries'] = $inquiry->getInquiry();
+
+        
+         $this->view('inquiry.stationmaster', $data);
         // echo json_encode($data);
+    }
+
+    function inquirySummary($id = '')
+    {
+        $Inquiry = new Inquiries();
+        $warrant_resevation = new WarrantsReservations();
+
+        $data = array();
+        $data['inquiry'] = $Inquiry->getInquirySummary($id);
+
+        $this->view('inquiry.summary.stationmaster', $data);
     }
 }

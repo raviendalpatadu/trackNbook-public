@@ -223,15 +223,16 @@ class WaitingLists extends Model
                     JOIN tbl_station start_st ON s.waiting_list_reservation_start_station = start_st.station_id
                     JOIN tbl_station end_st ON s.waiting_list_reservation_end_station = end_st.station_id
                     JOIN tbl_train t ON s.waiting_list_train_id = t.train_id";
-
+    
             $result = $this->query($query);
-
-            return $result;
+    
+            return $result ?: []; // Return empty array if $result is false
         } catch (PDOException $e) {
             // Log the error or handle it appropriately
             error_log("Error fetching waiting list: " . $e->getMessage());
-            return false;
+            return []; // Return empty array on error
         }
     }
+    
 
 }

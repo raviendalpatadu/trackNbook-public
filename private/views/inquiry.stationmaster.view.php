@@ -7,6 +7,11 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
 } else {
     $count = 0;
 }
+
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+
 ?>
 
 <head>
@@ -35,25 +40,42 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
                         <table class="if-table stripe hover" id="userTable" style="width: 100%;">
                             <thead>
                                 <tr>
-                                    <th class="col-2">Inquiry ID</th>
+                                    <!-- <th class="col-2">Inquiry ID</th>
                                     <th class="col-2">Passenger Name</th>
                                     <th class="col-2">Ticket No</th>
                                     <th class="col-2">Reason</th>
                                     <th class="col-2">Status</th>
-                                    <th class="col-2">Action</th> <!-- New column -->
+                                    <th class="col-2">Action</th> New column -->
+
+                                    <th class="col-1">Inquiry ID</th>
+                                    <th class="col-1">Ticket ID</th>
+                                    <th class="col-2">Passenger NIC</th>
+                                    <th class="col-3">Passenger Name</th>
+                                    <th class="col-2">Inquiry created time</th>
+                                    <th class="col-2">Status</th>
+                                    <th class="col-1"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($data['inquiries'] as $inquiry): ?>
                                     <tr class="p-20">
-                                        <td class="col-2"><?= $inquiry->inquiry_id ?></td>
-                                        <td class="col-2"><?= $inquiry->inquiry_passenger_id ?></td>
-                                        <td class="col-2"><?= $inquiry->inquiry_ticket_id ?></td>
-                                        <td class="col-2"><?= $inquiry->inquiry_reason ?></td>
-                                        <td class="col-2"><?= $inquiry->inquiry_status ?></td>
+                                        <td class="col-1"><?= $inquiry->inquiry_id ?></td>
+                                        <td class="col-1"><?= $inquiry->inquiry_ticket_id ?></td>
                                         <td class="col-2">
+                                        <?= $inquiry->user_nic ?>
+                                        </td>
+                                        <td class="col-3">
+                                        <?= $inquiry->user_first_name ?>
+                                        
+                                            
+                                        </td>
+
+                                        <td class="col-2"><?= $inquiry->inquiry_created_time ?></td>
+                                        <td class="col-2"><?= $inquiry->inquiry_status ?></td>
+                                        <td class="col-1">
                                             <!-- Add action buttons or links here -->
-                                            <a class="blue" href="<?= ROOT ?>staffgeneral/updateTrain/<?= $inquiry->inquiry_id ?>">
+                                            <a class="blue"
+                                                href="<?= ROOT ?>stationmaster/InquirySummary/<?= $inquiry->inquiry_ticket_id ?>">
                                                 <div class="badge-base bg-Selected-Blue">
                                                     <div class="dot">
                                                         <div class="dot4"></div>
@@ -74,16 +96,17 @@ if (isset($data['inquiries']) && $data['inquiries'] != 0) {
     </div>
 
     <script>
-       $(document).ready(function () {
+        $(document).ready(function () {
             // Initialize DataTable and specify column widths
             let table = new DataTable("#userTable", {
                 columnDefs: [
                     { width: '10%', targets: 0 }, // Inquiry ID
                     { width: '20%', targets: 1 }, // Passenger Name
-                    { width: '20%', targets: 2 }, // Ticket No
-                    { width: '30%', targets: 3 }, // Reason
-                    { width: '10%', targets: 4 }, // Status
-                    { width: '10%', targets: 5 }  // Action
+                    { width: '15%', targets: 2 }, // Ticket No
+                    { width: '20%', targets: 3 }, // Reason
+                    { width: '20%', targets: 4 }, // Status
+                    { width: '10%', targets: 5 },  // Action
+                    { width: '5%', targets: 6 }  // Action
                 ]
             });
         });
