@@ -1,7 +1,7 @@
 <?php
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 
 ?>
@@ -246,7 +246,6 @@ echo "</pre>";
 
 
                             </div>
-
                             <div class="d-flex flex-row justify-content-between">
                                 <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
                                     <div class="d-flex">
@@ -258,50 +257,45 @@ echo "</pre>";
                                     </div>
                                 <?php endif; ?>
 
-                                <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'normal') : ?>
+                                <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'warrant') : ?>
                                     <div class="d-flex">
-                                        <p class="blue" id="displayWarrantImg">View Warrant Image</p>
+                                        <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
                                     </div>
                                 <?php endif; ?>
-                                
-                                <div class="">
-                                    <!-- check if the warrant booking done by the counter -->
-                                    <?php if (empty($data['warrant_img']) && strtolower($data['warrant_reservations'][0]->warrant_status) == 'completed') : ?>
-                                        <p class="mou-warrant-text">Reservation Done by Manually</p>
 
-                                        <!-- check if the warant booking done by the user but image not uploaded succefully -->
-                                    <?php elseif (empty($data['warrant_img']) && strtolower($data['warrant_reservations'][0]->warrant_status) == 'approval pending') : ?>
-                                        <p class="mou-warrant-error-text">Image Not Found</p>
 
-                                    <?php else : ?>
-                                        <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
-                                        <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['warrant_img']->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
-                                    <?php endif; ?>
-
-                                </div>
 
 
                             </div>
-
-
                         </div>
+                    </div>
+                </div>
+                <!-- img -->
+                <div class="bg-white display-none d-flex justify-content-center p-20" id="mou-warrant-img">
+                    <div class=>
+                        <!-- check if the warrant booking done by the counter -->
+                        <?php if (empty($data['inquiry'][0]->warrant_image_path)) : ?>
+                            <p class="mou-warrant-text">Image Not Found</p>
 
-
-
+                        <?php else : ?>
+                            <!-- get the scr by the controller eke method ekata danna database eken ena warant_image_path eka  -->
+                            <img src="<?= ROOT . 'warrantreservation/getwarrantimg/' . $data['inquiry'][0]->warrant_image_path ?>" class="mou-warrant_image_width" alt="">
+                        <?php endif; ?>
 
                     </div>
-
                 </div>
+
+                <!-- passenger details -->
                 <div class="d-flex flex-column bg-white g-20 p-20">
 
-                    <?php for ($i = 0; $i < count($data['inquiry']); $i++) : ?>
+                    <?php for ($i = 0; count($data['inquiry']) > $i; $i++) : ?>
                         <div class="d-flex border-bottom-Lightgray ">Passenger Details - <?= '0' . $i + 1 ?></div>
                         <div class="d-flex flex-row g-20">
                             <div class="d-flex width-20">
                                 <div class="text-inputs">
                                     <div class="input-text-label">Title</div>
                                     <div class="width-fill">
-                                        <select type="text" class="dropdown" placeholder="Please choose" name="reservation_passenger_title" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_title : ''; ?>" disabled>
+                                        <select type="text" class="dropdown" placeholder="Please choose" name="reservation_passenger_title" value="<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][$i]->reservation_passenger_title : ''; ?>" disabled>
                                             <option value="">Mr</option>
                                             <option value="">Mrs</option>
                                             <option value="">Miss</option>
@@ -315,7 +309,7 @@ echo "</pre>";
                                 <div class="input-text-label">First Name</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" name="reservation_passenger_first_name" value="<?= (array_key_exists('reservations', $data)) ? ucfirst($data['reservations'][$i]->reservation_passenger_first_name) : ''; ?>" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" name="reservation_passenger_first_name" value="<?= (array_key_exists('inquiry', $data)) ? ucfirst($data['inquiry'][$i]->reservation_passenger_first_name) : ''; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="assistive-text display-none"></div>
@@ -325,7 +319,7 @@ echo "</pre>";
                                 <div class="input-text-label">Last Name</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? ucfirst($data['reservations'][$i]->reservation_passenger_last_name) : ''; ?> " name="reservation_passenger_last_name" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? ucfirst($data['inquiry'][$i]->reservation_passenger_last_name) : ''; ?> " name="reservation_passenger_last_name" disabled>
                                     </div>
                                 </div>
                                 <div class="assistive-text"></div>
@@ -335,7 +329,7 @@ echo "</pre>";
                                 <div class="input-text-label">NIC</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_nic : ''; ?>" name="reservation_passenger_nic" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][$i]->reservation_passenger_nic : ''; ?>" name="reservation_passenger_nic" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +342,7 @@ echo "</pre>";
                                 <div class="input-text-label">Mobile</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_phone_number : ''; ?>" name="reservation_passenger_phone_number" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][$i]->reservation_passenger_phone_number : ''; ?>" name="reservation_passenger_phone_number" disabled>
 
                                     </div>
                                 </div>
@@ -359,7 +353,7 @@ echo "</pre>";
                                 <div class="input-text-label">Email</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_email : ''; ?>" name="reservation_passenger_email" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][$i]->reservation_passenger_email : ''; ?>" name="reservation_passenger_email" disabled>
 
                                     </div>
                                 </div>
@@ -369,7 +363,7 @@ echo "</pre>";
                                 <div class="input-text-label">Seat No</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? str_pad($data['reservations'][$i]->reservation_seat, 2, '0', STR_PAD_LEFT) : ''; ?>" name="reservation_seat" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? str_pad($data['inquiry'][$i]->reservation_seat, 2, '0', STR_PAD_LEFT) : ''; ?>" name="reservation_seat" disabled>
 
                                     </div>
                                 </div>
@@ -381,7 +375,7 @@ echo "</pre>";
                                 <div class="input-text-label">Gender</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? ucfirst($data['reservations'][$i]->reservation_passenger_gender) : ''; ?>" name="reservation_passenger_gender" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ? ucfirst($data['inquiry'][$i]->reservation_passenger_gender) : ''; ?>" name="reservation_passenger_gender" disabled>
 
                                     </div>
                                 </div>
@@ -389,24 +383,12 @@ echo "</pre>";
                             </div>
                         </div>
 
-
-
-
-
-
-
-
                     <?php endfor; ?>
-
-
                 </div>
 
-
-                <!-- action btns -->
-                <?php if (strtolower($data['warrant_reservations'][0]->warrant_status) == 'completed') : ?>
-
-                    <div class="d-flex justify-content-center">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
+                <div class="row d-flex g-8 justify-content-center">
+                    <div class="col-4" id="mou-backBtn">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/staffTicketingInquiry">
                                 <div class="button-base bg-Selected-Blue">
                                     <div class="text Blue">Back</div>
                                 </div>
@@ -414,73 +396,38 @@ echo "</pre>";
                         </button>
                     </div>
 
-                <?php elseif (strtolower($data['warrant_reservations'][0]->warrant_status) == 'approval pending') : ?>
+                    <div class="col-4" id="mou-responseBtn">
+                        <button class="button mt-20 " id="reject">
+                            <div class="button-base bg-Selected-red">
+                                <div class="text Banner-red">Response</div>
+                            </div>
 
-                    <div class="row d-flex g-8 justify-content-center">
-                        <div class="col-4">
-                            <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
-                                    <div class="button-base bg-Selected-Blue">
-                                        <div class="text Blue">Back</div>
-                                    </div>
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-4">
-                            <button class="button mt-20 " id="reject">
-                                <div class="button-base bg-Selected-red">
-                                    <div class="text Banner-red">Rejected</div>
-                                </div>
-                            </button>
-                        </div>
-
-                        <div class="col-4">
-                            <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
-                                    <div class="button-base bg-light-green">
-                                        <div class="text dark-green ">Verified</div>
-                                    </div>
-                                </a>
-                            </button>
-                        </div>
+                        </button>
                     </div>
 
-                <?php elseif (strtolower($data['warrant_reservations'][0]->warrant_status) == 'verified') : ?>
-                    <div class="row d-flex g-8 justify-content-center">
-                        <div class="col-4">
-                            <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/warrant">
-                                    <div class="button-base bg-Selected-Blue">
-                                        <div class="text Blue">Back</div>
-                                    </div>
-                                </a>
-                            </button>
-                        </div>
-                        <div class="col-4">
-                            <button class="button mt-20 " id="reject">
-                                <div class="button-base bg-Selected-red">
-                                    <div class="text Banner-red">Rejected</div>
+                    <div class="col-4" id="mou-handoverBtn">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/inquirySM/<?php echo (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>">
+                                <div class="button-base bg-light-green">
+                                    <div class="text dark-green ">HandOver to Station Master</div>
                                 </div>
-                            </button>
-                        </div>
-
-                        <div class="col-4">
-                            <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
-                                    <div class="button-base bg-light-green">
-                                        <div class="text dark-green ">Handed Over</div>
-                                    </div>
-                                </a>
-                            </button>
-                        </div>
+                            </a>
+                        </button>
                     </div>
-                <?php endif; ?>
+
+                </div>
+
+
+
 
                 <div id="mou-rejectReason">
-                    <form action="<?= ROOT ?>staffticketing/rejectWarrent/<?= (array_key_exists('reservations', $data)) ? $data['reservations'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
+                    <form action="<?= ROOT ?>staffticketing/inquiryResponse/<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
 
-                        <div class="title">Reason for Rejection</div>
+                        <div class="title">Inquiry Response</div>
 
-                        <textarea placeholder="Enter the Reason Clearly" class="" name="warrantRejectReason" id="reason" cols="30 p-20" rows="10"></textarea>
+                        <textarea placeholder="Enter the response body clearly" class="" name="warrantRejectReason" id="reason" cols="30 p-20" rows="10"></textarea>
 
 
-                        <div class="assistive-text" id="rejectError">* Enter the Reject Reason Before Submit</div>
+                        <div class="assistive-text" id="rejectError">* Enter Message Body Before Submit</div>
 
                         <button class="button btn" id="submitBtn">
                             <div class="button-base btn bg-Border-blue white">
@@ -520,6 +467,24 @@ echo "</pre>";
             }
         });
     });
+
+    document.getElementById('displayWarrantImg').addEventListener('click', function() {
+        document.getElementById('mou-warrant-img').classList.toggle('display-none');
+
+
+        var Btn = <?= strtolower($data['inquiry'][0]->inquiry_status) ?>
+
+        if (Btn == 'forwarded' || Btn == 'rejected') {
+            document.getElementById('mou-handoverBtn').css('display', 'none');
+            document.getElementById('mou-responseBtn').css('display', 'none');
+        }
+
+
+    });
+
+
+
+
 
 
     // Remove the closing 
