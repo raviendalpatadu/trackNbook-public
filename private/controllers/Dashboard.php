@@ -21,6 +21,8 @@ class Dashboard extends Controller
             $data['usersCount'] = $user->getCount();
             $train = new Trains();
             $data['trainsCount'] = $train->getCount();
+            $train_disable = new TrainDisablePeriods();
+            $data['trains'] = $train_disable->getAllDisableTrains();
             $this->view('admin.dashboard', $data);
         } else {
             $this->view('login');

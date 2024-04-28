@@ -9,9 +9,9 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     $count = 0;
 }
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 ?>
 
 <head>
@@ -85,11 +85,11 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                 <tbody>
                                                     <?php foreach ($data['trains'] as $train): ?>
                                                         <tr class="p-20">
-                                                            <td class="col-3 d-flex align-items-center">
+                                                            <td class="col-3">
                                                                 <?= $train->train_name ?>
                                                             </td>
                                                             <td class="col-1">
-                                                                <?= $train->train_id ?>
+                                                                <?= $train->train_no ?>
                                                             </td>
                                                             <td class="col-1">
                                                                 <?= $train->train_type_name ?>
