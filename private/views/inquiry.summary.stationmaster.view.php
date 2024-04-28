@@ -413,7 +413,7 @@
 
 
                 <div id="mou-rejectReason">
-                    <form action="<?= ROOT ?>staffticketing/inquiryResponse/<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
+                    <form action="<?= ROOT ?>stationmaster/inquiryResponse/<?= (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>" method="POST" class="mou-reject_form" id="mou-rejectReasonForm">
 
                         <div class="title">Inquiry Response</div>
 
