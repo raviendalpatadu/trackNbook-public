@@ -11,12 +11,7 @@ if (!isset($data['errors'])) {
     $data['errors'] = array();
 }
 
-$stations = array("Select a station", "colombo", "kandy", "ella");
-$stations_prices = array(
-    array("colombo", "x", "0", "0"),
-    array("kandy", "1000", "x", "0"),
-    array("ella", "2000", "1500", "x")
-);
+
 ?>
 
 <body>

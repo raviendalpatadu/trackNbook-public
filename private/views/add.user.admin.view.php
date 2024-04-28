@@ -148,13 +148,6 @@ if (!isset($data['errors'])) {
                                             </label>
                                         </div>
                                         <div class="radio-button">
-                                            <input name="user_type" value="staff_general" id="radio2" class="radio-button__input" type="radio" <?= getRadioSelect('staff_general', 'user_type') ?>>
-                                            <label for="radio2" class="radio-button__label">
-                                                <span class="radio-button__custom"></span>
-                                                Staff General
-                                            </label>
-                                        </div>
-                                        <div class="radio-button">
                                             <input name="user_type" value="train_driver" id="radio3" class="radio-button__input" type="radio" <?= getRadioSelect('train_driver', 'user_type') ?>>
                                             <label for="radio3" class="radio-button__label">
                                                 <span class="radio-button__custom"></span>

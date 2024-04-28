@@ -236,9 +236,9 @@ class Train extends Controller
             }
         }
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";  
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";  
 
 
 
@@ -255,6 +255,9 @@ class Train extends Controller
 
     public function add()
     {
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/login');
+        }
 
         $data = array();
 

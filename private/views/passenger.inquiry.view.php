@@ -15,7 +15,7 @@
         <main>
             <div class="container">
                 <div class="row d-flex">
-                    <div class="col-6 justify-content-center">
+                    <div class="col-6 justify-content-center mobile-display-none">
                         <img src="<?= ASSETS ?>images/inquiry.png" alt="" srcset="">
                     </div>
 
@@ -58,7 +58,7 @@
                                     <div class="text-inputs">
                                         <div class="input-text-label">Inquiry Description</div>
                                         <div class="text">
-                                            <textarea name="inquiry_reason" class="flex-auto width-fill" id="" value="<?=get_var('inquiry_reason')?>"></textarea>
+                                            <textarea name="inquiry_reason" class="button-base flex-auto width-fill" placeholder="Type Here" value="<?=get_var('inquiry_reason')?>"></textarea>
                                         </div>
                                         <?= printError($data, 'inquiry_reason') ?>
                                     </div>
@@ -66,7 +66,7 @@
 
                                 <div class="col-12 d-flex justify-content-center g-10">
                                     <div class="button-base">
-                                        <a href="<?= ROOT ?>login">Back</a>
+                                        <a href="<?= ROOT ?>">Back</a>
                                     </div>
                                     <div class="button-base">
                                         <input class="text" type="submit" value="Submit" name="submit">
@@ -88,6 +88,7 @@
 
 <script>
     $(document).ready(function() {
+
         // validate form
         var ticket_id = $('#ticket_id');
         ticket_id.on('change', function() {

@@ -173,6 +173,16 @@ class Ajax extends Controller
     //         echo json_encode($train->errors);
     //     }
     // }
+     public function getRefund() {
+        if(isset($_POST['ticket_id'])){
+            $ticket_id =  $_POST['ticket_id'];
+            $reservation = new Reservations();
+            $data = $reservation->whereOne('reservation_ticket_id', $ticket_id);
 
+            $refund =  $reservation->getRefund($ticket_id, $data->reservation_amount);
+            echo json_encode($refund);
+        }
+        
+     }
 
 }
