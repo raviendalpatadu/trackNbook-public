@@ -18,7 +18,7 @@
             <div class="row mt-20 m-20 ">
                 <div class="col-4 line">
                     <div class="trains-available mt-10 mb-30">
-                        <h2>Warrant Requests</h2>
+                        <h2>Reservation cancellations</h2>
                     </div>
                 </div>
             </div>
