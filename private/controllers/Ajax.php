@@ -149,7 +149,11 @@ class Ajax extends Controller
     {
         $data = array();
         $train_location = new TrainLocation();
-        $data['train'] = $train_location->getTrainLocation($_POST['train_id']);
+        $train = new Trains();
+        $train_data = $train->whereOne('train_no', $_POST['train_id']);
+
+
+        $data['train'] = $train_location->getTrainLocation($train_data->train_id);
         echo json_encode($data);
     }
 
@@ -183,6 +187,19 @@ class Ajax extends Controller
             echo json_encode($refund);
         }
         
+     }
+
+
+     public function countReservationFromAndTo(){
+        $reservation = new Reservations();
+        $data = $reservation->countReservationFromAndTo($_POST['start'], $_POST['end']);
+        echo json_encode($data);
+     }
+
+     public function reservationCountByReservationType(){
+        $reservation = new Reservations();
+        $data = $reservation->reservationCountByReservationType($_POST['start'], $_POST['end']);
+        echo json_encode($data);
      }
 
 }

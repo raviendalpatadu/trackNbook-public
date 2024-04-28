@@ -422,6 +422,56 @@ class Reservations extends Model
         }
     }
 
+    public function countReservationFromAndTo($startDate,  $endDate){
+        // this should rerturn the total number of reservations from start and end date if there a no reservations it should return 0
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_date
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function reservationCountByReservationType($startDate,  $endDate){
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        reservation_type,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_type
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
 
 }
