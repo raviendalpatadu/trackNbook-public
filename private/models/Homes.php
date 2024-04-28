@@ -75,6 +75,12 @@ class Homes extends Model
             $this->errors['errors']['no_of_passengers'] = 'Passenger count is required';
         }
 
+        // check if no of passengers is greater than 0 and less than 5 
+       
+        if (!(array_key_exists('errors', $this->errors)) && ($values['no_of_passengers'] < 1 || $values['no_of_passengers'] > 5)) {
+            $this->errors['errors']['no_of_passengers'] = 'Passenger count should be between 1 and 5';
+        }
+
         if (count($this->errors) > 0) {
             return false;
         }

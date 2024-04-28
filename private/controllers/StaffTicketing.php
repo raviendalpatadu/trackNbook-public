@@ -289,6 +289,7 @@ class StaffTicketing extends Controller
                             $reservationPassengerData['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+                            $reservationPassengerData['reservation_amount'] = Auth::reservation()['from_fare']->fare_price;
 
                             //update passenger details to tbl_reservtion
                             $data = $reaservation->update($reservation_id, $reservationPassengerData, 'reservation_id');
@@ -322,6 +323,7 @@ class StaffTicketing extends Controller
                                 $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
+                                $reservationPassengerDataTo['reservation_amount'] = Auth::reservation()['to_fare']->fare_price;
 
 
                                 $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
@@ -356,7 +358,7 @@ class StaffTicketing extends Controller
                             $subject = "Reservation Successfull - Warrant";
                             $recipient = Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key];
 
-                        
+
                             $message = Auth::getReservationConfirmationEmailBody(Auth::reservation()['passenger_data']['reservation_passenger_first_name'][$key]);
 
                             $this->sendMail($to_email, $recipient, $subject, $message);
@@ -386,11 +388,11 @@ class StaffTicketing extends Controller
     function addReservation()
     {
         if (!Auth::is_logged_in()) {
-            $this->redirect('/home');
+            $this->redirect('/staffTicketing');
         }
 
         if (!Auth::reservation()) {
-            $this->redirect('/home');
+            $this->redirect('/');
         }
 
         $reaservation = new Reservations();
@@ -476,7 +478,6 @@ class StaffTicketing extends Controller
     }
 
 
-
     function pay($id = '')
     {
 
@@ -494,6 +495,8 @@ class StaffTicketing extends Controller
 
     //     $this->view('summary.staffticketing', $data);
     // }
+
+    
 
 
 
@@ -636,7 +639,7 @@ class StaffTicketing extends Controller
     function cancelList($id = '')
 
     {
-        
+
         $cancel_res = new Reservations();
         $data = array();
 
@@ -933,27 +936,26 @@ class StaffTicketing extends Controller
                 'inquiry_to_station_master' => '1',
                 'inquiry_status' => 'Forwarded'
             ), "inquiry_ticket_id");
-        
-        try {
-            $name = ucfirst($inquiry_data[0]->user_first_name);
-            $subject = "Inquiry Response";
-            $message = "Your inquiry has been forwarded to the station master. Please wait for the response.";
-            $body = Auth::getEmailBody($name, $message);
-            $to = $inquiry_data[0]->user_email;
 
-            if (!$this->sendMail($to, $name, $subject, $body)) {
-                die('failed to send mail');
+            try {
+                $name = ucfirst($inquiry_data[0]->user_first_name);
+                $subject = "Inquiry Response";
+                $message = "Your inquiry has been forwarded to the station master. Please wait for the response.";
+                $body = Auth::getEmailBody($name, $message);
+                $to = $inquiry_data[0]->user_email;
+
+                if (!$this->sendMail($to, $name, $subject, $body)) {
+                    die('failed to send mail');
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
             }
-        } catch (Exception $e) {
-            die($e->getMessage());
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
-    } catch (PDOException $e) {
-        echo $e->getMessage();
+
+        $this->redirect('staffticketing/staffTicketingInquiry');
     }
-
-    $this->redirect('staffticketing/staffTicketingInquiry');
-
-}
 
 
 

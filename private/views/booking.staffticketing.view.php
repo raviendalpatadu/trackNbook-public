@@ -32,7 +32,7 @@
                     </div> -->
 
                     <!-- booking form class = " mou-staff-reservation-welcomeBox"  -->
-                    <form action="" method="post" class=" flex-auto">
+                    <form action="" method="post" class="d-flex flex-column g-10 flex-auto">
                         <div class="d-flex flex-auto flex-column  border-bottom-Lightgray ">
                             <div class="d-flex bg-blue justify-content-center  p-20">
                                 <h1 class="white">Guide for a Secure Journey</h1>
@@ -94,7 +94,7 @@
                                             <div class="d-flex align-items-center g-20">
                                                 <div class="d-flex .flex-row g-5">
                                                     <label class="switch">
-                                                        <input type="checkbox" name="return" id="return">
+                                                        <input type="checkbox" name="return" id="return" <?=getCheckBox($data['return'], 'return')?>>
                                                         <span class="slider"></span>
                                                     </label>
                                                 </div>
@@ -136,26 +136,22 @@
 
 
                         <!-- trains -->
-                        <div class="d-flex flex-auto flex-column mt-40">
-                            <!-- <div class="d-flex bg-blue justify-content-center py-10">
-                                <h1 class="white">Available Trains </h1>
-                            </div> -->
-                            <!-- from to tags -->
-                            <div id="trainButtons" class="d-flex g-10">
-                                <button id="fromTrainBtn" class="train-available-btn bg-Selected-Blue active">From Train</button>
+                        <div id="trainsAvailable">
+                                <div id="trainButtons" class="d-flex g-3">
+                                    <button id="fromTrainBtn" class="train-available-btn active">From Train</button>
 
-                                <?php if (isset($data['to_date']) && $data['to_date'] != null) : ?>
-                                    <button id="toTrainBtn" class="train-available-btn bg-Selected-Blue">To Train</button>
-                                <?php endif; ?>
-                            </div>
+                                    <?php if (isset($data['to_date']) && $data['to_date'] != null) : ?>
+                                        <button id="toTrainBtn" class="train-available-btn">To Train</button>
+                                    <?php endif; ?>
+                                </div>
 
-                            <div class="d-flex flex-auto">
-                                <div id="fromTrains" class="flex-auto">
-                                    <table class="bg-white flex-auto">
+                                <div id="fromTrains">
+                                    <table class="train-available">
                                         <thead>
-                                            <tr class="row">
+                                            <tr class="row g-10">
                                                 <th class="col-5">Name</th>
-                                                <th class="col-2">Time</th>
+                                                <th class="col-1">Departure Time</th>
+                                                <th class="col-1 text-align-center">Arrival Time</th>
                                                 <th class="col-5 mobile-col-12">Reservations</th>
                                             </tr>
                                         </thead>
@@ -176,13 +172,50 @@
                                                     if ($unique_trains) :
                                             ?>
                                                         <tr class="row py-10">
-                                                            <td class="col-5 d-flex align-items-center mobile-pl-20"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                                            <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                            <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
+                                                                <span class="fs-18 fw-600">
+                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_no ?>
+                                                                </span>
+                                                                <!-- estimated duration  -->
+                                                                <span class="d-flex g-20">
+                                                                    <span class="d-flex align-items-center justify-content-center g-10 fs-14">
+                                                                        <!-- get the time difference in php -->
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32">
+                                                                            <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                                            <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                                            <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                                        </svg>
+    
+                                                                        <?php
+                                                                        $datetime1 = new DateTime($value->estimated_start_time);
+                                                                        $datetime2 = new DateTime($value->estimated_end_time);
+                                                                        $interval = $datetime1->diff($datetime2);
+                                                                        echo $interval->format('%Hh %im');
+                                                                        ?>
+                                                                    </span>
+    
+                                                                    <span class="d-flex align-items-center justify-content-center g-10 fs-14">
+                                                                        <svg width="1.5em" height="1.5em" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">                                                                        <path d="M23.4375 19.5312H1.5625V21.0938H3.125V22.6562H4.6875V21.0938H8.59375V22.6562H10.1562V21.0938H14.0625V22.6562H15.625V21.0938H19.5312V22.6562H21.0938V21.0938H23.4375V19.5312ZM6.25 12.5H1.5625V10.9375H6.25V9.375H1.5625V7.8125H6.25C6.66427 7.81291 7.06146 7.97767 7.3544 8.2706C7.64733 8.56354 7.81209 8.96073 7.8125 9.375V10.9375C7.81209 11.3518 7.64733 11.749 7.3544 12.0419C7.06146 12.3348 6.66427 12.4996 6.25 12.5Z" fill="black" />
+                                                                            <path d="M22.3047 11.1172L15.6016 4.97344C14.3056 3.78309 12.6096 3.12331 10.85 3.125H1.5625V4.6875H9.375V7.8125C9.37541 8.22678 9.54017 8.62396 9.8331 8.9169C10.126 9.20984 10.5232 9.37459 10.9375 9.375H18.0914L21.2484 12.2695C21.5355 12.5324 21.7364 12.8759 21.8248 13.2549C21.9133 13.634 21.8851 14.0309 21.7441 14.3936C21.603 14.7564 21.3556 15.0681 21.0344 15.2878C20.7131 15.5075 20.333 15.6251 19.9437 15.625H1.5625V17.1875H19.943C20.647 17.1875 21.3347 16.9749 21.9159 16.5774C22.497 16.1799 22.9445 15.6162 23.1998 14.96C23.4551 14.3039 23.5062 13.5859 23.3465 12.9002C23.1868 12.2145 22.8237 11.593 22.3047 11.1172ZM10.9375 7.8125V4.69141C12.2753 4.7103 13.5594 5.22055 14.5453 6.125L16.3867 7.8125H10.9375Z" fill="black" />
+                                                                        </svg>
+                                                                        <?= $value->train_type?>
+                                                                    </span>
+                                                                </span>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
                                                                 <div class="badge-base bg-light-green">
                                                                     <div class="dot">
                                                                         <div class="dot2"></div>
                                                                     </div>
-                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?></div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_end_time)) ?></div>
                                                                 </div>
                                                             </td>
                                                             <td class="col-5 mobile-col-12">
@@ -198,7 +231,7 @@
                                                                                 </div>
 
                                                                                 <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
-                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats * $value_res->compartment_total_number ?></div>
                                                                                 </div>
 
                                                                                 <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['from_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'from_compartment_and_train', 'train-selected') ?>">
@@ -244,12 +277,14 @@
                                     </table>
                                 </div>
 
-                                <div class="display-none flex-auto" id="toTrains">
-                                    <table class="bg-white flex-auto">
+
+                                <div class="display-none" id="toTrains">
+                                    <table class="train-available">
                                         <thead>
-                                            <tr class="row">
+                                            <tr class="row g-10">
                                                 <th class="col-5">Name</th>
-                                                <th class="col-2">Time</th>
+                                                <th class="col-1">Departure Time</th>
+                                                <th class="col-1 text-align-center">Arrival Time</th>
                                                 <th class="col-5 mobile-col-12">Reservations</th>
                                             </tr>
                                         </thead>
@@ -270,15 +305,53 @@
                                                     if ($unique_trains) :
                                             ?>
                                                         <tr class="row py-10">
-                                                            <td class="col-5 d-flex align-items-center mobile-pl-20"><?= ucfirst($value->train_name) ?> - <?= $value->train_id ?></td>
-                                                            <td class="col-2 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                            <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
+                                                                <span class="fs-18 fw-600">
+                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_no ?>
+                                                                </span>
+                                                                <!-- estimated duration  -->
+                                                                <span class="d-flex g-20">
+                                                                    <span class="d-flex align-items-center justify-content-center g-10 fs-14">
+                                                                        <!-- get the time difference in php -->
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32">
+                                                                            <path fill="none" d="m25.496 10.088l-2.622-2.622V3h2.25v3.534l1.964 1.964z"></path>
+                                                                            <path fill="currentColor" d="M24 1a6 6 0 1 0 6 6a6.007 6.007 0 0 0-6-6m1.497 9.088l-2.622-2.622V3h2.25v3.534l1.964 1.964Z"></path>
+                                                                            <path fill="currentColor" d="M6 16v-6h9V8H6.184A2.995 2.995 0 0 1 9 6h6V4H9a5.006 5.006 0 0 0-5 5v12a4.99 4.99 0 0 0 3.582 4.77L5.769 30h2.176l1.714-4h8.682l1.714 4h2.176l-1.813-4.23A4.99 4.99 0 0 0 24 21v-5Zm16 4h-3v2h2.816A2.995 2.995 0 0 1 19 24H9a2.995 2.995 0 0 1-2.816-2H9v-2H6v-2h16Z"></path>
+                                                                        </svg>
+    
+                                                                        <?php
+                                                                        $datetime1 = new DateTime($value->estimated_start_time);
+                                                                        $datetime2 = new DateTime($value->estimated_end_time);
+                                                                        $interval = $datetime1->diff($datetime2);
+                                                                        echo $interval->format('%Hh %im');
+                                                                        ?>
+                                                                    </span>
+    
+                                                                    <span class="d-flex align-items-center justify-content-center g-10 fs-14">
+                                                                        <svg width="1.5em" height="1.5em" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">                                                                        <path d="M23.4375 19.5312H1.5625V21.0938H3.125V22.6562H4.6875V21.0938H8.59375V22.6562H10.1562V21.0938H14.0625V22.6562H15.625V21.0938H19.5312V22.6562H21.0938V21.0938H23.4375V19.5312ZM6.25 12.5H1.5625V10.9375H6.25V9.375H1.5625V7.8125H6.25C6.66427 7.81291 7.06146 7.97767 7.3544 8.2706C7.64733 8.56354 7.81209 8.96073 7.8125 9.375V10.9375C7.81209 11.3518 7.64733 11.749 7.3544 12.0419C7.06146 12.3348 6.66427 12.4996 6.25 12.5Z" fill="black" />
+                                                                            <path d="M22.3047 11.1172L15.6016 4.97344C14.3056 3.78309 12.6096 3.12331 10.85 3.125H1.5625V4.6875H9.375V7.8125C9.37541 8.22678 9.54017 8.62396 9.8331 8.9169C10.126 9.20984 10.5232 9.37459 10.9375 9.375H18.0914L21.2484 12.2695C21.5355 12.5324 21.7364 12.8759 21.8248 13.2549C21.9133 13.634 21.8851 14.0309 21.7441 14.3936C21.603 14.7564 21.3556 15.0681 21.0344 15.2878C20.7131 15.5075 20.333 15.6251 19.9437 15.625H1.5625V17.1875H19.943C20.647 17.1875 21.3347 16.9749 21.9159 16.5774C22.497 16.1799 22.9445 15.6162 23.1998 14.96C23.4551 14.3039 23.5062 13.5859 23.3465 12.9002C23.1868 12.2145 22.8237 11.593 22.3047 11.1172ZM10.9375 7.8125V4.69141C12.2753 4.7103 13.5594 5.22055 14.5453 6.125L16.3867 7.8125H10.9375Z" fill="black" />
+                                                                        </svg>
+                                                                        <?= $value->train_type?>
+                                                                    </span>
+                                                                </span>
+                                                            </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
                                                                 <div class="badge-base bg-light-green">
                                                                     <div class="dot">
                                                                         <div class="dot2"></div>
                                                                     </div>
-                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->train_start_time)) ?>-<?= date("H:i", strtotime($value->train_end_time)) ?></div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_start_time)) ?></div>
                                                                 </div>
                                                             </td>
+                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                                <div class="badge-base bg-light-green">
+                                                                    <div class="dot">
+                                                                        <div class="dot2"></div>
+                                                                    </div>
+                                                                    <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_end_time)) ?></div>
+                                                                </div>
+                                                            </td>
+
                                                             <td class="col-5 mobile-col-12">
 
                                                                 <div class="availabity flex-auto">
@@ -291,7 +364,7 @@
                                                                                 </div>
 
                                                                                 <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
-                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats ?></div>
+                                                                                    <div class="text <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "primary-blue" : "blue") ?>"><?= $value_res->no_of_reservations . "/" . $value_res->compartment_total_seats * $value_res->compartment_total_number ?></div>
                                                                                 </div>
 
                                                                                 <div class="badge-base flex-auto flex-grow <?= (($key_res + 1) % 3 == 1) ? "" : ((($key_res + 1) % 3 == 2) ? "bg-selected-blue" : "bg-selected-blue") ?> <?= getRadioSelectClass($data['trains_available']['to_trains'][$key_res]->compartment_id . '-' . $value->train_id, 'to_compartment_and_train', 'train-selected') ?>">
@@ -334,8 +407,6 @@
                                     </table>
                                 </div>
                             </div>
-
-                        </div>
                     </form>
 
                     <div class="col-12 d-flex justify-content-end g-10">
