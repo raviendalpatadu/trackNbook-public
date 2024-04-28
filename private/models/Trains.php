@@ -68,29 +68,21 @@ class Trains extends Model
             $con->beginTransaction();
 
             //insert query to search train must come form route
-            $query = "SELECT\n"
+            $query = "SELECT
+            tbl_train.*,
+            start.station_name AS start_station,
+            end.station_name AS end_station,
+            train_type.train_type AS train_type_name
+            
+            FROM
+                tbl_train
+            JOIN
+                tbl_station AS start ON tbl_train.train_start_station = start.station_id
+            JOIN
+                tbl_station AS end ON tbl_train.train_end_station = end.station_id
+            JOIN
+                tbl_train_type AS train_type ON tbl_train.train_type = train_type.train_type_id";
 
-                . "tbl_train.*,\n"
-
-                . "start.station_name AS start_station,\n"
-
-                . "end.station_name AS end_station\n"
-
-
-
-                . "\n"
-
-                . "FROM\n"
-
-                . "	tbl_train\n"
-
-                . "JOIN\n"
-
-                . "	tbl_station AS start ON tbl_train.train_start_station = start.station_id\n"
-
-                . " JOIN\n"
-
-                . " 	tbl_station AS end ON tbl_train.train_end_station = end.station_id ";
             $stm = $con->prepare($query);
 
             $stm->execute();
@@ -697,14 +689,16 @@ class Trains extends Model
                 $compartment->delete($id, 'compartment_train_id');
 
                 foreach ($data['compartment']['class'] as $key => $value) {
-                    $compartment->insert(array(
-                        'compartment_train_id' => $id,
-                        'compartment_class_type' => $data['compartment']['type'][$key],
-                        'compartment_class' => $value,
-                        'compartment_seat_layout' => $data['compartment']['seat_layout'][$key],
-                        'compartment_total_seats' => $data['compartment']['total_seats'][$key],
-                        'compartment_total_number' => $data['compartment']['total_number'][$key]
-                    ));
+                    $compartment->insert(
+                        array(
+                            'compartment_train_id' => $id,
+                            'compartment_class_type' => $data['compartment']['type'][$key],
+                            'compartment_class' => $value,
+                            'compartment_seat_layout' => $data['compartment']['seat_layout'][$key],
+                            'compartment_total_seats' => $data['compartment']['total_seats'][$key],
+                            'compartment_total_number' => $data['compartment']['total_number'][$key]
+                        )
+                    );
                 }
 
                 // tbl_train_stop_station
@@ -714,13 +708,15 @@ class Trains extends Model
 
                 foreach ($data['stopping_station']['id'] as $key => $value) {
                     // echo $key . " =>" . $value . " " . $data['stopping_station']['time'][$key] . "<br>";
-                    $train_stop_stations->insert(array(
-                        'train_id' => $id,
-                        'station_id' => $value,
-                        'stop_no' => $key + 1,
-                        'train_stop_time' => $data['stopping_station']['time_verified'][$key]
+                    $train_stop_stations->insert(
+                        array(
+                            'train_id' => $id,
+                            'station_id' => $value,
+                            'stop_no' => $key + 1,
+                            'train_stop_time' => $data['stopping_station']['time_verified'][$key]
 
-                    ));
+                        )
+                    );
                 }
 
                 return true; // Successful insertion
