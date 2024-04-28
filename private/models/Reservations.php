@@ -226,6 +226,23 @@ class Reservations extends Model
         }
     }
 
+    public function getCancelReservations(){
+        try{
+           $query = "SELECT c.*, start_st.station_name
+                    FROM tbl_reservation_cancelled c
+                    JOIN tbl_station start_st ON c.reservation_start_station = start_st.station_id;";
+        
+            $result = $this->query($query);
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
     public function getReservationDataTicket($id, $type = '')
     {
