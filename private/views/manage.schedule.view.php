@@ -8,9 +8,9 @@ if (isset($data) && !empty($data)) {
 } else {
     $count = 0;
 }
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 
 ?>
 <html>
@@ -37,9 +37,9 @@ echo "</pre>";
                     <br>
                 </div>
                 <div class="display" id="toTrains">
-                                    <table class="train-available" id="to-trains">
+                                    <table class="if-table stripe hover" id="to-trains">
                                         <thead>
-                                            <tr class="row g-10">
+                                            <tr >
                                                 <th class="col-5">Name</th>
                                                 <th class="col-1">Departure Time</th>
                                                 <th class="col-1 text-align-center">Arrival Time</th>
@@ -61,8 +61,8 @@ echo "</pre>";
                                                         }
                                                     }
                                                     if ($unique_trains) :?>
-                                                        <tr class="row py-10">
-                                                            <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
+                                                        <tr >
+                                                            <td class="col-5 ">
                                                                 <span class="fs-18 fw-600">
                                                                     <?= ucfirst($value->train_name) ?> - <?= $value->train_id ?>
                                                                 </span>
@@ -92,7 +92,7 @@ echo "</pre>";
                                                                     </span>
                                                                 </span>
                                                             </td>
-                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                            <td class="col-1">
                                                                 <div class="badge-base bg-light-green">
                                                                     <div class="dot">
                                                                         <div class="dot2"></div>
@@ -100,7 +100,7 @@ echo "</pre>";
                                                                     <div class="text dark-green"><?= date("H:i", strtotime($value->estimated_start_time)) ?></div>
                                                                 </div>
                                                             </td>
-                                                            <td class="col-1 d-flex align-items-center mobile-justify-content-end justify-content-center mobile-pr-20">
+                                                            <td class="col-1 ">
                                                                 <div class="badge-base bg-light-green">
                                                                     <div class="dot">
                                                                         <div class="dot2"></div>
