@@ -1,11 +1,11 @@
 <?php $this->view("./includes/header") ?>
 <?php
-// echo "<pre>";
-// // print_r($data);
-// // print_r($_SESSION);
+echo "<pre>";
+print_r($data);
+// print_r($_SESSION);
 
 
-// echo "</pre>";
+echo "</pre>";
 
 // echo "<pre>";
 // print_r($data);
@@ -14,8 +14,8 @@
 
 
 
-if (isset($data['reservations']) && $data['reservations'] != 0) {
-    $count =  count($data['reservations']);
+if (isset($data['cancel_reservations']) && $data['cancel_reservations'] != 0) {
+    $count =  count($data['cancel_reservations']);
 } else {
     $count = 0;
 }
@@ -111,8 +111,8 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     <?php if (!empty($data['reservations'])) : ?>
                                         <?php foreach ($data['reservations'] as $key => $reservation) : ?>
                                             <tr class=" row p-20">
-                                                <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
-                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
+                                                <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $cancel_reservations->reservation_ticket_id ?></td>
+                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $cancel_reservations->reservation_passenger_nic ?></td>
                                                 <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
                                                 <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
                                                 <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->

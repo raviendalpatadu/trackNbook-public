@@ -640,12 +640,12 @@ class StaffTicketing extends Controller
         $cancel_res = new Reservations();
         $data = array();
 
-        $data['cancel_reservations'] = $cancel_res->getReservations($id, 'cancelled');
-        echo "<pre>";
-        print_r($data['cancel_reservations']);
-        echo "</pre>";
+        $data['cancel_reservations'] = $cancel_res->getCancelReservations();
+        // echo "<pre>";
+        // print_r($data['cancel_reservations']);
+        // echo "</pre>";
 
-        $this->view('cancellation.staffticketing');
+        $this->view('cancellation.staffticketing', $data);
     }
 
     // function refund($id = '')
