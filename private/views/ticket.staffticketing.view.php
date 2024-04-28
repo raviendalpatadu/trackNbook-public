@@ -428,4 +428,12 @@ $total_amount = Auth::reservation()['from_fare']->fare_price * Auth::reservation
             }
         }
     });
+
+    // get the balance amount 
+    $('input[name="user_amount"]').keyup(function() {
+        var totalAmount = $('input[name="from_total_amount"]').val();
+        var userAmount = $('input[name="user_amount"]').val();
+        var balanceAmount = userAmount - totalAmount;
+        $('input[name="user_balance_amount"]').val(balanceAmount);
+    });
 </script>

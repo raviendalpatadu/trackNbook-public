@@ -24,8 +24,8 @@
 
 <script src="<?= ASSETS ?>lib/toaster/build/toastr.min.js"></script>
 
-<!-- jsPDF  -->
-<script src="<?= ASSETS?>js/jsPDF/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+<script script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 
 
 

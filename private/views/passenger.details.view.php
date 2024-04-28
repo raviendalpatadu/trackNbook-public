@@ -277,6 +277,7 @@ echo "</pre>";
                         nicInput.attr('placeholder', 'Type here');
                         nicInput.css('pointer-events', 'auto');
                         nicInput.val('');
+                        $(this).parent().parent().find('input[name*=reservation_is_dependent]').val('0');
                     }
                 });
 

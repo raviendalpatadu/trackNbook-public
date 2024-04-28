@@ -287,6 +287,7 @@ class StaffTicketing extends Controller
                             $reservationPassengerData['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
                             $reservationPassengerData['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
                             $reservationPassengerData['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                            $reservationPassengerData['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                             $reservationPassengerData['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                             $reservationPassengerData['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
                             $reservationPassengerData['reservation_amount'] = Auth::reservation()['from_fare']->fare_price;
@@ -321,6 +322,7 @@ class StaffTicketing extends Controller
                                 $reservationPassengerDataTo['reservation_passenger_last_name'] = $_POST['reservation_passenger_last_name'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_title'] = $_POST['reservation_passenger_title'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_phone_number'] = $_POST['reservation_passenger_phone_number'][$count];
+                                $reservationPassengerDataTo['reservation_is_dependent'] = $_POST['reservation_is_dependent'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_email'] = $_POST['reservation_passenger_email'][$count];
                                 $reservationPassengerDataTo['reservation_passenger_gender'] = $_POST['reservation_passenger_gender'][$count];
                                 $reservationPassengerDataTo['reservation_amount'] = Auth::reservation()['to_fare']->fare_price;
@@ -329,6 +331,10 @@ class StaffTicketing extends Controller
                                 $data = $reaservation->update($reaservation_id, $reservationPassengerDataTo, 'reservation_id');
 
                                 if (Auth::reservation()['passenger_data']['warrant_booking'] == 'on') {
+                                    $reaservationPassengerArr = [];
+                                    $reaservationPassengerArr['reservation_type'] = 'Warrant';
+                                    $reaservation->update($reservation_id, $reaservationPassengerArr, 'reservation_id');
+
                                     // if warrant image is null throw an execption
                                     $warrant_reservation = new WarrantsReservations();
                                     $warrant_reservation->update($reservation_id, ['warrant_image_id' => null, 'warrant_status' => 'Completed'], 'warrant_reservation_id');
@@ -496,7 +502,7 @@ class StaffTicketing extends Controller
     //     $this->view('summary.staffticketing', $data);
     // }
 
-    
+
 
 
 

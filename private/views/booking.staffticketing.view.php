@@ -94,7 +94,7 @@
                                             <div class="d-flex align-items-center g-20">
                                                 <div class="d-flex .flex-row g-5">
                                                     <label class="switch">
-                                                        <input type="checkbox" name="return" id="return" <?=getCheckBox($data['return'], 'return')?>>
+                                                        <input type="checkbox" name="return" id="return" <?=getCheckBox(Auth::getReturn(), 'return')?>>
                                                         <span class="slider"></span>
                                                     </label>
                                                 </div>
