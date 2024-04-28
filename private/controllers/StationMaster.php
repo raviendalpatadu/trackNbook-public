@@ -128,7 +128,9 @@ class StationMaster extends Controller
         $train = new Trains();
         $data = array();
 
-        $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
+        $date  = date('Y-m-d');
+
+        $data['trains'] = $train->getTrainScheduleForStationMaster($_SESSION['USER']->user_data, $date);
 
         echo "<pre>";
         print_r($data);
