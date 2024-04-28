@@ -33,6 +33,13 @@ echo "</pre>";
                                     <h3>Available Trains</h3>
                                 </div>
                             </div>
+                            <div class="col-8">
+                                <div class="d-flex justify-content-end">
+                                    <div class="button-base" id="addNewBtn">
+                                        <div class="text" id="addNew">Add new</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <br>
 
@@ -140,6 +147,10 @@ echo "</pre>";
     <script>
         $(document).ready(function () {
             let table = new DataTable("#userTable");
+        });
+
+        $('#addNewBtn').click(function() {
+            window.location.href = "<?= ROOT ?>train/add";
         });
     </script>
 </body>

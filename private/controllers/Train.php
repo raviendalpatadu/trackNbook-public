@@ -255,6 +255,9 @@ class Train extends Controller
 
     public function add()
     {
+        if (!Auth::is_logged_in()) {
+            $this->redirect('/login');
+        }
 
         $data = array();
 
