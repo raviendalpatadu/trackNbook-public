@@ -132,9 +132,9 @@ class StationMaster extends Controller
 
         $data['trains'] = $train->getTrainScheduleForStationMaster($_SESSION['USER']->user_data, $date);
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>"; 
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>"; 
 
         $this->view('manage.schedule', $data);
     }

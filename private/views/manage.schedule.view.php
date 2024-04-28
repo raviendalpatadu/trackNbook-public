@@ -9,6 +9,9 @@ if (isset($data) && !empty($data)) {
     $count = 0;
 }
 
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 ?>
 <html>
 
@@ -41,7 +44,7 @@ if (isset($data) && !empty($data)) {
                             <th class="col-3">Start & End Station</th>
                             <th class="col-2">Time</th>
                             <th class="col-5">Reservation</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -63,12 +66,12 @@ if (isset($data) && !empty($data)) {
                                         </div>
                                     <?php endforeach; ?>
                                 </td>
-                                
+
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                
+
             </div>
             <script>
                 $(document).ready(function () {
@@ -96,6 +99,7 @@ if (isset($data) && !empty($data)) {
                             },
                             {
                                 title: 'Reservation',
+                                width: '40%',
                                 data: function (row) {
                                     let compartmentClassTypesHTML = '';
                                     row.compartment_class_types.forEach(function (compartmentType) {
