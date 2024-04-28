@@ -670,36 +670,92 @@ class StaffTicketing extends Controller
 
 
 
-    function verifiedWarrent($id = '')
+    function verifiedWarrent($ticket_id = '')
     {
         $warrant_resevation = new WarrantsReservations();
+        $reservation = new Reservations();
         // echo $id;
         try {
-            $warrant_data = $warrant_resevation->getReservations($id);
+            $warrant_data = $warrant_resevation->getReservationsByTicketNo($ticket_id);
 
-            // echo "<pre>";
-            // print_r($warrant_data);
-            // echo "</pre>";
+            foreach ($warrant_data as $key => $warrant) {
+                $warrant_resevation->update($warrant->warrant_id, array(
+                    'warrant_status' => 'Verified'
+                ), "warrant_id");
+                // // $new_ticket_id = Auth::getTicketId();
 
-            $warrant_resevation->update($id, array(
-                'warrant_status' => 'verified'
-            ), "warrant_id");
+                // $reservation = new Reservations();
+                $reservation->update($warrant->reservation_id, array(
+                    // 'reservation_ticket_id' => $reservation_ticket_id,
+                    'reservation_status' => 'Reserved'
+                ), "reservation_id");
+            }
 
-            // $new_ticket_id = Auth::getTicketId();
 
-            $reservation = new Reservations();
-            $reservation->update($warrant_data[0]->reservation_ticket_id, array(
-                // 'reservation_ticket_id' => $reservation_ticket_id,
-                'reservation_status' => 'Reserved'
-            ), "reservation_ticket_id");
 
             // send mail
             foreach ($warrant_data as $warrant) {
+                // incase if the email is not set
+                if ($warrant->reservation_passenger_email == null || $warrant->reservation_passenger_email == '') {
+                    continue;
+                }
+
                 try {
                     $name = ucfirst($warrant->reservation_passenger_first_name);
                     $subject = "Warrant Reservation has been Approved";
                     $message = "Your warrant has been Verified. In order to get the ticket please provide your warrant document to your depature station on or before the day of travel. <br><br> *Please note that if the submitted warrant document is not correct or if there is any defect it will be
                     rejected and Department of Railways shall not be responsible for any inconvenience caused by the rejection of the reservation";
+                    $body = Auth::getEmailBody($name, $message);
+                    $to = $warrant->reservation_passenger_email;
+
+                    // echo $body;
+                    if (!$this->sendMail($to, $name, $subject, $body)) {
+                        die('failed to send mail');
+                    }
+                } catch (Exception $e) {
+                    die($e->getMessage());
+                }
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $this->redirect('staffticketing/Warrant?success=1');
+    }
+
+    function completeWarrant($ticket_id)
+    {
+        $warrant_resevation = new WarrantsReservations();
+        $reservation = new Reservations();
+        // echo $id;
+        try {
+            $warrant_data = $warrant_resevation->getReservationsByTicketNo($ticket_id);
+
+            foreach ($warrant_data as $key => $warrant) {
+                $warrant_resevation->update($warrant->warrant_id, array(
+                    'warrant_status' => 'Completed'
+                ), "warrant_id");
+
+                $new_ticket_id = Auth::getTicketId();
+
+                $reservation->update($warrant->reservation_id, array(
+                    'reservation_ticket_id' => $new_ticket_id,
+                    'reservation_status' => 'Reserved'
+                ), "reservation_id");
+            }
+
+            // send mail
+            foreach ($warrant_data as $warrant) {
+                // incase if the email is not set
+                if ($warrant->reservation_passenger_email == null || $warrant->reservation_passenger_email == '') {
+                    continue;
+                }
+
+                try {
+                    $name = ucfirst($warrant->reservation_passenger_first_name);
+                    $subject = "Warrant Reservation has been has handed over to the station staff";
+                    $message = "You have handed over the warrant document to the station. Your warrant has been completed. <br> Your ticket id is " . $new_ticket_id . "
+                    <br> Thank you for using TrackNBook warrant reservation service. <br> Have a safe journey";
                     $body = Auth::getEmailBody($name, $message);
                     $to = $warrant->reservation_passenger_email;
 
@@ -798,25 +854,25 @@ class StaffTicketing extends Controller
         $this->view('refect_reason.staffticketing');
     }
 
-
     function staffTicketingInquiry($id = '')
     {
         $Inquiry = new Inquiries();
         $data = array();
 
-        $data['inquiry'] = $Inquiry->getInquiry();
+        // if (isset($id) && !empty($id)) {
+        $data['inquiry'] = $Inquiry->getInquiry(1);
 
-        if (isset($_POST['submit'])) {
-            if (!empty($_POST['reservation_ticket_id'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
-            }
-            if (!empty($_POST['inquiry_ticket_id'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
-            }
-            if (!empty($_POST['user_nic'])) {
-                $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
-            }
+
+        if (isset($_POST['submit']) && !empty($_POST['reservation_ticket_id'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('r.reservation_ticket_id', $_POST['reservation_ticket_id']);
         }
+        if (isset($_POST['submit']) && !empty($_POST['inquiry_ticket_id'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('i.inquiry_ticket_id', $_POST['inquiry_ticket_id']);
+        }
+        if (isset($_POST['submit']) && !empty($_POST['user_nic'])) {
+            $data['inquiry'] = $Inquiry->getInquiry('u.user_nic', $_POST['user_nic']);
+        }
+
 
 
         $this->view('inquiry.staffticketing', $data);

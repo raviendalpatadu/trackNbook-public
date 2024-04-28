@@ -69,7 +69,7 @@ class Trains extends Model
                             start.station_name AS start_station,
                             end.station_name AS end_station,
                             tbl_compartment_class_type.compartment_class_type,
-                            tbl_train_type.train_type
+                            tbl_train_type.train_type AS train_type_name
                         FROM
                             tbl_train
                         JOIN
@@ -548,37 +548,37 @@ class Trains extends Model
 
         if (isset($_POST['compartment']['class']) && count($_POST['compartment']['class']) == $_POST['no_of_compartments']) {
 
-            echo "<pre>";
-            print_r($_POST['compartment']);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_POST['compartment']);
+            // echo "</pre>";
             foreach ($_POST['compartment']['class'] as $key => $value) {
                 if (empty($value)) {
-                    $this->errors['errors']['compartment_class'][$key] = 'Compartment class is required';
+                    $this->errors['errors']['compartment'] = 'Compartment class is required';
                 }
             }
 
             foreach ($_POST['compartment']['type'] as $key => $value) {
                 if (empty($value)) {
-                    $this->errors['errors']['compartment_type'][$key] = 'Compartment type is required';
+                    $this->errors['errors']['compartment'] = 'Compartment type is required';
                 }
             }
 
             foreach ($_POST['compartment']['seat_layout'] as $key => $value) {
                 if (empty($value)) {
-                    $this->errors['errors']['compartment_seat_layout'][$key] = 'Compartment seat layout is required';
+                    $this->errors['errors']['compartment'] = 'Compartment seat layout is required';
                 }
             }
 
 
             foreach ($_POST['compartment']['total_seats'] as $key => $value) {
                 if (empty($value)) {
-                    $this->errors['errors']['compartment_total_seats'][$key] = 'Compartment total seats is required';
+                    $this->errors['errors']['compartment'] = 'Compartment total seats is required';
                 }
             }
 
             foreach ($_POST['compartment']['total_number'] as $key => $value) {
                 if (empty($value)) {
-                    $this->errors['errors']['compartment_total_number'][$key] = 'Compartment total number is required';
+                    $this->errors['errors']['compartment'] = 'Compartment total number is required';
                 }
             }
         }

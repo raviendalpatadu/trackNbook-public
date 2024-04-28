@@ -25,7 +25,7 @@
                                 <div class="row mb-10 mt-50 ml-20 ">
                                     <div class="col-12 d-flex align-items-center justify-content-start">
                                         <p class="ad-width-100">Train ID :
-                                            <?php echo (array_key_exists('train', $data)) ? $data['train']->train_id : ''; ?>
+                                            <?php echo (array_key_exists('train', $data)) ? $data['train']->train_no : ''; ?>
                                         </p>
                                     </div>
                                 </div>

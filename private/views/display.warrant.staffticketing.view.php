@@ -1,10 +1,8 @@
 <?php
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
-
-
-?>
+//     echo "<pre>";
+//     print_r($data);
+//     echo "</pre>";
+// ?>
 
 
 <?php $this->view("./includes/header"); ?>
@@ -174,7 +172,7 @@
                                 <div class="input-text-label">NIC</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_nic : ''; ?>" name="reservation_passenger_nic" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data) && $data['reservations'][$i]->reservation_passenger_nic != 0) ? $data['reservations'][$i]->reservation_passenger_nic : 'N/A'; ?>" name="reservation_passenger_nic" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +185,7 @@
                                 <div class="input-text-label">Mobile</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_phone_number : ''; ?>" name="reservation_passenger_phone_number" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data) && !empty($data['reservations'][$i]->reservation_passenger_phone_number)) ? $data['reservations'][$i]->reservation_passenger_phone_number : 'None'; ?>" name="reservation_passenger_phone_number" disabled>
 
                                     </div>
                                 </div>
@@ -198,7 +196,7 @@
                                 <div class="input-text-label">Email</div>
                                 <div class="input-field">
                                     <div class="text">
-                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data)) ? $data['reservations'][$i]->reservation_passenger_email : ''; ?>" name="reservation_passenger_email" disabled>
+                                        <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('reservations', $data) && !empty($data['reservations'][$i]->reservation_passenger_email)) ? $data['reservations'][$i]->reservation_passenger_email : 'None'; ?>" name="reservation_passenger_email" disabled>
 
                                     </div>
                                 </div>
@@ -273,7 +271,7 @@
                     </div>
 
                     <div class="col-4">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->reservation_ticket_id : ''; ?>">
                                 <div class="button-base bg-light-green">
                                     <div class="text dark-green ">Verified</div>
                                 </div>
@@ -301,7 +299,7 @@
                     </div>
 
                     <div class="col-4">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/verifiedWarrent/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->warrant_id : ''; ?>">
+                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/completeWarrant/<?php echo (array_key_exists('reservations', $data)) ? $data['warrant_reservations'][0]->reservation_ticket_id : ''; ?>">
                                 <div class="button-base bg-light-green">
                                     <div class="text dark-green ">Handed Over</div>
                                 </div>

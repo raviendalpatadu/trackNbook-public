@@ -120,6 +120,7 @@ class Controller
             if (!$mail->Send()) {
                 // echo "Error while sending Email.";
                 // var_dump($mail);
+                error_log($mail->ErrorInfo);
                 return false;
             } else {
                 // echo "Email sent successfully";

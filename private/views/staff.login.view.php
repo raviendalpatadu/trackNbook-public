@@ -8,7 +8,7 @@
 <body>
 
     <div class="column-left">
-        <?php $this->view("./includes/navbar") ?>
+        <?php $this->view("./includes/navbar.staff") ?>
         <main class=" bg d-flex align-items-center justify-content-center">
 
             <div class="staff-login-box bg-box-gray p-50">
