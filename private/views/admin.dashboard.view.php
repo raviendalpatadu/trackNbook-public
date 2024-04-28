@@ -169,14 +169,51 @@
 
             <div class='container'>
                 <div class='row'>
-                    <div class='col-6'>
-                        <div class="if-txt-wrapper">Reservation Analytics</div>
+                    <div class='col-6 pr-10'>
                         <div class="chart-card">
                             <canvas id="myChart" width="100%" height="60%"></canvas>
                         </div>
                     </div>
-                    <div class='col-6'>
-                        <!-- Your table HTML goes here -->
+                    <div class='col-6 chart-card'>
+                        <p2 class="blue" style="font-weight: bold; font-size: 18px;">Disable Trains</p2>
+                        <table class="if-table stripe hover" id="userTable" style:width=80%>
+                            <thead>
+                                <tr>
+                                    <th class=" ">
+                                        Train Name
+                                    </th>
+                                    <th class=" ">
+                                        Train No
+                                    </th>
+                                    <th class=" ">
+                                        Train Type
+                                    </th>
+                                    <th class=" ">
+                                        Disable Period
+                                    </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data['trains'] as $train): ?>
+                                    <tr class="p-20">
+                                        <td class="">
+                                            <?= $train->train_name ?>
+                                        </td>
+                                        <td class="">
+                                            <?= $train->train_id?>
+                                        </td>
+                                        <td class="">
+                                            <?= $train->train_type ?>
+                                        </td>
+                                        <td class="">
+                                            <?= $train->disable_period_start_date . " -" . $train->disable_period_end_date ?>
+                                        </td>
+                                        
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -195,6 +232,13 @@
 </body>
 
 </html>
+<script>
+      $(document).ready(function() {
+            new DataTable('#userTable', {
+                // fixedHeight: true
+            });
+        });
+</script>
 <script>
     $(document).ready(function () {
         $.ajax({

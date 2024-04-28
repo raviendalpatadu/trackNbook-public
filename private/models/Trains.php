@@ -69,7 +69,7 @@ class Trains extends Model
                             start.station_name AS start_station,
                             end.station_name AS end_station,
                             tbl_compartment_class_type.compartment_class_type,
-                            tbl_train_type.train_type
+                            tbl_train_type.train_type AS train_type_name
                         FROM
                             tbl_train
                         JOIN
