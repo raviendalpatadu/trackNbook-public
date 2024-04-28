@@ -230,7 +230,7 @@ echo "</pre>";
                                                         <tr class="row py-10">
                                                             <td class="col-5 d-flex flex-column align-items-start justify-content-center g-10 mobile-pl-20">
                                                                 <span class="fs-18 fw-600">
-                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_id ?>
+                                                                    <?= ucfirst($value->train_name) ?> - <?= $value->train_no ?>
                                                                 </span>
                                                                 <!-- estimated duration  -->
                                                                 <span class="d-flex g-20">

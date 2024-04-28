@@ -107,10 +107,15 @@ class StaffGeneral extends Controller
 
                 if ( $train->validateUpdatetrain($_POST)) {
 
-                    echo "validates";
-                    // $train->updateTrain($id, $_POST);
                     
-                    // $this->redirect('StaffGeneral/getTrainList?success=1');
+                    if($train->updateTrain($id, $_POST)){
+                        $this->redirect('StaffGeneral/getTrainList?update=1');
+                    }else{
+                        $_SESSION['errors'] = "Failed to update train";
+                        $data['errors'] = $train->errors;
+                        $this->view('update.train.staffgeneral', $data);
+                    }
+                    
                 }
                 else{
                     $data['errors'] = $train->errors;
@@ -133,7 +138,7 @@ class StaffGeneral extends Controller
         // if(isset($_POST['delete'])){
         try {
             $result = $train->delete($id, "train_id");
-            $this->redirect('StaffGeneral/getTrainList');
+            $this->redirect('StaffGeneral/getTrainList?delete=1');
         } catch (Exception $e) {
             die($e->getMessage());
         }
