@@ -239,6 +239,8 @@ class Reservations extends Model
         try {
             $query = "SELECT
                             	r.*,
+                                t.train_no,
+                                tt.train_type,
                                 t.train_name AS reservation_train_name,
                                 tstop_start_time.train_stop_time AS estimated_departure_time,
                                 tstop_end_time.train_stop_time AS estimated_arrival_time,
@@ -254,6 +256,7 @@ class Reservations extends Model
                             JOIN tbl_compartment c ON c.compartment_id = r.reservation_compartment_id
                             JOIN tbl_compartment_class_type ct ON ct.compartment_class_type_id = c.compartment_class_type
                             JOIN tbl_train t ON t.train_id = r.reservation_train_id
+                            JOIN tbl_train_type tt ON t.train_type = tt.train_type_id 
                         WHERE
                             r.reservation_ticket_id = :reservation_ticket_id
                         GROUP BY
@@ -312,8 +315,12 @@ class Reservations extends Model
             $data = $this->getReservationDataTicket($reservation_id);
 
 
+            if(strtolower($data[0]->reservation_type) == 'warrant'){
+                return 0;
+            }
+
             $refundedAmount = 0;
-            // $remainTime= $data[0]->estimated_departure_time - $data[0]->reservation_created_time;
+            
             $reservation_depature_date = new DateTime($data[0]->reservation_date);
             $reservation_time = new DateTime($data[0]->estimated_departure_time);
 
@@ -323,15 +330,8 @@ class Reservations extends Model
 
             // Combine date and time
             $reservation_depature_date->setTime($time_hour, $time_minute, $time_second);
-            // echo "<pre>";
-            // print_r($reservation_depature_date);
-            // echo "</pre>";
 
             $reservation_created_time = new DateTime($data[0]->reservation_created_time);
-            // echo "<pre>";
-            // print_r($reservation_created_time);
-            // echo "</pre>";
-
 
             // get the differencr in total hours
             $remainTime = $reservation_depature_date->diff($reservation_created_time);
@@ -339,12 +339,6 @@ class Reservations extends Model
 
 
             $remainTime = hms_date_diff($remainTime);
-
-            // $remainTime = $remainTime->format('%h');
-            // echo "remainging time : " . $remainTime;
-            //    echo "<pre>";
-            //     var_dump($remainTime);
-            //     echo "</pre>";
 
             if ($remainTime > 168) {
                 $refundedAmount = $total_fare_amount * 0.75;

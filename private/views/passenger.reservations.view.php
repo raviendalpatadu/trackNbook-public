@@ -461,6 +461,10 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                                                         <p class="width-fill" id="trainNo">None</p>
                                                     </div>
                                                     <div class="d-flex">
+                                                        <p class="width-fill heading">Train Type</p>
+                                                        <p class="width-fill" id="trainType">None</p>
+                                                    </div>
+                                                    <div class="d-flex">
                                                         <p class="width-fill heading">Train Name</p>
                                                         <p class="width-fill" id="trainName">None</p>
                                                     </div>
@@ -724,7 +728,8 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         // add data to the ticket summary
                         ticketDataDown.find('#refNo').text('Ref No: ' + data[0].reservation_ticket_id);
                         ticketDataDown.find('#price').text(data[0].reservation_amount);
-                        ticketDataDown.find('#trainNo').text(data[0].reservation_train_id);
+                        ticketDataDown.find('#trainNo').text(data[0].train_no);
+                        ticketDataDown.find('#trainType').text(data[0].train_type);
                         ticketDataDown.find('#trainName').text(data[0].reservation_train_name);
                         ticketDataDown.find('#reservationDate').text(data[0].reservation_date);
                         ticketDataDown.find('#startStation').text(data[0].reservation_start_station);
@@ -938,11 +943,57 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
         // poup alert to confirm cancelation
         $('#cancelReservation').click(function() {
             var ticketId = $('#refNo').text().split(' ')[2];
-            console.log(ticketId);
+            // console.log(ticketId);
+            processefundAndPopup(ticketId);
+            
 
-            // make a custopm confirm box
+        });
+
+        $("#downloadTicket").click(function() {
+            var element = $('#reservationData');
+            var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
+            var pdf = new jsPDF();
+
+
+            pdf.addHTML(element, function() {
+                pdf.save(name + '.pdf');
+            })
+        });
+        // });
+    }
+
+    function getRefund(ticketId, callback) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '<?= ROOT ?>ajax/getRefund/',
+                type: 'POST',
+
+                data: {
+                    ticket_id: ticketId
+                },
+
+                success: function(data, response) {
+                    console.log(data);
+                    var data = JSON.parse(data);
+                    console.log(data);
+                    resolve(data);
+                },
+                error: function(error) {
+                    console.error("AJAX error: " + error);
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    async function processefundAndPopup(ticketId){
+        try{
+            var refund = await getRefund(ticketId);
+            console.log(refund);
+            
+            // make a custom confirm box
             var tiile = 'Confirm Cancelation';
-            var desc = 'Are you sure you want to cancel this reservation?';
+            var desc = 'You are having a refund of Rs.' + refund + '. Are you sure you want to cancel this reservation?';
             var btnTxt = 'Cancel Reservation';
             var img = 'https://img.icons8.com/ios/50/000000/question-mark.png';
 
@@ -981,19 +1032,10 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                     });
                 }
             });
-
-        });
-
-        $("#downloadTicket").click(function() {
-            var element = $('#reservationData');
-            var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
-            var pdf = new jsPDF();
-
-
-            pdf.addHTML(element, function() {
-                pdf.save(name + '.pdf');
-            })
-        });
-        // });
+        } catch (error) {
+            console.error(error);
+        }
     }
+
+
 </script>
