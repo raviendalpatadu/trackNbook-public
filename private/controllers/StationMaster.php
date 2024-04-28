@@ -106,12 +106,33 @@ class StationMaster extends Controller
     $this->view('check.train.arrival', $data);
 }
 
+function delayRequest(){
+    // $train = new Trains();
+    $data = array();
+    $station = new Stations();
+        $delay_data = array(
+            'station_id' => Auth::getuser_data()
+        );
 
-    // function updateTrainStatus($id = '')
-    // {
-    //     $train = new Trains();
-    //     $train->updateStatus();
-    // }
+        $traindelay = new TrainDelay();
+        if ($traindelay->validate($delay_data['station_id']) === true) {
+            // update the location
+            $data['delays'] = $traindelay->getAllDelaysByStation($delay_data['station_id']);
+            $data['station_name'] = $station->getStation($delay_data['station_id']);
+
+            // get passenger data in the next station
+            // $passenger = new Passengers();
+            // $passenger_data = $passenger->getPassengerDataOfNextStation($train_id, Auth::getuser_data());
+
+            // // send a mail to the passengers
+            // $this->notifyPassengers($train_data, $passenger_data, Auth::getuser_data());
+            // $this->redirect('stationmaster/delayRequest?success=1'); // Success case
+        } else {
+            $data['errors'] = array_merge($data, $traindelay->errors);
+            $this->redirect('stationmaster/delayRequest?success=0'); // Failure case
+        }
+    $this->view('delay.train.request', $data);
+}
 
     function waitList()
     {
