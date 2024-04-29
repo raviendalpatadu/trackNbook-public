@@ -6,6 +6,7 @@
 // print_r($data);
 // echo "</pre>";
 $trainCount = count($data['trains']);
+$inquiryCount = count($data['inquiries']);
 ?>
 
 <body>
@@ -63,7 +64,7 @@ $trainCount = count($data['trains']);
 
                                     <div class="d-flex flex-column g-10">
                                         <p1 class="dashboard-card-sm-font1"><a href="<?= ROOT ?>stationmaster/getinquiry">Inquiries</a></p1>
-                                        <p2 class="dashboard-card-sm-font2"><?= $data['inquiryCount'] ?></p2>
+                                        <p2 class="dashboard-card-sm-font2"><?= $inquiryCount ?></p2>
                                     </div>
 
                                     <div class="d-flex ml-40 ">
