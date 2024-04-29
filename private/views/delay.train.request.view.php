@@ -75,7 +75,7 @@
                                                             </td>
                                                             <td class="col-1">
                                                                 <?php if ($delays->delay_is_informed_passenger == 0) : ?>
-                                                                    <button class="button-base blue" id="inform">More</button>
+                                                                    <button class="button-base blue inform-btn">More</button>
                                                                 <?php else : ?>
                                                                     <button class="button-base green">Informed</button>
                                                                 <?php endif; ?>
@@ -101,7 +101,7 @@
                 search: true
             });
 
-            $('#inform').click(function(e) {
+            $('.inform-btn').click(function(e) {
                 e.preventDefault();
                 var train_name = $(this).closest('tr').find('td:eq(0)').text();
                 var train_no = $(this).closest('tr').find('td:eq(1)').text();
