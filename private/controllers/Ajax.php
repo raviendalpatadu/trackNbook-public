@@ -152,6 +152,11 @@ class Ajax extends Controller
         $train = new Trains();
         $train_data = $train->whereOne('train_no', $_POST['train_id']);
 
+        if ($train_data == false) {
+            echo json_encode(['train' => false]);
+            return;
+        }
+
 
         $data['train'] = $train_location->getTrainLocation($train_data->train_id);
         echo json_encode($data);

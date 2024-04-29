@@ -109,8 +109,8 @@ $.ajax({
   url: ROOT + "ajax/reservationCountByReservationType",
   method: "POST",
   data: {
-    start: moment().subtract(1, 'months').format("YYYY-MM-DD"),
-    end: moment().format("YYYY-MM-DD"),
+    start: moment().format("YYYY-MM-DD"),
+    end: moment().add(10, 'day').format("YYYY-MM-DD"),
   },
 
   success: function (data) {
