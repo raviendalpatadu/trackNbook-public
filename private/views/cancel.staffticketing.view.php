@@ -245,17 +245,17 @@
 
                         <?php endif; ?>
                     </form>
-                    <div class="row mt-20 display-none" id="actionBtn">
+                    <div class="row mt-20 " id="actionBtn">
                         <div class="col-12 d-flex justify-content-center">
                             <button class="button mx-10">
-                                <div class="button-base">
-                                    <div class="text">Back</div>
+                                <div class="button-base bg-Selected-Blue">
+                                    <div class="text blue">Back</div>
                                 </div>
                             </button>
-
+                            
                             <button class="button mx-10" id="cancelReservationBtn">
-                                <div class="button-base">
-                                    <input type="submit" name="cancel_reservation" value="Cancel Reservation">
+                                <div class="button-base bg-Selected-red">
+                                    <input type="submit" name="cancel_reservation" class="text Banner-red" value="Cancel Reservation">
                                 </div>
                             </button>
                             <div class="" id="popoupError">
