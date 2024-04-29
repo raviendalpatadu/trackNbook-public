@@ -221,7 +221,7 @@
                             </div>
 
                             <div class="d-flex flex-grow g-20">
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column flex-grow">
                                     <p class="">Booking Type</p>
                                     <div class="text-inputs">
                                         <div class="input-field">
@@ -232,12 +232,34 @@
                                         <div class="assistive-text"></div>
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column flex-grow">
                                     <p class="">No of Passengers</p>
                                     <div class="text-inputs">
                                         <div class="input-field">
                                             <div class="text">
                                                 <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ?  str_pad(count($data['inquiry']), 2, '0', STR_PAD_LEFT) : ''; ?> " name="no_of_passengers" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="assistive-text"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-grow">
+                                    <p class="">Reservation Status</p>
+                                    <div class="text-inputs">
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ?  $data['inquiry'][0]->reservation_status : ''; ?> " name="no_of_passengers" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="assistive-text"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column flex-grow">
+                                    <p class="">Reservation Created Time</p>
+                                    <div class="text-inputs">
+                                        <div class="input-field">
+                                            <div class="text">
+                                                <input type="text" class="type-here" placeholder="Type here" value="<?= (array_key_exists('inquiry', $data)) ?  $data['inquiry'][0]->reservation_created_time : ''; ?> " name="no_of_passengers" disabled>
                                             </div>
                                         </div>
                                         <div class="assistive-text"></div>
@@ -249,11 +271,11 @@
                             <div class="d-flex flex-row justify-content-between">
                                 <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
                                     <div class="d-flex">
-                                        <p class="red">* This Passenger is not travelled yet</p>
+                                        <p class="red">* This Passenger has not travelled yet</p>
                                     </div>
                                 <?php else : ?>
                                     <div class="d-flex">
-                                        <p class="red">* This Passenger is travelled</p>
+                                        <p class="red">* This Passenger has travelled</p>
                                     </div>
                                 <?php endif; ?>
 
@@ -262,9 +284,6 @@
                                         <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
                                     </div>
                                 <?php endif; ?>
-
-
-
 
                             </div>
                         </div>
@@ -395,6 +414,8 @@
                             </a>
                         </button>
                     </div>
+                        
+                    <?php if(isset($data['inquiry']) && strtolower($data['inquiry'][0]->inquiry_status) == "pending"): ?>
 
                     <div class="col-4" id="mou-responseBtn">
                         <button class="button mt-20 " id="reject">
@@ -413,6 +434,8 @@
                             </a>
                         </button>
                     </div>
+
+                    <?php endif; ?>
 
                 </div>
 
