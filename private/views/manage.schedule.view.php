@@ -1,12 +1,7 @@
 <?php $this->view("./includes/header") ?>
 <?php $this->view("./includes/load-js") ?>
 
-<?php
-echo "<pre>";
-print_r($data);
-echo "</pre>";
 
-?>
 <html>
 
 <head>
