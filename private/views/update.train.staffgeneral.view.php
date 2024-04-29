@@ -5,11 +5,11 @@ if (!isset($data['errors'])) {
     $data['errors'] = array();
 }
 
-echo "<pre>";
+// echo "<pre>";
 
-print_r($_POST);
-print_r($data['errors']);
-echo "</pre>";
+// print_r($_POST);
+// print_r($data['errors']);
+// echo "</pre>";
 ?>
 
 <body>

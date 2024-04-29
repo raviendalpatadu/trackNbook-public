@@ -41,7 +41,7 @@
       ],
       [
         "name" => "Update Location",
-        "link" => "traindriver/qr",
+        "link" => "traindriver/addlocation",
         "icon" => "qr.svg"
       ],
       [
@@ -55,7 +55,7 @@
   <div class="col-12 d-flex align-items-center  border-top-mobile-nav-bar bg-Background-colour-nav">
 
   </div>
-  <nav class="nav-dashboard px-20">
+  <nav class="nav-dashboard">
 
     <div class="brand">
       <div class="brand-text">TrackNBook</div>
@@ -72,15 +72,15 @@
     
   </nav>
 
-  <div class="nav-menu-items px-50" id="menu items">
-    <ul>
+  <div class="nav-menu-items" id="menu items">
+    <ul class="mx-1">
       <?php foreach ($sidebar_list as $item) { ?>
         <a href="<?= ROOT . $item['link'] ?>">
           <li> <?= $item['name'] ?></li>
         </a>
       <?php } ?>
       <a href="<?=ROOT?>profile"> <li>Profile</li></a>
-      <a href="<?=ROOT?>logout"><li>Logut</li></a>
+      <a href="<?=ROOT?>logout"><li>Logout</li></a>
     </ul>
   </div>
 

@@ -24,9 +24,6 @@ class TicketChecker extends Controller
         //     $data['compartment'] =  $ticketcheker->errors['errors']['compartment'] = 'Compartment is required';
         // }
 
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
 
 
 
@@ -41,7 +38,7 @@ class TicketChecker extends Controller
 
         $seatData['from']['reservation_train_id'] = $_SESSION['work_train'];
         $seatData['from']['reservation_compartment_id'] = $data['compartment'][0]->compartment_id;
-        $seatData['from']['reservation_date'] = '2024-05-01';
+        $seatData['from']['reservation_date'] = date('Y-m-d');
         $seatData['from']['reservation_start_station'] = $data['from_train']->train_start_station;
         $seatData['from']['reservation_end_station'] = $data['from_train']->train_end_station;
 
@@ -189,9 +186,7 @@ class TicketChecker extends Controller
         $resevation = new Reservations();
         $data = array();
         $data['reservations'] = $resevation->getReservationDataTicket($id);
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+
 
 
         $this->view('QRSearch.ticketchecker');
