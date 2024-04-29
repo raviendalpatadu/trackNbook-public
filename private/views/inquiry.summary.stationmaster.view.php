@@ -269,20 +269,22 @@
 
                             </div>
                             <div class="d-flex flex-row justify-content-between">
-                                <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
-                                    <div class="d-flex">
-                                        <p class="red">* This Passenger has not travelled yet</p>
-                                    </div>
-                                <?php else : ?>
-                                    <div class="d-flex">
-                                        <p class="red">* This Passenger has travelled</p>
-                                    </div>
-                                <?php endif; ?>
+                            <?php if (strtolower($data['inquiry'][0]->reservation_status) == 'pending' || (strtolower($data['inquiry'][0]->reservation_status)) == "reserved") : ?>
+                                    <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
+                                        <div class="d-flex">
+                                            <p class="red">* This Passenger has not travelled yet</p>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="d-flex">
+                                            <p class="red">* This Passenger has travelled</p>
+                                        </div>
+                                    <?php endif; ?>
 
-                                <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'warrant') : ?>
-                                    <div class="d-flex">
-                                        <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
-                                    </div>
+                                    <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'warrant') : ?>
+                                        <div class="d-flex">
+                                            <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
 
 

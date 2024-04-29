@@ -20,21 +20,24 @@ class TicketCheckers extends Model
             $this->errors['errors']['train_id'] = 'Train ID is required';
         }
 
+        $train = new Trains();
+        $train = $train->whereOne('train_no', $data['train_id']);
+        $data['train_id'] = $train->train_id;
         // want to check if the train is valid
 
-            // check if the train_id exists in the tbl_train table
-            $query = "SELECT t.* FROM tbl_train t WHERE t.train_id = :train_id;";
+        // check if the train_id exists in the tbl_train table
+        $query = "SELECT t.* FROM tbl_train t WHERE t.train_id = :train_id;";
 
-          $result = $this->query($query, [
-            'train_id' => $data['train_id'] 
-            ]);
+        $result = $this->query($query, [
+            'train_id' => $data['train_id']
+        ]);
 
-            $exists = is_array($result) && count($result) > 0;
-            
-            if (!$exists) {
-                $this->errors['errors']['train_id'] = 'Train ID does not exist';
-            }
-       
+        $exists = is_array($result) && count($result) > 0;
+
+        if (!$exists) {
+            $this->errors['errors']['train_id'] = 'Train ID does not exist';
+        }
+
 
         // // check if id is a number
         // if (is_numeric(intval($data['train_id']))) {
@@ -61,7 +64,7 @@ class TicketCheckers extends Model
             $this->errors['errors']['train_id'] = 'Train is not working at now.';
         }
 
- 
+
 
         // check error count
         if (count($this->errors) > 0) {

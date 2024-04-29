@@ -27,23 +27,27 @@ class Ajax extends Controller
 
         if ($waiting_passenger_list != false) {
             foreach ($waiting_passenger_list as $waiting_passenger) {
-                // send email to the waiting list
+                //         // send email to the waiting list
 
+                
                 $user = new Users();
                 try {
                     $user_data = $user->whereOne('user_id', $waiting_passenger->waiting_list_passenger_id);
+                    if (empty($user_data->user_email) || $user_data->user_email == null) {
+                        continue;
+                    }
 
                     $email = $user_data->user_email;
                     $subject = "Train Reservation Notification";
                     $message = "<h3>Some seats are available on the train.</h3>
-                    <h4>$waiting_passenger->train_name</h4>
-                    <div>
-                        <p style='font-size: 14px; font-weight: 500'>From: $waiting_passenger->start_station_name</p>
-                        <p style='font-size: 14px; font-weight: 500'>To: $waiting_passenger->end_station_name</p>
-                        <p style='font-size: 14px; font-weight: 500'>Departure Time: $waiting_passenger->estimated_start_time</p>
-                        <p style='font-size: 14px; font-weight: 500'>Arrival Time: $waiting_passenger->estimated_end_time</p>
-                    </div>
-                    Please login to your account to make a reservation.";
+                                <h4>$waiting_passenger->train_name</h4>
+                                <div>
+                                    <p style='font-size: 14px; font-weight: 500'>From: $waiting_passenger->start_station_name</p>
+                                    <p style='font-size: 14px; font-weight: 500'>To: $waiting_passenger->end_station_name</p>
+                                    <p style='font-size: 14px; font-weight: 500'>Departure Time: $waiting_passenger->estimated_start_time</p>
+                                    <p style='font-size: 14px; font-weight: 500'>Arrival Time: $waiting_passenger->estimated_end_time</p>
+                                </div>
+                                Please login to your account to make a reservation.";
 
                     $message = Auth::getEmailBody($user_data->user_first_name, $message);
                 } catch (Exception $e) {
@@ -54,10 +58,15 @@ class Ajax extends Controller
             }
         }
         // echo json_encode($waiting_passenger_list);
+        // echo json_encode($waiting_passenger_list);
 
         $reservation = new Reservations();
         $result = $reservation->callProcedure('cancel_reservation', array($id));
-        echo json_encode($result);
+        if($result == false){
+            echo json_encode([]);
+            return;
+        }
+        echo json_encode(false);
     }
 
     public function getStation()
@@ -84,7 +93,7 @@ class Ajax extends Controller
     {
         $train = new Trains();
         $trains = $train->findAllTrains();
-    
+
         // Organize data by train ID
         $organizedData = [];
         foreach ($trains as $train) {
@@ -97,10 +106,10 @@ class Ajax extends Controller
             }
             $organizedData[$trainId]['compartment_class_types'][] = $train->compartment_class_type;
         }
-    
+
         echo json_encode(array_values($organizedData));
     }
-    
+
 
 
 
@@ -119,8 +128,6 @@ class Ajax extends Controller
         $data = $waitinglist->getWaitingList();
 
         echo json_encode($data);
-
-
     }
     public function updateLocation()
     {
@@ -152,6 +159,11 @@ class Ajax extends Controller
         $train = new Trains();
         $train_data = $train->whereOne('train_no', $_POST['train_id']);
 
+        if ($train_data == false) {
+            echo json_encode(['train' => false]);
+            return;
+        }
+
 
         $data['train'] = $train_location->getTrainLocation($train_data->train_id);
         echo json_encode($data);
@@ -177,8 +189,9 @@ class Ajax extends Controller
     //         echo json_encode($train->errors);
     //     }
     // }
-     public function getRefund() {
-        if(isset($_POST['ticket_id'])){
+    public function getRefund()
+    {
+        if (isset($_POST['ticket_id'])) {
             $ticket_id =  $_POST['ticket_id'];
             $reservation = new Reservations();
             $data = $reservation->whereOne('reservation_ticket_id', $ticket_id);
@@ -186,20 +199,20 @@ class Ajax extends Controller
             $refund =  $reservation->getRefund($ticket_id, $data->reservation_amount);
             echo json_encode($refund);
         }
-        
-     }
+    }
 
 
-     public function countReservationFromAndTo(){
+    public function countReservationFromAndTo()
+    {
         $reservation = new Reservations();
         $data = $reservation->countReservationFromAndTo($_POST['start'], $_POST['end']);
         echo json_encode($data);
-     }
+    }
 
-     public function reservationCountByReservationType(){
+    public function reservationCountByReservationType()
+    {
         $reservation = new Reservations();
         $data = $reservation->reservationCountByReservationType($_POST['start'], $_POST['end']);
         echo json_encode($data);
-     }
-
+    }
 }

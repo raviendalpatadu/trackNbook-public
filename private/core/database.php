@@ -34,6 +34,8 @@ class Database
                     if (preg_match("/^CALL/i", $query)) {
                         $data = $stm->fetchAll(PDO::FETCH_OBJ);
                         $con = null;
+
+                        if(is_object($data) && count($data)) return $data;
                         // return $data;
                     }
 

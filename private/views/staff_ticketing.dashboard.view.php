@@ -1,4 +1,11 @@
 <?php $this->view("./includes/header") ?>
+<?php
+echo "<pre>";
+// // print_r($_SESSION);
+// print_r($data['warrant_reservations']);
+echo "</pre>";
+
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -7,6 +14,9 @@
         <main class="bg">
             <div class="row">
                 <div class="col-12 p-20">
+                    <div class="d-flex mt-20 mb-20">
+                        <h1 class="Primary-Color">Hello Welcome to <?=Auth::smStation()->station_name?> !!</h1>
+                    </div>
 
                     <div class="d-flex flex-row justify-content-between g-50">
                         <div class="col-4">
@@ -14,7 +24,7 @@
                                 <a class="blue" href="<?= ROOT ?>staffticketing/reservationList">
                                     <div class="d-flex flex-column g-10">
                                         <p1 class="mb-4 align-items-start ">Total Reservations</p1>
-                                        <p2>230</p2>
+                                        <p2><?= str_pad(count($data['reservations']), '3', 0, STR_PAD_LEFT) ?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex">
@@ -27,10 +37,18 @@
 
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/refundList">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Refund Requests</p1>
-                                        <p2>23</p2>
+                                        <p1 class="mb-4">Warrant Requests</p1>
+                                        <?php
+                                        $counter = 0;
+                                        for ($i = 0; $i < count($data['reservations']); $i++) {
+                                            if (strtolower($data['reservations'][$i]->reservation_status) == 'approval pending' && strtolower($data['reservations'][$i]->reservation_type) == 'warrant') {
+                                                $counter++;
+                                            }
+                                        }
+                                        ?>
+                                        <p2><?= str_pad($counter,3,'0', STR_PAD_LEFT) ?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex  ">
@@ -43,10 +61,10 @@
                         </div>
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/cancelList">
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Warrants to be Verified</p1>
-                                        <p2>28</p2>
+                                        <p1 class="mb-4">Total Cancellations</p1>
+                                        <p2><?= str_pad(count($data['cancel_reservations']),3,'0',STR_PAD_LEFT)?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex  ">
@@ -58,10 +76,12 @@
                         </div>
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                            <a class="blue" href="<?= ROOT ?>staffticketing/staffticketinginquiry">
                                 <div class="d-flex flex-column g-10">
-                                    <p1 class="mb-4">Warrants Rejected</p1>
-                                    <p2 class="blue">10</p2>
+                                    <p1 class="mb-4">Passenger Inquiries</p1>
+                                    <p2 class="blue"><?= str_pad(count($data['inquiries']), 3, '0', STR_PAD_LEFT)?></p2>
                                 </div>
+                            </a>
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);">
                                         <path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V7h16l.001 12H4z"></path>
@@ -99,12 +119,12 @@
                                             <path d="M20 3H5C3.346 3 2 4.346 2 6v12c0 1.654 1.346 3 3 3h15c1.103 0 2-.897 2-2v-2h-8c-1.103 0-2-.897-2-2V9c0-1.103.897-2 2-2h8V5c0-1.103-.897-2-2-2z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="Primary-Gray">Refund Requests</h4>
+                                    <h4 class="Primary-Gray">Warrant Requests</h4>
 
 
                                 </div>
                                 <div class="d-flex align-items-center graphbox bg-light-blue">
-                                    <table class="mou-dashboard-table">
+                                    <table class="mou-dashboard-table" id="warrantRequestsTable">
                                         <thead>
                                             <tr class="row p-20">
                                                 <th class="col-3 d-flex align-items-center">
@@ -130,106 +150,33 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
+                                            <?php foreach ($data['warrant_reservations'] as $warrant) : 
+                                                if($warrant->reservation_status != 'Approval Pending') continue;
+                                                ?>
+                                                
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <?= $warrant->warrant_id ?>
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center"><?= $warrant->reservation_date ?></td>
+                                                    <td class="col-3 d-flex align-items-center"><?= $warrant->reservation_passenger_first_name  . " " . $warrant->reservation_passenger_last_name ?></td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <?= $warrant->compartment_class_type ?>
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center g-5">
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="button-base bg-light-blue">
+                                                                <a class="blue" href="<?= ROOT ?>staffticketing/displayWarrent/<?=$warrant->warrant_id?>/<?=$warrant->reservation_ticket_id?>">
+                                                                    <div class="text blue">View</div>
+                                                                
+                                                                </a>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                </td>
-                                            </tr>
-
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
                                         </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-
                                     </table>
                                 </div>
 
@@ -269,5 +216,29 @@
 <?php $this->view('includes/load-js') ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<?= ASSETS ?>js/mou_chart.js"></script>
+
+<script>
+    // make a datatable for warrant requests
+    $(document).ready(function() {
+        $('#warrantRequestsTable').DataTable(
+            {
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "searching": true,
+                "lengthChange": false,
+                "pageLength": 5,
+                "autoWidth": false,
+                "responsive": true,
+                //no search bar
+                "bFilter": false, 
+
+                "order": [
+                    [1, "desc"]
+                ]
+            }
+        );
+    });
+</script>
 
 </html>

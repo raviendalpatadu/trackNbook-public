@@ -862,7 +862,7 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
                         $('#resStatus').empty();
                         $('#resStatus').append(reservation_status);
 
-
+                        $('#cancelReservation').text('Cancel Reservation');
                         startStationMap = data[0].reservation_start_station;
                         endStationMap = data[0].reservation_end_station;
 
@@ -950,7 +950,8 @@ if (isset($data['cancelled_reservations']) && $data['cancelled_reservations'] !=
         });
 
         $("#downloadTicket").click(function() {
-            var element = $('#reservationData');
+            var element = $('#ticketDataDown');
+            console.log(element);
             var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
             var pdf = new jsPDF();
 

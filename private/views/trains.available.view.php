@@ -70,7 +70,7 @@ echo "</pre>";
                                     <div class="text" id="modifybtn">Do you want to modify your search?</div>
                                 </div>
                             </div>
-                            <form action="<?= ROOT ?>train/available/modifysearch" method="post" id="modifyForm" class="display-none">
+                            <form action="<?= ROOT ?>train/available/modifysearch" method="post" id="modifyForm" class="display-none pt-5">
                                 <div class=" d-flex flex-column g-20">
                                     <div class="d-flex g-20">
                                         <div class="text-inputs">

@@ -148,7 +148,7 @@ class WaitingLists extends Model
         if (is_array($result) && count($result) > 0) {
             return $result;
         }
-        return 0;
+        return [];
     }
 
     public function inWaitingList($waiting_list)

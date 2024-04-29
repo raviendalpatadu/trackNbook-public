@@ -570,19 +570,19 @@
 
 .if-table thead th {
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .if-table tbody td {
   font-weight: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   padding-bottom: 5px;
 }
 
 .filter-container {
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .filter-container {
