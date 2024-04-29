@@ -13,7 +13,7 @@ SELECT i.*,
     end_st.station_name AS end_station_name
 FROM tbl_inquiry i
     INNER JOIN tbl_user u ON i.inquiry_passenger_id = u.user_id
-    INNER JOIN tbl_reservation r ON i.inquiry_ticket_id = r.reservation_ticket_id
+    INNER JOIN tbl_reservation_cancelled r ON i.inquiry_ticket_id = r.reservation_ticket_id
     INNER JOIN tbl_train t ON r.reservation_train_id = t.train_id
     JOIN tbl_compartment c ON r.reservation_compartment_id = c.compartment_id
     JOIN tbl_compartment_class_type ctt ON c.compartment_class_type = ctt.compartment_class_type_id

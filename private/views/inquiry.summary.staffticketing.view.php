@@ -269,20 +269,22 @@
 
                             </div>
                             <div class="d-flex flex-row justify-content-between">
-                                <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
-                                    <div class="d-flex">
-                                        <p class="red">* This Passenger has not travelled yet</p>
-                                    </div>
-                                <?php else : ?>
-                                    <div class="d-flex">
-                                        <p class="red">* This Passenger has travelled</p>
-                                    </div>
-                                <?php endif; ?>
+                                <?php if (strtolower($data['inquiry'][0]->reservation_status) == 'pending' || (strtolower($data['inquiry'][0]->reservation_status)) == "reserved") : ?>
+                                    <?php if ($data['inquiry'][0]->reservation_is_travelled == 0) : ?>
+                                        <div class="d-flex">
+                                            <p class="red">* This Passenger has not travelled yet</p>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="d-flex">
+                                            <p class="red">* This Passenger has travelled</p>
+                                        </div>
+                                    <?php endif; ?>
 
-                                <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'warrant') : ?>
-                                    <div class="d-flex">
-                                        <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
-                                    </div>
+                                    <?php if (strtolower($data['inquiry'][0]->reservation_type) == 'warrant') : ?>
+                                        <div class="d-flex">
+                                            <a class="mou-view-img blue" id="displayWarrantImg">View Warrant Image</a>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
 
                             </div>
@@ -414,26 +416,26 @@
                             </a>
                         </button>
                     </div>
-                        
-                    <?php if(isset($data['inquiry']) && strtolower($data['inquiry'][0]->inquiry_status) == "pending"): ?>
 
-                    <div class="col-4" id="mou-responseBtn">
-                        <button class="button mt-20 " id="reject">
-                            <div class="button-base bg-Selected-red">
-                                <div class="text Banner-red">Response</div>
-                            </div>
+                    <?php if (isset($data['inquiry']) && strtolower($data['inquiry'][0]->inquiry_status) == "pending") : ?>
 
-                        </button>
-                    </div>
-
-                    <div class="col-4" id="mou-handoverBtn">
-                        <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/inquirySM/<?php echo (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>">
-                                <div class="button-base bg-light-green">
-                                    <div class="text dark-green ">HandOver to Station Master</div>
+                        <div class="col-4" id="mou-responseBtn">
+                            <button class="button mt-20 " id="reject">
+                                <div class="button-base bg-Selected-red">
+                                    <div class="text Banner-red">Response</div>
                                 </div>
-                            </a>
-                        </button>
-                    </div>
+
+                            </button>
+                        </div>
+
+                        <div class="col-4" id="mou-handoverBtn">
+                            <button class="button mt-20 "><a href="<?= ROOT ?>staffticketing/inquirySM/<?php echo (array_key_exists('inquiry', $data)) ? $data['inquiry'][0]->reservation_ticket_id : ''; ?>">
+                                    <div class="button-base bg-light-green">
+                                        <div class="text dark-green ">HandOver to Station Master</div>
+                                    </div>
+                                </a>
+                            </button>
+                        </div>
 
                     <?php endif; ?>
 
