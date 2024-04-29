@@ -234,7 +234,7 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
                         var nextStation = (data.train[0].next_station == data.train[0].endStation) ? data.train[0].end_station  : data.train[0].next_station;
                         $('.track-content .track-text').eq(2).text(nextStation);
                         $('.track-content .track-text').eq(3).text(data.train[0].train_name);
-                        $('.track-content .track-text').eq(4).text(data.train[0].train_id);
+                        $('.track-content .track-text').eq(4).text(data.train[0].train_no);
                     } else {
                         var title = 'No train';
                         var des = 'The train id you entered was not found.'
