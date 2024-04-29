@@ -86,7 +86,7 @@ echo "</pre>";
                                         <?php foreach ($data['reservations'] as $key => $reservation) : ?>
 
                                             <!-- if train id is not equal to the current work train id continue -->
-                                            <?php if ($reservation->reservation_train_id != $_SESSION['work_train']) {
+                                            <?php if (($reservation->reservation_train_id != $_SESSION['work_train']) || (strtolower($reservation->reservation_status) != 'reserved')) {
                                                 continue;
                                             } ?>
 
@@ -95,13 +95,13 @@ echo "</pre>";
                                                 <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
                                                 <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
                                                 <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
-                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->
+                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"></td> -->
                                                 <td class="col-1 d-flex align-items-center g-20">
                                                     <div class="badge-base bg-light-green">
                                                         <div class="dot">
                                                             <div class="dot4"></div>
                                                         </div>
-                                                        <div class="text dark-green">Pending</div>
+                                                        <div class="text dark-green"><?= $reservation->reservation_status?></div>
                                                     </div>
 
                                                     <a class="blue" href="<?= ROOT ?>ticketchecker/summary/<?= $reservation->reservation_ticket_id  ?>">

@@ -291,7 +291,7 @@ domReady(function () {
   }
 
   let htmlscanner = new Html5QrcodeScanner("my-qr-reader", {
-    fps: 30,
+    fps: 10,
     qrbos: 250,
   });
   htmlscanner.render(onScanSuccess);

@@ -18,7 +18,7 @@ echo "</pre>";
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg ">
             <div class="container">
-                <form action="" method="post" class="profile p-50 shadow" enctype="multipart/form-data">
+                <form action="" method="post" class="profile p-50 bg-white shadow" enctype="multipart/form-data">
                     <?php for ($i = 0; $i < $no_of_passengers; $i++) { ?>
                         <h3 class="mb-20 Primary-Gray input-text-label">Enter Details of Passenger <?= $i + 1 ?></h3>
                         <div class="row g-20 mb-20">
