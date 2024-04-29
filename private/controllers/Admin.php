@@ -141,9 +141,9 @@ class Admin extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($_POST);
+            // echo "</pre>";
             $train_disable = new TrainDisablePeriods();
             if ($train_disable->validate($_POST)) {
                 // add disable period
@@ -163,9 +163,9 @@ class Admin extends Controller
                     'disable_period_end_date' => $_POST['disable_period_end_date']
                 ]);
 
-                echo "<pre>";
-                print_r($reservations);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($reservations);
+                // echo "</pre>";
 
                 foreach ($reservations as $reservation) {
                     $reservationData = [
