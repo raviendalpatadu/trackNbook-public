@@ -124,7 +124,7 @@ echo "</pre>";
 
                                 </div>
                                 <div class="d-flex align-items-center graphbox bg-light-blue">
-                                    <table class="mou-dashboard-table">
+                                    <table class="mou-dashboard-table" id="warrantRequestsTable">
                                         <thead>
                                             <tr class="row p-20">
                                                 <th class="col-3 d-flex align-items-center">
@@ -166,7 +166,7 @@ echo "</pre>";
                                                     <td class="col-1 d-flex align-items-center g-5">
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="button-base bg-light-blue">
-                                                                <a class="blue" href="<?= ROOT ?>staffticketing/warrantDetails">
+                                                                <a class="blue" href="<?= ROOT ?>staffticketing/displayWarrent/<?=$warrant->warrant_id?>/<?=$warrant->reservation_ticket_id?>">
                                                                     <div class="text blue">View</div>
                                                                 
                                                                 </a>
@@ -176,29 +176,6 @@ echo "</pre>";
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
-
-                                            <!-- <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr> -->
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -239,5 +216,29 @@ echo "</pre>";
 <?php $this->view('includes/load-js') ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="<?= ASSETS ?>js/mou_chart.js"></script>
+
+<script>
+    // make a datatable for warrant requests
+    $(document).ready(function() {
+        $('#warrantRequestsTable').DataTable(
+            {
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "searching": true,
+                "lengthChange": false,
+                "pageLength": 5,
+                "autoWidth": false,
+                "responsive": true,
+                //no search bar
+                "bFilter": false, 
+
+                "order": [
+                    [1, "desc"]
+                ]
+            }
+        );
+    });
+</script>
 
 </html>
