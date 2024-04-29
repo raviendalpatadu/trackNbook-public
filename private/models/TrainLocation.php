@@ -98,43 +98,54 @@ class TrainLocation extends Model
         end_station.station_name AS end_station,
         current_station.station_name AS current_station
      -- get the mext station
-,(
-    SELECT station_name
-    FROM tbl_station
-    WHERE station_id = (
-       -- consider get the stop no. from the train_stop_station table
-         SELECT station_id
-            FROM tbl_train_stop_station tss
-            WHERE tss.train_id = tl.train_id
-            AND tss.stop_no = (
-                SELECT MIN(tss.stop_no)
-                FROM tbl_train_stop_station tss
-                WHERE tss.train_id = tl.train_id
-                AND tss.stop_no > (
-                    SELECT tss.stop_no
+        ,(
+            SELECT station_name
+            FROM tbl_station
+            WHERE station_id = (
+            -- consider get the stop no. from the train_stop_station table
+                SELECT station_id
                     FROM tbl_train_stop_station tss
                     WHERE tss.train_id = tl.train_id
-                    AND tss.station_id = tl.train_location
-                )
+                    AND tss.stop_no = (
+                        SELECT MIN(tss.stop_no)
+                        FROM tbl_train_stop_station tss
+                        WHERE tss.train_id = tl.train_id
+                        AND tss.stop_no > (
+                            SELECT tss.stop_no
+                            FROM tbl_train_stop_station tss
+                            WHERE tss.train_id = tl.train_id
+                            AND tss.station_id = tl.train_location
+                        )
+                    )
             )
-    )
-) AS next_station
-        
-        FROM tbl_train_location tl
-            JOIN tbl_train t ON t.train_id = tl.train_id
-            JOIN tbl_train_type tt ON tt.train_type_id = t.train_type
-            JOIN tbl_station start_station ON start_station.station_id = t.train_start_station
-            JOIN tbl_station end_station ON end_station.station_id = t.train_end_station
-            JOIN tbl_station current_station ON current_station.station_id = tl.train_location
-        WHERE tl.train_id = :train_id
-            AND date = :date
-        GROUP BY t.train_id,
-            tl.date
-        
-        ";
+        ) AS next_station
+                
+                FROM tbl_train_location tl
+                    JOIN tbl_train t ON t.train_id = tl.train_id
+                    JOIN tbl_train_type tt ON tt.train_type_id = t.train_type
+                    JOIN tbl_station start_station ON start_station.station_id = t.train_start_station
+                    JOIN tbl_station end_station ON end_station.station_id = t.train_end_station
+                    JOIN tbl_station current_station ON current_station.station_id = tl.train_location
+                WHERE tl.train_id = :train_id
+                    AND date = :date
+                GROUP BY t.train_id,
+                    tl.date
+                
+                ";
         return $this->query($query, [
             'train_id' => $train_id,
             'date' => date('Y-m-d')
         ]);
+    }
+
+    public function selectTrainLocation($train_id, $date)
+    {
+        $query = "SELECT * FROM $this->table WHERE train_id = :train_id AND date = :date";
+        $result = $this->query($query, ['train_id' => $train_id, 'date' => $date]);
+
+        if(is_array($result) && count($result) > 0){
+            return $result[0];
+        }
+        return [];
     }
 }

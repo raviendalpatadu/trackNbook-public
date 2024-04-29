@@ -13,7 +13,7 @@ class StationMaster extends Controller
             $this->redirect('login');
         }
 
-        $trainModel = new TrainModel();
+        $trainModel = new Trains();
         $trains = $trainModel->getAllTrainsWithEstimatedArrival($station_id);
 
         $this->view('dashboard.stationmaster', ['trains' => $trains]);
@@ -115,7 +115,8 @@ function delayRequest(){
         );
 
         $traindelay = new TrainDelay();
-        if ($traindelay->validate($delay_data['station_id']) === true) {
+
+        // if ($traindelay->validate($delay_data) === true) {
             // update the location
             $data['delays'] = $traindelay->getAllDelaysByStation($delay_data['station_id']);
             $data['station_name'] = $station->getStation($delay_data['station_id']);
@@ -127,10 +128,10 @@ function delayRequest(){
             // // send a mail to the passengers
             // $this->notifyPassengers($train_data, $passenger_data, Auth::getuser_data());
             // $this->redirect('stationmaster/delayRequest?success=1'); // Success case
-        } else {
-            $data['errors'] = array_merge($data, $traindelay->errors);
-            $this->redirect('stationmaster/delayRequest?success=0'); // Failure case
-        }
+        // } else {
+        //     $data['errors'] = array_merge($data, $traindelay->errors);
+        //     $this->redirect('stationmaster/delayRequest?success=0'); // Failure case
+        // }
     $this->view('delay.train.request', $data);
 }
 
@@ -236,5 +237,54 @@ function delayRequest(){
         }
 
         $this->redirect('stationmaster/getInquiry');
+    }
+
+    function informPassengerDelay()
+    {
+       
+        
+        $data = array();
+        $station_master = new StationMasters();
+
+        $delay_id = $_POST['delay_id'];
+        
+        $train_name = $_POST['train_name'];
+        $train_no = $_POST['train_no'];
+        $train_type = $_POST['train_type'];
+        $date_time = $_POST['date_time'];
+        $delay_reason = $_POST['delay_reason'];
+
+        $train = new Trains();
+        $train_data = $train->whereOne('train_no', $_POST['train_no']);
+
+        // send data is used to set the parameters required fpr informTrainDelay()
+        $sendData = [
+            'train_id' => $train_data->train_id,
+            'station_id' => $_SESSION['USER']->user_data
+        ];
+
+        $data['passenger_details'] = $station_master->infromTrainDelay($sendData);
+
+        // update is informed passengers
+        $train_delay = new TrainDelay();
+        $train_delay->update($delay_id, ['delay_is_informed_passenger' => 1], 'delay_id');
+
+        foreach($data['passenger_details'] as $passenger){
+            if($passenger->reservation_passenger_email == null){
+                continue;
+            }
+
+            $to = $passenger->reservation_passenger_email;
+            $subject = 'Train Delay Information';
+            $message = "The train {$train_name} with train number {$train_no} and type {$train_type} has been delayed. The new arrival time is {$date_time}. The reason for the delay is {$delay_reason}.";
+            $body = Auth::getEmailBody($passenger->reservation_passenger_first_name, $message);
+
+            if ($this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body)) {
+                echo json_encode(true);
+            }
+            else{
+                echo json_encode(false);
+            }
+        }  
     }
 }

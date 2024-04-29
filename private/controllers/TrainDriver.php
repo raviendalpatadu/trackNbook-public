@@ -59,7 +59,7 @@ class TrainDriver extends Controller
         $data['train_stop_stations'] = $train_stop_station->getTrainStopStationNames($train_id);
 
         $trainlocation = new TrainLocation();
-        $data['location'] = $trainlocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
+        $data['location'] = $trainlocation->selectTrainLocation($train_id, date('Y-m-d'));
 
         $station = new Stations();
 
@@ -80,7 +80,12 @@ class TrainDriver extends Controller
                 'delay_reason' => $_POST['reason']
             );
 
-            if ($train_delay->validate($train_id) === true) {
+            $validateData = [
+                'trainId' => $train_id,
+                'station_id' => $data['location']->station_id
+            ]; 
+
+            if ($train_delay->validate($validateData) === true) {
                 $train_delay->insert($delay_data);
                 $this->redirect('traindriver/traindelay?success=1');
             } else {
@@ -122,18 +127,20 @@ class TrainDriver extends Controller
 
 
         $trainlocation = new TrainLocation();
-        $data['location'] = $trainlocation->whereOne('train_id', $train_id, 'date', date('Y-m-d'));
+        $data['location'] = $trainlocation->selectTrainLocation($train_id, date('Y-m-d'));
 
+        
         $station = new Stations();
-
-
+        
+   
+        
         if (isset($data['location']) && empty($data['location'])) {
             $data['location'] = new stdClass();
             $data['location']->station_name = 'No Station';
         } else {
             $data['location'] = $station->whereOne('station_id', $data['location']->train_location);
         }
-
+        
 
 
         if (isset($_POST['submit'])) {

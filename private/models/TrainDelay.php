@@ -3,12 +3,12 @@
 class TrainDelay extends Model
 {
     protected $table = 'tbl_train_delay';
-    protected $allowedColumns = array('delay_id', 'delay_train', 'delay_station', 'delay_date', 'delay_reason');
+    protected $allowedColumns = array('delay_id', 'delay_train', 'delay_station', 'delay_date', 'delay_reason', 'delay_is_informed_passenger');
 
-    public function validate($trainId)
+    public function validate($data)
     {
-        $query = "SELECT * FROM $this->table WHERE delay_train = :train_id AND delay_date = :date";
-        $train_delay = $this->query($query, ['train_id' => $trainId, 'date' => date('Y-m-d')]);
+        $query = "SELECT * FROM $this->table WHERE delay_train = :train_id AND delay_date = :date AND delay_station = :station_id";
+        $train_delay = $this->query($query, ['train_id' => $data['trainId'], 'date' => date('Y-m-d'), 'station_id' => $data['station_id']]);
 
         if (is_array($train_delay) && count($train_delay) > 0) {
             $this->errors['errors']['station_id'] = 'Train is already delayed';
