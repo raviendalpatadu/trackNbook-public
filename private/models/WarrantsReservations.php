@@ -115,7 +115,11 @@ class WarrantsReservations extends Model
 
 
             $result = $this->query($query);
-            return $result;
+
+            if(is_array($result) && count($result) > 0){
+                return $result;
+            }
+            return [];
         } catch (PDOException $e) {
             die($e->getMessage());
         }

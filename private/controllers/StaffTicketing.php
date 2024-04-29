@@ -11,11 +11,13 @@ class StaffTicketing extends Controller
     {
         $reaservation = new Reservations();
         $inquiry = new Inquiries();
+        $warrant_reservation = new WarrantsReservations();
 
         $data = array();
         $data['reservations'] = $reaservation->getReservation();
         $data['cancel_reservations'] = $reaservation->getCancelReservations();
         $data['inquiries'] = $inquiry->getInquiry();
+        $data['warrant_reservations'] = $warrant_reservation->getjoinReservation();
 
 
         $this->view('staff_ticketing.dashboard',$data);
