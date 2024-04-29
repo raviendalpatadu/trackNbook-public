@@ -10,9 +10,9 @@ class Passenger extends Controller
 
     function details($id = '')
     {
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($_SESSION);
+        // echo "</pre>";
 
         if (!Auth::reservation()) {
             $this->redirect('/home');
@@ -208,7 +208,7 @@ class Passenger extends Controller
                             $waiting_list->removeFromWaitingList($waiting_list_arr);
                         }
 
-                        $this->view('passenger.warrant');
+                        $this->view('passenger.warrant', $data);
                     } else {
                         $this->redirect('passenger/billing');
                     }

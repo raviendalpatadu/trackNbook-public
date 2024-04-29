@@ -37,6 +37,16 @@ class Stations extends Model
         return $result;
     }
 
+    public function getStation($stationId)
+    {
+        try {
+            $result = $this->whereOne('station_id', $stationId);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $result;
+    }
+
     public function getOneStation($column, $value)
     {
         try {

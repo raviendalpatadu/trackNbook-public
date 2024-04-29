@@ -31,14 +31,14 @@ class Auth
     {
         if (isset($_SESSION['USER'])) {
             // $user_data = $_SESSION['USER']->user_data;
-            $station = new Stations();
-            $station_master_station = $station->whereOne('station_id',$_SESSION['USER']->user_data);
-            
-             return $station_master_station;
             // echo "<pre>";
             // print_r($_SESSION);
             // print_r($station_master_station);
             // echo "</pre>";
+            $station = new Stations();
+            $station_master_station = $station->whereOne('station_id',$_SESSION['USER']->user_data);
+            
+             return $station_master_station;
         }return false;
     }
 

@@ -116,49 +116,52 @@ class Reservations extends Model
                 $this->errors['reservation_passenger_last_name'][$entry] = 'Last Name is required';
             }
 
-            //check if phone number is exists in post
-            if (empty($data['reservation_passenger_phone_number'][$entry])) {
-                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
-            }
+            // //check if phone number is exists in post
+            // if (empty($data['reservation_passenger_phone_number'][$entry])) {
+            //     $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is required';
+            // }
 
-            // 10 number validation
-            if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
-                $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
-            }
+            // // 10 number validation
+            // if (strlen($data['reservation_passenger_phone_number'][$entry]) != 10) {
+            //     $this->errors['reservation_passenger_phone_number'][$entry] = 'Phone Number is invalid';
+            // }
 
-            //check nic is exists in post
-            if (empty($data['reservation_passenger_nic'][$entry])) {
-                $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
-            } else {
-                // 10 number validation o rGroup13 - SRS-TrackNBookm in it
-                if (strlen($data['reservation_passenger_nic'][$entry]) != 12) {
-                    if (strlen($data['reservation_passenger_nic'][$entry]) == 10) {
-                        $last_char = strtolower(substr($data['reservation_passenger_nic'][$entry], -1));
-                        if ($last_char != 'v') {
-                            $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid last char is not V or v';
+            if (isset($data['reservation_is_dependent'][$entry]) && $data['reservation_is_dependent'][$entry] == '0') {
+                if (empty($data['reservation_passenger_nic'][$entry])) {
+                    $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
+                } else {
+                    // 10 number validation o
+                    if (strlen($data['reservation_passenger_nic'][$entry]) != 12) {
+                        if (strlen($data['reservation_passenger_nic'][$entry]) == 10) {
+                            $last_char = strtolower(substr($data['reservation_passenger_nic'][$entry], -1));
+                            if ($last_char != 'v') {
+                                $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid last char is not V or v';
+                            }
+                        } else {
+                            $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid';
                         }
-                    } else {
-                        $this->errors['reservation_passenger_nic'][$entry] = 'NIC is invalid';
                     }
                 }
             }
+            //check nic is exists in post
 
 
 
-            //check if email is exists in post
-            if (empty($data['reservation_passenger_email'][$entry])) {
-                $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
-            }
+            // //check if email is exists in post
+            // if (empty($data['reservation_passenger_email'][$entry])) {
+            //     $this->errors['reservation_passenger_email'][$entry] = 'Email is required';
+            // }
 
-            //check if email is valid
-            if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
-                $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
-            }
+            // //check if email is valid
+            // if (!filter_var($_POST['reservation_passenger_email'][$entry], FILTER_VALIDATE_EMAIL)) {
+            //     $this->errors['reservation_passenger_email'][$entry] = 'Invalid Email';
+            // }
 
             // check gender
             if (empty($data['reservation_passenger_gender'][$entry])) {
                 $this->errors['reservation_passenger_gender'][$entry] = 'Gender Required';
             }
+            
 
             
         }
@@ -216,6 +219,23 @@ class Reservations extends Model
                 )
             );
             //sort an array in assending order
+            if ($result > 0) {
+                return $result;
+            } else {
+                return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function getCancelReservations(){
+        try{
+           $query = "SELECT c.*, start_st.station_name
+                    FROM tbl_reservation_cancelled c
+                    JOIN tbl_station start_st ON c.reservation_start_station = start_st.station_id;";
+        
+            $result = $this->query($query);
             if ($result > 0) {
                 return $result;
             } else {
@@ -399,6 +419,56 @@ class Reservations extends Model
                 return $result;
             } else {
                 return 0;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function countReservationFromAndTo($startDate,  $endDate){
+        // this should rerturn the total number of reservations from start and end date if there a no reservations it should return 0
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_date
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function reservationCountByReservationType($startDate,  $endDate){
+        try {
+            $query = "SELECT
+                        reservation_date,
+                        reservation_type,
+                        COUNT(reservation_id) AS total_reservations
+                      FROM
+                        tbl_reservation
+                      WHERE
+                        reservation_date BETWEEN :startDate AND :endDate
+                      GROUP BY reservation_type
+                      ORDER BY reservation_date ASC";
+
+            $result = $this->query($query, [':startDate' => $startDate, ':endDate' => $endDate]);
+
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

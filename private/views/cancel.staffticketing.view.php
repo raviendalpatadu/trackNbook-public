@@ -15,9 +15,18 @@
     <div class="column-left">
         <?php $this->view("./includes/dashboard-navbar") ?>
         <main class="bg">
+            <div class="row mt-20 m-20 ">
+                <div class="col-4 line">
+                    <div class="trains-available mt-10 mb-30">
+                        <h2>Reservation cancellations</h2>
+                    </div>
+                </div>
+            </div>
+
             <div class="d-flex flex-column align-items-center p-60 ">
 
-                <div class="notificationCard d-flex flex-column align-items-center g-10">
+
+                <div class="notificationCard d-flex flex-column align-items-center g-10" id="mou-cancel-form">
 
                     <div class="">
                         <p class="notificationHeading ">Enter Ticket ID</p>
@@ -44,7 +53,7 @@
                             </div>
 
                             <button class="button btn mt-20 ">
-                                <div class="button-base btn bg-Border-blue ">
+                                <div class="button-base btn bg-Border-blue " id="submitBtn">
                                     <input type="submit" name="enterBtn" value="Enter" class="white">
                                 </div>
 
@@ -236,27 +245,28 @@
 
                         <?php endif; ?>
                     </form>
-                </div>
+                    <div class="row mt-20 display-none" id="actionBtn">
+                        <div class="col-12 d-flex justify-content-center">
+                            <button class="button mx-10">
+                                <div class="button-base">
+                                    <div class="text">Back</div>
+                                </div>
+                            </button>
 
-                <div class="row mt-20">
-                    <div class="col-12 d-flex justify-content-center">
-                        <button class="button mx-10">
-                            <div class="button-base">
-                                <div class="text">Back</div>
-                            </div>
-                        </button>
+                            <button class="button mx-10" id="cancelReservationBtn">
+                                <div class="button-base">
+                                    <input type="submit" name="cancel_reservation" value="Cancel Reservation">
+                                </div>
+                            </button>
+                            <div class="" id="popoupError">
 
-                        <button class="button mx-10" id="cancelReservationBtn">
-                            <div class="button-base">
-                                <input type="submit" name="cancel_reservation" value="Cancel Reservation">
                             </div>
-                        </button>
-                        <div class="" id="popoupError">
 
                         </div>
-
                     </div>
+
                 </div>
+
 
             </div>
 
@@ -322,6 +332,14 @@
                     })
                 }
             }))
+        });
+
+
+        $('#submitBtn').click(function(e) {
+            e.preventDefault();
+            $('#actionBtn').removeClass('display-none');
+            $('#actionBtn').addClass('d-flex');
+
         });
 
 

@@ -144,6 +144,11 @@ class Train extends Controller
 
 
         if (isset($_POST['submit']) || $_POST) {
+            if (!Auth::is_logged_in()) {
+                $_SESSION['error'] = 'Please Login to continue.';
+                $this->redirect('login');
+            }
+    
 
 
             $reservation = new Reservations();

@@ -2,10 +2,10 @@
 <?php
 
 
-// echo "<pre>";
-// print_r($data);
+echo "<pre>";
+print_r($data);
 // print_r($_POST);
-// echo "</pre>";
+echo "</pre>";
 
 ?>
 

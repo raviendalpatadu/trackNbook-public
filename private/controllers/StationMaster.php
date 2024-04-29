@@ -13,7 +13,7 @@ class StationMaster extends Controller
             $this->redirect('login');
         }
 
-        $trainModel = new TrainModel();
+        $trainModel = new Trains();
         $trains = $trainModel->getAllTrainsWithEstimatedArrival($station_id);
 
         $this->view('dashboard.stationmaster', ['trains' => $trains]);
@@ -106,12 +106,34 @@ class StationMaster extends Controller
     $this->view('check.train.arrival', $data);
 }
 
+function delayRequest(){
+    // $train = new Trains();
+    $data = array();
+    $station = new Stations();
+        $delay_data = array(
+            'station_id' => Auth::getuser_data()
+        );
 
-    // function updateTrainStatus($id = '')
-    // {
-    //     $train = new Trains();
-    //     $train->updateStatus();
-    // }
+        $traindelay = new TrainDelay();
+
+        // if ($traindelay->validate($delay_data) === true) {
+            // update the location
+            $data['delays'] = $traindelay->getAllDelaysByStation($delay_data['station_id']);
+            $data['station_name'] = $station->getStation($delay_data['station_id']);
+
+            // get passenger data in the next station
+            // $passenger = new Passengers();
+            // $passenger_data = $passenger->getPassengerDataOfNextStation($train_id, Auth::getuser_data());
+
+            // // send a mail to the passengers
+            // $this->notifyPassengers($train_data, $passenger_data, Auth::getuser_data());
+            // $this->redirect('stationmaster/delayRequest?success=1'); // Success case
+        // } else {
+        //     $data['errors'] = array_merge($data, $traindelay->errors);
+        //     $this->redirect('stationmaster/delayRequest?success=0'); // Failure case
+        // }
+    $this->view('delay.train.request', $data);
+}
 
     function waitList()
     {
@@ -132,9 +154,9 @@ class StationMaster extends Controller
 
         $data['trains'] = $train->getTrainScheduleForStationMaster($_SESSION['USER']->user_data, $date);
 
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>"; 
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>"; 
 
         $this->view('manage.schedule', $data);
     }
@@ -166,8 +188,103 @@ class StationMaster extends Controller
     function getInquiry(){
         $inquiry = new Inquiries();
         $data = array();
-        $data['inquiries'] = $inquiry->getStationInquiry();
-         $this->view('view.inquiry', $data);
+        $data['inquiries'] = $inquiry->getInquiry();
+
+        
+         $this->view('inquiry.stationmaster', $data);
         // echo json_encode($data);
+    }
+
+    function inquirySummary($id = '')
+    {
+        $Inquiry = new Inquiries();
+        $warrant_resevation = new WarrantsReservations();
+
+        $data = array();
+        $data['inquiry'] = $Inquiry->getInquirySummary($id);
+
+        $this->view('inquiry.summary.stationmaster', $data);
+    }
+
+    function inquiryResponse($id)
+    {
+
+        $Inquiry = new Inquiries();
+
+        try {
+            $inquiry_data = $Inquiry->getInquirySummary($id);
+
+            $Inquiry->update($id, array(
+                'inquiry_status' => 'Responded',
+            ), "inquiry_ticket_id");
+
+
+            try {
+                $name = ucfirst($inquiry_data[0]->user_first_name);
+                $subject = "Inquiry Response";
+                $message = $_POST['inquiry_response'];
+                $body = Auth::getEmailBody($name, $message);
+                $to = $inquiry_data[0]->user_email;
+
+                if (!$this->sendMail($to, $name, $subject, $body)) {
+                    die('failed to send mail');
+                }
+            } catch (Exception $e) {
+                die($e->getMessage());
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $this->redirect('stationmaster/getInquiry');
+    }
+
+    function informPassengerDelay()
+    {
+       
+        
+        $data = array();
+        $station_master = new StationMasters();
+
+        $delay_id = $_POST['delay_id'];
+        
+        $train_name = $_POST['train_name'];
+        $train_no = $_POST['train_no'];
+        $train_type = $_POST['train_type'];
+        $date_time = $_POST['date_time'];
+        $delay_reason = $_POST['delay_reason'];
+
+        $train = new Trains();
+        $train_data = $train->whereOne('train_no', $_POST['train_no']);
+
+        // send data is used to set the parameters required fpr informTrainDelay()
+        $sendData = [
+            'train_id' => $train_data->train_id,
+            'station_id' => $_SESSION['USER']->user_data
+        ];
+
+        $data['passenger_details'] = $station_master->infromTrainDelay($sendData);
+
+        // update is informed passengers
+        $train_delay = new TrainDelay();
+        $train_delay->update($delay_id, ['delay_is_informed_passenger' => 1], 'delay_id');
+
+        foreach($data['passenger_details'] as $passenger){
+            if($passenger->reservation_passenger_email == null){
+                continue;
+            }
+
+            $to = $passenger->reservation_passenger_email;
+            $subject = 'Train Delay Information';
+            $message = "The train {$train_name} with train number {$train_no} and type {$train_type} has been delayed. The new arrival time is {$date_time}. The reason for the delay is {$delay_reason}.";
+            $body = Auth::getEmailBody($passenger->reservation_passenger_first_name, $message);
+
+            if ($this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body)) {
+                echo json_encode(true);
+            }
+            else{
+                echo json_encode(false);
+            }
+        }  
     }
 }

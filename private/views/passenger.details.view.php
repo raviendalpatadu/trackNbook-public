@@ -2,9 +2,9 @@
 $no_of_passengers = $_SESSION['reservation']['no_of_passengers'];
 
 
-echo "<pre>";
-// print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 ?>
 
 
@@ -277,6 +277,7 @@ echo "</pre>";
                         nicInput.attr('placeholder', 'Type here');
                         nicInput.css('pointer-events', 'auto');
                         nicInput.val('');
+                        $(this).parent().parent().find('input[name*=reservation_is_dependent]').val('0');
                     }
                 });
 

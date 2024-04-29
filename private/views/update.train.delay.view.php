@@ -6,9 +6,9 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     $count = 0;
 }
 
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 ?>
 <?php $this->view("./includes/header"); ?>
 
@@ -45,6 +45,7 @@ if (isset($data['trains']) && $data['trains'] != 0) {
                                                         placeholder="Type here">
                                                 </div>
                                             </div>
+                                            <?= printError($data, 'station_id')?>
                                         </div>
 
                                         <div class="row d-flex delay-g-8 justify-content-center">
