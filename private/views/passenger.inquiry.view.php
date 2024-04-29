@@ -107,7 +107,7 @@ echo "</pre>";
                         $('#station_id').val('Invalid Ticket No');
 
                         // disable submit button
-                        $('input[type="submit"]').attr('disabled', 'disabled');
+                        //$('input[type="submit"]').attr('disabled', 'disabled');
                     }
                 }
             });
