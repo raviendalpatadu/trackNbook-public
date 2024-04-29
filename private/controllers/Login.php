@@ -78,7 +78,7 @@ class Login extends Controller
                 }
                 //rederect to dashboard staff ticketing
                 elseif (strtolower($user_type) == "staff_ticketing") {
-                    $this->redirect('dashboard/staff_ticketing');
+                    $this->redirect('staffticketing');
                 }
                 //rederect to dashboard train driver
                 elseif (strtolower($user_type) == "train_driver") {
