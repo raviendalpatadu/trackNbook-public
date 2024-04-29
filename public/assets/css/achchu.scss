@@ -138,40 +138,7 @@
 
 
 
-/* Staff General Dashboard */
-.ach-widgets-s .number {
-  position: relative;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: "Poppins-Medium", Helvetica;
-  font-weight: 500;
-  color: var(--textdark);
-  font-size: 31.1px;
-  letter-spacing: -0.49px;
-  line-height: 17px;
-}
 
-.ach-widgets-s .div {
-  display: flex;
-  flex-direction: column;
-  width: 124.44px;
-  align-items: flex-start;
-  gap: 15.56px;
-  position: relative;
-  flex: 0 0 auto;
-  height: 92px;
-}
-
-.card-dashboard-sg {
-  margin: 5px 5px;
-  padding: 10px 20px;
-  background-color: #fafafa;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-family: "Poppins-Medium", Helvetica;
-  border-radius: 10px;
-  height: 117px;
-  width: 230px;
-}
 
 /* Train Driver Dashboard */
 .ach-widgets {
@@ -428,35 +395,8 @@ li {
   margin: 5px 0;
 }
 
-/* ................................................. */
-/* Wait list */
-.activation-field-waiting-list {
-  display: flex;
-  justify-content: flex-end;
-  width: calc(1232% - 10px);
-  gap: 20px;
-}
 
-.button-blue-waiting-list {
-  display: inline-flex;
-  padding: 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid #fff;
-  background: #2185d5;
-  cursor: pointer;
-  color: white;
-  width: 6%;
-  margin-right: 50px;
-  /* Set the text color to white */
-  /* You can add additional styling here, such as padding, border, etc. */
-}
 
-/* ...................................................................................*/
-/* Add location */
-/* Train Driver add  location*/
 /* Train Driver - Update Location */
 .button-base-update-location {
   background: var(--white, #ffffff);
