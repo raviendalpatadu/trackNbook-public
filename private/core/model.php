@@ -35,7 +35,7 @@ class Model extends Database
                 $data = $this->$func($data);
             }
         }
-
+        
         return $data;
     }
     public function whereOne($column, $value)

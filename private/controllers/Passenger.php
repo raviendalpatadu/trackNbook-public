@@ -472,8 +472,8 @@ class Passenger extends Controller
             if($inquiry->validateInquiry($_POST)) {
                 $station = new Stations();
                 $station_data = $station->whereOne('station_name', $_POST['inquiry_station']);
-                echo "<pre>";
-                print_r($station_data);
+                // echo "<pre>";
+                // print_r($station_data);
                 $inquiry_id = $inquiry->insert([
                     'inquiry_passenger_id' => Auth::getUser_id(),
                     'inquiry_ticket_id' => $_POST['inquiry_ticket_id'],
