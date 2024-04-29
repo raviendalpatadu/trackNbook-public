@@ -1,18 +1,7 @@
 <?php $this->view("./includes/header") ?>
 <?php $this->view("./includes/load-js") ?>
 
-<?php
 
-if (isset($data) && !empty($data)) {
-    $count = count($data['trains']);
-} else {
-    $count = 0;
-}
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
-
-?>
 <html>
 
 <head>
