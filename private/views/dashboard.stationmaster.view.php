@@ -5,7 +5,7 @@
 // echo "<pre>";
 // print_r($data);
 // echo "</pre>";
-
+$trainCount = count($data['trains']);
 ?>
 
 <body>
@@ -22,14 +22,14 @@
                         <div class="d-flex flex-row justify-content-center g-50">
                             <div class="col-4">
                                 <div
-                                    class="dashboard-card-sm  d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                    class="dashboard-card-sm-train  d-flex align-items-center bg-light-blue Primary-Gray g-50">
 
                                     <div class="d-flex flex-column g-10">
                                         <p1 class="dashboard-card-sm-font1 ">
                                             Number of
                                             Trains <br>by today
                                         </p1>
-                                        <p2 class="dashboard-card-sm-font2 ">35</p2>
+                                        <p2 class="dashboard-card-sm-font2 "><?= $trainCount ?></p2>
                                     </div>
 
                                     <div class="d-flex">
@@ -59,31 +59,32 @@
                             </div>
                             <div class="col-4">
                                 <div
-                                    class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                    class="dashboard-card-sm-inquiry d-flex align-items-center bg-light-blue Primary-Gray g-50">
 
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="dashboard-card-sm-font1">Trains Arrived</p1>
-                                        <p2 class="dashboard-card-sm-font2">21</p2>
+                                        <p1 class="dashboard-card-sm-font1"><a href="<?= ROOT ?>stationmaster/getinquiry">Inquiries</a></p1>
+                                        <p2 class="dashboard-card-sm-font2"><?= $data['inquiryCount'] ?></p2>
                                     </div>
 
-                                    <div class="d-flex  ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
-                                            viewBox="-2 -2 24.00 24.00" fill="#000000"
-                                            transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
+                                    <div class="d-flex ml-40 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80"
+                                            viewBox="0 0 512.00 512.00" version="1.1" fill="#000000">
 
                                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke="#CCCCCC" stroke-width="0.04" />
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round" />
 
                                             <g id="SVGRepo_iconCarrier">
-                                                <g id="train-left" transform="translate(-2 -5)">
-                                                    <path id="secondary" fill="rgb(89 169 224)"
-                                                        d="M11,14a1,1,0,0,0,1-1V10h8a1,1,0,0,1,1,1v6a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1,7,7,0,0,1,.68-3Z" />
-                                                    <path id="primary"
-                                                        d="M16,14h1M8,6h6m-2,4V6m-2,4H20a1,1,0,0,1,1,1v6a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1,7,7,0,0,1,7-7Zm0,0h2v3a1,1,0,0,1-1,1H3.68A7,7,0,0,1,10,10Z"
-                                                        fill="none" stroke="#000000" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="0.6" />
+                                                <title>inquiry-filled</title>
+                                                <g id="Page-1" stroke-width="0.00512" fill="none" fill-rule="evenodd">
+                                                    <g id="inquiry-" fill="rgb(89, 169, 224)"
+                                                        transform="translate(64.000000, 85.333333)">
+                                                        <path
+                                                            d="M384,1.42108547e-14 L384,298.666667 L277.333333,298.666667 L277.333333,384 L147.2,298.666667 L1.42108547e-14,298.666667 L1.42108547e-14,1.42108547e-14 L384,1.42108547e-14 Z M192.935,201.066667 C186.101632,201.066667 180.435023,203.295811 175.935,207.754167 C171.434978,212.212522 169.185,217.774967 169.185,224.441667 C169.185,231.441702 171.393311,237.191644 175.81,241.691667 C180.226689,246.191689 185.934965,248.441667 192.935,248.441667 C199.768368,248.441667 205.414144,246.191689 209.8725,241.691667 C214.330856,237.191644 216.56,231.5667 216.56,224.816667 C216.56,217.983299 214.330856,212.316689 209.8725,207.816667 C205.414144,203.316644 199.768368,201.066667 192.935,201.066667 Z M202.185,65.0666667 C183.601574,65.0666667 165.060093,69.8999517 146.56,79.5666667 L146.56,79.5666667 L157.685,107.316667 C172.768409,98.7332904 185.64328,94.4416667 196.31,94.4416667 C202.810033,94.4416667 207.955814,96.004151 211.7475,99.1291667 C215.539186,102.254182 217.435,106.483307 217.435,111.816667 C217.435,116.066688 216.080847,119.774984 213.3725,122.941667 C211.34124,125.316679 207.493614,128.58228 201.829549,132.738531 L201.829549,132.738531 L188.419684,142.338357 C187.103359,143.316246 185.967309,144.18359 185.011529,144.940391 L185.011529,144.940391 L182.685,146.879167 C180.601656,148.754176 178.935006,150.899988 177.685,153.316667 C175.518323,157.483354 174.435,164.85828 174.435,175.441667 L174.435,175.441667 L174.435,186.441667 L211.31,186.441667 L211.31,181.316667 C211.31,173.733295 212.268324,168.462515 214.185,165.504167 C216.101676,162.545819 221.226667,158.275028 229.56,152.691667 L229.56,152.691667 L233.497515,149.997322 C242.320454,143.767492 248.591231,137.936485 252.31,132.504167 C256.560021,126.295802 258.685,118.81671 258.685,110.066667 C258.685,97.1499354 254.310044,86.6500404 245.56,78.5666667 C235.643284,69.5666217 221.185095,65.0666667 202.185,65.0666667 Z"
+                                                            id="Combined-Shape"> </path>
+                                                    </g>
                                                 </g>
                                             </g>
 
@@ -93,31 +94,27 @@
                             </div>
                             <div class="col-4">
                                 <div
-                                    class="dashboard-card-sm d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                                    class="dashboard-card-sm-waitlist d-flex align-items-center bg-light-blue Primary-Gray g-50">
 
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="dashboard-card-sm-font1">Trains to be Arrived</p1>
-                                        <p2 class="dashboard-card-sm-font2">14</p2>
+                                        <p1 class="dashboard-card-sm-font1"> <a href="<?= ROOT ?>stationmaster/waitlist">Waiting List</a></p1>
+                                        <p2 class="dashboard-card-sm-font2"><?= $data['waitinglistCount'] ?></p2>
                                     </div>
 
-                                    <div class="d-flex  ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"
-                                            viewBox="-2 -2 24.00 24.00" fill="#000000">
+                                    <div class="d-flex ml-30  ">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="rgb(89, 169, 224)"
+                                            height="60" width="80" version="1.1" id="Capa_1" viewBox="0 0 297 297"
+                                            xml:space="preserve">
 
                                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke="#CCCCCC" stroke-width="0.16" />
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round" />
 
                                             <g id="SVGRepo_iconCarrier">
-                                                <g id="train" transform="translate(-2 -5)">
-                                                    <path id="secondary" fill="rgb(89 169 224)"
-                                                        d="M13,14a1,1,0,0,1-1-1V10H4a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H20a1,1,0,0,0,1-1,7,7,0,0,0-.68-3Z" />
-                                                    <path id="primary"
-                                                        d="M7,14H8m2-8h6M12,6v4m9,7h0a7,7,0,0,0-7-7H4a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1H20A1,1,0,0,0,21,17Zm-7-7H12v3a1,1,0,0,0,1,1h7.32A7,7,0,0,0,14,10Z"
-                                                        fill="none" stroke="#000000" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="0.6" />
-                                                </g>
+                                                <path
+                                                    d="M251.01,277.015h-17.683l-0.002-31.559c0-31.639-17.358-60.726-48.876-81.901c-3.988-2.682-6.466-8.45-6.466-15.055 s2.478-12.373,6.464-15.053c31.52-21.178,48.878-50.264,48.88-81.904V19.985h17.683c5.518,0,9.992-4.475,9.992-9.993 c0-5.518-4.475-9.992-9.992-9.992H45.99c-5.518,0-9.992,4.475-9.992,9.992c0,5.519,4.475,9.993,9.992,9.993h17.683v31.558 c0,31.642,17.357,60.729,48.875,81.903c3.989,2.681,6.467,8.448,6.467,15.054c0,6.605-2.478,12.373-6.466,15.053 c-31.519,21.176-48.876,50.263-48.876,81.903v31.559H45.99c-5.518,0-9.992,4.475-9.992,9.993c0,5.519,4.475,9.992,9.992,9.992 h205.02c5.518,0,9.992-4.474,9.992-9.992C261.002,281.489,256.527,277.015,251.01,277.015z M138.508,110.362 c0-5.518,4.474-9.993,9.992-9.993s9.992,4.475,9.992,9.993v17.664c0,5.519-4.474,9.992-9.992,9.992s-9.992-4.474-9.992-9.992 V110.362z M141.433,173.956c1.858-1.857,4.436-2.927,7.064-2.927c2.628,0,5.206,1.069,7.064,2.927 c1.868,1.859,2.928,4.438,2.928,7.065s-1.06,5.206-2.928,7.064c-1.858,1.858-4.436,2.928-7.064,2.928 c-2.628,0-5.206-1.069-7.064-2.928c-1.859-1.858-2.928-4.437-2.928-7.064S139.573,175.816,141.433,173.956z M86.94,277.112 c8.152-30.906,50.161-64.536,55.405-68.635c3.614-2.826,8.692-2.828,12.309,0c5.244,4.1,47.252,37.729,55.404,68.635H86.94z" />
                                             </g>
 
                                         </svg>
@@ -126,16 +123,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row ml-4">
-                        <div class="col-10-d-flex-flex-column">
+                    <div class="row ml-2">
+                        <div class="col-10-ach-d-flex-flex-column">
                             <div class="d-flex flex-column  bg-white g-5 p-10 mb-10 align-items-start mt-50">
                                 <div class="row mt-10">
                                     <div class="col-3">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink" fill="rgb(89 169 224)"
                                             version="1.1" id="Layer_1" viewBox="0 0 512.00 512.00" xml:space="preserve"
-                                            width="100" height="100" stroke="rgb(89 169 224)"
-                                            stroke-width="0.00512">
+                                            width="100" height="100" stroke="rgb(89 169 224)" stroke-width="0.00512">
 
                                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -159,7 +155,7 @@
                                         </svg>
                                     </div>
                                     <div class="col-3">
-                                        <h2> <br>Upcoming Trains</h2>
+                                        <h2> <br>Trains by Today</h2>
                                     </div>
                                 </div>
                             </div>
