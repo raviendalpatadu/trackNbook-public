@@ -102,18 +102,32 @@
 
 /* Station Master Dashboard */
 
-.col-10-d-flex-flex-column
+.col-10-ach-d-flex-flex-column
 {
-  width: 1230px
+  width: 1200%
 }
-.dashboard-card-sm {
-  height: 130%;
+.dashboard-card-sm-train {
+  height: 107%;
   padding: 24px 19px;
   border-radius: 22px;
   box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
-    width: 302px
+  width: 100%;
 }
 
+.dashboard-card-sm-inquiry {
+  height: 107%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
+.dashboard-card-sm-waitlist {
+  height: 107%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
 .dashboard-card-sm2 {
   height: 130%;
   padding: 24px 19px;
