@@ -176,7 +176,7 @@ class StaffTicketing extends Controller
             $reservationData['from']['reservation_date'] = Auth::reservation()['from_date'];
 
             date_default_timezone_set('Asia/Colombo');
-            $reservationData['from']['reservation_created_time'] = date('Y-m-d h:i:s a', time());
+            $reservationData['from']['reservation_created_time'] = date('Y-m-d h:i:s', time());
 
             $reservationData['from']['reservation_status'] = 'Pending';
 
