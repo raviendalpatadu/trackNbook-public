@@ -1,10 +1,10 @@
 <?php
 
 
-// echo "<pre>";
-// print_r($_SESSION);
-// print_r($_POST);
-// echo "</pre>";
+echo "<pre>";
+print_r($_SESSION);
+print_r($_POST);
+echo "</pre>";
 
 $from_total_amount = $_SESSION['reservation']['from_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
 $to_total_amount = $_SESSION['reservation']['to_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
