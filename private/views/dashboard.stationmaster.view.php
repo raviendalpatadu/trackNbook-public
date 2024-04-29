@@ -155,7 +155,7 @@ $trainCount = count($data['trains']);
                                         </svg>
                                     </div>
                                     <div class="col-3">
-                                        <h2> <br>Upcoming Trains</h2>
+                                        <h2> <br>Trains by Today</h2>
                                     </div>
                                 </div>
                             </div>

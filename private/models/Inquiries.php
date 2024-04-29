@@ -58,6 +58,9 @@ class Inquiries extends Model
                     JOIN tbl_train_type tt ON t.train_type = tt.train_type_id
                     JOIN tbl_station start_st ON t.train_start_station = start_st.station_id
                     JOIN tbl_station end_st ON t.train_end_station = end_st.station_id
+
+                    WHERE i.inquiry_to_station_master = 1 
+        
             
                 GROUP BY i.inquiry_id;";
 

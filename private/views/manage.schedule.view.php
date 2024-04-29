@@ -2,15 +2,9 @@
 <?php $this->view("./includes/load-js") ?>
 
 <?php
-
-if (isset($data) && !empty($data)) {
-    $count = count($data['trains']);
-} else {
-    $count = 0;
-}
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
 ?>
 <html>
