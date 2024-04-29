@@ -7,9 +7,18 @@
 class StaffTicketing extends Controller
 {
     function index($id = '')
-    {
 
-        $this->view('staff_ticketing.dashboard');
+    {
+        $reaservation = new Reservations();
+        $inquiry = new Inquiries();
+
+        $data = array();
+        $data['reservations'] = $reaservation->getReservation();
+        $data['cancel_reservations'] = $reaservation->getCancelReservations();
+        $data['inquiries'] = $inquiry->getInquiry();
+
+
+        $this->view('staff_ticketing.dashboard',$data);
     }
 
 
@@ -649,12 +658,40 @@ class StaffTicketing extends Controller
         $cancel_res = new Reservations();
         $data = array();
 
-        $data['cancel_reservations'] = $cancel_res->getReservations($id, 'cancelled');
-        echo "<pre>";
-        print_r($data['cancel_reservations']);
-        echo "</pre>";
+        $data['cancel_reservations'] = $cancel_res->getCancelReservations();
+        // echo "<pre>";
+        // print_r($data['cancel_reservations']);
+        // echo "</pre>";
 
-        $this->view('cancellation.staffticketing');
+        $this->view('cancellation.staffticketing', $data);
+    }
+
+    function cancelResSummary($id)
+    {
+        $resevation = new Reservations();
+        $train = new Trains();
+        $fare = new Fares();
+        $compartment = new Compartments();
+
+        $data = array();
+
+        $data['reservations'] = $resevation->getReservationDataTicket($id, 'cancelled');
+
+        $train_type = $train->whereOne('train_id', $data['reservations'][0]->reservation_train_id);
+
+        $data['train'] = $train->getTrain($data['reservations'][0]->reservation_train_id);
+
+        $compartment_type = $compartment->whereOne('compartment_id', $data['reservations'][0]->reservation_compartment_id);
+
+        $data['compartment'] = $compartment_type->compartment_class_type;
+
+        $station = new Stations();
+        $start_station = $station->whereOne('station_name', $data['reservations'][0]->reservation_start_station);
+        $end_station = $station->whereOne('station_name', $data['reservations'][0]->reservation_end_station);
+
+        $data['fares'] = $fare->getFareData($train_type->train_type, $compartment_type->compartment_class_type, $start_station->station_id, $end_station->station_id);
+
+        $this->view('cancel.summary.staffticketing', $data);
     }
 
     // function refund($id = '')

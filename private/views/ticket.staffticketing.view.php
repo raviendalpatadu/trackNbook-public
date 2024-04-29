@@ -6,10 +6,10 @@ print_r($_SESSION);
 print_r($_POST);
 echo "</pre>";
 
-$from_total_amount = $_SESSION['reservation']['from_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
-$to_total_amount = $_SESSION['reservation']['to_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
+// $from_total_amount = $_SESSION['reservation']['from_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
+// $to_total_amount = $_SESSION['reservation']['to_fare']->fare_price * $_SESSION['reservation']['no_of_passengers'];
 
-$total_amount = Auth::reservation()['from_fare']->fare_price * Auth::reservation()['no_of_passengers'] + (Auth::getReturn() == 'on' ? Auth::reservation()['to_fare']->fare_price * Auth::reservation()['no_of_passengers'] : 0);
+$total_amount = Auth::reservation()['from_fare']->fare_price * Auth::reservation()['no_of_passengers'] + ((Auth::getReturn() == 0) ? 0 : Auth::reservation()['to_fare']->fare_price * Auth::reservation()['no_of_passengers']);
 
 ?>
 
@@ -245,7 +245,7 @@ $total_amount = Auth::reservation()['from_fare']->fare_price * Auth::reservation
                         <div class="input-text-label ">Total Price:</div>
                         <div class="input-field">
                             <div class="text">
-                                <input type="number" name="from_total_amount" class="type-here" placeholder="Type here" value="<?= $from_total_amount ?>">
+                                <input type="number" name="from_total_amount" class="type-here" placeholder="Type here" value="<?= $total_amount ?>">
                             </div>
                         </div>
                         <div class="assistive-text"></div>

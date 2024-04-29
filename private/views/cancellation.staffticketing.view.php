@@ -1,7 +1,7 @@
 <?php $this->view("./includes/header") ?>
 <?php
 // echo "<pre>";
-// // print_r($data);
+// print_r($data);
 // // print_r($_SESSION);
 
 
@@ -14,8 +14,8 @@
 
 
 
-if (isset($data['reservations']) && $data['reservations'] != 0) {
-    $count =  count($data['reservations']);
+if (isset($data['cancel_reservations']) && $data['cancel_reservations'] != 0) {
+    $count =  count($data['cancel_reservations']);
 } else {
     $count = 0;
 }
@@ -34,11 +34,11 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                         <div class="row mt-20  ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
-                                    <h3>Reservation List</h3>
+                                    <h3>Cancellation List</h3>
                                 </div>
                             </div>
                         </div>
-                        <form class="mt-30" action="" method="post">
+                        <!-- <form class="mt-30" action="" method="post">
                             <div class="row mb-30 g-20">
                             <div class="col-3">
                                     <div class="text-inputs">
@@ -87,44 +87,46 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
 
-<!-- create a tab for normal and warrant -->
-                
-
-                    <div class="row">
+            
+                    <div class="row mt-50">
                         <div class="col-12">
 
-                            <table class="table bg-white">
+                            <table class="if-table stripe hover" id="reservationTable">
                                 <thead>
-                                    <tr class="row p-20 align-items-center justify-content-center">
-                                        <th class="col-3">Ticket ID</th>
-                                        <th class="col-3 ">NIC</th>
+                                    <tr class="p-20 align-items-center justify-content-center">
+                                        <th class="col-2">Ticket ID</th>
+                                        <th class="col-2 ">NIC</th>
                                         <th class="col-3">Passenger</th>
                                         <th class="col-2">Date</th>
-                                        <!-- <th class="col-2">Class</th> -->
+                                       
+                                        <th class="col-2"></th>
                                         <th class="col-1"></th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($data['reservations'])) : ?>
-                                        <?php foreach ($data['reservations'] as $key => $reservation) : ?>
-                                            <tr class=" row p-20">
-                                                <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
-                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
-                                                <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
-                                                <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
-                                                <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->
-                                                <td class="col-1 d-flex align-items-center g-20">
-                                                    <!-- <div class="badge-base bg-light-green">
-                                                    <div class="dot">
-                                                        <div class="dot4"></div>
-                                                    </div>
-                                                    <div class="text dark-green">Pending</div>
-                                                </div> -->
+                                    <?php if (!empty($data['cancel_reservations'])) : ?>
+                                        <?php foreach ($data['cancel_reservations'] as $key => $cancel_reservations) : ?>
+                                            <tr class="p-20">
+                                                <td data-label="Ticket ID" class=" align-items-center lightgray-font"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_ticket_id : ' N/A'; ?></td>
+                                                <td data-label="NIC" class="align-items-center"><?=(array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_passenger_nic : ' N/A';  ?></td>
+                                                <td data-label="Passenger" class="align-items-center"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_passenger_first_name. ' ' . $cancel_reservations->reservation_passenger_last_name  : ' N/A'; ?></td>
+                                                <td data-label="Date" class=" align-items-center"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_date : ' N/A';?></td>
+                                         
 
-                                                    <a class="blue" href="<?= ROOT ?>staffticketing/summary/<?= $reservation->reservation_ticket_id  ?>">
+                                                <td data-label="status" class=" align-items-center">
+                                                    <div class="badge-base bg-Selected-green">
+                                                        <div class="dot">
+                                                            <div class="dot4"></div>
+                                                        </div>
+                                                        <div class="text green"><?= array_key_exists('cancel_reservations', $data) ? ucfirst($cancel_reservations->reservation_refund_status) : ''; ?></div>
+                                                    </div>
+                                                </td>
+                                                <td class="align-items-center g-20">
+                                                    <a class="blue" href="<?= ROOT ?>staffticketing/cancelResSummary/<?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_ticket_id : ' N/A'; ?>">
                                                         <div class="badge-base bg-Selected-Blue">
                                                             <div class="dot">
                                                                 <div class="dot4"></div>
@@ -142,62 +144,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     <?php endif; ?>
                                 </tbody>
                             </table>
-                            <div class="pagination">
-                                <button class="button">
-                                    <div class="button-base">
-                                        <svg class="arrow-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.8334 9.99935H4.16675M4.16675 9.99935L10.0001 15.8327M4.16675 9.99935L10.0001 4.16602" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-
-                                        <div class="text">Previous</div>
-                                    </div>
-                                </button>
-                                <div class="pagination-numbers">
-                                    <div class="pagination-number-base-active">
-                                        <div class="content">
-                                            <div class="number">1</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">2</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">3</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">...</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">8</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">9</div>
-                                        </div>
-                                    </div>
-                                    <div class="pagination-number-base">
-                                        <div class="content">
-                                            <div class="number2">10</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="button">
-                                    <div class="button-base">
-                                        <div class="text">Next</div>
-                                        <svg class="arrow-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M4.16675 9.99935H15.8334M15.8334 9.99935L10.0001 4.16602M15.8334 9.99935L10.0001 15.8327" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -214,7 +161,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
 
 <script>
     $(document).ready(function() {
-        var resCount = <?php echo (!empty($data['reservations'])) ? count($data['reservations']) : "0"; ?>;
+        var resCount = <?php echo (!empty($data['cancel_reservations'])) ? count($data['cancel_reservations']) : "0"; ?>;
         console.log(resCount);
 
         if (resCount == 0) {
@@ -228,5 +175,9 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                 }
             }))
         }
+        let table = new DataTable('#reservationTable', {
+            searchable: true,
+            fixedHeight: true
+        });
     });
 </script>

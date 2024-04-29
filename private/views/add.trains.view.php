@@ -400,7 +400,7 @@ echo "</pre>";
                         </div> 
                         <div class="col-3">       
                             <div class="text-inputs">
-                                    <div class="input-text-label">Train Route</div>
+                                    <div class="input-text-label">Compartment Class Type</div>
                                     <div class="width-fill">
                                         <select class="input-field p-10" name="compartment[type][]" placeholder="Please choose">
                                             <option value="0">Please choose</option>

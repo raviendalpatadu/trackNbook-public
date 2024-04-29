@@ -1,4 +1,11 @@
 <?php $this->view("./includes/header") ?>
+<?php
+// echo "<pre>";
+// // print_r($_SESSION);
+// print_r($data);
+// echo "</pre>";
+
+?>
 
 <body>
     <?php $this->view("./includes/sidebar") ?>
@@ -7,6 +14,9 @@
         <main class="bg">
             <div class="row">
                 <div class="col-12 p-20">
+                    <div class="d-flex mt-20 mb-20">
+                        <h1 class="Primary-Color">Hello Welcome to <?=Auth::smStation()->station_name?> !!</h1>
+                    </div>
 
                     <div class="d-flex flex-row justify-content-between g-50">
                         <div class="col-4">
@@ -14,7 +24,7 @@
                                 <a class="blue" href="<?= ROOT ?>staffticketing/reservationList">
                                     <div class="d-flex flex-column g-10">
                                         <p1 class="mb-4 align-items-start ">Total Reservations</p1>
-                                        <p2>230</p2>
+                                        <p2><?= str_pad(count($data['reservations']), '3', 0, STR_PAD_LEFT) ?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex">
@@ -27,10 +37,18 @@
 
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/refundList">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Refund Requests</p1>
-                                        <p2>23</p2>
+                                        <p1 class="mb-4">Warrant Requests</p1>
+                                        <?php
+                                        $counter = 0;
+                                        for ($i = 0; $i < count($data['reservations']); $i++) {
+                                            if (strtolower($data['reservations'][$i]->reservation_status) == 'approval pending' && strtolower($data['reservations'][$i]->reservation_type) == 'warrant') {
+                                                $counter++;
+                                            }
+                                        }
+                                        ?>
+                                        <p2><?= str_pad($counter,3,'0', STR_PAD_LEFT) ?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex  ">
@@ -43,10 +61,10 @@
                         </div>
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
-                                <a class="blue" href="<?= ROOT ?>staffticketing/warrant">
+                                <a class="blue" href="<?= ROOT ?>staffticketing/cancelList">
                                     <div class="d-flex flex-column g-10">
-                                        <p1 class="mb-4">Warrants to be Verified</p1>
-                                        <p2>28</p2>
+                                        <p1 class="mb-4">Total Cancellations</p1>
+                                        <p2><?= str_pad(count($data['cancel_reservations']),3,'0',STR_PAD_LEFT)?></p2>
                                     </div>
                                 </a>
                                 <div class="d-flex  ">
@@ -58,10 +76,12 @@
                         </div>
                         <div class="col-4">
                             <div class="dashboard-card d-flex align-items-center bg-light-blue Primary-Gray g-50">
+                            <a class="blue" href="<?= ROOT ?>staffticketing/staffticketinginquiry">
                                 <div class="d-flex flex-column g-10">
-                                    <p1 class="mb-4">Warrants Rejected</p1>
-                                    <p2 class="blue">10</p2>
+                                    <p1 class="mb-4">Passenger Inquiries</p1>
+                                    <p2 class="blue"><?= str_pad(count($data['inquiries']), 3, '0', STR_PAD_LEFT)?></p2>
                                 </div>
+                            </a>
                                 <div class="d-flex">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="fill: rgba(89, 169, 224, 1);">
                                         <path d="M20 3H4c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM4 19V7h16l.001 12H4z"></path>

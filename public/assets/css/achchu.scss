@@ -44,7 +44,7 @@
   left: 0;
   z-index: -100;
   width: 100%;
-  height: 106%;
+  height: 109%;
   flex-shrink: 0;
   background: url("../images/checker-mobile.jpg"),
     lightgray -3.491px -930.014px / 100.77% 290.365% no-repeat;
@@ -102,18 +102,32 @@
 
 /* Station Master Dashboard */
 
-.col-10-d-flex-flex-column
+.col-10-ach-d-flex-flex-column
 {
-  width: 1230px
+  width: 1200%
 }
-.dashboard-card-sm {
-  height: 130%;
+.dashboard-card-sm-train {
+  height: 107%;
   padding: 24px 19px;
   border-radius: 22px;
   box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
-    width: 302px
+  width: 100%;
 }
 
+.dashboard-card-sm-inquiry {
+  height: 107%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
+.dashboard-card-sm-waitlist {
+  height: 107%;
+  padding: 24px 19px;
+  border-radius: 22px;
+  box-shadow: 0 25px 37px 0 rgba(65, 69, 88, 0.1), 0 22px 8px 0 rgba(0, 0, 0, 0.07);
+  width: 100%;
+}
 .dashboard-card-sm2 {
   height: 130%;
   padding: 24px 19px;
@@ -138,40 +152,7 @@
 
 
 
-/* Staff General Dashboard */
-.ach-widgets-s .number {
-  position: relative;
-  width: -moz-fit-content;
-  width: fit-content;
-  font-family: "Poppins-Medium", Helvetica;
-  font-weight: 500;
-  color: var(--textdark);
-  font-size: 31.1px;
-  letter-spacing: -0.49px;
-  line-height: 17px;
-}
 
-.ach-widgets-s .div {
-  display: flex;
-  flex-direction: column;
-  width: 124.44px;
-  align-items: flex-start;
-  gap: 15.56px;
-  position: relative;
-  flex: 0 0 auto;
-  height: 92px;
-}
-
-.card-dashboard-sg {
-  margin: 5px 5px;
-  padding: 10px 20px;
-  background-color: #fafafa;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  font-family: "Poppins-Medium", Helvetica;
-  border-radius: 10px;
-  height: 117px;
-  width: 230px;
-}
 
 /* Train Driver Dashboard */
 .ach-widgets {
@@ -428,35 +409,8 @@ li {
   margin: 5px 0;
 }
 
-/* ................................................. */
-/* Wait list */
-.activation-field-waiting-list {
-  display: flex;
-  justify-content: flex-end;
-  width: calc(1232% - 10px);
-  gap: 20px;
-}
 
-.button-blue-waiting-list {
-  display: inline-flex;
-  padding: 16px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  border-radius: 8px;
-  border: 1px solid #fff;
-  background: #2185d5;
-  cursor: pointer;
-  color: white;
-  width: 6%;
-  margin-right: 50px;
-  /* Set the text color to white */
-  /* You can add additional styling here, such as padding, border, etc. */
-}
 
-/* ...................................................................................*/
-/* Add location */
-/* Train Driver add  location*/
 /* Train Driver - Update Location */
 .button-base-update-location {
   background: var(--white, #ffffff);
@@ -517,16 +471,36 @@ thead tr {
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 30px;
-  margin: 67px 20px 75px 142px;
-  width: 350px;
+  width: 121%;
   padding-top: 30px;
-  padding-bottom: 20px;
-  padding-left: 19px;
+  padding-bottom: 30px;
+  padding-left: 39px;
   padding-right: 25px;
-  text-align: center;
+  text-align: left;
   color: #1f2124;
   float: left;
+  margin-left: 150px;
+  margin-top: 18px;
 }
+.input-field-update-delay  textarea {
+  background: var(--w-background, #ffffff);
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  resize: none; /* Prevent resizing of textarea */
+  width: 197%; /* Make the textarea fill its container */
+}
+
+
+
 
 .ad-width-70 {
   width: 70vw;

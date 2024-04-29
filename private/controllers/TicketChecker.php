@@ -27,6 +27,8 @@ class TicketChecker extends Controller
 
 
 
+
+
         // $compartment_types = new CompartmentTypes();
         $data['compartment'] = $compartment->getCompartment($_SESSION['work_train']);
 
@@ -36,7 +38,7 @@ class TicketChecker extends Controller
 
         $seatData['from']['reservation_train_id'] = $_SESSION['work_train'];
         $seatData['from']['reservation_compartment_id'] = $data['compartment'][0]->compartment_id;
-        $seatData['from']['reservation_date'] = '2024-04-23';
+        $seatData['from']['reservation_date'] = date('Y-m-d');
         $seatData['from']['reservation_start_station'] = $data['from_train']->train_start_station;
         $seatData['from']['reservation_end_station'] = $data['from_train']->train_end_station;
 
@@ -83,6 +85,7 @@ class TicketChecker extends Controller
         $this->view('reservation.ticketchecker', $data);
     }
 
+
     function option($id = '')
     {
         if (!Auth::is_logged_in() || !Auth::isUserType('ticket_checker')) {
@@ -101,9 +104,12 @@ class TicketChecker extends Controller
             $ticketcheker = new TicketCheckers();
             $work_train = $ticketcheker->validateTicketChecker($_POST);
 
+            $train = new Trains();
+
+            $train_data = $train->whereOne('train_no', $_POST['train_id']);
 
             if ($work_train) {
-                $_SESSION['work_train'] = $_POST['train_id'];
+                $_SESSION['work_train'] = $train_data->train_id;
                 $this->redirect('ticketchecker/dashboard');
             } else {
                 $data['errors'] = $ticketcheker->errors;
@@ -180,9 +186,7 @@ class TicketChecker extends Controller
         $resevation = new Reservations();
         $data = array();
         $data['reservations'] = $resevation->getReservationDataTicket($id);
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+
 
 
         $this->view('QRSearch.ticketchecker');

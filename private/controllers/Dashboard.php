@@ -63,9 +63,15 @@ class Dashboard extends Controller
         $data = array();
         $data['stations'] = $station->getStations();
         $train = new Trains();
+        $inquiry = new Inquiries();
+        $data['inquiryCount'] = $inquiry->getCount();
 
 
         $data['trains'] = $train->getAllTrainsByStation($_SESSION['USER']->user_data);
+        //get count of the trains by station
+        
+        $waitinglist = new WaitingLists();
+        $data['waitinglistCount'] = $waitinglist->getCount();
         // echo '<pre>';
         // print_r($data);
         // echo '</pre>';

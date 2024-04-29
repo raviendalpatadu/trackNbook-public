@@ -9,9 +9,9 @@ if (isset($data['trains']) && $data['trains'] != 0) {
     $count = 0;
 }
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 ?>
 
 <head>

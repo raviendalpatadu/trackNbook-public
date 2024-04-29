@@ -480,12 +480,12 @@ h3.warrant {
     0 3px 6px 0 rgba(0, 0, 0, 0.07);
 }
 
-.dashboard-card :hover {
-  cursor: pointer;
-  box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1),
-    0 3px 6px 0 rgba(0, 0, 0, 0.07);
-  transition: 0.3s ease-in-out;
-}
+// .dashboard-card :hover {
+//   cursor: pointer;
+//   box-shadow: 0 7px 14px 0 rgba(65, 69, 88, 0.1),
+//     0 3px 6px 0 rgba(0, 0, 0, 0.07);
+//   transition: 0.3s ease-in-out;
+// }
 
 .dashboard-card p1 {
   font-size: 16px;
@@ -1378,4 +1378,8 @@ text-decoration-line :underline;
 .mou-inq-img{
   width : 20vw;
   height: 20vh;
+}
+
+.notificationCard.Height{
+  height: 50vh;
 }
