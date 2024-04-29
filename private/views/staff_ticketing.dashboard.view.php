@@ -4,7 +4,9 @@
 // // print_r($_SESSION);
 // print_r($data);
 // echo "</pre>";
-
+// $data['reservations'] = [];
+// $data['cancel_reservations'] = [];
+// $data['inquiries'] = [];
 ?>
 
 <body>
