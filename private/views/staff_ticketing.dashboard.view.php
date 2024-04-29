@@ -1,12 +1,10 @@
 <?php $this->view("./includes/header") ?>
 <?php
-// echo "<pre>";
+echo "<pre>";
 // // print_r($_SESSION);
-// print_r($data);
-// echo "</pre>";
-// $data['reservations'] = [];
-// $data['cancel_reservations'] = [];
-// $data['inquiries'] = [];
+// print_r($data['warrant_reservations']);
+echo "</pre>";
+
 ?>
 
 <body>
@@ -121,7 +119,7 @@
                                             <path d="M20 3H5C3.346 3 2 4.346 2 6v12c0 1.654 1.346 3 3 3h15c1.103 0 2-.897 2-2v-2h-8c-1.103 0-2-.897-2-2V9c0-1.103.897-2 2-2h8V5c0-1.103-.897-2-2-2z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="Primary-Gray">Refund Requests</h4>
+                                    <h4 class="Primary-Gray">Warrant Requests</h4>
 
 
                                 </div>
@@ -152,8 +150,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php foreach ($data['warrant_reservations'] as $warrant) : 
+                                                if($warrant->reservation_status != 'Approval Pending') continue;
+                                                ?>
+                                                
+                                                <tr class="row p-20">
+                                                    <td class="col-3 d-flex align-items-center">
+                                                        <?= $warrant->warrant_id ?>
+                                                    </td>
+                                                    <td class="col-2 d-flex align-items-center"><?= $warrant->reservation_date ?></td>
+                                                    <td class="col-3 d-flex align-items-center"><?= $warrant->reservation_passenger_first_name  . " " . $warrant->reservation_passenger_last_name ?></td>
+                                                    <td class="col-2 d-flex align-items-center">
+                                                        <?= $warrant->compartment_class_type ?>
+                                                    </td>
+                                                    <td class="col-1 d-flex align-items-center g-5">
+                                                        <div class="badge-base bg-Selected-Blue">
+                                                            <div class="button-base bg-light-blue">
+                                                                <a class="blue" href="<?= ROOT ?>staffticketing/warrantDetails">
+                                                                    <div class="text blue">View</div>
+                                                                
+                                                                </a>
+                                                            </div>
+                                                        </div>
 
-                                            <tr class="row p-20">
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+
+                                            <!-- <tr class="row p-20">
                                                 <td class="col-3 d-flex align-items-center">
                                                     200167801725
                                                 </td>
@@ -173,85 +197,9 @@
                                                     </div>
 
                                                 </td>
-                                            </tr>
+                                            </tr> -->
 
                                         </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-                                        <tbody>
-
-                                            <tr class="row p-20">
-                                                <td class="col-3 d-flex align-items-center">
-                                                    200167801725
-                                                </td>
-                                                <td class="col-2 d-flex align-items-center">2023.10.24</td>
-                                                <td class="col-3 d-flex align-items-center">Moushika Kriyanjalee</td>
-                                                <td class="col-2 d-flex align-items-center">
-                                                    First Class
-                                                </td>
-                                                <td class="col-1 d-flex align-items-center g-5">
-                                                    <div class="badge-base bg-Selected-Blue">
-                                                        <div class="button-base bg-light-blue">
-                                                            <a class="blue" href="<?= ROOT ?>staffticketing/refundDetails">
-                                                                <div class="text blue">View</div>
-
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-
-                                        </tbody>
-
                                     </table>
                                 </div>
 

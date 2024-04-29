@@ -195,16 +195,33 @@ $reserved_seats = array(1, 32, 43, 24, 40, 6, 57, 8);
 
 
         function getTrainLocation(){
+
+            var train_id = $('#trainId').val();
+            console.log(train_id);
+
+            // check if empty
+            if (train_id == '') {
+                var title = 'No train';
+                var des = 'Please enter a train id to track the location.';
+                var btntext = 'Ok';
+                var img = '<?= ROOT ?>assets/images/error.jpg';
+
+                makePopupBox(title, des, btntext, img, function(){
+                    $('#trainId').focus();
+                    return;
+                });
+            }
+
             $.ajax({
                 url: '<?= ROOT ?>ajax/getTrainLocation',
                 type: 'POST',
                 data: {
-                    train_id: $('#trainId').val()
+                    train_id: train_id
                 },
                 success: function(res) {
                     var data = JSON.parse(res);
                     // data = data.train;
-                    // console.log(data);
+                    console.log($('#trainId').val());
                     if (data.train != false) {
                         $('.track-content .track-text').eq(0).text(data.train[0].current_station);
                         var time = new Date(data.train[0].train_location_updated_time);
