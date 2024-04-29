@@ -15,9 +15,10 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
     $count = 0;
 }
 
-// echo "<pre>";
+echo "<pre>";
+// print_r($_SESSION);
 // print_r($data);
-// echo "</pre>";
+echo "</pre>";
 ?>
 
 <body>
@@ -83,8 +84,14 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data['reservations'] as $key => $reservation) : ?>
+
+                                            <!-- if train id is not equal to the current work train id continue -->
+                                            <?php if ($reservation->reservation_train_id != $_SESSION['work_train']) {
+                                                continue;
+                                            } ?>
+
                                             <tr class=" row p-20">
-                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
+                                                <td data-label="NIC" class="col-3 d-flex align-items-center"><?= ($reservation->reservation_passenger_nic == '0') ? 'N/A' : $reservation->reservation_passenger_nic ?></td>
                                                 <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
                                                 <td data-label="Date" class="col-2 d-flex align-items-center"><?= $reservation->reservation_date ?></td>
                                                 <td data-label="Passenger" class="col-3 d-flex align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
