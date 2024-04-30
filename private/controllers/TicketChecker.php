@@ -38,7 +38,7 @@ class TicketChecker extends Controller
 
         $seatData['from']['reservation_train_id'] = $_SESSION['work_train'];
         $seatData['from']['reservation_compartment_id'] = $data['compartment'][0]->compartment_id;
-        $seatData['from']['reservation_date'] = '2024-05-01';
+        $seatData['from']['reservation_date'] = date('Y-m-d');
         $seatData['from']['reservation_start_station'] = $data['from_train']->train_start_station;
         $seatData['from']['reservation_end_station'] = $data['from_train']->train_end_station;
 
@@ -52,7 +52,7 @@ class TicketChecker extends Controller
 
 
         $seat = new Seats();
-        $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
+        $data['from_reservation_seats'] = $seat->getReservedSeatsTicketChecker($seatData['from']);
 
         $compartment = new Compartments();
         $data['from_compartment'] = $compartment->whereOne('compartment_id', $seatData['from']['reservation_compartment_id']);

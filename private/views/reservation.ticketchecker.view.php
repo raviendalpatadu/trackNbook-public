@@ -90,6 +90,11 @@ echo "</pre>";
                                                 continue;
                                             } ?>
 
+                                            <!-- if reservations date is not equal to current date -->
+                                            <?php if ($reservation->reservation_date != date('Y-m-d')) {
+                                                continue;
+                                            } ?>
+
                                             <tr class=" row p-20">
                                                 <td data-label="NIC" class="col-3 d-flex align-items-center"><?= ($reservation->reservation_passenger_nic == '0') ? 'N/A' : $reservation->reservation_passenger_nic ?></td>
                                                 <td data-label="Ticket ID" class="col-3 d-flex align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
