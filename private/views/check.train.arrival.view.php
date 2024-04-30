@@ -43,8 +43,8 @@
                                                 <tbody>
                                                     <?php foreach ($data['trains'] as $train): ?>
                                                         <tr class="p-20">
-                                                            <td class="col-4 d-flex align-items-center">
-                                                                <?= $train->train_name . " - " . $train->train_id ?>
+                                                            <td class="col-4">
+                                                                <?= $train->train_name . " - " . $train->train_no ?>
                                                             </td>
                                                             <td class="col-2">
                                                                 <?= $train->train_type ?>

@@ -65,10 +65,10 @@ class Inquiries extends Model
                         GROUP BY i.inquiry_id;";
 
 
-            $result = $this->query($query);
+            $result_reservation = $this->query($query);
 
-            if (is_array($result) && count($result) > 0) {
-                $data = array_merge($data, $result);
+            if (is_array($result_reservation) && count($result_reservation) > 0) {
+                $data = array_merge($data, $result_reservation);
             }
 
             // if not found in tbl_reservation
@@ -97,10 +97,10 @@ class Inquiries extends Model
                         JOIN tbl_station end_st ON t.train_end_station = end_st.station_id
                     GROUP BY i.inquiry_id;";
 
-            $result = $this->query($query);
+            $result_cancel = $this->query($query);
 
-            if (is_array($result) && count($result) > 0) {
-                $data = array_merge($data, $result);
+            if (is_array($result_cancel) && count($result_cancel) > 0) {
+                $data = array_merge($data, $result_cancel);
             }
 
             // if not found in tbl_reservation_cancelled and tbl_reservation
@@ -129,15 +129,19 @@ class Inquiries extends Model
                     JOIN tbl_station end_st ON t.train_end_station = end_st.station_id
              
                 GROUP BY i.inquiry_id;";
-            $result = $this->query($query);
+            $result_rejected = $this->query($query);
 
-            if (is_array($result) && count($result) > 0) {
-                return $data = array_merge($data, $result);
+            if (is_array($result_rejected) && count($result_rejected) > 0) {
+                $data = array_merge($data, $result_rejected);
             }
+
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
         
+        if(is_array($data) && count($data) > 0){
+            return $data;
+        }
         return [];
     }
 

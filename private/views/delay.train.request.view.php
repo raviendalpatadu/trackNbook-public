@@ -23,7 +23,7 @@
                         <div class="row mt-20  ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
-                                    <h3>Train Arrivals</h3>
+                                    <h3>Delay Trains Request</h3>
                                 </div>
                             </div>
                         </div>
@@ -133,12 +133,11 @@
                             success: function(response) {
                                 response = JSON.parse(response);
                                 if (response == true) {
-                                    alert("Mail sent successfully");
+                                    
                                     // remove popup
                                     $('.popup-box').remove();
 
-                                    // location reload
-                                    location.reload();
+                                    window.location.href = "<?= ROOT ?>stationmaster/delayrequest?success=1";
                                 }
                             }
                         });
@@ -146,6 +145,11 @@
                 });
             });
         });
+
+        // show success or failure toast based on URL parameter
+        if(checkNotification('success=1') > -1) {
+            makeSuccessToast('Passengers informed successfully!', '');
+        }
     </script>
 
 </body>

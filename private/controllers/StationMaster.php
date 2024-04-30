@@ -275,12 +275,9 @@ function delayRequest(){
             $message = "The train {$train_name} with train number {$train_no} and type {$train_type} has been delayed. The new arrival time is {$date_time}. The reason for the delay is {$delay_reason}.";
             $body = Auth::getEmailBody($passenger->reservation_passenger_first_name, $message);
 
-            if ($this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body)) {
-                echo json_encode(true);
-            }
-            else{
-                echo json_encode(false);
-            }
+            $this->sendMail($to, $passenger->reservation_passenger_first_name, $subject, $body);
+            
         }  
+        echo json_encode(true);
     }
 }

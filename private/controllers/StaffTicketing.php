@@ -908,7 +908,11 @@ class StaffTicketing extends Controller
         $data = array();
 
         // if (isset($id) && !empty($id)) {
-        $data['inquiry'] = $Inquiry->getInquiry(1);
+        $data['inquiry'] = $Inquiry->getInquiry();
+
+        // echo "<pre>";
+        // print_r($data['inquiry']);
+        // echo "</pre>";
 
 
         if (isset($_POST['submit']) && !empty($_POST['reservation_ticket_id'])) {
