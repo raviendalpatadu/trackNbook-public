@@ -112,7 +112,7 @@ if (isset($data['reservations']) && $data['reservations'] != 0) {
                                         <?php foreach ($data['reservations'] as $key => $reservation) : ?>
                                             <tr class="p-20 ">
                                                 <td data-label="Ticket ID" class="align-items-center lightgray-font"><?= $reservation->reservation_ticket_id ?></td>
-                                                <td data-label="NIC" class=" align-items-center"><?= $reservation->reservation_passenger_nic ?></td>
+                                                <td data-label="NIC" class=" align-items-center"><?= ($reservation->reservation_passenger_nic != '0') ? $reservation->reservation_passenger_nic : "N/A" ?></td>
                                                 <td data-label="Passenger" class=" align-items-center"><?= $reservation->reservation_passenger_first_name . ' ' . $reservation->reservation_passenger_last_name ?></td>
                                                 <td data-label="Date" class="align-items-center"><?= $reservation->reservation_date ?></td>
                                                 <!-- <td data-label="Class" class="col-2 d-flex align-items-center"><?= $reservation->reservation_compartment_id ?></td> -->

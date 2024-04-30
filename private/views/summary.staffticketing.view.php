@@ -95,19 +95,16 @@
                                 <tr>
                                     <th>NIC</th>
                                     <?php for ($i = 0; $i < count($data['reservations']); $i++) : ?>
-                                        <td><?= (isset($data['reservations'][$i]->reservation_passenger_nic)) ? $data['reservations'][$i]->reservation_passenger_nic : "-" ?></td>
+                                        <td><?= (isset($data['reservations'][$i]->reservation_passenger_nic) && $data['reservations'][$i]->reservation_passenger_nic != "0") ? $data['reservations'][$i]->reservation_passenger_nic : "-" ?></td>
                                     <?php endfor; ?>
                                 </tr>
-
-
-
                             </table>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button class="button mt-20 ">
+                        <button class="button mt-20 " id="printTicket">
                             <div class="button-base">
                                 <div class="text">Print Ticket</div>
                             </div>
@@ -133,5 +130,16 @@
         colorDark: "#324054",
         colorLight: "#ffffff",
         correctLevel: QRCode.CorrectLevel.H
+    });
+
+    $("#printTicket").click(function() {
+        var element = $('.staff-ticket-summary')[0];
+        var name = "TKT<?= Auth::getreservation_ticket_id() ?>";
+        var pdf = new jsPDF();
+
+
+        pdf.addHTML(element, function() {
+            pdf.save(name + '.pdf');
+        })
     });
 </script>

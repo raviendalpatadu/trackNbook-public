@@ -100,7 +100,7 @@ echo "</pre>";
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-column g-5">
                                     <h4 class="Primary-Gray">Booking Analysis</h4>
-                                    <h5 class="Primary-Gray">Overview of Latest Week</h5>
+                                    <h5 class="Primary-Gray">Overview of upcomming days</h5>
                                 </div>
                             </div>
                             <canvas id="lineChart" height="100%" width="500px"></canvas>

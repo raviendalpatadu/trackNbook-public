@@ -49,7 +49,7 @@ class Reservations extends Model
             }
 
             //check nic is exists in post
-            
+
             if (empty($data['reservation_passenger_nic'][$entry])) {
                 $this->errors['reservation_passenger_nic'][$entry] = 'NIC is required';
             } else {
@@ -161,9 +161,6 @@ class Reservations extends Model
             if (empty($data['reservation_passenger_gender'][$entry])) {
                 $this->errors['reservation_passenger_gender'][$entry] = 'Gender Required';
             }
-            
-
-            
         }
 
         if (count($this->errors) > 0) {
@@ -180,7 +177,7 @@ class Reservations extends Model
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        if(is_array($result) && count($result) > 0){
+        if (is_array($result) && count($result) > 0) {
             return $result;
         }
         return [];
@@ -232,14 +229,15 @@ class Reservations extends Model
         }
     }
 
-   
 
-    public function getCancelReservations(){
-        try{
-           $query = "SELECT c.*, start_st.station_name
+
+    public function getCancelReservations()
+    {
+        try {
+            $query = "SELECT c.*, start_st.station_name
                     FROM tbl_reservation_cancelled c
                     JOIN tbl_station start_st ON c.reservation_start_station = start_st.station_id;";
-        
+
             $result = $this->query($query);
             if ($result > 0) {
                 return $result;
@@ -340,12 +338,12 @@ class Reservations extends Model
             $data = $this->getReservationDataTicket($reservation_id);
 
 
-            if(strtolower($data[0]->reservation_type) == 'warrant'){
+            if (strtolower($data[0]->reservation_type) == 'warrant') {
                 return 0;
             }
 
             $refundedAmount = 0;
-            
+
             $reservation_depature_date = new DateTime($data[0]->reservation_date);
             $reservation_time = new DateTime($data[0]->estimated_departure_time);
 
@@ -374,11 +372,6 @@ class Reservations extends Model
             }
 
             return $refundedAmount;
-
-
-
-
-
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -430,7 +423,8 @@ class Reservations extends Model
         }
     }
 
-    public function countReservationFromAndTo($startDate,  $endDate){
+    public function countReservationFromAndTo($startDate,  $endDate)
+    {
         // this should rerturn the total number of reservations from start and end date if there a no reservations it should return 0
         try {
             $query = "SELECT
@@ -455,7 +449,8 @@ class Reservations extends Model
         }
     }
 
-    public function reservationCountByReservationType($startDate,  $endDate){
+    public function reservationCountByReservationType($startDate,  $endDate)
+    {
         try {
             $query = "SELECT
                         reservation_date,
@@ -480,6 +475,44 @@ class Reservations extends Model
         }
     }
 
+    public function getCancelReservationSummary($id)
+    {
+        try {
+            $query = "SELECT
+                    r.*,
+                    t.train_no,
+                    tt.train_type,
+                    t.train_name AS reservation_train_name,
+                    tstop_start_time.train_stop_time AS estimated_departure_time,
+                    tstop_end_time.train_stop_time AS estimated_arrival_time,
+                    s.station_name AS reservation_start_station,
+                    e.station_name AS reservation_end_station,
+                    ct.compartment_class_type AS reservation_compartment_type
+            FROM
+                tbl_reservation_cancelled r
+                JOIN tbl_train_stop_station tstop_start_time ON tstop_start_time.station_id = r.reservation_start_station
+                JOIN tbl_train_stop_station tstop_end_time ON tstop_end_time.station_id = r.reservation_end_station
+                JOIN tbl_station s ON s.station_id = r.reservation_start_station
+                JOIN tbl_station e ON e.station_id = r.reservation_end_station
+                JOIN tbl_compartment c ON c.compartment_id = r.reservation_compartment_id
+                JOIN tbl_compartment_class_type ct ON ct.compartment_class_type_id = c.compartment_class_type
+                JOIN tbl_train t ON t.train_id = r.reservation_train_id
+                JOIN tbl_train_type tt ON t.train_type = tt.train_type_id 
+            WHERE
+                r.reservation_ticket_id = :reservation_ticket_id
+            GROUP BY
+                r.reservation_seat,
+                r.reservation_ticket_id;";
 
+            $result = $this->query($query, [':reservation_ticket_id' => $id]);
 
+            if (is_array($result) && $result > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

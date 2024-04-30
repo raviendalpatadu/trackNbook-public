@@ -112,7 +112,7 @@ if (isset($data['cancel_reservations']) && $data['cancel_reservations'] != 0) {
                                         <?php foreach ($data['cancel_reservations'] as $key => $cancel_reservations) : ?>
                                             <tr class="p-20">
                                                 <td data-label="Ticket ID" class=" align-items-center lightgray-font"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_ticket_id : ' N/A'; ?></td>
-                                                <td data-label="NIC" class="align-items-center"><?=(array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_passenger_nic : ' N/A';  ?></td>
+                                                <td data-label="NIC" class="align-items-center"><?=(array_key_exists('cancel_reservations', $data) && $cancel_reservations->reservation_passenger_nic == '0') ?  ' N/A' : $cancel_reservations->reservation_passenger_nic  ;  ?></td>
                                                 <td data-label="Passenger" class="align-items-center"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_passenger_first_name. ' ' . $cancel_reservations->reservation_passenger_last_name  : ' N/A'; ?></td>
                                                 <td data-label="Date" class=" align-items-center"><?= (array_key_exists('cancel_reservations', $data)) ?  $cancel_reservations->reservation_date : ' N/A';?></td>
                                          

@@ -677,7 +677,7 @@ class StaffTicketing extends Controller
 
         $data = array();
 
-        $data['reservations'] = $resevation->getReservationDataTicket($id, 'cancelled');
+        $data['reservations'] = $resevation->getCancelReservationSummary($id);
 
         $train_type = $train->whereOne('train_id', $data['reservations'][0]->reservation_train_id);
 
