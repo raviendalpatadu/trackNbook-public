@@ -224,9 +224,7 @@ class Passenger extends Controller
 
     function billing($id = '')
     {
-        echo "<pre>";
-        print_r($_SESSION);
-        echo "</pre>";
+        // 
         if (!Auth::is_logged_in()) {
             $this->redirect('/home');
         }

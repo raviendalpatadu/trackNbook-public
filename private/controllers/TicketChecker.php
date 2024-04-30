@@ -52,7 +52,7 @@ class TicketChecker extends Controller
 
 
         $seat = new Seats();
-        $data['from_reservation_seats'] = $seat->getReservedSeats($seatData['from']);
+        $data['from_reservation_seats'] = $seat->getReservedSeatsTicketChecker($seatData['from']);
 
         $compartment = new Compartments();
         $data['from_compartment'] = $compartment->whereOne('compartment_id', $seatData['from']['reservation_compartment_id']);
