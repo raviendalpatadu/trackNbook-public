@@ -18,7 +18,7 @@
                         <div class="row mt-20  ">
                             <div class="col-4 line">
                                 <div class="trains-available mt-10 mb-30">
-                                    <h3>Trains Available</h3>
+                                    <h3>Train Schedules</h3>
                                 </div>
                             </div>
                         </div>

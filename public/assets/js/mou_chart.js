@@ -97,9 +97,8 @@ $.ajax({
 //   data: data2,
 // });
 
-// function resize() {
-//   pie.resize(200, 200);
-// }
+// f3
+
 
 // resize();
 
@@ -112,16 +111,16 @@ $.ajax({
     start: moment().format("YYYY-MM-DD"),
     end: moment().add(10, 'day').format("YYYY-MM-DD"),
   },
-
+  // result as data
   success: function (data) {
     var dataB = JSON.parse(data);
     // response came as [{"reservation_type":"normal","total_reservations":4},{"reservation_type":"warrant","total_reservations":2}]
     console.log(dataB);
     var labels = [];
-    var data = [];
+    var dataChart = [];
     dataB.forEach((element) => {
       labels.push(element.reservation_type);
-      data.push(element.total_reservations);
+      dataChart.push(element.total_reservations);
     });
 
     const ctx2 = document.getElementById("bookingpie");
@@ -129,7 +128,7 @@ $.ajax({
       datasets: [
         {
           label: "Total reservations",
-          data: data,
+          data: dataChart,
           backgroundColor: [
             "rgb(255, 99, 132)",
             "rgb(54, 162, 235)",

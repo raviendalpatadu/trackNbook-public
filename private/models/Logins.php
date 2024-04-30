@@ -28,6 +28,10 @@ class Logins extends Model{
             $this->errors['errors']['confirm_password'] = 'Password and Confirm Password is not match';
         }
 
+        if(strlen($data['new_password']) < 8){
+            $this->errors['errors']['new_password'] = 'Password must be at least 8 characters';
+        }
+
         if (count($this->errors) > 0) {
             return false;
         }
