@@ -168,21 +168,21 @@
                                 style: {
                                     fontSize: 14
                                 }
-                            },
-                            {
-                                col1: 'Average Revenue :',
-                                col2: averageRevenue.toString(),
-                                style: {
-                                    fontSize: 12
-                                }
-                            },
-                            {
-                                col1: '*(Calculated based on the normal reservations count)',
-                                col2: ' ',
-                                style: {
-                                    fontSize: 8
-                                }
                             }
+                            // {
+                            //     col1: 'Average Revenue :',
+                            //     col2: averageRevenue.toString(),
+                            //     style: {
+                            //         fontSize: 12
+                            //     }
+                            // },
+                            // {
+                            //     col1: '*(Calculated based on the normal reservations count)',
+                            //     col2: ' ',
+                            //     style: {
+                            //         fontSize: 8
+                            //     }
+                            // }
                         ],
                     },
                     footer: {
