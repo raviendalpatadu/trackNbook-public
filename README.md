@@ -24,7 +24,7 @@ As a second-year project, TrackNBook was built entirely from scratch without the
 
 **Technologies Used**
 
-- Front-End Development: HTML, CSS, JavaScript
+- Front-End Development: HTML, CSS, JQuery
 - Back-End Development: PHP
 - Diagram Design: Draw.io
 
