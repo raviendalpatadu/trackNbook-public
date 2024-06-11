@@ -128,7 +128,7 @@
       See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
       for more information.
       -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCranEueyo_pnCvKoHJwegdlluPvTPjyhU&callback=initMap&v=weekly" defer></script>
+    <script src="<?='https://maps.googleapis.com/maps/api/js?key='.MAP_API_KEY.'&callback=initMap&v=weekly'?>" defer></script>
     <script>
         function initMap() {
             const directionsService = new google.maps.DirectionsService();

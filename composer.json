@@ -1,6 +1,6 @@
 {
     "require": {
         "amphp/amp": "^3.0",
-        "mpdf/mpdf": "^8.2"
+        "vlucas/phpdotenv": "^5.6"
     }
 }

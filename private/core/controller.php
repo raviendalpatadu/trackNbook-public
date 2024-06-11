@@ -7,8 +7,7 @@ error_reporting(E_ALL);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-
+use PHPMailer\PHPMailer\SMTP;
 
 /**
  * main home controller
@@ -103,12 +102,12 @@ class Controller
             $mail->Port       = 587;
             $mail->Host       = "smtp.gmail.com";
     
-            $mail->Username   = "ravienkavisha@gmail.com";
-            $mail->Password   = "objb glvn fxgx isxo";
+            $mail->Username   = SMTP_HOST_EMAIL;
+            $mail->Password   = SMTP_PASSWORD;
     
             $mail->IsHTML(true);
             $mail->AddAddress($to, $recipent_name);
-            $mail->SetFrom("ravienkavisha@gmail.com", "TrackNBook");
+            $mail->SetFrom(EMAIL, "TrackNBook");
     
             // $mail->AddEmbeddedImage('../public/assets/images/shika.jpg', 'logo');
             //$mail->AddReplyTo("reply-to-email", "reply-to-name");

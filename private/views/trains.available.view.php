@@ -493,7 +493,7 @@ echo "</pre>";
         <?php $this->view('includes/footer'); ?>
 
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCranEueyo_pnCvKoHJwegdlluPvTPjyhU&callback=initMap&v=weekly" defer></script>
+        <script src="<?='https://maps.googleapis.com/maps/api/js?key='.MAP_API_KEY.'&callback=initMap&v=weekly'?>" defer></script>
     </div>
 
 

@@ -1,4 +1,6 @@
 <?php
+require("../vendor/autoload.php");
+
 // echo "autoload.php<br>";
 require("config.php");
 require("functions.php");
@@ -12,7 +14,6 @@ spl_autoload_register(function ($class_name)
     require("../private/models/" . $class_name . ".php");
 });
 
-// require("../vendor/autoload.php");
 
 require("../private/private_assets/PHPMailer-master/src/Exception.php");
 require("../private/private_assets/PHPMailer-master/src/PHPMailer.php");

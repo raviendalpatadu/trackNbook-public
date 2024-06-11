@@ -5,8 +5,8 @@ $.ajax({
   url: ROOT + "ajax/countReservationFromAndTo",
   method: "POST",
   data: {
-    start: moment().format("YYYY-MM-DD"),
-    end: moment().add(1, "week").format("YYYY-MM-DD"),
+    start: '2024-04-20',
+    end: moment().format("YYYY-MM-DD"),
   },
   success: function (data) {
     var dataB = JSON.parse(data);

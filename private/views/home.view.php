@@ -33,7 +33,7 @@ echo "</pre>";
                                             <div class="input-text-label">From</div>
 
                                             <div class="width-fill">
-                                                <select class="dropdown" name="from_station" placeholder="Please choose">
+                                                <select class="input-field p-10 width-fill" name="from_station" placeholder="Please choose" id="fromStation">
                                                     <!-- print data of $data -->
                                                     <option value="0">Please choose</option>
                                                     <?php foreach ($data['stations'] as $key => $value) : ?>
@@ -47,11 +47,11 @@ echo "</pre>";
                                             <div class="input-text-label">To</div>
                                             <div class="width-fill">
                                                 <!-- show max of 5 items in select tag -->
-                                                <select class="input-field dropdown" name="to_station" placeholder="Please choose">
+                                                <select class="input-field p-10 width-fill" name="to_station" placeholder="Please choose" id="toStation">
                                                     <option value="0">Please choose</option>
 
                                                     <?php foreach ($data['stations'] as $key => $value) : ?>
-                                                        <option value="<?= $value->station_id ?>" <?= get_select('to_station', $value->station_id) ?>><?= $value->station_name ?></option>
+                                                        <option value="<?= $value->station_id ?>" <?= get_select('to_station', $value->station_id) ?>> <?= $value->station_name ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -139,16 +139,32 @@ echo "</pre>";
     var startDate;
 
 
-    makeCalendar('#fromDate')
 
-    makeCalendar('#toDateHome')
+
+    makeCalendar('#fromDate');
+
+    makeCalendar('#toDateHome');
+
+    $('#fromStation').change(function() {
+        // console.log($(this).val());
+        var currentStation = $(this).val()
+        var totext;
+        
+        $('#toStation option').each(function() {
+            if ($(this).val() == currentStation) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+    });
 
     $('#next').click(function(e) {
 
         e.preventDefault();
 
         var formData = $('form').serialize();
-        
+
         console.log(formData);
 
         getErrors('<?= ROOT ?>home/validate', formData, function(data) {

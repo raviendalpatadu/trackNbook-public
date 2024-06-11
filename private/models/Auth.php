@@ -86,7 +86,7 @@ class Auth
 
         $amount = $data['from_fare']['fare_price'] * $data['no_of_passengers'] + (Auth::reservation()['return'] == 'on' ? $data['to_fare']['fare_price'] * $data['no_of_passengers'] : 0);
         $order_id = $data['reservation_id']['from'][0] . (Auth::reservation()['return'] == 'on' ? "={$data['reservation_id']['from'][0]}" : "");
-        $payment['merchant_id'] = "1225507";
+        $payment['merchant_id'] = MERCHENT_ID; // replace your merchant_id
         $payment['return_url'] = "passenger/summary";
         $payment['cancel_url'] = "passenger/billing";
         $payment['notify_url'] = "passenger/summary";
@@ -105,14 +105,11 @@ class Auth
                 $payment['order_id'] .
                 number_format($payment['amount'], 2, '.', '') .
                 "LKR" .
-                strtoupper(md5("OTk2MjQ5NTM4MTA1ODAwMDE4NjM5MjU5NjEwMTkyMDcwODQyMzc0"))
+                strtoupper(md5(PAYHERE_SECRET)) // Replace your Merchant Secret (Add your server side hash in place of PAYHERE_SECRET)
             )
         );
 
         return $payment;
-        // echo "heeejj";
-
-
     }
 
     public static function setError($data)
